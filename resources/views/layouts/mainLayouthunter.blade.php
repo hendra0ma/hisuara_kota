@@ -1,0 +1,6 @@
+@include('layouts.templateHunter.head')
+@include('layouts.templateHunter.sidebar')
+@include('layouts.templateHunter.header')
+@yield('content')
+@include('layouts.templateHunter.footer')
+@include('layouts.templateHunter.footer-scripts')

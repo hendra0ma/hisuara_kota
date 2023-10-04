@@ -1,0 +1,309 @@
+
+Route::get('/generate-domain',function ()
+{
+    $reg = Regency::get();
+    
+    foreach($reg as $re){
+        $cek_kab = explode(' ',$re->name);
+        $nama_kota = (count($cek_kab) == 3)?strtolower($cek_kab[1].'-'.$cek_kab[2]): strtolower($cek_kab[1]);
+        $provinsi = Province::join('province_domains','provinces.id','=','province_domains.province_id')->where('provinces.id',$re->province_id)->first();
+        $prov_subdomain = explode('.',$provinsi->domain)[1];
+        if($cek_kab[0] == "KABUPATEN"){
+            RegenciesDomain::insert([
+                'regency_id'=>$re->id,
+                'domain'=>'kab-'.$nama_kota.".pilpres.".$prov_subdomain.'.rekapitung.id',
+                'province_id'=> $re->province_id,
+            ]);
+          echo 'kab-'.$nama_kota.".pilpres.".$prov_subdomain.'.rekapitung.id  <br>';
+        }
+        else{
+            RegenciesDomain::insert([
+                'regency_id'=>$re->id,
+                'domain'=>$nama_kota.".pilpres.".$prov_subdomain.'.rekapitung.id',
+                'province_id'=> $re->province_id,
+            ]);
+            echo $nama_kota.".pilpres.".$prov_subdomain.'.rekapitung.id  <br>';
+
+        }
+    }
+});
+
+
+Route::get('/generate-domain-province',function ()
+{
+   $province = Province::get();
+   foreach($province as $hehe){
+    if ($hehe->id == 36){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.banten.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        
+    }
+    else if ($hehe->id == 31){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.jakarta.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.jakarta.rekapitung.id";
+    }
+    else if ($hehe->id == 32){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.jabar.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.jabar.rekapitung.id";
+    }
+    else if ($hehe->id == 13){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.sumbar.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.sumbar.rekapitung.id";
+    }
+    else if ($hehe->id == 51){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.bali.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.bali.rekapitung.id";
+    }
+    else if ($hehe->id == 11){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.aceh.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.aceh.rekapitung.id";
+    }
+    else if ($hehe->id == 12){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.sumut.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.sumut.rekapitung.id";
+    }
+    else if ($hehe->id == 14){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.riau.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.riau.rekapitung.id";
+    }
+    else if ($hehe->id == 15){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.jambi.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.jambi.rekapitung.id";
+    }
+    else if ($hehe->id == 17){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.bengkulu.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.bengkulu.rekapitung.id";
+    }
+    else if ($hehe->id == 16){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.sumsel.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.sumsel.rekapitung.id";
+    }
+    else if ($hehe->id == 18){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.lampung.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.lampung.rekapitung.id";
+    }
+    else if ($hehe->id == 19){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.babel.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.babel.rekapitung.id";
+    }
+    else if ($hehe->id == 21){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.kepri.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.kepri.rekapitung.id";
+    }
+    else if ($hehe->id == 34){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.jogja.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.jogja.rekapitung.id";
+    }
+    else if ($hehe->id == 33){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.jateng.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.jateng.rekapitung.id";
+    }
+    else if ($hehe->id == 35){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.jatim.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.jatim.rekapitung.id";
+    }
+    else if ($hehe->id == 52){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.ntb.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.ntb.rekapitung.id";
+    }
+    else if ($hehe->id == 53){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.ntt.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.ntt.rekapitung.id";
+    }
+    else if ($hehe->id == 61){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.kalbar.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.kalbar.rekapitung.id";
+    }
+    else if ($hehe->id == 62){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.kalteng.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.kalteng.rekapitung.id";
+    }
+    else if ($hehe->id == 63){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.kalsel.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.kalsel.rekapitung.id";
+    }
+    else if ($hehe->id == 64){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.kaltim.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.kaltim.rekapitung.id";
+    }
+    else if ($hehe->id == 65){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.kalut.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.kalut.rekapitung.id";
+    }
+    else if ($hehe->id == 71){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.sulut.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.sulut.rekapitung.id";
+    }
+    else if ($hehe->id == 72){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.sulteng.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.sulteng.rekapitung.id";
+    }
+    else if ($hehe->id == 73){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.sulsel.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.sulsel.rekapitung.id";
+    }
+    else if ($hehe->id == 74){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.sultra.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.sultra.rekapitung.id";
+    }
+    else if ($hehe->id == 75){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.gorontalo.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.gorontalo.rekapitung.id";
+    }
+    else if ($hehe->id == 76){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.sulbar.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.sulbar.rekapitung.id";
+    }
+    else if ($hehe->id == 81){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.maluku.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.maluku.rekapitung.id";
+    }
+    else if ($hehe->id == 82){
+        ProvinceDomain::insert([
+            'domain'=>   "pilpres.malut.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.malut.rekapitung.id";
+    }
+    else if ($hehe->id == 91){
+        ProvinceDomain::insert([
+            'domain'=>  "pilpres.pabar.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.pabar.rekapitung.id";
+    }
+    else if ($hehe->id == 94){
+        ProvinceDomain::insert([
+            'domain'=>  "pilpres.papua.rekapitung.id",
+            'province_id' => $hehe->id
+        
+        ]);
+        echo "pilpres.papua.rekapitung.id";
+    }
+   }
+});

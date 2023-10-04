@@ -1,0 +1,713 @@
+
+@extends('layouts.mainpublic')
+@section('content')
+<body class="app sidebar-mini dark-mode">
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md text-center mt-5 ">
+                <h4 class="text-uppercase fw-bold">
+                    <img style="width: 100px;"
+                        src="https://paslon1.tangsel.pilwalkot.rekapitung.id/ui/images/Lambang_Kota_Tangerang_Selatan_svg1.png"
+                        alt="">
+                </h4>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md text-center">
+                <h4 class="text-uppercase fw-bold">
+                    KOTA TANGERANG SELATAN <br> TAHUN 2020
+                </h4>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md text-center mt-5 ">
+                <h1 class="text-uppercase fw-bold">
+                    Public Count
+                </h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row" id="marquee1">
+
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <a class="btn btn-sm btn-danger rounded-0" style="font-size:11px;" data-toggle="modal"
+                                data-tooltip-toogle="tooltip"
+                                title="Kiriman Saksi adalah laporan saksi di TPS yang mengirim hasil perhitungan langsung dari lokasi TPS. Setiap saksi yang mengirim data perhitungan di TPS akan ditampilkan pada tulisan berjalan ini."
+                                id="inputGroup-sizing-sm">Kiriman Saksi <i class="fa fa-question-circle"></i></a>
+                        </div>
+                        <div class="form-control" style="height:25px;" aria-label="Small"
+                            aria-describedby="inputGroup-sizing-sm">
+                            <marquee id="cobamarq1">
+                                <span class="text-danger">
+                                    ▼
+                                </span>
+                                umar wibu hakim , Ciputat , TPS 62 <span class="text-success"> ▲</span> <span
+                                    class="text-danger">
+                                    ▼
+                                </span>
+                                Natasha Zevanya , Ciputat , TPS 65 <span class="text-success"> ▲</span> <span
+                                    class="text-danger">
+                                    ▼
+                                </span>
+                                Saksi Coba , Ciputat , TPS 66 <span class="text-success"> ▲</span> <span
+                                    class="text-danger">
+                                    ▼
+                                </span>
+                                Saksi Pertama , Ciputat , TPS 69 <span class="text-success"> ▲</span> <span
+                                    class="text-danger">
+                                    ▼
+                                </span>
+                                Saksi Kedua , Ciputat , TPS 70 <span class="text-success"> ▲</span> <span
+                                    class="text-danger">
+                                    ▼
+                                </span>
+                                saksi kelima , Ciputat , TPS 74 <span class="text-success"> ▲</span> <span
+                                    class="text-danger">
+                                    ▼
+                                </span>
+                                saksi keenam , Ciputat , TPS 75 <span class="text-success"> ▲</span> <span
+                                    class="text-danger">
+                                    ▼
+                                </span>
+                                saksi ketujuh , Ciputat , TPS 76 <span class="text-success"> ▲</span> <span
+                                    class="text-danger">
+                                    ▼
+                                </span>
+                                saksi kesembilan , Ciputat , TPS 78 <span class="text-success"> ▲</span> <span
+                                    class="text-danger">
+                                    ▼
+                                </span>
+                                Real Madrid , Ciputat , TPS 84 <span class="text-success"> ▲</span> <span
+                                    class="text-danger">
+                                    ▼
+                                </span>
+                                Saksi 4 , Ciputat , TPS 16 <span class="text-success"> ▲</span> <span
+                                    class="text-danger">
+                                    ▼
+                                </span>
+                                Saksi ke 02 , Ciputat , TPS 82 <span class="text-success"> ▲</span> <span
+                                    class="text-danger">
+                                    ▼
+                                </span>
+                                Robinson roboski , Ciputat , TPS 83 <span class="text-success"> ▲</span> <span
+                                    class="text-danger">
+                                    ▼
+                                </span>
+                                Revaldi Muhammad , Ciputat , TPS 85 <span class="text-success"> ▲</span> <span
+                                    class="text-danger">
+                                    ▼
+                                </span>
+                                Pras Teguh , Ciputat , TPS 86 <span class="text-success"> ▲</span> <span
+                                    class="text-danger">
+                                    ▼
+                                </span>
+                                Adit MKM , Ciputat , TPS 87 <span class="text-success"> ▲</span> <span
+                                    class="text-danger">
+                                    ▼
+                                </span>
+                                Andriano Walbi Khun , Ciputat , TPS 88 <span class="text-success"> ▲</span> <span
+                                    class="text-danger">
+                                    ▼
+                                </span>
+                                Coki Pardede , Ciputat , TPS 89 <span class="text-success"> ▲</span> <span
+                                    class="text-danger">
+                                    ▼
+                                </span>
+                                Albert Enins , Jombang , TPS 92 <span class="text-success"> ▲</span> </marquee>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="marquee3" style="display:none">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-dark btn-sm text-white rounded-0" data-tooltip-toogle="tooltip"
+                                title="TPS Quick Count adalah TPS yang terdaftar sebagai TPS Sample yang dipilih secara acak oleh Sistem dengan perhitungan 30% dari total TPS masuk dalam satu Kelurahan."
+                                style="font-size:11px;" data-toggle="modal" data-target="#modalTpsQuickCountQuest"
+                                id="inputGroup-sizing-sm">TPS QuickCount <i class="fa fa-question-circle"></i></button>
+                        </div>
+                        <div class="form-control" style="height:25px;" aria-label="Small"
+                            aria-describedby="inputGroup-sizing-sm">
+                            <marquee id="cobamarq3"><span class="text-danger">▼</span>, Jombang , TPS 1 <span
+                                    class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 1
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Ciputat , TPS 3
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 3
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Ciputat , TPS 5
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 4
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Ciputat , TPS 9
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Ciputat , TPS 7
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Ciputat , TPS 10
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Ciputat , TPS 13
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 15
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Ciputat , TPS 24
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 18
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 21
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 28
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 31
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 32
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Ciputat , TPS 28
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 39
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 41
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 44
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 46
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 47
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Ciputat , TPS 29
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 50
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 51
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 53
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Ciputat , TPS 34
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Ciputat , TPS 35
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 56
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 57
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 58
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 60
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 61
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 62
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Ciputat , TPS 43
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 63
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Ciputat , TPS 46
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 64
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Ciputat , TPS 48
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 66
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 70
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 71
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Sawah Baru , TPS
+                                5 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS
+                                72 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Sawah Baru ,
+                                TPS 9 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang ,
+                                TPS 74 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang ,
+                                TPS 75 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Sawah
+                                Baru , TPS 13 <span class="text-success"> ▲</span><span class="text-danger">▼</span>,
+                                Jombang , TPS 78 <span class="text-success"> ▲</span><span class="text-danger">▼</span>,
+                                Jombang , TPS 81 <span class="text-success"> ▲</span><span class="text-danger">▼</span>,
+                                Sawah Baru , TPS 21 <span class="text-success"> ▲</span><span
+                                    class="text-danger">▼</span>, Sawah Baru , TPS 22 <span class="text-success">
+                                    ▲</span><span class="text-danger">▼</span>, Sawah Baru , TPS 23 <span
+                                    class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 84
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS 85
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Sawah Baru , TPS
+                                26 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Jombang , TPS
+                                86 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Sawah Baru ,
+                                TPS 28 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Sawah
+                                Baru , TPS 29 <span class="text-success"> ▲</span><span class="text-danger">▼</span>,
+                                Cipayung , TPS 5 <span class="text-success"> ▲</span><span class="text-danger">▼</span>,
+                                Cipayung , TPS 6 <span class="text-success"> ▲</span><span class="text-danger">▼</span>,
+                                Cipayung , TPS 8 <span class="text-success"> ▲</span><span class="text-danger">▼</span>,
+                                Cipayung , TPS 10 <span class="text-success"> ▲</span><span
+                                    class="text-danger">▼</span>, Cipayung , TPS 13 <span class="text-success">
+                                    ▲</span><span class="text-danger">▼</span>, Sawah Baru , TPS 36 <span
+                                    class="text-success"> ▲</span><span class="text-danger">▼</span>, Cipayung , TPS 16
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Sawah Baru , TPS
+                                40 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Sawah Baru ,
+                                TPS 46 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Sawah
+                                Baru , TPS 47 <span class="text-success"> ▲</span><span class="text-danger">▼</span>,
+                                Sawah Baru , TPS 48 <span class="text-success"> ▲</span><span
+                                    class="text-danger">▼</span>, Sawah Baru , TPS 49 <span class="text-success">
+                                    ▲</span><span class="text-danger">▼</span>, Sawah Baru , TPS 52 <span
+                                    class="text-success"> ▲</span><span class="text-danger">▼</span>, Sawah Baru , TPS
+                                55 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Sawah Lama ,
+                                TPS 2 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Sawah Lama
+                                , TPS 11 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Sawah
+                                Lama , TPS 14 <span class="text-success"> ▲</span><span class="text-danger">▼</span>,
+                                Sawah Lama , TPS 16 <span class="text-success"> ▲</span><span
+                                    class="text-danger">▼</span>, Sawah Lama , TPS 21 <span class="text-success">
+                                    ▲</span><span class="text-danger">▼</span>, Sawah Lama , TPS 24 <span
+                                    class="text-success"> ▲</span><span class="text-danger">▼</span>, Sawah Lama , TPS
+                                26 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Sawah Lama ,
+                                TPS 29 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Sawah
+                                Lama , TPS 31 <span class="text-success"> ▲</span><span class="text-danger">▼</span>,
+                                Sawah Lama , TPS 41 <span class="text-success"> ▲</span><span
+                                    class="text-danger">▼</span>, Sawah Lama , TPS 43 <span class="text-success">
+                                    ▲</span><span class="text-danger">▼</span>, Sawah Lama , TPS 46 <span
+                                    class="text-success"> ▲</span><span class="text-danger">▼</span>, Sawah Lama , TPS
+                                49 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Sawah Lama ,
+                                TPS 55 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Sawah
+                                Lama , TPS 58 <span class="text-success"> ▲</span><span class="text-danger">▼</span>,
+                                Sawah Lama , TPS 60 <span class="text-success"> ▲</span><span
+                                    class="text-danger">▼</span>, Sawah Lama , TPS 62 <span class="text-success">
+                                    ▲</span><span class="text-danger">▼</span>, Sawah Lama , TPS 64 <span
+                                    class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua , TPS 10
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua , TPS 11
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua , TPS 12
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua , TPS 13
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua , TPS 14
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua , TPS 22
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua , TPS 24
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua , TPS 25
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua , TPS 30
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua , TPS 33
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua , TPS 36
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua , TPS 39
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua , TPS 42
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua , TPS 43
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua , TPS 44
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Cipayung , TPS
+                                19 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Cipayung ,
+                                TPS 20 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua ,
+                                TPS 45 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua ,
+                                TPS 47 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua ,
+                                TPS 48 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Cipayung
+                                , TPS 24 <span class="text-success"> ▲</span><span class="text-danger">▼</span>,
+                                Cipayung , TPS 27 <span class="text-success"> ▲</span><span
+                                    class="text-danger">▼</span>, Cipayung , TPS 28 <span class="text-success">
+                                    ▲</span><span class="text-danger">▼</span>, Serua , TPS 55 <span
+                                    class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua , TPS 56
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Cipayung , TPS
+                                32 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Cipayung ,
+                                TPS 33 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua ,
+                                TPS 57 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua ,
+                                TPS 61 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Cipayung
+                                , TPS 34 <span class="text-success"> ▲</span><span class="text-danger">▼</span>,
+                                Cipayung , TPS 37 <span class="text-success"> ▲</span><span
+                                    class="text-danger">▼</span>, Cipayung , TPS 41 <span class="text-success">
+                                    ▲</span><span class="text-danger">▼</span>, Serua , TPS 69 <span
+                                    class="text-success"> ▲</span><span class="text-danger">▼</span>, Cipayung , TPS 44
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Cipayung , TPS
+                                46 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Cipayung ,
+                                TPS 46 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua ,
+                                TPS 73 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua ,
+                                TPS 75 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Cipayung
+                                , TPS 48 <span class="text-success"> ▲</span><span class="text-danger">▼</span>,
+                                Cipayung , TPS 50 <span class="text-success"> ▲</span><span
+                                    class="text-danger">▼</span>, Serua , TPS 78 <span class="text-success">
+                                    ▲</span><span class="text-danger">▼</span>, Serua , TPS 80 <span
+                                    class="text-success"> ▲</span><span class="text-danger">▼</span>, Cipayung , TPS 53
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua , TPS 82
+                                <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua Indah ,
+                                TPS 3 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua
+                                Indah , TPS 4 <span class="text-success"> ▲</span><span class="text-danger">▼</span>,
+                                Serua Indah , TPS 5 <span class="text-success"> ▲</span><span
+                                    class="text-danger">▼</span>, Serua Indah , TPS 6 <span class="text-success">
+                                    ▲</span><span class="text-danger">▼</span>, Serua Indah , TPS 16 <span
+                                    class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua Indah , TPS
+                                17 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua Indah ,
+                                TPS 18 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua
+                                Indah , TPS 19 <span class="text-success"> ▲</span><span class="text-danger">▼</span>,
+                                Serua Indah , TPS 29 <span class="text-success"> ▲</span><span
+                                    class="text-danger">▼</span>, Serua Indah , TPS 33 <span class="text-success">
+                                    ▲</span><span class="text-danger">▼</span>, Serua Indah , TPS 34 <span
+                                    class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua Indah , TPS
+                                36 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Serua Indah ,
+                                TPS 38 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Ciputat ,
+                                TPS 75 <span class="text-success"> ▲</span><span class="text-danger">▼</span>, Ciputat ,
+                                TPS 90 <span class="text-success"> ▲</span></marquee>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="marquee2">
+                    <div class="input-group input-group-sm">
+                        <div class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                            <marquee id="cobamarq2" style="position:none"><span class="text-danger">▼</span>Gilda
+                                Wahyuni M.Pd , Jombang , TPS 1 <span class="text-success"> ▲</span><span
+                                    class="text-danger">▼</span>Syahrini Wahyuni , Ciputat , TPS 5 <span
+                                    class="text-success"> ▲</span><span class="text-danger">▼</span>Mumpuni Siregar S.Pd
+                                , Ciputat , TPS 6 <span class="text-success"> ▲</span><span
+                                    class="text-danger">▼</span>Gara Gamani Hutagalung , Ciputat , TPS 8 <span
+                                    class="text-success"> ▲</span><span class="text-danger">▼</span>Faizah Hasanah ,
+                                Ciputat , TPS 7 <span class="text-success"> ▲</span></marquee>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md text-center">
+                <div class="container">
+                    <ul class="nav nav-tabs mb-3 shadow-sm" id="pills-tab" role="tablist">
+                        <li class="nav-item w-50"> <button style="height: 24px;"
+                                class="btn nav-link active w-100 rounded-0 hoper border" id="pills-home-tab"
+                                data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home"
+                                aria-selected="true">Real
+                                Count</button> </li>
+                        <li class="nav-item w-50"> <button style="height: 24px;"
+                                class="btn nav-link w-100 rounded-0 border" id="pills-profile-tab" data-toggle="pill"
+                                href="#pills-profile" role="tab" aria-controls="pills-profile"
+                                aria-selected="false">Quick Count</button> </li>
+                    </ul> <!-- content -->
+                </div>
+                <div class="tab-content" id="pills-tabContent p-3">
+
+                    <!-- 1st card -->
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                        aria-labelledby="pills-home-tab">
+                        <div class="card rounded-0">
+                            <div class="card-body">
+                                <!-- nav options -->
+
+
+                                <div class="row mt-5">
+                                    <div class="col-md-12">
+                                        <div id="chart-pie" class="chartsh"></div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-12 col-sm-12 col-xl-3 mt-4">
+                                        <div class="card overflow-hidden" style="margin-bottom: 0px;">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <h6 class="">Suara Paslon 01</h6>
+                                                        <h3 class="mb-2 number-font">36478</h3>
+                                                    </div>
+                                                    <div class="col col-auto">
+                                                        <div class="counter-icon bg-primary-gradient box-shadow-primary brround ms-auto"
+                                                            style="margin-bottom: 0;">
+                                                            A
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-12 col-sm-12 col-xl-3 mt-4">
+                                        <div class="card overflow-hidden" style="margin-bottom: 0px;">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <h6 class="">Suara Paslon 02</h6>
+                                                        <h3 class="mb-2 number-font">21431</h3>
+                                                    </div>
+                                                    <div class="col col-auto">
+                                                        <div class="counter-icon bg-danger-gradient box-shadow-danger brround ms-auto"
+                                                            style="margin-bottom: 0;">
+                                                            B
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-12 col-sm-12 col-xl-3 mt-4">
+                                        <div class="card overflow-hidden" style="margin-bottom: 0px;">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <h6 class="">Suara Paslon 03</h6>
+                                                        <h3 class="mb-2 number-font">29850</h3>
+                                                    </div>
+                                                    <div class="col col-auto">
+                                                        <div class="counter-icon bg-secondary-gradient box-shadow-secondary brround ms-auto"
+                                                            style="margin-bottom: 0;">
+                                                            C
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12 col-sm-12 col-xl-3 mt-4">
+                                        <div class="card overflow-hidden" style="margin-bottom: 0px;">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <h6 class="">Suara Paslon 04</h6>
+                                                        <h3 class="mb-2 number-font">36478</h3>
+                                                    </div>
+                                                    <div class="col col-auto">
+                                                        <div class="counter-icon bg-success-gradient box-shadow-success brround ms-auto"
+                                                            style="margin-bottom: 0;">
+                                                            D
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-5">
+                                    <div class="col-md-12 mt-3">
+                                        <h5 class="text-uppercase">HITUNG SUARA PEMILIHAN WALIKOTA DAN WAKIL WALIKOTA
+                                            KOTA TANGERANG SELATAN</h5>
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <h5 class="text-uppercase">
+                                            <span class="badge bg-primary">Progress : 480 TPS Dari 2963 TPS</span>
+                                        </h5>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-5">
+                                    <div class="col-md-12 mt-5">
+                                        <table class="table table-bordered table-hover">
+                                            <thead class="bg-primary-transparent">
+                                                <tr>
+                                                    <th class="align-middle" rowspan="2">Kecamatan</th>
+                                                    <th colspan="3">Suara</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>01</th>
+                                                    <th>02</th>
+                                                    <th>03</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <tr>
+                                                    <td><a type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#modal-id">Serpong</a></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane fade show" id="pills-profile" role="tabpanel"
+                        aria-labelledby="pills-profile-tab">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- nav options -->
+
+
+                                <div class="row mt-5">
+                                    <div class="col-md-12">
+                                        <div id="chart-donut" class="chartsh"></div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-5">
+                                    <div class="col-md-12 mt-3">
+                                        <h5 class="text-uppercase">HITUNG SUARA PEMILIHAN WALIKOTA DAN WAKIL WALIKOTA
+                                            KOTA TANGERANG SELATAN</h5>
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <h5 class="text-uppercase">
+                                            <span class="badge bg-primary">Progress : 480 TPS Dari 2963 TPS</span>
+                                        </h5>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-5">
+                                    <div class="col-md-12 mt-5">
+                                        <table class="table table-bordered table-hover">
+                                            <thead class="bg-primary-transparent">
+                                                <tr>
+                                                    <th class="align-middle" rowspan="2">Kecamatan</th>
+                                                    <th colspan="3">Suara</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>01</th>
+                                                    <th>02</th>
+                                                    <th>03</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Serpong</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container" style="margin-top: -25px;">
+        <div class="card bg-primary rounded-0">
+            <div class="card-body text-center">
+                <h5 class="card-title"><img width="200px" class="mt-5"
+                        src="https://paslon1.tangsel.pilwalkot.rekapitung.id/ui/images/acakey_new.png" alt=""></h5>
+                <div class="row no-gutters mx-auto mt-5" style="width: 350px;">
+                    <div class="col"><button type="button" class="rounded-0 btn btn-facebook"><i
+                                class="fa fa-facebook me-2"></i>Facebook</button></div>
+                    <div class="col"><button type="button" class="rounded-0 btn btn-twitter"><i
+                                class="fa fa-twitter me-2"></i>Twitter</button></div>
+                    <div class="col"><button type="button" class="rounded-0 btn btn-success"><i
+                                class="fa fa-whatsapp me-2"></i>Twitter</button></div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col">
+                        <a class="text-white fw-bold" href="login">Login</a> |
+                        <a class="text-white fw-bold" href="relawan">Relawan</a> |
+                        <a class="text-white fw-bold" href="#">History</a> |
+                        <a class="text-white fw-bold" href="#">Disclaimer</a> |
+                        <a class="text-white fw-bold" href="#">Fraud</a>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col">
+                        <b>© PT. Mahadaya Swara Teknologi <br> All Rights Reserved 2021.</b>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal-id" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">TPS</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://paslon1.tangsel.pilwalkot.rekapitung.id/assets/upload/c1plano.jpg" alt=""
+                        srcset="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary">Unduh Salinan</button>
+                    <button type="button" class="btn btn-primary">Banding C1</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+  
+    <script>
+        /*chart-pie*/
+        var chart = c3.generate({
+            bindto: '#chart-pie', // id of chart wrapper
+            data: {
+                columns: [
+                    // each columns data
+                    ['data1', 63],
+                    ['data2', 44],
+                    ['data3', 12],
+                    ['data4', 14]
+                ],
+                type: 'pie', // default type of chart
+                colors: {
+                    data1: '#6259ca',
+                    data2: '#eb6f33',
+                    data3: '#ec546c',
+                    data4: '#0774f8'
+                },
+                names: {
+                    // name of each serie
+                    'data1': 'A',
+                    'data2': 'B',
+                    'data3': 'C',
+                    'data4': 'D'
+                }
+            },
+            axis: {},
+            legend: {
+                show: true, //hide legend
+            },
+            padding: {
+                bottom: 0,
+                top: 0
+            },
+        });
+
+    </script>
+
+    <script>
+        /*chart-pie*/
+        var chart = c3.generate({
+            bindto: '#chart-donut', // id of chart wrapper
+            data: {
+                columns: [
+                    // each columns data
+                    ['data1', 63],
+                    ['data2', 44],
+                    ['data3', 12],
+                    ['data4', 14]
+                ],
+                type: 'donut', // default type of chart
+                colors: {
+                    data1: '#6259ca',
+                    data2: '#eb6f33',
+                    data3: '#ec546c',
+                    data4: '#0774f8'
+                },
+                names: {
+                    // name of each serie
+                    'data1': 'A',
+                    'data2': 'B',
+                    'data3': 'C',
+                    'data4': 'D'
+                }
+            },
+            axis: {},
+            legend: {
+                show: true, //hide legend
+            },
+            padding: {
+                bottom: 0,
+                top: 0
+            },
+        });
+
+    </script>
+
+    <script>
+        setTimeout(function () {
+            $('#marquee2').hide()
+            $('#marquee3').hide()
+        }, 10)
+
+        let marquee1 = document.getElementById('cobamarq1');
+        let marquee2 = document.getElementById('cobamarq2');
+        let marquee3 = document.getElementById('cobamarq3');
+        $('#pills-verif-tab').on('click', function () {
+            $('#marquee1').hide()
+            $('#marquee2').show()
+            $('#marquee3').hide()
+            marquee2.start()
+            marquee1.stop()
+            marquee3.stop()
+
+        });
+
+        $('#pills-home-tab').on('click', function () {
+            $('#marquee1').show()
+            $('#marquee2').hide()
+            $('#marquee3').hide()
+            marquee1.start()
+            marquee2.stop()
+            marquee3.stop()
+
+        });
+        $('#pills-profile-tab').on('click', function () {
+            $('#marquee1').hide()
+            $('#marquee2').hide()
+            $('#marquee3').show()
+            marquee3.start()
+            marquee2.stop()
+            marquee1.stop()
+
+        });
+
+    </script>
+
+@endsection

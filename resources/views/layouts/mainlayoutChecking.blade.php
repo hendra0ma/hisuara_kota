@@ -1,0 +1,6 @@
+@include('layouts.templateChecking.head')
+@include('layouts.templateChecking.sidebar')
+@include('layouts.templateChecking.header')
+@yield('content')
+@include('layouts.templateChecking.footer')
+@include('layouts.templateChecking.footer-scripts')

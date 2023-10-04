@@ -1,0 +1,21 @@
+{
+  "name": "sertanus/zanex",
+  "description": "Template",
+  "keywords": [
+    "css",
+    "js",
+    "less",
+    "responsive",
+    "back-end",
+    "template",
+    "theme",
+    "web",
+    "admin"
+  ],
+  "authors": [
+    {
+      "name": "template"
+    }
+  ],
+  "license": "MIT"
+}
