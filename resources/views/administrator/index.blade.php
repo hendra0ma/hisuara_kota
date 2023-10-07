@@ -68,7 +68,7 @@ $tps = Tps::count();
         </div>
         <div class="col-md-8">
             
-                    <h1 class="page-title fs-3 mt-2">DASHBOARD REKAPITUNG
+                    <h1 class="page-title fs-3 mt-2">DASHBOARD HISUARA
                     </h1>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -112,7 +112,7 @@ $tps = Tps::count();
                             <div class="card-header text-center" style="padding: 0px; padding-bottom: 10px">
                                 <div class="card-title mx-auto">
                                     
-                                    Mode Sistem <i class="fa fa-question-circle"  data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Mode sistem adalah status sistem Rekapitung yang dibagi menjadi tiga bagian, yaitu : mode saksi, mode relawan dan mode overtime (Antisipasi Hacker). Ketiga mode ini berjalan pada hari yang sama dengan pembagian waktu yang telah di tetapkan."></i>
+                                    Mode Sistem <i class="fa fa-question-circle"  data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Mode sistem adalah status sistem HISUARA yang dibagi menjadi tiga bagian, yaitu : mode saksi, mode relawan dan mode overtime (Antisipasi Hacker). Ketiga mode ini berjalan pada hari yang sama dengan pembagian waktu yang telah di tetapkan."></i>
                                 </div>
                             </div>
                             <div class="row mx-auto text-center">

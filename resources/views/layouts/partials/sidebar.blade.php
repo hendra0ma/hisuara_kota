@@ -3,6 +3,7 @@
 use App\Models\Config;
 use App\Models\District;
 use App\Models\Province;
+use App\Models\RegenciesDomain;
 use App\Models\Regency;
 use App\Models\Tps;
 use Illuminate\Support\Facades\DB;
@@ -77,15 +78,19 @@ $tps = 2963;
                             class="side-menu__icon fe fe-grid"></i><span class="side-menu__label">PROVINSI {{$props->name}}</span><i
                             class="angle fa fa-angle-right"></i></a>
                     <ul class="slide-menu">
-                        <li><a href="http://pilpres.banten.rekapitung.id/index" class="slide-item fw-bolder text-danger">DASHBOARD {{$props->name}}</a></li>
-                        <li><a href="http://pandeglang.pilpres.banten.rekapitung.id" class="slide-item">KABUPATEN PANDEGLANG</a></li>
-                                                <li><a href="http://lebak.pilpres.banten.rekapitung.id" class="slide-item">KABUPATEN LEBAK</a></li>
-                                                <li><a href="http://kab-tanggerang.pilpres.banten.rekapitung.id" class="slide-item">KABUPATEN TANGERANG</a></li>
-                                            <li><a href="http://kab-serang.pilpres.banten.rekapitung.id" class="slide-item">KABUPATEN SERANG</a></li>
-                                             <li><a href="http://tanggerang.pilpres.banten.rekapitung.id" class="slide-item">KOTA TANGERANG</a></li>
-                                             <li><a href="http://cilegon.pilpres.banten.rekapitung.id" class="slide-item">KOTA CILEGON</a></li>
-                                             <li><a href="http://serang.pilpres.banten.rekapitung.id" class="slide-item">KOTA SERANG</a></li>
-                                            <li><a href="http://tangsel.pilpres.banten.rekapitung.id" class="slide-item">KOTA TANGERANG SELATAN</a></li>
+                        <li><a href="http://pilpres.banten.hisuara.id/index" class="slide-item fw-bolder text-danger">DASHBOARD {{$props->name}}</a></li>
+                        <?php $domainKota = RegenciesDomain::join("regencies",'regency_domains.regency_id','=','regencies.id')->where("province_id",$props->id)->get(); ?>
+                            @foreach($domainKota as $dokota)
+                            <li><a href="{{$dokota->domain}}" class="slide-item">{{$dokota->name}}</a></li>
+                            @endforeach
+
+                        <!-- <li><a href="http://lebak.pilpres.banten.rekapitung.id" class="slide-item">KABUPATEN LEBAK</a></li>
+                        <li><a href="http://kab-tanggerang.pilpres.banten.rekapitung.id" class="slide-item">KABUPATEN TANGERANG</a></li>
+                        <li><a href="http://kab-serang.pilpres.banten.rekapitung.id" class="slide-item">KABUPATEN SERANG</a></li>
+                        <li><a href="http://tanggerang.pilpres.banten.rekapitung.id" class="slide-item">KOTA TANGERANG</a></li>
+                        <li><a href="http://cilegon.pilpres.banten.rekapitung.id" class="slide-item">KOTA CILEGON</a></li>
+                        <li><a href="http://serang.pilpres.banten.rekapitung.id" class="slide-item">KOTA SERANG</a></li>
+                        <li><a href="http://tangsel.pilpres.banten.rekapitung.id" class="slide-item">KOTA TANGERANG SELATAN</a></li> -->
                     </ul>
                 </li>
                 <!-- <li>
@@ -117,11 +122,11 @@ $tps = 2963;
                     <a class="side-menu__item" href="quick_count2"><i class="side-menu__icon mdi mdi-quicktime"></i><span
                             class="side-menu__label">Quick Count 2</span></a>
                 </li> -->
-                <li>
+                <!-- <li>
                     <a class="side-menu__item" href="{{url('')}}/administrator/maps_count"><i
                             class="side-menu__icon mdi mdi-google-maps"></i><span class="side-menu__label">Maps
                             Count</span></a>
-                </li>
+                </li> -->
 
                 <li>
                     <h3>Administrator</h3>
@@ -223,7 +228,7 @@ $tps = 2963;
                         @endforeach
                     </ul>
                 </li>
-                <li>
+                <!-- <li>
                     <h3>Kecurangan</h3>
                 </li>
                 <li>
@@ -234,13 +239,13 @@ $tps = 2963;
                 <li>
                     <a class="side-menu__item" href="/v2l_security/{{encrypt(26)}}?title=Indikasi Realisasi DPT"><i
                             class="side-menu__icon mdi mdi-google-analytics"></i><span class="side-menu__label">Indikasi Realisasi DPT</span></a>
-                </li>
+                </li> -->
 
 
                 <li>
                     <h3>Fitur Utama</h3>
                 </li>
-                <li>
+                <!-- <li>
                     <a class="side-menu__item" href="/v2l_security/{{encrypt(20)}}?title=Pencetakan Data Kecurangan"><i
                             class="side-menu__icon mdi mdi-printer"></i><span class="side-menu__label">Pencetakan Data Kecurangan</span></a>
                 </li>
@@ -248,7 +253,7 @@ $tps = 2963;
                     <a class="side-menu__item"
                         href="/v2l_security/{{encrypt(21)}}?title=Barcode Data Kecurangan"><i
                             class="side-menu__icon mdi mdi-barcode"></i><span class="side-menu__label">Barcode Data Kecurangan</span></a>
-                </li>
+                </li> -->
                 <li>
                     <a class="side-menu__item" href="/v2l_security/{{encrypt(22)}}?title=Indikator Data TSM"><i
                             class="side-menu__icon mdi mdi-chart-arc"></i><span class="side-menu__label">Indikator Data TSM</span></a>
@@ -258,7 +263,7 @@ $tps = 2963;
                             class="side-menu__icon mdi mdi mdi-compare"></i><span class="side-menu__label">Komparasi Data Perhitungan</span></a>
                 </li>
 
-                <li>
+                <!-- <li>
                     <h3>Laporan Kecurangan</h3>
                 </li>
 
@@ -274,7 +279,7 @@ $tps = 2963;
                 <li>
                     <a class="side-menu__item" href="/v2l_security/{{encrypt(24)}}?title=Mahkamah Konstitusi (MK)"><i
                             class="side-menu__icon fa fa-gavel"></i><span class="side-menu__label">Mahkamah Konstitusi (MK)</span></a>
-                </li>
+                </li> -->
 
 
 
@@ -291,7 +296,7 @@ $tps = 2963;
                 <li>
                     <a class="side-menu__item modal-action" href="#modalCommander" data-bs-toggle="modal"
                         data-jenis="setting" data-izin="otonom" data-title="Mode Otonom"
-                        data-deskripsi="Mode Otonom adalah sistem rekapitung yang berjalan tanpa admin dan hanya menampilkan perolehan suara yang dikirim oleh saksi.">
+                        data-deskripsi="Mode Otonom adalah sistem Hisuara yang berjalan tanpa admin dan hanya menampilkan perolehan suara yang dikirim oleh saksi.">
                         <i class="side-menu__icon fa fa-magic"></i><span class="side-menu__label">Mode Otonom</span></a>
                 </li>
                 <!-- <li class="slide">
@@ -327,7 +332,7 @@ $tps = 2963;
                 <li>
                     <a class="side-menu__item modal-action" href="#modalCommander" data-bs-toggle="modal"
                         data-jenis="setting" data-izin="show_public" data-title="Mode C1 Publik"
-                        data-deskripsi="Mode Publikasi C1 adalah mode untuk menampilkan lampiran C1 kepada publik atau masyarakat melalui Rekapitung.id"">
+                        data-deskripsi="Mode Publikasi C1 adalah mode untuk menampilkan lampiran C1 kepada publik atau masyarakat melalui Hisuara.id"">
                         <i class="side-menu__icon mdi mdi-image"></i><span class="side-menu__label">Mode Publikasi C1</span></a>
                 </li>
                 <li>
@@ -367,15 +372,13 @@ $tps = 2963;
                 <li>
                     <h3>Demontrasi</h3>
                 </li>
-                <li class="slide">
-                    <a class="side-menu__item" data-bs-toggle="slide" href="#"><i
-                            class="side-menu__icon mdi mdi-file-account"></i><span class="side-menu__label">Input Saksi</span><i
-                            class="angle fa fa-angle-right"></i></a>
-                    <ul class="slide-menu">
-                        <li><a href="/v2l_security/{{encrypt(16)}}?title=Input C1 Plano" class="slide-item">Upload C1</a></li>
-                        <li><a href="/v2l_security/{{encrypt(15)}}?title=Input Kecurangan" class="slide-item">Laporan Kecurangan</a></li>
-                    </ul>
+
+                <li>
+                    <a class="side-menu__item" href="/v2l_security/{{encrypt(16)}}?title=Input C1 Plano">
+                        <i class="side-menu__icon mdi mdi-file-account"></i><span class="side-menu__label">Upload C1</span></a>
                 </li>
+
+              
                 <li>
                     <a class="side-menu__item" href="/v2l_security/{{encrypt(30)}}?title=Input C1 Quick Count">
                         <i class="side-menu__icon mdi mdi-file"></i><span class="side-menu__label">Input C1 Quick Count</span></a>
