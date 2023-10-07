@@ -79,7 +79,7 @@ $tps = 2963;
                             class="angle fa fa-angle-right"></i></a>
                     <ul class="slide-menu">
                         <li><a href="http://pilpres.banten.hisuara.id/index" class="slide-item fw-bolder text-danger">DASHBOARD {{$props->name}}</a></li>
-                        <?php $domainKota = RegenciesDomain::join("regencies",'regency_domains.regency_id','=','regencies.id')->where("province_id",$props->id)->get(); ?>
+                        <?php $domainKota = RegenciesDomain::join("regencies",'regency_domains.regency_id','=','regencies.id')->where("regency_domains.province_id",$props->id)->get(); ?>
                             @foreach($domainKota as $dokota)
                             <li><a href="{{$dokota->domain}}" class="slide-item">{{$dokota->name}}</a></li>
                             @endforeach
