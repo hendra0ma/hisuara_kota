@@ -6,17 +6,7 @@
 
 <div class="container" style="margin-top: -25px;">
     <div class="card bg-primary rounded-0">
-        <div class="dropup btn-group w-100">
-            <button class="btn btn-danger dropdown-toggle w-100 rounded-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">Pilih Mode Perhitungan
-                <span class="caret"></span></button>
-            <ul class="dropdown-menu bg-dark w-100 rounded-0">
-                <li><a href="{{url('')}}/real_count" class="text-white">Real Count</a></li>
-                @if($config->quick_count == "yes")
-                <li><a href="{{url('')}}/quick_count" class="text-white">Quick Count</a></li>
-                @endif
-                <li><a href="{{url('')}}/map_count" class="text-white">Maps Count</a></li>
-            </ul>
-        </div>
+     
         <div class="card-body text-center">
             <h5 class="card-title"><img width="150px" src="../../assets/images/brand/logo.png" alt=""></h5>
             <div class="row no-gutters mx-auto mt-5" style="width: 350px;">

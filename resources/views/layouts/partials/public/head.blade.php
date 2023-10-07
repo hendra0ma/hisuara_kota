@@ -174,45 +174,11 @@ var documentTitle = document.title + " - ";
                                 <span class="text-danger">▼</span>{{$item['name']}} Kecamatan {{$kecamatan['name']}}, Kelurahan {{$kelurahan['name']}}, TPS {{$tps['number']}}<span class="text-success">▲</span>
                                 @endforeach
                             </marquee>
-
-
                         </div>
                     </div>
                 </div>
-                <div class="row" id="marquee3" style="display:none">
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-info btn-sm text-white rounded-0" data-tooltip-toogle="tooltip" title="TPS Quick Count adalah TPS yang terdaftar sebagai TPS Sample yang dipilih secara acak oleh Sistem dengan perhitungan 30% dari total TPS masuk dalam satu Kelurahan." style="font-size:11px;" data-toggle="modal" data-target="#modalTpsQuickCountQuest" id="inputGroup-sizing-sm">TPS QuickCount <i class="fa fa-question-circle"></i></button>
-                        </div>
-                        <div class="form-control" style="height:25px;" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                            <marquee id="cobamarq3">
-                                @foreach ($marquee as $item)
-                                <?php $kecamatan =  District::where('id', $item['districts'])->first(); ?>
-                                <?php $kelurahan =  Village::where('id', $item['villages'])->first(); ?>
-                                <?php $tps =  Tps::where('id', $item['tps_id'])->first(); ?>
-                                <span class="text-danger">▼</span>{{$item['name']}} Kecamatan {{$kecamatan['name']}}, Kelurahan {{$kelurahan['name']}}, TPS {{$tps['number']}}<span class="text-success">▲</span>
-                                @endforeach
-                            </marquee>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" id="marquee2">
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-warning btn-sm text-white rounded-0" data-tooltip-toogle="tooltip" title="Terverifikasi adalah status kiriman C1 TPS yang telah di verifikasi oleh verifikator." style="font-size:11px;" data-toggle="modal" data-target="#modalTpsQuickCountQuest" id="inputGroup-sizing-sm">Terverifikasi <i class="fa fa-question-circle"></i></button>
-                        </div>
-                        <div class="form-control" style="height:25px;" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                            <marquee id="cobamarq2" style="position:none">
-                                @foreach ($marquee as $item)
-                                <?php $kecamatan =  District::where('id', $item['districts'])->first(); ?>
-                                <?php $kelurahan =  Village::where('id', $item['villages'])->first(); ?>
-                                <?php $tps =  Tps::where('id', $item['tps_id'])->first(); ?>
-                                <span class="text-danger">▼</span>{{$item['name']}} Kecamatan {{$kecamatan['name']}}, Kelurahan {{$kelurahan['name']}}, TPS {{$tps['number']}}<span class="text-success">▲</span>
-                                @endforeach
-                            </marquee>
-                        </div>
-                    </div>
-                </div>
+               
+             
             </div>
         </div>
 
@@ -221,12 +187,6 @@ var documentTitle = document.title + " - ";
                 <div class="container">
                     <ul class="nav nav-tabs mb-3 shadow-sm" id="pills-tab" role="tablist">
                         <li class="nav-item col" style="padding-right: 0; padding-left: 0;"> <button style="height: 24px;" class="btn nav-link active w-100 rounded-0 hoper border" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">RealCount</button> </li>
-                        @if($config->quick_count == "yes")
-                        <li class="nav-item col" style="padding-right: 0; padding-left: 0;"> <button style="height: 24px;" class="btn nav-link w-100 rounded-0 hoper border" id="pills-home-tab" data-toggle="pill" href="#pills-home-enum" role="tab" aria-controls="pills-home-enum" aria-selected="true">Quick Count By Enumerator</button> </li>
-                        <!-- <li class="nav-item col" style="padding-right: 0; padding-left: 0;"> <button style="height: 24px;" class="btn nav-link w-100 rounded-0 border" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Sistem Quick Count</button> </li> -->
-                        @endif
-                        @if($config->show_terverifikasi == "show")
-                        <li class="nav-item col" style="padding-right: 0; padding-left: 0;"> <button style="height: 24px;" class="btn nav-link w-100 rounded-0 border" id="pills-terverifikasi-tab" data-toggle="pill" href="#pills-terverifikasi" role="tab" aria-controls="pills-terverifikasi" aria-selected="false">Terverifikasi</button> </li>
-                        @endif
+                      
                     </ul>
                 </div>
