@@ -25,73 +25,7 @@
                         <i class="fe fe-minimize fullscreen-button"></i>
                     </a>
                 </div><!-- FULL-SCREEN -->
-                <div class="dropdown  d-none d-md-flex message">
-                    <a class="nav-link icon text-center" data-bs-toggle="dropdown">
-                        <i class="fe fe-message-square"></i><span class=" pulse-danger"></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        <div class="drop-heading border-bottom">
-                            <div class="d-flex">
-                                <h6 class="mt-1 mb-0 fs-16 fw-semibold">You have Messages</h6>
-                                <div class="ms-auto">
-                                    <span class="badge bg-danger rounded-pill">4</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="message-menu">
-                            <a class="dropdown-item d-flex" href="chat.html">
-                                <span class="avatar avatar-md brround me-3 align-self-center cover-image" data-bs-image-src="../../assets/images/users/1.jpg"></span>
-                                <div class="wd-90p">
-                                    <div class="d-flex">
-                                        <h5 class="mb-1">Madeleine</h5>
-                                        <small class="text-muted ms-auto text-end">
-                                            3 hours ago
-                                        </small>
-                                    </div>
-                                    <span>Hey! there I' am available....</span>
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex" href="chat.html">
-                                <span class="avatar avatar-md brround me-3 align-self-center cover-image" data-bs-image-src="../../assets/images/users/12.jpg"></span>
-                                <div class="wd-90p">
-                                    <div class="d-flex">
-                                        <h5 class="mb-1">Anthony</h5>
-                                        <small class="text-muted ms-auto text-end">
-                                            5 hour ago
-                                        </small>
-                                    </div>
-                                    <span>New product Launching...</span>
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex" href="chat.html">
-                                <span class="avatar avatar-md brround me-3 align-self-center cover-image" data-bs-image-src="../../assets/images/users/4.jpg"></span>
-                                <div class="wd-90p">
-                                    <div class="d-flex">
-                                        <h5 class="mb-1">Olivia</h5>
-                                        <small class="text-muted ms-auto text-end">
-                                            45 mintues ago
-                                        </small>
-                                    </div>
-                                    <span>New Schedule Realease......</span>
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex" href="chat.html">
-                                <span class="avatar avatar-md brround me-3 align-self-center cover-image" data-bs-image-src="../../assets/images/users/15.jpg"></span>
-                                <div class="wd-90p">
-                                    <div class="d-flex">
-                                        <h5 class="mb-1">Sanderson</h5>
-                                        <small class="text-muted ms-auto text-end">
-                                            2 days ago
-                                        </small>
-                                    </div>
-                                    <span>New Schedule Realease......</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="dropdown-divider m-0"></div>
-                        <a href="#" class="dropdown-item text-center p-3 text-muted">See all Messages</a>
-                    </div>
-                </div><!-- MESSAGE-BOX -->
+                
                 <div class="dropdown d-none d-md-flex profile-1">
                     <a href="#" data-bs-toggle="dropdown" class="nav-link pe-2 leading-none d-flex">
                         <span>
@@ -99,26 +33,7 @@
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        <div class="drop-heading">
-                            <div class="text-center">
-                                <h5 class="text-dark mb-0">Elizabeth Dyer</h5>
-                                <small class="text-muted">Administrator</small>
-                            </div>
-                        </div>
-                        <div class="dropdown-divider m-0"></div>
-                        <a class="dropdown-item" href="profile.html">
-                            <i class="dropdown-icon fe fe-user"></i> Profile
-                        </a>
-                        <a class="dropdown-item" href="email.html">
-                            <i class="dropdown-icon fe fe-mail"></i> Inbox
-                            <span class="badge bg-primary float-end">3</span>
-                        </a>
-                        <a class="dropdown-item" href="emailservices.html">
-                            <i class="dropdown-icon fe fe-settings"></i> Settings
-                        </a>
-                        <a class="dropdown-item" href="faq.html">
-                            <i class="dropdown-icon fe fe-alert-triangle"></i> Need help??
-                        </a>
+                      
                         <form action="{{ route('logout') }}" method="post">
 
                             @csrf

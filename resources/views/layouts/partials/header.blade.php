@@ -79,7 +79,6 @@
 
                         </div>
                         <div class="dropdown-divider m-0"></div>
-                        <a href="#" class="dropdown-item text-center p-3 text-muted">See all Messages</a>
                     </div>
                 </div><!-- MESSAGE-BOX -->
                 <div class="dropdown d-none d-md-flex profile-1">

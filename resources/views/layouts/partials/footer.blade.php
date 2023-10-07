@@ -142,7 +142,7 @@
                             </div>
                         </div>
                     </div>
-                    <a class="dropdown-item d-flex border-bottom border-top" href="profile.html">
+                    <a class="dropdown-item d-flex border-bottom border-top" href="/user/profile">
                         <div class="d-flex"><i class="fe fe-user me-3 tx-20 text-muted"></i>
                             <div class="pt-1">
                                 <h6 class="mb-0">My Profile</h6>
