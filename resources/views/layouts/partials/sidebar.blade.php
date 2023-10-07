@@ -254,10 +254,10 @@ $tps = 2963;
                         href="/v2l_security/{{encrypt(21)}}?title=Barcode Data Kecurangan"><i
                             class="side-menu__icon mdi mdi-barcode"></i><span class="side-menu__label">Barcode Data Kecurangan</span></a>
                 </li> -->
-                <li>
+                <!-- <li>
                     <a class="side-menu__item" href="/v2l_security/{{encrypt(22)}}?title=Indikator Data TSM"><i
                             class="side-menu__icon mdi mdi-chart-arc"></i><span class="side-menu__label">Indikator Data TSM</span></a>
-                </li>
+                </li> -->
                 <li>
                     <a class="side-menu__item" href="/v2l_security/{{encrypt(23)}}?title=Komparasi Data Perhitungan"><i
                             class="side-menu__icon mdi mdi mdi-compare"></i><span class="side-menu__label">Komparasi Data Perhitungan</span></a>
