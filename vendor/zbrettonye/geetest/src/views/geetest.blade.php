@@ -1,4 +1,4 @@
-<script src="//cdnjs.loli.net/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="//lib.baomitu.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//static.geetest.com/static/tools/gt.js"></script>
 <div id="{{ $captchaid }}"></div>
 <p id="wait-{{ $captchaid }}" class="show">正在加载验证码...</p>
@@ -17,7 +17,7 @@
       captchaObj.onReady(function() {
         $('#wait-{{ $captchaid }}')[0].className = 'hide';
       });
-      if ('{{ $product }}' == 'popup') {
+      if ('{{ $product }}' === 'popup') {
         captchaObj.bindOn($('#{{ $captchaid }}').closest('form').find(':submit'));
         captchaObj.appendTo('#{{ $captchaid }}');
       }

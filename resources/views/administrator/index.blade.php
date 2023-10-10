@@ -59,7 +59,7 @@ $tps = Tps::count();
     }
 </style>
 
-<div class="row mt-3">
+{{-- <div class="row mt-3">
     <div class="col-lg-3 col-md-6 break-point-1">
     <div class="row g-0">
         <div class="col-md-4">
@@ -81,15 +81,15 @@ $tps = Tps::count();
 
     
         @if($config->multi_admin == "yes")
-        <?php
-        $userOnline = User::where('role_id',1)->count();
-        $jumlahOrang = 0;
+        // <?php
+        // $userOnline = User::where('role_id',1)->count();
+        // $jumlahOrang = 0;
         // foreach($userOnline as $user){
         //     if(Cache::has('is_online' . $user->id)){
         //         $jumlahOrang +=1;
         //     }
         // }
-        ?>
+        // ?>
         <h4 class="fs-4 mt-2 fw-bold">Multi Administator ({{$userOnline}}) </h4> <!-- This Dummy Data -->
         @else
         <h4 class="fs-4 mt-2 fw-bold">Multi Administator (1) </h4> <!-- This Dummy Data -->
@@ -209,41 +209,10 @@ $tps = Tps::count();
             </div>
         </div>
     </div>
-    <!-- <div class="col-lg-8 justify-content-end mt-2">
-        <div class="row">
-            <div class="col-lg-4 justify-content-end">
-                <div class="card">
-                    <div class="card-header bg-secondary">
-                        <div class="card-title text-white">Real Count</div>
-                    </div>
-                    <div class="card-body">
-                        <p class="">{{substr($realcount,0,5)}}%</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="card">
-                    <div class="card-header bg-success">
-                        <div class="card-title text-white">TPS Masuk</div>
-                    </div>
-                    <div class="card-body">
-                        <p class="">{{$total_verification_voice}}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="card">
-                    <div class="card-header bg-primary">
-                        <div class="card-title text-white">Suara Masuk</div>
-                    </div>
-                    <div class="card-body">
-                        <p class="">{{$total_incoming_vote}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-</div>
+    
+</div> --}}
+
+
 
 <div class="row" id="marquee1">
     <div class="input-group input-group-sm">
@@ -265,6 +234,96 @@ $tps = Tps::count();
         </div>
     </div>
 </div>
+
+<style>
+    .col.judul {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+</style>
+
+<div class="card mb-0 mt-3">
+    <div class="card-header">
+        <div class="card-title">Tabulasi (Kota Tangerang Selatan)</div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col h4 judul text-center bg-secondary text-white" style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">Total TPS</div>
+            <div class="col h4 judul text-center bg-danger text-white">TPS Masuk</div>
+            <div class="col h4 judul text-center bg-primary text-white">TPS Kosong</div>
+            <div class="col h4 judul text-center bg-info text-white">Suara Masuk</div>
+            <div class="col h4 judul text-center bg-success text-white" style="border-top-right-radius: 25px; border-bottom-right-radius: 25px">Suara Terverifikasi</div>
+        </div>
+        <div class="row">
+            <div class="col h3 text-center"><h3 class="">{{ $total_tps }}</h3></div>
+            <div class="col h3 text-center"><h3 class="">{{ $tps_masuk }}</h3></div>
+            <div class="col h3 text-center"><h3 class="">{{ $tps_kosong }}</h3></div>
+            <div class="col h3 text-center"><h3 class="">{{ $suara_masuk }}</h3></div>
+            <div class="col h3 text-center"><h3 class="">{{$total_verification_voice}}</h3></div>
+        </div>
+    </div>
+</div>
+
+{{-- <div class="card mb-0 mt-3">
+    <div class="card-header">
+        <div class="card-title">Tabulasi (Kota Tangerang Selatan)</div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg justify-content-end">
+                <div class="card mb-0">
+                    <div class="card-header bg-secondary">
+                        <div class="card-title text-white">Total TPS</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="">{{ $total_tps }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg">
+                <div class="card mb-0">
+                    <div class="card-header bg-danger">
+                        <div class="card-title text-white">TPS Masuk</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="">{{ $tps_masuk }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg">
+                <div class="card mb-0">
+                    <div class="card-header bg-primary">
+                        <div class="card-title text-white">TPS Kosong</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="">{{ $tps_kosong }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg">
+                <div class="card mb-0">
+                    <div class="card-header bg-cyan">
+                        <div class="card-title text-white">Suara Masuk</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="">{{ $suara_masuk }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg">
+                <div class="card mb-0">
+                    <div class="card-header bg-success">
+                        <div class="card-title text-white">Suara Terverifikasi</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="">{{$total_verification_voice}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
 
 <div class="row mt-3">
     <div class="{{($config->otonom == 'yes')?'col-lg-12 col-md-12':'col-lg-6 col-md-12'}}">
@@ -443,66 +502,6 @@ $tps = Tps::count();
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="card">
-    <div class="card-header">
-        <div class="card-title">Tabulasi (Kota Tangerang Selatan)</div>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-lg justify-content-end">
-                <div class="card">
-                    <div class="card-header bg-secondary">
-                        <div class="card-title text-white">Total TPS</div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="">{{ $total_tps }}</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg">
-                <div class="card">
-                    <div class="card-header bg-danger">
-                        <div class="card-title text-white">TPS Masuk</div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="">{{ $tps_masuk }}</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg">
-                <div class="card">
-                    <div class="card-header bg-primary">
-                        <div class="card-title text-white">TPS Kosong</div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="">{{ $tps_kosong }}</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg">
-                <div class="card">
-                    <div class="card-header bg-cyan">
-                        <div class="card-title text-white">Suara Masuk</div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="">{{ $suara_masuk }}</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg">
-                <div class="card">
-                    <div class="card-header bg-success">
-                        <div class="card-title text-white">Suara Terverifikasi</div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="">{{$total_verification_voice}}</h3>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

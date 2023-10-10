@@ -11,9 +11,9 @@ class GeetestLib
     public const GT_SDK_VERSION = 'php_3.0.0';
     public static $connectTimeout = 5;
     public static $socketTimeout = 5;
-    protected $url = '';
-    protected $captcha_id;
-    protected $private_key;
+    private $url = '';
+    private $captcha_id;
+    private $private_key;
     private $response;
 
 
