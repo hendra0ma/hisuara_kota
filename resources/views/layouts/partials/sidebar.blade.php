@@ -68,6 +68,77 @@ $tps = 2963;
                     $cityProp = Regency::where('province_id',$kota['province_id'])->get();
 
                 ?>
+
+                <style>
+                    .metro-tabs {
+                        height: 50px;
+                    }
+                </style>
+                
+                <li>
+                    <h3 style="margin-bottom: 0 !important">
+                        <div class="card mb-0 text-center metro-tabs rounded-0 bg-primary text-white w-100">
+                            <div class="my-auto h4 fw-bold">Saksi</div>
+                        </div>
+                    </h3>
+                </li>
+                <li>
+                    <h3 style="margin: 0 !important">
+                        <div class="card mb-0 text-center metro-tabs rounded-0 bg-primary text-white w-100">
+                            <div class="my-auto h4 fw-bold">Admin</div>
+                        </div>
+                    </h3>
+                </li>
+                <li>
+                    <h3 style="margin: 0 !important">
+                        <div class="card mb-0 text-center metro-tabs rounded-0 bg-primary text-white w-100">
+                            <div class="my-auto h4 fw-bold">Payroll</div>
+                        </div>
+                    </h3>
+                </li>
+                <li>
+                    <h3 style="margin: 0 !important">
+                        <div class="card mb-0 text-center metro-tabs rounded-0 bg-primary text-white w-100">
+                            <div class="my-auto h4 fw-bold">Real Count</div>
+                        </div>
+                    </h3>
+                </li>
+                <li>
+                    <h3 style="margin: 0 !important">
+                        <div class="card mb-0 text-center metro-tabs rounded-0 bg-primary text-white w-100">
+                            <div class="my-auto h4 fw-bold">Quick Count</div>
+                        </div>
+                    </h3>
+                </li>
+                <li>
+                    <h3 style="margin: 0 !important">
+                        <div class="card mb-0 text-center metro-tabs rounded-0 bg-primary text-white w-100">
+                            <div class="my-auto h4 fw-bold">Terverifikasi</div>
+                        </div>
+                    </h3>
+                </li>
+                <li>
+                    <h3 style="margin: 0 !important">
+                        <div class="card mb-0 text-center metro-tabs rounded-0 bg-primary text-white w-100">
+                            <div class="my-auto h4 fw-bold">Verifikasi C1</div>
+                        </div>
+                    </h3>
+                </li>
+                <li>
+                    <h3 style="margin: 0 !important">
+                        <div class="card mb-0 text-center metro-tabs rounded-0 bg-primary text-white w-100">
+                            <div class="my-auto h4 fw-bold">Audit C1</div>
+                        </div>
+                    </h3>
+                </li>
+                <li>
+                    <h3 style="margin: 0 !important">
+                        <div class="card mb-0 text-center metro-tabs rounded-0 bg-primary text-white w-100">
+                            <div class="my-auto h4 fw-bold">Komparasi KPU</div>
+                        </div>
+                    </h3>
+                </li>
+                
                 <li>
                     <h3>Main Count</h3>
                 </li>
@@ -186,7 +257,7 @@ $tps = 2963;
                             class="side-menu__icon fa fa-cogs"></i><span class="side-menu__label">Bantuan Support System</span></a>
                 </li>
 
-                <li>
+                {{-- <li>
                     <h3>Verifikator</h3>
                 </li>
 
@@ -209,7 +280,7 @@ $tps = 2963;
                 <li>
                     <a class="side-menu__item" href="/v2l_security/{{encrypt(13)}}?title=Verifikasi Suara Overtime"><i
                             class="side-menu__icon mdi mdi-speedometer"></i><span class="side-menu__label">Verifikasi Suara Overtime</span></a>
-                </li>
+                </li> --}}
                 <!-- <li>
                     <a class="side-menu__item" href="/v2l_security/{{encrypt(13)}}?title=Verifikasi Suara Overtime"><i
                             class="side-menu__icon mdi mdi-dropbox"></i><span class="side-menu__label">Verifikasi Suara Saksi Partai</span></a>

@@ -36,42 +36,37 @@
 
 ## 配置项
 
-| 配置项  | 说明  | 选项  | 默认值  |
-| ------------ | ------------ | ------------ | ------------ |
-| width | 按钮宽度  | 单位可以是 px, %, em, rem, pt  | 300px|
-| lang | 语言，极验验证码免费版不支持多国语言  | zh-cn, en, zh-tw, ja, ko, th  | zh-cn  |
-| server-get-config | 从服务器获取GeetestKEY | True | False          |
-| product  | 验证码展示方式  | popup, float  | popup  |
-| geetest_id  | 极验验证码ID  |   |   |
-| geetest_key  | 极验验证码KEY  |   |   |
-| client_fail_alert  | 客户端失败提示语  |   | 请完成验证码  |
-| server_fail_alert  | 服务端失败提示语  |   | 验证码校验失败  |
+| 配置项               | 说明                 | 选项                           | 默认值     |
+|-------------------|--------------------|------------------------------|---------|
+| width             | 按钮宽度               | 单位可以是 px, %, em, rem, pt     | 300px   |
+| lang              | 语言，极验验证码免费版不支持多国语言 | zh-cn, en, zh-tw, ja, ko, th | zh-cn   |
+| server-get-config | 从服务器获取GeetestKEY   | True                         | False   |
+| product           | 验证码展示方式            | popup, float                 | popup   |
+| geetest_id        | 极验验证码ID            |                              |         |
+| geetest_key       | 极验验证码KEY           |                              |         |
+| client_fail_alert | 客户端失败提示语           |                              | 请完成验证码  |
+| server_fail_alert | 服务端失败提示语           |                              | 验证码校验失败 |
 
 ## 使用
 
 1. 前端使用
+   安装扩展后，在页面需要使用极验验证码的地方增加如下代码
 
-安装扩展后，在页面需要使用极验验证码的地方增加如下代码
-
-```php
-{!! Geetest::render() !!}
-```
-
+	```php
+	{!! Geetest::render() !!}
+	```
 2. 服务端校验
-
 在服务端使用 `geetest` 验证规则进行二次验证，示例代码：
 
-```php
-$this->validate($request, [
-    'geetest_challenge' => 'required|geetest'
-], [
-    'geetest' => config('geetest.server_fail_alert')
-]);
-```
-
+	```php
+	$this->validate($request, [
+		'geetest_challenge' => 'required|geetest'
+	], [
+		'geetest' => config('geetest.server_fail_alert')
+	]);
+	```
 3. 配置项：server-get-config  -  服务器获取GeetestKey
-
-通过调用 Components CaptchaVerify 的 geetestCaptchaGetConfig 方法来获取 Geetest 配置，方便实现由后台配置的KEY 和 ID
+   通过调用 Components CaptchaVerify 的 geetestCaptchaGetConfig 方法来获取 Geetest 配置，方便实现由后台配置的KEY 和 ID
 
 ```php
 <?php
