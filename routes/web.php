@@ -286,7 +286,7 @@ Route::group(['middleware' => 'role:verifikator', 'prefix' => 'verifikator', 'as
     Route::get('verifikasiKecurangan/{id}', [VerificatorController::class, 'verifikasiKecurangan'])->name('verifikasiKecurangan');
     Route::get('tolakKecurangan/{id}', [VerificatorController::class, 'tolakKecurangan'])->name('tolakKecurangan');
     Route::get('getKecuranganSaksi', [VerificatorController::class, 'getKecuranganSaksi'])->name('getKecuranganSaksi');
-    Route::post('get-saksi-pending', [VerificatorController::class, 'getSaksiPending'])->name('getSaksiPending');
+    Route::get('get-saksi-pending', [VerificatorController::class, 'getSaksiPending'])->name('getSaksiPending');
     Route::post('get-relawan-data', [VerificatorController::class, 'getRelawanData'])->name('getRelawanData');
     Route::get('verifikasiData/{id}', [VerificatorController::class, 'verifikasiData'])->name('verifikasiData');
     Route::get('verifikasi-data-pending/{id}', [VerificatorController::class, 'verifikasiDataPending'])->name('verifikasiDataPending');

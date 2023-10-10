@@ -65,10 +65,10 @@
     });
 </script>
 <script>
-  const buttonperiksaC1 = $("button.periksa-c1-plano");
   const buttonperiksaC1Relawan = $("button.periksa-c1-relawan");
   const buttonkecurangan = $("button.periksa-c1-kecurangan");
   const buttonC1Pending = $("button.periksa-c1-pending");
+  const buttonperiksaC1 = $("button.periksa-c1-plano");
   buttonperiksaC1.on('click', function() {
     const id = $(this).data('id');
     $.ajax({
@@ -92,7 +92,7 @@
         "_token": "{{ csrf_token() }}",
         id
       },
-      type: "post",
+      type: "get",
       dataType: "html",
       success: function(data) {
         $('#container-view-modal-c1-pending').html(data)

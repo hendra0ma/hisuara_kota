@@ -59,6 +59,8 @@
     <link href="../../assets/plugins/notify/css/notifIt.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet" />
     
+    <link rel="stylesheet" href="https://raw.githack.com/thdoan/magnify/master/dist/css/magnify.css">
+    
     @livewireStyles
     <style>
         /* Style the tab */
