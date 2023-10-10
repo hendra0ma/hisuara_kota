@@ -125,6 +125,7 @@ class VerificatorController extends Controller
                 ->whereNotNull('saksi.pending');
         }])->get();
 
+        
         $data['village'] = Village::where('id', $data['paslon'][0]->saksi_data[0]->village_id)->first();
         return view('verificator.modalViewPending', $data);
     }
