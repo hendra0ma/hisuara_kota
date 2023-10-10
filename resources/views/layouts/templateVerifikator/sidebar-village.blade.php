@@ -114,7 +114,7 @@ $title = '';
                         <li><a href="#" class="slide-item pengajuankoreksi">Pengajuan Koreksi</a></li>
                         <li><a href="#" class="slide-item tpsdibatalkan">TPS Dibatalkan</a></li>
                         <li><a href="#" class="slide-item koreksiditolak">Koreksi Ditolak</a></li>
-                        <li><a href="#" class="slide-item kecurangan">Kecurangan</a></li>
+                        <!-- <li><a href="#" class="slide-item kecurangan">Kecurangan</a></li> -->
 
                     </ul>
                 </li>

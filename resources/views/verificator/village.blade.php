@@ -91,9 +91,9 @@
             <button class="btn tablink w-100 rounded-0 c1saksipend" onclick="openPage('C1-Saksi-Pending', this, '#6259ca ')" style="background-color: rgb(98, 89, 202);">C1
                 Saksi (Pending)</button>
         </div>
-        <div class="col-md">
+        <!-- <div class="col-md">
             <button class="btn tablink w-100 rounded-0 kecurangan" onclick="openPage('Kecurangan', this, '#09ad95')">Kecurangan <span class="badge rounded-pill bg-danger">{{$count_kecurangan}}</span></button>
-        </div>
+        </div> -->
     </div>
 </div>
 
@@ -227,7 +227,6 @@
     <!-- <h3>Kecurangan</h3>
     <p>Who we are and what we do.</p> -->
 
-    <livewire:list-kecurangan-component />
 
 </div>
 
