@@ -15,20 +15,7 @@
                 <img src="{{ url('/') }}/assets/images/brand/logo-3.png" class="header-brand-img light-logo1" alt="logo">
             </a> -->
             <!-- LOGO -->
-            <div class="d-flex order-lg">
-                <div class="row">
-                    @foreach ($urutan as $urutPaslon)
-                        <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
-                        <div class="col-md-4">
-
-                            <div class="card card-body shadow text-center">
-                                {{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} <br>
-                                    {{$urutPaslon->total}}
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
+            
             <div class="d-flex order-lg-2 ms-auto header-right-icons">
 
 
