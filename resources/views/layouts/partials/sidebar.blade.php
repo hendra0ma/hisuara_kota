@@ -20,12 +20,22 @@ $tps = 2963;
 </div>
 <!-- /GLOBAL-LOADER -->
 
+<style>
+    .side-menu__item {
+        color: white
+    }
+
+    .page .page-main ul li h3 {
+        color: white
+    }
+</style>
+
 <!-- PAGE -->
 <div class="page">
     <div class="page-main">
         <!--APP-SIDEBAR-->
         <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
-        <aside class="app-sidebar">
+        <aside class="app-sidebar text-white" style="background-color: #1B1A17 !important;">
             <div class="side-header">
                 <a class="header-brand1" href="{{url('')}}/administrator/index">
 
@@ -36,7 +46,7 @@ $tps = 2963;
                     </h3>
                 </a>
             </div>
-            <ul class="side-menu">
+            <ul class="side-menu" style="padding: 0 !important">
                 <!-- <li class="my-2">
                     &nbsp;
                 </li>
@@ -60,7 +70,7 @@ $tps = 2963;
                 </li>
                 <li class="mt-5">
                     <center>
-                        <img src="{{asset('images/logo')}}/rekapitung_gold.png" style="width:120px;height:auto">
+                        <img src="{{asset('images/logo')}}/hisuara.png" style="width: 175px">
                     </center>
                 </li>
                 <?php
@@ -72,72 +82,157 @@ $tps = 2963;
                 <style>
                     .metro-tabs {
                         height: 50px;
+                        background-color: #E45826
                     }
                 </style>
                 
-                <li>
-                    <h3 style="margin-bottom: 0 !important">
-                        <div class="card mb-0 text-center metro-tabs rounded-0 bg-primary text-white w-100">
-                            <div class="my-auto h4 fw-bold">Saksi</div>
+                <li class="my-2">
+                    <div class="row">
+                        <div class="col-12" style="border: white 1px !important; padding:0.5px;">
+                                <div class="card mb-0 text-center metro-tabs rounded-0 text-white w-100">
+                                    <div class="my-auto" style="font-size: 14px">Menu</div>
+                                </div>
+                            </h3>
                         </div>
-                    </h3>
+                    </div>
                 </li>
                 <li>
-                    <h3 style="margin: 0 !important">
-                        <div class="card mb-0 text-center metro-tabs rounded-0 bg-primary text-white w-100">
-                            <div class="my-auto h4 fw-bold">Admin</div>
+                    <div class="row">
+                        <div class="col-6" style="border: white 1px !important; padding:0.5px;">
+                                <div class="card mb-0 text-center metro-tabs rounded-0 text-white w-100">
+                                    <div class="my-auto" style="font-size: 14px">Saksi</div>
+                                </div>
+                            </h3>
                         </div>
-                    </h3>
+                        <div class="col-6" style="border: white 1px !important; padding:0.5px;">
+                                <div class="card mb-0 text-center metro-tabs rounded-0 text-white w-100">
+                                    <div class="my-auto" style="font-size: 14px">Quick Count</div>
+                                </div>
+                            </h3>
+                        </div>
+                    </div>
                 </li>
                 <li>
+                    <div class="row">
+                        <div class="col-6" style="border: white 1px !important; padding:0.5px;">
+                                <div class="card mb-0 text-center metro-tabs rounded-0 text-white w-100">
+                                    <div class="my-auto" style="font-size: 14px">Admin</div>
+                                </div>
+                            </h3>
+                        </div>
+                        <div class="col-6" style="border: white 1px !important; padding:0.5px;">
+                                <div class="card mb-0 text-center metro-tabs rounded-0 text-white w-100">
+                                    <div class="my-auto" style="font-size: 14px">Realcount</div>
+                                </div>
+                            </h3>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-6" style="border: white 1px !important; padding:0.5px;">
+                                <div class="card mb-0 text-center metro-tabs rounded-0 text-white w-100">
+                                    <div class="my-auto" style="font-size: 14px">Payroll</div>
+                                </div>
+                            </h3>
+                        </div>
+                        <div class="col-6" style="border: white 1px !important; padding:0.5px;">
+                                <div class="card mb-0 text-center metro-tabs rounded-0 text-white w-100">
+                                    <div class="my-auto" style="font-size: 14px">Terverifikasi</div>
+                                </div>
+                            </h3>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-12" style="border: white 1px !important; padding:0.5px;">
+                                <div class="card mb-0 text-center metro-tabs rounded-0 text-white w-100">
+                                    <div class="my-auto" style="font-size: 14px">Verifikasi C1</div>
+                                </div>
+                            </h3>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-12" style="border: white 1px !important; padding:0.5px;">
+                                <div class="card mb-0 text-center metro-tabs rounded-0 text-white w-100">
+                                    <div class="my-auto" style="font-size: 14px">Audit C1</div>
+                                </div>
+                            </h3>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-12" style="border: white 1px !important; padding:0.5px;">
+                                <div class="card mb-0 text-center metro-tabs rounded-0 text-white w-100">
+                                    <div class="my-auto" style="font-size: 14px">Komparasi KPU</div>
+                                </div>
+                            </h3>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-12" style="border: white 1px !important; padding:0.5px;">
+                                <div class="card mb-0 text-center metro-tabs rounded-0 text-white w-100">
+                                    <div class="my-auto" style="font-size: 14px">Support System</div>
+                                </div>
+                            </h3>
+                        </div>
+                    </div>
+                </li>
+                {{-- <li>
                     <h3 style="margin: 0 !important">
-                        <div class="card mb-0 text-center metro-tabs rounded-0 bg-primary text-white w-100">
+                        <div class="card mb-0 text-center metro-tabs rounded-0 text-white w-100">
                             <div class="my-auto h4 fw-bold">Payroll</div>
                         </div>
                     </h3>
                 </li>
                 <li>
                     <h3 style="margin: 0 !important">
-                        <div class="card mb-0 text-center metro-tabs rounded-0 bg-primary text-white w-100">
+                        <div class="card mb-0 text-center metro-tabs rounded-0 text-white w-100">
                             <div class="my-auto h4 fw-bold">Real Count</div>
                         </div>
                     </h3>
                 </li>
                 <li>
                     <h3 style="margin: 0 !important">
-                        <div class="card mb-0 text-center metro-tabs rounded-0 bg-primary text-white w-100">
+                        <div class="card mb-0 text-center metro-tabs rounded-0 text-white w-100">
                             <div class="my-auto h4 fw-bold">Quick Count</div>
                         </div>
                     </h3>
                 </li>
                 <li>
                     <h3 style="margin: 0 !important">
-                        <div class="card mb-0 text-center metro-tabs rounded-0 bg-primary text-white w-100">
+                        <div class="card mb-0 text-center metro-tabs rounded-0 text-white w-100">
                             <div class="my-auto h4 fw-bold">Terverifikasi</div>
                         </div>
                     </h3>
                 </li>
                 <li>
                     <h3 style="margin: 0 !important">
-                        <div class="card mb-0 text-center metro-tabs rounded-0 bg-primary text-white w-100">
+                        <div class="card mb-0 text-center metro-tabs rounded-0 text-white w-100">
                             <div class="my-auto h4 fw-bold">Verifikasi C1</div>
                         </div>
                     </h3>
                 </li>
                 <li>
                     <h3 style="margin: 0 !important">
-                        <div class="card mb-0 text-center metro-tabs rounded-0 bg-primary text-white w-100">
+                        <div class="card mb-0 text-center metro-tabs rounded-0 text-white w-100">
                             <div class="my-auto h4 fw-bold">Audit C1</div>
                         </div>
                     </h3>
                 </li>
                 <li>
                     <h3 style="margin: 0 !important">
-                        <div class="card mb-0 text-center metro-tabs rounded-0 bg-primary text-white w-100">
+                        <div class="card mb-0 text-center metro-tabs rounded-0 text-white w-100">
                             <div class="my-auto h4 fw-bold">Komparasi KPU</div>
                         </div>
                     </h3>
-                </li>
+                </li> --}}
                 
                 <li>
                     <h3>Main Count</h3>

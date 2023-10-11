@@ -631,7 +631,7 @@
 {{-- <div class="card mb-0 mt-3">
     <div class="card-header">
         <div class="card-title">Tabulasi ({{ ucwords(strtolower($kota->name)) }})</div>
-    </div>
+s    </div>
     <div class="card-body">
         <div class="row">
             <div class="col-lg justify-content-end">
