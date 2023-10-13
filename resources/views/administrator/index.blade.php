@@ -562,14 +562,12 @@
 
 </div> --}}
 
-
-
-<div class="row" id="marquee1">
+<div class="row mb-3" id="marquee1">
     <div class="input-group input-group-sm">
         <div class="input-group-prepend">
-            <button class="btn btn-danger text-white rounded-0 mt-5">Suara Masuk</button>
+            <button class="btn btn-danger text-white rounded-0 mt-3">Suara Masuk</button>
         </div>
-        <div class="form-control mt-5 bg-dark" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+        <div class="form-control mt-3 bg-dark" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             <marquee id="cobamarq1">
                 @foreach ($marquee as $item)
                 <?php $kecamatan =  District::where('id', $item['districts'])->first(); ?>
@@ -597,11 +595,34 @@
     .col.judul .text {
         margin: auto;
     }
+
+    .arrow-nav {
+        border: 0;
+        background: transparent;
+    }
+
+    .custom-prev {
+        position: absolute;
+        top:7.5px;
+        left: 0px;
+    }
+
+    .custom-next {
+        position: absolute;
+        top:7.5px;
+        right: 0px;
+    }
+
+    .carousel-item {
+        transition: -webkit-transform .6s ease;
+        transition: transform .6s ease;
+        transition: transform .6s ease,-webkit-transform .6s ease;
+    }
 </style>
 
 <div class="row">
-    <div class="col-md-6">
-        <div class="card mb-0 mt-3">
+    <div class="col-md">
+        <div class="card mb-3">
             <div class="card-header">
                 <div class="card-title mx-auto">Tabulasi ({{ ucwords(strtolower($kota->name)) }})</div>
             </div>
@@ -647,7 +668,7 @@
     </div>
     
     <div class="col-md">
-        <div class="card mb-0 mt-3">
+        <div class="card mb-0">
             <div class="card-header w-100" style="display: block">
                 <div class="card-title">
                     <div class="row text-center" style="font-weight: 900">
@@ -657,7 +678,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="padding: 26px">
                 <div class="row">
                     @foreach ($urutan as $urutPaslon)
                         <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
@@ -672,6 +693,61 @@
                             </div>
                         </div>
                     @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" style="margin-bottom: 1rem">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xxl-6">
+                        <div class="container" style="margin-left: 3%; margin-top: 2.5%;">
+                            <div class="text-center fs-2 mb-3 fw-bold">QUICK COUNT</div>
+                            <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
+                            <div class="text-center mt-2 mb-2"><span
+                                    class="badge bg-success">{{$total_incoming_vote}} / {{$dpt}}</span></div>
+                            <div id="chart-pie2" class="chartsh h-100 w-100"></div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-6">
+                        <?php $i = 1; ?>
+                        @foreach ($paslon as $pas)
+                        <div class="row mt-2">
+                            <div class="col-lg col-md col-sm col-xl mb-3">
+                                <div class="card" style="margin-bottom: 0px;">
+                                    <div class="card-body">
+                                        <div class="row me-auto">
+                                            <div class="col-4">
+                                                <div class="counter-icon box-shadow-secondary brround candidate-name text-white "
+                                                    style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                    {{$i++}}
+                                                </div>
+                                            </div>
+                                            <div class="col me-auto">
+                                                <h6 class="">{{$pas->candidate}} </h6>
+                                                <h6 class="">{{$pas->deputy_candidate}} </h6>
+                                                <?php
+                                                $voice = 0;
+                                                ?>
+                                                @foreach ($pas->quicksaksidata as $dataTps)
+                                                <?php
+                                                $voice += $dataTps->voice;
+                                                ?>
+                                                @endforeach
+                                                <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
@@ -738,8 +814,7 @@ s    </div>
 </div>
 </div> --}}
 
-
-<div class="row mt-3">
+<div class="row">
     <div class="{{($config->otonom == 'yes')?'col-lg-12 col-md-12':'col-lg-6 col-md-12'}}">
         <div class="card">
             {{-- <div class="card-header bg-info">
@@ -749,7 +824,7 @@ s    </div>
                 <div class="row">
                     <div class="col-xxl-12">
                         <div class="container" style="margin-left: 3%; margin-right: 3%; margin-top: 2.5%;">
-                            <div class="text-center fs-3 mb-3 fw-bold">SUARA MASUK</div>
+                            <div class="text-center fs-3 mb-3 fw-bold">REAL COUNT</div>
                             <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
                             <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
                                     {{$dpt}}</span></div>
@@ -792,7 +867,67 @@ s    </div>
                     </div>
                 </div>
 
-                <table class="table table-bordered table-hover mt-4">
+                {{-- <div class="col-md">
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner text-center custom">
+                            <?php $count = 1; ?>
+                            @foreach ($kec as $item)
+                            <div class="carousel-item <?php if ($count++ == 1) : ?><?= 'active' ?><?php endif; ?>">
+                                <div class="fw-bold fs-3 mb-3">
+                                    KECAMATAN {{$item['name']}}
+                                </div>
+                                <div class="row">
+                                    <?php $i = 1; ?>
+                                    @foreach ($paslon as $psl)
+                                    <?php
+                                    $pasln = SaksiData::join('districts', 'districts.id', '=', 'saksi_data.district_id')->where('saksi_data.district_id', $item['id'])->where('saksi_data.paslon_id', $psl->id)->get();
+                                    $jumlah = 0;
+                                    foreach ($pasln as $pas) {
+                                        $jumlah += $pas->voice;
+                                    }
+                                    $persen = substr($jumlah / $item->dpt * 100, 0, 3);
+                                    ?>
+                                    <div class="col-md">
+                                        <div class="card mb-4">
+                                            <div class="card-header justify-content-center"
+                                                style="background-color:{{$psl->color}}">
+                                                <h5 style="margin-bottom: 0;" class="text-white">{{$psl->candidate}}
+                                                    || {{$psl->deputy_candidate}}</h5>
+                                            </div>
+                                            <div class="card-body" style="padding: 10px;">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <img src="{{asset('storage/'. $psl['picture'])}}" width="100px"
+                                                            height="100px" style="object-fit: cover;" alt="">
+                                                    </div>
+                                                    <div class="col text-center my-auto fs-1 fw-bold">
+                                                        {{$persen}}%
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php
+                                    $jumlah = 0;
+                                    ?>
+                                    @endforeach
+                                    <?php $i = 1; ?>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                        <button class="arrow-nav custom-prev" type="button" data-bs-target="#carouselExampleControls"
+                            data-bs-slide="prev">
+                            <i class="fa-solid fa-chevron-left" style="color: rgba(0, 0, 0, 0.5);font-size: 25px"></i>
+                        </button>
+                        <button class="arrow-nav custom-next" type="button" data-bs-target="#carouselExampleControls"
+                            data-bs-slide="next">
+                            <i class="fa-solid fa-chevron-right" style="color: rgba(0, 0, 0, 0.5);font-size: 25px"></i>
+                        </button>
+                    </div>
+                </div> --}}
+
+                <table class="table table-bordered table-hover ">
                     <thead class="bg-primary">
                         <tr>
                             <th class="text-white text-center align-middle">KECAMATAN</th>
@@ -883,7 +1018,7 @@ s    </div>
                     </div>
                 </div>
 
-                <table class="table table-bordered table-hover mt-4">
+                <table class="table table-bordered table-hover">
                     <thead class="bg-primary">
                         <td class="text-white text-center align-middle">KECAMATAN</td>
                         @foreach ($paslon as $item)
@@ -910,6 +1045,7 @@ s    </div>
         </div>
     </div>
 </div>
+
 
 <!-- <div class="card mg-b-20"style="display:{{($config->otonom == 'yes')?' none':'block'}}">
     <div class="card-header">

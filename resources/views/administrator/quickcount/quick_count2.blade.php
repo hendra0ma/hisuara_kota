@@ -29,26 +29,8 @@ $tps = Tps::count();
             </center>
         </div>
 
-        <div class="col-lg-12">
-            <div id="marquee1" class="input-group input-group-sm mb-3">
-                <div class="input-group-prepend">
-                    <button class="btn btn-danger text-white rounded-0">Enumerator</button>
-                </div>
-                <div class="form-control bg-dark" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                    <marquee id="cobamarq1">
-                        @foreach ($marquee as $mq)
-                        <?php $kecamatan2 =  District::where('id', $mq['districts'])->first(); ?>
-                        <?php $kelurahan =  Village::where('id', $mq['villages'])->first(); ?>
-                        <?php $tps =  Tps::where('id', $mq['tps_id'])->first(); ?>
-                        <span class="text-success">▼ </span><span class="text-white"
-                            style="font-size: 20px;">{{$mq['name']}} Kecamatan {{$kecamatan2 ['name']}}, Kelurahan
-                            {{$kelurahan['name']}}, TPS {{$tps['number']}}</span>
-                        @endforeach
-                    </marquee>
-
-
-                </div>
-            </div>
+        <div class="col-lg-12 mt-3">
+            
             <div class="card" style="margin-bottom: 1rem">
                 <div class="card-header bg-info-gradient">
                     <h3 class="card-title text-white">Suara TPS Masuk</h3>

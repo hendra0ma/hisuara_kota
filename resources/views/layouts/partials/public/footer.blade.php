@@ -27,7 +27,7 @@
 
             <div class="row mt-5 text-white">
                 <div class="col">
-                    <b>© PT. Mahadaya Swara Teknologi <br> All Rights Reserved 2022</b>
+                    <b>© PT. Mahadaya Swara Semesta <br> All Rights Reserved 2022</b>
                 </div>
             </div>
 

@@ -201,6 +201,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('laporan-bawaslu', 'laporanBapilu')->name('laporan_bapilu');
             Route::get('real_count2', 'real_count2')->name('real_count2');
             Route::get('quick_count2', 'quick_count2')->name('quick_count2');
+            Route::get('terverifikasi', 'terverifikasi')->name('terverifikasi');
             Route::get('data-gugatan', 'data_gugatan')->name('data_gugatan');
             Route::get('developer', 'developer')->name('developer');
             Route::post('cek_pass', 'cek_pass');

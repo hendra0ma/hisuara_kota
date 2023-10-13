@@ -257,7 +257,7 @@ let myModal = new bootstrap.Modal(document.getElementById('modallockdown'), {
                     <?php endforeach  ?>['data<?= $pas->id  ?>', <?= $voice ?>],
                 <?php endforeach  ?>
             ],
-            type: 'donut', // default type of chart
+            type: 'bar', // default type of chart
             colors: {
                 <?php foreach ($paslon_terverifikasi as $pas) :  ?> 'data<?= $pas->id  ?>': "<?= $pas->color ?>",
                 <?php endforeach  ?>
