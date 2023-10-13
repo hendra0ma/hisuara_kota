@@ -89,7 +89,8 @@ Route::get('/', function () {
     if ($config['setup'] == "yes") {
         return redirect('setup');
     } else {
-        return redirect('index');
+        // return redirect('index');
+        return redirect('login');
     }
 });
 
@@ -458,7 +459,7 @@ Route::controller(Security::class)->group(function () {
 
 Route::controller(PublicController::class)->group(function () {
     Route::get('scanning-secure/{id}', 'scanSecure');
-    Route::get('index', 'index');
+    // Route::get('index', 'index');
     Route::get('real_count', 'real_count_public');
     Route::get('quick_count', 'quick_count_public');
     Route::get('map_count', 'map_count_public');
