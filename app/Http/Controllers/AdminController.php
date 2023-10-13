@@ -1446,6 +1446,36 @@ class AdminController extends Controller
 
     }
 
+    public function verifikasiC1() {
+        $data['config'] = Config::first();
+        $config = Config::first();
+        $data['paslon'] = Paslon::with('quicksaksidata')->get();
+        $data['paslon_terverifikasi']     = Paslon::with(['quicksaksidata' => function ($query) {
+            $query->join('quicksaksi', 'quicksaksidata.saksi_id', 'quicksaksi.id')
+                ->whereNull('quicksaksi.pending')
+                ->where('quicksaksi.verification', 1);
+        }])->get();
+        $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
+        $data['kota'] = Regency::where('id', $config['regencies_id'])->first();
+        $data['tracking'] = ModelsTracking::get();
+        return view('administrator.c1.verifikasi-c1', $data);
+    }
+
+    public function auditC1() {
+        $data['config'] = Config::first();
+        $config = Config::first();
+        $data['paslon'] = Paslon::with('quicksaksidata')->get();
+        $data['paslon_terverifikasi']     = Paslon::with(['quicksaksidata' => function ($query) {
+            $query->join('quicksaksi', 'quicksaksidata.saksi_id', 'quicksaksi.id')
+                ->whereNull('quicksaksi.pending')
+                ->where('quicksaksi.verification', 1);
+        }])->get();
+        $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
+        $data['kota'] = Regency::where('id', $config['regencies_id'])->first();
+        $data['tracking'] = ModelsTracking::get();
+        return view('administrator.c1.audit-c1', $data);
+    }
+
 
    
     /**

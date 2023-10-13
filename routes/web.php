@@ -203,6 +203,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('real_count2', 'real_count2')->name('real_count2');
             Route::get('quick_count2', 'quick_count2')->name('quick_count2');
             Route::get('terverifikasi', 'terverifikasi')->name('terverifikasi');
+            Route::get('verifikasi-c1', 'verifikasiC1')->name('verifikasiC1');
+            Route::get('audit-c1', 'auditC1')->name('auditC1');
             Route::get('data-gugatan', 'data_gugatan')->name('data_gugatan');
             Route::get('developer', 'developer')->name('developer');
             Route::post('cek_pass', 'cek_pass');

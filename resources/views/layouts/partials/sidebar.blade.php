@@ -213,8 +213,8 @@ $tps = 2963;
                     <li>
                         <a class="metro-tabs" href="#" data-bs-toggle="slide"><span class="side-menu__label fs-3">OPERATOR</span></a>
                         <ul class="slide-menu">
-                            <li><a href="#" class="fs-5 slide-item text-white">Verifikasi C1</a></li>
-                            <li><a href="#" class="fs-5 slide-item text-white">Audit C1</a></li>
+                            <li><a href="{{url('')}}/administrator/verifikasi-c1" class="fs-5 slide-item text-white">Verifikasi C1</a></li>
+                            <li><a href="{{url('')}}/administrator/audit-c1" class="fs-5 slide-item text-white">Audit C1</a></li>
                             <li><a href="#" class="fs-5 slide-item text-white">Komparasi KPU</a></li>
                         </ul>
                     </li>
