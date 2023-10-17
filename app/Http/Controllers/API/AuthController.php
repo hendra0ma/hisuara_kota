@@ -31,7 +31,43 @@ class AuthController extends Controller
 
         }
     }
-
+    public function registerPusat(Request $request)
+    {
+       $validator = Validator::make($request->all(),[
+            'name' => 'required|string',
+            'address' => 'required|string',
+            'no_hp' => 'required|string|unique:users',
+            'districts' => 'required|string',
+            'villages' => 'required|string',
+            'role_id' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string',
+            'tps_id' => 'required|string|unique:users',
+            'cek' => 'required|string',
+            'absen' => 'required|string',
+            'nik' => 'required|string',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->address = $request->input('address');
+        $user->no_hp = $request->input('no_hp');
+        $user->districts = $request->input('districts');
+        $user->villages = $request->input('villages');
+        $user->role_id = $request->input('role_id');
+        $user->is_active = "1"  ;
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->tps_id = $request->input('tps_id');
+        $user->cek = $request->input('cek');
+        $user->absen = $request->input('absen');
+        $user->nik = $request->input('nik');
+        $user->save();
+        return response()->json(['message' => 'User created successfully'], 201);
+        
+    }
     public function login(Request $request)
     {
         if (!Auth::attempt($request->only('email', 'password'))) {

@@ -120,4 +120,13 @@ class PublicController extends Controller
             'count_tps_kosong' => $count_tps_kosong
         ], 200);
     }
+    function tpsByVillage(Request $request){
+    
+        $tps = Tps::where('villages_id',$request->village_id)->get();
+        
+        if (count($tps) > 0) {
+            return response()->json($tps,200);
+        }
+        return response()->json(['messages'=>"data kosong"],404);
+    }
 }
