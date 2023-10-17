@@ -51,7 +51,7 @@ Route::group(['prefix'=>'public'],function (){
 
 Route::get('get-domain',function () {
     
-    $kota = RegenciesDomain::get();
+    $kota = RegenciesDomain::join('regencies','regencies.id','=','regency_domains.regency_id')->get();
     return response()->json($kota,200);
 });
 
