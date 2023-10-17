@@ -10,6 +10,7 @@ use App\Models\Village;
 use Illuminate\Http\Request;
 use App\Models\Paslon;
 use App\Models\Config;
+use App\Models\User;
 
 class PublicController extends Controller
 {
@@ -124,6 +125,17 @@ class PublicController extends Controller
     
         $tps = Tps::where('villages_id',$request->village_id)->get();
         
+        foreach ($tps as $key => $item) {
+            $user = User::where('tps_id',$item['id'])->first();
+            if ($user !=null) {
+                // Menghapus elemen dari $data jika villages_id adalah '3674010001'
+                
+                unset($tps[$key]);
+            }
+        }
+     
+
+
         if (count($tps) > 0) {
             return response()->json($tps,200);
         }
