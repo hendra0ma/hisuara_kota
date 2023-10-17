@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\PublicController;
 use App\Http\Controllers\API\RelawanController as RelawanApi;
 use App\Http\Controllers\API\SaksiController;
+use App\Models\RegenciesDomain;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +47,12 @@ Route::group(['prefix'=>'public'],function (){
         Route::post('register-saksi-pusat',[AuthController::class,'registerPusat']);
         Route::get('get-tps-by-village-id',[PublicController::class,'tpsByVillage']);
     });
+});
+
+Route::get('get-domain',function () {
+    
+    $kota = RegenciesDomain::select('domain')->get();
+    return response()->json($kota,200);
 });
 
 
