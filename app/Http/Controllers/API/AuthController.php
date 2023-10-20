@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class AuthController extends Controller
 {
@@ -46,7 +47,7 @@ class AuthController extends Controller
             'cek' => 'required|string',
             'absen' => 'required|string',
             'nik' => 'required|string',
-        ]);
+        ]);     
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
@@ -82,12 +83,34 @@ class AuthController extends Controller
         return response()
             ->json(['message' => 'Hi ' . $user->name . ', welcome to home', 'access_token' => $token, 'token_type' => 'Bearer',]);
     }
+
+
+
+
+    
     // method for user logout and delete token
     public function logout()
     {
-        auth()->user()->tokens()->delete();
+        auth('sanctum')->user()->tokens()->delete();
         return [
             'message' => 'You have successfully logged out and the token was successfully deleted'
         ];
     }
+    function accessLoginToken(Request $request){
+       $token = PersonalAccessToken::findToken($request->token);
+       if (!$token) {
+        return response()->json(['message'=>"data kosong"],401);
+       }
+       $user = User::where("id",$token->tokenable_id)->first();
+
+       if (!$user) {
+           return response()->json( ['messages'=>"user tidak terdaftar"],401);
+        }
+        auth()->user()->tokens()->delete();
+        // auth()->login($user);
+            $auth = Auth::login($user,true);
+
+            return redirect('/redirect');
+    }
+    
 }
