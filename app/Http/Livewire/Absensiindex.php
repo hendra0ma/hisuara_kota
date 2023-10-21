@@ -16,7 +16,7 @@ class Absensiindex extends Component
     public function render()
     {
         $data['absen2'] = Absensi::join('users', 'users.id', '=', 'absensi.user_id')->get();
-        $data['absen'] = User::where('role_id',8)->where('is_active', '=', 1)->where('name', 'like', '%'.$this->search.'%')->paginate(18);
+        $data['absen'] = User::where('role_id',8)->where('is_active', '=', 1)->where('name', 'like', '%'.$this->search.'%')->paginate(16);
         $data['user'] = User::where('role_id',8)->count();
         $data['jumlah'] = $data['user'];
         

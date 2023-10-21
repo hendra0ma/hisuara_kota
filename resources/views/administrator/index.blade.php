@@ -61,7 +61,7 @@
 </style>
 
 <div class="row mt-3">
-    <div class="col-lg col-md break-point-1">
+    <div class="col-lg col-md">
         <div class="row g-0">
             <div class="col-md">
 
