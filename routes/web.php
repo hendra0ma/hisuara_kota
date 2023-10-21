@@ -658,8 +658,8 @@ Route::get('/update-kecurangan',function ()
 Route::get('/otentifikasi-login', function (Request $req) {
     $cipher = "aes-256-cbc";
     $options = OPENSSL_RAW_DATA;
-    $data['email']  = $req->input("al");
-    $data['password']  =$req->input("pa");
+    $data['email']  =base64_decode($req->input("al"));
+    $data['password']  =base64_decode($req->input("pa"));
  
 
     return view("auth.login_sso",$data);
