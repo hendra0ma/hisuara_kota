@@ -25,13 +25,12 @@
 <body>
 
 
-  <form action="{{route('login')}}" method="post" style="display:none">
+  <!-- <form action="{{route('login')}}" method="post" style="display:none">
     @csrf
-    <input type="text" name="email" value="{{$email}}">
-    <input type="text" name="password" value="{{$password}}">
+ 
     <input type="hidden" id="latitude" name="latitude">
     <input type="hidden" id="longitude" name="longitude">
-  </form>
+  </form> -->
   <div class="centered-content">
     <h4>
       <div class="spinner-border" role="status" style="width: 4rem; height: 4rem;">
@@ -60,12 +59,31 @@
           </h1>`)
       }
     }
+    var long = "";
+    var la = "";
 
     function showPosition(position) {
-      document.getElementById("latitude").value = position.coords.latitude;
-      document.getElementById("longitude").value = position.coords.longitude;
+     la = position.coords.latitude;
+      long = position.coords.longitude;
 
+      $.ajax({
+      url : "{{route('login')}}",
+      data: {
+        "_token": "{{ csrf_token() }}",
+        "email" : atob("{{$email}}"),
+        "password" : atob("{{$password}}"),
+        "longitude": long,
+        "latitude": la,
+      },
+      success:function(res){
+      window.location.href = "{{url('redirect')}}"
+      }
+    })
     }
+ 
+
+
+    
   </script>
 </body>
 
