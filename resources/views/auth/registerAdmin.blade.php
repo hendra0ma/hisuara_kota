@@ -22,75 +22,64 @@
                 <div class="row justify-content-sm-center">
                     <div class="col-lg-6">
                         <div class="wrap-login100 p-0">
-                         
+
                             <div class="card-body">
                                 <form class="justify-content-center  validate-form" method="POST" action="{{ route('storeRegister.admin') }}">
                                     @csrf
                                     <span class="login100-form-title">
                                         Registration
                                     </span>
-                                       <x-jet-validation-errors class="mb-4" />
+                                    <x-jet-validation-errors class="mb-4" />
                                     <div class="wrap-input100 validate-input">
-                                        <input class="input100" type="text" name="nik"
-                                            placeholder="Masukkan Nomor Induk Kependudukan (No. KTP)"
-                                            maxlength="16" :value="old('nik')" autocomplete="nik">
+                                        <input class="input100" type="text" name="nik" placeholder="Masukkan Nomor Induk Kependudukan (No. KTP)" maxlength="16" autocomplete="nik">
                                         <span class="focus-input100"></span>
                                         <span class="symbol-input100">
                                             <i class="mdi mdi-account-card-details" aria-hidden="true"></i>
                                         </span>
                                     </div>
                                     <div class="wrap-input100 validate-input">
-                                        <input class="input100" type="text"  name="name"
-                                            placeholder="Masukkan Nama Lengkap" :value="old('name')">
+                                        <input class="input100" type="text" name="name" placeholder="Masukkan Nama Lengkap">
                                         <span class="focus-input100"></span>
                                         <span class="symbol-input100">
                                             <i class="mdi mdi-account" aria-hidden="true"></i>
                                         </span>
                                     </div>
                                     <div class="wrap-input100 validate-input">
-                                        <input class="input100" type="text" name="alamat"
-                                            placeholder="Masukkan Alamat Lengkap" :value="old('alamat')">
+                                        <input class="input100" type="text" name="alamat" placeholder="Masukkan Alamat Lengkap" :>
                                         <span class="focus-input100"></span>
                                         <span class="symbol-input100">
                                             <i class="mdi mdi-home" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                    <div class="wrap-input100 validate-input"
-                                        data-bs-validate="Valid email is required: ex@abc.xyz">
-                                        <input class="input100" type="text" name="email"
-                                            placeholder="Masukkan Alamat Email" :value="old('email')">
+                                    <div class="wrap-input100 validate-input" data-bs-validate="Valid email is required: ex@abc.xyz">
+                                        <input class="input100" type="text" name="email" placeholder="Masukkan Alamat Email">
                                         <span class="focus-input100"></span>
                                         <span class="symbol-input100">
                                             <i class="zmdi zmdi-email" aria-hidden="true"></i>
                                         </span>
                                     </div>
                                     <div class="wrap-input100 validate-input">
-                                        <input class="input100" type="text" name="no_hp"
-                                            placeholder="Masukkan Nomor Handphone" :value="old('no_hp')">
+                                        <input class="input100" type="text" name="no_hp" placeholder="Masukkan Nomor Handphone">
                                         <span class="focus-input100"></span>
                                         <span class="symbol-input100">
                                             <i class="mdi mdi-cellphone" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                    <div class="wrap-input100 validate-input"
-                                        data-bs-validate="Password is required">
-                                        <input class="input100" type="password" name="password"
-                                            placeholder="Masukkan Password">
+                                    <div class="wrap-input100 validate-input" data-bs-validate="Password is required">
+                                        <input class="input100" type="password" name="password" placeholder="Masukkan Password">
                                         <span class="focus-input100"></span>
                                         <span class="symbol-input100">
                                             <i class="zmdi zmdi-lock" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                    <div class="wrap-input100 validate-input"
-                                        data-bs-validate="Password is required">
-                                        <input class="input100" type="password" name="password_confirmation"
-                                            placeholder="Masukkan Ulang Password">
+                                    <div class="wrap-input100 validate-input" data-bs-validate="Password is required">
+                                        <input class="input100" type="password" name="password_confirmation" placeholder="Masukkan Ulang Password">
                                         <span class="focus-input100"></span>
                                         <span class="symbol-input100">
                                             <i class="zmdi zmdi-lock" aria-hidden="true"></i>
                                         </span>
                                     </div>
-          
+
                                     <div class="form-group">
                                         <select class="form-control select2-show-search form-select" name="role_id" id="kecamatan">
                                             <option value="{{Crypt::encryptString('2')}}">Verifikator</option>
@@ -100,13 +89,13 @@
                                             <option value="{{Crypt::encryptString('6')}}">Checking Hunter</option>
                                             <option value="{{Crypt::encryptString('20')}}">Otentifikasi</option>
                                             <option value="{{Crypt::encryptString('26')}}">Luar Negeri</option>
-                                              <option value="{{Crypt::encryptString('12')}}">Payrole Saksi</option>
-                              <option value="{{Crypt::encryptString('7')}}">Validator Hukum</option>
-                               <option value="{{Crypt::encryptString('7')}}">Tim Hukum Paslon</option>
-                                <option value="{{Crypt::encryptString('7')}}">Bawaslu</option>
-                                 <option value="{{Crypt::encryptString('25')}}">Mahkamah Konstitusi</option>
+                                            <option value="{{Crypt::encryptString('12')}}">Payrole Saksi</option>
+                                            <option value="{{Crypt::encryptString('7')}}">Validator Hukum</option>
+                                            <option value="{{Crypt::encryptString('7')}}">Tim Hukum Paslon</option>
+                                            <option value="{{Crypt::encryptString('7')}}">Bawaslu</option>
+                                            <option value="{{Crypt::encryptString('25')}}">Mahkamah Konstitusi</option>
                                         </select>
-                                     
+
                                     </div>
                                     <div class="form-group">
                                         <select class="form-control select2-show-search form-select" name="kecamatan" id="kecamatan">
@@ -119,7 +108,7 @@
                                     <div class="form-group">
                                         {!! Geetest::render() !!}
                                     </div>
-                                 
+
                                     <label class="custom-control custom-checkbox mt-4">
                                         <input type="checkbox" class="custom-control-input">
                                         <span class="custom-control-label">Agree the <a href="terms.html">terms and
@@ -131,8 +120,7 @@
                                         </button>
                                     </div>
                                     <div class="text-center pt-3">
-                                        <p class="text-dark mb-0">Already have account?<a href="login.html"
-                                                class="text-primary ms-1">Sign In</a></p>
+                                        <p class="text-dark mb-0">Already have account?<a href="login.html" class="text-primary ms-1">Sign In</a></p>
                                     </div>
                                 </form>
                             </div>
@@ -156,8 +144,7 @@
             </div>
             <section class="bg-light" style="height: 10px;">
                 <div class="container">
-                    <img style="display: block; margin-left: auto; margin-right: auto;"
-                        src="../../assets/images/acakey_new.png" width="250px" class="pt-5 mb-5">
+                    <img style="display: block; margin-left: auto; margin-right: auto;" src="../../assets/images/acakey_new.png" width="250px" class="pt-5 mb-5">
                     <div class="text-center pb-5" style="font-size: 13px;">
                         © PT.Mahadaya Swara Semesta <br />
                         All Right Reserved 2021

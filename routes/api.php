@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\PublicController;
 use App\Http\Controllers\API\RelawanController as RelawanApi;
 use App\Http\Controllers\API\SaksiController;
+use App\Models\RegenciesDomain;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +29,7 @@ Route::post('/register', [App\Http\Controllers\API\AuthController::class, 'regis
 
 //API route for login user
 Route::post('/login', [App\Http\Controllers\API\AuthController::class, 'login']);
+Route::get('/cekToken', [App\Http\Controllers\API\AuthController::class, 'accessLoginToken']);
 
 //API Route for public
 
@@ -36,14 +39,23 @@ Route::group(['prefix'=>'public'],function (){
     Route::get('get-district',[PublicController::class,'getDistrictByRegencyId']);
     Route::get('get-village',[PublicController::class,'getVillageByDistrictId']);
     Route::get('get-fraud',[PublicController::class,'getFraud']);
+    Route::get('get-tps-by-village-id',[PublicController::class,'tpsByVillage']);
     Route::middleware(['check-token'])->group(function ()
     {
-        Route::get('get-voice',[PublicController::class,'getSuara']);
-        Route::get('get-tps',[PublicController::class,'getTPS']);
-        Route::get('get-tps-masuk',[PublicController::class,'getTPSMasuk']);
-        Route::get('get-tps-kosong',[PublicController::class,'getTPSKosong']);
+        Route::post('register-saksi-pusat',[AuthController::class,'registerPusat']);
     });
+    Route::get('get-tps',[PublicController::class,'getTPS']);
+    Route::get('get-tps-masuk',[PublicController::class,'getTPSMasuk']);
+    Route::get('get-tps-kosong',[PublicController::class,'getTPSKosong']);
+    Route::get('get-voice',[PublicController::class,'getSuara']);
 });
+
+Route::get('get-domain',function () {
+    $kota = RegenciesDomain::join('regencies','regencies.id','=','regency_domains.regency_id')->get();
+    return response()->json($kota,200);
+});
+
+
 
 //Protecting Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -57,5 +69,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/upload-c1-relawan', [RelawanApi::class, 'uploadC1Relawan']);
     });
     // API route for logout user
-    Route::post('/logout', [App\Http\Controllers\API\AuthController::class, 'logout']);
 });
+Route::post('/logout', [App\Http\Controllers\API\AuthController::class, 'logout']);
