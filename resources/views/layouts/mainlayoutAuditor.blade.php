@@ -1,6 +1,6 @@
 @include('layouts.templateAuditor.head')
-@include('layouts.templateAuditor.sidebar')
-@include('layouts.templateAuditor.header')
+@include('layouts.partials.sidebar')
+@include('layouts.partials.header')
 @yield('content')
 @include('layouts.templateAuditor.footer')
 @include('layouts.templateAuditor.footer-scripts')

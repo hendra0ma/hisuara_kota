@@ -31,6 +31,8 @@ use App\Models\Databukti;
 use App\Models\Listkecurangan as ModelsListkecurangan;
 use App\Models\Relawan;
 use App\Models\RelawanData;
+use App\Models\QuickSaksiData;
+use App\Models\Tracking as ModelsTracking;
 
 class VerificatorController extends Controller
 {
@@ -114,6 +116,7 @@ class VerificatorController extends Controller
                 ->whereNull('saksi.pending');
         }])->get();
         $data['village'] = Village::where('id', $data['paslon'][0]->saksi_data[0]->village_id)->first();
+        $data['user'] = User::where('tps_id', $req->id)->first();
         return view('verificator.modalView', $data);
     }
     public function getSaksiPending(Request $req)
@@ -251,7 +254,8 @@ class VerificatorController extends Controller
             'action' => $pesan,
         ]);
         // event(new NotifEvent($pesan));
-        return redirect()->route('verifikator.village', Crypt::encrypt($saksi_data[0]->village_id));
+        // return redirect()->route('verifikator.village', Crypt::encrypt($saksi_data[0]->village_id));
+        return redirect()->route('administrator.verifikasi-c1');
     }
     public function getRelawanData(Request $req)
     {
@@ -303,6 +307,25 @@ class VerificatorController extends Controller
 
         return redirect()->back()->with(['success' => 'berhasil memverifikasi data relawan']);
     }
+
+    public function verifikasiC1() {
+        $data['config'] = Config::first();
+        $config = Config::first();
+        $data['paslon'] = Paslon::with('quicksaksidata')->get();
+        $data['paslon_terverifikasi']     = Paslon::with(['quicksaksidata' => function ($query) {
+            $query->join('quicksaksi', 'quicksaksidata.saksi_id', 'quicksaksi.id')
+                ->whereNull('quicksaksi.pending')
+                ->where('quicksaksi.verification', 1);
+        }])->get();
+        $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
+        $data['kota'] = Regency::where('id', $config['regencies_id'])->first();
+        $data['tracking'] = ModelsTracking::get();
+        $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->count();
+        $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
+        $data['total_tps']   =  Tps::where('setup','belum terisi')->count();
+        return view('administrator.c1.verifikasi-c1', $data);
+    }
+    
     public function store(Request $request)
     {
         //

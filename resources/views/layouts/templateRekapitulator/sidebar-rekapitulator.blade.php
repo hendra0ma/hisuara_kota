@@ -45,7 +45,7 @@ $regency = District::where('regency_id', $config['regencies_id'])->get();
                         <a href="#" class="text-dark">
                             <center>
                                 <b>{{$kota['name']}} <br>
-                                    KECAMATAN {{$kec['name']}}</b>
+                                    {{-- KECAMATAN {{$kec['name']}}</b> --}}
                             </center>
                         </a>
                     </span>

@@ -1,5 +1,5 @@
 @include('layouts.templateVerifikator.head-village')
-@include('layouts.templateVerifikator.sidebar-village-koreksi')
+@include('layouts.partials.sidebar')
 @include('layouts.templateVerifikator.header')
 @yield('content')
 @include('layouts.templateVerifikator.footer')

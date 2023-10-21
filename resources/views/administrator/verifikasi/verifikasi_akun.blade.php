@@ -4,7 +4,15 @@
 use App\Models\District;
 use App\Models\Village;
 use App\Models\TPS;
+
+use App\Models\Regency;
+use App\Models\Config;
+
+$data['config'] = Config::first();
+$config = Config::first();
+$kota = Regency::where('id', $config['regencies_id'])->first();
 ?>
+
 @extends('layouts.main-verifikasi-akun')
 
 
@@ -12,15 +20,15 @@ use App\Models\TPS;
 <!-- PAGE-HEADER -->
 <div class="row mt-5">
     <div class="col-lg">
-        <h1 class="page-title fs-1 mt-2">Dashboard Rekapitung
+        <h1 class="page-title fs-1 mt-2">Verifikasi Saksi
+            <!-- Kota -->
         </h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Otentifikasi Admin
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ $kota->name }}
                 <!-- Kota -->
             </li>
         </ol>
-        <h4 class="fs-4 mt-2 fw-bold">Otentifikasi Admin</h4> <!-- This Dummy Data -->
     </div>
 </div>
 <!-- PAGE-HEADER END -->

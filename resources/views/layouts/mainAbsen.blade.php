@@ -1,9 +1,9 @@
-@include('layouts.templateAbsensi.head')
-@include('layouts.partials.sidebar-absensi')
-@include('layouts.templateAbsensi.header')
+@include('layouts.partials.head')
+@include('layouts.partials.sidebar')
+@include('layouts.partials.header')
 @yield('content')
 @include('layouts.templateAbsensi.footer')
-@include('layouts.templateAbsensi.footer-no-var')
+@include('layouts.partials.footer-no-var')
 </body>
 
 </html>

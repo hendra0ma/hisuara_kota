@@ -1,23 +1,50 @@
-
-text/x-generic absensi.blade.php ( HTML document, ASCII text, with CRLF line terminators )
 @extends('layouts.mainAbsen')
 @section('content')
 
 
 <div class="row mt-3">
     <div class="col-lg-4">
-        <h1 class="page-title fs-1 mt-2">Dashboard Rekapitung
+        <h1 class="page-title fs-1 mt-2">Saksi Teregristrasi
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Absensi Saksi
+            <li class="breadcrumb-item active" aria-current="page">{{ $kota->name }}
                 <!-- Kota -->
             </li>
         </ol>
-        <h4 class="fs-4 mt-2 fw-bold">Daftar Absensi Saksi</h4>
     </div>
-    <div class="col-lg-8 mt-2">
+
+    <div class="col-lg-8">
+        <div class="row mt-2">
+
+            {{-- <div class="col parent-link">
+                <a href="{{url('')}}/administrator/verifikasi_saksi" class="btn text-white w-100 py-3">Verifikasi Saksi</a>
+            </div>
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/absensi" class="btn text-white w-100 py-3">Saksi Teregristrasi</a>
+            </div>
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/absensi/hadir" class="btn text-white w-100 py-3">Saksi Hadir</a>
+            </div>
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/absensi/tidak_hadir" class="btn text-white w-100 py-3">Saksi Tidak Hadir</a>
+            </div> --}}
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/verifikasi_saksi" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/verifikasi_saksi')?'active' : '' }}">Verifikasi Saksi</a>
+            </div>
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/absensi" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi')?'active' : '' }}">Saksi Teregristrasi</a>
+            </div>
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/absensi/hadir" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/hadir')?'active' : '' }}">Saksi Hadir</a>
+            </div>
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/absensi/tidak_hadir" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/tidak_hadir')?'active' : '' }}">Saksi Tidak Hadir</a>
+            </div>
+
+        </div>
+    </div>
+    {{-- <div class="col-lg-8 mt-2">
         <div class="row">
             <div class="col-lg-4 justify-content-end">
                 <div class="card">
@@ -50,7 +77,7 @@ text/x-generic absensi.blade.php ( HTML document, ASCII text, with CRLF line ter
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 
 <style>
@@ -80,12 +107,15 @@ text/x-generic absensi.blade.php ( HTML document, ASCII text, with CRLF line ter
     @else
         {{$title}} 
     @endif
+
 </h4>
 <hr style="border: 1px solid">
 
-
-<div class="row mt-5">
-    <div class="col-md">
+<div>
+    <!-- Search Input and Results -->
+    <livewire:absensiindex>
+    
+    {{-- <div class="col-md">
 
         <div class="card">
             <div class="card-body">
@@ -100,6 +130,7 @@ text/x-generic absensi.blade.php ( HTML document, ASCII text, with CRLF line ter
                                 <th class="text-white text-center align-middle">TPS</th>
                                 <th class="text-white text-center align-middle">Jam Absen</th>
                                 <th class="text-white text-center align-middle">Email</th>
+                                <th class="text-white text-center align-middle">Aksi</th>
                           
                             </tr>
                         </thead>
@@ -121,6 +152,10 @@ text/x-generic absensi.blade.php ( HTML document, ASCII text, with CRLF line ter
                                 <td class="align-middle">{{$tps['number']}}</td>
                                 <td class="align-middle">{{$item['created_at']}}</td>
                                 <td class="align-middle">{{$item['email']}}</td>
+                                <td>
+                                    <a href="cekmodal" class="btn btn-primary cekmodal" style="font-size: 0.8em;" id="Cek" data-id="{{$item['id']}}"
+                                        data-bs-toggle="modal" id="" data-bs-target="#cekmodal">Cek</a>
+                                </td>
                
                              
                             </tr>
@@ -130,15 +165,25 @@ text/x-generic absensi.blade.php ( HTML document, ASCII text, with CRLF line ter
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
+    
+</div>
 
-    <div class="col-lg-3 col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title">Info</h5>
+<div class="modal fade" id="cekmodal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-fullscreen" role="document">
+        <div class="modal-header bg-primary text-white">
+            <div class="modal-title mx-auto">
+                <h4 class="mb-0 fw-bold">Verifikasi Saksi</h4>
             </div>
-            <div class="card-body" style="text-align: justify">
-                Saksi Terdaftar adalah data saksi yang telah di input sebelumnya oleh administrator Rekapitung kedalam database sistem. Data saksi diperoleh dari timses kandidat sebelum pemilu berlangsung sehingga ketika saksi tersebut mendaftar menjadi saksi Rekapitung maka pendaftaran tersebut akan diproses secara otomatis oleh sistem dengan hasil terverifikasi, pending atau ditolak.
+        </div>
+        <div class="modal-content h-auto">
+            <div class="container">
+                <div id="container-verifikasi">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

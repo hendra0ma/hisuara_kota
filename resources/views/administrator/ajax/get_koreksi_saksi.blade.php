@@ -102,8 +102,8 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn bg-success text-light w-100">Setujui</button>
-                        <a href="tolak_koreksi/{{Crypt::encrypt($saksi['id'])}}" ="btn bg-danger mt-2 text-light w-100">Tolak</a>
-                    </div>class
+                        <a href="tolak_koreksi/{{Crypt::encrypt($saksi['id'])}}" class="btn bg-danger mt-2 text-light w-100">Tolak</a>
+                    </div>
                     </form>
                 </div>
             </div>

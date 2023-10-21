@@ -34,8 +34,7 @@ class HumanVerificationController extends Controller
 
     public function verifikasi_saksi()
     {
-         $data['config'] = Config::first();
-
+        $data['config'] = Config::first();
         $data['saksi_data'] = User::where('role_id', '=', 8)->get();
         return view('administrator.verifikasi.verifikasi_saksi', $data);
     }

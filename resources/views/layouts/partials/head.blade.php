@@ -61,6 +61,39 @@
     
     <link rel="stylesheet" href="https://raw.githack.com/thdoan/magnify/master/dist/css/magnify.css">
     
+    <style>
+        .inner-card {
+            border-radius: 10px;
+            background-color: #cbd7ff;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5) inset;
+            -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5) inset;
+            -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5) inset;
+        }
+        .hiasan-1 {
+            background-color: rgba(98, 89, 202, 0.8);
+            height: 60px;
+            position: relative;
+        }
+    
+        .hiasan-2 {
+            background-color: #404042;
+            height: 60px;
+        }
+    
+        .card.custom {
+            position: relative;
+        }
+    
+        .gambar-bulat {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 100%;
+            border: 5px white solid;
+        }
+    </style>
+
     @livewireStyles
     <style>
         /* Style the tab */
@@ -229,6 +262,18 @@
         p {
             margin-top: 0;
             margin-bottom: 1rem
+        }
+
+        .parent-link a.active {
+            background: #6259ca;
+        }
+
+        .parent-link a {
+            background: rgba(98, 88, 202, 0.65);
+        }
+
+        .parent-link a:hover {
+            background: #6259ca;
         }
     </style>
 

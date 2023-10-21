@@ -253,8 +253,6 @@ class AdminController extends Controller
     public function verifikasi_saksi()
     {
         $data['config'] = Config::first();
-
-        $data['saksi_data'] = User::where('role_id', '=', 8)->get();
         return view('administrator.verifikasi.verifikasi_saksi', $data);
     }
 
@@ -262,6 +260,11 @@ class AdminController extends Controller
     {
         $data['config'] = Config::first();
         $data['saksi_data'] = Saksi::join('users', 'users.tps_id', '=', 'saksi.tps_id')->where('koreksi', 1)->get();
+        $data['village'] = Village::where('id', $data['saksi_data'][0]->village_id)->first();
+        $data['total_tps']   =  Tps::where('setup','belum terisi')->count();
+        $data['tracking'] = ModelsTracking::get();
+        $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->count();
+        $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
         return view('administrator.verifikasi.verifikasi_koreksi', $data);
 
     }
@@ -310,6 +313,7 @@ class AdminController extends Controller
         }
         return redirect('administrator/verifikasi_koreksi');
     }
+
     public function real_count()
     {
         $data['config'] = Config::first();
@@ -802,16 +806,16 @@ class AdminController extends Controller
         $data['id'] = Crypt::decrypt($id);
         return view('administrator.rekapitulasi.rekapitulator', $data);
     }
+   
 
     public function absensi_hadir()
     {
         $data['config'] = Config::first();
-        $data['absen'] = Absensi::join('users', 'users.id', '=', 'absensi.user_id')->get();
-        $data['absen2'] = Absensi::join('users', 'users.id', '=', 'absensi.user_id')->get();
-        $data['user'] = User::where('role_id',8)->count();
-        $data['jumlah'] = count($data['absen2']);
+        $config = Config::first();
+        $data['kota']      = Regency::where('id', $config->regencies_id)->first();
 
-        $data['title'] = 'Saksi Hadir (' . $data['jumlah'] . ')';
+        // $data['title'] = 'Saksi Hadir (' . $data['jumlah'] . ')';
+        $data['title'] = 'Saksi Hadir';
 
         return view("administrator.super_feature.absensi", $data);
     }
@@ -820,12 +824,11 @@ class AdminController extends Controller
     public function absensi()
     {
         $data['config'] = Config::first();
-        $data['absen2'] = Absensi::join('users', 'users.id', '=', 'absensi.user_id')->get();
-        $data['absen'] = User::where('role_id',8)->get();
-        $data['user'] = User::where('role_id',8)->count();
-        $data['jumlah'] = $data['user'];
+        $config = Config::first();
+        $data['kota']      = Regency::where('id', $config->regencies_id)->first();
 
-        $data['title'] = 'Saksi Terdaftar (' . $data['jumlah'] . ')';
+        // $data['title'] = 'Saksi Teregistrasi (' . $data['jumlah'] . ')';
+        $data['title'] = 'Saksi Teregistrasi';
 
         return view("administrator.super_feature.absenindex", $data);
     }
@@ -833,14 +836,13 @@ class AdminController extends Controller
        public function absensi_tidak()
     {
         $data['config'] = Config::first();
-        $data['absen2'] = Absensi::join('users', 'users.id', '=', 'absensi.user_id')->get();
-        $data['absen'] = User::where('role_id',8)->where('absen','tidak hadir')->get();
-        $data['user'] = User::where('role_id',8)->count();
-        $data['jumlah'] = $data['user'] - count($data['absen2']);
+        $config = Config::first();
+        $data['kota']      = Regency::where('id', $config->regencies_id)->first();
 
-        $data['title'] = 'Saksi Absen (' . $data['jumlah'] . ')';
+        // $data['title'] = 'Saksi Absen (' . $data['jumlah'] . ')';
+        $data['title'] = 'Saksi Absen';
 
-        return view("administrator.super_feature.absenindex", $data);
+        return view("administrator.super_feature.absensitidakhadir", $data);
     }
 
 
@@ -1001,7 +1003,61 @@ class AdminController extends Controller
         return view('administrator.rekapitulasi.print_kota',$data);
     }
 
+    public function rekapitulasiKelurahan(){
+       $config = Config::first();
+        $rekapitulator = ModelsRekapitulator::where('regency_id', $config->regencies_id)->get();
+        if (count($rekapitulator) == 0) {
+            $district = Village::where('regency_id', $config->regencies_id)->get();
+            
+            $paslon   = Paslon::get();
+            foreach ($paslon as $psl) {
+                foreach ($district as $ds) {
+                    $dsc = District::where('id',$ds->district_id)->first();
+                    $rekapitulator_form =  ModelsRekapitulator::create([
+                        'village_id' => $ds['id'],
+                        'district_id' =>$dsc->id,
+                        'paslon_id' => $psl['id'],
+                        "regency_id"=>$config->regencies_id
+                    ]);
+                }
+            }
+        }
+        $data['config'] = $config;
+        $data['kecamatan'] = Village::where('district_id','like','%'.$config->regencies_id."%")->get();
+        // $data['kec'] = District::where('id', Crypt::decrypt($id))->first();
 
+        // $data['rekapitulator'] = Village::join('rekapitulator', 'villages.id', '=', 'rekapitulator.village_id')
+        // ->join('paslon','paslon.id','=','rekapitulator.paslon_id')
+        // ->get();
+        $data['suara'] = Paslon::get();
+        // $data['id'] = Crypt::decrypt($id);
+        
+        return view('administrator.rekapitulasi.rekapitulasi_kelurahan',$data);
+    }
+
+    public function rekapitulasiKecamatan(){
+        $data['config'] = Config::first();
+
+        $rekapitulator = ModelsRekapitulator::where('regency_id', $data['config']['regencies_id'])->get();
+        if (count($rekapitulator) == 0) {
+            $district = District::where('regency_id', $data['config']['regencies_id'])->get();
+            $paslon   = Paslon::get();
+            foreach ($paslon as $psl) {
+                foreach ($district as $ds) {
+                    $rekapitulator_form =  ModelsRekapitulator::create([
+                        'village_id' => 0,
+                        'district_id' => $ds['id'],
+                        'paslon_id' => $psl['id'],
+                        'regency_id' => $data['config']['regencies_id'],
+                    ]);
+                }
+            }
+            echo 1;
+        }
+        $data['paslon'] = Paslon::get();
+        $data['kecamatan'] = District::where('regency_id', $data['config']['regencies_id'])->get();
+        return view('administrator.rekapitulasi.rekapitulasi_kecamatan',$data);
+    }
 
     public function fraudDataPrint()
     {
@@ -1446,7 +1502,7 @@ class AdminController extends Controller
 
     }
 
-    public function verifikasiC1() {
+    public function Relawan() {
         $data['config'] = Config::first();
         $config = Config::first();
         $data['paslon'] = Paslon::with('quicksaksidata')->get();
@@ -1458,23 +1514,9 @@ class AdminController extends Controller
         $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
         $data['kota'] = Regency::where('id', $config['regencies_id'])->first();
         $data['tracking'] = ModelsTracking::get();
-        return view('administrator.c1.verifikasi-c1', $data);
+        return view('administrator.relawan.relawan', $data);
     }
 
-    public function auditC1() {
-        $data['config'] = Config::first();
-        $config = Config::first();
-        $data['paslon'] = Paslon::with('quicksaksidata')->get();
-        $data['paslon_terverifikasi']     = Paslon::with(['quicksaksidata' => function ($query) {
-            $query->join('quicksaksi', 'quicksaksidata.saksi_id', 'quicksaksi.id')
-                ->whereNull('quicksaksi.pending')
-                ->where('quicksaksi.verification', 1);
-        }])->get();
-        $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
-        $data['kota'] = Regency::where('id', $config['regencies_id'])->first();
-        $data['tracking'] = ModelsTracking::get();
-        return view('administrator.c1.audit-c1', $data);
-    }
 
 
    
