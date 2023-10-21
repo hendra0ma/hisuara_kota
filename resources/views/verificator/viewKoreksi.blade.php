@@ -12,8 +12,8 @@
 
 </div>
 
-<div class="container-fluid mt-5">
-    <div class="col-lg-12">
+<div class="p-0 mt-5">
+    <div class="col-lg-12 p-0">
         <div class="row">
             <div class="col-lg-6">
                 <div class="card">

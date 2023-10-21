@@ -1,5 +1,5 @@
-@include('layouts.templateRekapitulator.head-rekapitulator')
-@include('layouts.templateRekapitulator.sidebar-rekapitulator') 
+@include('layouts.partials.head')
+@include('layouts.partials.sidebar') 
         @include('layouts.partials.header')
         @yield('content')
         @include('layouts.templateRekapitulator.footer-rekapitulator')

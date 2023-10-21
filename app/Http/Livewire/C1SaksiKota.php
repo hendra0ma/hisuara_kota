@@ -2,14 +2,16 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\District;
 use App\Models\Tps;
+use App\Models\Village;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class C1SaksiKota extends Component
 {
     public $id_kel;
-    public $district;
+    // public $district;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public function render()
@@ -22,6 +24,9 @@ class C1SaksiKota extends Component
             ->where('saksi.overlimit', 0)
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->paginate(18);
+
+        // $data['district'] = District::find($data['list_suara'][0]->district_id);
+        $data['village'] = Village::where('id', $data['list_suara'][0]->village_id)->first();
         return view('livewire.c1-saksi-kota', $data);
     }
 }

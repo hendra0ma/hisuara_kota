@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Crypt;
 use App\Events\NotifEvent;
+use App\Models\QuickSaksiData;
+use App\Models\Tracking as ModelsTracking;
 
 class AuditorController extends Controller
 {
@@ -129,8 +131,48 @@ class AuditorController extends Controller
 
                 ->where('tps.id', '=', $req->id);
         }])->get();
+        $data['user'] = User::where('tps_id', $req->id)->first();
 
         $data['village'] = Village::where('id', $data['paslon'][0]->saksi_data[0]->village_id)->first();
         return view('auditor.modalView', $data);
+    }
+
+    public function auditC1() {
+        $data['config'] = Config::first();
+        $config = Config::first();
+        $data['paslon'] = Paslon::with('quicksaksidata')->get();
+        $data['paslon_terverifikasi']     = Paslon::with(['quicksaksidata' => function ($query) {
+            $query->join('quicksaksi', 'quicksaksidata.saksi_id', 'quicksaksi.id')
+                ->whereNull('quicksaksi.pending')
+                ->where('quicksaksi.verification', 1);
+        }])->get();
+        $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
+        $data['kota'] = Regency::where('id', $config['regencies_id'])->first();
+        $data['tracking'] = ModelsTracking::get();
+        $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->count();
+        $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
+        $data['total_tps']   =  Tps::where('setup','belum terisi')->count();
+        $data['list_suara']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
+            ->join('users', 'users.tps_id', '=', 'tps.id')
+            ->where('saksi.verification', 1)
+            ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
+            ->where('saksi.audit', "")
+            ->paginate(18);
+
+        $data['list_suara_audit']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
+            ->join('users', 'users.tps_id', '=', 'tps.id')
+            ->where('saksi.verification', 1)
+            ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
+            ->where('saksi.audit', 1)
+            ->paginate(18);
+
+        $data['list_suara_batal']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
+            ->join('users', 'users.tps_id', '=', 'tps.id')
+           ->where('saksi.batalkan', 1)
+            ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
+            ->paginate(18);
+
+        $data['village'] = Village::where('id', $data['list_suara'][0]->village_id)->first();
+        return view('administrator.c1.audit-c1', $data);
     }
 }

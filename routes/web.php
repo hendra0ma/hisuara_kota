@@ -202,10 +202,11 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('solution/{id}', 'solution')->name('solution');
             Route::get('laporan-bawaslu', 'laporanBapilu')->name('laporan_bapilu');
             Route::get('real_count2', 'real_count2')->name('real_count2');
+            Route::get('rekapitulasi_kelurahan', 'rekapitulasiKelurahan')->name('rekapitulasiKelurahan');
+            Route::get('rekapitulasi_kecamatan', 'rekapitulasiKecamatan')->name('rekapitulasiKecamatan');
             Route::get('quick_count2', 'quick_count2')->name('quick_count2');
             Route::get('terverifikasi', 'terverifikasi')->name('terverifikasi');
-            Route::get('verifikasi-c1', 'verifikasiC1')->name('verifikasiC1');
-            Route::get('audit-c1', 'auditC1')->name('auditC1');
+            Route::get('relawan', 'Relawan')->name('Relawan');
             Route::get('data-gugatan', 'data_gugatan')->name('data_gugatan');
             Route::get('developer', 'developer')->name('developer');
             Route::post('cek_pass', 'cek_pass');
@@ -299,6 +300,7 @@ Route::group(['middleware' => 'role:verifikator', 'prefix' => 'verifikator', 'as
     Route::get('koreksidata/{id}', [VerificatorController::class, 'koreksidata'])->name('koreksidata');
     Route::post('actionKoreksiData/{id}', [VerificatorController::class, 'actionKoreksiData'])->name('actionKoreksiData');
     Route::get('village/{id}', [VerificatorController::class, "village"])->middleware('districtCheck:kelurahan')->name("village");
+    Route::get('verifikasi-c1', [VerificatorController::class, 'verifikasiC1'])->name('verifikasiC1');
 });
 
 
@@ -310,6 +312,7 @@ Route::group(['middleware' => 'role:auditor', 'prefix' => 'auditor', 'as' => 'au
     Route::get('batalkanData/{id}', [AuditorController::class, 'batalkanData'])->name('batalkanData');
     Route::get('tpsteraudit/{id}', [AuditorController::class, 'tpsteraudit'])->name('tpsteraudit');
     Route::get('village/{id}', [AuditorController::class, "village"])->middleware('districtCheck:kelurahan')->name("village");
+    Route::get('audit-c1', [AuditorController::class, 'auditC1'])->name('auditC1');
 });
 
 //huver

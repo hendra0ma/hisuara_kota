@@ -65,135 +65,140 @@ $track = Tracking::where('id_user',$user['id'])->first();
         </div>
         @endif
     </div>
-    <div class="row mt-5">
-        <div class="col-12">
-            <b>Detail Akun <i class="fa fa-info-circle"></i></b>
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="row mt-5">
+                <div class="col-12">
+                    <b>Detail Akun <i class="fa fa-info-circle"></i></b>
+                </div>
+            
+                <div class="col-12 mt-5">
+                    <table class="table">
+                        <tr>
+                            <td style="width: 130px">Status</td>
+                            <td style="width: 52px">:</td>
+                            @if ($user['is_active'] == 2)
+                            <td>Belum Terverifikasi</td>
+                            @else
+                            @if ($tps['setup'] == 'terisi')
+                            <td>Terverifikasi (Sudah Mengirim Data Saksi)</td>
+                            @else
+                            <td>Terverifikasi (Belum Mengirim Data Saksi)</td>
+                            @endif
+                            @endif
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>:</td>
+                            <td>{{ $user['email'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>No.Hp</td>
+                            <td>:</td>
+                            <td>{{ $user['no_hp'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Alamat</td>
+                            <td>:</td>
+                            <td>{{ $user['address'] }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row mt-5">
-        <div class="col-12">
-            <table class="table">
-                <tr>
-                    <td style="width: 130px">Status</td>
-                    <td style="width: 52px">:</td>
-                    @if ($user['is_active'] == 2)
-                    <td>Belum Terverifikasi</td>
-                    @else
-                    @if ($tps['setup'] == 'terisi')
-                    <td>Terverifikasi (Sudah Mengirim Data Saksi)</td>
-                    @else
-                    <td>Terverifikasi (Belum Mengirim Data Saksi)</td>
-                    @endif
-                    @endif
-                </tr>
-                <tr>
-                    <td>Email</td>
-                    <td>:</td>
-                    <td>{{ $user['email'] }}</td>
-                </tr>
-                <tr>
-                    <td>No.Hp</td>
-                    <td>:</td>
-                    <td>{{ $user['no_hp'] }}</td>
-                </tr>
-                <tr>
-                    <td>Alamat</td>
-                    <td>:</td>
-                    <td>{{ $user['address'] }}</td>
-                </tr>
-            </table>
+
+        <div class="col-md-4">
+            <div class="row mt-5">
+                <div class="col-12">
+                    <b>Lokasi <i class="fa fa-info-circle"></i></b>
+                </div>
+
+                <div class="col-12 mt-5">
+                    <table class="table">
+                        <tr>
+                            <td style="width: 130px">Kecamatan</td>
+                            <td style="width: 52px">:</td>
+                            <td>{{$district['name'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Kelurahan</td>
+                            <td>:</td>
+                            <td>{{$village['name'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>TPS</td>
+                            <td>:</td>
+                            <td>{{ $tps['number'] }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row mt-5">
-        <div class="col-12">
-            <b>Lokasi <i class="fa fa-info-circle"></i></b>
+
+        <div class="col-md-4">
+            <div class="row mt-5">
+                <div class="col-12">
+                    <b>Meta Data <i class="fa fa-info-circle"></i></b>
+                </div>
+            @if ($track == NULL)
+                <div class="col-12 mt-2">
+                    <table class="table">
+                        <tr>
+                            <td style="width: 130px">Lontitude</td>
+                            <td style="width: 52px">:</td>
+                            <td>Tidak Terdeteksi</td>
+                        </tr>
+                        <tr>
+                            <td>Latitude</td>
+                            <td>:</td>
+                            <td>Tidak Terdeteksi</td>
+                        </tr>
+                        <tr>
+                            <td>Ip Address</td>
+                            <td>:</td>
+                            <td>Tidak Terdeteksi</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            @else
+                <div class="col-12 mt-2">
+                    <table class="table">
+                        <tr>
+                            <td style="width: 130px">Lontitude</td>
+                            <td style="width: 52px">:</td>
+                            <td>{{$track['longitude'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Latitude</td>
+                            <td>:</td>
+                            <td>{{$track['latitude'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Ip Address</td>
+                            <td>:</td>
+                            <td>{{ $track['ip_address'] }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            @endif
         </div>
     </div>
 
-    <div class="row mt-5">
-        <div class="col-12">
-            <table class="table">
-                <tr>
-                    <td style="width: 130px">Kecamatan</td>
-                    <td style="width: 52px">:</td>
-                    <td>{{$district['name'] }}</td>
-                </tr>
-                <tr>
-                    <td>Kelurahan</td>
-                    <td>:</td>
-                    <td>{{$village['name'] }}</td>
-                </tr>
-                <tr>
-                    <td>TPS</td>
-                    <td>:</td>
-                    <td>{{ $tps['number'] }}</td>
-                </tr>
-                <tr>
-                    <td>Foto Lokasi</td>
-                    <td colspan="2">:</td>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        @if ($tps['foto_lokasi'] != null)
-                            <img style="width: 100%" src="{{ $tps['foto_lokasi'] }}" alt="">
-                        @else
-                            <img style="width: 100%" src="https://t-2.tstatic.net/default-2.jpg" alt="">
-                        @endif
-                    </td>
-                </tr>
-            </table>
+    <div class="row">
+        <div class="col-12 mt-2">
+            <b>Foto Lokasi <i class="fa fa-info-circle"></i></b>
+        </div>
+        <div class="col-12 mt-2">
+            @if ($tps['foto_lokasi'] != null)
+                <img style="width: 100%" src="{{ $tps['foto_lokasi'] }}" alt="">
+            @else
+                <img style="width: 100%" src="https://t-2.tstatic.net/default-2.jpg" alt="">
+            @endif
         </div>
     </div>
-    <div class="row mt-5">
-        <div class="col-12">
-            <b>Meta Data <i class="fa fa-info-circle"></i></b>
-        </div>
-    </div>
-    @if ($track == NULL)
-    <div class="row mt-5">
-        <div class="col-12">
-            <table class="table">
-                <tr>
-                    <td style="width: 130px">Lontitude</td>
-                    <td style="width: 52px">:</td>
-                    <td>Tidak Terdeteksi</td>
-                </tr>
-                <tr>
-                    <td>Latitude</td>
-                    <td>:</td>
-                    <td>Tidak Terdeteksi</td>
-                </tr>
-                <tr>
-                    <td>Ip Address</td>
-                    <td>:</td>
-                    <td>Tidak Terdeteksi</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    @else
-    <div class="row mt-5">
-        <div class="col-12">
-            <table class="table">
-                <tr>
-                    <td style="width: 130px">Lontitude</td>
-                    <td style="width: 52px">:</td>
-                    <td>{{$track['longitude'] }}</td>
-                </tr>
-                <tr>
-                    <td>Latitude</td>
-                    <td>:</td>
-                    <td>{{$track['latitude'] }}</td>
-                </tr>
-                <tr>
-                    <td>Ip Address</td>
-                    <td>:</td>
-                    <td>{{ $track['ip_address'] }}</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    @endif
 
     <div class="row mt-5">
         <div class="col-12">

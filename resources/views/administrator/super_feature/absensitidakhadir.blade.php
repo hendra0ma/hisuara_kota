@@ -4,11 +4,11 @@
 
 <div class="row mt-3">
     <div class="col-lg-4">
-        <h1 class="page-title fs-1 mt-2">Saksi Hadir
+        <h1 class="page-title fs-1 mt-2">Saksi Teregristrasi
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">{{$kota->name}}
+            <li class="breadcrumb-item active" aria-current="page">{{ $kota->name }}
                 <!-- Kota -->
             </li>
         </ol>
@@ -62,7 +62,7 @@
                         <div class="card-title text-white">Total Saksi Hadir</div>
                     </div>
                     <div class="card-body">
-                        <p class="">{{count($absen)}}</p>
+                        <p class="">{{count($absen2)}}</p>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                         <div class="card-title text-white">Total Saksi Absen</div>
                     </div>
                     <div class="card-body">
-                        <p class="">{{$user - count($absen)}}</p>
+                        <p class="">{{$user - count($absen2)}}</p>
                     </div>
                 </div>
             </div>
@@ -80,12 +80,39 @@
     </div> --}}
 </div>
 
+<style>
+    .tooltip-inner {
+        background-color: rgb(248, 38, 73);
+        box-shadow: 0px 0px 4px black;
+        opacity: 1 !important;
+    }
+    .tooltip.bs-tooltip-right .tooltip-arrow::before {
+        border-right-color: rgb(248, 38, 73) !important;
+    }
+    .tooltip.bs-tooltip-left .tooltip-arrow::before {
+        border-left-color: rgb(248, 38, 73) !important;
+    }
+    .tooltip.bs-tooltip-bottom .tooltip-arrow::before {
+        border-bottom-color: rgb(248, 38, 73) !important;
+    }
+    .tooltip.bs-tooltip-top .tooltip-arrow::before {
+        border-top-color: rgb(248, 38, 73) !important;
+    }
+</style>
+
 <h4 class="fw-bold fs-4 mt-5">
-    {{$title}}  
+    
+    @if((string)Request::segment(3) != "tidak_hadir") 
+        {{$title}} &nbsp; <i class="fa fa-question-circle"  data-bs-placement="right" data-bs-toggle="tooltip" title="" data-bs-customClass="custom-tooltip" data-bs-original-title="Saksi yang terdaftar pada halaman ini merupakan saksi yang telah didaftarkan oleh tim sukses kandidat sebelum perhitungan dilakukan untuk menghindari saksi ilegal yang menyusup."></i>
+    @else
+        {{$title}} 
+    @endif
+
 </h4>
 <hr style="border: 1px solid">
 
-<livewire:absensi>
+<livewire:absensi-tidak-hadir>
+
 {{-- <div class="row mt-5">
     <div class="col-md">
 
@@ -98,13 +125,12 @@
                                 <th class="text-white text-center align-middle">Foto</th>
                                 <th class="text-white text-center align-middle">Nama</th>
                                 <th class="text-white text-center align-middle">Kecamatan</th>
+                                <th class="text-white text-center align-middle">Kecamatan</th>
                                 <th class="text-white text-center align-middle">Kelurahan</th>
                                 <th class="text-white text-center align-middle">TPS</th>
                                 <th class="text-white text-center align-middle">Jam Absen</th>
                                 <th class="text-white text-center align-middle">Email</th>
-                                <th class="text-white text-center align-middle">Longitude</th>
-                                <th class="text-white text-center align-middle">Latitude</th>
-                                <th class="text-white text-center align-middle">Action</th>
+                          
                             </tr>
                         </thead>
                         <tbody>
@@ -125,15 +151,8 @@
                                 <td class="align-middle">{{$tps['number']}}</td>
                                 <td class="align-middle">{{$item['created_at']}}</td>
                                 <td class="align-middle">{{$item['email']}}</td>
-                                <td class="align-middle">{{$item['longitude']}}</td>
-                                <td class="align-middle">{{$item['latitude']}}</td>
-                                <td class="align-middle">
-                                    @if ($item['status'] == 'sudah absen')
-                                    <span class="badge bg-success">{{$item['status']}}</span>
-                                    @else
-                                    <span class="badge bg-danger">{{$item['status']}}</span>
-                                    @endif
-                                </td>
+               
+                             
                             </tr>
                             @endforeach
                         </tbody>
@@ -142,6 +161,7 @@
             </div>
         </div>
     </div>
+    
 </div> --}}
 
 @endsection

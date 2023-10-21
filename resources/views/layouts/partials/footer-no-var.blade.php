@@ -84,7 +84,25 @@
         <script src="../../assets/plugins/gallery/lg-zoom.js"></script>
         <script src="../../assets/plugins/gallery/lg-hash.js"></script>
         <script src="../../assets/plugins/gallery/lg-share.js"></script>
+        @livewireScripts
+        <script>
+            $('.cekmodal').on('click', function () {
+                let id = $(this).data('id');
+                $.ajax({
+                    url: '{{url("/")}}/administrator/ajax/get_verifikasi_saksi',
+                    type: "GET",
+                    data: {
+                        id
+                    },
+                    success: function (response) {
+                        if (response) {
+                            $('#container-verifikasi').html(response);
+                        }
+                    }
+                });
+            });
 
+        </script>
 
         <script>
     var cities = L.layerGroup();
@@ -159,24 +177,6 @@
 
         </script>
         <script>
-            $('a.cekmodal').on('click', function () {
-                let id = $(this).data('id');
-                $.ajax({
-                    url: '{{url("/")}}/administrator/ajax/get_verifikasi_saksi',
-                    type: "GET",
-                    data: {
-                        id
-                    },
-                    success: function (response) {
-                        if (response) {
-                            $('#container-verifikasi').html(response);
-                        }
-                    }
-                });
-            });
-
-        </script>
-        <script>
             $('a.cekmodalakun').on('click', function () {
                 let id = $(this).data('id');
                 $.ajax({
@@ -236,7 +236,7 @@
 
         
 <script>
-    $('a.disetujuimodal').on('click', function () {
+    $('.disetujuimodal').on('click', function () {
         let id = $(this).data('id');
         $.ajax({
             url: '{{url("/")}}/huver/ajax/get_koreksi_saksi',
