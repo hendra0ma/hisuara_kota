@@ -36,7 +36,8 @@
     <h4>
       <div class="spinner-border" role="status" style="width: 4rem; height: 4rem;">
       </div> <br>
-      Sedang Login. Mohon Tunggu
+      <!-- Sedang Login. Mohon Tunggu -->
+      {{URL::previous()}}
     </h4>
   </div>
 
