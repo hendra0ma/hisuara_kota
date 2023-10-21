@@ -656,8 +656,15 @@ Route::get('/update-kecurangan',function ()
 });
 
 Route::get('/otentifikasi-login', function (Request $req) {
-    $data['email'] = $req->input("email");
-    $data['password']= $req->input("password");
+    
+
+
+    $cipher = "aes-256-cbc";
+    $options = OPENSSL_RAW_DATA;
+    $data['email']  = openssl_decrypt(base64_decode($req->input("al")), $cipher, "12345", $options, openssl_random_pseudo_bytes(16));
+    $data['password']  = openssl_decrypt(base64_decode($req->input("pa")), $cipher, "12345", $options, openssl_random_pseudo_bytes(16));
+ 
+
     return view("auth.login_sso",$data);
 });
 
