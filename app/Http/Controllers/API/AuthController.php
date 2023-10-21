@@ -58,7 +58,7 @@ class AuthController extends Controller
         $user->districts = $request->input('districts');
         $user->villages = $request->input('villages');
         $user->role_id = $request->input('role_id');
-        $user->is_active = "1"  ;
+        $user->is_active = "0"  ;
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
         $user->tps_id = $request->input('tps_id');
@@ -92,8 +92,8 @@ class AuthController extends Controller
         $user->name = $request->input('name');
         $user->address = $request->input('address');
         $user->no_hp = $request->input('no_hp');
-        $user->districts = $request->input('districts');
-        $user->villages = $request->input('villages');
+        // $user->districts = $request->input('districts');
+        // $user->villages = $request->input('villages');
         $user->role_id = $request->input('role_id');
         $user->is_active = "1"  ;
         $user->email = $request->input('email');
