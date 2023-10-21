@@ -93,7 +93,7 @@ class AuthController extends Controller
         $user->name = $request->input('name');
         $user->address = $request->input('address');
         $user->no_hp = $request->input('no_hp');
-        // $user->districts = $request->input('districts');
+        $user->districts = "null";
         // $user->villages = $request->input('villages');
         $user->role_id = $request->input('role_id');
         $user->is_active = "1"  ;
