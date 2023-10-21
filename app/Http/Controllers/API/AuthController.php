@@ -83,6 +83,16 @@ class AuthController extends Controller
         return response()
             ->json(['message' => 'Hi ' . $user->name . ', welcome to home', 'access_token' => $token, 'token_type' => 'Bearer',]);
     }
+    public function loginCek(Request $request)
+    {
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return response()
+                ->json(['message' => 'gagal'], 401);
+        }
+
+         return response()
+       ->json(['message' => 'berhasil'], 200);
+    }
 
 
 
@@ -107,10 +117,7 @@ class AuthController extends Controller
            return response()->json( ['messages'=>"user tidak terdaftar"],401);
         }
         auth()->user()->tokens()->delete();
-        // auth()->login($user);
-            $auth = Auth::login($user,true);
-
-            return redirect('/redirect');
     }
+
     
 }

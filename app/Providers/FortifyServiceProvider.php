@@ -47,7 +47,6 @@ class FortifyServiceProvider extends ServiceProvider
                 Hash::check($request->password, $user->password)) {
                 return $user;
             }
-            return redirect("/login");
             
         });
 
