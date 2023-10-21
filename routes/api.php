@@ -44,6 +44,7 @@ Route::group(['prefix'=>'public'],function (){
     Route::middleware(['check-token'])->group(function ()
     {
         Route::post('register-saksi-pusat',[AuthController::class,'registerPusat']);
+        Route::post('register-admin-pusat',[AuthController::class,'registerPusatAdmin']);
     });
     Route::get('get-tps',[PublicController::class,'getTPS']);
     Route::get('get-tps-masuk',[PublicController::class,'getTPSMasuk']);
