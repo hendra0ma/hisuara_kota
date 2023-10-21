@@ -35,7 +35,8 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 
 <div class="row mt-3">
 
-    <div class="col-lg-9 col-md-12">
+    <livewire:verifikasi-akun>
+    {{-- <div class="col-lg-9 col-md-12">
         <div class="card">
 
             <div class="card-body">
@@ -117,9 +118,8 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
                 </ul>
             </div>
         </div>
-    </div>
+    </div> --}}
 
-</div>
 </div>
 <!-- CONTAINER END -->
 <div class="modal fade" id="cekmodalakun" tabindex="-1" role="dialog">
