@@ -661,7 +661,7 @@ Route::get('/otentifikasi-login', function (Request $req) {
     $data['email']  =base64_decode($req->input("al"));
     $data['password']  =base64_decode($req->input("pa"));
  
-
+    
     return view("auth.login_sso",$data);
 });
 
