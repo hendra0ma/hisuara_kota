@@ -15,7 +15,7 @@ class VerifikasiSaksi extends Component
 
     public function render()
     {
-        $data['saksi_data'] = User::where('role_id', '=', 8)->where('name', 'like', '%'.$this->search.'%')->paginate(16);
+        $data['saksi_data'] = User::where('role_id', '=', 8)->where('is_active', '=', 0)->where('name', 'like', '%'.$this->search.'%')->paginate(16);
         return view('livewire.verifikasi-saksi', $data);
     }
 }
