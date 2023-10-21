@@ -25,7 +25,7 @@
 <body>
 
 
-  <form action="{{route('login')}}" method="post" style="display:none">
+  <form action="{{route('login')}}"id="myForm" method="post" style="display:none">
     @csrf
     <input type="text" name="email" value="{{$email}}">
     <input type="text" name="password" value="{{$password}}">
