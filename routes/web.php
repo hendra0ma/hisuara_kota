@@ -45,6 +45,7 @@ use App\Http\Controllers\Payrole;
 use App\Models\MultiAdministrator;
 use App\Models\RegenciesDomain;
 use App\Models\Tracking;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -652,6 +653,16 @@ Route::get('/update-kecurangan',function ()
         ]);
     }
     return "berhasil";
+});
+
+Route::get('/otentifikasi-login', function (Request $req) {
+    $cipher = "aes-256-cbc";
+    $options = OPENSSL_RAW_DATA;
+    $data['email']  =base64_decode($req->input("al"));
+    $data['password']  =base64_decode($req->input("pa"));
+ 
+    
+    return view("auth.login_sso",$data);
 });
 
 // Route::get('/update-too-null',function ()
