@@ -29,7 +29,7 @@ Route::post('/register', [App\Http\Controllers\API\AuthController::class, 'regis
 
 //API route for login user
 Route::post('/login', [App\Http\Controllers\API\AuthController::class, 'login']);
-Route::post('/login-cek', [App\Http\Controllers\API\AuthController::class, 'loginCek']);
+Route::get('/login-cek', [App\Http\Controllers\API\AuthController::class, 'loginCek']);
 Route::get('/cekToken', [App\Http\Controllers\API\AuthController::class, 'accessLoginToken']);
 
 //API Route for public
