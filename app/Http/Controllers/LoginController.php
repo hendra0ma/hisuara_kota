@@ -19,8 +19,8 @@ class LoginController extends Controller
     public function index(Request $request)
     {
 
-        
- 
+
+
         $result = $this->validate(
             $request,
             ['geetest_challenge' => 'geetest',],
@@ -34,17 +34,17 @@ class LoginController extends Controller
             );
 
             if ($request) {
-                if(Auth::check()){
-                $role = Auth::user()->role;
-                // return view('auth.redirect', [
-                //     'role_id' => $role,
-                // ]);
-                // }else{
-                //     return redirect('login');
-                // }
-                return "halo";
+                if (Auth::check()) {
+                    $role = Auth::user()->role;
+                    return view('auth.redirect', [
+                        'role_id' => $role,
+                    ]);
+                } else {
+                    return redirect('login');
+                }
+                // return "halo";
+
             }
-        }
         }
     }
     public function createAdmin()
