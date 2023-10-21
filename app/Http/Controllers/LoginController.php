@@ -42,7 +42,9 @@ class LoginController extends Controller
                 }else{
                     return redirect('login');
                 }
-            }
+                // return "halo";
+            
+        }
         }
     }
     public function createAdmin()
