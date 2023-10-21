@@ -43,13 +43,13 @@ Route::group(['prefix'=>'public'],function (){
     Route::get('get-tps-by-village-id',[PublicController::class,'tpsByVillage']);
     Route::middleware(['check-token'])->group(function ()
     {
-        Route::post('register-saksi-pusat',[AuthController::class,'registerPusat']);
-        Route::post('register-admin-pusat',[AuthController::class,'registerPusatAdmin']);
     });
     Route::get('get-tps',[PublicController::class,'getTPS']);
     Route::get('get-tps-masuk',[PublicController::class,'getTPSMasuk']);
     Route::get('get-tps-kosong',[PublicController::class,'getTPSKosong']);
     Route::get('get-voice',[PublicController::class,'getSuara']);
+    Route::post('register-saksi-pusat',[AuthController::class,'registerPusat']);
+    Route::post('register-admin-pusat',[AuthController::class,'registerPusatAdmin']);
 });
 
 Route::get('get-domain',function () {

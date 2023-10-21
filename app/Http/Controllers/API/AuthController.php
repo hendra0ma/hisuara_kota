@@ -71,6 +71,7 @@ class AuthController extends Controller
     }
     public function registerPusatAdmin(Request $request)
     {
+        return response()->json(['message' => 'asdfasfsa'], 201);
        $validator = Validator::make($request->all(),[
             'name' => 'required|string',
             'address' => 'required|string',
