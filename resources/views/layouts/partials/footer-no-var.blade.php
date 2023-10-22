@@ -177,7 +177,7 @@
 
         </script>
         <script>
-            $('a.cekmodalakun').on('click', function () {
+            $('.cekmodalakun').on('click', function () {
                 let id = $(this).data('id');
                 $.ajax({
                     url: '{{url("/")}}/administrator/ajax/get_verifikasi_akun',

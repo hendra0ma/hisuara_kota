@@ -244,8 +244,6 @@ class AdminController extends Controller
     public function verifikasi_akun()
     {
         $data['config'] = Config::first();
-
-        $data['admin_data'] = User::where('role_id', '!=', 8)->get();
         $data['config'] = Config::first();
         return view('administrator.verifikasi.verifikasi_akun', $data);
     }
