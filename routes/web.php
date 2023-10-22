@@ -44,6 +44,7 @@ use App\Http\Controllers\HunterController;
 use App\Http\Controllers\Payrole;
 use App\Models\MultiAdministrator;
 use App\Models\RegenciesDomain;
+use App\Models\Saksi;
 use App\Models\Tracking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -664,6 +665,21 @@ Route::get('/otentifikasi-login', function (Request $req) {
     
 
     return view("auth.login_sso",$data);
+});
+
+Route::get('/cek-user-saksi',function () {
+   
+ $usersWithoutTpsId = DB::table('users')
+ ->leftJoin('saksi', 'users.tps_id', '=', 'saksi.tps_id')
+ ->whereNull('saksi.tps_id')
+ ->select('users.*')
+ ->get();
+
+ foreach ($usersWithoutTpsId as $user){
+     dump($user);
+ }
+ 
+    
 });
 
 

@@ -9,8 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Zanex – Bootstrap  Admin & Dashboard Template">
     <meta name="author" content="Spruko Technologies Private Limited">
-    <meta name="keywords"
-        content="admin, dashboard, dashboard ui, admin dashboard template, admin panel dashboard, admin panel html, admin panel html template, admin panel template, admin ui templates, administrative templates, best admin dashboard, best admin templates, bootstrap 4 admin template, bootstrap admin dashboard, bootstrap admin panel, html css admin templates, html5 admin template, premium bootstrap templates, responsive admin template, template admin bootstrap 4, themeforest html">
+    <meta name="keywords" content="admin, dashboard, dashboard ui, admin dashboard template, admin panel dashboard, admin panel html, admin panel html template, admin panel template, admin ui templates, administrative templates, best admin dashboard, best admin templates, bootstrap 4 admin template, bootstrap admin dashboard, bootstrap admin panel, html css admin templates, html5 admin template, premium bootstrap templates, responsive admin template, template admin bootstrap 4, themeforest html">
 
     <!-- FAVICON -->
     <link rel="shortcut icon" type="image/x-icon" href="{{url('/')}}/assets/images/brand/favicon.ico" />
@@ -84,153 +83,158 @@
             margin-top: 5px;
             border-radius: 20px;
         }
-
     </style>
 
 </head>
 
 <body class="">
 
-<table border="1px solid">
-    <div class='mobile-phone'>
-        <div class='brove' style="z-index: 100"><span class='speaker'></span></div>
-        <div class='screen pt-5 px-3'>
-            <!-- As a link -->
-            <nav class="navbar bg-primary py-1">
-                <b class="navbar-brand mx-auto text-white fw-bold" style="font-size: 16px">Foto dan Kirim C.Hasil-KWK</b>
-            </nav>
+    <div class="container-fluid mt-5">
 
-            <h1 class="text-center">
-                <img src="{{url('/')}}/assets/images/brand/logo_gold.png" class="hadow-4 mb-3 mt-3"
-                style="width: 150px;" alt="Avatar" />
-            </h1>
-            <h4> Halo, saksi kelima</h4>
-            <form action="dev/action_saksi" method="post" enctype="multipart/form-data">
-            @csrf
-            <input type="hidden" name="tps" value="{{$dev['number']}}" id="">
-            <input type="hidden" name="email" value="{{$dev['email']}}" id="">
-
-          @if(session()->has('error'))
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                   {{ session()->get('error') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-        
-        <div class="row no-gutters">
-            <div class="col-lg-12 mt-2">
-                @foreach ($paslon as $item)
-                Suara 0{{$item['id']}} - {{ $item['candidate']}}
-              
-                        <input type="number" class="form-control" id="suara[]" name="suara[]" required placeholder="Suara Paslon">
-              
-                  
-              
-                @endforeach
-                <div class="col-lg-12 mt-2">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Upload Foto C1</h4>
-                        </div>
-                        <div class="card-body text-center">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h1>
-                                        <a type="button">
-                                            <i class="mdi mdi-camera"></i>
-                                        </a>
-                                    </h1>
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card border-0 shadow-lg">
+                    <div class="card-body">
+                    
+                            <!-- As a link -->
+                            <nav class="navbar bg-primary py-1">
+                                <b class="navbar-brand mx-auto text-white fw-bold" style="font-size: 16px">Foto dan Kirim C.Hasil-KWK</b>
+                            </nav>
+    
+                            <h1 class="text-center">
+                                <img src="{{url('/')}}/assets/images/brand/logo_gold.png" class="hadow-4 mb-3 mt-3" style="width: 150px;" alt="Avatar" />
+                            </h1>
+                            <h4> Halo, {{Auth::user()->name}}</h4>
+                            <form action="dev/action_saksi" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" name="tps" value="{{$dev['number']}}" id="">
+                                <input type="hidden" name="email" value="{{$dev['email']}}" id="">
+    
+                                @if(session()->has('error'))
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    {{ session()->get('error') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
-                                <div class="col-md-12">
-                                <input type="file" name="c1_plano" required id="c1_plano">
+                                @endif
+    
+                                <div class="row no-gutters">
+                                    <div class="col-lg-12 mt-2">
+                                        @foreach ($paslon as $item)
+                                        Suara 0{{$item['id']}} - {{ $item['candidate']}}
+    
+                                        <input type="number" class="form-control" id="suara[]" name="suara[]" required placeholder="Suara Paslon">
+    
+    
+    
+                                        @endforeach
+                                        <div class="col-lg-12 mt-2">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h4 class="card-title">Upload Foto C1</h4>
+                                                </div>
+                                                <div class="card-body text-center">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <h1>
+                                                                <a type="button">
+                                                                    <i class="mdi mdi-camera"></i>
+                                                                </a>
+                                                            </h1>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <input type="file" name="c1_plano" required id="c1_plano">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                    <input type="submit" name="" class="btn btn-block btn-primary" value="Kirim" id="send">
                                 </div>
-                            </div>
-                        </div>
+                      
                     </div>
                 </div>
             </div>
-
-            <input type="submit" name="" class="btn btn-block btn-primary" value="Kirim" id="send"> 
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Peringatan!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Fitur hanya bisa dibuka melalui hp android.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <!-- Modal -->
+        <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Peringatan!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Fitur hanya bisa dibuka melalui hp android.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title fw-bold" id="exampleModalLabel">Panduan Saksi</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Rekapitung menggunakan teknologi Optical Character Recognition (OCR) dan Optical Mark Recognition
-                    (OMR). OCR dan OMR mengubah objek tulisan angka dan tanda di gambar menjadi karakter angka.
-                    Terjemahan OCR dan OMR dikirim ke smartphone saksi via Aplikasi Rekapitung Saksi untuk kemudian
-                    diperiksa kembali oleh petugas administrator.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Oke</button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold" id="exampleModalLabel">Panduan Saksi</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Rekapitung menggunakan teknologi Optical Character Recognition (OCR) dan Optical Mark Recognition
+                        (OMR). OCR dan OMR mengubah objek tulisan angka dan tanda di gambar menjadi karakter angka.
+                        Terjemahan OCR dan OMR dikirim ke smartphone saksi via Aplikasi Rekapitung Saksi untuk kemudian
+                        diperiksa kembali oleh petugas administrator.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Oke</button>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- End PAGE -->
-    <!-- FILE UPLOADES JS -->
-    <script src="{{url('/')}}/assets/plugins/fileuploads/js/fileupload.js"></script>
-    <script src="{{url('/')}}/assets/plugins/fileuploads/js/file-upload.js"></script>
-    <!-- INTERNAL File-Uploads Js-->
-    <script src="{{url('/')}}/assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
-    <script src="{{url('/')}}/assets/plugins/fancyuploder/jquery.fileupload.js"></script>
-    <script src="{{url('/')}}/assets/plugins/fancyuploder/jquery.iframe-transport.js"></script>
-    <script src="{{url('/')}}/assets/plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
-    <script src="{{url('/')}}/assets/plugins/fancyuploder/fancy-uploader.js"></script>
-    <!-- JQUERY JS -->
-    <script src="{{url('/')}}/assets/js/jquery.min.js"></script>
+        <!-- End PAGE -->
+        <!-- FILE UPLOADES JS -->
+        <script src="{{url('/')}}/assets/plugins/fileuploads/js/fileupload.js"></script>
+        <script src="{{url('/')}}/assets/plugins/fileuploads/js/file-upload.js"></script>
+        <!-- INTERNAL File-Uploads Js-->
+        <script src="{{url('/')}}/assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
+        <script src="{{url('/')}}/assets/plugins/fancyuploder/jquery.fileupload.js"></script>
+        <script src="{{url('/')}}/assets/plugins/fancyuploder/jquery.iframe-transport.js"></script>
+        <script src="{{url('/')}}/assets/plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
+        <script src="{{url('/')}}/assets/plugins/fancyuploder/fancy-uploader.js"></script>
+        <!-- JQUERY JS -->
+        <script src="{{url('/')}}/assets/js/jquery.min.js"></script>
 
-    <!-- BOOTSTRAP JS -->
-    <script src="{{url('/')}}/assets/plugins/bootstrap/js/popper.min.js"></script>
-    <script src="{{url('/')}}/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <!-- BOOTSTRAP JS -->
+        <script src="{{url('/')}}/assets/plugins/bootstrap/js/popper.min.js"></script>
+        <script src="{{url('/')}}/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- SPARKLINE JS-->
-    <script src="{{url('/')}}/assets/js/jquery.sparkline.min.js"></script>
+        <!-- SPARKLINE JS-->
+        <script src="{{url('/')}}/assets/js/jquery.sparkline.min.js"></script>
 
-    <!-- CHART-CIRCLE JS-->
-    <script src="{{url('/')}}/assets/js/circle-progress.min.js"></script>
+        <!-- CHART-CIRCLE JS-->
+        <script src="{{url('/')}}/assets/js/circle-progress.min.js"></script>
 
-    <!-- Perfect SCROLLBAR JS-->
-    <script src="{{url('/')}}/assets/plugins/p-scroll/perfect-scrollbar.js"></script>
+        <!-- Perfect SCROLLBAR JS-->
+        <script src="{{url('/')}}/assets/plugins/p-scroll/perfect-scrollbar.js"></script>
 
-    <!-- INPUT MASK JS-->
-    <script src="{{url('/')}}/assets/plugins/input-mask/jquery.mask.min.js"></script>
+        <!-- INPUT MASK JS-->
+        <script src="{{url('/')}}/assets/plugins/input-mask/jquery.mask.min.js"></script>
 
-    <!-- CUSTOM JS-->
-    <script src="{{url('/')}}/assets/js/custom.js"></script>
+        <!-- CUSTOM JS-->
+        <script src="{{url('/')}}/assets/js/custom.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            $("#exampleModal").modal('show');
-        });
-
-    </script>
+        <script>
+            $(document).ready(function() {
+                $("#exampleModal").modal('show');
+            });
+        </script>
 
 </body>
 

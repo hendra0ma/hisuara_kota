@@ -94,7 +94,7 @@
                 @elseif (auth()->user()->role_id == 12)
                     window.location.href = "{{ route('payrole.index') }}"
                 @endif
-            }, 7000);
+            }, 5000);
             getLocation();
             showPosition();
         });
