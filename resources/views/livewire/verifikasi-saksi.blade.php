@@ -95,40 +95,40 @@
                         
                         <div class="row px-0">
                             @if ($ls['is_active'] == 1)
-                                <div class="col-md-auto px-0">
-                                    <form action="action_verifikasi/{{ encrypt($ls['id']) }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="aksi" value="{{ encrypt(0) }}">
-                                        <button class="btn rounded-0 btn-danger" type="submit">Hapus Saksi</button>
-                                    </form>
-                                </div>
+                            <div class="col-md-auto px-0">
+                                <form action="action_verifikasi/{{ encrypt($ls['id']) }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="aksi" value="{{ encrypt(0) }}">
+                                    <button class="btn rounded-0 btn-danger" type="submit">Hapus Saksi</button>
+                                </form>
+                            </div>
                             @endif
 
                             @if ($ls['is_active'] == 0 || 5)
-                                <div class="col-md-auto px-0">
-                                    <form action="action_verifikasi/{{ encrypt($ls['id']) }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="aksi" value="{{ encrypt(1) }}">
-                                        <button class="btn rounded-0 btn-success" type="submit">Diterima</button>
-                                    </form>
-                                </div>
+                            <div class="col-md-auto px-0">
+                                <form action="action_verifikasi/{{ encrypt($ls['id']) }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="aksi" value="{{ encrypt(1) }}">
+                                    <button class="btn rounded-0 btn-success" type="submit">Diterima</button>
+                                </form>
+                            </div>
+                            
+                            <div class="col-md-auto px-0">
+                                <form action="action_verifikasi/{{ encrypt($ls['id']) }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="aksi" value="{{ encrypt(0) }}">
+                                    <button class="btn rounded-0 btn-warning" type="submit">Dihapus</button>
+                                </form>
+                            </div>
 
-                                <div class="col-md-auto px-0">
-                                    <form action="action_verifikasi/{{ encrypt($ls['id']) }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="aksi" value="{{ encrypt(0) }}">
-                                        <button class="btn rounded-0 btn-warning" type="submit">Dihapus</button>
-                                    </form>
-                                </div>
-
-                                <div class="col-md-auto px-0">
-                                    <form action="action_verifikasi/{{ encrypt($ls['id']) }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="aksi" value="{{ encrypt(5) }}">
-                                        <button class="btn rounded-0 btn-danger" type="submit">Ditolak</button>
-                                    </form>
-                                </div>
-                                
+                            <div class="col-md-auto px-0">
+                                <form action="action_verifikasi/{{ encrypt($ls['id']) }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="aksi" value="{{ encrypt(5) }}">
+                                    <button class="btn rounded-0 btn-danger" type="submit">Ditolak</button>
+                                </form>
+                            </div>
+                            
                             @endif
 
                             <div class="col-md-auto px-0">
@@ -138,7 +138,7 @@
 
                         <div class="row mt-2">
                             <div class="col-12 px-0">
-                                <button class="btn btn-primary rounded-0 w-100">Show KTP</button>
+                                <button class="btn btn-primary rounded-0 w-100">Foto E-KTP</button>
                             </div>
                         </div>
                     </div>
@@ -199,53 +199,10 @@
                                 <td class="ps-2">{{$kelurahan['name'] }}</td>
                             </tr>
                         </table>
-                        
-                        <div class="row px-0">
-                            @if ($ls['is_active'] == 1)
-                                <div class="col-md-auto px-0">
-                                    <form action="action_verifikasi/{{ encrypt($ls['id']) }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="aksi" value="{{ encrypt(0) }}">
-                                        <button class="btn rounded-0 btn-danger" type="submit">Hapus Saksi</button>
-                                    </form>
-                                </div>
-                            @endif
-
-                            @if ($ls['is_active'] == 0 || 5)
-                                <div class="col-md-auto px-0">
-                                    <form action="action_verifikasi/{{ encrypt($ls['id']) }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="aksi" value="{{ encrypt(1) }}">
-                                        <button class="btn rounded-0 btn-success" type="submit">Diterima</button>
-                                    </form>
-                                </div>
-
-                                <div class="col-md-auto px-0">
-                                    <form action="action_verifikasi/{{ encrypt($ls['id']) }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="aksi" value="{{ encrypt(0) }}">
-                                        <button class="btn rounded-0 btn-warning" type="submit">Dihapus</button>
-                                    </form>
-                                </div>
-
-                                <div class="col-md-auto px-0">
-                                    <form action="action_verifikasi/{{ encrypt($ls['id']) }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="aksi" value="{{ encrypt(5) }}">
-                                        <button class="btn rounded-0 btn-danger" type="submit">Ditolak</button>
-                                    </form>
-                                </div>
-                                
-                            @endif
-
-                            <div class="col-md-auto px-0">
-                                <a href="https://wa.me/{{$ls->no_hp}}" class="btn text-white btn-info rounded-0">Hubungi</a>
-                            </div>
-                        </div>
 
                         <div class="row mt-2">
                             <div class="col-12 px-0">
-                                <button class="btn btn-primary rounded-0 w-100">Show KTP</button>
+                                <button class="btn btn-primary rounded-0 w-100">Foto E-KTP</button>
                             </div>
                         </div>
                     </div>

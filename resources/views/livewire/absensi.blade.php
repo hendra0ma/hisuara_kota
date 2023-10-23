@@ -49,7 +49,7 @@
                                 <td class="ps-2">{{$villages['name'] }}</td>
                             </tr>
                             <tr>
-                                <td class="text-primary fw-bold">
+                                <td class="text-primary fw-bold pe-0">
                                     Jam Absen
                                 </td>
                                 <td class="px-0">:</td>
@@ -77,6 +77,18 @@
                                 <td class="ps-2">{{$ls->latitude}}</td>
                             </tr>
                         </table>
+
+                        <div class="row px-0">
+                            <div class="col-md px-0">
+                                <button class="btn rounded-0 btn-success w-100" type="submit">Diterima</button>
+                            </div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col-12 px-0">
+                                <a class="btn btn-primary rounded-0 w-100 cekmodal" id="Cek" data-id="{{$ls['id']}}" data-bs-toggle="modal" id="" data-bs-target="#cekmodal">Tampil Saksi</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="hiasan-2" style="height: 30px"></div>

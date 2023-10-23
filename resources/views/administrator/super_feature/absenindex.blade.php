@@ -170,7 +170,7 @@
 </div>
 
 <div class="modal fade" id="cekmodal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-fullscreen" role="document">
+    <div class="modal-dialog modal-xl" role="document">
         <div class="modal-header bg-primary text-white">
             <div class="modal-title mx-auto">
                 <h4 class="mb-0 fw-bold">Verifikasi Saksi</h4>

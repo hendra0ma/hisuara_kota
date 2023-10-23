@@ -779,8 +779,8 @@ s    </div>
                             @foreach ($paslon as $pas)
                             <div class="col-lg col-md col-sm col-xl mb-3">
                                 <div class="card" style="margin-bottom: 0px;">
-                                    <div class="card-body">
-                                        <div class="row me-auto">
+                                    <div class="card-body p-3">
+                                        <div class="row">
                                             <div class="col-12">
                                                 <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
                                                     style="margin-bottom: 0; background-color: {{$pas->color}};">
@@ -808,6 +808,34 @@ s    </div>
                         </div>
                     </div>
                 </div>
+                <table class="table table-bordered table-hover mb-0">
+                    <thead class="bg-primary">
+                        <tr>
+                            <th class="text-white text-center align-middle">Kecamatan</th>
+                            <th class="text-white text-center align-middle">Jumlah <br> TPS Quick Count</th>
+                            <th class="text-white text-center align-middle">Quick <br> Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($district_quick as $item)
+                        <?php $count_tps = Tps::where('district_id',(string)$item['id'])->count(); ?>
+                        <?php $count_tps_quick = Tps::where('district_id',(string)$item['id'])->where('quick_count', 1)->count(); ?>
+                        <?php $kecc = District::where('id', $item['district_id'])->first(); ?>
+                        <tr @if ( $count_tps_quick  > 0)
+                            style="background-color: rgb(80,78, 78); color :white;" @else  @endif>
+                            <td class="align-middle text">
+                                {{$item['name']}}
+                            </td>
+                            <td class="align-middle">{{$count_tps}}</td>
+                            <td class="align-middle">@if ( $count_tps_quick  > 0)
+                                {{$count_tps_quick}}
+                                @else
+                                0
+                                @endif</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

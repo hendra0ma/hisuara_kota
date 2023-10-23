@@ -19,6 +19,43 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 $dpt = District::where('regency_id', $config['regencies_id'])->sum('dpt');
 $tps = Tps::count();
 ?>
+
+<style>
+    .col.judul {
+        display: flex;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        position: relative;
+    }
+
+    .col.judul .text {
+        margin: auto;
+    }
+
+    .arrow-nav {
+        border: 0;
+        background: transparent;
+    }
+
+    .custom-prev {
+        position: absolute;
+        top:7.5px;
+        left: 0px;
+    }
+
+    .custom-next {
+        position: absolute;
+        top:7.5px;
+        right: 0px;
+    }
+
+    .carousel-item {
+        transition: -webkit-transform .6s ease;
+        transition: transform .6s ease;
+        transition: transform .6s ease,-webkit-transform .6s ease;
+    }
+</style>
+
 <div class="row">
 
     <div class="row">
@@ -109,17 +146,17 @@ $tps = Tps::count();
 
                             ?>
                             <div class="col-md">
-                                <div class="card">
+                                <div class="card mb-4">
                                     <div class="card-header justify-content-center"
                                         style="background-color:{{$psl->color}}">
-                                        <h3 style="margin-bottom: 0;" class="fw-bold text-white">{{$psl->candidate}} -
-                                            <br> {{$psl->deputy_candidate}}</h3>
+                                        <h5 style="margin-bottom: 0;" class="text-white">{{$psl->candidate}}
+                                            || {{$psl->deputy_candidate}}</h5>
                                     </div>
                                     <div class="card-body" style="padding: 10px;">
                                         <div class="row">
                                             <div class="col">
-                                                <img src="{{asset('storage/'. $psl['picture'])}}" width="125px"
-                                                    height="125px" style="object-fit: cover;" alt="">
+                                                <img src="{{asset('storage/'. $psl['picture'])}}" width="100px"
+                                                    height="100px" style="object-fit: cover;" alt="">
                                             </div>
                                             <div class="col text-center my-auto fs-1 fw-bold">
                                                 {{$persen}}%
@@ -128,7 +165,6 @@ $tps = Tps::count();
                                     </div>
                                 </div>
                             </div>
-
                             <?php
                             $jumlah = 0;
                             ?>
@@ -140,15 +176,13 @@ $tps = Tps::count();
 
                     @endforeach
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                <button class="arrow-nav custom-prev" type="button" data-bs-target="#carouselExampleControls"
                     data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
+                    <i class="fa-solid fa-chevron-left" style="color: rgba(0, 0, 0, 0.5);font-size: 25px"></i>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                <button class="arrow-nav custom-next" type="button" data-bs-target="#carouselExampleControls"
                     data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
+                    <i class="fa-solid fa-chevron-right" style="color: rgba(0, 0, 0, 0.5);font-size: 25px"></i>
                 </button>
             </div>
         </div>
