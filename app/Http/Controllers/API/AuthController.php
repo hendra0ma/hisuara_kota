@@ -47,10 +47,38 @@ class AuthController extends Controller
             'cek' => 'required|string',
             'absen' => 'required|string',
             'nik' => 'required|string',
+            'foto_ktp' => 'required|image|mimes:jpeg,png,jpg,gif', 
+            'foto_profil' => 'required|image|mimes:jpeg,png,jpg,gif', 
         ]);     
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
+
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+     
+
+        if ($request->file('foto_ktp')) {
+            $image = $request->file('foto_ktp');
+            $randomString = substr(str_shuffle($characters), 0, 13); // Menghasilkan string acak sepanjang 10 karakter
+            $foto_ktp = time() . $randomString .".". $image->getClientOriginalExtension();
+            $image->move(public_path('storage/profile-photos'), $foto_ktp);
+        } else {
+            return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
+        }
+
+        if ($request->file('foto_profil')) {
+            $image = $request->file('foto_profil');
+            $randomString = substr(str_shuffle($characters), 0, 14); // Menghasilkan string acak sepanjang 10 karakter
+            $foto_profil = time() . $randomString  .".".  $image->getClientOriginalExtension();
+            $image->move(public_path('storage/profile-photos'), $foto_profil);
+        } else {
+            return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
+        }
+
+
+
+
+
         $user = new User();
         $user->name = $request->input('name');
         $user->address = $request->input('address');
@@ -64,11 +92,31 @@ class AuthController extends Controller
         $user->tps_id = $request->input('tps_id');
         $user->cek = $request->input('cek');
         $user->absen = $request->input('absen');
+        $user->profile_photo_path = $foto_profil;
+        $user->foto_ktp = $foto_ktp;
+
         $user->nik = $request->input('nik');
         $user->save();
-        return response()->json(['message' => 'User created successfully'], 201);
+        return response()->json(['message' => 'Anda Berhasil Daftar'], 201);
         
     }
+
+    function testUpload(Request $request){
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
+        ]);
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('storage/profile-photos'), $imageName);
+
+            return response()->json(['message' => 'Gambar berhasil diunggah', 'url' => 'storage/profile-photos/' . $imageName], 200);
+        } else {
+            return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
+        }
+    }
+
+
     public function registerPusatAdmin(Request $request)
     {
         // return response()->json(['message' => 'asdfasfsa'], 201);
@@ -85,10 +133,39 @@ class AuthController extends Controller
             'cek' => 'required|string',
             'absen' => 'required|string',
             'nik' => 'required|string',
-        ]);     
+            'foto_ktp' => 'required|image|mimes:jpeg,png,jpg,gif', 
+            'foto_profil' => 'required|image|mimes:jpeg,png,jpg,gif', 
+        ]);
+      
+        //UnComment Kode iini setelah pencobaan
+
+        // $users = User::where('role_id', $request->input('role_id'))->count();
+        // if ($users > 10) {
+        //     return response()->json(['errors' => ["error"=>"Tidak dapat mendaftar, karena admin Telah mencapai 10 admin"]], 422);
+        // }
+
+
+        
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
+
+        if ($request->file('foto_ktp')) {
+            $image = $request->file('foto_ktp');
+            $foto_profil = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('storage/profile-photos'), $foto_profil);
+        } else {
+            return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
+        }
+
+        if ($request->file('foto_profil')) {
+            $image = $request->file('foto_profil');
+            $foto_profil = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('storage/profile-photos'), $foto_profil);
+        } else {
+            return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
+        }
+
         $user = new User();
         $user->name = $request->input('name');
         $user->address = $request->input('address');

@@ -74,3 +74,4 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // API route for logout user
 });
 Route::post('/logout', [App\Http\Controllers\API\AuthController::class, 'logout']);
+// Route::post('/upload-image', [App\Http\Controllers\API\AuthController::class, 'testUpload']);
