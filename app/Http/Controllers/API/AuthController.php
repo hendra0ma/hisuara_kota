@@ -47,8 +47,8 @@ class AuthController extends Controller
             'cek' => 'required|string',
             'absen' => 'required|string',
             'nik' => 'required|string',
-            'foto_ktp' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
-            'foto_profil' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
+            'foto_ktp' => 'required|image|mimes:jpeg,png,jpg,gif', 
+            'foto_profil' => 'required|image|mimes:jpeg,png,jpg,gif', 
         ]);     
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
@@ -125,10 +125,29 @@ class AuthController extends Controller
             'cek' => 'required|string',
             'absen' => 'required|string',
             'nik' => 'required|string',
+            'foto_ktp' => 'required|image|mimes:jpeg,png,jpg,gif', 
+            'foto_profil' => 'required|image|mimes:jpeg,png,jpg,gif', 
         ]);     
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
+
+        if ($request->file('foto_ktp')) {
+            $image = $request->file('foto_ktp');
+            $foto_profil = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('storage/profile-photos'), $foto_profil);
+        } else {
+            return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
+        }
+
+        if ($request->file('foto_profil')) {
+            $image = $request->file('foto_profil');
+            $foto_profil = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('storage/profile-photos'), $foto_profil);
+        } else {
+            return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
+        }
+
         $user = new User();
         $user->name = $request->input('name');
         $user->address = $request->input('address');
