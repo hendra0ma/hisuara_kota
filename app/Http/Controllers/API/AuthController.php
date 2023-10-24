@@ -47,10 +47,33 @@ class AuthController extends Controller
             'cek' => 'required|string',
             'absen' => 'required|string',
             'nik' => 'required|string',
+            'foto_ktp' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
+            'foto_profil' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
         ]);     
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
+
+        if ($request->file('foto_ktp')) {
+            $image = $request->file('foto_ktp');
+            $foto_profil = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('storage/profile-photos'), $foto_profil);
+        } else {
+            return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
+        }
+
+        if ($request->file('foto_profil')) {
+            $image = $request->file('foto_profil');
+            $foto_profil = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('storage/profile-photos'), $foto_profil);
+        } else {
+            return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
+        }
+
+
+
+
+
         $user = new User();
         $user->name = $request->input('name');
         $user->address = $request->input('address');
@@ -69,6 +92,23 @@ class AuthController extends Controller
         return response()->json(['message' => 'User created successfully'], 201);
         
     }
+
+    function testUpload(Request $request){
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
+        ]);
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('storage/profile-photos'), $imageName);
+
+            return response()->json(['message' => 'Gambar berhasil diunggah', 'url' => 'storage/profile-photos/' . $imageName], 200);
+        } else {
+            return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
+        }
+    }
+
+
     public function registerPusatAdmin(Request $request)
     {
         // return response()->json(['message' => 'asdfasfsa'], 201);
