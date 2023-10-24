@@ -227,6 +227,13 @@ $tps = 2963;
                         </ul>
                     </li>
                     <li>
+                        <a class="metro-tabs" href="#" data-bs-toggle="slide"><span class="side-menu__label fs-3">REKAPITULASI</span></a>
+                        <ul class="slide-menu">
+                            <li><a href="{{url('')}}/administrator/rekapitulasi_kelurahan" class="fs-5 slide-item text-white">Rekapitualsi Kelurahan</a></li>
+                            <li><a href="{{url('')}}/administrator/rekapitulasi_kecamatan" class="fs-5 slide-item text-white">Rekapitualsi Kecamatan</a></li>
+                        </ul>
+                    </li>
+                    <li>
                         <a class="metro-tabs" href="#" data-bs-toggle="slide" style="border-top: #34425a 6px solid;"><span class="side-menu__label fs-3">PETUGAS</span></a>
                         <ul class="slide-menu">
                             <li><a href="{{url('')}}/administrator/verifikasi_saksi" class="fs-5 slide-item text-white">Saksi</a></li>
@@ -241,13 +248,6 @@ $tps = 2963;
                             <li><a href="{{url('')}}/verifikator/verifikasi-c1" class="fs-5 slide-item text-white">Verifikasi C1</a></li>
                             <li><a href="{{url('')}}/auditor/audit-c1" class="fs-5 slide-item text-white">Audit C1</a></li>
                             <li><a href="{{url('')}}/administrator/verifikasi_koreksi" class="fs-5 slide-item text-white">Koreksi C1</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="metro-tabs" href="#" data-bs-toggle="slide"><span class="side-menu__label fs-3">REKAPITULASI</span></a>
-                        <ul class="slide-menu">
-                            <li><a href="{{url('')}}/administrator/rekapitulasi_kelurahan" class="fs-5 slide-item text-white">Rekapitualsi Kelurahan</a></li>
-                            <li><a href="{{url('')}}/administrator/rekapitulasi_kecamatan" class="fs-5 slide-item text-white">Rekapitualsi Kecamatan</a></li>
                         </ul>
                     </li>
                     <li>
