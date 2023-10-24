@@ -54,9 +54,12 @@ class AuthController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = substr(str_shuffle($characters), 0, 10); // Menghasilkan string acak sepanjang 10 karakter
+
         if ($request->file('foto_ktp')) {
             $image = $request->file('foto_ktp');
-            $foto_ktp = time() . '.' . $image->getClientOriginalExtension();
+            $foto_ktp = time() . $randomString .".". $image->getClientOriginalExtension();
             $image->move(public_path('storage/profile-photos'), $foto_ktp);
         } else {
             return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
@@ -64,7 +67,7 @@ class AuthController extends Controller
 
         if ($request->file('foto_profil')) {
             $image = $request->file('foto_profil');
-            $foto_profil = time() . '.' . $image->getClientOriginalExtension();
+            $foto_profil = time() . $randomString  .".".  $image->getClientOriginalExtension();
             $image->move(public_path('storage/profile-photos'), $foto_profil);
         } else {
             return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
