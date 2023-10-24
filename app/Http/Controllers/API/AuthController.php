@@ -97,7 +97,7 @@ class AuthController extends Controller
 
         $user->nik = $request->input('nik');
         $user->save();
-        return response()->json(['message' => 'User created successfully'], 201);
+        return response()->json(['message' => 'Anda Berhasil Daftar'], 201);
         
     }
 
@@ -135,7 +135,13 @@ class AuthController extends Controller
             'nik' => 'required|string',
             'foto_ktp' => 'required|image|mimes:jpeg,png,jpg,gif', 
             'foto_profil' => 'required|image|mimes:jpeg,png,jpg,gif', 
-        ]);     
+        ]);
+      
+        $users = User::where('role_id', $request->input('role_id'))->count();
+        if ($users > 10) {
+            return response()->json(['errors' => ["error"=>"Tidak dapat mendaftar, karena admin Telah mencapai 10 admin"]], 422);
+        }
+        
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
