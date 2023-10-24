@@ -41,6 +41,9 @@
             <div class="col parent-link">
                 <a href="{{url('')}}/administrator/absensi/tidak_hadir" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/tidak_hadir')?'active' : '' }}">Saksi Tidak Hadir</a>
             </div>
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/saksi_ditolak" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/saksi_ditolak')?'active' : '' }}">Saksi Ditolak</a>
+            </div>
 
         </div>
     </div>

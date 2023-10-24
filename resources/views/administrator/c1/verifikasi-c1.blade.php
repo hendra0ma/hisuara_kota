@@ -118,7 +118,12 @@
 
             <div class="col-md">
                 <button class="btn tablink w-100 rounded-0 c1teraudit"
-                    onclick="openPage('C1-Saksi-Teraudit', this, '#fb6b25')">C1 Saksi Teraudit</button>
+                    onclick="openPage('C1-Dibatalkan', this, '#fb6b25')">C1 Dibatalkan</button>
+            </div>
+
+            <div class="col-md">
+                <button class="btn tablink w-100 rounded-0 c1koreksi"
+                    onclick="openPage('C1-Koreksi', this, '#09ad95')">C1 Koreksi</button>
             </div>
           
             <!-- <div class="col-md">
@@ -134,8 +139,11 @@
     <div id="C1-Relawan" class="tabcontent px-0">
         <livewire:c1-relawan-kota />
     </div>
-    <div id="C1-Saksi-Teraudit" class="tabcontent px-0">
-        
+    <div id="C1-Dibatalkan" class="tabcontent px-0">
+        <livewire:c1-dibatalkan />
+    </div>
+    <div id="C1-Koreksi" class="tabcontent px-0">
+        <livewire:c1-koreksi />
     </div>
     
 </div>

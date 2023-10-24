@@ -245,14 +245,25 @@ class AdminController extends Controller
     public function verifikasi_akun()
     {
         $data['config'] = Config::first();
-        $data['config'] = Config::first();
         return view('administrator.verifikasi.verifikasi_akun', $data);
+    }
+
+    public function admin_terverifikasi()
+    {
+        $data['config'] = Config::first();
+        return view('administrator.verifikasi.admin_terverifikasi', $data);
     }
 
     public function verifikasi_saksi()
     {
         $data['config'] = Config::first();
         return view('administrator.verifikasi.verifikasi_saksi', $data);
+    }
+
+    public function saksi_ditolak()
+    {
+        $data['config'] = Config::first();
+        return view('administrator.verifikasi.saksi_ditolak', $data);
     }
 
     public function verifikasi_koreksi()
@@ -1499,7 +1510,7 @@ class AdminController extends Controller
         ->get();
         $data['district_quick'] = District::join('villages', 'villages.district_id', '=', 'districts.id')->where('regency_id', $data['config']['regencies_id'])->get();
         return view('administrator.terverifikasi.terverifikasi',$data);
-        // dd($data['paslon']);
+        // dd($data['paslon']); 
 
     }
 
@@ -1516,6 +1527,21 @@ class AdminController extends Controller
         $data['kota'] = Regency::where('id', $config['regencies_id'])->first();
         $data['tracking'] = ModelsTracking::get();
         return view('administrator.relawan.relawan', $data);
+    }
+
+    public function RelawanDihapus() {
+        $data['config'] = Config::first();
+        $config = Config::first();
+        $data['paslon'] = Paslon::with('quicksaksidata')->get();
+        $data['paslon_terverifikasi']     = Paslon::with(['quicksaksidata' => function ($query) {
+            $query->join('quicksaksi', 'quicksaksidata.saksi_id', 'quicksaksi.id')
+                ->whereNull('quicksaksi.pending')
+                ->where('quicksaksi.verification', 1);
+        }])->get();
+        $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
+        $data['kota'] = Regency::where('id', $config['regencies_id'])->first();
+        $data['tracking'] = ModelsTracking::get();
+        return view('administrator.relawan.relawan_dihapus', $data);
     }
 
 

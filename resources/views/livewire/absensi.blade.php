@@ -78,15 +78,15 @@
                             </tr>
                         </table>
 
-                        <div class="row px-0">
+                        {{-- <div class="row px-0">
                             <div class="col-md px-0">
                                 <button class="btn rounded-0 btn-success w-100" type="submit">Diterima</button>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="row mt-2">
                             <div class="col-12 px-0">
-                                <a class="btn btn-primary rounded-0 w-100 cekmodal" id="Cek" data-id="{{$ls['id']}}" data-bs-toggle="modal" id="" data-bs-target="#cekmodal">Tampil Saksi</a>
+                                <a class="btn btn-primary rounded-0 w-100 cekmodal" id="Cek" data-id="{{$ls['id']}}" data-bs-toggle="modal" id="" data-bs-target="#cekmodal">Detail Data Saksi</a>
                             </div>
                         </div>
                     </div>

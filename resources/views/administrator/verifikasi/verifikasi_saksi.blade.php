@@ -50,13 +50,16 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
                 <a href="{{url('')}}/administrator/verifikasi_saksi" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/verifikasi_saksi')?'active' : '' }}">Verifikasi Saksi</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi')?'active' : '' }}">Saksi Teregristrasi</a>
+                <a href="{{url('')}}/administrator/absensi" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi')?'active' : '' }}">Saksi Teregistrasi</a>
             </div>
             <div class="col parent-link">
                 <a href="{{url('')}}/administrator/absensi/hadir" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/hadir')?'active' : '' }}">Saksi Hadir</a>
             </div>
             <div class="col parent-link">
                 <a href="{{url('')}}/administrator/absensi/tidak_hadir" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/tidak_hadir')?'active' : '' }}">Saksi Tidak Hadir</a>
+            </div>
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/saksi_ditolak" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/saksi_ditolak')?'active' : '' }}">Saksi Ditolak</a>
             </div>
 
         </div>

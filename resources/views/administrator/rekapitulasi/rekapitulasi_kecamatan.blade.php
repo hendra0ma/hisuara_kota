@@ -62,17 +62,17 @@ Tingkat Kabupaten / Kota
 
     <div class="col-lg-6 col-md-12">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header bg-dark">
                 <div class="row w-100">
                     <div class="col-md-12 text-center">
-                        <h5><img style="width: 145px;"
-                            src="{{url('/')}}/assets/images/brand/logo_gold.png"
+                        <h5><img style="width: 113px;"
+                            src="{{url('/')}}/assets/images/brand/hisuara.png"
                             alt=""></h5>
                     </div>
                     <div class="col-md-12 mt-2">
                         <h5 class="card-title mx-auto">
                             <center>
-                                Hasil Rekapitulasi Rekapitung
+                                Hasil Rekapitulasi Hisuara
                             </center>
                         </h5>
                     </div>

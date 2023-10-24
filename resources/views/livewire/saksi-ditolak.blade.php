@@ -1,6 +1,5 @@
 <div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
+
     <style>
         td {
             padding-top: 7.5px !important;
@@ -32,11 +31,6 @@
         .inner-police {
             background: #f9cd1a;
         }
-
-        .btn {
-            margin-right: 2.5px;
-            margin-left: 2.5px;
-        }
     </style>
     
     <div class="row">
@@ -51,7 +45,7 @@
         <?php $kelurahan = \App\Models\Village::where('id',(string)3674040006)->first(); ?>
         <?php $tps = \App\Models\Tps::where('user_id',$ls['id'])->first(); ?>
         {{-- @if($ls['is_active'] == 0) --}}
-        <div class="col-xl-3">
+        {{-- <div class="col-xl-3">
             <div class="card">
                 <div class="card-header text-white border-0" style="background-color: #404042">
                     <span class="mx-auto py-6 fs-6">TPS <?php if($tps == null){?> <?php }else{ ?> {{$tps['number']}}<?php } ?> / Kelurahan {{ $kelurahan['name'] }}</span>
@@ -101,11 +95,12 @@
                         
                         <div class="row px-0">
 
+                            @if ($ls['is_active'] == 0 || 5)
                             <div class="col-md px-0">
                                 <form action="action_verifikasi/{{ encrypt($ls['id']) }}" method="post">
                                     @csrf
                                     <input type="hidden" name="aksi" value="{{ encrypt(1) }}">
-                                    <button class="btn w-100 rounded-0 btn-success" onclick="konfirmasi(this)" type="button">Diterima</button>
+                                    <button class="btn w-100 rounded-0 btn-success" type="submit">Diterima</button>
                                 </form>
                             </div>
 
@@ -113,9 +108,11 @@
                                 <form action="action_verifikasi/{{ encrypt($ls['id']) }}" method="post">
                                     @csrf
                                     <input type="hidden" name="aksi" value="{{ encrypt(5) }}">
-                                    <button class="btn w-100 rounded-0 btn-danger" onclick="konfirmasi(this)" type="button">Ditolak</button>
+                                    <button class="btn w-100 rounded-0 btn-danger" type="submit">Ditolak</button>
                                 </form>
                             </div>
+                            
+                            @endif
 
                             <div class="col-md px-0">
                                 <a href="https://wa.me/{{$ls->no_hp}}" class="btn w-100 text-white btn-info rounded-0">Hubungi</a>
@@ -132,8 +129,8 @@
                 <div class="hiasan-2" style="height: 30px"></div>
                 <div class="hiasan-1" style="height: 30px"></div>
             </div>
-        </div>
-        {{-- @elseif($ls['is_active'] == 5)
+        </div> --}}
+        {{-- @elseif($ls['is_active'] == 5) --}}
         <div class="col-xl-3">
             <div class="card">
                 <div class="disabled"></div>
@@ -197,60 +194,12 @@
                 <div class="hiasan-1" style="height: 30px"></div>
             </div>
         </div>
-        @endif --}}
+        {{-- @endif --}}
         @endforeach
     </div>
 
     <div class="mb-4">
         {{$saksi_data->links()}}
     </div>
-    
-    {{-- <button onclick="konfirmasi()"></button> --}}
-    <script>
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: 'btn btn-success',
-                cancelButton: 'btn btn-danger'
-            },
-            buttonsStyling: false
-        })  
-
-        function konfirmasi(btn) {
-           var form = $(btn).closest("form");
-            swalWithBootstrapButtons.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes',
-                cancelButtonText: 'No',
-                reverseButtons: false
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // swalWithBootstrapButtons.fire(
-                    //     'Deleted!',
-                    //     'success'
-                    // )
-                    $(form).submit();
-                    // console.log(form)
-                    
-                } else if (
-                    /* Read more about handling dismissals below */
-                    result.dismiss === Swal.DismissReason.cancel
-                ) {
-                    swalWithBootstrapButtons.fire(
-                        'Cancelled',
-                        'Perubahan dibatalkan',
-                        'error'
-                    )
-                }
-            })  
-        }
-       
-        
-    $("#diterima").on('submit', function(e){
-               
-        })
-    </script>
 
 </div>

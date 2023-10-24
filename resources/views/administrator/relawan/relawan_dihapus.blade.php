@@ -18,7 +18,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 <!-- PAGE-HEADER -->
 <div class="row mt-5">
     <div class="col-lg">
-        <h1 class="page-title fs-1 mt-2">Relawan Terdaftar
+        <h1 class="page-title fs-1 mt-2">Relawan Dihapus
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">
@@ -60,7 +60,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 
 <div class="row mt-3">
 
-    <livewire:relawan>
+    <livewire:relawan-dihapus>
 
     {{-- <div class="col-lg-12 col-md-12">
         <div class="card">

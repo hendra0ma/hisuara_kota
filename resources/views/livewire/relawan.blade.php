@@ -104,16 +104,8 @@
                             <div class="col-md px-0">
                                 <form action="action_verifikasi/{{ encrypt($ls['id']) }}" method="post">
                                     @csrf
-                                    <input type="hidden" name="aksi" value="{{ encrypt(1) }}">
-                                    <button class="btn w-100 rounded-0 btn-success" onclick="konfirmasi(this)" type="button">Diterima</button>
-                                </form>
-                            </div>
-
-                            <div class="col-md px-0">
-                                <form action="action_verifikasi/{{ encrypt($ls['id']) }}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="aksi" value="{{ encrypt(5) }}">
-                                    <button class="btn w-100 rounded-0 btn-danger" onclick="konfirmasi(this)" type="button">Ditolak</button>
+                                    <input type="hidden" name="aksi" value="{{ encrypt(0) }}">
+                                    <button class="btn w-100 rounded-0 btn-danger" onclick="konfirmasi(this)" type="button">Dihapus</button>
                                 </form>
                             </div>
 
