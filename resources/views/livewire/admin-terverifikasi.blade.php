@@ -91,7 +91,7 @@
                             </tr>
                         </table>
 
-                        <div class="row px-0">
+                        {{-- <div class="row px-0">
 
                             <div class="col-md px-0">
                                 <form action="action_verifikasi/{{ encrypt($ls['id']) }}" method="post">
@@ -112,7 +112,7 @@
                             <div class="col-md px-0">
                                 <a href="https://wa.me/{{$ls->no_hp}}" class="btn w-100 text-white btn-info rounded-0">Hubungi</a>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="row mt-2">
                             <div class="col-12 px-0">

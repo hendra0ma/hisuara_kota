@@ -41,6 +41,9 @@
             <div class="col parent-link">
                 <a href="{{url('')}}/administrator/absensi/tidak_hadir" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/tidak_hadir')?'active' : '' }}">Saksi Tidak Hadir</a>
             </div>
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/saksi_ditolak" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/saksi_ditolak')?'active' : '' }}">Saksi Ditolak</a>
+            </div>
 
         </div>
     </div>
@@ -100,15 +103,28 @@
     }
 </style>
 
-<h4 class="fw-bold fs-4 mt-5">
+<div class="row">
+    <div class="col-md">
+        <h4 class="fw-bold fs-4 mt-5 mb-0">
     
-    @if((string)Request::segment(3) != "tidak_hadir") 
-        {{$title}} &nbsp; <i class="fa fa-question-circle"  data-bs-placement="right" data-bs-toggle="tooltip" title="" data-bs-customClass="custom-tooltip" data-bs-original-title="Saksi yang terdaftar pada halaman ini merupakan saksi yang telah didaftarkan oleh tim sukses kandidat sebelum perhitungan dilakukan untuk menghindari saksi ilegal yang menyusup."></i>
-    @else
-        {{$title}} 
-    @endif
+            @if((string)Request::segment(3) != "tidak_hadir") 
+                {{$title}} &nbsp; <i class="fa fa-question-circle"  data-bs-placement="right" data-bs-toggle="tooltip" title="" data-bs-customClass="custom-tooltip" data-bs-original-title="Saksi yang terdaftar pada halaman ini merupakan saksi yang telah didaftarkan oleh tim sukses kandidat sebelum perhitungan dilakukan untuk menghindari saksi ilegal yang menyusup."></i>
+            @else
+                {{$title}} 
+            @endif
 
-</h4>
+        </h4>
+
+    </div>
+    <div class="col-md-auto mt-auto">
+        <div class="ms-auto">
+            <div class="btn btn-success my-auto">
+                <i class="fa-solid fa-download"></i>
+                Unduh
+            </div>
+        </div>
+    </div>
+</div>
 <hr style="border: 1px solid">
 
 <div>
@@ -173,7 +189,7 @@
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-header bg-primary text-white">
             <div class="modal-title mx-auto">
-                <h4 class="mb-0 fw-bold">Verifikasi Saksi</h4>
+                <h4 class="mb-0 fw-bold">Detail Data Saksi</h4>
             </div>
         </div>
         <div class="modal-content h-auto">

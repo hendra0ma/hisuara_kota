@@ -60,7 +60,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 
 <div class="row mt-3">
 
-    <livewire:verifikasi-akun>
+    <livewire:admin-terverifikasi>
     {{-- <div class="col-lg-9 col-md-12">
         <div class="card">
 

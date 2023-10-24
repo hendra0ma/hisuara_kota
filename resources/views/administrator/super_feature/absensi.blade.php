@@ -41,6 +41,9 @@
             <div class="col parent-link">
                 <a href="{{url('')}}/administrator/absensi/tidak_hadir" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/tidak_hadir')?'active' : '' }}">Saksi Tidak Hadir</a>
             </div>
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/saksi_ditolak" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/saksi_ditolak')?'active' : '' }}">Saksi Ditolak</a>
+            </div>
 
         </div>
     </div>
@@ -148,7 +151,7 @@
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-header bg-primary text-white">
             <div class="modal-title mx-auto">
-                <h4 class="mb-0 fw-bold">Verifikasi Saksi</h4>
+                <h4 class="mb-0 fw-bold">Detail Data Saksi</h4>
             </div>
         </div>
         <div class="modal-content h-auto">

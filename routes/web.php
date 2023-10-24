@@ -232,7 +232,9 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('patroli_mode/tracking/maps', 'tracking_maps');
             Route::get('patroli_mode/tracking/detail/{id}', 'tracking_detail');
             Route::get('verifikasi_akun', 'verifikasi_akun');
+            Route::get('admin_terverifikasi', 'admin_terverifikasi');
             Route::get('verifikasi_saksi', 'verifikasi_saksi');
+            Route::get('saksi_ditolak', 'saksi_ditolak');
             Route::get('pembayaran_saksi', 'pembayaran_saksi');
             Route::get('verifikasi_koreksi', 'verifikasi_koreksi');
             Route::get('kick/{id}', 'kick');

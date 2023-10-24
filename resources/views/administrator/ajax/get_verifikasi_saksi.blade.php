@@ -11,11 +11,22 @@ $track = Tracking::where('id_user',$user['id'])->first();
         max-width: 200px;
         /* word-break: break-all */
     }
+
+    /* .parent-print {
+        position: relative;
+    }
+
+    .btn-print {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%)
+    } */
 </style>
 
 <div class="container">
     <div class="row">
-        <div class="col-9 mt-2">
+        <div class="col mt-2">
             <div class="media">
                 @if ($user['profile_photo_path'] == NULL)
                 <img class="rounded-circle" style="width: 70px; height: 70px; object-fit: cover; margin-right: 10px;" src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
@@ -29,7 +40,10 @@ $track = Tracking::where('id_user',$user['id'])->first();
                 </div>
             </div>
         </div>
-        <div class="col-md-3 mt-2 ">
+        <div class="col-md-auto pt-2 my-auto">
+            <button class="btn btn-warning text-white"><i class="fa-solid fa-print"></i> Print</button>
+        </div>
+        {{-- <div class="col-md-3 mt-2 ">
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle justify-content-end" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Action Saksi
@@ -57,7 +71,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                   @endif
                 </ul>
             </div>
-        </div>
+        </div> --}}
     </div>
     <div class="row mt-5">
         @if ($user['is_active'] == 2)
@@ -168,9 +182,22 @@ $track = Tracking::where('id_user',$user['id'])->first();
                             <td class="px-0">:</td>
                             <td class="ps-2"Tidak Terdeteksi</td>
                         </tr>
+                        <tr>
+                            <td class="ps-0 pe-2">Tanggal Teregristrasi</td>
+                            <td class="px-0">:</td>
+                            <td class="ps-2">(dummy)</td>
+                        </tr>
+                        @if($url == 'hadir')
+                        <tr>
+                            <td class="ps-0 pe-2">Jam Absen</td>
+                            <td class="px-0">:</td>
+                            <td class="ps-2">{{ $user['created_at'] }}</td>
+                        </tr>
+                        @else
+                        @endif
                     </table>
                 </div>
-            </div>
+
             @else
                 <div class="col-12 mt-2">
                     <table class="table">
@@ -191,7 +218,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                         </tr>
                         <tr>
                             <td class="ps-0 pe-2">Tanggal Teregristrasi</td>
-                            <td>:</td>
+                            <td class="px-0">:</td>
                             <td class="ps-2">(dummy)</td>
                         </tr>
                     </table>
@@ -202,43 +229,114 @@ $track = Tracking::where('id_user',$user['id'])->first();
     </div>
 
     @if($url == 'hadir')
+    <div class="row">
+        {{-- <div class="col-12 mt-2">
+            <b>Foto Potrait & KTP <i class="fa fa-info-circle"></i></b>
+        </div> --}}
+        <div class="col-4 mt-2 px-1">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0 fw-bold">
+                        Foto Selfie
+                    </h6>
+                </div>
+                <div class="card-body p-0">
+                    @if ($user['profile_photo_path'] == NULL)
+                        <img style="height: 415px; object-fit: cover;" src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
+                    @else
+                        <img style="height: 415px; object-fit: cover;" src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
+                    @endif
+                </div>
+            </div>
+        </div>
+        <div class="col-8 mt-2 px-1">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0 fw-bold">
+                        Foto KTP
+                    </h6>
+                </div>
+                <div class="card-body p-0">
+                    @if ($tps['foto_lokasi'] != null)
+                        <img style="height: 415px; object-fit: cover" src="{{ $tps['foto_lokasi'] }}" alt="">
+                    @else
+                        <img style="height: 415px; object-fit: cover" src="https://t-2.tstatic.net/default-2.jpg" alt="">
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="row mb-5">
-        <div class="col-12 mt-2">
-            <b>Foto Lokai & Bukti di Lokasi <i class="fa fa-info-circle"></i></b>
+        <div class="col-6 mt-2 px-1">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0 fw-bold">
+                        Foto Selfie di Lokasi
+                    </h6>
+                </div>
+                <div class="card-body p-0">
+                    @if ($tps['foto_lokasi'] != null)
+                        <img style="height: 415px; object-fit: cover" src="{{ $tps['foto_lokasi'] }}" alt="">
+                    @else
+                        <img style="height: 415px; object-fit: cover" src="https://t-2.tstatic.net/default-2.jpg" alt="">
+                    @endif
+                </div>
+            </div>
         </div>
-        <div class="col-6 mt-2">
-            @if ($tps['foto_lokasi'] != null)
-                <img style="height: 415px; object-fit: cover" src="{{ $tps['foto_lokasi'] }}" alt="">
-            @else
-                <img style="height: 415px; object-fit: cover" src="https://t-2.tstatic.net/default-2.jpg" alt="">
-            @endif
-        </div>
-        <div class="col-6 mt-2">
-            @if ($tps['foto_lokasi'] != null)
-                <img style="height: 415px; object-fit: cover" src="{{ $tps['foto_lokasi'] }}" alt="">
-            @else
-                <img style="height: 415px; object-fit: cover" src="https://t-2.tstatic.net/default-2.jpg" alt="">
-            @endif
+        <div class="col-6 mt-2 px-1">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0 fw-bold">
+                        Foto TPS
+                    </h6>
+                </div>
+                <div class="card-body p-0">
+                    @if ($tps['foto_lokasi'] != null)
+                        <img style="height: 415px; object-fit: cover" src="{{ $tps['foto_lokasi'] }}" alt="">
+                    @else
+                        <img style="height: 415px; object-fit: cover" src="https://t-2.tstatic.net/default-2.jpg" alt="">
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
     @else
     <div class="row mb-5">
-        <div class="col-12 mt-2">
+        {{-- <div class="col-12 mt-2">
             <b>Foto Potrait & KTP <i class="fa fa-info-circle"></i></b>
+        </div> --}}
+        <div class="col-4 mt-2 px-1">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0 fw-bold">
+                        Foto Selfie
+                    </h6>
+                </div>
+                <div class="card-body p-0">
+                    @if ($user['profile_photo_path'] == NULL)
+                        <img style="height: 415px; object-fit: cover;" src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
+                    @else
+                        <img style="height: 415px; object-fit: cover;" src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
+                    @endif
+                </div>
+            </div>
         </div>
-        <div class="col-4 mt-2">
-            @if ($tps['foto_lokasi'] != null)
-                <img style="height: 415px; object-fit: cover" src="{{ $tps['foto_lokasi'] }}" alt="">
-            @else
-                <img style="height: 415px; object-fit: cover" src="https://t-2.tstatic.net/default-2.jpg" alt="">
-            @endif
-        </div>
-        <div class="col-8 mt-2">
-            @if ($tps['foto_lokasi'] != null)
-                <img style="height: 415px; object-fit: cover" src="{{ $tps['foto_lokasi'] }}" alt="">
-            @else
-                <img style="height: 415px; object-fit: cover" src="https://t-2.tstatic.net/default-2.jpg" alt="">
-            @endif
+        <div class="col-8 mt-2 px-1">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0 fw-bold">
+                        Foto KTP
+                    </h6>
+                </div>
+                <div class="card-body p-0">
+                    @if ($tps['foto_lokasi'] != null)
+                        <img style="height: 415px; object-fit: cover" src="{{ $tps['foto_lokasi'] }}" alt="">
+                    @else
+                        <img style="height: 415px; object-fit: cover" src="https://t-2.tstatic.net/default-2.jpg" alt="">
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
     @endif
@@ -248,7 +346,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
         <div class="col-12">
             <hr>
             <div class="row">
-                <div class="col"> <strong>Saksi Mengirim Data tps:</strong> <br>{{$saksi['created_at']}}</div>
+                <div class="col"> <strong>Saksi Mengirim Data TPS:</strong> <br>{{$saksi['created_at']}}</div>
                 <div class="col"> <strong>Checked BY:</strong> <br> -
                 </div>
                 <div class="col"> <strong>Status:</strong> <br> @if ($saksi['verification'] == 1)

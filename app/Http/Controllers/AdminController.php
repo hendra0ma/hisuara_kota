@@ -245,14 +245,25 @@ class AdminController extends Controller
     public function verifikasi_akun()
     {
         $data['config'] = Config::first();
-        $data['config'] = Config::first();
         return view('administrator.verifikasi.verifikasi_akun', $data);
+    }
+
+    public function admin_terverifikasi()
+    {
+        $data['config'] = Config::first();
+        return view('administrator.verifikasi.admin_terverifikasi', $data);
     }
 
     public function verifikasi_saksi()
     {
         $data['config'] = Config::first();
         return view('administrator.verifikasi.verifikasi_saksi', $data);
+    }
+
+    public function saksi_ditolak()
+    {
+        $data['config'] = Config::first();
+        return view('administrator.verifikasi.saksi_ditolak', $data);
     }
 
     public function verifikasi_koreksi()
