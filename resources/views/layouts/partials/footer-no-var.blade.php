@@ -92,7 +92,8 @@
                     url: '{{url("/")}}/administrator/ajax/get_verifikasi_saksi',
                     type: "GET",
                     data: {
-                        id
+                        id,
+                        url: "<?= request()->segment(count(request()->segments())) ?>"
                     },
                     success: function (response) {
                         if (response) {

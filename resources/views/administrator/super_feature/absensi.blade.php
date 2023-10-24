@@ -144,4 +144,25 @@
     </div>
 </div> --}}
 
+<div class="modal fade" id="cekmodal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-header bg-primary text-white">
+            <div class="modal-title mx-auto">
+                <h4 class="mb-0 fw-bold">Verifikasi Saksi</h4>
+            </div>
+        </div>
+        <div class="modal-content h-auto">
+            <div class="container">
+                <div id="container-verifikasi">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @endsection

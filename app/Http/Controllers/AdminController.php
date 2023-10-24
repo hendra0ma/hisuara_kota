@@ -101,6 +101,7 @@ class AdminController extends Controller
         $data['tracking'] = ModelsTracking::get();
         $data['config'] = Config::first();
         $data['kec'] = District::where('regency_id', $data['config']['regencies_id'])->get();
+        $data['district_quick'] = District::where('regency_id', $data['config']['regencies_id'])->get();
         return view('administrator.index', $data);
     }
 
@@ -395,6 +396,7 @@ class AdminController extends Controller
 
     public function get_verifikasi_saksi(Request $request)
     {
+        // dump($request->url);
         $user        = User::where('id', $request['id'])->first();
         $district    = District::where('id', $user['districts'])->first();
         $village     = Village::where('id', $user['villages'])->first();
@@ -407,7 +409,8 @@ class AdminController extends Controller
             'district' => $district,
             'tps' => $tps,
             'saksi' => $saksi,
-            'config' => Config::first()
+            'config' => Config::first(),
+            'url' => $request->url,
         ]);
     }
 

@@ -17,7 +17,7 @@
         <?php $villages = App\Models\Village::where('id',$ls['villages'])->first(); ?>
         <?php $tps = App\Models\Tps::where('id',$ls['tps_id'])->first(); ?>
         <div class="col-xl-3">
-            <div class="card cekmodal" style="cursor: pointer" id="Cek" data-id="{{$ls['id']}}" data-bs-toggle="modal" id="" data-bs-target="#cekmodal">
+            <div class="card">
                 <div class="card-header text-white border-0" style="background-color: #404042">
                     <span class="mx-auto py-6 fs-6">TPS {{ $ls->number }} / Kelurahan {{ $villages['name'] }}</span>
                 </div>
@@ -43,19 +43,38 @@
                             </tr>
                             <tr>
                                 <td class="text-primary fw-bold">
-                                    No Wa
+                                    No HP
                                 </td>
                                 <td class="px-0">:</td>
                                 <td class="ps-2">{{$ls->no_hp}}</td>
                             </tr>
                             <tr>
                                 <td class="text-primary fw-bold">
-                                    Jam Absen
+                                    Kecamatan
                                 </td>
                                 <td class="px-0">:</td>
-                                <td class="ps-2">{{$ls->created_at}}</td>
+                                <td class="ps-2">{{$district['name'] }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary fw-bold">
+                                    Kelurahan
+                                </td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{$villages['name'] }}</td>
                             </tr>
                         </table>
+
+                        <div class="row px-0">
+                            <div class="col-md px-0">
+                                <button class="btn rounded-0 btn-success w-100" type="submit">Diterima</button>
+                            </div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col-12 px-0">
+                                <a class="btn btn-primary rounded-0 w-100 cekmodal" id="Cek" data-id="{{$ls['id']}}" data-bs-toggle="modal" id="" data-bs-target="#cekmodal">Tampil Saksi</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="hiasan-2" style="height: 30px"></div>
