@@ -55,10 +55,11 @@ class AuthController extends Controller
         }
 
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $randomString = substr(str_shuffle($characters), 0, 10); // Menghasilkan string acak sepanjang 10 karakter
+     
 
         if ($request->file('foto_ktp')) {
             $image = $request->file('foto_ktp');
+            $randomString = substr(str_shuffle($characters), 0, 13); // Menghasilkan string acak sepanjang 10 karakter
             $foto_ktp = time() . $randomString .".". $image->getClientOriginalExtension();
             $image->move(public_path('storage/profile-photos'), $foto_ktp);
         } else {
@@ -67,6 +68,7 @@ class AuthController extends Controller
 
         if ($request->file('foto_profil')) {
             $image = $request->file('foto_profil');
+            $randomString = substr(str_shuffle($characters), 0, 14); // Menghasilkan string acak sepanjang 10 karakter
             $foto_profil = time() . $randomString  .".".  $image->getClientOriginalExtension();
             $image->move(public_path('storage/profile-photos'), $foto_profil);
         } else {
