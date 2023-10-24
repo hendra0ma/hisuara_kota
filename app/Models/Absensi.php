@@ -9,5 +9,5 @@ class Absensi extends Model
 {
     use HasFactory;
     public $table = "absensi";
-    protected $fillable = ['user_id','longitude','latitude','status'];
+    protected $fillable = ['user_id','longitude','latitude','status','selfie_lokasi'];
 }

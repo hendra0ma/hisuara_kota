@@ -84,7 +84,7 @@
                 @elseif (auth()->user()->role_id == 6)
                     window.location.href = "{{ route('hunter.index') }}"
                 @elseif (auth()->user()->role_id == 8)
-                    window.location.href = "{{ url('upload_c1') }}"
+                    window.location.href = "{{ route('absensiSaksi') }}"
                 @elseif (auth()->user()->role_id == 7)
                     window.location.href = "{{ route('hukum.index') }}"
                 @elseif (auth()->user()->role_id == 10)
