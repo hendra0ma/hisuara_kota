@@ -56,8 +56,8 @@ class AuthController extends Controller
 
         if ($request->file('foto_ktp')) {
             $image = $request->file('foto_ktp');
-            $foto_profil = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('storage/profile-photos'), $foto_profil);
+            $foto_ktp = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('storage/profile-photos'), $foto_ktp);
         } else {
             return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
         }
@@ -87,6 +87,9 @@ class AuthController extends Controller
         $user->tps_id = $request->input('tps_id');
         $user->cek = $request->input('cek');
         $user->absen = $request->input('absen');
+        $user->profile_photo_path = $foto_profil;
+        $user->foto_ktp = $foto_ktp;
+
         $user->nik = $request->input('nik');
         $user->save();
         return response()->json(['message' => 'User created successfully'], 201);
