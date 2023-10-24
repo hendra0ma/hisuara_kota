@@ -137,10 +137,14 @@ class AuthController extends Controller
             'foto_profil' => 'required|image|mimes:jpeg,png,jpg,gif', 
         ]);
       
-        $users = User::where('role_id', $request->input('role_id'))->count();
-        if ($users > 10) {
-            return response()->json(['errors' => ["error"=>"Tidak dapat mendaftar, karena admin Telah mencapai 10 admin"]], 422);
-        }
+        //UnComment Kode iini setelah pencobaan
+
+        // $users = User::where('role_id', $request->input('role_id'))->count();
+        // if ($users > 10) {
+        //     return response()->json(['errors' => ["error"=>"Tidak dapat mendaftar, karena admin Telah mencapai 10 admin"]], 422);
+        // }
+
+
         
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
