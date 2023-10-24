@@ -266,6 +266,36 @@ class AdminController extends Controller
         return view('administrator.verifikasi.saksi_ditolak', $data);
     }
 
+    public function Enumerator()
+    {
+        $data['config'] = Config::first();
+        return view('administrator.enumerator.enumerator', $data);
+    }
+
+    public function EnumeratorTeregistrasi()
+    {
+        $data['config'] = Config::first();
+        return view('administrator.enumerator.enumerator_teregistrasi', $data);
+    }
+
+    public function EnumeratorHadir()
+    {
+        $data['config'] = Config::first();
+        return view('administrator.enumerator.enumerator_hadir', $data);
+    }
+
+    public function EnumeratorTidakHadir()
+    {
+        $data['config'] = Config::first();
+        return view('administrator.enumerator.enumerator_tidak_hadir', $data);
+    }
+
+    public function EnumeratorDitolak()
+    {
+        $data['config'] = Config::first();
+        return view('administrator.enumerator.enumerator_ditolak', $data);
+    }
+
     public function verifikasi_koreksi()
     {
         $data['config'] = Config::first();

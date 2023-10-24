@@ -236,6 +236,11 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('admin_terverifikasi', 'admin_terverifikasi');
             Route::get('verifikasi_saksi', 'verifikasi_saksi');
             Route::get('saksi_ditolak', 'saksi_ditolak');
+            Route::get('enumerator', 'Enumerator');
+            Route::get('enumerator_teregistrasi', 'EnumeratorTeregistrasi');
+            Route::get('enumerator_hadir', 'EnumeratorHadir');
+            Route::get('enumerator_tidak_hadir', 'EnumeratorTidakHadir');
+            Route::get('enumerator_ditolak', 'EnumeratorDitolak');
             Route::get('pembayaran_saksi', 'pembayaran_saksi');
             Route::get('verifikasi_koreksi', 'verifikasi_koreksi');
             Route::get('kick/{id}', 'kick');
