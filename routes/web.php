@@ -493,8 +493,16 @@ Route::controller(PublicController::class)->group(function () {
     // Route::get('/relawan','index');
 });
 
-Route::get("absensi-saksi",[DevelopingController::class,'absensiSaksi'])->middleware('role:saksi')->name('absensiSaksi');
-Route::post("action_absen_saksi",[DevelopingController::class,'actionAbsensiSaksi'])->middleware('role:saksi')->name('actionAbsensiSaksi');
+Route::get("absensi-saksi",[DevelopingController::class,'absensiSaksi'])->middleware(['auth','role:saksi'])->name('absensiSaksi');
+
+Route::get("upload-surat-suara",[DevelopingController::class,'uploadSuratSuara'])->middleware(['auth','role:saksi'])->name('uploadSuratSuara');
+
+Route::post("action_absen_saksi",[DevelopingController::class,'actionAbsensiSaksi'])->middleware(['auth','role:saksi'])->name('actionAbsensiSaksi');
+
+
+Route::get('/testhp',function () {
+   return view('developing.template_phone.phone') ;
+});
 
 Route::controller(RelawanController::class)->group(function () {
     Route::get('relawan', 'index');
@@ -681,12 +689,12 @@ Route::get('/cek-user-saksi',function () {
  ->get();
 
  foreach ($usersWithoutTpsId as $user){
-    //  dump($user);
-    DB::table('users')
-    ->where("id",$user->id)
-    ->update([
-        'absen'=>""
-    ]);
+     dump($user);
+    // DB::table('users')
+    // ->where("id",$user->id)
+    // ->update([
+    //     'absen'=>""
+    // ]);
  }
 
  

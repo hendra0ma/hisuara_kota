@@ -38,13 +38,13 @@ class DevelopingController extends Controller
     {
 
 
-        $this->validate($request,[
-            'total_surat_suara' => "required|numeric",
-            'surat_suara_tidak_sah' => "required|numeric",
-            'surat_suara_terpakai' => "required|numeric",
-            'sisa_surat_suara' => "required|numeric",
+        // $this->validate($request,[
+        //     'total_surat_suara' => "required|numeric",
+        //     'surat_suara_tidak_sah' => "required|numeric",
+        //     'surat_suara_terpakai' => "required|numeric",
+        //     'sisa_surat_suara' => "required|numeric",
             
-        ]);
+        // ]);
 
         $config =  Config::find(1);
 
@@ -107,6 +107,18 @@ class DevelopingController extends Controller
         return redirect('upload_c1');
     }
 
+    function uploadSuratSuara(){
+        
+        // if (Auth::user()->absen == "hadir") {
+        //     return redirect()->route('upload_c1');
+        // }
+        $data['kelurahan'] = Village::where('id', Auth::user()->villages)->first();
+        $data['paslon'] = Paslon::get();
+        $data['dev'] = User::join('tps', 'tps.id', '=', 'users.tps_id')->first();
+
+        return view('developing.surat_suara');
+    }
+
 
     function absensiSaksi()
     {
@@ -142,7 +154,7 @@ class DevelopingController extends Controller
             $foto_profil = time()  . $randomString  .".". $image->getClientOriginalExtension();
             $image->move(public_path('storage/absensi'), $foto_profil);
         } else {
-            return redirect()->back()->with("success", 'gagal mengupload data absensi');
+            return redirect()->back()->with("error", 'gagal mengupload data absensi');
         }
 
       
@@ -347,8 +359,10 @@ class DevelopingController extends Controller
         $data['kelurahan'] = Village::where('id', $villagee)->first();
         $data['paslon'] = Paslon::get();
         $cekSaksi = Saksi::where('tps_id', Auth::user()->tps_id)->count('id');
-     
-            return view('developing.c1_plano', $data);
+        if( $cekSaksi == null){
+            return view('developing.c1_plano',$data);
+        }
+        return redirect()->route('uploadSuratSuara');
     
     }
     public function c1_quickcount()
