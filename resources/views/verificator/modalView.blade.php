@@ -4,7 +4,7 @@
     </center>
 </div>
 
-<div class="col-lg-6" style="height: 100vh; overflow: hidden">
+<div class="col-lg-6" style="height: 100vh; overflow: scroll">
 
     <div class="row">
         <div class="col-12">
@@ -83,6 +83,42 @@
             <button type="submit" class="btn btn-primary btn-block openModalKoreksi" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modalPeriksa" data-id="{{Crypt::encrypt($paslon[0]->saksi_data[0]->saksi_id)}}">Koreksi</button>
         </div>
         @endif
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <td style="width: 33.3333333%">Total Surat Suara</td>
+                            <td style="width: 33.3333333%">:</td>
+                            <td style="width: 33.3333333%">(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 33.3333333%">Surat Suara Terpakai</td>
+                            <td style="width: 33.3333333%">:</td>
+                            <td style="width: 33.3333333%">(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 33.3333333%">Surat Suara Sah</td>
+                            <td style="width: 33.3333333%">:</td>
+                            <td style="width: 33.3333333%">(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 33.3333333%">Suara Tidak Sah</td>
+                            <td style="width: 33.3333333%">:</td>
+                            <td style="width: 33.3333333%">(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 33.3333333%">Sisa Surat Suara</td>
+                            <td style="width: 33.3333333%">:</td>
+                            <td style="width: 33.3333333%">(dummy)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="row" style="margin-top: 50px;">

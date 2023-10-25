@@ -1,5 +1,26 @@
 @include('layouts.partials.head')
-@include('layouts.partials.header-r-data')
+@include('layouts.partials.header')
+
+<style>
+    .app-content {
+        margin-left: 0px;
+        margin-top: 0px;
+    }
+</style>
+
+<?php
+
+use App\Models\District;
+use App\Models\Village;
+use App\Models\TPS;
+
+use App\Models\Regency;
+use App\Models\Config;
+
+$data['config'] = Config::first();
+$config = Config::first();
+$kota = Regency::where('id', $config['regencies_id'])->first();
+?>
 
 <div class="container-fluid" style="margin-top: 100px; padding-right: 4.75rem; padding-left: 4.75rem;">
     <!-- PAGE-HEADER -->
@@ -9,12 +30,11 @@
                 <!-- Kota -->
             </h1>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Data Tracking
+                <li class="breadcrumb-item active" aria-current="page">
+                    {{ $kota->name }}
                     <!-- Kota -->
                 </li>
             </ol>
-            <h4 class="fs-4 mt-2 fw-bold">Data Tracking</h4>
         </div>
         <div class="col-lg-8 mt-2">
             <div class="row">

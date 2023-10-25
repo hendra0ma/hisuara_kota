@@ -197,6 +197,7 @@ Route::group(['middleware' => 'auth'], function () {
         });
         Route::controller(AdminController::class)->group(function () {
             //Administratorw
+            Route::get('data-c1', 'dataC1');
             Route::get('r-data-record', 'rDataRecord');
             Route::get('r-data', 'rdata');
             Route::post('main-permission', 'mainPermission');

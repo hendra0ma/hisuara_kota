@@ -248,6 +248,13 @@ class AdminController extends Controller
         return view('administrator.verifikasi.verifikasi_akun', $data);
     }
 
+    public function dataC1()
+    {
+        $data['config'] = Config::first();
+        $data['jumlah_c1'] = Saksi::count();
+        return view('administrator.perdataan.data-c1', $data);
+    }
+
     public function admin_terverifikasi()
     {
         $data['config'] = Config::first();
