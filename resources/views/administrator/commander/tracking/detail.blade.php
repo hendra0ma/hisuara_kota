@@ -4,16 +4,11 @@
 <div class="page-header">
     <div class="row w-100">
         <div class="col-md">
-            <h1 class="page-title fs-1">Dashboard Rekapitung</h1>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Tracking</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Patroli Mode</li>
-            </ol>
-            <h3>Patroli Mode</h3>
+            <h1 class="page-title fs-1">Dashboard Hisuara</h1>
         </div>
-        <div class="col-md">
+        {{-- <div class="col-md">
             <div class="ms-auto text-uppercase d-flex justify-content-end fs-1 fw-bold text-warning">Admin demography tracking  (ADT)</div>
-        </div>
+        </div> --}}
     </div>
 </div>
 
@@ -78,9 +73,18 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-3">
+                                <h6 class="mb-0">NIK</h6>
+                            </div>
+                            <div class="col-sm-9">
+                                {{$profile['nik']}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
                                 <h6 class="mb-0">Full Name</h6>
                             </div>
-                            <div class="col-sm-9 text-light">
+                            <div class="col-sm-9">
                                 {{$profile['name']}}
                             </div>
                         </div>
@@ -89,7 +93,7 @@
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Email</h6>
                             </div>
-                            <div class="col-sm-9 text-light">
+                            <div class="col-sm-9">
                                 {{$profile['email']}}
                             </div>
                         </div>
@@ -98,7 +102,7 @@
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Phone</h6>
                             </div>
-                            <div class="col-sm-9 text-light">
+                            <div class="col-sm-9">
                                 {{$profile['no_hp']}}
                             </div>
                         </div>
@@ -107,7 +111,7 @@
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Address</h6>
                             </div>
-                            <div class="col-sm-9 text-light">
+                            <div class="col-sm-9">
                                 {{$profile['address']}}
                             </div>
                         </div>

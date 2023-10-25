@@ -32,45 +32,52 @@
                 </div>
                 <div class="card-body py-7">
                     <div class="text-center fs-4 fw-bold mb-3">{{$ls->name}}</div>
-                    <div class="px-5">
+                    <div class="px-3">
                         <table class="table">
                             <tr>
-                                <td class="text-primary fw-bold">
+                                <td class="text-primary fw-bold ps-0">
                                     Kecamatan
                                 </td>
                                 <td class="px-0">:</td>
                                 <td class="ps-2">{{$district['name'] }}</td>
                             </tr>
                             <tr>
-                                <td class="text-primary fw-bold">
+                                <td class="text-primary fw-bold ps-0">
                                     Kelurahan
                                 </td>
                                 <td class="px-0">:</td>
                                 <td class="ps-2">{{$villages['name'] }}</td>
                             </tr>
                             <tr>
-                                <td class="text-primary fw-bold pe-0">
+                                <td class="text-primary fw-bold ps-0">
+                                    TPS
+                                </td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{$tps['number']}}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary fw-bold ps-0">
                                     Jam Absen
                                 </td>
                                 <td class="px-0">:</td>
                                 <td class="ps-2">{{$ls->created_at}}</td>
                             </tr>
-                            <tr>
-                                <td class="text-primary fw-bold">
+                            {{-- <tr>
+                                <td class="text-primary fw-bold ps-0">
                                     Email
                                 </td>
                                 <td class="px-0">:</td>
                                 <td class="ps-2">{{$ls->email}}</td>
-                            </tr>
+                            </tr> --}}
                             <tr>
-                                <td class="text-primary fw-bold">
+                                <td class="text-primary fw-bold ps-0">
                                     Longitude
                                 </td>
                                 <td class="px-0">:</td>
                                 <td class="ps-2">{{$ls->longitude}}</td>
                             </tr>
                             <tr>
-                                <td class="text-primary fw-bold">
+                                <td class="text-primary fw-bold ps-0">
                                     Latitude
                                 </td>
                                 <td class="px-0">:</td>

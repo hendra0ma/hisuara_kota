@@ -83,7 +83,7 @@
     </div> --}}
 </div>
 
-<h4 class="fw-bold fs-4 mt-5">
+<h4 class="fw-bold fs-4 mt-5 mb-0">
     {{$title}}  
 </h4>
 <hr style="border: 1px solid">

@@ -108,7 +108,7 @@
         <h4 class="fw-bold fs-4 mt-5 mb-0">
     
             @if((string)Request::segment(3) != "tidak_hadir") 
-                {{$title}} &nbsp; <i class="fa fa-question-circle"  data-bs-placement="right" data-bs-toggle="tooltip" title="" data-bs-customClass="custom-tooltip" data-bs-original-title="Saksi yang terdaftar pada halaman ini merupakan saksi yang telah didaftarkan oleh tim sukses kandidat sebelum perhitungan dilakukan untuk menghindari saksi ilegal yang menyusup."></i>
+                {{$title}}
             @else
                 {{$title}} 
             @endif

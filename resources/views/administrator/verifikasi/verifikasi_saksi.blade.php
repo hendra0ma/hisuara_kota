@@ -67,7 +67,12 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 </div>
 <!-- PAGE-HEADER END -->
 
+<h4 class="fw-bold fs-4 mt-5 mb-0">
+    Verifikasi Saksi
+</h4>
+<hr style="border: 1px solid">
 <div class="row mt-3">
+
 
     <livewire:verifikasi-saksi>
 

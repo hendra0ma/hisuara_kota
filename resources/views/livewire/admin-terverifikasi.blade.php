@@ -66,28 +66,28 @@
                 </div>
                 <div class="card-body py-7">
                     <div class="text-center fs-4 fw-bold mb-3">{{$ls->name}}</div>
-                    <div class="px-5">
-                        <table class="table" style="max-width: 280px;">
+                    <div class="px-3">
+                        <table class="table">
+                            <tr>
+                                <td class="text-primary px-0 fw-bold">
+                                    NIK
+                                </td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{$ls->nik}}</td>
+                            </tr>
                             <tr>
                                 <td class="text-primary px-0 fw-bold">
                                     Email
                                 </td>
                                 <td class="px-0">:</td>
-                                <td class="ps-1" style="max-width: 180px">{{$ls->email}}</td>
+                                <td class="ps-2">{{$ls->email}}</td>
                             </tr>
                             <tr>
                                 <td class="text-primary px-0 fw-bold">
                                     No. Hp
                                 </td>
                                 <td class="px-0">:</td>
-                                <td class="ps-1" style="max-width: 180px">{{$ls->no_hp}}</td>
-                            </tr>
-                            <tr>
-                                <td class="text-primary px-0 fw-bold">
-                                    Kecamatan
-                                </td>
-                                <td class="px-0">:</td>
-                                <td class="ps-1">{{ $district['name'] }}</td>
+                                <td class="ps-2">{{$ls->no_hp}}</td>
                             </tr>
                         </table>
 
@@ -116,7 +116,7 @@
 
                         <div class="row mt-2">
                             <div class="col-12 px-0">
-                                <button class="btn btn-primary rounded-0 w-100 cekmodalakun" id="Cek" data-id="{{$ls['id']}}" data-bs-toggle="modal" id="" data-bs-target="#cekmodalakun">Detail Data Admin</button>
+                                <a class="btn btn-primary rounded-0 w-100" href="{{url('/')}}/administrator/patroli_mode/tracking/detail/<?= encrypt($ls['id'])?>">Detail Data Admin</a>
                             </div>
                         </div>
                         
