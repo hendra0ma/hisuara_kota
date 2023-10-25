@@ -2,7 +2,7 @@
 @section('content')
 
 
-<div class="row mt-3">
+<div class="row mt-5">
     <div class="col-lg-4">
         <h1 class="page-title fs-1 mt-2">Saksi Teregristrasi
             <!-- Kota -->

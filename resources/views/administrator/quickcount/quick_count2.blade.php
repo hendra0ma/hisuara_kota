@@ -73,9 +73,6 @@ $tps = Tps::count();
         <div class="col-12 mt-1">
             
             <div class="card" style="margin-bottom: 1rem">
-                <div class="card-header bg-info-gradient">
-                    <h3 class="card-title text-white">Suara TPS Masuk</h3>
-                </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-xxl-6">
