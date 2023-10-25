@@ -30,7 +30,7 @@ class C1Koreksi extends Component
         //     ->where('batalkan', '=', 0)->get();
 
         // $data['district'] = District::find($data['list_suara'][0]->district_id);
-        $data['village'] = Village::where('id', $data['list_suara'][0]->villages_id)->first();
+        $data['village'] = Village::where('id', $data['list_suara'][0]->village_id)->first();
         
         return view('livewire.c1-saksi-kota', $data);
     }
