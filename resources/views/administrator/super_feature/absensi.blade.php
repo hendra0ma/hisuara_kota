@@ -84,7 +84,7 @@
 </div>
 
 <h4 class="fw-bold fs-4 mt-5 mb-0">
-    {{$title}}  
+    Jumlah Saksi Hadir : {{$jumlah_hadir}}
 </h4>
 <hr style="border: 1px solid">
 

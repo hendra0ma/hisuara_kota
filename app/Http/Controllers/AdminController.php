@@ -257,12 +257,14 @@ class AdminController extends Controller
     public function verifikasi_saksi()
     {
         $data['config'] = Config::first();
+        $data['jumlah_saksi'] = User::where('role_id', '=', 8)->where('is_active', '=', 0)->count();
         return view('administrator.verifikasi.verifikasi_saksi', $data);
     }
 
     public function saksi_ditolak()
     {
         $data['config'] = Config::first();
+        $data['jumlah_saksi_ditolak'] = User::where('role_id', '=', 8)->where('is_active', '=', 5)->count();
         return view('administrator.verifikasi.saksi_ditolak', $data);
     }
 
@@ -855,7 +857,7 @@ class AdminController extends Controller
         $data['config'] = Config::first();
         $config = Config::first();
         $data['kota']      = Regency::where('id', $config->regencies_id)->first();
-
+        $data['jumlah_hadir'] = Absensi::join('users', 'users.id', '=', 'absensi.user_id')->where('users.absen', '=', 'hadir')->where('is_active', '=', 1)->count();
         // $data['title'] = 'Saksi Hadir (' . $data['jumlah'] . ')';
         $data['title'] = 'Saksi Hadir';
 
@@ -868,6 +870,7 @@ class AdminController extends Controller
         $data['config'] = Config::first();
         $config = Config::first();
         $data['kota']      = Regency::where('id', $config->regencies_id)->first();
+        $data['jumlah_saksi_teregistrasi'] = User::where('role_id',8)->where('is_active', '=', 1)->count();
 
         // $data['title'] = 'Saksi Teregistrasi (' . $data['jumlah'] . ')';
         $data['title'] = 'Saksi Teregistrasi';
@@ -880,6 +883,7 @@ class AdminController extends Controller
         $data['config'] = Config::first();
         $config = Config::first();
         $data['kota']      = Regency::where('id', $config->regencies_id)->first();
+        $data['jumlah_tidak_hadir'] = User::where('role_id',8)->where('absen','tidak hadir')->where('is_active', '=', 1)->count();
 
         // $data['title'] = 'Saksi Absen (' . $data['jumlah'] . ')';
         $data['title'] = 'Saksi Absen';

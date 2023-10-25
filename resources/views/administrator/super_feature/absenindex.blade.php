@@ -107,11 +107,7 @@
     <div class="col-md">
         <h4 class="fw-bold fs-4 mt-5 mb-0">
     
-            @if((string)Request::segment(3) != "tidak_hadir") 
-                {{$title}}
-            @else
-                {{$title}} 
-            @endif
+            Jumlah Saksi Teregistrasi : {{$jumlah_saksi_teregistrasi}}
 
         </h4>
 
