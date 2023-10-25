@@ -60,12 +60,16 @@ $tps = Tps::count();
 
     <div class="col-lg-12">
        <center>
-        <h1 class="page-title mt-1 mb-0" style="font-size: 70px">REAL COUNT
-        </h1>
+        <h2 class="page-title mt-1 mb-0" style="font-size: 60px">
+            REAL COUNT
+        </h2>
+        <h4 class="mt-2">
+            {{ $kota['name'] }}
+        </h4>
        </center>
     </div>
 
-    <div class="col-12 mt-3">
+    <div class="col-12 mt-1">
         <div class="card">
             {{-- <div class="card-header bg-info">
                 <h3 class="card-title text-white">Suara TPS Masuk</h3>
@@ -115,66 +119,73 @@ $tps = Tps::count();
                             @endforeach
                         </div>
                     </div>
-                </div>
-                <div class="col-md">
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner text-center custom">
-                <?php $count = 1; ?>
-                @foreach ($kec as $item)
-                <div class="carousel-item <?php if ($count++ == 1) : ?><?= 'active' ?><?php endif; ?>">
-                    <div class="fw-bold fs-3 mb-3">
-                        KECAMATAN {{$item['name']}}
+                    {{-- <hr> --}}
+                    <div class="col-md-12 mt-4 text-center">
+                        <h1 class="fw-bold mb-2">
+                            Perolehan Tingkat Kecamatan
+                        </h1>
                     </div>
-                    <div class="row">
-                        <?php $i = 1; ?>
-                        @foreach ($paslon as $psl)
-                        <?php
-                        $pasln = SaksiData::join('districts', 'districts.id', '=', 'saksi_data.district_id')->where('saksi_data.district_id', $item['id'])->where('saksi_data.paslon_id', $psl->id)->get();
-                        $jumlah = 0;
-                        foreach ($pasln as $pas) {
-                            $jumlah += $pas->voice;
-                        }
-                        $persen = substr($jumlah / $item->dpt * 100, 0, 3);
-                        ?>
-                        <div class="col-md">
-                            <div class="card mb-4">
-                                <div class="card-header justify-content-center"
-                                    style="background-color:{{$psl->color}}">
-                                    <h5 style="margin-bottom: 0;" class="text-white">{{$psl->candidate}}
-                                        || {{$psl->deputy_candidate}}</h5>
-                                </div>
-                                <div class="card-body" style="padding: 10px;">
+                    <hr style="background-color: black">
+                    <div class="col-md">
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner text-center custom">
+                                <?php $count = 1; ?>
+                                @foreach ($kec as $item)
+                                <div class="carousel-item <?php if ($count++ == 1) : ?><?= 'active' ?><?php endif; ?>">
+                                    <div class="fw-bold fs-3 mb-3">
+                                        KECAMATAN {{$item['name']}}
+                                    </div>
                                     <div class="row">
-                                        <div class="col">
-                                            <img src="{{asset('storage/'. $psl['picture'])}}" width="100px"
-                                                height="100px" style="object-fit: cover;" alt="">
+                                        <?php $i = 1; ?>
+                                        @foreach ($paslon as $psl)
+                                        <?php
+                                        $pasln = SaksiData::join('districts', 'districts.id', '=', 'saksi_data.district_id')->where('saksi_data.district_id', $item['id'])->where('saksi_data.paslon_id', $psl->id)->get();
+                                        $jumlah = 0;
+                                        foreach ($pasln as $pas) {
+                                            $jumlah += $pas->voice;
+                                        }
+                                        $persen = substr($jumlah / $item->dpt * 100, 0, 3);
+                                        ?>
+                                        <div class="col-md">
+                                            <div class="card mb-4">
+                                                <div class="card-header justify-content-center"
+                                                    style="background-color:{{$psl->color}}">
+                                                    <h5 style="margin-bottom: 0;" class="text-white">{{$psl->candidate}}
+                                                        || {{$psl->deputy_candidate}}</h5>
+                                                </div>
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <img src="{{asset('storage/'. $psl['picture'])}}" width="100px"
+                                                                height="100px" style="object-fit: cover;" alt="">
+                                                        </div>
+                                                        <div class="col text-center my-auto fs-1 fw-bold">
+                                                            {{$persen}}%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col text-center my-auto fs-1 fw-bold">
-                                            {{$persen}}%
-                                        </div>
+                                        <?php
+                                        $jumlah = 0;
+                                        ?>
+                                        @endforeach
+                                        <?php $i = 1; ?>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
+                            <button class="arrow-nav custom-prev" type="button" data-bs-target="#carouselExampleControls"
+                                data-bs-slide="prev">
+                                <i class="fa-solid fa-chevron-left" style="color: rgba(0, 0, 0, 0.5);font-size: 25px"></i>
+                            </button>
+                            <button class="arrow-nav custom-next" type="button" data-bs-target="#carouselExampleControls"
+                                data-bs-slide="next">
+                                <i class="fa-solid fa-chevron-right" style="color: rgba(0, 0, 0, 0.5);font-size: 25px"></i>
+                            </button>
                         </div>
-                        <?php
-                        $jumlah = 0;
-                        ?>
-                        @endforeach
-                        <?php $i = 1; ?>
-                    </div>
+                    </div> 
                 </div>
-                @endforeach
-            </div>
-            <button class="arrow-nav custom-prev" type="button" data-bs-target="#carouselExampleControls"
-                data-bs-slide="prev">
-                <i class="fa-solid fa-chevron-left" style="color: rgba(0, 0, 0, 0.5);font-size: 25px"></i>
-            </button>
-            <button class="arrow-nav custom-next" type="button" data-bs-target="#carouselExampleControls"
-                data-bs-slide="next">
-                <i class="fa-solid fa-chevron-right" style="color: rgba(0, 0, 0, 0.5);font-size: 25px"></i>
-            </button>
-        </div>
-    </div> 
 
                 {{-- <div class="col-md">
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -235,6 +246,7 @@ $tps = Tps::count();
                         </button>
                     </div>
                 </div> --}}
+
                 <table class="table table-bordered table-hover ">
                     <thead class="bg-primary">
                         <tr>
