@@ -47,7 +47,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
                 <a href="{{url('')}}/administrator/absensi/tidak_hadir" class="btn text-white w-100 py-3">Saksi Tidak Hadir</a>
             </div> --}}
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/relawan" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/relawan')?'active' : '' }}">Verifikasi Terdaftar</a>
+                <a href="{{url('')}}/administrator/relawan" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/relawan')?'active' : '' }}">Relawan Terdaftar</a>
             </div>
             <div class="col parent-link">
                 <a href="{{url('')}}/administrator/relawan_dihapus" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/relawan_dihapus')?'active' : '' }}">Relawan Dihapus</a>

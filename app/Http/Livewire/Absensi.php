@@ -15,7 +15,7 @@ class Absensi extends Component
     protected $queryString = ['search'];
     public function render()
     {
-        $data['absen'] = AbsensiModel::join('users', 'users.id', '=', 'absensi.user_id')->where('is_active', '=', 1)->where('name', 'like', '%'.$this->search.'%')->paginate(16);
+        $data['absen'] = AbsensiModel::join('users', 'users.id', '=', 'absensi.user_id')->where('users.absen', '=', 'hadir')->where('is_active', '=', 1)->where('name', 'like', '%'.$this->search.'%')->paginate(16);
         $data['absen2'] = AbsensiModel::join('users', 'users.id', '=', 'absensi.user_id')->get();
         $data['user'] = User::where('role_id',8)->count();
         $data['jumlah'] = count($data['absen2']);

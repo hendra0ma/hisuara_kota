@@ -18,7 +18,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 <!-- PAGE-HEADER -->
 <div class="row mt-5">
     <div class="col-lg">
-        <h1 class="page-title fs-1 mt-2">Verifikasi Saksi
+        <h1 class="page-title fs-1 mt-2">Verifikasi Enumerator
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">
@@ -47,19 +47,19 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
                 <a href="{{url('')}}/administrator/absensi/tidak_hadir" class="btn text-white w-100 py-3">Saksi Tidak Hadir</a>
             </div> --}}
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/verifikasi_saksi" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/verifikasi_saksi')?'active' : '' }}">Verifikasi Saksi</a>
+                <a href="{{url('')}}/administrator/enumerator" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/enumerator')?'active' : '' }}">Enumerator</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi')?'active' : '' }}">Saksi Teregistrasi</a>
+                <a href="{{url('')}}/administrator/enumerator_teregistrasi" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/enumerator_teregistrasi')?'active' : '' }}">Enumerator Teregistrasi</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi/hadir" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/hadir')?'active' : '' }}">Saksi Hadir</a>
+                <a href="{{url('')}}/administrator/enumerator_hadir" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/enumerator_hadir')?'active' : '' }}">Enumerator Hadir</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi/tidak_hadir" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/tidak_hadir')?'active' : '' }}">Saksi Tidak Hadir</a>
+                <a href="{{url('')}}/administrator/enumerator_tidak_hadir" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/enumerator_tidak_hadir')?'active' : '' }}">Enumerator Tidak Hadir</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/saksi_ditolak" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/saksi_ditolak')?'active' : '' }}">Saksi Ditolak</a>
+                <a href="{{url('')}}/administrator/enumerator_ditolak" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/enumerator_ditolak')?'active' : '' }}">Enumerator Ditolak</a>
             </div>
 
         </div>
@@ -67,12 +67,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 </div>
 <!-- PAGE-HEADER END -->
 
-<h4 class="fw-bold fs-4 mt-5 mb-0">
-    Jumlah Saksi : {{$jumlah_saksi}}
-</h4>
-<hr style="border: 1px solid">
 <div class="row mt-3">
-
 
     <livewire:verifikasi-saksi>
 

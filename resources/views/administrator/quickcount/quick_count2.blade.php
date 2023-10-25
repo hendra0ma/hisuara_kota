@@ -60,18 +60,19 @@ $tps = Tps::count();
 
     <div class="row">
         <div class="col-lg-12">
-            <center>
-                <h1 class="page-title mt-1 mb-0" style="font-size: 70px">QUICK COUNT
-                </h1>
-            </center>
+           <center>
+            <h3 class="page-title mt-1 mb-0" style="font-size: 60px">
+                QUICK COUNT
+            </h3>
+            <h4 class="mt-2">
+                {{ $kota['name'] }}
+            </h4>
+           </center>
         </div>
 
-        <div class="col-lg-12 mt-3">
+        <div class="col-12 mt-1">
             
             <div class="card" style="margin-bottom: 1rem">
-                <div class="card-header bg-info-gradient">
-                    <h3 class="card-title text-white">Suara TPS Masuk</h3>
-                </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-xxl-6">
@@ -122,6 +123,12 @@ $tps = Tps::count();
                 </div>
             </div>
         </div>
+        <div class="col-md-12 mt-4 text-center">
+            <h1 class="fw-bold mb-2">
+                Perolehan Tingkat Kecamatan
+            </h1>
+        </div>
+        <hr style="background-color: black">
         <div class="col-lg-12">
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner text-center">

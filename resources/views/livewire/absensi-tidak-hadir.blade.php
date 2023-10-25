@@ -17,18 +17,18 @@
             top: 50%;
             transform: translateY(-50%);
             width: 100%;
-            background: repeating-linear-gradient(45deg, #f9cd1a, #f9cd1a 10px, #404042 10px, #404042 20px);
+            background: repeating-linear-gradient(45deg, #f82649, #f82649 10px, #404042 10px, #404042 20px);
             position: absolute;
             z-index: 11;
             text-align: center;
             font-weight: bold;
             padding-top: 5px;
             padding-bottom: 5px;
-            font-size: 25px
+            font-size: 20px
         }
 
         .inner-police {
-            background: #f9cd1a;
+            background: #f82649;
         }
     </style>
     
@@ -47,7 +47,7 @@
             <div class="card">
                 <div class="disabled"></div>
                 <div class="police-line">
-                    <div class="inner-police">Tidak Hadir</div>
+                    <div class="inner-police">Belum Hadir</div>
                 </div>
                 <div class="card-header text-white border-0" style="background-color: #404042">
                     <span class="mx-auto py-6 fs-6">TPS {{ $ls->number }} / Kelurahan {{ $villages['name'] }}</span>
@@ -63,24 +63,38 @@
                 </div>
                 <div class="card-body py-7">
                     <div class="text-center fs-4 fw-bold mb-3">{{$ls->name}}</div>
-                    <div class="px-5">
+                    <div class="px-3">
                         <table class="table">
                             <tr>
-                                <td class="text-primary fw-bold">
+                                <td class="text-primary fw-bold ps-0">
+                                    NIK
+                                </td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{$ls->nik}}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary fw-bold ps-0">
+                                    No HP
+                                </td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{$ls->no_hp}}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary fw-bold ps-0">
                                     Kecamatan
                                 </td>
                                 <td class="px-0">:</td>
-                                <td class="ps-2">{{$district['name'] }}</td>
+                                <td class="ps-2">{{$district['name']}}</td>
                             </tr>
                             <tr>
-                                <td class="text-primary fw-bold">
+                                <td class="text-primary fw-bold ps-0">
                                     Kelurahan
                                 </td>
                                 <td class="px-0">:</td>
-                                <td class="ps-2">{{$villages['name'] }}</td>
+                                <td class="ps-2">{{$villages['name']}}</td>
                             </tr>
                             <tr>
-                                <td class="text-primary fw-bold">
+                                <td class="text-primary fw-bold ps-0">
                                     Email
                                 </td>
                                 <td class="px-0">:</td>

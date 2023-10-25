@@ -2,9 +2,9 @@
 @section('content')
 
 
-<div class="row mt-5">
+<div class="row mt-3">
     <div class="col-lg-4">
-        <h1 class="page-title fs-1 mt-2">Saksi Teregristrasi
+        <h1 class="page-title fs-1 mt-2">Enumerator Teregristrasi
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">
@@ -103,31 +103,21 @@
     }
 </style>
 
-<div class="row">
-    <div class="col-md">
-        <h4 class="fw-bold fs-4 mt-5 mb-0">
+<h4 class="fw-bold fs-4 mt-5">
     
-            Jumlah Saksi Teregistrasi : {{$jumlah_saksi_teregistrasi}}
+    @if((string)Request::segment(3) != "tidak_hadir") 
+        {{$title}} &nbsp; <i class="fa fa-question-circle"  data-bs-placement="right" data-bs-toggle="tooltip" title="" data-bs-customClass="custom-tooltip" data-bs-original-title="Saksi yang terdaftar pada halaman ini merupakan saksi yang telah didaftarkan oleh tim sukses kandidat sebelum perhitungan dilakukan untuk menghindari saksi ilegal yang menyusup."></i>
+    @else
+        {{$title}} 
+    @endif
 
-        </h4>
-
-    </div>
-    <div class="col-md-auto mt-auto">
-        <div class="ms-auto">
-            <div class="btn btn-success my-auto">
-                <i class="fa-solid fa-download"></i>
-                Unduh
-            </div>
-        </div>
-    </div>
-</div>
+</h4>
 <hr style="border: 1px solid">
 
-<div>
-    <!-- Search Input and Results -->
-    <livewire:absensiindex>
-    
-    {{-- <div class="col-md">
+<livewire:absensi-tidak-hadir>
+
+{{-- <div class="row mt-5">
+    <div class="col-md">
 
         <div class="card">
             <div class="card-body">
@@ -138,11 +128,11 @@
                                 <th class="text-white text-center align-middle">Foto</th>
                                 <th class="text-white text-center align-middle">Nama</th>
                                 <th class="text-white text-center align-middle">Kecamatan</th>
+                                <th class="text-white text-center align-middle">Kecamatan</th>
                                 <th class="text-white text-center align-middle">Kelurahan</th>
                                 <th class="text-white text-center align-middle">TPS</th>
                                 <th class="text-white text-center align-middle">Jam Absen</th>
                                 <th class="text-white text-center align-middle">Email</th>
-                                <th class="text-white text-center align-middle">Aksi</th>
                           
                             </tr>
                         </thead>
@@ -164,10 +154,6 @@
                                 <td class="align-middle">{{$tps['number']}}</td>
                                 <td class="align-middle">{{$item['created_at']}}</td>
                                 <td class="align-middle">{{$item['email']}}</td>
-                                <td>
-                                    <a href="cekmodal" class="btn btn-primary cekmodal" style="font-size: 0.8em;" id="Cek" data-id="{{$item['id']}}"
-                                        data-bs-toggle="modal" id="" data-bs-target="#cekmodal">Cek</a>
-                                </td>
                
                              
                             </tr>
@@ -177,28 +163,8 @@
                 </div>
             </div>
         </div>
-    </div> --}}
-    
-</div>
-
-<div class="modal fade" id="cekmodal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-header bg-primary text-white">
-            <div class="modal-title mx-auto">
-                <h4 class="mb-0 fw-bold">Detail Data Saksi</h4>
-            </div>
-        </div>
-        <div class="modal-content h-auto">
-            <div class="container">
-                <div id="container-verifikasi">
-
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
     </div>
-</div>
+    
+</div> --}}
 
 @endsection

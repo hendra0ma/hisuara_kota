@@ -67,35 +67,42 @@
                 </div>
                 <div class="card-body py-7">
                     <div class="text-center fs-4 fw-bold mb-3">{{$ls->name}}</div>
-                    <div class="px-5">
+                    <div class="px-3">
                         <table class="table">
                             <tr>
-                                <td class="text-primary fw-bold">
+                                <td class="text-primary fw-bold ps-0">
                                     NIK
                                 </td>
                                 <td class="px-0">:</td>
                                 <td class="ps-2">{{$ls->nik}}</td>
                             </tr>
                             <tr>
-                                <td class="text-primary fw-bold">
+                                <td class="text-primary fw-bold ps-0">
                                     No HP
                                 </td>
                                 <td class="px-0">:</td>
                                 <td class="ps-2">{{$ls->no_hp}}</td>
                             </tr>
                             <tr>
-                                <td class="text-primary fw-bold">
+                                <td class="text-primary fw-bold ps-0">
                                     Kecamatan
                                 </td>
                                 <td class="px-0">:</td>
-                                <td class="ps-2">{{$kecamatan['name'] }}</td>
+                                <td class="ps-2">{{$kecamatan['name']}}</td>
                             </tr>
                             <tr>
-                                <td class="text-primary fw-bold">
+                                <td class="text-primary fw-bold ps-0">
                                     Kelurahan
                                 </td>
                                 <td class="px-0">:</td>
-                                <td class="ps-2">{{$kelurahan['name'] }}</td>
+                                <td class="ps-2">{{$kelurahan['name']}}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary fw-bold ps-0">
+                                    Email
+                                </td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{$ls->email}}</td>
                             </tr>
                         </table>
                         
@@ -157,28 +164,28 @@
                     <div class="px-5">
                         <table class="table">
                             <tr>
-                                <td class="text-primary fw-bold">
+                                <td class="text-primary fw-bold ps-0">
                                     NIK
                                 </td>
                                 <td class="px-0">:</td>
                                 <td class="ps-2">{{$ls->nik}}</td>
                             </tr>
                             <tr>
-                                <td class="text-primary fw-bold">
+                                <td class="text-primary fw-bold ps-0">
                                     No HP
                                 </td>
                                 <td class="px-0">:</td>
                                 <td class="ps-2">{{$ls->no_hp}}</td>
                             </tr>
                             <tr>
-                                <td class="text-primary fw-bold">
+                                <td class="text-primary fw-bold ps-0">
                                     Kecamatan
                                 </td>
                                 <td class="px-0">:</td>
                                 <td class="ps-2">{{$kecamatan['name'] }}</td>
                             </tr>
                             <tr>
-                                <td class="text-primary fw-bold">
+                                <td class="text-primary fw-bold ps-0">
                                     Kelurahan
                                 </td>
                                 <td class="px-0">:</td>
@@ -218,12 +225,12 @@
         function konfirmasi(btn) {
            var form = $(btn).closest("form");
             swalWithBootstrapButtons.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                title: 'Apakah Anda Yakin?',
+                text: "Aksi ini tidak bisa di batalkan!",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Yes',
-                cancelButtonText: 'No',
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Tidak',
                 reverseButtons: false
             }).then((result) => {
                 if (result.isConfirmed) {

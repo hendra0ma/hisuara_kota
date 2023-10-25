@@ -2,13 +2,13 @@
 @section('content')
 
 
-<div class="row mt-5">
+<div class="row mt-3">
     <div class="col-lg-4">
-        <h1 class="page-title fs-1 mt-2">Saksi Teregristrasi
+        <h1 class="page-title fs-1 mt-2">Enumerator Hadir
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">{{ $kota->name }}
+            <li class="breadcrumb-item active" aria-current="page">{{$kota->name}}
                 <!-- Kota -->
             </li>
         </ol>
@@ -65,7 +65,7 @@
                         <div class="card-title text-white">Total Saksi Hadir</div>
                     </div>
                     <div class="card-body">
-                        <p class="">{{count($absen2)}}</p>
+                        <p class="">{{count($absen)}}</p>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                         <div class="card-title text-white">Total Saksi Absen</div>
                     </div>
                     <div class="card-body">
-                        <p class="">{{$user - count($absen2)}}</p>
+                        <p class="">{{$user - count($absen)}}</p>
                     </div>
                 </div>
             </div>
@@ -83,51 +83,14 @@
     </div> --}}
 </div>
 
-<style>
-    .tooltip-inner {
-        background-color: rgb(248, 38, 73);
-        box-shadow: 0px 0px 4px black;
-        opacity: 1 !important;
-    }
-    .tooltip.bs-tooltip-right .tooltip-arrow::before {
-        border-right-color: rgb(248, 38, 73) !important;
-    }
-    .tooltip.bs-tooltip-left .tooltip-arrow::before {
-        border-left-color: rgb(248, 38, 73) !important;
-    }
-    .tooltip.bs-tooltip-bottom .tooltip-arrow::before {
-        border-bottom-color: rgb(248, 38, 73) !important;
-    }
-    .tooltip.bs-tooltip-top .tooltip-arrow::before {
-        border-top-color: rgb(248, 38, 73) !important;
-    }
-</style>
-
-<div class="row">
-    <div class="col-md">
-        <h4 class="fw-bold fs-4 mt-5 mb-0">
-    
-            Jumlah Saksi Teregistrasi : {{$jumlah_saksi_teregistrasi}}
-
-        </h4>
-
-    </div>
-    <div class="col-md-auto mt-auto">
-        <div class="ms-auto">
-            <div class="btn btn-success my-auto">
-                <i class="fa-solid fa-download"></i>
-                Unduh
-            </div>
-        </div>
-    </div>
-</div>
+<h4 class="fw-bold fs-4 mt-5">
+    {{$title}}  
+</h4>
 <hr style="border: 1px solid">
 
-<div>
-    <!-- Search Input and Results -->
-    <livewire:absensiindex>
-    
-    {{-- <div class="col-md">
+<livewire:absensi>
+{{-- <div class="row mt-5">
+    <div class="col-md">
 
         <div class="card">
             <div class="card-body">
@@ -142,8 +105,9 @@
                                 <th class="text-white text-center align-middle">TPS</th>
                                 <th class="text-white text-center align-middle">Jam Absen</th>
                                 <th class="text-white text-center align-middle">Email</th>
-                                <th class="text-white text-center align-middle">Aksi</th>
-                          
+                                <th class="text-white text-center align-middle">Longitude</th>
+                                <th class="text-white text-center align-middle">Latitude</th>
+                                <th class="text-white text-center align-middle">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -164,12 +128,15 @@
                                 <td class="align-middle">{{$tps['number']}}</td>
                                 <td class="align-middle">{{$item['created_at']}}</td>
                                 <td class="align-middle">{{$item['email']}}</td>
-                                <td>
-                                    <a href="cekmodal" class="btn btn-primary cekmodal" style="font-size: 0.8em;" id="Cek" data-id="{{$item['id']}}"
-                                        data-bs-toggle="modal" id="" data-bs-target="#cekmodal">Cek</a>
+                                <td class="align-middle">{{$item['longitude']}}</td>
+                                <td class="align-middle">{{$item['latitude']}}</td>
+                                <td class="align-middle">
+                                    @if ($item['status'] == 'sudah absen')
+                                    <span class="badge bg-success">{{$item['status']}}</span>
+                                    @else
+                                    <span class="badge bg-danger">{{$item['status']}}</span>
+                                    @endif
                                 </td>
-               
-                             
                             </tr>
                             @endforeach
                         </tbody>
@@ -177,9 +144,8 @@
                 </div>
             </div>
         </div>
-    </div> --}}
-    
-</div>
+    </div>
+</div> --}}
 
 <div class="modal fade" id="cekmodal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-xl" role="document">
@@ -200,5 +166,6 @@
         </div>
     </div>
 </div>
+
 
 @endsection

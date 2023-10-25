@@ -18,7 +18,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 <!-- PAGE-HEADER -->
 <div class="row mt-5">
     <div class="col-lg">
-        <h1 class="page-title fs-1 mt-2">Verifikasi Saksi
+        <h1 class="page-title fs-1 mt-2">Saksi Ditolak
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">
@@ -66,6 +66,11 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
     </div>
 </div>
 <!-- PAGE-HEADER END -->
+
+<h4 class="fw-bold fs-4 mt-5 mb-0">
+    Jumlah Saksi Ditolak : {{$jumlah_saksi_ditolak}}
+</h4>
+<hr style="border: 1px solid">
 
 <div class="row mt-3">
 

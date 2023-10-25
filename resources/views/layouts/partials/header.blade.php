@@ -95,7 +95,11 @@
                 <div class="dropdown d-none d-md-flex profile-1">
                     <a href="#" data-bs-toggle="dropdown" class="nav-link pe-2 leading-none d-flex">
                         <span>
-                            <img src="" alt="profile-user" class="avatar  profile-user brround cover-image">
+                            @if (Auth::user()->profile_photo_path == NULL)
+                            <img class="avatar profile-user brround" style="object-fit: cover" src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF" alt="profile-user">
+                            @else
+                            <img class="avatar profile-user brround" style="object-fit: cover" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}" alt="profile-user"s>
+                            @endif
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -178,7 +182,11 @@
             <div class="dropdown d-md-flex profile-1">
                 <a href="#" data-bs-toggle="dropdown" class="nav-link pe-2 leading-none d-flex">
                     <span>
-                        <img src="" alt="profile-user" class="avatar  profile-user brround cover-image">
+                        @if (Auth::user()->profile_photo_path == NULL)
+                        <img class="avatar profile-user brround" style="object-fit: cover" src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF" alt="profile-user">
+                        @else
+                        <img class="avatar profile-user brround" style="object-fit: cover" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}" alt="profile-user"s>
+                        @endif
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">

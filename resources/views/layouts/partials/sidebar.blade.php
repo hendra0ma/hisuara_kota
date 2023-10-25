@@ -238,7 +238,7 @@ $tps = 2963;
                         <ul class="slide-menu">
                             <li><a href="{{url('')}}/administrator/verifikasi_saksi" class="fs-5 slide-item text-white">Saksi</a></li>
                             <li><a href="{{url('')}}/administrator/relawan  " class="fs-5 slide-item text-white">Relawan</a></li>
-                            <li><a href="#" class="fs-5 slide-item text-white">Enumerator</a></li>
+                            <li><a href="{{url('')}}/administrator/enumerator" class="fs-5 slide-item text-white">Enumerator</a></li>
                             <li><a href="{{url('')}}/administrator/verifikasi_akun" class="fs-5 slide-item text-white">Admin</a></li>
                         </ul>
                     </li>

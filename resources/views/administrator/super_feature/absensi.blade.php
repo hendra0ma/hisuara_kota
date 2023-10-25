@@ -2,7 +2,7 @@
 @section('content')
 
 
-<div class="row mt-3">
+<div class="row mt-5">
     <div class="col-lg-4">
         <h1 class="page-title fs-1 mt-2">Saksi Hadir
             <!-- Kota -->
@@ -83,8 +83,8 @@
     </div> --}}
 </div>
 
-<h4 class="fw-bold fs-4 mt-5">
-    {{$title}}  
+<h4 class="fw-bold fs-4 mt-5 mb-0">
+    Jumlah Saksi Hadir : {{$jumlah_hadir}}
 </h4>
 <hr style="border: 1px solid">
 
