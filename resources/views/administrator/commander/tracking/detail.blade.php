@@ -1,6 +1,11 @@
 @extends('layouts.main-patroli-detail')
 
 @section('content')
+<style>
+    .app-content {
+        margin-left: 0px !important;
+    }
+</style>
 <div class="page-header">
     <div class="row w-100">
         <div class="col-md">

@@ -216,5 +216,5 @@
 <!-- /Mobile Header -->
 
 <!--app-content open-->
-<div class="app-content" style="margin-left: 0px !important">
+<div class="app-content">
     <div class="side-app">
