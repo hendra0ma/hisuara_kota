@@ -562,28 +562,6 @@
 
 </div> --}}
 
-<div class="row mb-3" id="marquee1">
-    <div class="input-group input-group-sm">
-        <div class="input-group-prepend">
-            <button class="btn btn-danger text-white rounded-0 mt-3">Suara Masuk</button>
-        </div>
-        <div class="form-control mt-3 bg-dark" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-            <marquee id="cobamarq1">
-                @foreach ($marquee as $item)
-                <?php $kecamatan =  District::where('id', $item['districts'])->first(); ?>
-                <?php $kelurahan =  Village::where('id', $item['villages'])->first(); ?>
-                <?php $tps =  Tps::where('id', $item['tps_id'])->first(); ?>
-                <span class="text-success">▼ </span><span class="text-white" style="font-size: 20px;">{{$item['name']}}
-                    Kecamatan {{$kecamatan['name']}}, Kelurahan {{$kelurahan['name']}}, TPS {{$tps['number']}}
-                </span>
-                @endforeach
-            </marquee>
-
-
-        </div>
-    </div>
-</div>
-
 <style>
     .col.judul {
         display: flex;
@@ -618,58 +596,315 @@
         transition: transform .6s ease;
         transition: transform .6s ease,-webkit-transform .6s ease;
     }
-</style>
 
+    .urutan-suara {
+        position: absolute;
+    }
+
+    .urutan-suara::after {
+        border-top: 1px black solid;
+    }
+
+    .urutan-suara:nth-child(1) {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .urutan-suara:nth-child(2) {
+        left: 0;
+        top: 30px;
+    }
+
+    .urutan-suara:nth-child(3) {
+        right: 0;
+        top: 60px;
+    }
+
+</style>
 <div class="row">
-    <div class="col-md">
-        <div class="card mb-3">
-            <div class="card-header">
-                <div class="card-title mx-auto">Tabulasi ({{ ucwords(strtolower($kota->name)) }})</div>
+
+    <div class="col-md-12">
+        <div class="card mb-0">
+            <div class="card-header p-0" style="position: relative">
+                <button class="btn btn-kolapse"><i class="fa-solid fa-bars"></i></button> Menu
+                <script>
+                    $('.btn-kolapse').on('click', function() {
+                        $('.for-kolapse').toggle(500);
+                    })
+                </script>
             </div>
-            <div class="card-body">
+            <div class="card-body for-kolapse">
                 <div class="row">
-                    <div class="col h4 judul text-center bg-secondary text-white"
-                        style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
-                        <div class="text">Total TPS</div>
+
+                    <div class="col-md-7">
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col py-2 judul text-center bg-secondary text-white"
+                                        style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
+                                        <div class="text">Total TPS</div>
+                                    </div>
+                                    <div class="col py-2 judul text-center bg-danger text-white">
+                                        <div class="text">TPS Masuk</div>
+                                    </div>
+                                    <div class="col py-2 judul text-center bg-primary text-white">
+                                        <div class="text">TPS Kosong</div>
+                                    </div>
+                                    <div class="col py-2 judul text-center bg-info text-white">
+                                        <div class="text">Suara Masuk</div>
+                                    </div>
+                                    <div class="col py-2 judul text-center bg-success text-white"
+                                        style="border-top-right-radius: 25px; border-bottom-right-radius: 25px">
+                                        <div class="text">Suara Terverifikasi</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col h3 text-center">
+                                        <h4 class="mb-0 py-2">{{ $total_tps }}</h4>
+                                    </div>
+                                    <div class="col h3 text-center">
+                                        <h4 class="mb-0 py-2">{{ $tps_masuk }}</h4>
+                                    </div>
+                                    <div class="col h3 text-center">
+                                        <h4 class="mb-0 py-2">{{ $tps_kosong }}</h4>
+                                    </div>
+                                    <div class="col h3 text-center">
+                                        <h4 class="mb-0 py-2">{{ $suara_masuk }}</h4>
+                                    </div>
+                                    <div class="col h3 text-center">
+                                        <h4 class="mb-0 py-2">{{$total_verification_voice}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mb-2">
+                                {{-- Settings --}}
+                                <div class="row justify-content-between px-5 my-auto">
+                                    <div class="col-auto mt-2">
+                                        <h3 class="mb-0 fw-bold">
+                                            Settings
+                                        </h3>
+                                    </div>
+                                    <div class="col-auto mb-2">
+                                        <div class="mid">
+                                        
+                                            <label class="switch">
+                                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('multi_admin',this)"
+                                                    {{($config->multi_admin == "no") ? "":"checked"; }}>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                        <div class="text-center" style="font-size:13px">
+                                            Multi
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-auto mb-2">
+                                        <div class="mid">
+                                        
+                                            <label class="switch">
+                                                <input type="checkbox" data-target="mode" onclick="settings('otonom',this)"
+                                                    {{($config->otonom == "no") ? "":"checked"; }}>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                        <div class="text-center" style="font-size:13px">
+                                            Otonom
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-auto mb-2">
+                                        <div class="mid">
+                                            <label class="switch">
+                                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('show_terverifikasi',this)"
+                                                    {{($config->show_terverifikasi == "hide") ? "":"checked"; }}>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                        <div class="text-center" style="font-size:13px">
+                                            Verifikasi
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-auto mb-2">
+                                        <div class="mid">
+                                            <label class="switch">
+                                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('show_public',this)"
+                                                    {{($config->show_public == "hide") ? "":"checked"; }}>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                        <div class="text-center" style="font-size:13px">
+                                            Publish C1
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-auto mb-2">
+                                        <div class="mid">
+                                        
+                                            <label class="switch">
+                                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('lockdown',this)"
+                                                    {{($config->lockdown == "no") ? "":"checked"; }}>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                        <div class="text-center" style="font-size:13px">
+                                            Lockdown
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                    <div class="col h4 judul text-center bg-danger text-white">
-                        <div class="text">TPS Masuk</div>
+
+                    
+                    <div class="col-md">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h4 class="mb-0">Urutan Suara Terbanyak</h4>
+                            </div>
+                        </div>
+                        <hr class="my-1" style="background-color: #00000036">
+                        <div class="row">
+                            <div class="col-4 text-center mb-2 fw-bold fs-3">
+                                <span style="-webkit-text-stroke: 0.75px black; color: #ffd700">1</span>
+                            </div>
+                            <div class="col-4 text-center mb-2 fw-bold fs-3">
+                                <span style="-webkit-text-stroke: 0.75px black; color: #c0c0c0">2</span>
+                            </div>
+                            <div class="col-4 text-center mb-2 fw-bold fs-3">
+                                <span style="-webkit-text-stroke: 0.75px black; color: #cd7f32">3</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            @foreach ($urutan as $urutPaslon)
+                                <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
+                                {{-- <div class="col-md"> --}}
+                                    <div class="col-4">
+                                        <div class="card shadow text-center mb-0 mx-auto" style="width: 170px; border: black 1px solid !important">
+                                            <div class="card-header py-2 px-0" style="background: {{ $pasangan->color }}">
+                                                <h3 class="card-title text-white mx-auto">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} </h3>
+                                            </div>
+                                            <div class="card-body p-1">
+                                                <div style="font-size: 18px">{{$urutPaslon->total}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {{-- </div> --}}
+                            @endforeach
+                        </div>
                     </div>
-                    <div class="col h4 judul text-center bg-primary text-white">
-                        <div class="text">TPS Kosong</div>
-                    </div>
-                    <div class="col h4 judul text-center bg-info text-white">
-                        <div class="text">Suara Masuk</div>
-                    </div>
-                    <div class="col h4 judul text-center bg-success text-white"
-                        style="border-top-right-radius: 25px; border-bottom-right-radius: 25px">
-                        <div class="text">Suara Terverifikasi</div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col h3 text-center">
-                        <h3 class="mb-0">{{ $total_tps }}</h3>
-                    </div>
-                    <div class="col h3 text-center">
-                        <h3 class="mb-0">{{ $tps_masuk }}</h3>
-                    </div>
-                    <div class="col h3 text-center">
-                        <h3 class="mb-0">{{ $tps_kosong }}</h3>
-                    </div>
-                    <div class="col h3 text-center">
-                        <h3 class="mb-0">{{ $suara_masuk }}</h3>
-                    </div>
-                    <div class="col h3 text-center">
-                        <h3 class="mb-0">{{$total_verification_voice}}</h3>
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-    
-    <div class="col-md">
+
+    <div class="col-12 mb-3" id="marquee1">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend">
+                <button class="btn btn-danger text-white rounded-0 mt-3">Suara Masuk</button>
+            </div>
+            <div class="form-control mt-3 bg-dark" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                <marquee id="cobamarq1">
+                    @foreach ($marquee as $item)
+                    <?php $kecamatan =  District::where('id', $item['districts'])->first(); ?>
+                    <?php $kelurahan =  Village::where('id', $item['villages'])->first(); ?>
+                    <?php $tps =  Tps::where('id', $item['tps_id'])->first(); ?>
+                    <span class="text-success">▼ </span><span class="text-white" style="font-size: 20px;">{{$item['name']}}
+                        Kecamatan {{$kecamatan['name']}}, Kelurahan {{$kelurahan['name']}}, TPS {{$tps['number']}}
+                    </span>
+                    @endforeach
+                </marquee>
+
+
+            </div>
+        </div>
+    </div>
+    {{-- <div class="col-md-3 mb-4 pe-1">
         <div class="card mb-0">
-            <div class="card-header w-100" style="display: block">
+            <div class="card-header py-1">
+                <div class="card-title mx-auto">Settings</div>
+            </div>
+            <div class="card-body p-4">
+                <div class="row justify-content-center px-5 my-auto">
+                    <div class="col-auto mb-2">
+                        <div class="mid">
+                        
+                            <label class="switch">
+                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('multi_admin',this)"
+                                    {{($config->multi_admin == "no") ? "":"checked"; }}>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="text-center" style="font-size:13px">
+                            Multi
+                        </div>
+                    </div>
+                
+                    <div class="col-auto mb-2">
+                        <div class="mid">
+                        
+                            <label class="switch">
+                                <input type="checkbox" data-target="mode" onclick="settings('otonom',this)"
+                                    {{($config->otonom == "no") ? "":"checked"; }}>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="text-center" style="font-size:13px">
+                            Otonom
+                        </div>
+                    </div>
+                
+                    <div class="col-auto mb-2">
+                        <div class="mid">
+                            <label class="switch">
+                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('show_terverifikasi',this)"
+                                    {{($config->show_terverifikasi == "hide") ? "":"checked"; }}>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="text-center" style="font-size:13px">
+                            Verifikasi
+                        </div>
+                    </div>
+                
+                    <div class="col-auto mb-2">
+                        <div class="mid">
+                            <label class="switch">
+                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('show_public',this)"
+                                    {{($config->show_public == "hide") ? "":"checked"; }}>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="text-center" style="font-size:13px">
+                            Publish C1
+                        </div>
+                    </div>
+                
+                    <div class="col-auto mb-2">
+                        <div class="mid">
+                        
+                            <label class="switch">
+                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('lockdown',this)"
+                                    {{($config->lockdown == "no") ? "":"checked"; }}>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="text-center" style="font-size:13px">
+                            Lockdown
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+
+    {{-- <div class="col-md-5 mb-4 px-1">
+        <div class="card mb-0">
+            <div class="card-header w-100 py-1" style="display: block">
                 <div class="card-title">
                     <div class="row text-center" style="font-weight: 900">
                         <div class="col-4">1</div>
@@ -684,7 +919,7 @@
                         <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
                         <div class="col-md">
                             <div class="card shadow text-center mb-0">
-                                <div class="card-header py-5 px-0" style="background: {{ $pasangan->color }}">
+                                <div class="card-header py-4 px-0" style="background: {{ $pasangan->color }}">
                                     <h3 class="card-title text-white mx-auto">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} </h3>
                                 </div>
                                 <div class="card-body p-1">
@@ -696,7 +931,56 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
+
+    {{-- <div class="col-md-4 mb-4 ps-1">
+        <div class="card mb-0">
+            <div class="card-header py-1">
+                <div class="card-title mx-auto">Tabulasi ({{ ucwords(strtolower($kota->name)) }})</div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col py-1 judul text-center bg-secondary text-white"
+                        style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
+                        <div class="text">Total TPS</div>
+                    </div>
+                    <div class="col py-1 judul text-center bg-danger text-white">
+                        <div class="text">TPS Masuk</div>
+                    </div>
+                    <div class="col py-1 judul text-center bg-primary text-white">
+                        <div class="text">TPS Kosong</div>
+                    </div>
+                    <div class="col py-1 judul text-center bg-info text-white">
+                        <div class="text">Suara Masuk</div>
+                    </div>
+                    <div class="col py-1 judul text-center bg-success text-white"
+                        style="border-top-right-radius: 25px; border-bottom-right-radius: 25px">
+                        <div class="text">Suara Terverifikasi</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col h3 text-center">
+                        <h3 class="mb-0 py-1">{{ $total_tps }}</h3>
+                    </div>
+                    <div class="col h3 text-center">
+                        <h3 class="mb-0 py-1">{{ $tps_masuk }}</h3>
+                    </div>
+                    <div class="col h3 text-center">
+                        <h3 class="mb-0 py-1">{{ $tps_kosong }}</h3>
+                    </div>
+                    <div class="col h3 text-center">
+                        <h3 class="mb-0 py-1">{{ $suara_masuk }}</h3>
+                    </div>
+                    <div class="col h3 text-center">
+                        <h3 class="mb-0 py-1">{{$total_verification_voice}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+    
+    
+    
 </div>
 
 {{-- <div class="card mb-0 mt-3">
@@ -1000,74 +1284,80 @@ s    </div>
             </div> --}}
             <div class="card-body">
                 <div class="row">
-                    <div class="col-xxl-12">
-                        <div class="container">
-                            <div class="text-center fs-3 mb-3 fw-bold">SUARA TERVERIFIKASI</div>
-                            <div class="text-center">Terverifikasi {{$saksi_terverifikasi}} TPS dari {{$saksi_masuk}}
-                                TPS Masuk</div>
-                            <div class="text-center mt-2 mb-2"><span
-                                    class="badge bg-success">{{$total_verification_voice}} / {{$dpt}}</span></div>
-                            <div id="chart-donut" class="chartsh h-100 w-100"></div>
-                        </div>
-                    </div>
-                    <div class="col-xxl">
-                        <?php $i = 1; ?>
-                        <div class="row mt-2">
-                        @foreach ($paslon_terverifikasi as $pas)
-                            <div class="col-lg col-md col-sm col-xl mb-3">
-                                <div class="card" style="margin-bottom: 0px;">
-                                    <div class="card-body p-3">
-                                        <div class="row me-auto">
-                                            <div class="col-12">
-                                                <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white ms-auto"
-                                                    style="margin-bottom: 0; background-color: {{$pas->color}};">
-                                                    {{$i++}}
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-xxl-12">
+                                <div class="container">
+                                    <div class="text-center fs-3 mb-3 fw-bold">SUARA TERVERIFIKASI</div>
+                                    <div class="text-center">Terverifikasi {{$saksi_terverifikasi}} TPS dari {{$saksi_masuk}}
+                                        TPS Masuk</div>
+                                    <div class="text-center mt-2 mb-2"><span
+                                            class="badge bg-success">{{$total_verification_voice}} / {{$dpt}}</span></div>
+                                    <div id="chart-donut" class="chartsh h-100 w-100"></div>
+                                </div>
+                            </div>
+                            <div class="col-xxl">
+                                <?php $i = 1; ?>
+                                <div class="row mt-2">
+                                @foreach ($paslon_terverifikasi as $pas)
+                                    <div class="col-lg col-md col-sm col-xl mb-3">
+                                        <div class="card" style="margin-bottom: 0px;">
+                                            <div class="card-body p-3">
+                                                <div class="row me-auto">
+                                                    <div class="col-12">
+                                                        <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white ms-auto"
+                                                            style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                            {{$i++}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col text-center">
+                                                        <h6 class="mt-4">{{$pas->candidate}} </h6>
+                                                        <h6 class="">{{$pas->deputy_candidate}} </h6>
+                                                        <?php
+                                                        $voice = 0;
+                                                        ?>
+                                                        @foreach ($pas->saksi_data as $dataTps)
+                                                        <?php
+                                                        $voice += $dataTps->voice;
+                                                        ?>
+                                                        @endforeach
+                                                        <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col text-center">
-                                                <h6 class="mt-4">{{$pas->candidate}} </h6>
-                                                <h6 class="">{{$pas->deputy_candidate}} </h6>
-                                                <?php
-                                                $voice = 0;
-                                                ?>
-                                                @foreach ($pas->saksi_data as $dataTps)
-                                                <?php
-                                                $voice += $dataTps->voice;
-                                                ?>
-                                                @endforeach
-                                                <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
                                             </div>
                                         </div>
                                     </div>
+                                    @endforeach
                                 </div>
                             </div>
-                            @endforeach
                         </div>
                     </div>
-                </div>
 
-                <table class="table table-bordered table-hover">
-                    <thead class="bg-primary">
-                        <td class="text-white text-center align-middle">KECAMATAN</td>
-                        @foreach ($paslon as $item)
-                        <th class="text-white text-center align-middle">{{ $item['candidate']}} - <br>
-                            {{ $item['deputy_candidate']}}</th>
-                        @endforeach
-                    </thead>
-                    <tbody>
-                        @foreach ($kec as $item)
-                        <tr onclick='check("{{Crypt::encrypt($item->id)}}")'>
-                            <td><a
-                                    href="{{url('/')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
-                            </td>
-                            @foreach ($paslon as $cd)
-                            <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->where('saksi.verification',1)->sum('voice'); ?>
-                            <td>{{$saksi_dataa}}</td>
-                            @endforeach
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                    <div class="col-6">
+                        <table class="table table-bordered table-hover h-100">
+                            <thead class="bg-primary">
+                                <td class="text-white text-center align-middle">KECAMATAN</td>
+                                @foreach ($paslon as $item)
+                                <th class="text-white text-center align-middle">{{ $item['candidate']}} - <br>
+                                    {{ $item['deputy_candidate']}}</th>
+                                @endforeach
+                            </thead>
+                            <tbody>
+                                @foreach ($kec as $item)
+                                <tr onclick='check("{{Crypt::encrypt($item->id)}}")'>
+                                    <td class="align-middle"><a
+                                            href="{{url('/')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
+                                    </td>
+                                    @foreach ($paslon as $cd)
+                                    <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->where('saksi.verification',1)->sum('voice'); ?>
+                                    <td class="align-middle">{{$saksi_dataa}}</td>
+                                    @endforeach
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
             </div>
         </div>
