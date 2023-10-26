@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="row mt-3">
+<div class="row mt-5">
     <div class="col-lg-4">
         @if ($message = Session::get('success'))
 
@@ -21,54 +21,68 @@
             </li>
         </ol>
     </div>
-    <div class="col-lg-8">
+
+    <div class="col-md">
         <div class="row">
-            <div class="col">
-                <div class="card mb-3 bg-light text-dark">
-                    <div class="card-header py-3 bg-secondary text-white">
-                        <div> Total TPS </div>
+            <div class="col-12 mb-2">
+                <div class="row">
+                    <div class="col parent-link">
+                        <a class="btn text-white w-100 py-3 c1saksi tablink" onclick="openPage('C1-Saksi', this, '#6259ca')" id="defaultOpen">C1 Saksi</a>
                     </div>
-                    <div class="card-body py-3" style="font-size:15px;font-weight:bolder">
-                        <div class="row no-gutters">
-                            <div class="col-12">
-                                {{$total_tps}}
-                            </div>
-                        </div>
+                    <div class="col parent-link">
+                        <a class="btn text-white w-100 py-3 c1relawan tablink" onclick="openPage('C1-Relawan', this, '#6259ca')">C1 Relawan Partai</a>
                     </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card mb-3 bg-light text-dark">
-                    <div class="card-header py-3 bg-danger text-white">
-                        <div> TPS Masuk </div>
+                    <div class="col parent-link">
+                        <a class="btn text-white w-100 py-3 c1teraudit tablink" onclick="openPage('C1-Dibatalkan', this, '#6259ca')">C1 Dibatalkan</a>
                     </div>
-                    <div class="card-body py-3" style="font-size:15px;font-weight:bolder">
-                        <div class="row no-gutters">
-                            <div class="col-12">
-                                {{$jumlah_tps_masuk}}
-                            </div>
-                        </div>
+                    <div class="col parent-link">
+                        <a class="btn text-white w-100 py-3 c1koreksi tablink" onclick="openPage('C1-Koreksi', this, '#6259ca')">C1 Koreksi</a>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card mb-3 bg-light text-dark">
-                    <div class="card-header py-3 bg-success text-white">
-                        <div> TPS Terverifikasi </div>
+            
+            <div class="col-12">
+                
+                <div class="row">
+                    <div class="col text-center">
+                        <span class="mx-auto"> <b>Total TPS :</b> {{$total_tps}}</span>
                     </div>
-                    <div class="card-body py-3" style="font-size:15px;font-weight:bolder">
-                        <div class="row no-gutters">
-                            <div class="col-12">
-                                {{$jumlah_tps_terverifikai}}
-                            </div>
-                        </div>
+                    <div class="col text-center">
+                        <span class="mx-auto"> <b>TPS Masuk :</b> {{$jumlah_tps_masuk}}</span>
+                    </div>
+                    <div class="col text-center">
+                        <span class="mx-auto"> <b>TPS Terverifikasi :</b> {{$jumlah_tps_terverifikai}}</span>
                     </div>
                 </div>
-            </div>
 
-
+            </div>
         </div>
     </div>
+
+    <script>
+        function openPage(pageName, elmnt, color) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].style.backgroundColor = "";
+                // Remove the "active-tab" class from all tab links
+                tablinks[i].classList.remove("active-tab");
+            }
+            document.getElementById(pageName).style.display = "block";
+            elmnt.style.backgroundColor = color;
+            // Add the "active-tab" class to the selected tab link
+            elmnt.classList.add("active-tab");
+        }
+
+        // Wrap this part in a DOMContentLoaded event listener
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("defaultOpen").click();
+        });
+    </script>
 
 </div>
 
@@ -85,7 +99,7 @@
 
 <div class="row">
 
-    <div class="tab">
+    {{-- <div class="tab">
         <div class="row">
             <div class="col-md">
                 <?php
@@ -130,48 +144,23 @@
                 <button class="btn tablink w-100 rounded-0 kecurangan" onclick="openPage('Kecurangan', this, '#09ad95')">Kecurangan <span class="badge rounded-pill bg-danger">{{ $count_kecurangan }}</span></button>
             </div> -->
         </div>
-    </div>
+    </div> --}}
 </div>
 <div class="card-body p-0">
-    <div id="C1-Saksi" class="tabcontent px-0">
+    <div id="C1-Saksi" class="tabcontent mt-0 px-0">
         <livewire:c1-saksi-kota />
     </div>
-    <div id="C1-Relawan" class="tabcontent px-0">
+    <div id="C1-Relawan" class="tabcontent mt-0 px-0">
         <livewire:c1-relawan-kota />
     </div>
-    <div id="C1-Dibatalkan" class="tabcontent px-0">
+    <div id="C1-Dibatalkan" class="tabcontent mt-0 px-0">
         <livewire:c1-dibatalkan />
     </div>
-    <div id="C1-Koreksi" class="tabcontent px-0">
+    <div id="C1-Koreksi" class="tabcontent mt-0 px-0">
         <livewire:c1-koreksi />
     </div>
     
 </div>
-
-<script>
-    function openPage(pageName, elmnt, color) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablink");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].style.backgroundColor = "";
-            // Remove the "active-tab" class from all tab links
-            tablinks[i].classList.remove("active-tab");
-        }
-        document.getElementById(pageName).style.display = "block";
-        elmnt.style.backgroundColor = color;
-        // Add the "active-tab" class to the selected tab link
-        elmnt.classList.add("active-tab");
-    }
-
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
-</script>
-
-
 
 <div class="modal fade" id="periksaC1Verifikator" tabindex="-1" aria-labelledby="periksaC1VerifikatorLabel"
     aria-hidden="true">

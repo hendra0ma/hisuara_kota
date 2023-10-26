@@ -1,10 +1,21 @@
 @extends('layouts.mainAbsen')
 @section('content')
 
+<?php
+use App\Models\District;
+use App\Models\Village;
+use App\Models\Tps;
+use App\Models\Regency;
+use App\Models\Config;
 
-<div class="row mt-3">
+$data['config'] = Config::first();
+$config = Config::first();
+$kota = Regency::where('id', $config['regencies_id'])->first();
+?>
+
+<div class="row mt-5">
     <div class="col-lg-4">
-        <h1 class="page-title fs-1 mt-2">Enumerator Teregristrasi
+        <h1 class="page-title fs-1 mt-2">Saksi Teregristrasi
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">
@@ -30,19 +41,19 @@
                 <a href="{{url('')}}/administrator/absensi/tidak_hadir" class="btn text-white w-100 py-3">Saksi Tidak Hadir</a>
             </div> --}}
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/verifikasi_saksi" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/verifikasi_saksi')?'active' : '' }}">Verifikasi Saksi</a>
+                <a href="{{url('')}}/administrator/enumerator" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/enumerator')?'active' : '' }}">Enumerator</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi')?'active' : '' }}">Saksi Teregristrasi</a>
+                <a href="{{url('')}}/administrator/enumerator_teregistrasi" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/enumerator_teregistrasi')?'active' : '' }}">Enumerator Teregistrasi</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi/hadir" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/hadir')?'active' : '' }}">Saksi Hadir</a>
+                <a href="{{url('')}}/administrator/enumerator_hadir" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/enumerator_hadir')?'active' : '' }}">Enumerator Hadir</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi/tidak_hadir" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/tidak_hadir')?'active' : '' }}">Saksi Tidak Hadir</a>
+                <a href="{{url('')}}/administrator/enumerator_tidak_hadir" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/enumerator_tidak_hadir')?'active' : '' }}">Enumerator Tidak Hadir</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/saksi_ditolak" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/saksi_ditolak')?'active' : '' }}">Saksi Ditolak</a>
+                <a href="{{url('')}}/administrator/enumerator_ditolak" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/enumerator_ditolak')?'active' : '' }}">Enumerator Ditolak</a>
             </div>
 
         </div>
@@ -107,11 +118,7 @@
     <div class="col-md">
         <h4 class="fw-bold fs-4 mt-5 mb-0">
     
-            @if((string)Request::segment(3) != "tidak_hadir") 
-                {{$title}} &nbsp; <i class="fa fa-question-circle"  data-bs-placement="right" data-bs-toggle="tooltip" title="" data-bs-customClass="custom-tooltip" data-bs-original-title="Saksi yang terdaftar pada halaman ini merupakan saksi yang telah didaftarkan oleh tim sukses kandidat sebelum perhitungan dilakukan untuk menghindari saksi ilegal yang menyusup."></i>
-            @else
-                {{$title}} 
-            @endif
+            Jumlah Saksi Teregistrasi : {{$jumlah_saksi_teregistrasi}}
 
         </h4>
 

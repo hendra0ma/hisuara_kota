@@ -9,7 +9,7 @@
 <div class="page-header">
     <div class="row w-100">
         <div class="col-md">
-            <h1 class="page-title fs-1">Dashboard Hisuara</h1>
+            <h1 class="page-title fs-1">Detail Data Admin</h1>
         </div>
         {{-- <div class="col-md">
             <div class="ms-auto text-uppercase d-flex justify-content-end fs-1 fw-bold text-warning">Admin demography tracking  (ADT)</div>
@@ -41,7 +41,7 @@
                                     @else
                                     <span class="badge bg-danger  me-1 mb-1 mt-1">Offline</span>
                                     @endif
-                                    <p class="text-muted font-size-sm">{{$profile['address']}}</p>
+                                    {{-- <p class="text-muted font-size-sm">{{$profile['address']}}</p> --}}
                                 </div>
                             </div>
 

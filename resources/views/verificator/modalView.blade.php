@@ -85,10 +85,13 @@
         @endif
     </div>
 
-    <div class="row mt-2">
+    <div class="row mt-5">
         <div class="col-12">
             <div class="card">
-                <div class="card-body">
+                <div class="card-header bg-success">
+                    <h4 class="mb-0 mx-auto text-white card-title">Sisa Surat Suara</h4>
+                </div>
+                <div class="card-body p-0">
                     <table class="table table-striped">
                         <tr>
                             <td style="width: 33.3333333%">Total Surat Suara</td>
@@ -121,13 +124,13 @@
         </div>
     </div>
 
-    <div class="row" style="margin-top: 50px;">
+    {{-- <div class="row" style="margin-top: 50px;">
         <div class="col-12">
             <div class="alert alert-dark" role="alert">
                 <h1 class="mb-0">SISA SURAT SUARA: TPS {{$paslon[0]->saksi_data[0]->number}} / Kelurahan {{$village->name}}: 0</h1>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 <script>
     $(document).ready(function() {

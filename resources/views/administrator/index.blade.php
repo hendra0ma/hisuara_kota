@@ -623,68 +623,70 @@
 </style>
 <div class="row">
 
-    <div class="col-md-12">
+    <div class="col-md-12 mb-5">
         <div class="card mb-0">
-            <div class="card-header p-0" style="position: relative">
-                <button class="btn btn-kolapse"><i class="fa-solid fa-bars"></i></button> Menu
-                <script>
-                    $('.btn-kolapse').on('click', function() {
-                        $('.for-kolapse').toggle(500);
-                    })
-                </script>
+            <div class="card-header p-0" id="marquee1" style="position: relative">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend" style="background-color: #30304d">
+                        <button class="btn btn-kolapse text-white" style="background-color: #30304d"><i class="fa-solid fa-bars"></i></button>
+                        <button class="btn btn-danger text-white rounded-0 h-100">Suara Masuk</button>
+                    </div>
+                    <div class="form-control bg-dark" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                        <marquee id="cobamarq1">
+                            @foreach ($marquee as $item)
+                            <?php $kecamatan =  District::where('id', $item['districts'])->first(); ?>
+                            <?php $kelurahan =  Village::where('id', $item['villages'])->first(); ?>
+                            <?php $tps =  Tps::where('id', $item['tps_id'])->first(); ?>
+                            <span class="text-success">▼ </span><span class="text-white" style="font-size: 20px;">{{$item['name']}}
+                                Kecamatan {{$kecamatan['name']}}, Kelurahan {{$kelurahan['name']}}, TPS {{$tps['number']}}
+                            </span>
+                            @endforeach
+                        </marquee>
+
+
+                    </div>
+                </div>
             </div>
-            <div class="card-body for-kolapse">
+            <div class="card-body for-kolapse" style="background: #000">
                 <div class="row">
 
-                    <div class="col-md-7">
+                    <div class="col-md-10">
                         <div class="row">
 
-                            <div class="col-md-12">
+                            <div class="col-md-12 text-white tabulasi">
                                 <div class="row">
+                                    <div class="col-auto my-auto text-white">
+                                        <h4 class="mb-0">
+                                            Tabulasi
+                                        </h4>
+                                    </div>
                                     <div class="col py-2 judul text-center bg-secondary text-white"
                                         style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
-                                        <div class="text">Total TPS</div>
+                                        <div class="text">Total TPS : <b>{{ $total_tps }}</b></div>
                                     </div>
                                     <div class="col py-2 judul text-center bg-danger text-white">
-                                        <div class="text">TPS Masuk</div>
+                                        <div class="text">TPS Masuk : <b>{{ $tps_masuk }}</b></div>
                                     </div>
                                     <div class="col py-2 judul text-center bg-primary text-white">
-                                        <div class="text">TPS Kosong</div>
+                                        <div class="text">TPS Kosong : <b>{{ $tps_kosong }}</b></div>
                                     </div>
                                     <div class="col py-2 judul text-center bg-info text-white">
-                                        <div class="text">Suara Masuk</div>
+                                        <div class="text">Suara Masuk : <b>{{ $suara_masuk }}</b></div>
                                     </div>
                                     <div class="col py-2 judul text-center bg-success text-white"
                                         style="border-top-right-radius: 25px; border-bottom-right-radius: 25px">
-                                        <div class="text">Suara Terverifikasi</div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col h3 text-center">
-                                        <h4 class="mb-0 py-2">{{ $total_tps }}</h4>
-                                    </div>
-                                    <div class="col h3 text-center">
-                                        <h4 class="mb-0 py-2">{{ $tps_masuk }}</h4>
-                                    </div>
-                                    <div class="col h3 text-center">
-                                        <h4 class="mb-0 py-2">{{ $tps_kosong }}</h4>
-                                    </div>
-                                    <div class="col h3 text-center">
-                                        <h4 class="mb-0 py-2">{{ $suara_masuk }}</h4>
-                                    </div>
-                                    <div class="col h3 text-center">
-                                        <h4 class="mb-0 py-2">{{$total_verification_voice}}</h4>
+                                        <div class="text">Suara Terverifikasi : <b>{{$total_verification_voice}}</b></div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-12 mb-2 settings" style="display: none">
                                 {{-- Settings --}}
-                                <div class="row justify-content-between px-5 my-auto">
-                                    <div class="col-auto mt-2">
-                                        <h3 class="mb-0 fw-bold">
+                                <div class="row px-5 my-auto" style="gap: 25px">
+                                   <div class="col-auto mt-3 text-white">
+                                        <h4 class="mb-0"style="font-family:'Roboto' !important">
                                             Settings
-                                        </h3>
+                                        </h4>
                                     </div>
                                     <div class="col-auto mb-2">
                                         <div class="mid">
@@ -695,7 +697,7 @@
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
-                                        <div class="text-center" style="font-size:13px">
+                                        <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
                                             Multi
                                         </div>
                                     </div>
@@ -709,7 +711,7 @@
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
-                                        <div class="text-center" style="font-size:13px">
+                                        <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
                                             Otonom
                                         </div>
                                     </div>
@@ -722,7 +724,7 @@
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
-                                        <div class="text-center" style="font-size:13px">
+                                        <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
                                             Verifikasi
                                         </div>
                                     </div>
@@ -735,7 +737,7 @@
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
-                                        <div class="text-center" style="font-size:13px">
+                                        <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
                                             Publish C1
                                         </div>
                                     </div>
@@ -749,80 +751,88 @@
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
-                                        <div class="text-center" style="font-size:13px">
+                                        <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
                                             Lockdown
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                        </div>
-                    </div>
-
-                    
-                    <div class="col-md">
-                        <div class="row">
-                            <div class="col-12 text-center">
-                                <h4 class="mb-0">Urutan Suara Terbanyak</h4>
-                            </div>
-                        </div>
-                        <hr class="my-1" style="background-color: #00000036">
-                        <div class="row">
-                            <div class="col-4 text-center mb-2 fw-bold fs-3">
-                                <span style="-webkit-text-stroke: 0.75px black; color: #ffd700">1</span>
-                            </div>
-                            <div class="col-4 text-center mb-2 fw-bold fs-3">
-                                <span style="-webkit-text-stroke: 0.75px black; color: #c0c0c0">2</span>
-                            </div>
-                            <div class="col-4 text-center mb-2 fw-bold fs-3">
-                                <span style="-webkit-text-stroke: 0.75px black; color: #cd7f32">3</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            @foreach ($urutan as $urutPaslon)
-                                <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
-                                {{-- <div class="col-md"> --}}
-                                    <div class="col-4">
-                                        <div class="card shadow text-center mb-0 mx-auto" style="width: 170px; border: black 1px solid !important">
-                                            <div class="card-header py-2 px-0" style="background: {{ $pasangan->color }}">
-                                                <h3 class="card-title text-white mx-auto">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} </h3>
-                                            </div>
-                                            <div class="card-body p-1">
-                                                <div style="font-size: 18px">{{$urutPaslon->total}}</div>
+                            <div class="col-md suara"style="display: none">
+                                <div class="row">
+                                    <div class="col-auto my-auto text-white" >
+                                        <h4 class="mb-0">
+                                            Urutan Suara
+                                        </h4>
+                                    </div>
+                                    {{-- <div class="col-4 text-center mb-2 fw-bold fs-3">
+                                        <span style="-webkit-text-stroke: 0.75px #00000036; color: #ffd700">1</span>
+                                    </div>
+                                    <div class="col-4 text-center mb-2 fw-bold fs-3">
+                                        <span style="-webkit-text-stroke: 0.75px #00000036; color: #c0c0c0">2</span>
+                                    </div>
+                                    <div class="col-4 text-center mb-2 fw-bold fs-3">
+                                        <span style="-webkit-text-stroke: 0.75px #00000036; color: #cd7f32">3</span>
+                                    </div> --}}
+                                    @foreach ($urutan as $urutPaslon)
+                                        <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
+                                        {{-- <div class="col-md"> --}}
+                                        <div class="col-auto">
+                                            <div class="card shadow text-center mb-0 mx-auto mt-1 border-0">
+                                                <div class="card-header pt-1 pb-1 px-2 border-0" style="background: {{ $pasangan->color }}">
+                                                    <span class="card-title text-white mx-auto">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} : {{$urutPaslon->total}}</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                {{-- </div> --}}
-                            @endforeach
+                                        {{-- </div> --}}
+                                    @endforeach
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
+                    <div class="col-md">
+                        <div class="row h-100">
+                            <div class="col-md justify-content-end">
+                                <button class="mx-auto btn btn-success w-100 h-100 tugel-kolaps"data-target="suara">
+                                    <i class="fa-solid fa-ranking-star"></i>
+                                </button>
+                            </div>
+                            <div class="col-md justify-content-end">
+                                <button class="mx-auto btn btn-success w-100 h-100 tugel-kolaps"data-target="tabulasi">
+                                    <i class="fa-solid fa-database"></i>
+                                </button>
+                            </div>
+                            <div class="col-md justify-content-end">
+                                <button class="mx-auto btn btn-success w-100 h-100 tugel-kolaps"data-target="settings">
+                                    <i class="fa-solid fa-gear"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                   
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="col-12 mb-3" id="marquee1">
-        <div class="input-group input-group-sm">
-            <div class="input-group-prepend">
-                <button class="btn btn-danger text-white rounded-0 mt-3">Suara Masuk</button>
-            </div>
-            <div class="form-control mt-3 bg-dark" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                <marquee id="cobamarq1">
-                    @foreach ($marquee as $item)
-                    <?php $kecamatan =  District::where('id', $item['districts'])->first(); ?>
-                    <?php $kelurahan =  Village::where('id', $item['villages'])->first(); ?>
-                    <?php $tps =  Tps::where('id', $item['tps_id'])->first(); ?>
-                    <span class="text-success">▼ </span><span class="text-white" style="font-size: 20px;">{{$item['name']}}
-                        Kecamatan {{$kecamatan['name']}}, Kelurahan {{$kelurahan['name']}}, TPS {{$tps['number']}}
-                    </span>
-                    @endforeach
-                </marquee>
+                <script>
+                    $('.btn-kolapse').on('click', function() {
+                        $('.for-kolapse').toggle(500);
+                    })
 
+                    $('.tugel-kolaps').on('click', function() {
+
+                        let target = $(this).data('target')
+                        console.log(target)
+                        $('.suara, .settings, .tabulasi').hide()
+                        $(`.${target}`).show(200)
+                    })
+
+                </script>
 
             </div>
         </div>
     </div>
+
     {{-- <div class="col-md-3 mb-4 pe-1">
         <div class="card mb-0">
             <div class="card-header py-1">

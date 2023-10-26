@@ -58,12 +58,11 @@ $tps = Tps::count();
 
 <div class="row">
 
-    <div class="row">
         <div class="col-lg-12">
            <center>
-            <h3 class="page-title mt-1 mb-0" style="font-size: 60px">
+            <h2 class="page-title mt-1 mb-0" style="font-size: 60px">
                 QUICK COUNT
-            </h3>
+            </h2>
             <h4 class="mt-2">
                 {{ $kota['name'] }}
             </h4>
@@ -248,7 +247,7 @@ $tps = Tps::count();
                 </div>
             </div>
         </div>
-    </div>
+        
 </div>
 
 

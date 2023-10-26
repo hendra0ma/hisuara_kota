@@ -268,6 +268,7 @@ $tps = 2963;
                             <li><a href="#" class="fs-5 slide-item text-white fs-6">Suara Tidak Sah</a></li>
                             <li><a href="#" class="fs-5 slide-item text-white fs-6">Sisa Surat Suara</a></li>
                             <hr>
+                            <li><a href="{{url('')}}/administrator/r-data" class="fs-5 slide-item text-white fs-6">Realisasi DPT</a></li>
                             <li><a href="{{url('')}}/administrator/r-data" class="fs-5 slide-item text-white fs-6">Riwayat</a></li>
                         </ul>
                     </li>
@@ -581,54 +582,6 @@ $tps = 2963;
                         <a class="side-menu__item" href="/v2l_security/{{encrypt(24)}}?title=Mahkamah Konstitusi (MK)"><i
                                 class="side-menu__icon fa fa-gavel"></i><span class="side-menu__label">Mahkamah Konstitusi (MK)</span></a>
                     </li> -->
-
-                    <li class="slide">
-
-                        <a class="side-menu__item" data-bs-toggle="slide" href="#"><i
-                                class="side-menu__icon fa-solid fa-gears"></i><span class="side-menu__label">Pengaturan</span><i
-                                class="angle fa fa-angle-right"></i></a>
-                        <ul class="slide-menu">
-                            <li><a href="#modalCommander" data-bs-toggle="modal"
-                            data-jenis="setting" data-izin="multi_admin" data-title="Multi Admin"
-                            data-deskripsi="Mode Multi Administrator adalah fitur dimana Administrator dapat login di beberapa device pada saat bersamaan." 
-                            class="slide-item">Mode Multi Admin</a></li>
-
-                            <li><a href="#modalCommander" data-bs-toggle="modal"
-                            data-jenis="setting" data-izin="otonom" data-title="Mode Otonom"
-                            data-deskripsi="Mode Otonom adalah sistem Hisuara yang berjalan tanpa admin dan hanya menampilkan perolehan suara yang dikirim oleh saksi." 
-                            class="slide-item">Mode Otonom</a></li>
-
-                            <li><a href="#modalCommander" data-bs-toggle="modal" data-jenis="redirect"
-                            data-izin="{{url('')}}/administrator/patroli_mode/tracking/maps"
-                            data-title="Lacak Admin" data-deskripsi="Lacak Admin adalah sistem untuk melacak posisi admin berdasarkan demografi wilayah pemilihan."
-                            class="slide-item">Mode Patroli</a></li>
-
-                            <li><a href="#modalCommander" href="#modalCommander" data-bs-toggle="modal"
-                            data-jenis="setting" data-izin="lockdown" data-title="Mode Lockdown"
-                            data-deskripsi="Mode Lockdown adalah penutupan sementara seluruh admin. Status lockdown terjadi biasanya karena ada serangan hacker dan atau proses perhitungan yang telah dinyatakan selesai."
-                            class="slide-item">Mode Lockdown</a></li>
-
-                            <li><a href="#modalCommander" data-bs-toggle="modal"
-                            data-jenis="setting" data-izin="show_terverifikasi" data-title="Mode Verifikasi Publik"
-                            data-deskripsi="Mode Verifikasi adalah publikasi data terverifikasi untuk dilihat pada publik. Hasil suara terverifikasi bisa lebih rendah, lebih tinggi ataupun sama dengan suara masuk."
-                            class="slide-item">Mode Verifikasi</a></li>
-
-                            <li><a href="#modalCommander" href="#modalCommander" data-bs-toggle="modal"
-                            data-jenis="setting" data-izin="show_public" data-title="Mode C1 Publik"
-                            data-deskripsi="Mode Publikasi C1 adalah mode untuk menampilkan lampiran C1 kepada publik atau masyarakat melalui Hisuara.id"
-                            class="slide-item">Mode Publikasi C1</a></li>
-
-                            <li><a href="#modalCommander" data-bs-toggle="modal" data-jenis="redirect"
-                            data-izin="{{url('')}}/administrator/r-data" data-title="Data Tracking" data-deskripsi="Anda membutuhkan izin commander untuk mengakses halaman ini."
-                            class="slide-item">Mode Tracking</a></li>
-
-                            <li><a href="#modalCommander" data-bs-toggle="modal"
-                            data-jenis="setting" data-izin="master_data_tps" data-title="Mode Data TPS"
-                            data-deskripsi="Mode Data C1 adalah mode untuk menampilkan Data rekam Rekam C1"
-                            class="slide-item">Mode Data C1</a></li>
-
-                        </ul>
-                    </li>
 
                     {{-- <li>
                         <h3>Pengaturan</h3>
