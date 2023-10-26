@@ -83,19 +83,20 @@
 <body>
 
     <div class="phone">
-        
+        @if (Auth::user()->absen == "hadir")
+        @else
         <div alt="home" class="content show">
-
             <livewire:absensi-saksi>
         </div>
-        <div alt="work" class="content">
+        @endif
+        <div alt="work" class="content {{Auth::user()->absen == 'hadir'?'show':''}}">
             <livewire:upload-c1>
 
         </div>
-        <div alt="blog" class="content">
+        <div alt="blog" class="content ">
             <livewire:surat-suara>
         </div>
-        <div alt="blog" class="content">
+        <div alt="blog" class="content ">
             <livewire:clainnya>
         </div>
 
@@ -104,10 +105,13 @@
 
         <nav class="position-fixed">
             <ul>
+            @if (Auth::user()->absen == "hadir")
+        @else
                 <li class="active">
                     <i class="fas fa-home"></i>
                     <p>Absensi</p>
                 </li>
+                @endif
                 <li>
                     <i class="fas fa-box"></i>
                     <p>Upload C1</p>

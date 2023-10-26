@@ -90,7 +90,7 @@
             <div class="col-lg-10 mt-5">
                 <div class="card">
                 <h4 class="mt-5 text-center">
-                                <img class="card-img-top" style="width: 150px;" src="{{asset('assets/images/brand/logo_gold.png')}}" alt="">
+                                <img class="card-img-top bg-dark rounded-3" style="width: 150px;" src="{{asset('images/logo/hisuara.png')}}" alt="">
                             </h4>
                             <h4 class="card-title text-center"> {{$config['jenis_pemilu']}} TAHUN  {{$config['tahun']}} <br> {{$kota->name}}</h4>
                     <div class="row justify-content-center">
@@ -159,32 +159,31 @@
                 </div>
                 <div class="card bg-primary rounded-0">
       
-        <div class="card-body text-center">
-            <h5 class="card-title"><img width="150px" src="../../assets/images/brand/logo.png" alt=""></h5>
-            <div class="row no-gutters mx-auto mt-5" style="width: 350px;">
-                <div class="col"><a href="https://facebook.com/" type="button" class="rounded-0 btn btn-facebook"><i class="fa fa-facebook me-2"></i>Facebook</a></div>
-                <div class="col"><a href="https://twitter.com/" type="button" class="rounded-0 btn btn-twitter"><i class="fa fa-twitter me-2"></i>Twitter</a></div>
-                <div class="col"><a href="https://wa.me/6281235757667" type="button" class="rounded-0 btn btn-success"><i class="fa fa-whatsapp me-2"></i>Whatsapp</a></div>
-            </div>
-            <div class="row mt-5 text-white">
-                <div class="col">
-                    <a class="text-white fw-bold" href="{{url('')}}/login">Login</a> |
-                    <a class="text-white fw-bold" href="{{url('')}}/relawan">Relawan</a> |
-                    <!-- <a class="text-white fw-bold" href="{{url('')}}/publik/history">History</a> | -->
-                    <a class="text-white fw-bold" href="https://disclaimer.rekapitung.id">Disclaimer</a> |
-                    <!-- <a class="text-white fw-bold" href="{{url('')}}/publik/fraud">Fraud</a> | -->
-                    <a class="text-white fw-bold" href="https://Info.rekapitung.id">Info</a>
+                <div class="card-body text-center">
+                    <h5 class="card-title"><img width="150px" src="{{asset('images/logo/hisuara.png')}}" alt=""></h5>
+                    <div class="row no-gutters mx-auto mt-5" style="width: 350px;">
+                        <!-- <div class="col"><a href="https://facebook.com/" type="button" class="rounded-0 btn btn-facebook"><i class="fa fa-facebook me-2"></i>Facebook</a></div>
+                        <div class="col"><a href="https://twitter.com/" type="button" class="rounded-0 btn btn-twitter"><i class="fa fa-twitter me-2"></i>Twitter</a></div>
+                        <div class="col"><a href="https://wa.me/6281235757667" type="button" class="rounded-0 btn btn-success"><i class="fa fa-whatsapp me-2"></i>Whatsapp</a></div> -->
+                    </div>
+                    <div class="row mt-5 text-white">
+                        <div class="col">
+                            <a class="text-white fw-bold" href="{{url('')}}/login">Login</a> |
+                            <a class="text-white fw-bold" href="{{url('')}}/relawan">Relawan</a> |
+                            <!-- <a class="text-white fw-bold" href="{{url('')}}/publik/history">History</a> | -->
+                            <a class="text-white fw-bold" href="https://disclaimer.rekapitung.id">Disclaimer</a> |
+                        
+                        </div>
+                    </div>
+
+                    <div class="row mt-5 text-white">
+                        <div class="col">
+                            <b>© PT. Hisuara.id</b>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-
-            <div class="row mt-5 text-white">
-                <div class="col">
-                    <b>© PT. Mahadaya Swara Semesta <br> All Rights Reserved 2022</b>
-                </div>
-            </div>
-
-        </div>
-    </div>
             </div>
 
         </div>

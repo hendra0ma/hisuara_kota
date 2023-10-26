@@ -49,7 +49,6 @@
                                 <div class="d-grid gap-2">
                                     <input type="submit" name="" class="btn btn-block btn-primary mt-2" value="Kirim Status Kehadiran" id="send">
                                 </div>
-
                             </div>
                         </form>
 

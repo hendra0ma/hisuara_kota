@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Config;
 use App\Models\District;
+use App\Models\Paslon;
 use App\Models\Regency;
 use App\Models\Relawan;
+use App\Models\RelawanData;
 use App\Models\Tps;
 use App\Models\User;
 use App\Models\Village;
@@ -113,9 +115,6 @@ class RelawanController extends Controller
     }
     public function uploadC1Banding(Request $request)
     {
-
-        
-
         Validator::make($request->all(), [
             'c1_images' => 'required|mimes:png,jpg|max:2048',
         ]);
@@ -141,7 +140,8 @@ class RelawanController extends Controller
     }
     public function c1relawan()
     {
-        return view('publik.relawan.uploadc1relawan');
+        $data['paslon'] = Paslon::get();
+        return view('publik.relawan.uploadc1relawan',$data);
     }
     public function c1banding()
     {
@@ -151,25 +151,47 @@ class RelawanController extends Controller
     {
         Validator::make($request->all(), [
             'c1_images' => 'required|mimes:png,jpg|max:2048',
-        ]);
+            'suara.*' => 'required',
+        ]);  
         
         $config = Config::first();
         $user  = Auth::user();
+
+        $paslon = Paslon::select('id')->get();
+
         if ($files = $request->file('c1_images')) {
             $file =  $request->file('c1_images')->store('public/storage/c1_plano');
         }else{
             return redirect()->back()->with(['error'=>'error saat mengupload file']);
         }
+        // $regency = Regency::where('id',Auth::user()->district_id)->first();
+
         $upload_relawan = new Relawan;
         $upload_relawan->c1_images = $file;
         $upload_relawan->regency_id = $config->regencies_id;
         $upload_relawan->district_id = $user->districts;
         $upload_relawan->village_id = $user->villages;
         $upload_relawan->tps_id = $user->tps_id;
-        $upload_relawan->status = 0;
+        $upload_relawan->status = 1;
         $upload_relawan->relawan_id = $user->id;
         $upload_relawan->jenis = 'relawan';
         $upload_relawan->save();
+        $id = $upload_relawan->id;
+
+        $i = 0;
+        foreach ($paslon as $pas) {
+            $relawan_data = new RelawanData;
+            $relawan_data->relawan_id = $id;
+            $relawan_data->c1_relawan_id = $id;
+            $relawan_data->paslon_id = $pas->id;
+            $relawan_data->village_id = Auth::user()->village_id;
+            $relawan_data->regency_id = $config->regencies_id;
+            $relawan_data->district_id = Auth::user()->district_id;
+            $relawan_data->voice = $request->suara[$i];
+            $relawan_data->save();
+            $i++;
+        }
+
         return redirect()->back()->with(['success' => 'berhasil saat upload c1 relawan']);
     }
     public function getTps(Request $req)
