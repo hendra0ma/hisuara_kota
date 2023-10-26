@@ -755,6 +755,20 @@
                                             Lockdown
                                         </div>
                                     </div>
+
+                                    <div class="col-md-auto">
+                                        <div class="mid">
+                                            <label class="switch">
+                                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('quick_count',this)"
+                                                    {{($config->quick_count == "no") ? "":"checked"; }}>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                        <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
+                                            Quick Count
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
 
