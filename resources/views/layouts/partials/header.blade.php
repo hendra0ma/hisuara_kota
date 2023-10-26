@@ -1,11 +1,8 @@
-<!-- Mobile Header -->
 <div class="app-header header">
     <div class="container-fluid">
 
+        <div class="d-flex" style="position: relative">
 
-
-
-        <div class="d-flex">
             <!-- <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="#"></a> -->
             <!-- sidebar-toggle-->
             <!-- <a class="header-brand1 d-flex d-md-none">
@@ -93,7 +90,7 @@
                     </div>
                 </div><!-- MESSAGE-BOX -->
                 <div class="dropdown d-none d-md-flex profile-1">
-                    <a href="#" data-bs-toggle="dropdown" class="nav-link pe-2 leading-none d-flex">
+                    <a href="#" data-bs-toggle="dropdown" class="nav-link pt-0 leading-none d-flex">
                         <span>
                             @if (Auth::user()->profile_photo_path == NULL)
                             <img class="avatar profile-user brround" style="object-fit: cover" src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF" alt="profile-user">
@@ -180,7 +177,7 @@
                 </div>
             </div><!-- MESSAGE-BOX -->
             <div class="dropdown d-md-flex profile-1">
-                <a href="#" data-bs-toggle="dropdown" class="nav-link pe-2 leading-none d-flex">
+                <a href="#" data-bs-toggle="dropdown" class="nav-link pe-2 leading-none d-flex pt-0">
                     <span>
                         @if (Auth::user()->profile_photo_path == NULL)
                         <img class="avatar profile-user brround" style="object-fit: cover" src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF" alt="profile-user">

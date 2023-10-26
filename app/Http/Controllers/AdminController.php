@@ -248,6 +248,13 @@ class AdminController extends Controller
         return view('administrator.verifikasi.verifikasi_akun', $data);
     }
 
+    public function dataC1()
+    {
+        $data['config'] = Config::first();
+        $data['jumlah_c1'] = Saksi::count();
+        return view('administrator.perdataan.data-c1', $data);
+    }
+
     public function admin_terverifikasi()
     {
         $data['config'] = Config::first();
@@ -302,11 +309,14 @@ class AdminController extends Controller
     {
         $data['config'] = Config::first();
         $data['saksi_data'] = Saksi::join('users', 'users.tps_id', '=', 'saksi.tps_id')->where('koreksi', 1)->get();
-        $data['village'] = Village::where('id', $data['saksi_data'][0]->village_id)->first();
+        // $data['village'] = Village::where('id', $data['saksi_data'][0]->village_id)->first();
         $data['total_tps']   =  Tps::where('setup','belum terisi')->count();
         $data['tracking'] = ModelsTracking::get();
         $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->count();
         $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
+        if (count($data['saksi_data']) > 0) {
+            $data['village'] = Village::where ('id', $data['saksi_data'][0]->village_id)->first();
+        }
         return view('administrator.verifikasi.verifikasi_koreksi', $data);
 
     }

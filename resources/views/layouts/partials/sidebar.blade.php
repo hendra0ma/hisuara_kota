@@ -253,7 +253,7 @@ $tps = 2963;
                     <li>
                         <a class="metro-tabs" href="#" data-bs-toggle="slide"><span class="side-menu__label fs-3">DOKUMENTASI</span></a>
                         <ul class="slide-menu">
-                            <li><a href="#" class="fs-5 slide-item text-white">Data C1</a></li>
+                            <li><a href="{{url('')}}/administrator/data-c1" class="fs-5 slide-item text-white">Data C1</a></li>
                             <li><a href="#" class="fs-5 slide-item text-white">Data C2</a></li>
                             <li><a href="#" class="fs-5 slide-item text-white">Data C3</a></li>
                             <li><a href="#" class="fs-5 slide-item text-white">Data C4</a></li>
@@ -267,6 +267,8 @@ $tps = 2963;
                             <li><a href="#" class="fs-5 slide-item text-white fs-6">Surat Suara Sah</a></li>
                             <li><a href="#" class="fs-5 slide-item text-white fs-6">Suara Tidak Sah</a></li>
                             <li><a href="#" class="fs-5 slide-item text-white fs-6">Sisa Surat Suara</a></li>
+                            <hr>
+                            <li><a href="{{url('')}}/administrator/r-data" class="fs-5 slide-item text-white fs-6">Riwayat</a></li>
                         </ul>
                     </li>
                     
