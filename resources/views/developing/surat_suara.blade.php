@@ -93,8 +93,8 @@
 
         <div class="row justify-content-center">
             <div class="col-lg-5">
-                <div class="card border-0 shadow-lg  bg-dark  text-light g">
-                    <div class="card-body shadow-lg  bg-dark  text-light ">
+                <div class="card border-0 shadow-lg  bg-dark  text-light">
+                    <div class="card-body shadow-lg  bg-dark  text-light">
 
                         <!-- As a link -->
                         <nav class="navbar bg-primary py-1">
@@ -146,8 +146,23 @@
                                             </div>
                                         </div>
                                     </div>
-                                   
-                                    <input type="submit" class="btn btn-block btn-primary mt-2" value="Kirim" id="send">
+                                    <div class="col-lg-12">
+                                        <label class="mt-2" for="total_surat_suara">Total Surat Suara</label>
+                                        <input type="number" class="form-control" id="total_surat_suara" name="total_surat_suara" required>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <label class="mt-2" for="surat_suara_terpakai">Surat Suara Terpakai</label>
+                                        <input type="number" class="form-control" id="surat_suara_terpakai" name="surat_suara_terpakai" required>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <label class="mt-2" for="surat_suara_tidak_sah">Surat Suara Tidak Sah</label>
+                                        <input type="number" class="form-control" id="surat_suara_tidak_sah" name="surat_suara_tidak_sah" required>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <label class="mt-2" for="sisa_surat_suara">Sisa Surat Suara</label>
+                                        <input type="number" class="form-control" id="sisa_surat_suara" name="sisa_surat_suara" required>
+                                        <input type="submit" class="btn btn-block btn-primary mt-2" value="Kirim" id="send">
+                                    </div>
 
                                 </div>
 

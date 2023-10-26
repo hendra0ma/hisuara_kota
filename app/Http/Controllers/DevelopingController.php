@@ -16,9 +16,12 @@ use App\Models\Bukti_deskripsi_curang;
 use App\Models\Buktifoto;
 use App\Models\Buktividio;
 use App\Models\Config;
+use App\Models\DataSaksiC;
 use App\Models\District;
 use App\Models\Province;
 use App\Models\Regency;
+use App\Models\SaksiC;
+use App\Models\SuratSuara;
 use App\Models\Tracking;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -39,23 +42,18 @@ class DevelopingController extends Controller
 
 
         $this->validate($request,[
-            'total_surat_suara' => "required|numeric",
-            'surat_suara_tidak_sah' => "required|numeric",
-            'surat_suara_terpakai' => "required|numeric",
-            'sisa_surat_suara' => "required|numeric",
+            'suara.*' => "required|numeric",
             
         ]);
+        $district = District::where('id',Auth::user()->districts)->first();
+        $regency = Regency::where("id",$district->regency_id)->first();
 
         $config =  Config::find(1);
 
-        $prov = Province::where('id', $config['provinces_id'])->first();
-        $reg = Regency::where('province_id', $prov->id)->first();
-        $dis = District::where('regency_id', $reg['id'])->first();
-        $villages = Village::where('district_id', $dis['id'])->first();
+        
         $villagee =   Auth::user()->villages;
-        $images = $request->file('c1_plano')->store('c1_plano');
-        $paslon = Paslon::get();
-        $count = count($paslon);
+        $count = Paslon::count();
+    
         $error = false;
         $jumlah = 0;
         foreach ($request->suara as $suara) {
@@ -71,40 +69,131 @@ class DevelopingController extends Controller
         $tps = Tps::where('id', Auth::user()->tps_id)->first();
 
         $userrss = User::where('email', $request['email'])->first();
-        Tps::where('id', $tps['id'])->update(
-            [
-                'user_id' =>  $userrss['id'],
-                'setup' => 'terisi',
-            ]
-        );
-        $userss = User::where('id', $userrss['id'])->update([
-            'tps_id' => $tps['id']
-        ]);
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        if ($request->file('c1_plano')) {
+            $image = $request->file('c1_plano');
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $randomString = substr(str_shuffle($characters), 0, 13); // Menghasilkan string acak sepanjang 10 karakter
+            $c1_plano = time()  . $randomString  .".". $image->getClientOriginalExtension();
+            $image->move(public_path('storage/c1_plano'), $c1_plano);
+        } else {
+            return redirect()->back()->with("error", 'gagal mengupload data C1 Plano');
+        }
+
         $saksi = new Saksi;
-        $saksi->c1_images = $images;
+        $saksi->c1_images = $c1_plano;
         $saksi->verification = "";
         $saksi->audit = "";
         $saksi->district_id = Auth::user()->districts;
         $saksi->batalkan = "0";
         $saksi->village_id =  $villagee;
-        $saksi->tps_id = $tps['id'];
-        $saksi->regency_id = 3674;
         $saksi->overlimit = 0;
+        $saksi->tps_id = Auth::user()->tps_id;
+        $saksi->regency_id = $regency->id;
+
         $saksi->save();
         $ide = $saksi->id;
+        $paslon = Paslon::get();
+        // for ($i = 0; $i < $count; $i++) {
+            $i = 0;
+            foreach ($paslon as $item) {
+                
+                SaksiData::create([
+                    'user_id' =>  $userrss['id'],
+                    'paslon_id' =>  $item->id,
+                    'district_id' => Auth::user()->districts,
+                    'village_id' =>  $villagee,
+                    'regency_id' => $regency->id,
+                    'voice' =>  (int)$request->suara[$i++],
+                    'saksi_id' => $ide,
+                ]);
+            }
+        // }
+        return redirect()->route('dashboard.saksi2');
+    }
 
-        for ($i = 0; $i < $count; $i++) {
-            SaksiData::create([
-                'user_id' =>  $userrss['id'],
-                'paslon_id' =>  $i,
-                'district_id' => Auth::user()->districts,
-                'village_id' =>  $villagee,
-                'regency_id' => $reg->id,
-                'voice' =>  (int)$request->suara[$i],
-                'saksi_id' => $ide,
-            ]);
+
+    public function action_saksi_c(Request $request)
+    {
+        $this->validate($request,[
+            'suara.*' => "required|numeric",
+            
+        ]);
+        $district = District::where('id',Auth::user()->districts)->first();
+        $regency = Regency::where("id",$district->regency_id)->first();
+
+        $config =  Config::find(1);
+
+        
+        $villagee =   Auth::user()->villages;
+        $count = Paslon::count();
+    
+        $error = false;
+        $jumlah = 0;
+        foreach ($request->suara as $suara) {
+            $jumlah += $suara;
         }
-        return redirect('upload_c1');
+        if ((int)$jumlah > 300) {
+            $error = true;
+        }
+        if ($error) {
+            return redirect()->back()->with('error', 'data tidak boleh lebih dari 300');
+        }
+
+        $tps = Tps::where('id', Auth::user()->tps_id)->first();
+
+        $userrss = User::where('email', $request['email'])->first();
+
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        if ($request->hasFile('c1_plano')) {
+            $c1_plano = $request->file('c1_plano');
+            $pathFotoArray = [];
+            foreach ($c1_plano as $image) {
+                $randomString = substr(str_shuffle($characters), 0, 15); // Menghasilkan string acak sepanjang 10 karakter
+                $imageName = time()  . $randomString  .".".  $image->getClientOriginalName();
+                $image->move(public_path('storage/c_images'), $imageName);
+                $pathFotoArray[] = $imageName;
+            }
+            $namaFoto = implode('|',$pathFotoArray);
+        }
+
+    
+        $saksi = new SaksiC;
+        $saksi->c_images = $namaFoto;
+        $saksi->district_id = Auth::user()->districts;
+        $saksi->village_id =  $villagee;
+        $saksi->tps_id = $tps['id'];
+        $saksi->regency_id = $regency->id;
+        $saksi->tipe = $request->input('tipe');
+        $saksi->save();
+        $ide = $saksi->id;
+        $paslon = Paslon::get();
+            $i = 0;
+            foreach ($paslon as $item) {
+                DataSaksiC::create([
+                    'user_id' => Auth::user()->id,
+                    'paslon_id' =>  $item->id,
+                    'district_id' => Auth::user()->districts,
+                    'village_id' =>  $villagee,
+                    'regency_id' => $regency->id,
+                    'voice' =>  (int)$request->suara[$i++],
+                    'saksi_id' => $ide,
+                ]);
+            }
+        // }
+        return redirect()->route('dashboard.saksi2');
+    }
+
+    function uploadSuratSuara(){
+        
+        // if (Auth::user()->absen == "hadir") {
+        //     return redirect()->route('upload_c1');
+        // }
+        $data['kelurahan'] = Village::where('id', Auth::user()->villages)->first();
+        $data['paslon'] = Paslon::get();
+        $data['dev'] = User::join('tps', 'tps.id', '=', 'users.tps_id')->first();
+
+        return view('developing.surat_suara');
     }
 
 
@@ -118,10 +207,47 @@ class DevelopingController extends Controller
         $data['paslon'] = Paslon::get();
         $data['dev'] = User::join('tps', 'tps.id', '=', 'users.tps_id')->first();
 
-
-
         return view('developing.absensi_saksi', $data);
     }
+
+    function actionSuratSuara(Request $request)
+    {
+       $validator = Validator::make($request->all(),[
+            "total_surat_suara"=>"required|numeric",
+            "surat_suara_tidak_sah"=>"required|numeric",
+            "surat_suara_terpakai"=>"required|numeric",
+            "sisa_surat_suara"=>"required|numeric",
+            "surat_suara.*" => 'image|mimes:jpeg,png,jpg,gif'
+        ]);
+
+        if($validator->fails()){
+             return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        if ($request->hasFile('surat_suara')) {
+            $surat_suara = $request->file('surat_suara');
+            $pathFotoArray = [];
+            foreach ($surat_suara as $image) {
+                $randomString = substr(str_shuffle($characters), 0, 15); // Menghasilkan string acak sepanjang 10 karakter
+                $imageName = time()  . $randomString  .".".  $image->getClientOriginalName();
+                $image->move(public_path('storage/surat_suara'), $imageName);
+                $pathFotoArray[] = $imageName;
+            }
+            $namaFoto = implode('|',$pathFotoArray);
+        }
+        SuratSuara::insert([
+            "total_surat_suara"=>$request->input("total_surat_suara"),
+            "surat_suara_tidak_sah"=>$request->input("surat_suara_tidak_sah"),
+            "surat_suara_terpakai"=>$request->input("surat_suara_terpakai"),
+            "sisa_surat_suara"=>$request->input("sisa_surat_suara"),
+            "foto_surat_suara"=>$namaFoto
+        ]);
+    
+        return redirect()->back()->with('success', 'Surat Suara Berhasil di Upload');
+        
+    }
+
 
 
     function actionAbsensiSaksi(Request $request)
@@ -142,7 +268,7 @@ class DevelopingController extends Controller
             $foto_profil = time()  . $randomString  .".". $image->getClientOriginalExtension();
             $image->move(public_path('storage/absensi'), $foto_profil);
         } else {
-            return redirect()->back()->with("success", 'gagal mengupload data absensi');
+            return redirect()->back()->with("error", 'gagal mengupload data absensi');
         }
 
       
@@ -347,8 +473,10 @@ class DevelopingController extends Controller
         $data['kelurahan'] = Village::where('id', $villagee)->first();
         $data['paslon'] = Paslon::get();
         $cekSaksi = Saksi::where('tps_id', Auth::user()->tps_id)->count('id');
-     
-            return view('developing.c1_plano', $data);
+        if( $cekSaksi == null){
+            return view('developing.c1_plano',$data);
+        }
+        return redirect()->route('uploadSuratSuara');
     
     }
     public function c1_quickcount()

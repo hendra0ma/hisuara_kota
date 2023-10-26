@@ -175,14 +175,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
-        Route::get('/all-c1-plano',function ()
-        {
-           return view('administrator.all_c1'); 
+        Route::get('/all-c1-plano', function () {
+            return view('administrator.all_c1');
         });
 
-        Route::get('/all-c1-relawan',function ()
-        {
-           return view('administrator.all_c1_relawan'); 
+        Route::get('/all-c1-relawan', function () {
+            return view('administrator.all_c1_relawan');
         });
 
         Route::post('settings-theme', [AdminController::class, 'theme'])->name('theme');
@@ -333,11 +331,11 @@ Route::group(['middleware' => 'role:huver', 'prefix' => 'huver', 'as' => 'huver.
         Route::get('verifikasi_saksi', 'verifikasi_saksi');
         Route::get('ajax/get_verifikasi_saksi', 'get_verifikasi_saksi');
         Route::get('ajax/get_verifikasi_akun', 'get_verifikasi_akun');
-         Route::get('verifikasi_koreksi', 'verifikasi_koreksi');
-         Route::get('ajax/get_koreksi_saksi', 'get_koreksi_saksi');
+        Route::get('verifikasi_koreksi', 'verifikasi_koreksi');
+        Route::get('ajax/get_koreksi_saksi', 'get_koreksi_saksi');
         Route::post('action_verifikasi/{id}', 'action_verifikasi');
-            Route::post('action_setujui/{id}', 'action_setujui');
-            Route::get('tolak_koreksi/{id}', 'tolak_koreksi');
+        Route::post('action_setujui/{id}', 'action_setujui');
+        Route::get('tolak_koreksi/{id}', 'tolak_koreksi');
     });
 });
 //rekapitulator
@@ -499,8 +497,18 @@ Route::controller(PublicController::class)->group(function () {
     // Route::get('/relawan','index');
 });
 
-Route::get("absensi-saksi",[DevelopingController::class,'absensiSaksi'])->middleware('role:saksi')->name('absensiSaksi');
-Route::post("action_absen_saksi",[DevelopingController::class,'actionAbsensiSaksi'])->middleware('role:saksi')->name('actionAbsensiSaksi');
+Route::get("absensi-saksi", [DevelopingController::class, 'absensiSaksi'])->middleware(['auth', 'role:saksi'])->name('absensiSaksi');
+
+Route::get("upload-surat-suara", [DevelopingController::class, 'uploadSuratSuara'])->middleware(['auth', 'role:saksi'])->name('uploadSuratSuara');
+
+Route::post("action_absen_saksi", [DevelopingController::class, 'actionAbsensiSaksi'])->middleware(['auth', 'role:saksi'])->name('actionAbsensiSaksi');
+Route::post("action-surat-suara", [DevelopingController::class, 'actionSuratSuara'])->middleware(['auth', 'role:saksi'])->name('actionSuratSuara');
+
+
+Route::get('/saksi-dashboard', function () {
+    
+    return view('developing.template_phone.phone');
+})->middleware(['auth', 'role:saksi'])->name('dashboard.saksi2');
 
 Route::controller(RelawanController::class)->group(function () {
     Route::get('relawan', 'index');
@@ -580,16 +588,16 @@ Route::get('/factory_user', function () {
 Route::get('/factory_saksi', function () {
     $faker = Faker\Factory::create();
     $config = Config::first();
-    $dis_id =  (string) $config->regencies_id."010";
-    $villages = Village::where('district_id',$dis_id)->first();
-    $tps = Tps::where('villages_id','LIKE','%'.(string)  $dis_id.'%')->where('setup','belum terisi')->limit(3)->get();
+    $dis_id =  (string) $config->regencies_id . "010";
+    $villages = Village::where('district_id', $dis_id)->first();
+    $tps = Tps::where('villages_id', 'LIKE', '%' . (string)  $dis_id . '%')->where('setup', 'belum terisi')->limit(3)->get();
     $i = 1;
-    
+
     foreach ($tps as $key) {
         $user = new User;
         $user->nik = $faker->creditCardNumber;
         $user->name = $faker->name;
-        $user->email = "adminSaksi".$i."@gmail.com";
+        $user->email = "adminSaksi" . $i . "@gmail.com";
         $user->role_id = 8;
         $user->no_hp = $faker->phoneNumber;
         $user->password = Hash::make('admin');
@@ -606,30 +614,27 @@ Route::get('/factory_saksi', function () {
         $i++;
     }
 
-   $get_data = User::where('email','LIKE','%adminSaksi%')->get();
-   dd($get_data);
-
+    $get_data = User::where('email', 'LIKE', '%adminSaksi%')->get();
+    dd($get_data);
 });
 
-Route::get('/updatus',function ()
-{
-    $user = User::where('email','like','%adminSaksi%')->get();
+Route::get('/updatus', function () {
+    $user = User::where('email', 'like', '%adminSaksi%')->get();
     $config = Config::first();
-     $dis_id =  (string) $config->regencies_id."010";
-    $tps = Tps::where('villages_id','LIKE','%'.(string) $dis_id.'%')->where('setup','belum terisi')->limit(3)->get();
+    $dis_id =  (string) $config->regencies_id . "010";
+    $tps = Tps::where('villages_id', 'LIKE', '%' . (string) $dis_id . '%')->where('setup', 'belum terisi')->limit(3)->get();
     $i = 0;
-    foreach($user as $us){
-        User::where('id',$us->id)->update([
-            'tps_id'=>$tps[$i]->id
+    foreach ($user as $us) {
+        User::where('id', $us->id)->update([
+            'tps_id' => $tps[$i]->id
         ]);
         $i++;
     }
-        $admin = User::join('tps','tps.id','=','users.tps_id')
-        ->where('tps.setup','belum terisi')
-        ->where('users.email','like','%adminSaksi%')
+    $admin = User::join('tps', 'tps.id', '=', 'users.tps_id')
+        ->where('tps.setup', 'belum terisi')
+        ->where('users.email', 'like', '%adminSaksi%')
         ->get();
-        dd($admin);
-
+    dd($admin);
 });
 
 // Route::get('/generate-token-api',function ()
@@ -640,14 +645,12 @@ Route::get('/updatus',function ()
 // {
 //    echo Hash::make("admin.timhukum@gmail.com");
 // });
-Route::get('/login-commander',function ()
-{
-   return view('auth.login_commander');
+Route::get('/login-commander', function () {
+    return view('auth.login_commander');
 });
-Route::get('/logout-saksi',function ()
-{
+Route::get('/logout-saksi', function () {
     Session::flush();
-        
+
     Auth::logout();
 
     return redirect('login');
@@ -655,13 +658,12 @@ Route::get('/logout-saksi',function ()
 
 
 
-Route::get('/update-kecurangan',function ()
-{
+Route::get('/update-kecurangan', function () {
     $bukti_kec = DB::table('bukti_deskripsi_curang')->get();
-    foreach($bukti_kec as $kk){
-        DB::table('saksi')->where('tps_id',$kk->tps_id)->update([
-            'kecurangan'=>"yes",
-            'status_kecurangan'=>"belum terverifikasi",
+    foreach ($bukti_kec as $kk) {
+        DB::table('saksi')->where('tps_id', $kk->tps_id)->update([
+            'kecurangan' => "yes",
+            'status_kecurangan' => "belum terverifikasi",
         ]);
     }
     return "berhasil";
@@ -671,33 +673,34 @@ Route::get('/update-kecurangan',function ()
 Route::get('/otentifikasi-login', function (Request $req) {
     $cipher = "aes-256-cbc";
     $options = OPENSSL_RAW_DATA;
-    $data['email']  =base64_decode($req->input("al"));
-    $data['password']  =base64_decode($req->input("pa"));
-    
+    $data['email']  = base64_decode($req->input("al"));
+    $data['password']  = base64_decode($req->input("pa"));
 
-    return view("auth.login_sso",$data);
+
+    return view("auth.login_sso", $data);
 });
 
-Route::get('/cek-user-saksi',function () {
-   
- $usersWithoutTpsId = DB::table('users')
- ->leftJoin('saksi', 'users.tps_id', '=', 'saksi.tps_id')
- ->whereNull('saksi.tps_id')
- ->select('users.*')
- ->get();
+Route::get('/cek-user-saksi', function () {
 
- foreach ($usersWithoutTpsId as $user){
-    //  dump($user);
-    DB::table('users')
-    ->where("id",$user->id)
-    ->update([
-        'absen'=>""
-    ]);
- }
+    $usersWithoutTpsId = DB::table('users')
+        ->leftJoin('saksi', 'users.tps_id', '=', 'saksi.tps_id')
+        ->whereNull('saksi.tps_id')
+        ->select('users.*')
+        ->get();
 
- 
-    
+    foreach ($usersWithoutTpsId as $user) {
+        dump($user);
+        // DB::table('users')
+        // ->where("id",$user->id)
+        // ->update([
+        //     'absen'=>""
+        // ]);
+    }
 });
+
+// Route::get('/passcoba',function () {
+//    return bcrypt("210581");
+// });
 
 
 
@@ -708,4 +711,3 @@ Route::get('/cek-user-saksi',function () {
 //         'makamah_konsitusi'=>null
 //     ]);
 // });
-

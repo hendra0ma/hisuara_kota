@@ -46,44 +46,7 @@
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{url('/')}}/assets/colors/color1.css" />
 
-    <style>
-        .mobile-phone {
-            margin: auto;
-            margin-top: 170px;
-            padding: 10px 10px 30px;
-            width: 350px;
-            height: 650px;
-            box-shadow: 0 0 20px #000000;
-            border-radius: 30px;
-        }
-
-        .screen {
-            width: 100%;
-            height: 100%;
-            background: #f2f2f2;
-            border-radius: 30px;
-            overflow-y: auto;
-        }
-
-        .brove {
-            width: 150px;
-            height: 20px;
-            background: white;
-            position: absolute;
-            margin: 0 100px;
-            border-radius: 0 0 20px 20px;
-        }
-
-        .speaker {
-            width: 60px;
-            height: 5px;
-            background: #d2d2d2;
-            display: block;
-            margin: auto;
-            margin-top: 5px;
-            border-radius: 20px;
-        }
-    </style>
+   
 
 </head>
 

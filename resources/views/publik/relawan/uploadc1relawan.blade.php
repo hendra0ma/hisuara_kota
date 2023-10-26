@@ -71,13 +71,13 @@
             <div class="card-body">
                 <div class="row justify-content-end">
                     <div class="col-lg-2">
-                    
+
 
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn btn-danger btn-block float-end">
+                            <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn btn-danger">
                                 <span>
-                                    <i class="fa-solid fa-right-from-bracket"></i> 
+                                    <i class="fa-solid fa-right-from-bracket"></i>
                                 </span> Logout
                             </a>
                         </form>
@@ -86,14 +86,19 @@
                 </div>
                 <x-jet-validation-errors class="mb-4" />
                 <div class="row justify-content-center">
-                    <img src="{{url('/')}}/images/logo/rekapitung_gold.png" alt="Avatar" class="hadow-4 mb-3" style="width: 130px;" />
+
+                    <img src="{{asset('images/logo/hisuara.png')}}" alt="Avatar" class="shadow-4 mb-3 bg-dark p-2 rounded-2" style="width: 130px;" />
+
                 </div>
                 <h5 class="text-center">Input C1 Relawan</h5>
                 <hr>
                 <div class="row">
-                    <button class="btn btn-secondary mt-3" data-bs-toggle="modal" data-bs-target="#extralargemodal">
-                        Upload C1 Relawan
-                    </button>
+
+                    <div class="col-md-12">
+                        <button class="btn btn-secondary mt-3 btn-block" data-bs-toggle="modal" data-bs-target="#extralargemodal">
+                            Upload C1 Relawan
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -104,7 +109,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Input C1</h5>
+                    <h5 class="modal-title">Input C1 Relawan</h5>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -114,9 +119,20 @@
                     @csrf
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <h4 class="mt-3 header-title">Foto C1</h4>
-                            <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
-                                <input type="file" class="dropify" data-height="300" name="c1_images" />
+                            <div class="row justify-content-center">
+                                <div class="col-lg-5">
+                                    <?php $i=1; ?> 
+                                    @foreach ($paslon as $item)
+                                    <div class="col-lg-12">
+                                        Suara 0{{$i++}} - {{ $item['candidate']}}
+                                        <input type="number" class="form-control" id="suara[]" name="suara[]" required placeholder="Suara Paslon">
+                                    </div>
+                                    @endforeach
+                                    <h4 class="mt-3 header-title">Foto C1</h4>
+                                    <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
+                                        <input type="file" class="dropify" data-height="300" name="c1_images" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
