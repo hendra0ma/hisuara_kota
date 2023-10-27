@@ -8,12 +8,27 @@
     use App\Models\Village;
     use App\Models\User;
     use Illuminate\Support\Facades\DB;
+    use App\Models\Saksi;
     
     $config = Config::all()->first();
     $regency = District::where('regency_id', $config['regencies_id'])->get();
     $kota = Regency::where('id', $config['regencies_id'])->first();
     $dpt = District::where('regency_id', $config['regencies_id'])->sum('dpt');
     $tps = Tps::count();
+    $marquee = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->get();
+    $total_tps = Tps::where('setup','belum terisi')->count();;
+    $tps_masuk = Tps::where('setup','terisi')->count();
+    $tps_kosong = $total_tps - $tps_masuk;
+    $suara_masuk = SaksiData::count('voice');
+    $verification = Saksi::where('verification', 1)->with('saksi_data')->get();
+    $total_verification_voice = 0;
+    foreach ($verification as $key) {
+        foreach ($key->saksi_data as $verif) {
+            $total_verification_voice += $verif->voice;
+        }
+    }
+    $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data GROUP by paslon_id ORDER by total DESC'));
+    $urutan = $paslon_tertinggi;
 ?>
 
 <style>
@@ -21,18 +36,32 @@
         margin-left: 0px !important;
         position: relative;
     }
+
+    .for-kolapse-kurangin > .side-app > .row:first-child {
+        margin-top: 75px !important;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .for-kolapse-kurangin > .side-app > .row.kurangin {
+        margin-top: 0px !important;
+        transition: all 0.5s ease-in-out;
+    }
+    .sidenav-toggled .header-baru {
+        padding-left: 80px !important
+    }
 </style>
 
-<div class="app-header header py-0 pe-0" style="padding-left: 270px">
+<div class="app-header header header-baru py-0 pe-0" style="padding-left: 270px">
     <div class="container-fluid px-0">
 
         <div class="d-flex" style="position: relative">
 
             <div class="col-12 px-0">
-                <div class="card mb-0 border-0" style="height: 106px">
+                <div class="card mb-0 border-0">
                     <div class="card-header p-0 border-0" id="marquee1" style="position: relative; background-color: #343a40">
-                        <button class="btn-dark btn-kolapse text-white" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-bars"></i></button>
-                        <button class="btn-danger text-white rounded-0" style="position: absolute; left: 28px; z-index: 20">Suara Masuk</button>
+                        <button class="btn-dark btn-kolapse-sidebar text-white" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-align-left"></i></button>
+                        <button class="btn-dark btn-kolapse text-white" style="background-color: #30304d; position: absolute; left: 28px; z-index: 20; border-0"><i class="fa-solid fa-bars"></i></button>
+                        <button class="btn-danger text-white rounded-0" style="position: absolute; left: 56px; z-index: 20">Suara Masuk</button>
                         {{-- <button class="btn btn-kolapse text-white" style="background-color: #30304d; z-index: 20"><i class="fa-solid fa-bars"></i></button>
                         <button class="btn btn-danger text-white rounded-0" style="z-index: 20">Suara Masuk</button> --}}
                         <marquee>
@@ -237,12 +266,12 @@
                                         </button>
                                     </div>
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps" style="background-color: #bababa; width: 40px; height: 36px;" data-target="">
+                                        <button class="w-100 mx-auto btn tugel-kolaps" style="background-color: #bababa; width: 40px; height: 36px;">
                                             <i class="fa-solid fa-database"></i>
                                         </button>
                                     </div>
-                                    <div class="col-md-auto px-0">
-                                        <a class="w-100 mx-auto btn nav-link icon theme-layout nav-link-bg layout-setting" onclick="darktheme()" style="background-color: #bababa; width: 40px; height: 36px; margin: 0px" data-target="">
+                                    <div class="col-md-auto px-0" style="color: #212529 !important">
+                                        <a class="w-100 mx-auto btn nav-link theme-layout nav-link-bg layout-setting px-3" onclick="darktheme()" style="background-color: #bababa; width: 40px; height: 36px; margin: 0px; font-size: 16px" data-target="">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip"
                                                 title="Dark Theme"><i class="fe fe-moon"></i></span>
                                             <span class="light-layout" data-bs-placement="bottom" data-bs-toggle="tooltip"
@@ -323,6 +352,11 @@
                         <script>
                             $('.btn-kolapse').on('click', function() {
                                 $('.for-kolapse').toggle(500);
+                                $('.for-kolapse-kurangin > .side-app > .row:first').toggleClass('kurangin')
+                            })
+
+                            $('.btn-kolapse-sidebar').on('click', function() {
+                                $('body.app.sidebar-mini').toggleClass('sidenav-toggled')
                             })
                         
                             $('.tugel-kolaps').on('click', function() {
@@ -556,5 +590,5 @@
 <!-- /Mobile Header -->
 
 <!--app-content open-->
-<div class="app-content">
+<div class="app-content for-kolapse-kurangin" style="margin-top: 40px;">
     <div class="side-app">

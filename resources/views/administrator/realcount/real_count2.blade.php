@@ -56,7 +56,7 @@ $tps = Tps::count();
     }
 </style>
 
-<div class="row">
+<div class="row" style="margin-top: 75px; transition: all 0.5s ease-in-out;">
 
     <div class="col-lg-12">
        <center>
