@@ -15,7 +15,7 @@ class Relawan extends Component
 
     public function render()
     {
-        $data['saksi_data'] = User::where('role_id', '=', 14)->where('is_active', '=', '1')->paginate(16);
+        $data['saksi_data'] = User::where('role_id', '=', 14)->where('is_active', '=', '1')->where('name', 'like', '%'.$this->search.'%')->paginate(16);
         
         return view('livewire.relawan', $data);
     }

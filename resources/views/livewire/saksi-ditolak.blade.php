@@ -172,14 +172,21 @@
                                     Kecamatan
                                 </td>
                                 <td class="px-0">:</td>
-                                <td class="ps-2">{{$kecamatan['name'] }}</td>
+                                <td class="ps-2">{{$kecamatan['name']}}</td>
                             </tr>
                             <tr>
                                 <td class="text-primary fw-bold ps-0">
                                     Kelurahan
                                 </td>
                                 <td class="px-0">:</td>
-                                <td class="ps-2">{{$kelurahan['name'] }}</td>
+                                <td class="ps-2">{{$kelurahan['name']}}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary fw-bold ps-0">
+                                    Email
+                                </td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{$ls->email}}</td>
                             </tr>
                         </table>
 

@@ -1,4 +1,15 @@
 <div>
+    <h4 class="fw-bold fs-4 mt-5 mb-0">
+    Jumlah C1 Dibatalkan : {{$jumlah_c1_dibatalkan}}
+    </h4>
+    <hr style="border: 1px solid">
+
+    <div class="row">
+        <div class="col-12 mb-3">
+            <input wire:model="search" type="search" class="form-control border-1 border-dark" placeholder="Search posts by title...">
+        </div>
+    </div>
+
     <div class="row">
         <style>
             .inner-card {
@@ -14,7 +25,7 @@
             <div class="card periksa-c1-plano" style="border-radius: 10px; cursor: pointer; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
                         -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
                         -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);" data-bs-toggle="modal" data-bs-target="#periksaC1Verifikator" data-id="{{$ls->tps_id}}">
-                @if($ls['batalkan'] == 1)
+                {{-- @if($ls['batalkan'] == 1)
                 <div class="ribbone">
 												 <div class="ribbon bg-dager"><span>Dibatalkan</span></div>
 											</div>
@@ -23,7 +34,7 @@
                 <div class="ribbone">
 												 <div class="ribbon bg-dager"><span>Koreksi</span></div>
 											</div>
-                @endif
+                @endif --}}
                 {{-- <div class="card-header bg-primary">
                     <div class="card-title text-white">DATA C1 SAKSI</div>
                 </div> --}}
@@ -40,7 +51,10 @@
                             <div class="col-md my-auto">
                                 <div class="row mb-2">
                                     <div class="col-md-12 bg-danger text-white p-2 fs-6">
+                                        @if($village == null) 
+                                        @else
                                         TPS {{ $ls->number }} / Kelurahan {{ $village->name }}
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="row mb-2">

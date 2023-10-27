@@ -57,7 +57,10 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
     </div>
 </div>
 <!-- PAGE-HEADER END -->
-
+<h4 class="fw-bold fs-4 mt-5 mb-0">
+    Jumlah Relawan : {{$jumlah_relawan}}
+</h4>
+<hr style="border: 1px solid">
 <div class="row mt-3">
 
     <livewire:relawan>

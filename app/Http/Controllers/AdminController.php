@@ -278,30 +278,35 @@ class AdminController extends Controller
     public function Enumerator()
     {
         $data['config'] = Config::first();
+        $data['jumlah_saksi'] = User::where('role_id', '=', 8)->where('is_active', '=', 0)->count();
         return view('administrator.enumerator.enumerator', $data);
     }
 
     public function EnumeratorTeregistrasi()
     {
         $data['config'] = Config::first();
+        $data['jumlah_saksi_teregistrasi'] = User::where('role_id',8)->where('is_active', '=', 1)->count();
         return view('administrator.enumerator.enumerator_teregistrasi', $data);
     }
 
     public function EnumeratorHadir()
     {
         $data['config'] = Config::first();
+        $data['jumlah_hadir'] = Absensi::join('users', 'users.id', '=', 'absensi.user_id')->where('users.absen', '=', 'hadir')->where('is_active', '=', 1)->count();
         return view('administrator.enumerator.enumerator_hadir', $data);
     }
 
     public function EnumeratorTidakHadir()
     {
         $data['config'] = Config::first();
+        $data['jumlah_tidak_hadir'] = User::where('role_id',8)->where('absen','tidak hadir')->where('is_active', '=', 1)->count();
         return view('administrator.enumerator.enumerator_tidak_hadir', $data);
     }
 
     public function EnumeratorDitolak()
     {
         $data['config'] = Config::first();
+        $data['jumlah_saksi_ditolak'] = User::where('role_id', '=', 8)->where('is_active', '=', 5)->count();
         return view('administrator.enumerator.enumerator_ditolak', $data);
     }
 
@@ -1570,6 +1575,7 @@ class AdminController extends Controller
         $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
         $data['kota'] = Regency::where('id', $config['regencies_id'])->first();
         $data['tracking'] = ModelsTracking::get();
+        $data['jumlah_relawan'] = User::where('role_id', '=', 14)->where('is_active', '=', '1')->count();
         return view('administrator.relawan.relawan', $data);
     }
 
@@ -1585,6 +1591,7 @@ class AdminController extends Controller
         $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
         $data['kota'] = Regency::where('id', $config['regencies_id'])->first();
         $data['tracking'] = ModelsTracking::get();
+        $data['jumlah_relawan_dihapus'] = User::where('role_id', '=', 14)->where('is_active', '=', '0')->count();
         return view('administrator.relawan.relawan_dihapus', $data);
     }
 
