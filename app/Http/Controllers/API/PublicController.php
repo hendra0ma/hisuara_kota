@@ -41,6 +41,12 @@ class PublicController extends Controller
     public function getTpsByVilage(Request $request)
     {
        $village = Tps::where('villages_id',$request->id)->select('id','villages_id','number')->get();
+       if(isset($request['relawan'])){
+           $village = Tps::leftJoin('saksi', 'tps.id', '=', 'saksi.tps_id')
+           ->whereNull('saksi.tps_id')
+           ->select('tps.*')
+           ->get();
+       }
            if(count($village) == null) return response()->json(['message'=>"Data NULL"],204);
         return response()->json($village,200);
     }   
