@@ -272,6 +272,9 @@ $tps = 2963;
                             <li><a href="{{url('')}}/administrator/r-data" class="fs-5 slide-item text-white fs-6">Riwayat</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a class="metro-tabs" href="#" data-bs-toggle="slide"><span class="side-menu__label fs-3">KECURANGAN</span></a>
+                    </li>
                     
 
                     {{-- <li>
@@ -703,7 +706,7 @@ $tps = 2963;
                             <i class="side-menu__icon mdi mdi-flash"></i><span class="side-menu__label">Mode Developer</span></a>
                     </li> --}}
 
-                    <hr>
+                    {{-- <hr>
                     <li>
                         <a class="side-menu__item" href="#" type="button" data-bs-toggle="modal" data-bs-target="#chat"><i
                                 class="side-menu__icon fa-solid fa-headset"></i><span class="side-menu__label">Support</span></a>
@@ -718,7 +721,7 @@ $tps = 2963;
                                 <i class="side-menu__icon mdi mdi-logout"></i> Sign out
                             </a>
                         </form>
-                    </li>
+                    </li> --}}
                 </div>
 
             </ul>

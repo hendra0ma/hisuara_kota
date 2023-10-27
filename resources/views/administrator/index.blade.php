@@ -60,8 +60,19 @@
 
 </style>
 
-<div class="row mt-3">
-    <div class="col-lg col-md">
+<div class="row" style="margin-top: 50px;">
+    <div class="col-lg-12">
+        <h1 class="page-title fs-1 mt-2">PILPRES 2024
+            <!-- Kota -->
+        </h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">{{ $kota->name }}
+                <!-- Kota -->
+            </li>
+        </ol>
+    </div>
+
+    <div class="col-lg col-md mt-4">
         <div class="row g-0">
             <div class="col-md">
 
@@ -622,230 +633,6 @@
 
 </style>
 <div class="row">
-
-    <div class="col-md-12 mb-5">
-        <div class="card mb-0">
-            <div class="card-header p-0" id="marquee1" style="position: relative">
-                <div class="input-group input-group-sm">
-                    <div class="input-group-prepend" style="background-color: #30304d">
-                        <button class="btn btn-kolapse text-white" style="background-color: #30304d"><i class="fa-solid fa-bars"></i></button>
-                        <button class="btn btn-danger text-white rounded-0 h-100">Suara Masuk</button>
-                    </div>
-                    <div class="form-control bg-dark" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                        <marquee id="cobamarq1">
-                            @foreach ($marquee as $item)
-                            <?php $kecamatan =  District::where('id', $item['districts'])->first(); ?>
-                            <?php $kelurahan =  Village::where('id', $item['villages'])->first(); ?>
-                            <?php $tps =  Tps::where('id', $item['tps_id'])->first(); ?>
-                            <span class="text-success">▼ </span><span class="text-white" style="font-size: 20px;">{{$item['name']}}
-                                Kecamatan {{$kecamatan['name']}}, Kelurahan {{$kelurahan['name']}}, TPS {{$tps['number']}}
-                            </span>
-                            @endforeach
-                        </marquee>
-
-
-                    </div>
-                </div>
-            </div>
-            <div class="card-body for-kolapse" style="background: #000">
-                <div class="row">
-
-                    <div class="col-md-10">
-                        <div class="row">
-
-                            <div class="col-md-12 text-white tabulasi">
-                                <div class="row">
-                                    <div class="col-auto my-auto text-white">
-                                        <h4 class="mb-0">
-                                            Tabulasi
-                                        </h4>
-                                    </div>
-                                    <div class="col py-2 judul text-center bg-secondary text-white"
-                                        style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
-                                        <div class="text">Total TPS : <b>{{ $total_tps }}</b></div>
-                                    </div>
-                                    <div class="col py-2 judul text-center bg-danger text-white">
-                                        <div class="text">TPS Masuk : <b>{{ $tps_masuk }}</b></div>
-                                    </div>
-                                    <div class="col py-2 judul text-center bg-primary text-white">
-                                        <div class="text">TPS Kosong : <b>{{ $tps_kosong }}</b></div>
-                                    </div>
-                                    <div class="col py-2 judul text-center bg-info text-white">
-                                        <div class="text">Suara Masuk : <b>{{ $suara_masuk }}</b></div>
-                                    </div>
-                                    <div class="col py-2 judul text-center bg-success text-white"
-                                        style="border-top-right-radius: 25px; border-bottom-right-radius: 25px">
-                                        <div class="text">Suara Terverifikasi : <b>{{$total_verification_voice}}</b></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12 mb-2 settings" style="display: none">
-                                {{-- Settings --}}
-                                <div class="row px-5 my-auto" style="gap: 25px">
-                                   <div class="col-auto mt-3 text-white">
-                                        <h4 class="mb-0"style="font-family:'Roboto' !important">
-                                            Settings
-                                        </h4>
-                                    </div>
-                                    <div class="col-auto mb-2">
-                                        <div class="mid">
-                                        
-                                            <label class="switch">
-                                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('multi_admin',this)"
-                                                    {{($config->multi_admin == "no") ? "":"checked"; }}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                            Multi
-                                        </div>
-                                    </div>
-                                
-                                    <div class="col-auto mb-2">
-                                        <div class="mid">
-                                        
-                                            <label class="switch">
-                                                <input type="checkbox" data-target="mode" onclick="settings('otonom',this)"
-                                                    {{($config->otonom == "no") ? "":"checked"; }}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                            Otonom
-                                        </div>
-                                    </div>
-                                
-                                    <div class="col-auto mb-2">
-                                        <div class="mid">
-                                            <label class="switch">
-                                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('show_terverifikasi',this)"
-                                                    {{($config->show_terverifikasi == "hide") ? "":"checked"; }}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                            Verifikasi
-                                        </div>
-                                    </div>
-                                
-                                    <div class="col-auto mb-2">
-                                        <div class="mid">
-                                            <label class="switch">
-                                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('show_public',this)"
-                                                    {{($config->show_public == "hide") ? "":"checked"; }}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                            Publish C1
-                                        </div>
-                                    </div>
-                                
-                                    <div class="col-auto mb-2">
-                                        <div class="mid">
-                                        
-                                            <label class="switch">
-                                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('lockdown',this)"
-                                                    {{($config->lockdown == "no") ? "":"checked"; }}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                            Lockdown
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-auto">
-                                        <div class="mid">
-                                            <label class="switch">
-                                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('quick_count',this)"
-                                                    {{($config->quick_count == "no") ? "":"checked"; }}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                            Quick Count
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="col-md suara"style="display: none">
-                                <div class="row">
-                                    <div class="col-auto my-auto text-white" >
-                                        <h4 class="mb-0">
-                                            Urutan Suara
-                                        </h4>
-                                    </div>
-                                    {{-- <div class="col-4 text-center mb-2 fw-bold fs-3">
-                                        <span style="-webkit-text-stroke: 0.75px #00000036; color: #ffd700">1</span>
-                                    </div>
-                                    <div class="col-4 text-center mb-2 fw-bold fs-3">
-                                        <span style="-webkit-text-stroke: 0.75px #00000036; color: #c0c0c0">2</span>
-                                    </div>
-                                    <div class="col-4 text-center mb-2 fw-bold fs-3">
-                                        <span style="-webkit-text-stroke: 0.75px #00000036; color: #cd7f32">3</span>
-                                    </div> --}}
-                                    @foreach ($urutan as $urutPaslon)
-                                        <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
-                                        {{-- <div class="col-md"> --}}
-                                        <div class="col-auto">
-                                            <div class="card shadow text-center mb-0 mx-auto mt-1 border-0">
-                                                <div class="card-header pt-1 pb-1 px-2 border-0" style="background: {{ $pasangan->color }}">
-                                                    <span class="card-title text-white mx-auto">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} : {{$urutPaslon->total}}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {{-- </div> --}}
-                                    @endforeach
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="col-md">
-                        <div class="row h-100">
-                            <div class="col-md justify-content-end">
-                                <button class="mx-auto btn btn-success w-100 h-100 tugel-kolaps"data-target="suara">
-                                    <i class="fa-solid fa-ranking-star"></i>
-                                </button>
-                            </div>
-                            <div class="col-md justify-content-end">
-                                <button class="mx-auto btn btn-success w-100 h-100 tugel-kolaps"data-target="tabulasi">
-                                    <i class="fa-solid fa-database"></i>
-                                </button>
-                            </div>
-                            <div class="col-md justify-content-end">
-                                <button class="mx-auto btn btn-success w-100 h-100 tugel-kolaps"data-target="settings">
-                                    <i class="fa-solid fa-gear"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                   
-                </div>
-
-                <script>
-                    $('.btn-kolapse').on('click', function() {
-                        $('.for-kolapse').toggle(500);
-                    })
-
-                    $('.tugel-kolaps').on('click', function() {
-
-                        let target = $(this).data('target')
-                        console.log(target)
-                        $('.suara, .settings, .tabulasi').hide()
-                        $(`.${target}`).show(200)
-                    })
-
-                </script>
-
-            </div>
-        </div>
-    </div>
 
     {{-- <div class="col-md-3 mb-4 pe-1">
         <div class="card mb-0">
