@@ -61,7 +61,7 @@
 </style>
 
 <div class="row" style="margin-top: 50px;">
-    <div class="col-lg-12">
+    <div class="col-lg-6">
         <h1 class="page-title fs-1 mt-2">PILPRES 2024
             <!-- Kota -->
         </h1>
@@ -70,6 +70,76 @@
                 <!-- Kota -->
             </li>
         </ol>
+    </div>
+    <div class="col-lg-6 text-end">
+        <div class="row mx-auto text-center">
+            <div class="col-md me-auto">
+                <div class="row">
+
+                    <div class="col mt-2">
+                        <div class="card" style="margin-bottom: 0px;">
+                            <div class="card-body text-center" style="padding: 0px; background: #f2f3f9 !important">
+                                <i class="fe fe-user fs-4"></i>
+                            </div>
+                            <div class="card-footer text-center" style="color: black; padding: 0px; background: #f2f3f9 !important">
+                                @if ($jam > 8 && $jam < 21) 
+                                <div class="badge bg-success">Saksi : Aktif</div>
+                                @else
+                                <div class="badge bg-danger">Saksi : Nonaktif</div>
+                                @endif
+                            </div>
+                        </div>
+                        <h5 style="font-size:13px" class="text-center mt-3">09.00 - 21.00</h5>
+                    </div>
+                    <div class="col mt-2">
+                        <div class="card" style="margin-bottom: 0px;">
+                            <div class="card-body text-center" style="padding: 0px; background: #f2f3f9 !important">
+                                <i class="fe fe-user fs-4"></i>
+                            </div>
+                            <div class="card-footer text-center" style="color: black; padding: 0px; background: #f2f3f9 !important">
+
+                                @if ($jam > 14 && $jam < 21) <div class="badge bg-success">Relawan :
+                                    aktif</div>
+                            @else
+                            <div class="badge bg-danger">Relawan : Nonaktif</div>
+                            @endif
+                        </div>
+                    </div>
+                    <h5 style="font-size:13px" class="text-center mt-3">14.00 - 21.00</h5>
+                </div>
+                <div class="col mt-2">
+                    <div class="card" style="margin-bottom: 0px;">
+                        <div class="card-body text-center" style="padding: 0px; background: #f2f3f9 !important">
+                            <i class="fe fe-user fs-4"></i>
+                        </div>
+                        <div class="card-footer text-center" style="color: black; padding: 0px; background: #f2f3f9 !important">
+                            @if ($jam >= 21)
+                            <div class="badge bg-success">Overtime : Aktif</div>
+                            @else
+                            <div class="badge bg-danger">Overtime : Nonaktif</div>
+                            @endif
+                        </div>
+                    </div>
+                    <h5 style="font-size:13px" class="text-center mt-3">21.00 - dst</h5>
+                </div>
+                <div class="col my-auto">
+                    <a href="https://time.is/Jakarta" id="time_is_link" rel="nofollow"
+                            style="font-size:25px">
+                    </a>
+                    <span id="Jakarta_z41c" style="font-size:27px"></span>
+                    <div style="font-size:27px">WIB</div>
+                    <script src="//widget.time.is/t.js"></script>
+                    <script>
+                        time_is_widget.init({
+                            Jakarta_z41c: {}
+                        });
+                    </script>
+                </div>
+            </div>
+                    
+
+            </div>
+        </div>
     </div>
 
     <div class="col-lg col-md mt-4">
