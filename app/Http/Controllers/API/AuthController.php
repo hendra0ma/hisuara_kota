@@ -75,10 +75,6 @@ class AuthController extends Controller
             return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
         }
 
-
-
-
-
         $user = new User();
         $user->name = $request->input('name');
         $user->address = $request->input('address');

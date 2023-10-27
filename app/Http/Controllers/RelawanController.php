@@ -8,6 +8,7 @@ use App\Models\Paslon;
 use App\Models\Regency;
 use App\Models\Relawan;
 use App\Models\RelawanData;
+use App\Models\Saksi;
 use App\Models\Tps;
 use App\Models\User;
 use App\Models\Village;
@@ -196,13 +197,36 @@ class RelawanController extends Controller
     }
     public function getTps(Request $req)
     {
-        $tps = Tps::where('villages_id', $req->id)->get();
-        foreach ($tps as $vil) {
-            echo "
-           <option value='$vil->id'>
-           TPS $vil->number
-           </option>
-           ";
-        }  
+        // $tps = Tps::where('villages_id', $req->id)->get();
+        // foreach ($tps as $vil) {
+        //     $saksi = Saksi::where("tps_id",$vil->id)->first();
+        //     if ($saksi == null) {
+        //         echo "
+        //        <option value='$vil->id'>
+        //        TPS $vil->number
+        //        </option>
+        //        ";
+        //     }
+        // }  
+
+
+        $tps = Tps::where('villages_id',$req->id)->get();
+        
+        foreach ($tps as $key => $item) {
+            $user = User::where('tps_id',$item['id'])->first();
+            if ($user !=null) {
+                // Menghapus elemen dari $data jika villages_id adalah '3674010001'
+                
+                // unset($tps[$key]);
+                continue;
+            }
+                echo "
+                <option value='$item->id'>
+                TPS $item->number
+                </option>
+                ";
+            
+        }
+
     }
 }
