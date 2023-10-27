@@ -261,11 +261,6 @@
                                         </button>
                                     </div>
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps" style="background-color: #bababa; width: 40px; height: 36px;" data-target="setting">
-                                            <i class="fa-solid fa-gear"></i>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps" style="background-color: #bababa; width: 40px; height: 36px;">
                                             <i class="fa-solid fa-database"></i>
                                         </button>
@@ -307,6 +302,11 @@
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps" style="background-color: #bababa; width: 40px; height: 36px;" data-target="support">
                                             <i class="fa-solid fa-headset"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-auto px-0">
+                                        <button class="w-100 mx-auto btn tugel-kolaps" style="background-color: #bababa; width: 40px; height: 36px;" data-target="setting">
+                                            <i class="fa-solid fa-gear"></i>
                                         </button>
                                     </div>
                                     <div class="col-md-auto px-0">
