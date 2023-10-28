@@ -121,13 +121,13 @@
                                     <div class="col-md-12 text-white support tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md-auto px-1 my-auto">
-                                                <img src="https://plus.unsplash.com/premium_photo-1661510749856-47c47ea10fc7?auto=format&fit=crop&q=80&w=1932&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="avatar profile-user brround" style="width: 40px; height: 40px; object-fit: cover" alt="">
+                                                <img src="https://plus.unsplash.com/premium_photo-1661510749856-47c47ea10fc7?auto=format&fit=crop&q=80&w=1932&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="avatar profile-user brround" style="width: 35px; height: 35px; object-fit: cover" alt="">
                                             </div>
                                             <div class="col-md my-auto">
-                                                <input class="w-100 form-control" style="border-radius: 25px" type="text" name="" id="" placeholder="Kirim pesan ...">
+                                                <input class="w-100 form-control py-0" style="border-radius: 25px; height: 30px" type="text" name="" id="" placeholder="Kirim pesan ...">
                                             </div>
-                                            <div class="col-md-auto px-0">
-                                                <button class="btn text-white fs-5"><i class="fa-solid fa-paper-plane"></i></button>
+                                            <div class="col-md-auto my-auto p-0">
+                                                <button class="btn text-white my-auto"><i class="fa-solid fa-paper-plane" style="font-size: 16px;"></i></button>
                                             </div>
                                         </div>
                                     </div>
