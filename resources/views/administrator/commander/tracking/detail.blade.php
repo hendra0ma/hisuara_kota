@@ -6,7 +6,7 @@
         margin-left: 0px !important;
     }
 </style>
-<div class="row" style="margin-top: 75px; transition: all 0.5s ease-in-out;">
+<div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
 
     <div class="col-12">
         <div class="row w-100">

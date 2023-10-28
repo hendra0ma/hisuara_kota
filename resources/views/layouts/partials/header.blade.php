@@ -38,7 +38,7 @@
     }
 
     .for-kolapse-kurangin > .side-app > .row:first-child {
-        margin-top: 75px !important;
+        margin-top: 90px !important;
         transition: all 0.5s ease-in-out;
     }
 
@@ -59,23 +59,6 @@
 
             <div class="col-12 px-0">
                 <div class="card mb-0 border-0">
-                    <div class="card-header p-0 border-0" id="marquee1" style="position: relative; background-color: #343a40">
-                        {{-- <button class="btn-dark btn-kolapse-sidebar text-white" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-align-left"></i></button> --}}
-                        <button class="btn-dark btn-kolapse text-white" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-bars"></i></button>
-                        <button class="btn-danger text-white rounded-0" style="position: absolute; left: 28px; z-index: 20">Suara Masuk</button>
-                        {{-- <button class="btn btn-kolapse text-white" style="background-color: #30304d; z-index: 20"><i class="fa-solid fa-bars"></i></button>
-                        <button class="btn btn-danger text-white rounded-0" style="z-index: 20">Suara Masuk</button> --}}
-                        <marquee>
-                            @foreach ($marquee as $item)
-                            <?php $kecamatan =  District::where('id', $item['districts'])->first(); ?>
-                            <?php $kelurahan =  Village::where('id', $item['villages'])->first(); ?>
-                            <?php $tps =  Tps::where('id', $item['tps_id'])->first(); ?>
-                            <span class="text-success">▼ </span><span class="text-white" style="font-size: 20px;">{{$item['name']}}
-                                Kecamatan {{$kecamatan['name']}}, Kelurahan {{$kelurahan['name']}}, TPS {{$tps['number']}}
-                            </span>
-                            @endforeach
-                        </marquee>
-                    </div>
                     <div class="card-body for-kolapse py-1 pl-5" style="background: #000; padding-right: 2.5rem">
                         <div class="row py-4 justify-content-between">
                         
@@ -120,7 +103,7 @@
                                         </a>
                                     </div>
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps-menu text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="petugas">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="petugas">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Petugas">    
                                                 <i class="fa-solid fa-ranking-star"></i>
                                             </span>
@@ -128,7 +111,7 @@
                                     </div>
 
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps-menu text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="operator">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="operator">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Operator">    
                                                 <i class="fa-solid fa-database"></i>
                                             </span>
@@ -136,7 +119,7 @@
                                     </div>
 
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps-menu text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="perhitungan">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="perhitungan">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Perhitungan">    
                                                 <i class="fa-solid fa-database"></i>
                                             </span>
@@ -144,7 +127,7 @@
                                     </div>
 
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps-menu text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="rekapitulasi">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="rekapitulasi">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Rekapitulasi">
                                                 <i class="fa-solid fa-headset"></i>
                                             </span>
@@ -152,7 +135,7 @@
                                     </div>
 
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps-menu text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="dokumentasi">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="dokumentasi">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Dokumentasi">
                                                 <i class="fa-solid fa-gear"></i>
                                             </span>
@@ -160,7 +143,7 @@
                                     </div>
 
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps-menu text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="kecurangan">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="kecurangan">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Kecurangan">
                                                 <i class="fa-solid fa-gear"></i>
                                             </span>
@@ -171,6 +154,106 @@
 
                             <div class="col-md-5 my-auto">
                                 <div class="row">
+
+                                    <div class="col-md-12 petugas tugel-content" style="display: none">
+                                        <div class="row">
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/verifikasi_saksi" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 25px 0px 0px 25px;">
+                                                    Saksi
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/relawan" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 0;">
+                                                    Relawan
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/enumerator" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 0;">
+                                                    Enumerator
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/verifikasi_akun" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 0px 25px 25px 0px;">
+                                                    Admin
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-12 operator tugel-content" style="display: none">
+                                        <div class="row">
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/verifikator/verifikasi-c1" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 25px 0px 0px 25px;">
+                                                    Verifikasi C1
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/auditor/audit-c1" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 0px;">
+                                                    Audit C1
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/verifikasi_koreksi" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 0px 25px 25px 0px;">
+                                                    Koreksi
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-12 perhitungan tugel-content" style="display: none">
+                                        <div class="row">
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/real_count2" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 25px 0px 0px 25px;">
+                                                    Real Count
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/quick_count2" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 0px">
+                                                    Quick Count
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/terverifikasi" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 0px 25px 25px 0px;">
+                                                    Terverifikasi
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-12 rekapitulasi tugel-content" style="display: none">
+                                        <div class="row">
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/rekapitulasi_kelurahan" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 25px 0px 0px 25px;">
+                                                    Rekapitulasi Kelurahan
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/rekapitulasi_kecamatan" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 0px 25px 25px 0px;">
+                                                    Rekapitulasi Kecamatan
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-12 dokumentasi tugel-content" style="display: none">
+                                        <div class="row">
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/data-c1" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 25px 0px 0px 25px;">
+                                                    C1
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="#" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 0;">
+                                                    C6
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="#" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 0px 25px 25px 0px;">
+                                                    Surat Suara
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 
                                     <div class="col-md-12 text-white tabulasi tugel-content">
                                         <div class="row">
@@ -208,10 +291,10 @@
                                         </div>
                                     </div>
                                 
-                                    <div class="col-md-12 mb-2 setting tugel-content settings" style="display: none;position: relative;">
+                                    <div class="col-md-12 setting tugel-content settings" style="display: none; top: 0; position: relative;">
                                         {{-- Settings --}}
-                                        <div class="row px-5 my-auto" style="gap: 25px; position: absolute;">
-                                            <div class="col-auto mb-2">
+                                        <div class="row px-5 my-auto" style="gap: 25px;">
+                                            <div class="col-md">
                                                 <div class="mid">
                                                 
                                                     <label class="switch">
@@ -225,7 +308,7 @@
                                                 </div>
                                             </div>
                                         
-                                            <div class="col-auto mb-2">
+                                            <div class="col-md">
                                                 <div class="mid">
                                                 
                                                     <label class="switch">
@@ -239,7 +322,7 @@
                                                 </div>
                                             </div>
                                         
-                                            <div class="col-auto mb-2">
+                                            <div class="col-md">
                                                 <div class="mid">
                                                     <label class="switch">
                                                         <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('show_terverifikasi',this)"
@@ -252,7 +335,7 @@
                                                 </div>
                                             </div>
                                         
-                                            <div class="col-auto mb-2">
+                                            <div class="col-md">
                                                 <div class="mid">
                                                     <label class="switch">
                                                         <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('show_public',this)"
@@ -265,7 +348,7 @@
                                                 </div>
                                             </div>
                                         
-                                            <div class="col-auto mb-2">
+                                            <div class="col-md">
                                                 <div class="mid">
                                                 
                                                     <label class="switch">
@@ -279,7 +362,7 @@
                                                 </div>
                                             </div>
                                         
-                                            <div class="col-md-auto">
+                                            <div class="col-md">
                                                 <div class="mid">
                                                     <label class="switch">
                                                         <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('quick_count',this)"
@@ -434,185 +517,70 @@
                             </div>
                         
                         </div>
-                    
-                        <script>
-                            $('.btn-kolapse').on('click', function() {
-                                $('.for-kolapse').toggle(500);
-                                $('.for-kolapse-kurangin > .side-app > .row:first').toggleClass('kurangin')
-                            })
-
-                            $('.btn-kolapse-sidebar').on('click', function() {
-                                $('body.app.sidebar-mini').toggleClass('sidenav-toggled')
-                            })
-                        
-                            $('.tugel-kolaps').on('click', function() {
-                            
-                                let target = $(this).data('target')
-                                // console.log(target)
-                                $('.tugel-content').hide()
-                                $(`.${target}`).show(200)
-                            })
-
-                            $('.tugel-kolaps-menu').on('click', function() {
-                            
-                                let target = $(this).data('target')
-                                // console.log(target)
-                                const cek = $(`.${target}`).css('display') == 'block';
-
-                                $('.tugel-content-menu').hide(500)
-                                
-                                if (cek) {
-                                    $('.tugel-content-menu').hide(500)
-                                }else{
-                                    $(`.${target}`).show(500)
-                                }
-                            })
-
-                            // $('.tugel-kolaps-menu.content-toggled').on('click', function() {
-                            
-                                // let target = $(this).data('target')
-                                // console.log(target)
-                                // $('.tugel-content-menu').removeClass('content-toggled')
-                                // $(`.${target}`).toggleClass('content-toggled')
-                            // })
-                        
-                        </script>
 
                     </div>
+                </div>
+                <div class="card-footer p-0 border-0" id="marquee1" style="position: relative; background-color: #343a40">
+                    {{-- <button class="btn-dark btn-kolapse-sidebar text-white" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-align-left"></i></button> --}}
+                    <button class="btn-dark btn-kolapse text-white" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-bars"></i></button>
+                    <button class="btn-danger text-white rounded-0" style="position: absolute; left: 28px; z-index: 20">Suara Masuk</button>
+                    {{-- <button class="btn btn-kolapse text-white" style="background-color: #30304d; z-index: 20"><i class="fa-solid fa-bars"></i></button>
+                    <button class="btn btn-danger text-white rounded-0" style="z-index: 20">Suara Masuk</button> --}}
+                    <marquee>
+                        @foreach ($marquee as $item)
+                        <?php $kecamatan =  District::where('id', $item['districts'])->first(); ?>
+                        <?php $kelurahan =  Village::where('id', $item['villages'])->first(); ?>
+                        <?php $tps =  Tps::where('id', $item['tps_id'])->first(); ?>
+                        <span class="text-success">▼ </span><span class="text-white" style="font-size: 20px;">{{$item['name']}}
+                            Kecamatan {{$kecamatan['name']}}, Kelurahan {{$kelurahan['name']}}, TPS {{$tps['number']}}
+                        </span>
+                        @endforeach
+                    </marquee>
                 </div>
             </div>
-            <!-- <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="#"></a> -->
-            <!-- sidebar-toggle-->
-            <!-- <a class="header-brand1 d-flex d-md-none">
-                <img src="{{ url('/') }}/assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
-                <img src="{{ url('/') }}/assets/images/brand/logo-1.png" class="header-brand-img toggle-logo" alt="logo">
-                <img src="{{ url('/') }}/assets/images/brand/logo-2.png" class="header-brand-img light-logo" alt="logo">
-                <img src="{{ url('/') }}/assets/images/brand/logo-3.png" class="header-brand-img light-logo1" alt="logo">
-            </a> -->
-            <!-- LOGO -->
+
+            <script>
+                $('.btn-kolapse').on('click', function() {
+                    $('.for-kolapse').toggle(500);
+                    $('.for-kolapse-kurangin > .side-app > .row:first').toggleClass('kurangin')
+                })
+
+                $('.btn-kolapse-sidebar').on('click', function() {
+                    $('body.app.sidebar-mini').toggleClass('sidenav-toggled')
+                })
             
-            {{-- <div class="d-flex order-lg-2 ms-auto header-right-icons">
+                $('.tugel-kolaps').on('click', function() {
+                
+                    let target = $(this).data('target')
+                    // console.log(target)
+                    $('.tugel-content').hide()
+                    $(`.${target}`).show(200)
+                })
 
+                $('.tugel-kolaps-menu').on('click', function() {
+                
+                    let target = $(this).data('target')
+                    // console.log(target)
+                    const cek = $(`.${target}`).css('display') == 'block';
 
-
-                <button class="navbar-toggler navresponsive-toggler d-md-none ms-auto" type="button"
-                    data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4"
-                    aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon fe fe-more-vertical text-dark"></span>
-                </button>
-                <div class="dropdown d-none d-md-flex">
-                    <a class="nav-link icon theme-layout nav-link-bg layout-setting" onclick="darktheme()">
-                        <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip"
-                            title="Dark Theme"><i class="fe fe-moon"></i></span>
-                        <span class="light-layout" data-bs-placement="bottom" data-bs-toggle="tooltip"
-                            title="Light Theme"><i class="fe fe-sun"></i></span>
-                    </a>
-                </div><!-- Theme-Layout -->
-                <script>
-                    let darktheme = function() {
-                        setTimeout(function() {
-                            let body = document.body;
-                            let themes = body.className.split(" ");
-                            let theme = (themes.length == 3) ? "yes" : "no";
-                            $.ajax({
-                                url: `{{ route('superadmin.theme') }}`,
-                                data: {
-                                    theme,
-                                    "_token": "{{ csrf_token() }}"
-                                },
-                                type: "post",
-                                success: function(res) {
-
-                                }
-                            });
-                        }, 300);
+                    $('.tugel-content-menu').hide(500)
+                    
+                    if (cek) {
+                        $('.tugel-content-menu').hide(500)
+                    }else{
+                        $(`.${target}`).show(500)
                     }
-                </script>
-                <div class="dropdown d-none d-md-flex">
-                    <a class="nav-link icon full-screen-link nav-link-bg">
-                        <i class="fe fe-minimize fullscreen-button"></i>
-                    </a>
-                </div><!-- FULL-SCREEN -->
+                })
 
-                <div class="dropdown  d-none d-md-flex message">
-                    <a class="nav-link icon text-center" data-bs-toggle="dropdown">
-                        <i class="fe fe-message-square"></i><span class=" pulse-danger"></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-
-                        <div class="message-menu"style="overflow-y:scroll;height:300px">
-                            <?php
-                            
-                            $allUser = App\Models\User::where('id', '!=', Auth::user()->id)
-                                ->where('role_id', '!=', 8)
-                                ->where('role_id', '!=', 0)
-                                ->where('role_id', '!=', 14)
-                                ->get(); ?>
-                            @foreach ($allUser as $usr)
-                                <a class="dropdown-item d-flex" href="#" onclick="openForm(`<?= $usr->id ?>`)">
-                                    <span class="avatar avatar-md brround me-3 align-self-center cover-image"
-                                        data-bs-image-src="{{ url('/') }}/assets/images/users/1.jpg"></span>
-                                    <div class="wd-90p">
-                                        <div class="d-flex">
-                                            <h5 class="mb-1">{{ $usr->name }}</h5>
-                                            <small class="text-muted ms-auto text-end">
-
-                                            </small>
-                                        </div>
-                                    </div>
-                                </a>
-                            @endforeach
-
-                        </div>
-                        <div class="dropdown-divider m-0"></div>
-                    </div>
-                </div><!-- MESSAGE-BOX -->
-                <div class="dropdown d-none d-md-flex profile-1">
-                    <a href="#" data-bs-toggle="dropdown" class="nav-link pt-0 leading-none d-flex">
-                        <span>
-                            @if (Auth::user()->profile_photo_path == NULL)
-                            <img class="avatar profile-user brround" style="object-fit: cover" src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF" alt="profile-user">
-                            @else
-                            <img class="avatar profile-user brround" style="object-fit: cover" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}" alt="profile-user"s>
-                            @endif
-                        </span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        <div class="drop-heading">
-                            <div class="text-center">
-                                <h5 class="text-dark mb-0">{{ Auth::user()->name }}</h5>
-                                <small
-                                    class="text-muted">{{ Auth::user()->role_id == 1 ? 'Administrator' : 'uwon luyi' }}</small>
-                            </div>
-                        </div>
-                        <div class="dropdown-divider m-0"></div>
-                        <a class="dropdown-item" href="/user/profile">
-                            <i class="dropdown-icon fe fe-user"></i> Profile
-                        </a>
-
-                        <a class="dropdown-item" href="#">
-                            <i class="dropdown-icon fe fe-settings"></i> Settings
-                        </a>
-
-                        <form action="{{ route('logout') }}" method="post">
-                            @csrf
-
-
-                            <button class="dropdown-item"type="submit">
-                                <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
-                            </button>
-                        </form>
-                    </div>
-                </div>
-                <div class="dropdown d-none d-md-flex header-settings">
-                    <a href="#" class="nav-link icon " data-bs-toggle="sidebar-right"
-                        data-target=".sidebar-right">
-                        <i class="fe fe-menu"></i>
-                    </a>
-                </div><!-- SIDE-MENU -->
-            </div> --}}
-
-
+                // $('.tugel-kolaps-menu.content-toggled').on('click', function() {
+                
+                    // let target = $(this).data('target')
+                    // console.log(target)
+                    // $('.tugel-content-menu').removeClass('content-toggled')
+                    // $(`.${target}`).toggleClass('content-toggled')
+                // })
+            
+            </script>
 
         </div>
     </div>
