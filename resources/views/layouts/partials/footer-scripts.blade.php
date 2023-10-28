@@ -281,8 +281,44 @@ let myModal = new bootstrap.Modal(document.getElementById('modallockdown'), {
 
 <script>
     /*chart-pie*/
-    var chart = c3.generate({
+    var chartV1 = c3.generate({
         bindto: '#chart-donut', // id of chart wrapper
+    data: {
+            columns: [
+                // each columns data
+
+                <?php foreach ($paslon_terverifikasi as $pas) :  ?>
+                    <?php $voice = 0;  ?>
+                    <?php foreach ($pas->saksi_data as $pak) :  ?>
+                        <?php
+                        $voice += $pak->voice;
+                        ?>
+                    <?php endforeach  ?>['data<?= $pas->id  ?>', <?= $voice ?>],
+                <?php endforeach  ?>
+            ],
+            type: 'pie', // default type of chart
+            colors: {
+                <?php foreach ($paslon_terverifikasi as $pas) :  ?> 'data<?= $pas->id  ?>': "<?= $pas->color ?>",
+                <?php endforeach  ?>
+            },
+            names: {
+                // name of each serie
+                <?php foreach ($paslon_terverifikasi as $pas) :  ?> 'data<?= $pas->id  ?>': " <?= $pas->candidate ?> - <?= $pas->deputy_candidate ?>",
+                <?php endforeach  ?>
+            }
+        },
+        axis: {},
+        legend: {
+            show: true, //hide legend
+        },
+        padding: {
+            bottom: 0,
+            top: 0
+        },
+    });
+
+    var chartV2 = c3.generate({
+        bindto: '#chart-donut-mode-2', // id of chart wrapper
     data: {
             columns: [
                 // each columns data
@@ -521,7 +557,7 @@ let myModal = new bootstrap.Modal(document.getElementById('modallockdown'), {
         setTimeout(() => {
              chartmode1.flush()
         chartmode2.flush()
-        }, 100);
+        }, 5);
         
     })
     $('.mode-2').on('click', function() {
@@ -531,8 +567,30 @@ let myModal = new bootstrap.Modal(document.getElementById('modallockdown'), {
         setTimeout(() => {
               chartmode1.flush()
                 chartmode2.flush()
-        }, 100);
-    })</script>
+        }, 5);
+    })
+
+    $('.mode-v-1').on('click', function() {
+
+        $('.tampilan-v-1').show();
+       
+        $('.tampilan-v-2').hide();
+        setTimeout(() => {
+            chartV1.flush()
+            chartV2.flush()
+        }, 5);
+        
+    })
+    $('.mode-v-2').on('click', function() {
+        $('.tampilan-v-1').hide();
+        
+        $('.tampilan-v-2').show();
+        setTimeout(() => {
+            chartV1.flush()
+            chartV2.flush()
+        }, 5);
+    })
+</script>
 
 
 </body>

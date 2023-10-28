@@ -336,7 +336,7 @@ $tps = Tps::count();
                     </div>
 
                     <div class="col-xxl-6">
-                        <table class="table table-bordered table-hover ">
+                        <table class="table table-bordered table-hover h-100">
                             <thead class="bg-primary">
                                 <tr>
                                     <th class="text-white text-center align-middle">KECAMATAN</th>
@@ -349,12 +349,12 @@ $tps = Tps::count();
                             <tbody>
                                 @foreach ($kec as $item)
                                 <tr onclick='check("{{Crypt::encrypt($item->id)}}")'>
-                                    <td><a
+                                    <td class="align-middle"><a
                                             href="{{url('/')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
                                     </td>
                                     @foreach ($paslon as $cd)
                                     <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->sum('voice'); ?>
-                                    <td>{{$saksi_dataa}}</td>
+                                    <td class="align-middle">{{$saksi_dataa}}</td>
                                     @endforeach
                                 </tr>
                                 @endforeach
