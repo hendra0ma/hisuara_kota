@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="row mt-3">
+<div class="row">
     <div class="col-lg-4">
 
         <h1 class="page-title fs-1 mt-2">Koreksi C1
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="card">
+                {{-- <div class="card">
                     <div class="card-header bg-danger text-center text-white h6 text-uppercase">
                         Peringatan
                     </div>
@@ -33,31 +33,39 @@
                             <li>Aktifitas perubahan data yang anda lakukan akan di tampilkan pada history publik yang dapat di lihat oleh masyarakat. Segala perbuatan yang melanggar hukum dengan merubah hasil perhitungan suara yang sah dapat di kenakan Pasal 505 UU No.7 Tahun 2017</li>
                         </ul>
                     </div>
-                </div>
+                </div> --}}
                 <div class="card">
                     <div class="card-header bg-primary text-center text-white h6">
                         Data Lama
                     </div>
                     <div class="card-body">
-                        <div class="form-row">
-                            <?php $i = 1;
-                            $voice = 0;
-                            ?>
-                            @foreach($saksi as $saksidata)
-                            @foreach($saksidata->saksi_data as $saksi_data)
-                            <?php $voice += $saksi_data->voice  ?>
-                            <div class="form-group col-md-6">
-                                <label>Suara 0{{$i++}}</label>
-                                <input type="number" class="form-control" id="inputname1" readonly="" value="{{$saksi_data->voice}}" name="suara[]" placeholder="Suara 01">
-                            </div>
-                            @endforeach
-                            @endforeach
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-row">
+                                    <?php $i = 1;
+                                    $voice = 0;
+                                    ?>
+                                    @foreach($saksi as $saksidata)
+                                    @foreach($saksidata->saksi_data as $saksi_data)
+                                    <?php $voice += $saksi_data->voice  ?>
+                                    <div class="form-group col-md-12">
+                                        <label>Suara 0{{$i++}}</label>
+                                        <input type="number" class="form-control" id="inputname1" readonly="" value="{{$saksi_data->voice}}" name="suara[]" placeholder="Suara 01">
+                                    </div>
+                                    @endforeach
+                                    @endforeach
+                                </div>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <label>Jumlah Suara Sah</label>
-                                <input type="number" class="form-control" id="inputnom4" readonly="" value="{{$voice}}" name="suaraSah" placeholder="Suara Tidak Sah">
+                        <div class="col-6">
+                            
+                            <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label>Jumlah Suara Sah</label>
+                                        <textarea type="number" class="form-control" id="inputnom4" readonly="" value="{{$voice}}" name="suaraSah" placeholder="Suara Tidak Sah" rows="9"></textarea>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -70,27 +78,35 @@
                         <x-jet-validation-errors class="mb-4" />
                         <form action="{{route('verifikator.actionKoreksiData',Crypt::encrypt($id))}}" method="post">
                             @csrf
-                            <div class="form-row">
-                                <?php $i = 1;  ?>
-                                @foreach($saksi as $saksidata)
-                                @foreach($saksidata->saksi_data as $saksi_data)
-                                <div class="form-group col-md-6">
-                                    <label>Suara 0{{$i++}}</label>
-                                    <input type="number" class="form-control" id="suara[]" name="suara[]" required placeholder="Total Suara">
+
+                            <div class="row">
+
+                                <div class="col">
+                                    <div class="form-row">
+                                        <?php $i = 1;  ?>
+                                        @foreach($saksi as $saksidata)
+                                        @foreach($saksidata->saksi_data as $saksi_data)
+                                        <div class="form-group col-md-12">
+                                            <label>Suara 0{{$i++}}</label>
+                                            <input type="number" class="form-control" id="suara[]" name="suara[]" required placeholder="Total Suara">
+                                        </div>
+                                        @endforeach
+                                        @endforeach
+                                    
+                                    </div>
                                 </div>
-                                @endforeach
-                                @endforeach
-
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label>Keterangan *</label>
-
-                                    <textarea name="keterangan" class="form-control" rows="5" placeholder="Jelaskan kesalahan data "></textarea>
-                                    <small class="text-danger">
-                                        *Keterangan wajib diisi
-                                    </small>
+    
+                                <div class="col-6">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label>Keterangan *</label>
+    
+                                            <textarea name="keterangan" class="form-control" rows="9" placeholder="Jelaskan kesalahan data "></textarea>
+                                            <small class="text-danger">
+                                                *Keterangan wajib diisi
+                                            </small>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 

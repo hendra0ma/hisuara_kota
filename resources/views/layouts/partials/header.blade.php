@@ -252,17 +252,23 @@
                                 <div class="row h-100 justify-content-end" style="gap: 10px;">
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps" style="background-color: #bababa; width: 40px; height: 36px;" data-target="suara">
-                                            <i class="fa-solid fa-ranking-star"></i>
+                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Urutan Suara">    
+                                                <i class="fa-solid fa-ranking-star"></i>
+                                            </span>
                                         </button>
                                     </div>
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps" style="background-color: #bababa; width: 40px; height: 36px;" data-target="tabulasi">
-                                            <i class="fa-solid fa-database"></i>
+                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Tabulasi">    
+                                                <i class="fa-solid fa-database"></i>
+                                            </span>
                                         </button>
                                     </div>
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps" style="background-color: #bababa; width: 40px; height: 36px;">
-                                            <i class="fa-solid fa-database"></i>
+                                            
+                                                <i class="fa-solid fa-database"></i>
+                                            
                                         </button>
                                     </div>
                                     <div class="col-md-auto px-0" style="color: #212529 !important">
@@ -301,12 +307,16 @@
 
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps" style="background-color: #bababa; width: 40px; height: 36px;" data-target="support">
-                                            <i class="fa-solid fa-headset"></i>
+                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Support">
+                                                <i class="fa-solid fa-headset"></i>
+                                            </span>
                                         </button>
                                     </div>
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps" style="background-color: #bababa; width: 40px; height: 36px;" data-target="setting">
-                                            <i class="fa-solid fa-gear"></i>
+                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Settings">
+                                                <i class="fa-solid fa-gear"></i>
+                                            </span>
                                         </button>
                                     </div>
                                     <div class="col-md-auto px-0">

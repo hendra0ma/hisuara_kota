@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\District;
 use App\Models\Saksi;
 use App\Models\Village;
 use Livewire\Component;
@@ -21,6 +22,7 @@ class VerifikasiKoreksi extends Component
 
         if (count($data['saksi_data']) > 0) {
             $data['village'] = Village::where ('id', $data['saksi_data'][0]->village_id)->first();
+            $data['district'] = District::where ('id', $data['saksi_data'][0]->district_id)->first();
         }
 
         return view('livewire.verifikasi-koreksi', $data);

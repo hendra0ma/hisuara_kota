@@ -164,8 +164,47 @@ let myModal = new bootstrap.Modal(document.getElementById('modallockdown'), {
 @if(Request::segment('2') != "index-tsm")
 <script>
     /*chart-pie*/
-    var chart = c3.generate({
+    var chartmode1 = c3.generate({
         bindto: '#chart-pie', // id of chart wrapper
+        data: {
+            columns: [
+                // each columns data
+
+                <?php foreach ($paslon as $pas) :  ?>
+                    <?php $voice = 0;  ?>
+                    <?php foreach ($pas->saksi_data as $pak) :  ?>
+                        <?php
+                        $voice += $pak->voice;
+                        ?>
+                    <?php endforeach  ?>['data<?= $pas->id  ?>', <?= $voice ?>],
+                <?php endforeach  ?>
+            ],
+            type: 'pie', // default type of chart
+            colors: {
+                <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': "<?= $pas->color ?>",
+                <?php endforeach  ?>
+            },
+            names: {
+                // name of each serie
+                <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': " <?= $pas->candidate ?> - <?= $pas->deputy_candidate ?>",
+                <?php endforeach  ?>
+            }
+        },
+        axis: {},
+        legend: {
+            show: true, //hide legend
+        },
+        padding: {
+            bottom: 0,
+            top: 0
+        },
+    });
+</script>
+
+<script>
+    /*chart-pie*/
+    var chartmode2 = c3.generate({
+        bindto: '#chart-pie-mode-2', // id of chart wrapper
         data: {
             columns: [
                 // each columns data
@@ -277,6 +316,9 @@ let myModal = new bootstrap.Modal(document.getElementById('modallockdown'), {
             top: 0
         },
     });
+
+
+
 </script>
 
 
@@ -386,7 +428,7 @@ let myModal = new bootstrap.Modal(document.getElementById('modallockdown'), {
 
 @else
         <script>
-               var chart = c3.generate({
+               var chartmode1 = c3.generate({
                 bindto: '#chart-pie', // id of chart wrapper
                 data: {
                     columns: [
@@ -463,9 +505,35 @@ let myModal = new bootstrap.Modal(document.getElementById('modallockdown'), {
                     width: 300
                 }
             });
+            
+        
         </script>
 
+
 @endif
+<script>
+    
+     $('.mode-1').on('click', function() {
+
+        $('.tampilan-1').show();
+       
+        $('.tampilan-2').hide();
+        setTimeout(() => {
+             chartmode1.flush()
+        chartmode2.flush()
+        }, 100);
+        
+    })
+    $('.mode-2').on('click', function() {
+        $('.tampilan-1').hide();
+        
+        $('.tampilan-2').show();
+        setTimeout(() => {
+              chartmode1.flush()
+                chartmode2.flush()
+        }, 100);
+    })</script>
+
 
 </body>
 

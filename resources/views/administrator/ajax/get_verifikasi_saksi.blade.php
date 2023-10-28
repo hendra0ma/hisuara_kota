@@ -64,7 +64,10 @@ $track = Tracking::where('id_user',$user['id'])->first();
                     </div>
                 </div>
             </div>
-            <div class="col-md-auto pt-2 my-auto">
+            <div class="col-md-auto pt-2 my-auto px-1">
+                <a href="https://wa.me/{{$user->no_hp}}" class="btn btn-success text-white"><i class="fa-solid fa-phone"></i> Hubungi</a>
+            </div>
+            <div class="col-md-auto pt-2 my-auto px-1">
                 <button class="btn btn-warning text-white" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
             </div>
             {{-- <div class="col-md-3 mt-2 ">
@@ -131,9 +134,9 @@ $track = Tracking::where('id_user',$user['id'])->first();
                                 <td class="ps-2">Belum Terverifikasi</td>
                                 @else
                                 @if ($tps['setup'] == 'terisi')
-                                <td class="ps-2">Terverifikasi (Sudah Mengirim Data Saksi)</td>
+                                <td class="ps-2">Terverifikasi (Sudah Mengirim C1)</td>
                                 @else
-                                <td class="ps-2">Terverifikasi (Belum Mengirim Data Saksi)</td>
+                                <td class="ps-2">Terverifikasi (Belum Mengirim C1)</td>
                                 @endif
                                 @endif
                             </tr>
@@ -270,7 +273,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                     <div class="card">
                         <div class="card-header">
                             <h6 class="mb-0 fw-bold">
-                                Foto Selfie
+                                Foto Saksi
                             </h6>
                         </div>
                         <div class="card-body p-0">
@@ -305,7 +308,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                     <div class="card">
                         <div class="card-header">
                             <h6 class="mb-0 fw-bold">
-                                Foto Selfie di Lokasi
+                                Foto Saksi di Lokasi
                             </h6>
                         </div>
                         <div class="card-body p-0">
@@ -343,7 +346,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                     <div class="card">
                         <div class="card-header">
                             <h6 class="mb-0 fw-bold">
-                                Foto Selfie
+                                Foto Saksi
                             </h6>
                         </div>
                         <div class="card-body p-0">
@@ -376,18 +379,20 @@ $track = Tracking::where('id_user',$user['id'])->first();
         </div>
     
         <div class="col-12">
+            <b>Progres Kinerja Saksi</b>
+        </div>
+
+        <div class="col-12">
             @if($url == 'hadir')
             <div class="row">
                 <div class="col-12">
                     <hr>
                     <div class="row">
                         <div class="col"> <strong>Saksi Mengirim Data TPS:</strong> <br>{{$saksi['created_at']}}</div>
-                        <div class="col"> <strong>Checked BY:</strong> <br> -
-                        </div>
                         <div class="col"> <strong>Status:</strong> <br> @if ($saksi['verification'] == 1)
                           Selesai
                         @else
-                        Pending
+                        Proses
                         @endif
                     </div>
                     </div>
@@ -416,8 +421,6 @@ $track = Tracking::where('id_user',$user['id'])->first();
                     <hr>
                     <div class="row">
                         <div class="col"> <strong>Estimasi Kecurangan Terverfikasi:</strong> <br>29 nov 2019 </div>
-                        <div class="col"> <strong>Checked BY:</strong> <br> Hendra Maulidan
-                        </div>
                         <div class="col"> <strong>Status:</strong> <br> Selesai </div>
                     </div>
                     <div class="track">

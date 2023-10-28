@@ -30,8 +30,11 @@
                             </div>
                             <div class="col-md my-auto">
                                 <div class="row mb-2">
-                                    <div class="col-md-12 bg-info text-white p-2 fs-6">
-                                        TPS {{ $ls->number }} / Kelurahan {{ $village->name }}
+                                    <div class="col-md-12 bg-info text-white p-2 fs-6 fw-bold">
+                                        @if($village == null)
+                                        @else
+                                        TPS {{ $ls->number }} <br> Kelurahan {{ $village->name }} <br> Kecamatan {{ $district->name }}
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="row mb-2">
@@ -42,10 +45,10 @@
                                     <div class="col-md-4 fw-bold">Nama</div>
                                     <div class="col-md">{{$ls->name}}</div>
                                 </div>
-                                <div class="row mb-2">
+                                {{-- <div class="row mb-2">
                                     <div class="col-md-4 fw-bold">No Wa</div>
                                     <div class="col-md">{{$ls->no_hp}}</div>
-                                </div>
+                                </div> --}}
                                 <div class="row">
                                     <div class="col-md-4 fw-bold">Date</div>
                                     <div class="col-md">{{$ls->date}}</div>
