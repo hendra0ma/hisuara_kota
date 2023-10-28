@@ -522,8 +522,8 @@
                 </div>
                 <div class="card-footer p-0 border-0" id="marquee1" style="position: relative; background-color: #343a40">
                     {{-- <button class="btn-dark btn-kolapse-sidebar text-white" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-align-left"></i></button> --}}
-                    <button class="btn-dark btn-kolapse text-white" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-bars"></i></button>
-                    <button class="btn-danger text-white rounded-0" style="position: absolute; left: 28px; z-index: 20">Suara Masuk</button>
+                    <button class="btn-dark btn-kolapse text-white h-100" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-bars"></i></button>
+                    <button class="btn-danger text-white h-100 rounded-0" style="position: absolute; left: 28px; z-index: 20">Suara Masuk</button>
                     {{-- <button class="btn btn-kolapse text-white" style="background-color: #30304d; z-index: 20"><i class="fa-solid fa-bars"></i></button>
                     <button class="btn btn-danger text-white rounded-0" style="z-index: 20">Suara Masuk</button> --}}
                     <marquee>
