@@ -62,10 +62,110 @@
 </style>
 
 <div class="row" style="margin-top: 75px; transition: all 0.5s ease-in-out;">
-    <div class="col-md-auto pe-0 my-auto">
+    <div class="col-md-12 petugas tugel-content-menu mb-2" style="display: none">
+        <div class="row">
+            <div class="col-md">
+                <a href="{{url('')}}/administrator/verifikasi_saksi" class="btn btn-primary fs-4 w-100">
+                    Saksi
+                </a>
+            </div>
+            <div class="col-md">
+                <a href="{{url('')}}/administrator/relawan" class="btn btn-primary fs-4 w-100">
+                    Relawan
+                </a>
+            </div>
+            <div class="col-md">
+                <a href="{{url('')}}/administrator/enumerator" class="btn btn-primary fs-4 w-100">
+                    Enumerator
+                </a>
+            </div>
+            <div class="col-md">
+                <a href="{{url('')}}/administrator/verifikasi_akun" class="btn btn-primary fs-4 w-100">
+                    Admin
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 operator tugel-content-menu mb-2" style="display: none">
+        <div class="row">
+            <div class="col-md">
+                <a href="{{url('')}}/verifikator/verifikasi-c1" class="btn btn-primary fs-4 w-100">
+                    Verifikasi C1
+                </a>
+            </div>
+            <div class="col-md">
+                <a href="{{url('')}}/auditor/audit-c1" class="btn btn-primary fs-4 w-100">
+                    Audit C1
+                </a>
+            </div>
+            <div class="col-md">
+                <a href="{{url('')}}/administrator/verifikasi_koreksi" class="btn btn-primary fs-4 w-100">
+                    Koreksi
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 perhitungan tugel-content-menu mb-2" style="display: none">
+        <div class="row">
+            <div class="col-md">
+                <a href="{{url('')}}/administrator/real_count2" class="btn btn-primary fs-4 w-100">
+                    Real Count
+                </a>
+            </div>
+            <div class="col-md">
+                <a href="{{url('')}}/administrator/quick_count2" class="btn btn-primary fs-4 w-100">
+                    Quick Count
+                </a>
+            </div>
+            <div class="col-md">
+                <a href="{{url('')}}/administrator/terverifikasi" class="btn btn-primary fs-4 w-100">
+                    Terverifikasi
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 rekapitulasi tugel-content-menu mb-2" style="display: none">
+        <div class="row">
+            <div class="col-md">
+                <a href="{{url('')}}/administrator/rekapitulasi_kelurahan" class="btn btn-primary fs-4 w-100">
+                    Rekapitulasi Kelurahan
+                </a>
+            </div>
+            <div class="col-md">
+                <a href="{{url('')}}/administrator/rekapitulasi_kecamatan" class="btn btn-primary fs-4 w-100">
+                    Rekapitulasi Kecamatan
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 dokumentasi tugel-content-menu mb-2" style="display: none">
+        <div class="row">
+            <div class="col-md">
+                <a href="{{url('')}}/administrator/data-c1" class="btn btn-primary fs-4 w-100">
+                    C1
+                </a>
+            </div>
+            <div class="col-md">
+                <a href="#" class="btn btn-primary fs-4 w-100">
+                    C6
+                </a>
+            </div>
+            <div class="col-md">
+                <a href="#" class="btn btn-primary fs-4 w-100">
+                    Surat Suara
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {{-- <div class="col-md-auto pe-0 my-auto">
         <img src="{{asset('')}}storage/{{$config->regencies_logo}}" style="width: 80px" alt="">
     </div>
-    <div class="col-lg-5 ps-2">
+    <div class="col-lg-11 ps-2 mb-3">
         <h1 class="page-title fs-1 mt-2">PILPRES 2024
             <!-- Kota -->
         </h1>
@@ -74,8 +174,8 @@
                 <!-- Kota -->
             </li>
         </ol>
-    </div>
-    <div class="col-lg-6 text-end">
+    </div> --}}
+    {{-- <div class="col-lg-6 text-end">
         <div class="row mx-auto text-center">
             <div class="col-md me-auto">
                 <div class="row">
@@ -147,7 +247,7 @@
 
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="col-lg col-md mt-4">
         <div class="row g-0">
