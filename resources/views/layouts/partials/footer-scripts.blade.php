@@ -157,7 +157,7 @@ let myModal = new bootstrap.Modal(document.getElementById('modallockdown'), {
         function playSound(url) {
             const audio = new Audio(url);
             audio.play();
-            console.log(audio);
+            // console.log(audio);
         }
     });
 </script>

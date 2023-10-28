@@ -340,6 +340,8 @@ Route::group(['middleware' => 'role:huver', 'prefix' => 'huver', 'as' => 'huver.
 });
 //rekapitulator
 Route::group(['middleware' => 'role:rekapitulator', 'prefix' => 'rekapitulator', 'as' => 'rekapitulator.'], function () {
+    Route::get('home', [RekapitulatorController::class, 'home'])->name('home');
+    Route::post('action-tambah/{id}', [RekapitulatorController::class, 'actionTambah'])->name('actionTambah');
     Route::get('index', [RekapitulatorController::class, 'index'])->name('index');
     Route::get('print_kecamatan', [RekapitulatorController::class, 'print_kecamatan'])->name('print_kecamatan');
     Route::post('action_rekapitulator/{id}', [RekapitulatorController::class, 'action_rekapitulator']);
