@@ -68,7 +68,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 <!-- PAGE-HEADER END -->
 
 <h4 class="fw-bold fs-4 mt-5 mb-0">
-    Jumlah Saksi Ditolak : {{$jumlah_saksi_ditolak}}
+    Jumlah Enumerator Ditolak : {{$jumlah_saksi_ditolak}}
 </h4>
 <hr style="border: 1px solid">
 
