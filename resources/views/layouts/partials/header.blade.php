@@ -42,7 +42,7 @@
     }
 
     .for-kolapse-kurangin > .side-app > .row:first-child {
-        margin-top: 110px !important;
+        margin-top: 90px !important;
         transition: all 0.5s ease-in-out;
     }
 
@@ -702,7 +702,7 @@
                     {{-- <button class="btn-dark btn-kolapse-sidebar text-white" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-align-left"></i></button> --}}
                     <button class="btn-dark btn-kolapse text-white h-100" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-bars"></i></button>
                     <button class="btn-danger text-white h-100 rounded-0" style="position: absolute; left: 28px; z-index: 20">Suara Masuk</button>
-                    <a href="https://time.is/Jakarta" id="time_is_link" rel="nofollow" style="font-size:36px"></a>
+                    <a href="https://time.is/Jakarta" id="time_is_link" rel="nofollow"></a>
                     <button class="btn-dark text-white h-100 rounded-0" style="position: absolute; left: 123px; z-index: 20;"><span id="Jakarta_z41c" style="font-size:20px; color: #f7f700"></span> <span style="font-size: 20px; color: #f7f700">WIB</span></button>
                     <script src="//widget.time.is/t.js"></script>
                     <script>
