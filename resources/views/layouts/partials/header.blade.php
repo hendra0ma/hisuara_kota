@@ -182,7 +182,7 @@
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="kecurangan">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Kecurangan">
-                                                <i class="fa-solid fa-file-circle-xmark"></i>
+                                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M14.25 0H2.75C1.23 0 0 1.23 0 2.75v15.5C0 19.77 1.23 21 2.75 21h8.14a7.138 7.138 0 0 1-1.39-4.25c0-4 3.25-7.25 7.25-7.25.08 0 .17 0 .25.01V2.75C17 1.23 15.77 0 14.25 0zM4 4h4c.55 0 1 .45 1 1s-.45 1-1 1H4c-.55 0-1-.45-1-1s.45-1 1-1zm5 10H4c-.55 0-1-.45-1-1s.45-1 1-1h5c.55 0 1 .45 1 1s-.45 1-1 1zm4-4H4c-.55 0-1-.45-1-1s.45-1 1-1h9c.55 0 1 .45 1 1s-.45 1-1 1z" fill="#ffffff" opacity="1" data-original="#000000" class=""></path><path d="M16.75 22c-2.895 0-5.25-2.355-5.25-5.25s2.355-5.25 5.25-5.25S22 13.855 22 16.75 19.645 22 16.75 22zm0-8.5c-1.792 0-3.25 1.458-3.25 3.25S14.958 20 16.75 20 20 18.542 20 16.75s-1.458-3.25-3.25-3.25z" fill="#ffffff" opacity="1" data-original="#000000" class=""></path><path d="M23 24a.997.997 0 0 1-.707-.293l-3.25-3.25a.999.999 0 1 1 1.414-1.414l3.25 3.25A.999.999 0 0 1 23 24z" fill="#ffffff" opacity="1" data-original="#000000" class=""></path></g></svg>
                                             </span>
                                         </button>
                                     </div>
@@ -340,6 +340,21 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="col-md kecurangan tugel-content" style="display: none">
+                                        <div class="row">
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                                    Verifikator Kecurangan
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="#" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                                    Validator Kecurangan
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 
                                     <div class="col-md text-white tabulasi tugel-content">
                                         <div class="row">
@@ -380,7 +395,7 @@
                                                 <div class="row items" style="width: 515px; overflow: scroll; flex-wrap: nowrap">
                                                     @foreach($domainKota as $dokota)
                                                         <div class="col">    
-                                                            <a class="text-white btn btn-secondary rounded-0 item" href="{{$dokota->domain}}">{{$dokota->name}}</a>
+                                                            <a class="text-white btn rounded-0 item" style="background: #528bff" href="{{$dokota->domain}}">{{$dokota->name}}</a>
                                                         </div>
                                                     @endforeach
                                                 </div>
@@ -553,33 +568,27 @@
                             <div class="col-md-auto my-auto">
                                 <div class="row h-100 justify-content-end" style="gap: 10px;">
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="suara">
-                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Urutan Suara">    
-                                                <i class="fa-solid fa-ranking-star"></i>
-                                            </span>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white active-button" style="background-color: #656064; width: 40px; height: 36px;" data-target="tabulasi">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Tabulasi">    
                                                 <i class="fa-solid fa-database"></i>
                                             </span>
                                         </button>
                                     </div>
+
+                                    <div class="col-md-auto px-0">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="suara">
+                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Urutan Suara">    
+                                                <i class="fa-solid fa-ranking-star"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                    
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="kota">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Kota">    
                                                 <i class="fa-solid fa-city"></i>
                                             </span>
                                         </button>
-                                    </div>
-                                    <div class="col-md-auto px-0" style="color: #212529 !important">
-                                        <a class="w-100 mx-auto btn nav-link theme-layout nav-link-bg layout-setting px-3 text-white" onclick="darktheme()" style="background-color: #656064; width: 40px; height: 36px; margin: 0px; font-size: 16px" data-target="">
-                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip"
-                                                title="Dark Theme"><i class="fe fe-moon"></i></span>
-                                            <span class="light-layout" data-bs-placement="bottom" data-bs-toggle="tooltip"
-                                                title="Light Theme"><i class="fe fe-sun"></i></span>
-                                        </a>
                                     </div>
                                     {{-- <div class="dropdown d-none d-md-flex">
                                         <a class="nav-link icon theme-layout nav-link-bg layout-setting" onclick="darktheme()">
@@ -621,6 +630,14 @@
                                                 <i class="fa-solid fa-gear"></i>
                                             </span>
                                         </button>
+                                    </div>
+                                    <div class="col-md-auto px-0" style="color: #212529 !important">
+                                        <a class="w-100 mx-auto btn nav-link theme-layout nav-link-bg layout-setting px-3 text-white" onclick="darktheme()" style="background-color: #656064; width: 40px; height: 36px; margin: 0px; font-size: 16px" data-target="">
+                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip"
+                                                title="Dark Theme"><i class="fe fe-moon"></i></span>
+                                            <span class="light-layout" data-bs-placement="bottom" data-bs-toggle="tooltip"
+                                                title="Light Theme"><i class="fe fe-sun"></i></span>
+                                        </a>
                                     </div>
                                     <div class="col-md-auto px-0">
                                         <div class="dropdown d-none d-md-flex profile-1">
@@ -668,6 +685,13 @@
                     {{-- <button class="btn-dark btn-kolapse-sidebar text-white" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-align-left"></i></button> --}}
                     <button class="btn-dark btn-kolapse text-white h-100" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-bars"></i></button>
                     <button class="btn-danger text-white h-100 rounded-0" style="position: absolute; left: 28px; z-index: 20">Suara Masuk</button>
+                    <button class="btn-dark text-white h-100 rounded-0" style="position: absolute; left: 123px; z-index: 20"><span id="Jakarta_z41c" style="font-size:20px"></span> <span style="font-size: 20px">WIB</span></button>
+                    <script src="//widget.time.is/t.js"></script>
+                    <script>
+                        time_is_widget.init({
+                            Jakarta_z41c: {}
+                        });
+                    </script>
                     {{-- <button class="btn btn-kolapse text-white" style="background-color: #30304d; z-index: 20"><i class="fa-solid fa-bars"></i></button>
                     <button class="btn btn-danger text-white rounded-0" style="z-index: 20">Suara Masuk</button> --}}
                     <marquee>
