@@ -711,8 +711,17 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                 <a class="dropdown-item" href="/user/profile">
                                     <i class="dropdown-icon fe fe-user"></i> Profile
                                 </a>
-                                <a class="dropdown-item" href="/user/profile">
+                                <a class="dropdown-item" href="#">
                                     <i class="dropdown-icon fe fe-user"></i> Upload C1
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="dropdown-icon fe fe-user"></i> Upload C1 Enumerator
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="dropdown-icon fe fe-user"></i> Upload C1 Relawan
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="dropdown-icon fe fe-user"></i> Upload Kecurangan
                                 </a>
 
                                 <form action="{{ route('logout') }}" method="post">
