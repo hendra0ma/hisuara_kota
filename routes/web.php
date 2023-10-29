@@ -309,6 +309,7 @@ Route::group(['middleware' => 'role:verifikator', 'prefix' => 'verifikator', 'as
     Route::post('actionKoreksiData/{id}', [VerificatorController::class, 'actionKoreksiData'])->name('actionKoreksiData');
     Route::get('village/{id}', [VerificatorController::class, "village"])->middleware('districtCheck:kelurahan')->name("village");
     Route::get('verifikasi-c1', [VerificatorController::class, 'verifikasiC1'])->name('verifikasiC1');
+    Route::get('verifikator_kecurangan', [VerificatorController::class, 'verifikatorKecurangan'])->name('verifikatorKecurangan');
 });
 
 
@@ -379,6 +380,7 @@ Route::group(['middleware' => 'role:hukum', 'prefix' => 'hukum', 'as' => 'hukum.
     Route::get('index', [HukumController::class, 'index'])->name('index');
     Route::controller(HukumController::class)->group(function () {
         Route::get('terverifikasi', 'terverifikasi');
+        Route::get('validator_kecurangan', 'validatorKecurangan')->name('validatorKecurangan');
         Route::get('ditolak', 'ditolak');
         Route::get('print/{id}', 'print');
         Route::get('verifikasi_kecurangan/{id}', 'verifikasi_kecurangan');
