@@ -9,6 +9,8 @@
     use App\Models\User;
     use Illuminate\Support\Facades\DB;
     use App\Models\Saksi;
+    use App\Models\RegenciesDomain;
+    use App\Models\Province;
     
     $config = Config::all()->first();
     $regency = District::where('regency_id', $config['regencies_id'])->get();
@@ -29,6 +31,8 @@
     }
     $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data GROUP by paslon_id ORDER by total DESC'));
     $urutan = $paslon_tertinggi;
+    $props = Province::where('id',$kota['province_id'])->first();
+    $cityProp = Regency::where('province_id',$kota['province_id'])->get();
 ?>
 
 <style>
@@ -50,6 +54,53 @@
         padding-left: 80px !important
     }
 
+    .tooltip-inner {
+        background-color: #f82649 !important;
+    }
+
+    .bs-tooltip-bottom .tooltip-arrow::before {
+        border-bottom-color: #f82649 !important;
+    }
+
+    .active-button{
+        background-color: rgb(0, 156, 133) !important;
+    }
+
+    .custom-urutan:nth-child(1) {
+        border-radius: 25px 0px 0px 25px
+    }
+
+    .custom-urutan:nth-child(2) {
+        border-radius: 0px
+    }
+
+    .custom-urutan:nth-child(3) {
+        border-radius: 0px 25px 25px 0px
+    }
+
+    /* custom scrollbar */
+    .row.items::-webkit-scrollbar {
+      display: none
+    }
+    
+    /* ::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background-color: #d6dee1;
+      border-radius: 20px;
+      background-clip: content-box;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #a8bbbf;
+    }
+
+    ::-webkit-scrollbar-corner {
+        background: transparent;
+    } */
+    
 </style>
 
 <div class="app-header header header-baru py-0 pe-0" style="padding-left: 0px !important">
@@ -60,22 +111,8 @@
             <div class="col-12 px-0">
                 <div class="card mb-0 border-0">
                     <div class="card-body for-kolapse py-1 pl-5" style="background: #000; padding-right: 2.5rem">
-                        <div class="row py-4 justify-content-between">
-                        
-                            {{-- <div class="col-md-auto my-auto">
-                                <h4 class="mb-0 text-white tabulasi tugel-content">
-                                    Tabulasi
-                                </h4>
-                                <h4 class="mb-0 text-white support tugel-content" style="display: none;">
-                                    Support
-                                </h4>
-                                <h4 class="mb-0 text-white setting tugel-content" style="display: none;">
-                                    Settings
-                                </h4>
-                                <h4 class="mb-0 text-white suara tugel-content" style="display: none;">
-                                    Urutan Suara
-                                </h4>
-                            </div> --}}
+                        <div class="row py-4 justify-content-between" style="gap: 15px">
+                            
                             <div class="col-auto">
                                 <div class="row">
                                     <div class="col-md-auto pe-0 my-auto">
@@ -105,7 +142,7 @@
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="petugas">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Petugas">    
-                                                <i class="fa-solid fa-ranking-star"></i>
+                                                <i class="fa-solid fa-user-tie"></i>
                                             </span>
                                         </button>
                                     </div>
@@ -113,7 +150,7 @@
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="operator">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Operator">    
-                                                <i class="fa-solid fa-database"></i>
+                                                <i class="fa-solid fa-computer"></i>
                                             </span>
                                         </button>
                                     </div>
@@ -121,7 +158,7 @@
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="perhitungan">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Perhitungan">    
-                                                <i class="fa-solid fa-database"></i>
+                                                <i class="fa-solid fa-chart-simple"></i>
                                             </span>
                                         </button>
                                     </div>
@@ -129,7 +166,7 @@
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="rekapitulasi">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Rekapitulasi">
-                                                <i class="fa-solid fa-headset"></i>
+                                                <i class="fa-solid fa-folder-closed"></i>
                                             </span>
                                         </button>
                                     </div>
@@ -137,7 +174,7 @@
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="dokumentasi">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Dokumentasi">
-                                                <i class="fa-solid fa-gear"></i>
+                                                <i class="fa-solid fa-book"></i>
                                             </span>
                                         </button>
                                     </div>
@@ -145,17 +182,56 @@
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="kecurangan">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Kecurangan">
-                                                <i class="fa-solid fa-gear"></i>
+                                                <i class="fa-solid fa-file-circle-xmark"></i>
                                             </span>
                                         </button>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-5 my-auto">
+                            <div class="col-md my-auto">
                                 <div class="row">
 
-                                    <div class="col-md-12 petugas tugel-content" style="display: none">
+                                    <div class="col-md-auto my-auto">
+                                        <h4 class="mb-0 fw-bold dashboard tugel-content" style="color: #009c85; font-size: 16px; display: none;">
+                                            Dashboard
+                                        </h4>
+                                        <h4 class="mb-0 fw-bold petugas tugel-content" style="color: #009c85; font-size: 16px; display: none;">
+                                            Petugas
+                                        </h4>
+                                        <h4 class="mb-0 fw-bold operator tugel-content" style="color: #009c85; font-size: 16px; display: none;">
+                                            Operator
+                                        </h4>
+                                        <h4 class="mb-0 fw-bold perhitungan tugel-content" style="color: #009c85; font-size: 16px; display: none;">
+                                            Perhitungan
+                                        </h4>
+                                        <h4 class="mb-0 fw-bold rekapitulasi tugel-content" style="color: #009c85; font-size: 16px; display: none;">
+                                            Rekapitulasi
+                                        </h4>
+                                        <h4 class="mb-0 fw-bold dokumentasi tugel-content" style="color: #009c85; font-size: 16px; display: none;">
+                                            Dokumentasi
+                                        </h4>
+                                        <h4 class="mb-0 fw-bold kecurangan tugel-content" style="color: #009c85; font-size: 16px; display: none;">
+                                            Kecurangan
+                                        </h4>
+                                        <h4 class="mb-0 fw-bold suara tugel-content" style="color: #009c85; font-size: 16px; display: none;">
+                                            Urutan
+                                        </h4>
+                                        <h4 class="mb-0 fw-bold tabulasi tugel-content" style="color: #009c85; font-size: 16px">
+                                            Tabulasi
+                                        </h4>
+                                        <h4 class="mb-0 fw-bold kota tugel-content" style="color: #009c85; font-size: 16px; display: none;">
+                                            Kota
+                                        </h4>
+                                        <h4 class="mb-0 fw-bold support tugel-content" style="color: #009c85; font-size: 16px; display: none;">
+                                            Support
+                                        </h4>
+                                        <h4 class="mb-0 fw-bold setting tugel-content" style="color: #009c85; font-size: 16px; display: none;">
+                                            Settings
+                                        </h4>
+                                    </div>
+
+                                    <div class="col-md petugas tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/verifikasi_saksi" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 25px 0px 0px 25px;">
@@ -180,7 +256,7 @@
                                         </div>
                                     </div>
                                 
-                                    <div class="col-md-12 operator tugel-content" style="display: none">
+                                    <div class="col-md operator tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/verifikator/verifikasi-c1" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 25px 0px 0px 25px;">
@@ -200,7 +276,7 @@
                                         </div>
                                     </div>
                                 
-                                    <div class="col-md-12 perhitungan tugel-content" style="display: none">
+                                    <div class="col-md perhitungan tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/real_count2" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 25px 0px 0px 25px;">
@@ -220,7 +296,7 @@
                                         </div>
                                     </div>
                                 
-                                    <div class="col-md-12 rekapitulasi tugel-content" style="display: none">
+                                    <div class="col-md rekapitulasi tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/rekapitulasi_kelurahan" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 25px 0px 0px 25px;">
@@ -235,7 +311,7 @@
                                         </div>
                                     </div>
                                 
-                                    <div class="col-md-12 dokumentasi tugel-content" style="display: none">
+                                    <div class="col-md dokumentasi tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/data-c1" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 25px 0px 0px 25px;">
@@ -248,6 +324,16 @@
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="#" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 0;">
+                                                    Riwayat
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="#" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 0;">
+                                                    Realisasi DPT
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="#" class="py-1 btn btn-primary fs-6 w-100" style="border-radius: 0px 25px 25px 0px;">
                                                     Surat Suara
                                                 </a>
@@ -255,7 +341,7 @@
                                         </div>
                                     </div>
                                 
-                                    <div class="col-md-12 text-white tabulasi tugel-content">
+                                    <div class="col-md text-white tabulasi tugel-content">
                                         <div class="row">
                                             <div class="col py-2 judul text-center bg-secondary text-white"
                                                 style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
@@ -277,7 +363,69 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12 text-white support tugel-content" style="display: none">
+                                    <style>
+                                        .items.active {
+                                          cursor: grabbing;
+                                          cursor: -webkit-grabbing;
+                                        }
+                                    </style>
+
+                                    <div class="col-md text-white kota tugel-content" style="display: none">
+                                        <div class="row">
+                                            <div class="col-4 my-auto">
+                                                <input type="text" class="w-100 form-control py-0" style="border-radius: 25px; height: 30px" name="" id="" placeholder="Cari Kota..." >
+                                            </div>
+                                            <div class="col-6">
+                                                <?php $domainKota = RegenciesDomain::join("regencies",'regency_domains.regency_id','=','regencies.id')->where("regency_domains.province_id",$props->id)->get(); ?>
+                                                <div class="row items" style="width: 515px; overflow: scroll; flex-wrap: nowrap">
+                                                    @foreach($domainKota as $dokota)
+                                                        <div class="col">    
+                                                            <a class="text-white btn btn-secondary rounded-0 item" href="{{$dokota->domain}}">{{$dokota->name}}</a>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <script>
+                                        const $slider = $('.items');
+                                        let isDown = false;
+                                        let startX;
+                                        let scrollLeft;                                        
+
+                                        $slider.on('mousedown', (e) => {
+                                          isDown = true;
+                                          $slider.addClass('active');
+                                          startX = e.pageX - $slider.offset().left;
+                                          scrollLeft = $slider.scrollLeft();
+                                          setTimeout(() => {
+                                            $('.items.active .item').prop('disabled', true)
+                                          }, 100);
+                                        });                                        
+
+                                        $slider.on('mouseleave', () => {
+                                          isDown = false;
+                                          $slider.removeClass('active');
+                                        });                                        
+
+                                        $slider.on('mouseup', () => {
+                                          isDown = false;
+                                          $slider.removeClass('active');
+                                        });                                        
+
+                                        $slider.on('mousemove', (e) => {
+                                          if (!isDown) return;
+                                          e.preventDefault();
+                                          const x = e.pageX - $slider.offset().left;
+                                          const walk = (x - startX) * 1; // scroll-fast
+                                          $slider.scrollLeft(scrollLeft - walk);
+                                          console.log(walk);
+                                        });
+
+                                    </script>
+
+                                    <div class="col-md text-white support tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md-auto px-1 my-auto">
                                                 <img src="https://plus.unsplash.com/premium_photo-1661510749856-47c47ea10fc7?auto=format&fit=crop&q=80&w=1932&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="avatar profile-user brround" style="width: 35px; height: 35px; object-fit: cover" alt="">
@@ -291,7 +439,7 @@
                                         </div>
                                     </div>
                                 
-                                    <div class="col-md-12 setting tugel-content settings" style="display: none; top: 0; position: relative;">
+                                    <div class="col-md setting tugel-content settings" style="display: none; top: 0; position: relative;">
                                         {{-- Settings --}}
                                         <div class="row px-5 my-auto" style="gap: 25px;">
                                             <div class="col-md">
@@ -380,18 +528,17 @@
                                 
                                     <div class="col-md suara tugel-content"style="display: none">
                                         <div class="row">
-                                            {{-- <div class="col-4 text-center mb-2 fw-bold fs-3">
-                                                <span style="-webkit-text-stroke: 0.75px #00000036; color: #ffd700">1</span>
+                                            @foreach ($urutan as $urutPaslon)
+                                            <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
+                                            <div class="col py-2 judul text-center text-white custom-urutan"
+                                                style="background: {{ $pasangan->color }}">
+                                                <div class="text">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} : {{$urutPaslon->total}}</b></div>
                                             </div>
-                                            <div class="col-4 text-center mb-2 fw-bold fs-3">
-                                                <span style="-webkit-text-stroke: 0.75px #00000036; color: #c0c0c0">2</span>
-                                            </div>
-                                            <div class="col-4 text-center mb-2 fw-bold fs-3">
-                                                <span style="-webkit-text-stroke: 0.75px #00000036; color: #cd7f32">3</span>
-                                            </div> --}}
+                                            @endforeach
+                                        </div>
+                                        {{-- <div class="row">
                                             @foreach ($urutan as $urutPaslon)
                                                 <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
-                                                {{-- <div class="col-md"> --}}
                                                 <div class="col-auto">
                                                     <div class="card shadow text-center mb-0 mx-auto mt-1 border-0">
                                                         <div class="card-header pt-1 pb-1 px-2 border-0" style="background: {{ $pasangan->color }}">
@@ -399,9 +546,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                {{-- </div> --}}
                                             @endforeach
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 
                                 </div>
@@ -417,17 +563,17 @@
                                         </button>
                                     </div>
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="tabulasi">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white active-button" style="background-color: #656064; width: 40px; height: 36px;" data-target="tabulasi">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Tabulasi">    
                                                 <i class="fa-solid fa-database"></i>
                                             </span>
                                         </button>
                                     </div>
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;">
-                                            
-                                                <i class="fa-solid fa-database"></i>
-                                            
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="kota">
+                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Kota">    
+                                                <i class="fa-solid fa-city"></i>
+                                            </span>
                                         </button>
                                     </div>
                                     <div class="col-md-auto px-0" style="color: #212529 !important">
@@ -462,6 +608,7 @@
                                                 });
                                             }, 300);
                                         }
+
                                     </script>
 
                                     <div class="col-md-auto px-0">
@@ -545,9 +692,9 @@
                     $('.for-kolapse-kurangin > .side-app > .row:first').toggleClass('kurangin')
                 })
 
-                $('.btn-kolapse-sidebar').on('click', function() {
-                    $('body.app.sidebar-mini').toggleClass('sidenav-toggled')
-                })
+                // $('.btn-kolapse-sidebar').on('click', function() {
+                //     $('body.app.sidebar-mini').toggleClass('sidenav-toggled')
+                // })
             
                 $('.tugel-kolaps').on('click', function() {
                 
@@ -572,6 +719,14 @@
                     }
                 })
 
+                $('.tugel-kolaps').on('click',function () {
+                    const btnIni = $(this);
+                    $('.tugel-kolaps').removeClass('active-button');
+                    btnIni.addClass('active-button');
+                });
+
+                
+
                 // $('.tugel-kolaps-menu.content-toggled').on('click', function() {
                 
                     // let target = $(this).data('target')
@@ -579,6 +734,8 @@
                     // $('.tugel-content-menu').removeClass('content-toggled')
                     // $(`.${target}`).toggleClass('content-toggled')
                 // })
+
+               
             
             </script>
 
