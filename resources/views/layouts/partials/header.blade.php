@@ -386,12 +386,12 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12 text-white judul-pertama tugel-content">
+                                    <div class="col-md-12 text-white judul-pertama">
                                         <div class="row">
 
                                             <div class="col-12 judul text-center text-white" id="gantiBackground" style="transition: background 1s; transform: scaleX(1.2);">
                                                 <div class="text">
-                                                    <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" class="display-2" id="text-effect"></h1>
+                                                    <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;" class="display-2" id="text-effect"></h1>
                                                     <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; color: #fff; text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;" class="display-3" id="text-effect2"></h1>
                                                 </div>
                                             </div>
@@ -403,8 +403,9 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     <script>
                                         function animate() {
                                             $container = $("#text-effect");
+                                            $('.tugel-content').hide(500);
                                             const text = "HISUARA"
-                                            const $elements = text.split("").map((s) => $(`<span style="margin-left:20px" class="my-auto">${s}</span>`));
+                                            const $elements = text.split("").map((s) => $(`<span style="margin-left:20px" class="my-auto fw-bold">${s}</span>`));
 
                                             $container.html($elements);
                                             $container.show();
@@ -425,6 +426,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             });
 
                                             setTimeout(() => {
+                                                $("#text-effect").hide();
                                                 $("#text-effect").html("");
                                                 animate2()
                                             }, 3000)
@@ -455,10 +457,16 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                     }, 200);
                                             });
                                             setTimeout(() => {
+                                                $("#text-effect2").html("")
+                                                $("#text-effect2").hide()
+
                                                 $(`.active-button`).click();
                                                 setTimeout(()=>{
+
+                                                    $('.tugel-content').hide(500);
                                                     animate();
-                                                },1000*60*3);
+                                                    
+                                                },1000 * 60 );
 
                                             }, 5000);
                                         }
@@ -756,8 +764,12 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     </div>
                                 </div>
                                 <div class="dropdown-divider m-0"></div>
+
                                 <a class="dropdown-item" href="/user/profile">
                                     <i class="dropdown-icon fe fe-user"></i> Profile
+                                </a>
+                                <a class="dropdown-item" href="/user/profile">
+                                    <i class="dropdown-icon fe fe-user"></i> Upload C1
                                 </a>
 
                                 <form action="{{ route('logout') }}" method="post">
