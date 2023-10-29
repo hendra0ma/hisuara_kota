@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memek</title>
+<style>
+
+
+  span{
+    position: relative;
+  }
+
+</style>
+</head>
+
+<body>
+    <img src="1698156219.jpg" id="image"style="position:relative">
+    <h1 id="text-effect">Lorem ipsum, dolor sit amet </h1>
+      <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        function animate() {
+            $container = $("#text-effect");
+            const text = $container.text();
+            const $elements = text.split("").map((s) => $(`<span>${s}</span>`));
+          
+            $container.html($elements);
+            $container.show();
+
+            const $image = $('#image');
+            $image.css({ top: -60, opacity: 0 })
+            .delay(40)
+            .animate({ top: 0, opacity: 1 }, {
+                duration: 1000,
+                easing: "easeOutBounce",
+            });
+          
+            $elements.forEach(function ($el, i) {
+              $el
+                .css({ top: -60, opacity: 0 })
+                .delay(40 * i)
+                .animate({ top: 0, opacity: 1 }, 100, "easeOutExpo");
+            });
+          }
+          $(function () {
+            animate();
+          });
+          
+    </script>
+
+</body>
+
+</html>

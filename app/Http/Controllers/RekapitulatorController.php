@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Village;
 use App\Models\Config;
 use App\Models\Rekapitulator as ModelsRekapitulator;
+use App\Models\Tps;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -72,4 +73,24 @@ class RekapitulatorController extends Controller
 
         return redirect('rekapitulator/index');
     }
+    public function actionTambah(Request $request,$id)
+    {
+        return $request;
+    }
+
+
+    function home(){
+
+        $village_id = Auth::user()->villages;
+        $district_id = Auth::user()->districts;
+        $data['paslon'] = Paslon::get();
+        $data['tps'] = Tps::leftJoin("rekapitulasi","tps.id","=","rekapitulasi.tps_id")->where('tps.villages_id',$village_id)
+        ->whereNull("rekapitulasi.id")
+        ->select('tps.*')
+        ->get();
+        $data['village'] = Village::where("id",$village_id)->first();
+        $data['district'] = District::where("id",$district_id)->first();
+        return view("rekapitulator.home",$data);
+    }
+
 }

@@ -197,7 +197,7 @@ Route::group(['middleware' => 'auth'], function () {
             //Administratorw
             Route::get('data-c1', 'dataC1');
             Route::get('r-data-record', 'rDataRecord');
-            Route::get('r-data', 'rdata');
+            Route::get('r-data', 'rdata')->name("rdata");
             Route::post('main-permission', 'mainPermission');
             Route::get('solution/{id}', 'solution')->name('solution');
             Route::get('laporan-bawaslu', 'laporanBapilu')->name('laporan_bapilu');
@@ -278,7 +278,7 @@ Route::group(['middleware' => 'auth'], function () {
                 return view('security.dev_pass');
             });
 
-            Route::get('analisa_dpt_kpu', 'analisa_dpt_kpu');
+            Route::get('analisa_dpt_kpu', 'analisa_dpt_kpu')->name('analisa_dpt_kpu');
             Route::get('analisa_dpt_kpu/print', 'analisa_dpt_kpu_print');
             Route::get('get_qrsidang', 'get_qrsidang');
             Route::get('print_sidang/{id}', 'print_sidang');
@@ -340,6 +340,8 @@ Route::group(['middleware' => 'role:huver', 'prefix' => 'huver', 'as' => 'huver.
 });
 //rekapitulator
 Route::group(['middleware' => 'role:rekapitulator', 'prefix' => 'rekapitulator', 'as' => 'rekapitulator.'], function () {
+    Route::get('home', [RekapitulatorController::class, 'home'])->name('home');
+    Route::post('action-tambah/{id}', [RekapitulatorController::class, 'actionTambah'])->name('actionTambah');
     Route::get('index', [RekapitulatorController::class, 'index'])->name('index');
     Route::get('print_kecamatan', [RekapitulatorController::class, 'print_kecamatan'])->name('print_kecamatan');
     Route::post('action_rekapitulator/{id}', [RekapitulatorController::class, 'action_rekapitulator']);
