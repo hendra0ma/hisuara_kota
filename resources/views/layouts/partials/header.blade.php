@@ -42,7 +42,7 @@
     }
 
     .for-kolapse-kurangin > .side-app > .row:first-child {
-        margin-top: 90px !important;
+        margin-top: 110px !important;
         transition: all 0.5s ease-in-out;
     }
 

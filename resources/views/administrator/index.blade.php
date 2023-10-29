@@ -61,7 +61,7 @@
 
 </style>
 
-<div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
+<div class="row" style="margin-top: 110px; transition: all 0.5s ease-in-out;">
 
     {{-- <div class="col-md-auto pe-0 my-auto">
         <img src="{{asset('')}}storage/{{$config->regencies_logo}}" style="width: 80px" alt="">
