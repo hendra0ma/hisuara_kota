@@ -30,7 +30,7 @@
                         <a class="btn text-white w-100 py-3 c1saksi tablink" onclick="openPage('C1-Saksi', this, '#6259ca')" id="defaultOpen">C1 Saksi</a>
                     </div>
                     <div class="col parent-link">
-                        <a class="btn text-white w-100 py-3 c1relawan tablink" onclick="openPage('C1-Relawan', this, '#6259ca')">C1 Relawan Partai</a>
+                        <a class="btn text-white w-100 py-3 c1relawan tablink" onclick="openPage('C1-Relawan', this, '#6259ca')">C1 Relawan TPS</a>
                     </div>
                     {{-- <div class="col parent-link">
                         <a class="btn text-white w-100 py-3 c1teraudit tablink" onclick="openPage('C1-Dibatalkan', this, '#6259ca')">C1 Dibatalkan</a>
@@ -41,7 +41,7 @@
                 </div>
             </div>
             
-            <div class="col-md-12 text-white mt-3">
+            {{-- <div class="col-md-12 text-white mt-3">
                 <div class="row">
                     <div class="col py-2 judul text-center bg-secondary text-white"
                         style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
@@ -58,7 +58,7 @@
                         <div class="text">TPS Terverifikasi : <b>{{$jumlah_tps_terverifikai}}</b></div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="row mt-5">
+<div class="row mt-5 mb-5">
     <div class="col-lg-4">
         <h1 class="page-title fs-1 mt-2">Audit C1
             <!-- Kota -->
@@ -13,7 +13,7 @@
             </li>
         </ol> <!-- This Dummy Data -->
     </div>
-    <div class="col-lg-8">
+    {{-- <div class="col-lg-8">
         <div class="row">
             <div class="col">
                 <div class="card mb-3 bg-light text-dark">
@@ -60,7 +60,7 @@
 
 
         </div>
-    </div>
+    </div> --}}
 
 </div>
 

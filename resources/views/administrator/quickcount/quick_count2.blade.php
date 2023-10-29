@@ -11,6 +11,7 @@ use App\Models\Regency;
 use App\Models\SaksiData;
 use App\Models\Tps;
 use App\Models\Village;
+use App\Models\Province;
 use Illuminate\Support\Facades\DB;
 
 $config = Config::all()->first();
@@ -18,6 +19,7 @@ $regency = District::where('regency_id', $config['regencies_id'])->get();
 $kota = Regency::where('id', $config['regencies_id'])->first();
 $dpt = District::where('regency_id', $config['regencies_id'])->sum('dpt');
 $tps = Tps::count();
+$props = Province::where('id',$kota['province_id'])->first();
 ?>
 
 <style>
@@ -54,6 +56,10 @@ $tps = Tps::count();
         transition: transform .6s ease;
         transition: transform .6s ease,-webkit-transform .6s ease;
     }
+
+    .title-atas-table {
+        line-height: 23px
+    }
 </style>
 
 <div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
@@ -76,29 +82,28 @@ $tps = Tps::count();
                     <div class="row">
                         <div class="col-xxl-6">
                             <div class="container" style="margin-left: 3%; margin-top: 2.5%;">
-                                <div class="text-center fs-2 mb-3 fw-bold">SUARA MASUK</div>
+                                <div class="text-center fs-2 mb-3 fw-bold">Suara Masuk</div>
                                 <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
                                 <div class="text-center mt-2 mb-2"><span
                                         class="badge bg-success">{{$total_incoming_vote}} / {{$dpt}}</span></div>
                                 <div id="chart-pie2" class="chartsh h-100 w-100"></div>
                             </div>
-                        </div>
-                        <div class="col-xxl-6">
+
                             <?php $i = 1; ?>
-                            @foreach ($paslon as $pas)
                             <div class="row mt-2">
+                                @foreach ($paslon as $pas)
                                 <div class="col-lg col-md col-sm col-xl mb-3">
                                     <div class="card" style="margin-bottom: 0px;">
                                         <div class="card-body">
                                             <div class="row me-auto">
-                                                <div class="col-4">
-                                                    <div class="counter-icon box-shadow-secondary brround candidate-name text-white "
+                                                <div class="col-12">
+                                                    <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
                                                         style="margin-bottom: 0; background-color: {{$pas->color}};">
                                                         {{$i++}}
                                                     </div>
                                                 </div>
-                                                <div class="col me-auto">
-                                                    <h6 class="">{{$pas->candidate}} </h6>
+                                                <div class="col text-center">
+                                                    <h6 class="mt-4">{{$pas->candidate}} </h6>
                                                     <h6 class="">{{$pas->deputy_candidate}} </h6>
                                                     <?php
                                                     $voice = 0;
@@ -110,19 +115,65 @@ $tps = Tps::count();
                                                     @endforeach
                                                     <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
-                            @endforeach
                         </div>
+
+                        <div class="col-xxl-6">
+                            <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Hasil Perhitungan Suara</div>
+                            <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Pemilihan Presiden dan Wakil Presiden</div>
+                            <div class="text-center title-atas-table fs-5 fw-bold">PROVINSI {{$props->name}}</div>
+                            <div class="row mt-3">
+                                @foreach ($urutan as $urutPaslon)
+                                <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
+                                <div class="col py-2 judul text-center text-white custom-urutan"
+                                    style="background: {{ $pasangan->color }}">
+                                    <div class="text">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} : {{$urutPaslon->total}}</b></div>
+                                </div>
+                                @endforeach
+                            </div>
+                            <table class="table table-bordered table-hover mt-3">
+                                <thead class="bg-primary">
+                                    <tr>
+                                        <th class="text-white text-center align-middle">KECAMATAN</th>
+                                        @foreach ($paslon as $item)
+                                        <th class="text-white text-center align-middle">{{ $item['candidate']}} - <br>
+                                            {{ $item['deputy_candidate']}}</th>
+                                        @endforeach
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($kec as $item)
+                                    <tr onclick='check("{{Crypt::encrypt($item->id)}}")'>
+                                        <td class="align-middle"><a
+                                                href="{{url('/')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
+                                        </td>
+                                        @foreach ($paslon as $cd)
+                                        <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->sum('voice'); ?>
+                                        <td class="align-middle">(dummy)</td>
+                                        @endforeach
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                                <script>
+                                    let check = function (id) {
+                                        window.location = `{{url('/')}}/administrator/perhitungan_kecamatan/${id}`;
+                                    }
+                                </script>
+                            </table>
+                        </div>
+
                     </div>
 
                 </div>
             </div>
         </div>
-        <div class="col-md-12 mt-4 text-center">
+        {{-- <div class="col-md-12 mt-4 text-center">
             <h1 class="fw-bold mb-2">
                 Perolehan Tingkat Kecamatan
             </h1>
@@ -246,7 +297,7 @@ $tps = Tps::count();
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         
 </div>
 
