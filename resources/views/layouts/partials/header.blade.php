@@ -339,12 +339,12 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="#" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0;">
+                                                <a href="{{route('superadmin.analisa_dpt_kpu')}}" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0;">
                                                     Realisasi DPT
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="#" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                                <a href="{{route('superadmin.rdata')}}" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                                     Riwayat
                                                 </a>
                                             </div>
@@ -391,10 +391,8 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
                                             <div class="col-12 judul text-center text-white" id="gantiBackground" style="transition: background 1s; transform: scaleX(1.2);">
                                                 <div class="text">
-                                                    <h1 style="display:inline;" class="display-2" id="text-effect"></h1>
-                                                    <h1 style="display:inline;color: #fff;text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;" class="display-3" id="text-effect2"></h1>
-
-
+                                                    <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" class="display-2" id="text-effect"></h1>
+                                                    <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; color: #fff; text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;" class="display-3" id="text-effect2"></h1>
                                                 </div>
                                             </div>
 
@@ -406,7 +404,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         function animate() {
                                             $container = $("#text-effect");
                                             const text = "HISUARA"
-                                            const $elements = text.split("").map((s) => $(`<span style="margin-left:20px">${s}</span>`));
+                                            const $elements = text.split("").map((s) => $(`<span style="margin-left:20px" class="my-auto">${s}</span>`));
 
                                             $container.html($elements);
                                             $container.show();
@@ -437,7 +435,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
                                             $container = $("#text-effect2");
                                             const text = "VOX POPULI,VOX DEI"
-                                            const $elements = text.split("").map((s) => $(`<span style="margin-left:15px">${s}</span>`));
+                                            const $elements = text.split("").map((s) => $(`<span style="margin-left:15px" class="my-auto">${s}</span>`));
 
                                             $container.html($elements);
                                             $container.show();
@@ -458,6 +456,10 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             });
                                             setTimeout(() => {
                                                 $(`.active-button`).click();
+                                                setTimeout(()=>{
+                                                    animate();
+                                                },1000*60*3);
+
                                             }, 5000);
                                         }
 
@@ -780,7 +782,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
     {{-- <button class="btn-dark btn-kolapse-sidebar text-white" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-align-left"></i></button> --}}
     <button class="btn-dark btn-kolapse text-white h-100" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-bars"></i></button>
     <button class="btn-danger text-white h-100 rounded-0" style="position: absolute; left: 28px; z-index: 20">Suara Masuk</button>
-    <a href="https://time.is/Jakarta" id="time_is_link" rel="nofollow" style="font-size:36px"></a>
+    <!-- <a href="https://time.is/Jakarta" id="time_is_link" rel="nofollow" style="font-size:36px"></a> -->
     <button class="btn-dark text-white h-100 rounded-0" style="position: absolute; left: 123px; z-index: 20;"><span id="Jakarta_z41c" style="font-size:20px; color: #f7f700"></span> <span style="font-size: 20px; color: #f7f700">WIB</span></button>
     <script src="//widget.time.is/t.js"></script>
     <script>

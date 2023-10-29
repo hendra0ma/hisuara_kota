@@ -197,7 +197,7 @@ Route::group(['middleware' => 'auth'], function () {
             //Administratorw
             Route::get('data-c1', 'dataC1');
             Route::get('r-data-record', 'rDataRecord');
-            Route::get('r-data', 'rdata');
+            Route::get('r-data', 'rdata')->name("rdata");
             Route::post('main-permission', 'mainPermission');
             Route::get('solution/{id}', 'solution')->name('solution');
             Route::get('laporan-bawaslu', 'laporanBapilu')->name('laporan_bapilu');
@@ -278,7 +278,7 @@ Route::group(['middleware' => 'auth'], function () {
                 return view('security.dev_pass');
             });
 
-            Route::get('analisa_dpt_kpu', 'analisa_dpt_kpu');
+            Route::get('analisa_dpt_kpu', 'analisa_dpt_kpu')->name('analisa_dpt_kpu');
             Route::get('analisa_dpt_kpu/print', 'analisa_dpt_kpu_print');
             Route::get('get_qrsidang', 'get_qrsidang');
             Route::get('print_sidang/{id}', 'print_sidang');
