@@ -102,6 +102,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
     ::-webkit-scrollbar-corner {
         background: transparent;
     } */
+
 </style>
 
 <div class="app-header header header-baru py-0 pe-0" style="padding-left: 0px !important">
@@ -117,14 +118,16 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                             <div class="col-auto">
                                 <div class="row">
                                     <div class="col-md-auto pe-0 my-auto">
-                                        <img src="{{asset('')}}storage/{{$config->regencies_logo}}" style="width: 50px" alt="">
+                                        <img src="{{asset('')}}storage/{{$config->regencies_logo}}" style="width: 50px"
+                                            alt="">
                                     </div>
                                     <div class="col-lg-auto ps-3 mb-0">
                                         <h3 class="text-white mb-0">PILPRES 2024
                                             <!-- Kota -->
                                         </h3>
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item active text-white" aria-current="page">{{ $kota->name }}
+                                            <li class="breadcrumb-item active text-white" aria-current="page">
+                                                {{ $kota->name }}
                                                 <!-- Kota -->
                                             </li>
                                         </ol>
@@ -134,60 +137,93 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                             <div class="col-md-auto my-auto">
                                 <div class="row h-100 justify-content-end" style="gap: 10px;">
                                     <div class="col-md-auto px-0">
-                                        <a class="w-100 mx-auto btn text-white" style="background-color: #528bff; width: 40px; height: 36px;" href="{{url('')}}/administrator/index">
-                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Dashboard">
+                                        <a class="w-100 mx-auto btn text-white"
+                                            style="background-color: #528bff; width: 40px; height: 36px;"
+                                            href="{{url('')}}/administrator/index">
+                                            <span class="dark-layout" data-bs-placement="bottom"
+                                                data-bs-toggle="tooltip" title="Dashboard">
                                                 <i class="fa-solid fa-gauge-high"></i>
                                             </span>
                                         </a>
                                     </div>
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="petugas">
-                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Petugas">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
+                                            style="background-color: #656064; width: 40px; height: 36px;"
+                                            data-target="petugas">
+                                            <span class="dark-layout" data-bs-placement="bottom"
+                                                data-bs-toggle="tooltip" title="Petugas">
                                                 <i class="fa-solid fa-user-tie"></i>
                                             </span>
                                         </button>
                                     </div>
 
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="operator">
-                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Operator">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
+                                            style="background-color: #656064; width: 40px; height: 36px;"
+                                            data-target="operator">
+                                            <span class="dark-layout" data-bs-placement="bottom"
+                                                data-bs-toggle="tooltip" title="Operator">
                                                 <i class="fa-solid fa-computer"></i>
                                             </span>
                                         </button>
                                     </div>
 
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="perhitungan">
-                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Perhitungan">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
+                                            style="background-color: #656064; width: 40px; height: 36px;"
+                                            data-target="perhitungan">
+                                            <span class="dark-layout" data-bs-placement="bottom"
+                                                data-bs-toggle="tooltip" title="Perhitungan">
                                                 <i class="fa-solid fa-chart-simple"></i>
                                             </span>
                                         </button>
                                     </div>
 
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="rekapitulasi">
-                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Rekapitulasi">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
+                                            style="background-color: #656064; width: 40px; height: 36px;"
+                                            data-target="rekapitulasi">
+                                            <span class="dark-layout" data-bs-placement="bottom"
+                                                data-bs-toggle="tooltip" title="Rekapitulasi">
                                                 <i class="fa-solid fa-folder-closed"></i>
                                             </span>
                                         </button>
                                     </div>
 
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="dokumentasi">
-                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Dokumentasi">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
+                                            style="background-color: #656064; width: 40px; height: 36px;"
+                                            data-target="dokumentasi">
+                                            <span class="dark-layout" data-bs-placement="bottom"
+                                                data-bs-toggle="tooltip" title="Dokumentasi">
                                                 <i class="fa-solid fa-book"></i>
                                             </span>
                                         </button>
                                     </div>
 
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="kecurangan">
-                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Kecurangan">
-                                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
+                                            style="background-color: #656064; width: 40px; height: 36px;"
+                                            data-target="kecurangan">
+                                            <span class="dark-layout" data-bs-placement="bottom"
+                                                data-bs-toggle="tooltip" title="Kecurangan">
+                                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" x="0" y="0"
+                                                    viewBox="0 0 24 24" style="enable-background:new 0 0 512 512"
+                                                    xml:space="preserve" class="">
                                                     <g>
-                                                        <path d="M14.25 0H2.75C1.23 0 0 1.23 0 2.75v15.5C0 19.77 1.23 21 2.75 21h8.14a7.138 7.138 0 0 1-1.39-4.25c0-4 3.25-7.25 7.25-7.25.08 0 .17 0 .25.01V2.75C17 1.23 15.77 0 14.25 0zM4 4h4c.55 0 1 .45 1 1s-.45 1-1 1H4c-.55 0-1-.45-1-1s.45-1 1-1zm5 10H4c-.55 0-1-.45-1-1s.45-1 1-1h5c.55 0 1 .45 1 1s-.45 1-1 1zm4-4H4c-.55 0-1-.45-1-1s.45-1 1-1h9c.55 0 1 .45 1 1s-.45 1-1 1z" fill="#ffffff" opacity="1" data-original="#000000" class=""></path>
-                                                        <path d="M16.75 22c-2.895 0-5.25-2.355-5.25-5.25s2.355-5.25 5.25-5.25S22 13.855 22 16.75 19.645 22 16.75 22zm0-8.5c-1.792 0-3.25 1.458-3.25 3.25S14.958 20 16.75 20 20 18.542 20 16.75s-1.458-3.25-3.25-3.25z" fill="#ffffff" opacity="1" data-original="#000000" class=""></path>
-                                                        <path d="M23 24a.997.997 0 0 1-.707-.293l-3.25-3.25a.999.999 0 1 1 1.414-1.414l3.25 3.25A.999.999 0 0 1 23 24z" fill="#ffffff" opacity="1" data-original="#000000" class=""></path>
+                                                        <path
+                                                            d="M14.25 0H2.75C1.23 0 0 1.23 0 2.75v15.5C0 19.77 1.23 21 2.75 21h8.14a7.138 7.138 0 0 1-1.39-4.25c0-4 3.25-7.25 7.25-7.25.08 0 .17 0 .25.01V2.75C17 1.23 15.77 0 14.25 0zM4 4h4c.55 0 1 .45 1 1s-.45 1-1 1H4c-.55 0-1-.45-1-1s.45-1 1-1zm5 10H4c-.55 0-1-.45-1-1s.45-1 1-1h5c.55 0 1 .45 1 1s-.45 1-1 1zm4-4H4c-.55 0-1-.45-1-1s.45-1 1-1h9c.55 0 1 .45 1 1s-.45 1-1 1z"
+                                                            fill="#ffffff" opacity="1" data-original="#000000" class="">
+                                                        </path>
+                                                        <path
+                                                            d="M16.75 22c-2.895 0-5.25-2.355-5.25-5.25s2.355-5.25 5.25-5.25S22 13.855 22 16.75 19.645 22 16.75 22zm0-8.5c-1.792 0-3.25 1.458-3.25 3.25S14.958 20 16.75 20 20 18.542 20 16.75s-1.458-3.25-3.25-3.25z"
+                                                            fill="#ffffff" opacity="1" data-original="#000000" class="">
+                                                        </path>
+                                                        <path
+                                                            d="M23 24a.997.997 0 0 1-.707-.293l-3.25-3.25a.999.999 0 1 1 1.414-1.414l3.25 3.25A.999.999 0 0 1 23 24z"
+                                                            fill="#ffffff" opacity="1" data-original="#000000" class="">
+                                                        </path>
                                                     </g>
                                                 </svg>
                                             </span>
@@ -200,43 +236,55 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                 <div class="row">
 
                                     <div class="col-md-auto my-auto">
-                                        <h4 class="mb-0 fw-bold dashboard tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                        <h4 class="mb-0 fw-bold dashboard tugel-content"
+                                            style="color: #e1af0a; font-size: 16px; display: none;">
                                             Dashboard
                                         </h4>
-                                        <h4 class="mb-0 fw-bold petugas tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                        <h4 class="mb-0 fw-bold petugas tugel-content"
+                                            style="color: #e1af0a; font-size: 16px; display: none;">
                                             Petugas
                                         </h4>
-                                        <h4 class="mb-0 fw-bold operator tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                        <h4 class="mb-0 fw-bold operator tugel-content"
+                                            style="color: #e1af0a; font-size: 16px; display: none;">
                                             Operator
                                         </h4>
-                                        <h4 class="mb-0 fw-bold perhitungan tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                        <h4 class="mb-0 fw-bold perhitungan tugel-content"
+                                            style="color: #e1af0a; font-size: 16px; display: none;">
                                             Perhitungan
                                         </h4>
-                                        <h4 class="mb-0 fw-bold rekapitulasi tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                        <h4 class="mb-0 fw-bold rekapitulasi tugel-content"
+                                            style="color: #e1af0a; font-size: 16px; display: none;">
                                             Rekapitulasi
                                         </h4>
-                                        <h4 class="mb-0 fw-bold dokumentasi tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                        <h4 class="mb-0 fw-bold dokumentasi tugel-content"
+                                            style="color: #e1af0a; font-size: 16px; display: none;">
                                             Dokumentasi
                                         </h4>
-                                        <h4 class="mb-0 fw-bold kecurangan tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                        <h4 class="mb-0 fw-bold kecurangan tugel-content"
+                                            style="color: #e1af0a; font-size: 16px; display: none;">
                                             Kecurangan
                                         </h4>
-                                        <h4 class="mb-0 fw-bold suara tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                        <h4 class="mb-0 fw-bold suara tugel-content"
+                                            style="color: #e1af0a; font-size: 16px; display: none;">
                                             Urutan
                                         </h4>
-                                        <h4 class="mb-0 fw-bold tabulasi tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                        <h4 class="mb-0 fw-bold tabulasi tugel-content"
+                                            style="color: #e1af0a; font-size: 16px; display: none;">
                                             Tabulasi
                                         </h4>
                                         <!-- <h4 class="mb-0 fw-bold  tugel-content" style="color: #e1af0a; font-size: 16px">
                                          Hisuara
                                         </h4> -->
-                                        <h4 class="mb-0 fw-bold kota tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                        <h4 class="mb-0 fw-bold kota tugel-content"
+                                            style="color: #e1af0a; font-size: 16px; display: none;">
                                             Kota
                                         </h4>
-                                        <h4 class="mb-0 fw-bold support tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                        <h4 class="mb-0 fw-bold support tugel-content"
+                                            style="color: #e1af0a; font-size: 16px; display: none;">
                                             Support
                                         </h4>
-                                        <h4 class="mb-0 fw-bold setting tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                        <h4 class="mb-0 fw-bold setting tugel-content"
+                                            style="color: #e1af0a; font-size: 16px; display: none;">
                                             Settings
                                         </h4>
                                     </div>
@@ -244,22 +292,30 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     <div class="col-md petugas tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/verifikasi_saksi" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                                <a href="{{url('')}}/administrator/verifikasi_saksi"
+                                                    class="py-1 btn fs-6 w-100 text-white"
+                                                    style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
                                                     Saksi
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/relawan" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0;">
+                                                <a href="{{url('')}}/administrator/relawan"
+                                                    class="py-1 btn fs-6 w-100 text-white"
+                                                    style="background-color: #528bff; border-radius: 0;">
                                                     Relawan
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/enumerator" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0;">
+                                                <a href="{{url('')}}/administrator/enumerator"
+                                                    class="py-1 btn fs-6 w-100 text-white"
+                                                    style="background-color: #528bff; border-radius: 0;">
                                                     Enumerator
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/verifikasi_akun" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                                <a href="{{url('')}}/administrator/verifikasi_akun"
+                                                    class="py-1 btn fs-6 w-100 text-white"
+                                                    style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                                     Admin
                                                 </a>
                                             </div>
@@ -269,17 +325,23 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     <div class="col-md operator tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/verifikator/verifikasi-c1" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                                <a href="{{url('')}}/verifikator/verifikasi-c1"
+                                                    class="py-1 btn fs-6 w-100 text-white"
+                                                    style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
                                                     Verifikasi C1
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/auditor/audit-c1" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px;">
+                                                <a href="{{url('')}}/auditor/audit-c1"
+                                                    class="py-1 btn fs-6 w-100 text-white"
+                                                    style="background-color: #528bff; border-radius: 0px;">
                                                     Audit C1
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/verifikasi_koreksi" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                                <a href="{{url('')}}/administrator/verifikasi_koreksi"
+                                                    class="py-1 btn fs-6 w-100 text-white"
+                                                    style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                                     Koreksi
                                                 </a>
                                             </div>
@@ -289,17 +351,23 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     <div class="col-md perhitungan tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/real_count2" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                                <a href="{{url('')}}/administrator/real_count2"
+                                                    class="py-1 btn fs-6 w-100 text-white"
+                                                    style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
                                                     Real Count
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/quick_count2" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px">
+                                                <a href="{{url('')}}/administrator/quick_count2"
+                                                    class="py-1 btn fs-6 w-100 text-white"
+                                                    style="background-color: #528bff; border-radius: 0px">
                                                     Quick Count
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/terverifikasi" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                                <a href="{{url('')}}/administrator/terverifikasi"
+                                                    class="py-1 btn fs-6 w-100 text-white"
+                                                    style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                                     Terverifikasi
                                                 </a>
                                             </div>
@@ -309,12 +377,16 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     <div class="col-md rekapitulasi tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/rekapitulasi_kelurahan" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                                <a href="{{url('')}}/administrator/rekapitulasi_kelurahan"
+                                                    class="py-1 btn fs-6 w-100 text-white"
+                                                    style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
                                                     Rekapitulasi Kelurahan
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/rekapitulasi_kecamatan" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                                <a href="{{url('')}}/administrator/rekapitulasi_kecamatan"
+                                                    class="py-1 btn fs-6 w-100 text-white"
+                                                    style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                                     Rekapitulasi Kecamatan
                                                 </a>
                                             </div>
@@ -324,7 +396,9 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     <div class="col-md dokumentasi tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/data-c1" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                                <a href="{{url('')}}/administrator/data-c1"
+                                                    class="py-1 btn fs-6 w-100 text-white"
+                                                    style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
                                                     Data C1
                                                 </a>
                                             </div>
@@ -334,17 +408,22 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 </a>
                                             </div> -->
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="#" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0;">
+                                                <a href="#" class="py-1 btn fs-6 w-100 text-white"
+                                                    style="background-color: #528bff; border-radius: 0;">
                                                     Surat Suara
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{route('superadmin.analisa_dpt_kpu')}}" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0;">
+                                                <a href="{{route('superadmin.analisa_dpt_kpu')}}"
+                                                    class="py-1 btn fs-6 w-100 text-white"
+                                                    style="background-color: #528bff; border-radius: 0;">
                                                     Realisasi DPT
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{route('superadmin.rdata')}}" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                                <a href="{{route('superadmin.rdata')}}"
+                                                    class="py-1 btn fs-6 w-100 text-white"
+                                                    style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                                     Riwayat
                                                 </a>
                                             </div>
@@ -354,12 +433,16 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     <div class="col-md kecurangan tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/verifikator/verifikator_kecurangan" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                                <a href="{{url('')}}/verifikator/verifikator_kecurangan"
+                                                    class="py-1 btn fs-6 w-100 text-white"
+                                                    style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
                                                     Verifikator Kecurangan
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/hukum/validator_kecurangan" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                                <a href="{{url('')}}/hukum/validator_kecurangan"
+                                                    class="py-1 btn fs-6 w-100 text-white"
+                                                    style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                                     Validator Kecurangan
                                                 </a>
                                             </div>
@@ -368,7 +451,8 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
                                     <div class="col-md text-white tabulasi tugel-content" style="display:none">
                                         <div class="row">
-                                            <div class="col py-2 judul text-center bg-secondary text-white" style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
+                                            <div class="col py-2 judul text-center bg-secondary text-white"
+                                                style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
                                                 <div class="text">Total TPS : <b>{{ $total_tps }}</b></div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-danger text-white">
@@ -380,8 +464,10 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             <div class="col py-2 judul text-center bg-info text-white">
                                                 <div class="text">Suara Masuk : <b>{{ $suara_masuk }}</b></div>
                                             </div>
-                                            <div class="col py-2 judul text-center bg-success text-white" style="border-top-right-radius: 25px; border-bottom-right-radius: 25px">
-                                                <div class="text">Terverifikasi : <b>{{$total_verification_voice}}</b></div>
+                                            <div class="col py-2 judul text-center bg-success text-white"
+                                                style="border-top-right-radius: 25px; border-bottom-right-radius: 25px">
+                                                <div class="text">Terverifikasi : <b>{{$total_verification_voice}}</b>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -392,22 +478,30 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             cursor: grabbing;
                                             cursor: -webkit-grabbing;
                                         }
+
                                     </style>
 
                                     <div class="col-md text-white kota tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-4 my-auto">
-                                                <input type="text" class="w-100 form-control py-0 searchbar" style="border-radius: 25px; height: 30px" name="" id="" placeholder="Cari Kota...">
+                                                <input type="text" class="w-100 form-control py-0 searchbar"
+                                                    style="border-radius: 25px; height: 30px" name="" id=""
+                                                    placeholder="Cari Kota...">
                                             </div>
                                             <div class="col-6">
                                                 <?php $domainKota = RegenciesDomain::join("regencies", 'regency_domains.regency_id', '=', 'regencies.id')->where("regency_domains.province_id", $props->id)->get(); ?>
-                                                <div class="row items" style="width: 515px; overflow: scroll; flex-wrap: nowrap">
+                                                <div class="row items"
+                                                    style="width: 515px; overflow: scroll; flex-wrap: nowrap">
                                                     <div class="col-auto">
-                                                        <a class="text-white btn rounded-0 item bg-danger" href="http://pilpres.banten.hisuara.id/index">DASHBOARD {{$props->name}}</a>
+                                                        <a class="text-white btn rounded-0 item bg-danger"
+                                                            href="http://pilpres.banten.hisuara.id/index">DASHBOARD
+                                                            {{$props->name}}</a>
                                                     </div>
                                                     @foreach($domainKota as $dokota)
                                                     <div class="col-auto">
-                                                        <a class="text-white btn rounded-0 item" style="background: #528bff" href="{{$dokota->domain}}">{{$dokota->name}}</a>
+                                                        <a class="text-white btn rounded-0 item"
+                                                            style="background: #528bff"
+                                                            href="{{$dokota->domain}}">{{$dokota->name}}</a>
                                                     </div>
                                                     @endforeach
                                                 </div>
@@ -418,29 +512,40 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     <div class="col-md text-white support tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md-auto px-1 my-auto">
-                                                <img src="https://plus.unsplash.com/premium_photo-1661510749856-47c47ea10fc7?auto=format&fit=crop&q=80&w=1932&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="avatar profile-user brround" style="width: 35px; height: 35px; object-fit: cover" alt="">
+                                                <img src="https://plus.unsplash.com/premium_photo-1661510749856-47c47ea10fc7?auto=format&fit=crop&q=80&w=1932&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                                    class="avatar profile-user brround"
+                                                    style="width: 35px; height: 35px; object-fit: cover" alt="">
                                             </div>
                                             <div class="col-md my-auto">
-                                                <input class="w-100 form-control py-0" style="border-radius: 25px; height: 30px" type="text" name="" id="" placeholder="Kirim pesan ...">
+                                                <input class="w-100 form-control py-0"
+                                                    style="border-radius: 25px; height: 30px" type="text" name="" id=""
+                                                    placeholder="Kirim pesan ...">
                                             </div>
                                             <div class="col-md-auto my-auto p-0">
-                                                <button class="btn text-white my-auto"><i class="fa-solid fa-paper-plane" style="font-size: 16px;"></i></button>
+                                                <button class="btn text-white my-auto"><i
+                                                        class="fa-solid fa-paper-plane"
+                                                        style="font-size: 16px;"></i></button>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-md setting tugel-content settings" style="display: none; top: 0; position: relative;">
+                                    <div class="col-md setting tugel-content settings"
+                                        style="display: none; top: 0; position: relative;">
                                         {{-- Settings --}}
                                         <div class="row px-5 my-auto" style="gap: 25px;">
                                             <div class="col-md">
                                                 <div class="mid">
 
                                                     <label class="switch">
-                                                        <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('multi_admin',this)" {{($config->multi_admin == "no") ? "":"checked"; }}>
+                                                        <input type="checkbox"
+                                                            {{($config->default == "yes")?'disabled':''}}
+                                                            data-target="mode" onclick="settings('multi_admin',this)"
+                                                            {{($config->multi_admin == "no") ? "":"checked"; }}>
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </div>
-                                                <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
+                                                <div class="text-center"
+                                                    style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
                                                     Multi
                                                 </div>
                                             </div>
@@ -449,11 +554,14 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 <div class="mid">
 
                                                     <label class="switch">
-                                                        <input type="checkbox" data-target="mode" onclick="settings('otonom',this)" {{($config->otonom == "no") ? "":"checked"; }}>
+                                                        <input type="checkbox" data-target="mode"
+                                                            onclick="settings('otonom',this)"
+                                                            {{($config->otonom == "no") ? "":"checked"; }}>
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </div>
-                                                <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
+                                                <div class="text-center"
+                                                    style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
                                                     Otonom
                                                 </div>
                                             </div>
@@ -461,11 +569,16 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             <div class="col-md">
                                                 <div class="mid">
                                                     <label class="switch">
-                                                        <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('show_terverifikasi',this)" {{($config->show_terverifikasi == "hide") ? "":"checked"; }}>
+                                                        <input type="checkbox"
+                                                            {{($config->default == "yes")?'disabled':''}}
+                                                            data-target="mode"
+                                                            onclick="settings('show_terverifikasi',this)"
+                                                            {{($config->show_terverifikasi == "hide") ? "":"checked"; }}>
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </div>
-                                                <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
+                                                <div class="text-center"
+                                                    style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
                                                     Verifikasi
                                                 </div>
                                             </div>
@@ -473,11 +586,15 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             <div class="col-md">
                                                 <div class="mid">
                                                     <label class="switch">
-                                                        <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('show_public',this)" {{($config->show_public == "hide") ? "":"checked"; }}>
+                                                        <input type="checkbox"
+                                                            {{($config->default == "yes")?'disabled':''}}
+                                                            data-target="mode" onclick="settings('show_public',this)"
+                                                            {{($config->show_public == "hide") ? "":"checked"; }}>
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </div>
-                                                <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
+                                                <div class="text-center"
+                                                    style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
                                                     Publish C1
                                                 </div>
                                             </div>
@@ -486,11 +603,15 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 <div class="mid">
 
                                                     <label class="switch">
-                                                        <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('lockdown',this)" {{($config->lockdown == "no") ? "":"checked"; }}>
+                                                        <input type="checkbox"
+                                                            {{($config->default == "yes")?'disabled':''}}
+                                                            data-target="mode" onclick="settings('lockdown',this)"
+                                                            {{($config->lockdown == "no") ? "":"checked"; }}>
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </div>
-                                                <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
+                                                <div class="text-center"
+                                                    style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
                                                     Lockdown
                                                 </div>
                                             </div>
@@ -498,11 +619,15 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             <div class="col-md">
                                                 <div class="mid">
                                                     <label class="switch">
-                                                        <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('quick_count',this)" {{($config->quick_count == "no") ? "":"checked"; }}>
+                                                        <input type="checkbox"
+                                                            {{($config->default == "yes")?'disabled':''}}
+                                                            data-target="mode" onclick="settings('quick_count',this)"
+                                                            {{($config->quick_count == "no") ? "":"checked"; }}>
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </div>
-                                                <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
+                                                <div class="text-center"
+                                                    style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
                                                     Quick Count
                                                 </div>
                                             </div>
@@ -514,8 +639,10 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         <div class="row">
                                             @foreach ($urutan as $urutPaslon)
                                             <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
-                                            <div class="col py-2 judul text-center text-white custom-urutan" style="background: {{ $pasangan->color }}">
-                                                <div class="text">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} : {{$urutPaslon->total}}</b></div>
+                                            <div class="col py-2 judul text-center text-white custom-urutan"
+                                                style="background: {{ $pasangan->color }}">
+                                                <div class="text">{{ $pasangan->candidate }} ||
+                                                    {{ $pasangan->deputy_candidate }} : {{$urutPaslon->total}}</b></div>
                                             </div>
                                             @endforeach
                                         </div>
@@ -524,10 +651,13 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     <div class="col-md-12 text-white judul-pertama">
                                         <div class="row">
 
-                                            <div class="col-12 judul text-center text-white" id="gantiBackground" style="transition: background 1s; transform: scaleX(1.2);">
+                                            <div class="col-12 judul text-center text-white" id="gantiBackground"
+                                                style="transition: background 1s; transform: scaleX(1.2);">
                                                 <div class="text">
-                                                    <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;" class="display-2" id="text-effect"></h1>
-                                                    <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; color: #fff; text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;" class="display-3" id="text-effect2"></h1>
+                                                    <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;"
+                                                        class="display-2" id="text-effect"></h1>
+                                                    <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; color: #fff; text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;"
+                                                        class="display-3" id="text-effect2"></h1>
                                                 </div>
                                             </div>
 
@@ -538,18 +668,20 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     <script>
                                         function animate() {
 
-                                            $('.judul-pertama').css("z-index","900");
+                                            $('.judul-pertama').css("z-index", "900");
                                             $container = $("#text-effect");
                                             $('.tugel-content').hide(500);
                                             const text = "HISUARA"
-                                            const $elements = text.split("").map((s) => $(`<span style="margin-left:20px" class="my-auto fw-bold">${s}</span>`));
+                                            const $elements = text.split("").map((s) => $(
+                                                `<span style="margin-left:20px" class="my-auto fw-bold">${s}</span>`
+                                                ));
 
                                             $container.html($elements);
                                             $container.show();
                                             // $("#gantiBackground").css({
                                             //     "background-color": "#007bff"
                                             // }, 1000);
-                                            $elements.forEach(function($el, i) {
+                                            $elements.forEach(function ($el, i) {
                                                 $el
                                                     .css({
                                                         top: -60,
@@ -574,14 +706,15 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
                                             $container = $("#text-effect2");
                                             const text = "VOX POPULI,VOX DEI"
-                                            const $elements = text.split("").map((s) => $(`<span style="margin-left:15px" class="my-auto">${s}</span>`));
+                                            const $elements = text.split("").map((s) => $(
+                                                `<span style="margin-left:15px" class="my-auto">${s}</span>`));
 
                                             $container.html($elements);
                                             $container.show();
                                             // $("#gantiBackground").css({
                                             //     "background-color": "#007bff"
                                             // }, 1000);
-                                            $elements.forEach(function($el, i) {
+                                            $elements.forEach(function ($el, i) {
                                                 $el
                                                     .css({
                                                         top: -60,
@@ -598,230 +731,272 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 $("#text-effect2").hide()
 
                                                 $(`.active-button`).click();
-                                                setTimeout(()=>{
+                                                setTimeout(() => {
 
                                                     $('.tugel-content').hide(500);
                                                     animate();
-                                                    
-                                                },1000 * 60 );
+
+                                                }, 1000 * 60);
 
                                             }, 5000);
                                         }
 
 
-                                        $(function() {
+                                        $(function () {
                                             animate();
                                         });
+
                                     </script>
 
-                </div>
-            </div>
+                                </div>
+                            </div>
 
-            <div class="col-md-auto my-auto">
-                <div class="row h-100 justify-content-end" style="gap: 10px;">
-                    <div class="col-md-auto px-0">
-                        <button class="w-100 mx-auto btn tugel-kolaps text-white active-button" style="background-color: #656064; width: 40px; height: 36px;" data-target="tabulasi">
-                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Tabulasi">
-                                <i class="fa-solid fa-database"></i>
-                            </span>
-                        </button>
-                    </div>
+                            <div class="col-md-auto my-auto">
+                                <div class="row h-100 justify-content-end" style="gap: 10px;">
+                                    <div class="col-md-auto px-0">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white active-button"
+                                            style="background-color: #656064; width: 40px; height: 36px;"
+                                            data-target="tabulasi">
+                                            <span class="dark-layout" data-bs-placement="bottom"
+                                                data-bs-toggle="tooltip" title="Tabulasi">
+                                                <i class="fa-solid fa-database"></i>
+                                            </span>
+                                        </button>
+                                    </div>
 
-                    <div class="col-md-auto px-0">
-                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="suara">
-                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Urutan Suara">
-                                <i class="fa-solid fa-ranking-star"></i>
-                            </span>
-                        </button>
-                    </div>
+                                    <div class="col-md-auto px-0">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
+                                            style="background-color: #656064; width: 40px; height: 36px;"
+                                            data-target="suara">
+                                            <span class="dark-layout" data-bs-placement="bottom"
+                                                data-bs-toggle="tooltip" title="Urutan Suara">
+                                                <i class="fa-solid fa-ranking-star"></i>
+                                            </span>
+                                        </button>
+                                    </div>
 
-                    <div class="col-md-auto px-0">
-                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="kota">
-                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Kota">
-                                <i class="fa-solid fa-city"></i>
-                            </span>
-                        </button>
-                    </div>
-                    {{-- <div class="dropdown d-none d-md-flex">
+                                    <div class="col-md-auto px-0">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
+                                            style="background-color: #656064; width: 40px; height: 36px;"
+                                            data-target="kota">
+                                            <span class="dark-layout" data-bs-placement="bottom"
+                                                data-bs-toggle="tooltip" title="Kota">
+                                                <i class="fa-solid fa-city"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                    {{-- <div class="dropdown d-none d-md-flex">
                                         <a class="nav-link icon theme-layout nav-link-bg layout-setting" onclick="darktheme()">
                                             
                                         </a>
                                     </div><!-- Theme-Layout --> --}}
-                    <script>
-                        let darktheme = function() {
-                            setTimeout(function() {
-                                let body = document.body;
-                                let themes = body.className.split(" ");
-                                let theme = (themes.length == 3) ? "yes" : "no";
-                                $.ajax({
-                                    url: `{{ route('superadmin.theme') }}`,
-                                    data: {
-                                        theme,
-                                        "_token": "{{ csrf_token() }}"
-                                    },
-                                    type: "post",
-                                    success: function(res) {
+                                    <script>
+                                        let darktheme = function () {
+                                            setTimeout(function () {
+                                                let body = document.body;
+                                                let themes = body.className.split(" ");
+                                                let theme = (themes.length == 3) ? "yes" : "no";
+                                                $.ajax({
+                                                    url: `{{ route('superadmin.theme') }}`,
+                                                    data: {
+                                                        theme,
+                                                        "_token": "{{ csrf_token() }}"
+                                                    },
+                                                    type: "post",
+                                                    success: function (res) {
 
-                                    }
-                                });
-                            }, 300);
-                        }
-                    </script>
+                                                    }
+                                                });
+                                            }, 300);
+                                        }
 
-                    <div class="col-md-auto px-0">
-                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="support">
-                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Support">
-                                <i class="fa-solid fa-headset"></i>
-                            </span>
-                        </button>
-                    </div>
-                    <div class="col-md-auto px-0">
-                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="setting">
-                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Settings">
-                                <i class="fa-solid fa-gear"></i>
-                            </span>
-                        </button>
-                    </div>
-                    <div class="col-md-auto px-0" style="color: #212529 !important">
-                        <a class="w-100 mx-auto btn nav-link theme-layout nav-link-bg layout-setting px-3 text-white" onclick="darktheme()" style="background-color: #656064; width: 40px; height: 36px; margin: 0px; font-size: 16px" data-target="">
-                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Dark Theme"><i class="fe fe-moon"></i></span>
-                            <span class="light-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Light Theme"><i class="fe fe-sun"></i></span>
-                        </a>
-                    </div>
-                    <div class="col-md-auto px-0">
-                        <div class="dropdown d-none d-md-flex profile-1">
-                            <a href="#" data-bs-toggle="dropdown" class="nav-link pt-0 leading-none d-flex">
-                                <span>
-                                    @if (Auth::user()->profile_photo_path == NULL)
-                                    <img class="avatar profile-user brround" style="object-fit: cover; width: 33px; height: 33px" src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF" alt="profile-user">
-                                    @else
-                                    <img class="avatar profile-user brround" style="object-fit: cover; width: 33px; height: 33px" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}" alt="profile-user" s>
-                                    @endif
-                                </span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                <div class="drop-heading">
-                                    <div class="text-center">
-                                        <h5 class="text-dark mb-0">{{ Auth::user()->name }}</h5>
-                                        <small class="text-muted">{{ Auth::user()->role_id == 1 ? 'Administrator' : 'uwon luyi' }}</small>
+                                    </script>
+
+                                    <div class="col-md-auto px-0">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
+                                            style="background-color: #656064; width: 40px; height: 36px;"
+                                            data-target="support">
+                                            <span class="dark-layout" data-bs-placement="bottom"
+                                                data-bs-toggle="tooltip" title="Support">
+                                                <i class="fa-solid fa-headset"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-auto px-0">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
+                                            style="background-color: #656064; width: 40px; height: 36px;"
+                                            data-target="setting">
+                                            <span class="dark-layout" data-bs-placement="bottom"
+                                                data-bs-toggle="tooltip" title="Settings">
+                                                <i class="fa-solid fa-gear"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-auto px-0" style="color: #212529 !important">
+                                        <a class="w-100 mx-auto btn nav-link theme-layout nav-link-bg layout-setting px-3 text-white"
+                                            onclick="darktheme()"
+                                            style="background-color: #656064; width: 40px; height: 36px; margin: 0px; font-size: 16px"
+                                            data-target="">
+                                            <span class="dark-layout" data-bs-placement="bottom"
+                                                data-bs-toggle="tooltip" title="Dark Theme"><i
+                                                    class="fe fe-moon"></i></span>
+                                            <span class="light-layout" data-bs-placement="bottom"
+                                                data-bs-toggle="tooltip" title="Light Theme"><i
+                                                    class="fe fe-sun"></i></span>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-auto px-0">
+                                        <div class="dropdown d-none d-md-flex profile-1">
+                                            <a href="#" data-bs-toggle="dropdown"
+                                                class="nav-link pt-0 leading-none d-flex">
+                                                <span>
+                                                    @if (Auth::user()->profile_photo_path == NULL)
+                                                    <img class="avatar profile-user brround"
+                                                        style="object-fit: cover; width: 33px; height: 33px"
+                                                        src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF"
+                                                        alt="profile-user">
+                                                    @else
+                                                    <img class="avatar profile-user brround"
+                                                        style="object-fit: cover; width: 33px; height: 33px"
+                                                        src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}"
+                                                        alt="profile-user" s>
+                                                    @endif
+                                                </span>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                <div class="drop-heading">
+                                                    <div class="text-center">
+                                                        <h5 class="text-dark mb-0">{{ Auth::user()->name }}</h5>
+                                                        <small
+                                                            class="text-muted">{{ Auth::user()->role_id == 1 ? 'Administrator' : 'uwon luyi' }}</small>
+                                                    </div>
+                                                </div>
+                                                <div class="dropdown-divider m-0"></div>
+
+                                                <a class="dropdown-item" href="/user/profile">
+                                                    <i class="dropdown-icon fe fe-user"></i> Profile
+                                                </a>
+                                                <a class="dropdown-item" href="#">
+                                                    <i class="dropdown-icon fe fe-user"></i> Upload C1
+                                                </a>
+                                                <a class="dropdown-item" href="#">
+                                                    <i class="dropdown-icon fe fe-user"></i> Upload C1 Enumerator
+                                                </a>
+                                                <a class="dropdown-item" href="#">
+                                                    <i class="dropdown-icon fe fe-user"></i> Upload C1 Relawan
+                                                </a>
+                                                <a class="dropdown-item" href="#">
+                                                    <i class="dropdown-icon fe fe-user"></i> Upload Kecurangan
+                                                </a>
+
+                                                <form action="{{ route('logout') }}" method="post">
+                                                    @csrf
+
+
+                                                    <button class="dropdown-item" type="submit">
+                                                        <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="dropdown-divider m-0"></div>
-
-                                <a class="dropdown-item" href="/user/profile">
-                                    <i class="dropdown-icon fe fe-user"></i> Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="dropdown-icon fe fe-user"></i> Upload C1
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="dropdown-icon fe fe-user"></i> Upload C1 Enumerator
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="dropdown-icon fe fe-user"></i> Upload C1 Relawan
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="dropdown-icon fe fe-user"></i> Upload Kecurangan
-                                </a>
-
-                                <form action="{{ route('logout') }}" method="post">
-                                    @csrf
-
-
-                                    <button class="dropdown-item" type="submit">
-                                        <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
-                                    </button>
-                                </form>
                             </div>
+
                         </div>
+
                     </div>
+                </div>
+                <div class="card-footer p-0 border-0" id="marquee1"
+                    style="position: relative; background-color: #343a40">
+                    {{-- <button class="btn-dark btn-kolapse-sidebar text-white" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-align-left"></i></button> --}}
+                    <button class="btn-dark btn-kolapse text-white h-100"
+                        style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i
+                            class="fa-solid fa-bars"></i></button>
+                    <button class="btn-danger text-white h-100 rounded-0"
+                        style="position: absolute; left: 28px; z-index: 20">Suara Masuk</button>
+                    <!-- <a href="https://time.is/Jakarta" id="time_is_link" rel="nofollow" style="font-size:36px"></a> -->
+                    <button class="btn-dark text-white h-100 rounded-0"
+                        style="position: absolute; left: 123px; z-index: 20;"><span id="Jakarta_z41c"
+                            style="font-size:20px; color: #f7f700"></span> <span
+                            style="font-size: 20px; color: #f7f700">WIB</span></button>
+                    <script src="//widget.time.is/t.js"></script>
+                    <script>
+                        time_is_widget.init({
+                            Jakarta_z41c: {}
+                        });
+
+                    </script>
+                    {{-- <button class="btn btn-kolapse text-white" style="background-color: #30304d; z-index: 20"><i class="fa-solid fa-bars"></i></button>
+                    <button class="btn btn-danger text-white rounded-0" style="z-index: 20">Suara Masuk</button> --}}
+                    <marquee>
+                        @foreach ($marquee as $item)
+                        <?php $kecamatan =  District::where('id', $item['districts'])->first(); ?>
+                        <?php $kelurahan =  Village::where('id', $item['villages'])->first(); ?>
+                        <?php $tps =  Tps::where('id', $item['tps_id'])->first(); ?>
+                        <span class="text-success">▼ </span><span class="text-white"
+                            style="font-size: 20px;">{{$item['name']}}
+                            Kecamatan {{$kecamatan['name']}}, Kelurahan {{$kelurahan['name']}}, TPS {{$tps['number']}}
+                        </span>
+                        @endforeach
+                    </marquee>
                 </div>
             </div>
 
+            <script>
+                $('.btn-kolapse').on('click', function () {
+                    $('.for-kolapse').toggle(500);
+                    $('.for-kolapse-kurangin > .side-app > .row:first').toggleClass('kurangin')
+                })
+
+                // $('.btn-kolapse-sidebar').on('click', function() {
+                //     $('body.app.sidebar-mini').toggleClass('sidenav-toggled')
+                // })
+
+                $('.tugel-kolaps').on('click', function () {
+
+                    let target = $(this).data('target')
+                    // console.log(target)
+                    $('.tugel-content').hide()
+                    $(`.${target}`).show(200)
+                })
+
+                $('.tugel-kolaps-menu').on('click', function () {
+
+                    let target = $(this).data('target')
+                    // console.log(target)
+                    const cek = $(`.${target}`).css('display') == 'block';
+
+                    $('.tugel-content-menu').hide(500)
+
+                    if (cek) {
+                        $('.tugel-content-menu').hide(500)
+                    } else {
+                        $(`.${target}`).show(500)
+                    }
+                })
+
+                $('.tugel-kolaps').on('click', function () {
+                    const btnIni = $(this);
+                    $('.judul-pertama').css("z-index", "-900");
+                    $('.tugel-kolaps').removeClass('active-button');
+                    btnIni.addClass('active-button');
+                });
+
+
+
+                // $('.tugel-kolaps-menu.content-toggled').on('click', function() {
+
+                // let target = $(this).data('target')
+                // console.log(target)
+                // $('.tugel-content-menu').removeClass('content-toggled')
+                // $(`.${target}`).toggleClass('content-toggled')
+                // })
+
+            </script>
+
         </div>
-
     </div>
-</div>
-<div class="card-footer p-0 border-0" id="marquee1" style="position: relative; background-color: #343a40">
-    {{-- <button class="btn-dark btn-kolapse-sidebar text-white" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-align-left"></i></button> --}}
-    <button class="btn-dark btn-kolapse text-white h-100" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-bars"></i></button>
-    <button class="btn-danger text-white h-100 rounded-0" style="position: absolute; left: 28px; z-index: 20">Suara Masuk</button>
-    <!-- <a href="https://time.is/Jakarta" id="time_is_link" rel="nofollow" style="font-size:36px"></a> -->
-    <button class="btn-dark text-white h-100 rounded-0" style="position: absolute; left: 123px; z-index: 20;"><span id="Jakarta_z41c" style="font-size:20px; color: #f7f700"></span> <span style="font-size: 20px; color: #f7f700">WIB</span></button>
-    <script src="//widget.time.is/t.js"></script>
-    <script>
-        time_is_widget.init({
-            Jakarta_z41c: {}
-        });
-    </script>
-    {{-- <button class="btn btn-kolapse text-white" style="background-color: #30304d; z-index: 20"><i class="fa-solid fa-bars"></i></button>
-                    <button class="btn btn-danger text-white rounded-0" style="z-index: 20">Suara Masuk</button> --}}
-    <marquee>
-        @foreach ($marquee as $item)
-        <?php $kecamatan =  District::where('id', $item['districts'])->first(); ?>
-        <?php $kelurahan =  Village::where('id', $item['villages'])->first(); ?>
-        <?php $tps =  Tps::where('id', $item['tps_id'])->first(); ?>
-        <span class="text-success">▼ </span><span class="text-white" style="font-size: 20px;">{{$item['name']}}
-            Kecamatan {{$kecamatan['name']}}, Kelurahan {{$kelurahan['name']}}, TPS {{$tps['number']}}
-        </span>
-        @endforeach
-    </marquee>
-</div>
-</div>
-
-<script>
-    $('.btn-kolapse').on('click', function() {
-        $('.for-kolapse').toggle(500);
-        $('.for-kolapse-kurangin > .side-app > .row:first').toggleClass('kurangin')
-    })
-
-    // $('.btn-kolapse-sidebar').on('click', function() {
-    //     $('body.app.sidebar-mini').toggleClass('sidenav-toggled')
-    // })
-
-    $('.tugel-kolaps').on('click', function() {
-
-        let target = $(this).data('target')
-        // console.log(target)
-        $('.tugel-content').hide()
-        $(`.${target}`).show(200)
-    })
-
-    $('.tugel-kolaps-menu').on('click', function() {
-
-        let target = $(this).data('target')
-        // console.log(target)
-        const cek = $(`.${target}`).css('display') == 'block';
-
-        $('.tugel-content-menu').hide(500)
-
-        if (cek) {
-            $('.tugel-content-menu').hide(500)
-        } else {
-            $(`.${target}`).show(500)
-        }
-    })
-
-    $('.tugel-kolaps').on('click', function() {
-        const btnIni = $(this);
-        $('.judul-pertama').css("z-index","-900");
-        $('.tugel-kolaps').removeClass('active-button');
-        btnIni.addClass('active-button');
-    });
-
-
-
-    // $('.tugel-kolaps-menu.content-toggled').on('click', function() {
-
-    // let target = $(this).data('target')
-    // console.log(target)
-    // $('.tugel-content-menu').removeClass('content-toggled')
-    // $(`.${target}`).toggleClass('content-toggled')
-    // })
-</script>
-
-</div>
-</div>
 </div>
 <div class="mb-1 navbar navbar-expand-lg  responsive-navbar navbar-dark d-md-none bg-white">
     <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
@@ -843,7 +1018,8 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                             ->get(); ?>
                         @foreach ($allUser as $usr)
                         <a class="dropdown-item d-flex" href="#" onclick="openForm(`<?= $usr->id ?>`)">
-                            <span class="avatar avatar-md brround me-3 align-self-center cover-image" data-bs-image-src="{{ url('/') }}/assets/images/users/1.jpg"></span>
+                            <span class="avatar avatar-md brround me-3 align-self-center cover-image"
+                                data-bs-image-src="{{ url('/') }}/assets/images/users/1.jpg"></span>
                             <div class="wd-90p">
                                 <div class="d-flex">
                                     <h5 class="mb-1">{{ $usr->name }}</h5>
@@ -863,9 +1039,13 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                 <a href="#" data-bs-toggle="dropdown" class="nav-link pe-2 leading-none d-flex pt-0">
                     <span>
                         @if (Auth::user()->profile_photo_path == NULL)
-                        <img class="avatar profile-user brround" style="object-fit: cover" src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF" alt="profile-user">
+                        <img class="avatar profile-user brround" style="object-fit: cover"
+                            src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF"
+                            alt="profile-user">
                         @else
-                        <img class="avatar profile-user brround" style="object-fit: cover" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}" alt="profile-user" s>
+                        <img class="avatar profile-user brround" style="object-fit: cover"
+                            src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}"
+                            alt="profile-user" s>
                         @endif
                     </span>
                 </a>
@@ -873,7 +1053,8 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                     <div class="drop-heading">
                         <div class="text-center">
                             <h5 class="text-dark mb-0">{{ Auth::user()->name }}</h5>
-                            <small class="text-muted">{{ Auth::user()->role_id == 1 ? 'Administrator' : 'uwon luyi' }}</small>
+                            <small
+                                class="text-muted">{{ Auth::user()->role_id == 1 ? 'Administrator' : 'uwon luyi' }}</small>
                         </div>
                     </div>
                     <div class="dropdown-divider m-0"></div>
