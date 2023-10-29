@@ -394,7 +394,7 @@
                                                 <?php $domainKota = RegenciesDomain::join("regencies",'regency_domains.regency_id','=','regencies.id')->where("regency_domains.province_id",$props->id)->get(); ?>
                                                 <div class="row items" style="width: 515px; overflow: scroll; flex-wrap: nowrap">
                                                     @foreach($domainKota as $dokota)
-                                                        <div class="col">    
+                                                        <div class="col-auto">    
                                                             <a class="text-white btn rounded-0 item" style="background: #528bff" href="{{$dokota->domain}}">{{$dokota->name}}</a>
                                                         </div>
                                                     @endforeach
@@ -404,6 +404,23 @@
                                     </div>
 
                                     <script>
+                                        $(document).ready(function() {
+                                            $('.searchbar').on('input', function() {
+                                                const searchText = $(this).val().toLowerCase().trim();
+                                            
+                                                $('.item').each(function() {
+                                                    const itemText = $(this).text().toLowerCase();
+                                                    const parentCol = $(this).parent('.col-auto');
+                                                
+                                                    if (itemText.includes(searchText)) {
+                                                        parentCol.show(); // Show the item if it matches the search text
+                                                    } else {
+                                                        parentCol.hide(); // Hide the item if it doesn't match
+                                                    }
+                                                });
+                                            });
+                                        });
+                                        
                                         const $slider = $('.items');
                                         let isDown = false;
                                         let startX;
@@ -685,12 +702,11 @@
                     {{-- <button class="btn-dark btn-kolapse-sidebar text-white" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-align-left"></i></button> --}}
                     <button class="btn-dark btn-kolapse text-white h-100" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-bars"></i></button>
                     <button class="btn-danger text-white h-100 rounded-0" style="position: absolute; left: 28px; z-index: 20">Suara Masuk</button>
-                    <button class="btn-dark text-white h-100 rounded-0" style="position: absolute; left: 123px; z-index: 20"><span id="Jakarta_z41c" style="font-size:20px"></span> <span style="font-size: 20px">WIB</span></button>
+                    <a href="https://time.is/Jakarta" id="time_is_link" rel="nofollow" style="font-size:36px"></a>
+                    <button class="btn-dark text-white h-100 rounded-0" style="position: absolute; left: 123px; z-index: 20;"><span id="Jakarta_z41c" style="font-size:20px; color: #f7f700"></span> <span style="font-size: 20px; color: #f7f700">WIB</span></button>
                     <script src="//widget.time.is/t.js"></script>
                     <script>
-                        time_is_widget.init({
-                            Jakarta_z41c: {}
-                        });
+                    time_is_widget.init({Jakarta_z41c:{}});
                     </script>
                     {{-- <button class="btn btn-kolapse text-white" style="background-color: #30304d; z-index: 20"><i class="fa-solid fa-bars"></i></button>
                     <button class="btn btn-danger text-white rounded-0" style="z-index: 20">Suara Masuk</button> --}}
