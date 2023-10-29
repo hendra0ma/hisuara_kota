@@ -354,12 +354,12 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     <div class="col-md kecurangan tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                                <a href="{{url('')}}/verifikator/verifikator_kecurangan" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
                                                     Verifikator Kecurangan
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="#" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                                <a href="{{url('')}}/hukum/validator_kecurangan" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                                     Validator Kecurangan
                                                 </a>
                                             </div>
@@ -493,6 +493,9 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             <div class="col-6">
                                                 <?php $domainKota = RegenciesDomain::join("regencies", 'regency_domains.regency_id', '=', 'regencies.id')->where("regency_domains.province_id", $props->id)->get(); ?>
                                                 <div class="row items" style="width: 515px; overflow: scroll; flex-wrap: nowrap">
+                                                    <div class="col-auto">
+                                                        <a class="text-white btn rounded-0 item bg-danger" href="http://pilpres.banten.hisuara.id/index">DASHBOARD {{$props->name}}</a>
+                                                    </div>
                                                     @foreach($domainKota as $dokota)
                                                     <div class="col-auto">
                                                         <a class="text-white btn rounded-0 item" style="background: #528bff" href="{{$dokota->domain}}">{{$dokota->name}}</a>

@@ -50,7 +50,7 @@
                             </div>
                             <div class="col-md my-auto">
                                 <div class="row mb-2">
-                                    <div class="col-md-12 bg-danger text-white p-2 fs-6 fw-bold">
+                                    <div class="col-md-12 text-white p-2 fs-6 fw-bold" style="background-color: #3c377d">
                                         @if($village == null)
                                         @else
                                         TPS {{ $ls->number }} <br> Kelurahan {{ $village->name }} <br> Kecamatan {{ $district->name }}

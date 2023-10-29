@@ -329,6 +329,26 @@ class VerificatorController extends Controller
         $data['jumlah_kosong']  =  $data['total_tps'] - $data['jumlah_tps_masuk'];
         return view('administrator.c1.verifikasi-c1', $data);
     }
+
+    public function verifikatorKecurangan() {
+        $data['config'] = Config::first();
+        $config = Config::first();
+        $data['paslon'] = Paslon::with('quicksaksidata')->get();
+        $data['paslon_terverifikasi']     = Paslon::with(['quicksaksidata' => function ($query) {
+            $query->join('quicksaksi', 'quicksaksidata.saksi_id', 'quicksaksi.id')
+                ->whereNull('quicksaksi.pending')
+                ->where('quicksaksi.verification', 1);
+        }])->get();
+        $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
+        $data['kota'] = Regency::where('id', $config['regencies_id'])->first();
+        $data['tracking'] = ModelsTracking::get();
+        $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->count();
+        $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
+        $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
+        $data['total_tps']   =  Tps::where('setup','belum terisi')->count();
+        $data['jumlah_kosong']  =  $data['total_tps'] - $data['jumlah_tps_masuk'];
+        return view('administrator.kecurangan.verifikator_kecurangan', $data);
+    }
     
     public function store(Request $request)
     {

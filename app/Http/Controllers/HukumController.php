@@ -7,11 +7,14 @@ use App\Models\Bukti_deskripsi_curang;
 use App\Models\Bukticatatan;
 use App\Models\Buktifoto as ModelsBuktifoto;
 use App\Models\Buktividio as ModelsBuktividio;
+use App\Models\Config;
 use App\Models\Databukti;
 use App\Models\District;
 use App\Models\Listkecurangan as ModelsListkecurangan;
+use App\Models\Paslon;
 use App\Models\Qrcode as ModelsQrcode;
 use App\Models\Qrcode;
+use App\Models\QuickSaksiData;
 use App\Models\Regency;
 use App\Models\Saksi;
 use App\Models\Tps;
@@ -19,6 +22,7 @@ use App\Models\User;
 use App\Models\Village;
 
 use App\Models\SuratPernyataan;
+use App\Models\Tracking;
 use BuktiDeskirpsiCurang;
 use BuktiFoto;
 use BuktiVidio;
@@ -47,15 +51,36 @@ class HukumController extends Controller
         return view('hukum.index', $data);
     }
 
+    public function validatorKecurangan ()
+    {
+        $data['config'] = Config::first();
+        $config = $data['config'];
+        $data['paslon'] = Paslon::with('quicksaksidata')->get();
+        $data['paslon_terverifikasi']     = Paslon::with(['quicksaksidata' => function ($query) {
+            $query->join('quicksaksi', 'quicksaksidata.saksi_id', 'quicksaksi.id')
+                ->whereNull('quicksaksi.pending')
+                ->where('quicksaksi.verification', 1);
+        }])->get();
+        $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
+        $data['kota'] = Regency::where('id', $config['regencies_id'])->first();
+        $data['tracking'] = Tracking::get();
+        $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->count();
+        $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
+        $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
+        $data['total_tps']   =  Tps::where('setup','belum terisi')->count();
+        $data['jumlah_kosong']  =  $data['total_tps'] - $data['jumlah_tps_masuk'];
+
+        $data['index_tsm']    = ModelsListkecurangan::get();
+        $data['terverifikasi'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->get();
+        $data['ditolak'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'ditolak')->get();
+        $data['data_masuk'] = Saksi::where('kecurangan', 'yes')->get();
+        $data['team'] = User::where('id', '!=', Auth::user()->id)->where('role_id', 7)->get();
+        return view('administrator.kecurangan.validator_kecurangan', $data);
+    }
+
     public function terverifikasi()
     {
         $data['index_tsm']    = ModelsListkecurangan::get();
-        $data['list_suara']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
-            ->join('users', 'users.tps_id', '=', 'tps.id')
-            ->where('saksi.kecurangan', 'yes')
-            ->where('saksi.status_kecurangan', 'terverifikasi')
-            ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
-            ->get();
 
         $data['terverifikasi'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->get();
         $data['ditolak'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'ditolak')->get();
@@ -72,12 +97,6 @@ class HukumController extends Controller
     public function ditolak()
     {
         $data['index_tsm']    = ModelsListkecurangan::get();
-        $data['list_suara']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
-            ->join('users', 'users.tps_id', '=', 'tps.id')
-            ->where('saksi.kecurangan', 'yes')
-            ->where('saksi.status_kecurangan', 'ditolak')
-            ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
-            ->get();
         $data['terverifikasi'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->get();
         $data['ditolak'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'ditolak')->get();
         $data['data_masuk'] = Saksi::where('kecurangan', 'yes')->get();

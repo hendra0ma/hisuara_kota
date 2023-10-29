@@ -94,9 +94,21 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
     </div> --}}
 </div>
 
-<h4 class="fw-bold fs-4 mt-5 mb-0">
-    Jumlah Enumerator Hadir : {{$jumlah_hadir}}
-</h4>
+<div class="row">
+    <div class="col-md">
+        <h4 class="fw-bold fs-4 mt-5 mb-0">
+            Jumlah Enumerator Hadir : {{$jumlah_hadir}}
+        </h4>
+    </div>
+    <div class="col-md-auto mt-auto">
+        <div class="ms-auto">
+            <div class="btn btn-success my-auto">
+                <i class="fa-solid fa-download"></i>
+                Unduh
+            </div>
+        </div>
+    </div>
+</div>
 <hr style="border: 1px solid">
 
 <livewire:absensi>

@@ -29,9 +29,15 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
     </div>
 </div>
 
-<h4 class="fw-bold fs-4 mt-5 mb-0">
+<h4 class="fw-bold fs-4 mt-5 mb-0 d-inline">
     Jumlah C1 : {{$jumlah_c1}}
 </h4>
+
+        <div class="btn btn-success float-end">
+            <i class="fa-solid fa-download"></i>
+            Unduh
+        </div>
+
 <hr style="border: 1px solid">
 
 <livewire:all-c1-plano />

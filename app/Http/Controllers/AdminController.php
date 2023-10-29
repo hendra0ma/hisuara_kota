@@ -1458,7 +1458,9 @@ class AdminController extends Controller
         $data['config'] = Config::first();
         $config = Config::first();
         $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->get();
-
+        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data GROUP by paslon_id ORDER by total DESC'));
+        $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        $data['urutan'] = $paslon_tertinggi;
         $dpt                              = District::where('regency_id', $this->config->regencies_id)->sum("dpt");
         $data['paslon'] = Paslon::with('saksi_data')->get();
         $data['paslon_terverifikasi']     = Paslon::with(['saksi_data' => function ($query) {
@@ -1508,6 +1510,9 @@ class AdminController extends Controller
         ->join('tps', 'tps.id', "=", "saksi.tps_id")
         ->where('tps.sample',5)
         ->get();
+        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data GROUP by paslon_id ORDER by total DESC'));
+        $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        $data['urutan'] = $paslon_tertinggi;
         $data['district_quick'] = District::join('villages', 'villages.district_id', '=', 'districts.id')->where('regency_id', $data['config']['regencies_id'])->get();
         return view('administrator.quickcount.quick_count2',$data);
         // dd($data['paslon']);
@@ -1538,6 +1543,10 @@ class AdminController extends Controller
         $data['saksi_masuk'] = Saksi::count();
         $data['total_verification_voice'] = 0;
         $data['total_incoming_vote']      = 0;
+
+        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data GROUP by paslon_id ORDER by total DESC'));
+        $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        $data['urutan'] = $paslon_tertinggi;
 
         foreach ($verification as $key) {
             foreach ($key->saksi_data as $verif) {

@@ -12,7 +12,7 @@
         </div>
         @endif
 
-        <h1 class="page-title fs-1 mt-2">Verifikasi C1
+        <h1 class="page-title fs-1 mt-2">Validator Kecurangan
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">
@@ -27,16 +27,13 @@
             <div class="col-12 mb-2">
                 <div class="row">
                     <div class="col parent-link">
-                        <a class="btn text-white w-100 py-3 c1saksi tablink" onclick="openPage('C1-Saksi', this, '#6259ca')" id="defaultOpen">C1 Saksi</a>
+                        <a class="btn text-white w-100 py-3 c1saksi tablink" onclick="openPage('Data-Kecurangan-Masuk', this, '#6259ca')" id="defaultOpen">Data Kecurangan Masuk</a>
                     </div>
                     <div class="col parent-link">
-                        <a class="btn text-white w-100 py-3 c1relawan tablink" onclick="openPage('C1-Relawan', this, '#6259ca')">C1 Relawan TPS</a>
+                        <a class="btn text-white w-100 py-3 c1relawan tablink" onclick="openPage('Data-Kecurangan-Terverifikasi', this, '#6259ca')">Data Kecurangan Terverifikasi</a>
                     </div>
-                    {{-- <div class="col parent-link">
-                        <a class="btn text-white w-100 py-3 c1teraudit tablink" onclick="openPage('C1-Dibatalkan', this, '#6259ca')">C1 Dibatalkan</a>
-                    </div> --}}
                     <div class="col parent-link">
-                        <a class="btn text-white w-100 py-3 c1koreksi tablink" onclick="openPage('C1-Koreksi', this, '#6259ca')">C1 Koreksi</a>
+                        <a class="btn text-white w-100 py-3 c1koreksi tablink" onclick="openPage('Data-Kecurangan-Ditolak', this, '#6259ca')">Data Kecurangan Ditolak</a>
                     </div>
                 </div>
             </div>
@@ -121,7 +118,7 @@
                     ->count();
                 
                 ?>
-                <button class="btn tablink w-100 rounded-0 c1saksi" onclick="openPage('C1-Saksi', this, '#45aaf2 ')"
+                <button class="btn tablink w-100 rounded-0 c1saksi" onclick="openPage('Data-Kecurangan-Masuk', this, '#45aaf2 ')"
                     id="defaultOpen">C1 Saksi <span
                         class="badge rounded-pill bg-danger">{{ $count_suara }}</span></button>
             </div>
@@ -130,7 +127,7 @@
             </div> -->
             <div class="col-md">
                 <button class="btn tablink w-100 rounded-0 c1relawan"
-                    onclick="openPage('C1-Relawan', this, '#f82649')">C1 Relawan Partai</button>
+                    onclick="openPage('Data-Kecurangan-Terverifikasi', this, '#f82649')">C1 Relawan Partai</button>
             </div>
 
             <div class="col-md">
@@ -140,7 +137,7 @@
 
             <div class="col-md">
                 <button class="btn tablink w-100 rounded-0 c1koreksi"
-                    onclick="openPage('C1-Koreksi', this, '#09ad95')">C1 Koreksi</button>
+                    onclick="openPage('Data-Kecurangan-Ditolak', this, '#09ad95')">C1 Koreksi</button>
             </div>
           
             <!-- <div class="col-md">
@@ -150,17 +147,14 @@
     </div> --}}
 </div>
 <div class="card-body p-0">
-    <div id="C1-Saksi" class="tabcontent mt-0 px-0">
-        <livewire:c1-saksi-kota />
+    <div id="Data-Kecurangan-Masuk" class="tabcontent mt-0 px-0">
+        <livewire:data-kecurangan-masuk />
     </div>
-    <div id="C1-Relawan" class="tabcontent mt-0 px-0">
-        <livewire:c1-relawan-kota />
+    <div id="Data-Kecurangan-Terverifikasi" class="tabcontent mt-0 px-0">
+        <livewire:data-kecurangan-terverifikasi />
     </div>
-    {{-- <div id="C1-Dibatalkan" class="tabcontent mt-0 px-0">
-        <livewire:c1-dibatalkan />
-    </div> --}}
-    <div id="C1-Koreksi" class="tabcontent mt-0 px-0">
-        <livewire:c1-koreksi />
+    <div id="Data-Kecurangan-Ditolak" class="tabcontent mt-0 px-0">
+        <livewire:data-kecurangan-ditolak />
     </div>
     
 </div>
