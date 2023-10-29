@@ -386,97 +386,6 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12 text-white judul-pertama">
-                                        <div class="row">
-
-                                            <div class="col-12 judul text-center text-white" id="gantiBackground" style="transition: background 1s; transform: scaleX(1.2);">
-                                                <div class="text">
-                                                    <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;" class="display-2" id="text-effect"></h1>
-                                                    <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; color: #fff; text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;" class="display-3" id="text-effect2"></h1>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-                                    <script>
-                                        function animate() {
-                                            $container = $("#text-effect");
-                                            $('.tugel-content').hide(500);
-                                            const text = "HISUARA"
-                                            const $elements = text.split("").map((s) => $(`<span style="margin-left:20px" class="my-auto fw-bold">${s}</span>`));
-
-                                            $container.html($elements);
-                                            $container.show();
-                                            // $("#gantiBackground").css({
-                                            //     "background-color": "#007bff"
-                                            // }, 1000);
-                                            $elements.forEach(function($el, i) {
-                                                $el
-                                                    .css({
-                                                        top: -60,
-                                                        opacity: 0
-                                                    })
-                                                    .delay(100 * i)
-                                                    .animate({
-                                                        top: 0,
-                                                        opacity: 1
-                                                    }, 200);
-                                            });
-
-                                            setTimeout(() => {
-                                                $("#text-effect").hide();
-                                                $("#text-effect").html("");
-                                                animate2()
-                                            }, 3000)
-
-                                        }
-
-                                        function animate2() {
-
-                                            $container = $("#text-effect2");
-                                            const text = "VOX POPULI,VOX DEI"
-                                            const $elements = text.split("").map((s) => $(`<span style="margin-left:15px" class="my-auto">${s}</span>`));
-
-                                            $container.html($elements);
-                                            $container.show();
-                                            // $("#gantiBackground").css({
-                                            //     "background-color": "#007bff"
-                                            // }, 1000);
-                                            $elements.forEach(function($el, i) {
-                                                $el
-                                                    .css({
-                                                        top: -60,
-                                                        opacity: 0
-                                                    })
-                                                    .delay(100 * i)
-                                                    .animate({
-                                                        top: 0,
-                                                        opacity: 1
-                                                    }, 200);
-                                            });
-                                            setTimeout(() => {
-                                                $("#text-effect2").html("")
-                                                $("#text-effect2").hide()
-
-                                                $(`.active-button`).click();
-                                                setTimeout(()=>{
-
-                                                    $('.tugel-content').hide(500);
-                                                    animate();
-                                                    
-                                                },1000 * 60 );
-
-                                            }, 5000);
-                                        }
-
-
-                                        $(function() {
-                                            animate();
-                                        });
-                                    </script>
-
 
                                     <style>
                                         .items.active {
@@ -505,56 +414,6 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             </div>
                                         </div>
                                     </div>
-
-                                    <script>
-                                        $(document).ready(function() {
-                                            $('.searchbar').on('input', function() {
-                                                const searchText = $(this).val().toLowerCase().trim();
-
-                                                $('.item').each(function() {
-                                                    const itemText = $(this).text().toLowerCase();
-                                                    const parentCol = $(this).parent('.col-auto');
-
-                                                    if (itemText.includes(searchText)) {
-                                                        parentCol.show(); // Show the item if it matches the search text
-                                                    } else {
-                                                        parentCol.hide(); // Hide the item if it doesn't match
-                                                    }
-                                                });
-                                            });
-                                        });
-
-                                        const $slider = $('.items');
-                                        let isDown = false;
-                                        let startX;
-                                        let scrollLeft;
-
-                                        $slider.on('mousedown', (e) => {
-                                            isDown = true;
-                                            $slider.addClass('active');
-                                            startX = e.pageX - $slider.offset().left;
-                                            scrollLeft = $slider.scrollLeft();
-                                        });
-
-                                        $slider.on('mouseleave', () => {
-                                            isDown = false;
-                                            $slider.removeClass('active');
-                                        });
-
-                                        $slider.on('mouseup', () => {
-                                            isDown = false;
-                                            $slider.removeClass('active');
-                                        });
-
-                                        $slider.on('mousemove', (e) => {
-                                            if (!isDown) return;
-                                            e.preventDefault();
-                                            const x = e.pageX - $slider.offset().left;
-                                            const walk = (x - startX) * 1; // scroll-fast
-                                            $slider.scrollLeft(scrollLeft - walk);
-                                            console.log(walk);
-                                        });
-                                    </script>
 
                                     <div class="col-md text-white support tugel-content" style="display: none">
                                         <div class="row">
@@ -660,19 +519,100 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             </div>
                                             @endforeach
                                         </div>
-                                        {{-- <div class="row">
-                                            @foreach ($urutan as $urutPaslon)
-                                                <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
-                                                <div class="col-auto">
-                                                    <div class="card shadow text-center mb-0 mx-auto mt-1 border-0">
-                                                        <div class="card-header pt-1 pb-1 px-2 border-0" style="background: {{ $pasangan->color }}">
-                                        <span class="card-title text-white mx-auto">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} : {{$urutPaslon->total}}</span>
                                     </div>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div> --}}
-                    </div>
+
+                                    <div class="col-md-12 text-white judul-pertama">
+                                        <div class="row">
+
+                                            <div class="col-12 judul text-center text-white" id="gantiBackground" style="transition: background 1s; transform: scaleX(1.2);">
+                                                <div class="text">
+                                                    <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;" class="display-2" id="text-effect"></h1>
+                                                    <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; color: #fff; text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;" class="display-3" id="text-effect2"></h1>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+                                    <script>
+                                        function animate() {
+
+                                            $('.judul-pertama').css("z-index","900");
+                                            $container = $("#text-effect");
+                                            $('.tugel-content').hide(500);
+                                            const text = "HISUARA"
+                                            const $elements = text.split("").map((s) => $(`<span style="margin-left:20px" class="my-auto fw-bold">${s}</span>`));
+
+                                            $container.html($elements);
+                                            $container.show();
+                                            // $("#gantiBackground").css({
+                                            //     "background-color": "#007bff"
+                                            // }, 1000);
+                                            $elements.forEach(function($el, i) {
+                                                $el
+                                                    .css({
+                                                        top: -60,
+                                                        opacity: 0
+                                                    })
+                                                    .delay(100 * i)
+                                                    .animate({
+                                                        top: 0,
+                                                        opacity: 1
+                                                    }, 200);
+                                            });
+
+                                            setTimeout(() => {
+                                                $("#text-effect").hide();
+                                                $("#text-effect").html("");
+                                                animate2()
+                                            }, 3000)
+
+                                        }
+
+                                        function animate2() {
+
+                                            $container = $("#text-effect2");
+                                            const text = "VOX POPULI,VOX DEI"
+                                            const $elements = text.split("").map((s) => $(`<span style="margin-left:15px" class="my-auto">${s}</span>`));
+
+                                            $container.html($elements);
+                                            $container.show();
+                                            // $("#gantiBackground").css({
+                                            //     "background-color": "#007bff"
+                                            // }, 1000);
+                                            $elements.forEach(function($el, i) {
+                                                $el
+                                                    .css({
+                                                        top: -60,
+                                                        opacity: 0
+                                                    })
+                                                    .delay(100 * i)
+                                                    .animate({
+                                                        top: 0,
+                                                        opacity: 1
+                                                    }, 200);
+                                            });
+                                            setTimeout(() => {
+                                                $("#text-effect2").html("")
+                                                $("#text-effect2").hide()
+
+                                                $(`.active-button`).click();
+                                                setTimeout(()=>{
+
+                                                    $('.tugel-content').hide(500);
+                                                    animate();
+                                                    
+                                                },1000 * 60 );
+
+                                            }, 5000);
+                                        }
+
+
+                                        $(function() {
+                                            animate();
+                                        });
+                                    </script>
 
                 </div>
             </div>
@@ -855,6 +795,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
     $('.tugel-kolaps').on('click', function() {
         const btnIni = $(this);
+        $('.judul-pertama').css("z-index","-900");
         $('.tugel-kolaps').removeClass('active-button');
         btnIni.addClass('active-button');
     });
