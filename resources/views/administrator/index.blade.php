@@ -56,12 +56,101 @@
             flex: 0 0 100%;
             max-width: 100%;
         }
+        
     }
 
 </style>
 
-<div class="row mt-3">
-    <div class="col-lg col-md">
+<div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
+
+    {{-- <div class="col-md-auto pe-0 my-auto">
+        <img src="{{asset('')}}storage/{{$config->regencies_logo}}" style="width: 80px" alt="">
+    </div>
+    <div class="col-lg-11 ps-2 mb-3">
+        <h1 class="page-title fs-1 mt-2">PILPRES 2024
+            <!-- Kota -->
+        </h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">{{ $kota->name }}
+                <!-- Kota -->
+            </li>
+        </ol>
+    </div> --}}
+    {{-- <div class="col-lg-6 text-end">
+        <div class="row mx-auto text-center">
+            <div class="col-md me-auto">
+                <div class="row">
+                    <div class="col my-auto text-center">
+                        <h3 class="mb-0">Indikator</h3>
+                    </div>
+
+                    <div class="col-auto mt-2">
+                        <div class="card" style="margin-bottom: 0px; background: transparent">
+                            <div class="card-body text-center" style="padding: 0px;">
+                                <i class="fe fe-user fs-4"></i>
+                            </div>
+                            <div class="card-footer text-center" style="color: black; padding: 0px;">
+                                @if ($jam > 8 && $jam < 21) 
+                                <div class="badge bg-success">Saksi : Aktif</div>
+                                @else
+                                <div class="badge bg-danger">Saksi : Nonaktif</div>
+                                @endif
+                            </div>
+                        </div>
+                        <h5 style="font-size:13px" class="text-center mt-3">09.00 - 21.00</h5>
+                    </div>
+                    <div class="col-auto mt-2">
+                        <div class="card" style="margin-bottom: 0px; background: transparent">
+                            <div class="card-body text-center" style="padding: 0px;">
+                                <i class="fe fe-user fs-4"></i>
+                            </div>
+                            <div class="card-footer text-center" style="color: black; padding: 0px;">
+
+                                @if ($jam > 14 && $jam < 21) <div class="badge bg-success">Relawan :
+                                    aktif</div>
+                            @else
+                            <div class="badge bg-danger">Relawan : Nonaktif</div>
+                            @endif
+                        </div>
+                    </div>
+                    <h5 style="font-size:13px" class="text-center mt-3">14.00 - 21.00</h5>
+                </div>
+                <div class="col-auto mt-2">
+                    <div class="card" style="margin-bottom: 0px; background: transparent">
+                        <div class="card-body text-center" style="padding: 0px;">
+                            <i class="fe fe-user fs-4"></i>
+                        </div>
+                        <div class="card-footer text-center" style="color: black; padding: 0px;">
+                            @if ($jam >= 21)
+                            <div class="badge bg-success">Overtime : Aktif</div>
+                            @else
+                            <div class="badge bg-danger">Overtime : Nonaktif</div>
+                            @endif
+                        </div>
+                    </div>
+                    <h5 style="font-size:13px" class="text-center mt-3">21.00 - dst</h5>
+                </div>
+                <div class="col-auto my-auto">
+                    <a href="https://time.is/Jakarta" id="time_is_link" rel="nofollow"
+                            style="font-size:25px">
+                    </a>
+                    <span id="Jakarta_z41c" style="font-size:27px"></span>
+                    <span style="font-size:27px; margin-left: 5px;">WIB</span>
+                    <script src="//widget.time.is/t.js"></script>
+                    <script>
+                        time_is_widget.init({
+                            Jakarta_z41c: {}
+                        });
+                    </script>
+                </div>
+            </div>
+                    
+
+            </div>
+        </div>
+    </div> --}}
+
+    <div class="col-lg col-md mt-4">
         <div class="row g-0">
             <div class="col-md">
 
@@ -623,230 +712,6 @@
 </style>
 <div class="row">
 
-    <div class="col-md-12 mb-5">
-        <div class="card mb-0">
-            <div class="card-header p-0" id="marquee1" style="position: relative">
-                <div class="input-group input-group-sm">
-                    <div class="input-group-prepend" style="background-color: #30304d">
-                        <button class="btn btn-kolapse text-white" style="background-color: #30304d"><i class="fa-solid fa-bars"></i></button>
-                        <button class="btn btn-danger text-white rounded-0 h-100">Suara Masuk</button>
-                    </div>
-                    <div class="form-control bg-dark" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                        <marquee id="cobamarq1">
-                            @foreach ($marquee as $item)
-                            <?php $kecamatan =  District::where('id', $item['districts'])->first(); ?>
-                            <?php $kelurahan =  Village::where('id', $item['villages'])->first(); ?>
-                            <?php $tps =  Tps::where('id', $item['tps_id'])->first(); ?>
-                            <span class="text-success">▼ </span><span class="text-white" style="font-size: 20px;">{{$item['name']}}
-                                Kecamatan {{$kecamatan['name']}}, Kelurahan {{$kelurahan['name']}}, TPS {{$tps['number']}}
-                            </span>
-                            @endforeach
-                        </marquee>
-
-
-                    </div>
-                </div>
-            </div>
-            <div class="card-body for-kolapse" style="background: #000">
-                <div class="row">
-
-                    <div class="col-md-10">
-                        <div class="row">
-
-                            <div class="col-md-12 text-white tabulasi">
-                                <div class="row">
-                                    <div class="col-auto my-auto text-white">
-                                        <h4 class="mb-0">
-                                            Tabulasi
-                                        </h4>
-                                    </div>
-                                    <div class="col py-2 judul text-center bg-secondary text-white"
-                                        style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
-                                        <div class="text">Total TPS : <b>{{ $total_tps }}</b></div>
-                                    </div>
-                                    <div class="col py-2 judul text-center bg-danger text-white">
-                                        <div class="text">TPS Masuk : <b>{{ $tps_masuk }}</b></div>
-                                    </div>
-                                    <div class="col py-2 judul text-center bg-primary text-white">
-                                        <div class="text">TPS Kosong : <b>{{ $tps_kosong }}</b></div>
-                                    </div>
-                                    <div class="col py-2 judul text-center bg-info text-white">
-                                        <div class="text">Suara Masuk : <b>{{ $suara_masuk }}</b></div>
-                                    </div>
-                                    <div class="col py-2 judul text-center bg-success text-white"
-                                        style="border-top-right-radius: 25px; border-bottom-right-radius: 25px">
-                                        <div class="text">Suara Terverifikasi : <b>{{$total_verification_voice}}</b></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12 mb-2 settings" style="display: none">
-                                {{-- Settings --}}
-                                <div class="row px-5 my-auto" style="gap: 25px">
-                                   <div class="col-auto mt-3 text-white">
-                                        <h4 class="mb-0"style="font-family:'Roboto' !important">
-                                            Settings
-                                        </h4>
-                                    </div>
-                                    <div class="col-auto mb-2">
-                                        <div class="mid">
-                                        
-                                            <label class="switch">
-                                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('multi_admin',this)"
-                                                    {{($config->multi_admin == "no") ? "":"checked"; }}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                            Multi
-                                        </div>
-                                    </div>
-                                
-                                    <div class="col-auto mb-2">
-                                        <div class="mid">
-                                        
-                                            <label class="switch">
-                                                <input type="checkbox" data-target="mode" onclick="settings('otonom',this)"
-                                                    {{($config->otonom == "no") ? "":"checked"; }}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                            Otonom
-                                        </div>
-                                    </div>
-                                
-                                    <div class="col-auto mb-2">
-                                        <div class="mid">
-                                            <label class="switch">
-                                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('show_terverifikasi',this)"
-                                                    {{($config->show_terverifikasi == "hide") ? "":"checked"; }}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                            Verifikasi
-                                        </div>
-                                    </div>
-                                
-                                    <div class="col-auto mb-2">
-                                        <div class="mid">
-                                            <label class="switch">
-                                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('show_public',this)"
-                                                    {{($config->show_public == "hide") ? "":"checked"; }}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                            Publish C1
-                                        </div>
-                                    </div>
-                                
-                                    <div class="col-auto mb-2">
-                                        <div class="mid">
-                                        
-                                            <label class="switch">
-                                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('lockdown',this)"
-                                                    {{($config->lockdown == "no") ? "":"checked"; }}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                            Lockdown
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-auto">
-                                        <div class="mid">
-                                            <label class="switch">
-                                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('quick_count',this)"
-                                                    {{($config->quick_count == "no") ? "":"checked"; }}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                            Quick Count
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="col-md suara"style="display: none">
-                                <div class="row">
-                                    <div class="col-auto my-auto text-white" >
-                                        <h4 class="mb-0">
-                                            Urutan Suara
-                                        </h4>
-                                    </div>
-                                    {{-- <div class="col-4 text-center mb-2 fw-bold fs-3">
-                                        <span style="-webkit-text-stroke: 0.75px #00000036; color: #ffd700">1</span>
-                                    </div>
-                                    <div class="col-4 text-center mb-2 fw-bold fs-3">
-                                        <span style="-webkit-text-stroke: 0.75px #00000036; color: #c0c0c0">2</span>
-                                    </div>
-                                    <div class="col-4 text-center mb-2 fw-bold fs-3">
-                                        <span style="-webkit-text-stroke: 0.75px #00000036; color: #cd7f32">3</span>
-                                    </div> --}}
-                                    @foreach ($urutan as $urutPaslon)
-                                        <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
-                                        {{-- <div class="col-md"> --}}
-                                        <div class="col-auto">
-                                            <div class="card shadow text-center mb-0 mx-auto mt-1 border-0">
-                                                <div class="card-header pt-1 pb-1 px-2 border-0" style="background: {{ $pasangan->color }}">
-                                                    <span class="card-title text-white mx-auto">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} : {{$urutPaslon->total}}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {{-- </div> --}}
-                                    @endforeach
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="col-md">
-                        <div class="row h-100">
-                            <div class="col-md justify-content-end">
-                                <button class="mx-auto btn btn-success w-100 h-100 tugel-kolaps"data-target="suara">
-                                    <i class="fa-solid fa-ranking-star"></i>
-                                </button>
-                            </div>
-                            <div class="col-md justify-content-end">
-                                <button class="mx-auto btn btn-success w-100 h-100 tugel-kolaps"data-target="tabulasi">
-                                    <i class="fa-solid fa-database"></i>
-                                </button>
-                            </div>
-                            <div class="col-md justify-content-end">
-                                <button class="mx-auto btn btn-success w-100 h-100 tugel-kolaps"data-target="settings">
-                                    <i class="fa-solid fa-gear"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                   
-                </div>
-
-                <script>
-                    $('.btn-kolapse').on('click', function() {
-                        $('.for-kolapse').toggle(500);
-                    })
-
-                    $('.tugel-kolaps').on('click', function() {
-
-                        let target = $(this).data('target')
-                        console.log(target)
-                        $('.suara, .settings, .tabulasi').hide()
-                        $(`.${target}`).show(200)
-                    })
-
-                </script>
-
-            </div>
-        </div>
-    </div>
-
     {{-- <div class="col-md-3 mb-4 pe-1">
         <div class="card mb-0">
             <div class="card-header py-1">
@@ -1068,12 +933,12 @@ s    </div>
 </div> --}}
 
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-6" style="{{($config->quick_count == 'yes')?'':'display:none'}}">
         <div class="card" style="margin-bottom: 1rem">
             <div class="card-body">
                 <div class="row">
                     <div class="col-xxl-12">
-                        <div class="container" style="margin-left: 3%; margin-top: 2.5%;">
+                        <div class="container">
                             <div class="text-center fs-3 mb-3 fw-bold">QUICK COUNT</div>
                             <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
                             <div class="text-center mt-2 mb-2"><span
@@ -1156,7 +1021,7 @@ s    </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-xxl-12">
-                        <div class="container" style="margin-left: 3%; margin-right: 3%; margin-top: 2.5%;">
+                        <div class="container">
                             <div class="text-center fs-3 mb-3 fw-bold">REAL COUNT</div>
                             <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
                             <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
@@ -1298,10 +1163,8 @@ s    </div>
         </div>
     </div>
 
-</div>
-
-<div class="row">
-    <div class="col-lg-12 col-md-12" style="display:{{($config->otonom == 'yes')?'none':'block'}}">
+    @if ($config->quick_count == 'yes')
+    <div class="col-lg col-md" style="display:{{($config->otonom == 'yes')?'none':'block'}}">
         <div class="card">
             {{-- <div class="card-header bg-secondary">
                 <h3 class="card-title text-white">Suara TPS Terverifikasi</h3>
@@ -1386,6 +1249,91 @@ s    </div>
             </div>
         </div>
     </div>
+    @else
+    <div class="col-lg col-md" style="display:{{($config->otonom == 'yes')?'none':'block'}}">
+        <div class="card">
+            {{-- <div class="card-header bg-secondary">
+                <h3 class="card-title text-white">Suara TPS Terverifikasi</h3>
+            </div> --}}
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-xxl-12">
+                                <div class="container">
+                                    <div class="text-center fs-3 mb-3 fw-bold">SUARA TERVERIFIKASI</div>
+                                    <div class="text-center">Terverifikasi {{$saksi_terverifikasi}} TPS dari {{$saksi_masuk}}
+                                        TPS Masuk</div>
+                                    <div class="text-center mt-2 mb-2"><span
+                                            class="badge bg-success">{{$total_verification_voice}} / {{$dpt}}</span></div>
+                                    <div id="chart-donut" class="chartsh h-100 w-100"></div>
+                                </div>
+                            </div>
+                            <div class="col-xxl">
+                                <?php $i = 1; ?>
+                                <div class="row mt-2">
+                                @foreach ($paslon_terverifikasi as $pas)
+                                    <div class="col-lg col-md col-sm col-xl mb-3">
+                                        <div class="card" style="margin-bottom: 0px;">
+                                            <div class="card-body p-3">
+                                                <div class="row me-auto">
+                                                    <div class="col-12">
+                                                        <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white ms-auto"
+                                                            style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                            {{$i++}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col text-center">
+                                                        <h6 class="mt-4">{{$pas->candidate}} </h6>
+                                                        <h6 class="">{{$pas->deputy_candidate}} </h6>
+                                                        <?php
+                                                        $voice = 0;
+                                                        ?>
+                                                        @foreach ($pas->saksi_data as $dataTps)
+                                                        <?php
+                                                        $voice += $dataTps->voice;
+                                                        ?>
+                                                        @endforeach
+                                                        <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-hover h-100">
+                    <thead class="bg-primary">
+                        <td class="text-white text-center align-middle">KECAMATAN</td>
+                        @foreach ($paslon as $item)
+                        <th class="text-white text-center align-middle">{{ $item['candidate']}} - <br>
+                            {{ $item['deputy_candidate']}}</th>
+                        @endforeach
+                    </thead>
+                    <tbody>
+                        @foreach ($kec as $item)
+                        <tr onclick='check("{{Crypt::encrypt($item->id)}}")'>
+                            <td class="align-middle"><a
+                                    href="{{url('/')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
+                            </td>
+                            @foreach ($paslon as $cd)
+                            <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->where('saksi.verification',1)->sum('voice'); ?>
+                            <td class="align-middle">{{$saksi_dataa}}</td>
+                            @endforeach
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    @endif
+
 </div>
 
 

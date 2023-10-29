@@ -219,21 +219,6 @@ $tps = 2963;
                                 class="side-menu__icon fa-solid fa-gauge-high"></i><span class="side-menu__label">DASHBOARD</span></a>
                     </li>
                     <li>
-                        <a class="metro-tabs" href="#" data-bs-toggle="slide"><span class="side-menu__label fs-3">PERHITUNGAN</span></a>
-                        <ul class="slide-menu">
-                            <li><a href="{{url('')}}/administrator/real_count2" class="fs-5 slide-item text-white">Real Count</a></li>
-                            <li><a href="{{url('')}}/administrator/quick_count2" class="fs-5 slide-item text-white">Quick Count</a></li>
-                            <li><a href="{{url('')}}/administrator/terverifikasi" class="fs-5 slide-item text-white">Terverifikasi</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="metro-tabs" href="#" data-bs-toggle="slide"><span class="side-menu__label fs-3">REKAPITULASI</span></a>
-                        <ul class="slide-menu">
-                            <li><a href="{{url('')}}/administrator/rekapitulasi_kelurahan" class="fs-5 slide-item text-white">Rekapitualsi Kelurahan</a></li>
-                            <li><a href="{{url('')}}/administrator/rekapitulasi_kecamatan" class="fs-5 slide-item text-white">Rekapitualsi Kecamatan</a></li>
-                        </ul>
-                    </li>
-                    <li>
                         <a class="metro-tabs" href="#" data-bs-toggle="slide" style="border-top: #34425a 6px solid;"><span class="side-menu__label fs-3">PETUGAS</span></a>
                         <ul class="slide-menu">
                             <li><a href="{{url('')}}/administrator/verifikasi_saksi" class="fs-5 slide-item text-white">Saksi</a></li>
@@ -248,6 +233,21 @@ $tps = 2963;
                             <li><a href="{{url('')}}/verifikator/verifikasi-c1" class="fs-5 slide-item text-white">Verifikasi C1</a></li>
                             <li><a href="{{url('')}}/auditor/audit-c1" class="fs-5 slide-item text-white">Audit C1</a></li>
                             <li><a href="{{url('')}}/administrator/verifikasi_koreksi" class="fs-5 slide-item text-white">Koreksi C1</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="metro-tabs" href="#" data-bs-toggle="slide"><span class="side-menu__label fs-3">PERHITUNGAN</span></a>
+                        <ul class="slide-menu">
+                            <li><a href="{{url('')}}/administrator/real_count2" class="fs-5 slide-item text-white">Real Count</a></li>
+                            <li><a href="{{url('')}}/administrator/quick_count2" class="fs-5 slide-item text-white">Quick Count</a></li>
+                            <li><a href="{{url('')}}/administrator/terverifikasi" class="fs-5 slide-item text-white">Terverifikasi</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="metro-tabs" href="#" data-bs-toggle="slide"><span class="side-menu__label fs-3">REKAPITULASI</span></a>
+                        <ul class="slide-menu">
+                            <li><a href="{{url('')}}/administrator/rekapitulasi_kelurahan" class="fs-5 slide-item text-white">Rekapitualsi Kelurahan</a></li>
+                            <li><a href="{{url('')}}/administrator/rekapitulasi_kecamatan" class="fs-5 slide-item text-white">Rekapitualsi Kecamatan</a></li>
                         </ul>
                     </li>
                     <li>
@@ -271,6 +271,9 @@ $tps = 2963;
                             <li><a href="{{url('')}}/administrator/r-data" class="fs-5 slide-item text-white fs-6">Realisasi DPT</a></li>
                             <li><a href="{{url('')}}/administrator/r-data" class="fs-5 slide-item text-white fs-6">Riwayat</a></li>
                         </ul>
+                    </li>
+                    <li>
+                        <a class="metro-tabs" href="#" data-bs-toggle="slide"><span class="side-menu__label fs-3">KECURANGAN</span></a>
                     </li>
                     
 
@@ -703,7 +706,7 @@ $tps = 2963;
                             <i class="side-menu__icon mdi mdi-flash"></i><span class="side-menu__label">Mode Developer</span></a>
                     </li> --}}
 
-                    <hr>
+                    {{-- <hr>
                     <li>
                         <a class="side-menu__item" href="#" type="button" data-bs-toggle="modal" data-bs-target="#chat"><i
                                 class="side-menu__icon fa-solid fa-headset"></i><span class="side-menu__label">Support</span></a>
@@ -718,7 +721,7 @@ $tps = 2963;
                                 <i class="side-menu__icon mdi mdi-logout"></i> Sign out
                             </a>
                         </form>
-                    </li>
+                    </li> --}}
                 </div>
 
             </ul>

@@ -15,7 +15,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 
 <div class="row mt-5">
     <div class="col-lg-4">
-        <h1 class="page-title fs-1 mt-2">Saksi Teregristrasi
+        <h1 class="page-title fs-1 mt-2">Enumerator Teregristrasi
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">
@@ -118,7 +118,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
     <div class="col-md">
         <h4 class="fw-bold fs-4 mt-5 mb-0">
     
-            Jumlah Saksi Teregistrasi : {{$jumlah_saksi_teregistrasi}}
+            Jumlah Enumerator Teregistrasi : {{$jumlah_saksi_teregistrasi}}
 
         </h4>
 

@@ -32,29 +32,32 @@
                     <div class="col parent-link">
                         <a class="btn text-white w-100 py-3 c1relawan tablink" onclick="openPage('C1-Relawan', this, '#6259ca')">C1 Relawan Partai</a>
                     </div>
-                    <div class="col parent-link">
+                    {{-- <div class="col parent-link">
                         <a class="btn text-white w-100 py-3 c1teraudit tablink" onclick="openPage('C1-Dibatalkan', this, '#6259ca')">C1 Dibatalkan</a>
-                    </div>
+                    </div> --}}
                     <div class="col parent-link">
                         <a class="btn text-white w-100 py-3 c1koreksi tablink" onclick="openPage('C1-Koreksi', this, '#6259ca')">C1 Koreksi</a>
                     </div>
                 </div>
             </div>
             
-            <div class="col-12">
-                
+            <div class="col-md-12 text-white mt-3">
                 <div class="row">
-                    <div class="col text-center">
-                        <span class="mx-auto"> <b>Total TPS :</b> {{$total_tps}}</span>
+                    <div class="col py-2 judul text-center bg-secondary text-white"
+                        style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
+                        <div class="text">Total TPS : <b>{{ $total_tps }}</b></div>
                     </div>
-                    <div class="col text-center">
-                        <span class="mx-auto"> <b>TPS Masuk :</b> {{$jumlah_tps_masuk}}</span>
+                    <div class="col py-2 judul text-center bg-danger text-white">
+                        <div class="text">TPS Masuk : <b>{{ $jumlah_tps_masuk }}</b></div>
                     </div>
-                    <div class="col text-center">
-                        <span class="mx-auto"> <b>TPS Terverifikasi :</b> {{$jumlah_tps_terverifikai}}</span>
+                    <div class="col py-2 judul text-center bg-primary text-white">
+                        <div class="text">TPS Kosong : <b>{{ $jumlah_kosong }}</b></div>
+                    </div>
+                    <div class="col py-2 judul text-center bg-success text-white"
+                        style="border-top-right-radius: 25px; border-bottom-right-radius: 25px">
+                        <div class="text">TPS Terverifikasi : <b>{{$jumlah_tps_terverifikai}}</b></div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -153,9 +156,9 @@
     <div id="C1-Relawan" class="tabcontent mt-0 px-0">
         <livewire:c1-relawan-kota />
     </div>
-    <div id="C1-Dibatalkan" class="tabcontent mt-0 px-0">
+    {{-- <div id="C1-Dibatalkan" class="tabcontent mt-0 px-0">
         <livewire:c1-dibatalkan />
-    </div>
+    </div> --}}
     <div id="C1-Koreksi" class="tabcontent mt-0 px-0">
         <livewire:c1-koreksi />
     </div>
@@ -166,9 +169,9 @@
     aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="periksaC1VerifikatorLabel">Verifikasi Data C1 TPS</h5>
-                <button type="button" class="btn-close btn-danger text-white" style="width: 50px" data-bs-dismiss="modal" aria-label="Close">X</button>
+            <div class="modal-header" style="padding-right: 3rem">
+                <h3 class="modal-title fw-bold" id="periksaC1VerifikatorLabel">Verifikasi Data C1 TPS</h3>
+                <button type="button" class="btn-close btn-danger text-white mr-5" style="width: 50px" data-bs-dismiss="modal" aria-label="Close">Close</button>
             </div>
             <div class="modal-body">
                 <div class="row" id="container-view-modal">
@@ -185,8 +188,8 @@
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="periksaC1RelawanLabel">Data TPS</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                <h3 class="modal-title" id="periksaC1RelawanLabel">Data TPS</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Close</button>
             </div>
             <div class="modal-body">
                 <div class="row" id="container-view-modal-relawan">
@@ -202,7 +205,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalPeriksaLabel">Persetujuan Koreksi</h5>
+                <h3 class="modal-title" id="modalPeriksaLabel">Persetujuan Koreksi</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

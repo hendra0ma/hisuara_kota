@@ -14,8 +14,8 @@
         }
 
         .police-line {
-            top: 50%;
-            transform: translateY(-50%);
+            top: 515px;
+            /* transform: translateY(-50%); */
             width: 100%;
             background: repeating-linear-gradient(45deg, #f82649, #f82649 10px, #404042 10px, #404042 20px);
             position: absolute;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\District;
 use App\Models\Tps;
 use App\Models\Village;
 use Livewire\Component;
@@ -48,6 +49,7 @@ class C1Koreksi extends Component
         // $data['district'] = District::find($data['list_suara'][0]->district_id);
         if (count($data['list_suara']) > 0) {
             $data['village'] = Village::where ('id', $data['list_suara'][0]->village_id)->first();
+            $data['district'] = District::where ('id', $data['list_suara'][0]->district_id)->first();
         }
         
         return view('livewire.c1-koreksi', $data);

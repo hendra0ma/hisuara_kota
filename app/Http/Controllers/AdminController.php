@@ -89,7 +89,7 @@ class AdminController extends Controller
         $data['saksi_masuk'] = Saksi::count();
         
         $data['tps_masuk'] = Tps::where('setup','terisi')->count();
-        $data['total_tps']   =  Tps::where('setup','belum terisi')->count();;
+        $data['total_tps']   =  Tps::where('setup','belum terisi')->count();
         $data['tps_kosong']  =  $data['total_tps'] - $data['tps_masuk'];
 
 
@@ -245,6 +245,7 @@ class AdminController extends Controller
     public function verifikasi_akun()
     {
         $data['config'] = Config::first();
+        $data['jumlah_admin'] = User::where('role_id', '!=', 8)->where('is_active', '=', '2')->count();
         return view('administrator.verifikasi.verifikasi_akun', $data);
     }
 
@@ -258,6 +259,7 @@ class AdminController extends Controller
     public function admin_terverifikasi()
     {
         $data['config'] = Config::first();
+        $data['jumlah_admin_terverifikasi'] = User::where('role_id', '!=', 8)->where('is_active', '=', '1')->count();
         return view('administrator.verifikasi.admin_terverifikasi', $data);
     }
 

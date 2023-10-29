@@ -1,6 +1,6 @@
-@include('layouts.templateVerifikator.head-village')
+@include('layouts.partials.head')
 @include('layouts.partials.sidebar')
-@include('layouts.templateVerifikator.header')
+@include('layouts.partials.header')
 @yield('content')
 @include('layouts.templateVerifikator.footer')
 @include('layouts.templateVerifikator.footer-scripts')
