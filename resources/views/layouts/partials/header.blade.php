@@ -393,6 +393,9 @@
                                             <div class="col-6">
                                                 <?php $domainKota = RegenciesDomain::join("regencies",'regency_domains.regency_id','=','regencies.id')->where("regency_domains.province_id",$props->id)->get(); ?>
                                                 <div class="row items" style="width: 515px; overflow: scroll; flex-wrap: nowrap">
+                                                    <div class="col-auto">
+                                                        <a class="text-white btn rounded-0 item bg-danger" href="http://pilpres.banten.hisuara.id/index">DASHBOARD {{$props->name}}</a>
+                                                    </div>
                                                     @foreach($domainKota as $dokota)
                                                         <div class="col-auto">    
                                                             <a class="text-white btn rounded-0 item" style="background: #528bff" href="{{$dokota->domain}}">{{$dokota->name}}</a>
