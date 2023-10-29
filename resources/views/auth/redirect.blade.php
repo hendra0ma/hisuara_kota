@@ -78,7 +78,7 @@
                 @elseif (auth()->user()->role_id == 20)
                     window.location.href = "{{ route('huver.index') }}"
                 @elseif (auth()->user()->role_id == 9)
-                    window.location.href = "{{ route('rekapitulator.home') }}"
+                    window.location.href = "{{ route('rekapitulator.index') }}"
                 @elseif (auth()->user()->role_id == 5)
                     window.location.href = "{{ route('checking.index') }}"
                 @elseif (auth()->user()->role_id == 6)
