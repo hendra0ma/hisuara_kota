@@ -597,7 +597,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
                                             const text = "HISUARA"
                                             const $elements = text.split("").map((s) => $(
-                                                `<span style="margin-left:20px" class="my-auto fw-bold">${s}</span>`
+                                                `<span style="margin-left:20px" class="my-auto fw-normal">${s}</span>`
                                             ));
 
                                             $container.html($elements);
