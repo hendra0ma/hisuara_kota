@@ -85,6 +85,10 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
         display: none
     }
 
+    .kecurangan.active-button {
+        background-color: #f82649 !important;
+    }
+
     /* ::-webkit-scrollbar-track {
       background-color: transparent;
     }
@@ -114,8 +118,20 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                     <div class="card-body for-kolapse py-1 pl-5" style="background: #000; padding-right: 2.5rem">
                         <div class="row py-2 justify-content-between" style="gap: 15px">
 
-                            <div class="col-auto">
+                            <div class="col-auto col-hisuara"style="display:none;width:238px;height:54px">
+                                <div class="row my-auto">
+                                  
+                                    <div class="col-md ps-3 mb-0 text-light headerAnimate">
+                                        <h3 class="text-white mb-0 text-center headerPojokan"></h3>
+                                        <h3 class="text-white mb-0 text-center headerPojokanText1" style="display:none"></h3>
+                                        <h3 class="text-white mb-0 text-center headerPojokanText2" style="display:none"> </h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-auto col-pilpres">
                                 <div class="row">
+                                  
                                     <div class="col-md-auto pe-0 my-auto">
                                         <img src="{{asset('')}}storage/{{$config->regencies_logo}}" style="width: 50px" alt="">
                                     </div>
@@ -125,13 +141,123 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         </h3>
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item active text-white" aria-current="page">
+                                            <marquee width="150px"direction="left"scrollamount="3">
                                                 {{ $kota->name }}
+                                            </marquee>
+                                                <!-- KABUPATEN KEPULAUAN SIAU TABULANDANG BIARO -->
                                                 <!-- Kota -->
                                             </li>
                                         </ol>
                                     </div>
                                 </div>
                             </div>
+
+
+                            <script>
+                                function animateHeaderPojokan() {
+                                    $container = $(".headerPojokan");
+                                    const text = "HISUARA"
+                                    const $elements = text.split("").map((s) => $(
+                                        `<span style="text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}</span>`
+                                    ));
+
+                                    $container.html($elements);
+                                    $container.show();
+                                    // $("#gantiBackground").css({
+                                    //     "background-color": "#007bff"
+                                    // }, 1000);
+                                    $elements.forEach(function($el, i) {
+                                        $el
+                                            .css({
+                                                top: -60,
+                                                opacity: 0
+                                            })
+                                            .delay(100 * i)
+                                            .animate({
+                                                top: 0,
+                                                opacity: 1
+                                            }, 200);
+                                    });
+                                    setTimeout(() => {
+                                        $($(".headerPojokan").find('span')).remove();
+                                        animateHeaderPojokanText1()
+                                    }, 2000);
+
+                                }
+
+                                function animateHeaderPojokanText1() {
+                                    $container = $(".headerPojokanText1");
+
+                                    const text = "Vox Populi"
+                                    const $elements = text.split("").map((s) => $(
+                                        `<span style="text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}</span>`
+                                    ));
+
+                                    $container.html($elements);
+                                    $container.show();
+                                    // $("#gantiBackground").css({
+                                    //     "background-color": "#007bff"
+                                    // }, 1000);
+                                    $elements.forEach(function($el, i) {
+                                        $el
+                                            .css({
+                                                top: -60,
+                                                opacity: 0
+                                            })
+                                            .delay(100 * i)
+                                            .animate({
+                                                top: 0,
+                                                opacity: 1
+                                            }, 200);
+                                    });
+                                    setTimeout(() => {
+                                        $($(".headerPojokanText1").find('span')).remove();
+                                        animateHeaderPojokanText2()
+                                    }, 2000);
+                                }
+
+                                function animateHeaderPojokanText2() {
+                                    $container = $(".headerPojokanText2");
+
+                                    const text = "Vox Dei"
+                                    const $elements = text.split("").map((s) => $(
+                                        `<span style="text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}</span>`
+                                    ));
+
+                                    $container.html($elements);
+                                    $container.show();
+                                    // $("#gantiBackground").css({
+                                    //     "background-color": "#007bff"
+                                    // }, 1000);
+                                    $elements.forEach(function($el, i) {
+                                        $el
+                                            .css({
+                                                top: -60,
+                                                opacity: 0
+                                            })
+                                            .delay(100 * i)
+                                            .animate({
+                                                top: 0,
+                                                opacity: 1
+                                            }, 200);
+                                    });
+                                    setTimeout(() => {
+                                        $($(".headerPojokanText2").find('span')).remove();
+                                        $('.col-hisuara').hide()
+                                        $('.col-pilpres').show()
+                                        setTimeout(() => {
+                                            $('.col-hisuara').show()
+                                            $('.col-pilpres').hide()
+
+                                            animateHeaderPojokan()
+                                        }, 1000 * 60);
+                                    }, 2000);
+
+                                }
+                              
+                            </script>
+
+
                             <div class="col-md-auto my-auto">
                                 <div class="row h-100 justify-content-end" style="gap: 10px;">
                                     <div class="col-md-auto px-0">
@@ -166,14 +292,6 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     </div>
 
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="rekapitulasi">
-                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Rekapitulasi">
-                                                <i class="fa-solid fa-folder-closed"></i>
-                                            </span>
-                                        </button>
-                                    </div>
-
-                                    <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="dokumentasi">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Dokumentasi">
                                                 <i class="fa-solid fa-book"></i>
@@ -182,7 +300,16 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     </div>
 
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="kecurangan">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="Featured">
+                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Featured">
+                                                <i class="fa-solid fa-star"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+
+
+                                    <div class="col-md-auto px-0">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white kecurangan" style="background-color: #656064; width: 40px; height: 36px;" data-target="kecurangan">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Kecurangan">
                                                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
                                                     <g>
@@ -222,7 +349,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         <h4 class="mb-0 fw-bold dokumentasi tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
                                             Dokumentasi
                                         </h4>
-                                        <h4 class="mb-0 fw-bold kecurangan tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                        <h4 class="mb-0 fw-bold kecurangan tugel-content" style="color: #f82649; font-size: 16px; display: none;">
                                             Kecurangan
                                         </h4>
                                         <h4 class="mb-0 fw-bold suara tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
@@ -365,12 +492,12 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     <div class="col-md kecurangan tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/verifikator/verifikator_kecurangan" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                                <a href="{{url('')}}/verifikator/verifikator_kecurangan" class="py-1 btn fs-6 w-100 text-white" style="background-color: #f82649; border-radius: 25px 0px 0px 25px;">
                                                     Verifikator Kecurangan
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/hukum/validator_kecurangan" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                                <a href="{{url('')}}/hukum/validator_kecurangan" class="py-1 btn fs-6 w-100 text-white" style="background-color: #f82649; border-radius: 0px 25px 25px 0px;">
                                                     Validator Kecurangan
                                                 </a>
                                             </div>
@@ -666,12 +793,9 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 } else {
                                                     $('.active-button').click()
                                                 }
-                                                setTimeout(() => {
-
-                                                    $('.tugel-content').hide(500);
-                                                    animate();
-
-                                                }, 1000 * 60);
+                                                $('.col-hisuara').show()
+                                                $('.col-pilpres').hide()
+                                                animateHeaderPojokan();
 
                                             }, 5000);
                                         }
@@ -688,12 +812,14 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 } else {
                                                     $('.active-button').click()
                                                 }
-                                                
-                                                setTimeout(() => {
-                                                    $('.tugel-content').hide(500);
-                                                    animate();
-                                                    }, 1500 * 60);
 
+                                                setTimeout(() => {
+                                                    $('.col-hisuara').show()
+                                                    $('.col-pilpres').hide()
+                                                    animateHeaderPojokan();
+                                                 }, 6000);
+
+                                              
 
                                             <?php } else { ?>
                                                 animate();
