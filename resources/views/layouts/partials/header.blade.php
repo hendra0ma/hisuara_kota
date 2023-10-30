@@ -509,6 +509,51 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         </div>
                                     </div>
 
+                                    <script>
+                                        $(document).ready(function() {
+                                            $('.searchbar').on('input', function() {
+                                                const searchText = $(this).val().toLowerCase().trim();
+                                                $('.item').each(function() {
+                                                    const itemText = $(this).text().toLowerCase();
+                                                
+                                                    if (itemText.includes(searchText)) {
+                                                        $(this).parent('.col-auto').show(); // Show the parent column if the item matches the search text
+                                                    } else {
+                                                        $(this).parent('.col-auto').hide(); // Hide the parent column if the item doesn't match
+                                                    }
+                                                });
+                                            });
+                                        });
+
+                                        const slider = document.querySelector('.items');
+                                        let isDown = false;
+                                        let startX;
+                                        let scrollLeft;
+                                                                            
+                                        slider.addEventListener('mousedown', (e) => {
+                                          isDown = true;
+                                          slider.classList.add('active');
+                                          startX = e.pageX - slider.offsetLeft;
+                                          scrollLeft = slider.scrollLeft;
+                                        });
+                                        slider.addEventListener('mouseleave', () => {
+                                          isDown = false;
+                                          slider.classList.remove('active');
+                                        });
+                                        slider.addEventListener('mouseup', () => {
+                                          isDown = false;
+                                          slider.classList.remove('active');
+                                        });
+                                        slider.addEventListener('mousemove', (e) => {
+                                          if(!isDown) return;
+                                          e.preventDefault();
+                                          const x = e.pageX - slider.offsetLeft;
+                                          const walk = (x - startX) * 1; //scroll-fast
+                                          slider.scrollLeft = scrollLeft - walk;
+                                          console.log(walk);
+                                        });
+                                    </script>
+
                                     <div class="col-md text-white support tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md-auto px-1 my-auto">
