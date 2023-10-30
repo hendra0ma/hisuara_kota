@@ -119,12 +119,12 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                         <div class="row py-2 justify-content-between" style="gap: 15px">
 
                             <div class="col-auto col-hisuara"style="display:none;width:238px;height:54px">
-                                <div class="row my-auto">
+                                <div class="row my-auto mx-auto">
                                   
                                     <div class="col-md ps-3 mb-0 text-light headerAnimate">
-                                        <h3 class="text-white mb-0 text-center headerPojokan"></h3>
-                                        <h3 class="text-white mb-0 text-center headerPojokanText1" style="display:none"></h3>
-                                        <h3 class="text-white mb-0 text-center headerPojokanText2" style="display:none"> </h3>
+                                        <h2 class="text-white mb-0 text-center headerPojokan"></h2>
+                                        <h2 class="text-white mb-0 text-center headerPojokanText1" style="display:none"></h2>
+                                        <h2 class="text-white mb-0 text-center headerPojokanText2" style="display:none"> </h2>
                                     </div>
                                 </div>
                             </div>
@@ -246,7 +246,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         $('.col-hisuara').hide()
                                         $('.col-pilpres').show()
                                         setTimeout(() => {
-                                            $('.col-hisuara').show()
+                                            $('.col-hisuara').css('display') = 'flex'
                                             $('.col-pilpres').hide()
 
                                             animateHeaderPojokan()
@@ -300,15 +300,6 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     </div>
 
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="Featured">
-                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Featured">
-                                                <i class="fa-solid fa-star"></i>
-                                            </span>
-                                        </button>
-                                    </div>
-
-
-                                    <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white kecurangan" style="background-color: #656064; width: 40px; height: 36px;" data-target="kecurangan">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Kecurangan">
                                                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -321,6 +312,14 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                         </path>
                                                     </g>
                                                 </svg>
+                                            </span>
+                                        </button>
+                                    </div>
+
+                                    <div class="col-md-auto px-0">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="Featured">
+                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Featured">
+                                                <i class="fa-solid fa-star"></i>
                                             </span>
                                         </button>
                                     </div>
@@ -793,7 +792,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 } else {
                                                     $('.active-button').click()
                                                 }
-                                                $('.col-hisuara').show()
+                                                $('.col-hisuara').css('display', 'flex')
                                                 $('.col-pilpres').hide()
                                                 animateHeaderPojokan();
 
@@ -814,7 +813,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 }
 
                                                 setTimeout(() => {
-                                                    $('.col-hisuara').show()
+                                                    $('.col-hisuara').css('display') = 'flex'
                                                     $('.col-pilpres').hide()
                                                     animateHeaderPojokan();
                                                  }, 6000);
