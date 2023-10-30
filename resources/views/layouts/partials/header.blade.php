@@ -685,7 +685,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 setTimeout(() => {
                                                     $('.tugel-content').hide(500);
                                                     animate();
-                                                    }, 1000 * 60);
+                                                    }, 1500 * 60);
 
 
                                             <?php } else { ?>
