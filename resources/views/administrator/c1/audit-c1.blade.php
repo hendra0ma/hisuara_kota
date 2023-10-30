@@ -81,8 +81,8 @@
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="periksaC1VerifikatorLabel">Audit Data C1</h5>
-                <button type="button" class="btn-close btn-danger text-white" style="width: 50px" data-bs-dismiss="modal" aria-label="Close">X</button>
+                <h3 class="modal-title fw-bold" id="periksaC1VerifikatorLabel">AUDIT DATA C1</h3>
+                <button type="button" class="btn-close btn-danger text-white mr-5" style="width: 50px" data-bs-dismiss="modal" aria-label="Close">Close</button>
             </div>
             <div class="modal-body">
                 <div class="row" id="container-view-modal">
@@ -101,7 +101,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalPeriksaLabel">Persetujuan Koreksi</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-danger text-white mr-5" style="width: 50px" data-bs-dismiss="modal" aria-label="Close">Close</button>
             </div>
             <div class="modal-body">
                 <div class="container">

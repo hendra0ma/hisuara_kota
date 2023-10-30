@@ -170,7 +170,7 @@
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header" style="padding-right: 3rem">
-                <h3 class="modal-title fw-bold" id="periksaC1VerifikatorLabel">Verifikasi Data C1 TPS</h3>
+                <h3 class="modal-title fw-bold" id="periksaC1VerifikatorLabel">VERIFIKASI DATA C1 TPS</h3>
                 <button type="button" class="btn-close btn-danger text-white mr-5" style="width: 50px" data-bs-dismiss="modal" aria-label="Close">Close</button>
             </div>
             <div class="modal-body">
