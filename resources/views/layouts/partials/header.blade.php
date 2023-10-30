@@ -946,8 +946,6 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
                                                 <form action="{{ route('logout') }}" method="post">
                                                     @csrf
-
-
                                                     <button class="dropdown-item" type="submit">
                                                         <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                     </button>
