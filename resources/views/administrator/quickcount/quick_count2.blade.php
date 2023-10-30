@@ -125,7 +125,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                         </div>
 
                         <div class="col-xxl-6">
-                            <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Hasil Perhitungan Suara</div>
+                            <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Hasil Perhitungan Cepat</div>
                             <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Pemilihan Presiden dan Wakil Presiden</div>
                             <div class="text-center title-atas-table fs-5 fw-bold">PROVINSI {{$props->name}}</div>
                             <div class="row mt-3 mx-auto" style="width: 884.5px;">
