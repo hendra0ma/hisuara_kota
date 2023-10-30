@@ -665,12 +665,18 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         </div>
                                     </div>
                                     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+                              
                                     <script>
+
+                                            
+
+
                                         function animate() {
 
                                             $('.judul-pertama').css("z-index", "900");
                                             $container = $("#text-effect");
                                             $('.tugel-content').hide(500);
+                                            
                                             const text = "HISUARA"
                                             const $elements = text.split("").map((s) => $(
                                                 `<span style="margin-left:20px" class="my-auto fw-bold">${s}</span>`
@@ -729,8 +735,12 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             setTimeout(() => {
                                                 $("#text-effect2").html("")
                                                 $("#text-effect2").hide()
-
-                                                $(`.active-button`).click();
+                                               const dataTarget = getCookie('dataTarget');
+                                            if (dataTarget!="") {
+                                                $(`[data-target='${dataTarget}']`).click();
+                                            }else{
+                                                $('.active-button').click()
+                                            }
                                                 setTimeout(() => {
 
                                                     $('.tugel-content').hide(500);
@@ -743,6 +753,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
 
                                         $(function () {
+                                          
                                             animate();
                                         });
 
@@ -956,6 +967,11 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                 $('.tugel-kolaps').on('click', function () {
 
                     let target = $(this).data('target')
+
+                    // $.cookie('dataTarget', `${target}`, { expires: 7, path: '/' });
+
+                   setCookie("dataTarget",target,30);
+
                     // console.log(target)
                     $('.tugel-content').hide()
                     $(`.${target}`).show(200)
@@ -992,6 +1008,9 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                 // $('.tugel-content-menu').removeClass('content-toggled')
                 // $(`.${target}`).toggleClass('content-toggled')
                 // })
+
+
+                
 
             </script>
 
