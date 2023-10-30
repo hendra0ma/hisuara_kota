@@ -206,6 +206,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('rekapitulasi_kecamatan', 'rekapitulasiKecamatan')->name('rekapitulasiKecamatan');
             Route::get('quick_count2', 'quick_count2')->name('quick_count2');
             Route::get('terverifikasi', 'terverifikasi')->name('terverifikasi');
+            Route::get('rekapitulasi', 'Rekapitulasi')->name('Rekapitulasi');
             Route::get('relawan', 'Relawan')->name('Relawan');
             Route::get('relawan_dihapus', 'RelawanDihapus')->name('RelawanDihapus');
             Route::get('data-gugatan', 'data_gugatan')->name('data_gugatan');

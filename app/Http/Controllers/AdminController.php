@@ -1483,6 +1483,36 @@ class AdminController extends Controller
         return view('administrator.realcount.real_count2',$data);
     }
 
+    public function Rekapitulasi()
+    {
+        $data['config'] = Config::first();
+        $config = Config::first();
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->get();
+        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data GROUP by paslon_id ORDER by total DESC'));
+        $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        $data['urutan'] = $paslon_tertinggi;
+        $dpt                              = District::where('regency_id', $this->config->regencies_id)->sum("dpt");
+        $data['paslon'] = Paslon::with('saksi_data')->get();
+        $data['paslon_terverifikasi']     = Paslon::with(['saksi_data' => function ($query) {
+            $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
+                ->whereNull('saksi.pending')
+                ->where('saksi.verification', 1);
+        }])->get();
+        $data['kota'] = Regency::where('id', $config['regencies_id'])->first();
+        $data['tracking'] = ModelsTracking::get();
+        $data['total_incoming_vote']      = SaksiData::sum('voice');
+        $data['realcount']                = $data['total_incoming_vote'] / $dpt * 100;
+        $data['village'] = Village::first();
+        $data['villages'] = Village::get();
+        $data['realcount'] = $data['total_incoming_vote'] / $dpt * 100;
+        $data['kec'] = District::where('regency_id', $data['config']['regencies_id'])->get();
+        $data['kecamatan'] = District::where('regency_id', $config['regencies_id'])->get();
+        $data['district'] = District::first();
+
+        // dd($data['paslon']);
+        return view('administrator.rekapitulasi-perhitungan.rekapitulasi',$data);
+    }
+
 
     public function quick_count2(){
 
