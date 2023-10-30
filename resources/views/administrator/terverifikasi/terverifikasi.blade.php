@@ -124,7 +124,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                         <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Hasil Perhitungan Suara</div>
                         <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Pemilihan Presiden dan Wakil Presiden</div>
                         <div class="text-center title-atas-table fs-5 fw-bold">PROVINSI {{$props->name}}</div>
-                        <div class="row mt-3">
+                        <div class="row mt-3 mx-auto" style="width: 884.5px;">
                             @foreach ($urutan as $urutPaslon)
                             <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
                             <div class="col py-2 judul text-center text-white custom-urutan"

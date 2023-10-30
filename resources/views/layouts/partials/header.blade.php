@@ -367,8 +367,15 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/terverifikasi"
                                                     class="py-1 btn fs-6 w-100 text-white"
-                                                    style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                                    style="background-color: #528bff; border-radius: 0px">
                                                     Terverifikasi
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/rekapitulasi"
+                                                    class="py-1 btn fs-6 w-100 text-white"
+                                                    style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                                    Rekapitulasi
                                                 </a>
                                             </div>
                                         </div>
