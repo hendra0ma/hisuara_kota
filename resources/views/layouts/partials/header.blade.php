@@ -774,7 +774,6 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             </span>
                                         </button>
                                     </div>
-
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white"
                                             style="background-color: #656064; width: 40px; height: 36px;"
