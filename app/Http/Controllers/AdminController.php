@@ -1630,6 +1630,29 @@ class AdminController extends Controller
         return view('administrator.relawan.relawan_dihapus', $data);
     }
 
+    public function lacakSaksi() {
+        $data['config'] = Config::first();
+        $data['jumlah_saksi'] = User::where('role_id', '=', 8)->count();
+        return view('administrator.lacak.lacak_saksi', $data);
+    }
+
+    public function lacakRelawan() {
+        $data['config'] = Config::first();
+        $data['jumlah_relawan'] = User::where('role_id', '=', 14)->count();
+        return view('administrator.lacak.lacak_relawan', $data);
+    }
+
+    public function lacakEnumerator() {
+        $data['config'] = Config::first();
+        $data['jumlah_enumerator'] = User::where('role_id', '=', 8)->count();
+        return view('administrator.lacak.lacak_enumerator', $data);
+    }
+
+    public function lacakAdmin() {
+        $data['config'] = Config::first();
+        $data['jumlah_admin'] = User::where('role_id', '!=', 8)->count();
+        return view('administrator.lacak.lacak_admin', $data);
+    }
 
 
 

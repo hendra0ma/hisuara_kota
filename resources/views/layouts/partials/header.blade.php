@@ -541,6 +541,35 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         </div>
                                     </div>
 
+                                    <div class="col-md lacak tugel-content" style="display: none">
+                                        <div class="row">
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/lacak_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu"
+                                                    style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                                    Saksi
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/lacak_relawan" class="py-1 btn fs-6 w-100 text-white glowy-menu"
+                                                    style="background-color: #528bff; border-radius: 0;">
+                                                    Relawan
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/lacak_enumerator" class="py-1 btn fs-6 w-100 text-white glowy-menu"
+                                                    style="background-color: #528bff; border-radius: 0;">
+                                                    Enumerator
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/lacak_admin" class="py-1 btn fs-6 w-100 text-white glowy-menu"
+                                                    style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                                    Admin
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md text-white tabulasi tugel-content" style="display:none">
                                         <div class="row">
                                             <div class="col py-2 judul text-center bg-secondary text-white" style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
@@ -931,12 +960,13 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 <i class="fa-solid fa-gear"></i>
                                             </span>
                                         </button>
-                                    </div>
-                                    <div class="col-md-auto px-0" style="color: #212529 !important">
-                                        <a class="w-100 mx-auto btn nav-link theme-layout nav-link-bg layout-setting px-3 text-white" onclick="darktheme()" style="background-color: #656064; width: 40px; height: 36px; margin: 0px; font-size: 16px" data-target="">
-                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Dark Theme"><i class="fe fe-moon"></i></span>
-                                            <span class="light-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Light Theme"><i class="fe fe-sun"></i></span>
-                                        </a>
+                                    </div><div class="col-md-auto px-0">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
+                                            style="background-color: #656064; width: 40px; height: 36px;" data-target="lacak">
+                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Lacak">
+                                                <i class="fa-solid fa-location-dot"></i>
+                                            </span>
+                                        </button>
                                     </div>
                                     <div class="col-md-auto px-0">
                                         <div class="dropdown d-none d-md-flex profile-1">
