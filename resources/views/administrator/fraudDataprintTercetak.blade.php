@@ -86,7 +86,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 </h4>
 <hr style="border: 1px solid">
 
-<livewire:fraud-data-print>
+<livewire:fraud-data-print-tercetak>
 
 
 <div id="fotoKecuranganterverifikasi" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">

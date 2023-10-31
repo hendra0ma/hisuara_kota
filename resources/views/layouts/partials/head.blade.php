@@ -377,6 +377,30 @@
         .parent-link a:hover {
             background: #6259ca;
         }
+
+        .parent-link .btn-fdp.active {
+            background: #f82649;
+        }
+
+        .parent-link .btn-fdp {
+            background: rgba(248, 38, 73, 0.65);
+        }
+
+        .parent-link .btn-fdp:hover {
+            background: #f82649;
+        }
+
+        .parent-link .btn-ver.active {
+            background: #ff4f4e;
+        }
+
+        .parent-link .btn-ver {
+            background: rgba(248, 38, 73, 0.65)
+        }
+
+        .parent-link .btn-ver:hover {
+            background: #ff4f4e;
+        }
     </style>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script>

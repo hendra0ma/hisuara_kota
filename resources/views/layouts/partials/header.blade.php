@@ -378,7 +378,9 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     <div class="col-md petugas tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/verifikasi_saksi" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                                <a href="{{url('')}}/administrator/verifikasi_saksi" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 25px 0px 0px 25px; -webkit-box-shadow:0px 0px 100px 30px rgba(82,140,255,1);
+-moz-box-shadow: 0px 0px 100px 30px rgba(82,140,255,1);
+box-shadow: 0px 0px 100px 30px rgba(82,140,255,1);">
                                                     Saksi
                                                 </a>
                                             </div>

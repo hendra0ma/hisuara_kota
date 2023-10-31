@@ -31,36 +31,13 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
         </ol> <!-- This Dummy Data -->
     </div>
     <div class="col-md">
-        <div class="row">
-            <div class="col-12 mb-2">
-                <div class="row">
-                    <div class="col parent-link">
-                        <a class="btn text-white w-100 py-3 c1koreksi tablink" onclick="openPage('C1-Koreksi', this, '#6259ca')"  id="defaultOpen">C1 Koreksi (Verifikator)</a>
-                    </div>
-                    <div class="col parent-link">
-                        <a class="btn text-white w-100 py-3 c1teraudit tablink" onclick="openPage('C1-Dibatalkan', this, '#6259ca')">C1 Dibatalkan (Auditor)</a>
-                    </div>
-                </div>
+        <div class="row mt-2">
+            <div class="col parent-link">
+                <a class="btn text-white w-100 py-3 c1koreksi tablink" onclick="openPage('C1-Koreksi', this, '#6259ca')"  id="defaultOpen">C1 Koreksi (Verifikator)</a>
             </div>
-            
-            {{-- <div class="col-md-12 text-white mt-3">
-                <div class="row">
-                    <div class="col py-2 judul text-center bg-secondary text-white"
-                        style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
-                        <div class="text">Total TPS : <b>{{ $total_tps }}</b></div>
-                    </div>
-                    <div class="col py-2 judul text-center bg-danger text-white">
-                        <div class="text">TPS Masuk : <b>{{ $jumlah_tps_masuk }}</b></div>
-                    </div>
-                    <div class="col py-2 judul text-center bg-primary text-white">
-                        <div class="text">TPS Kosong : <b>{{ $jumlah_kosong }}</b></div>
-                    </div>
-                    <div class="col py-2 judul text-center bg-success text-white"
-                        style="border-top-right-radius: 25px; border-bottom-right-radius: 25px">
-                        <div class="text">TPS Terverifikasi : <b>{{$jumlah_tps_terverifikai}}</b></div>
-                    </div>
-                </div>
-            </div> --}}
+            <div class="col parent-link">
+                <a class="btn text-white w-100 py-3 c1teraudit tablink" onclick="openPage('C1-Dibatalkan', this, '#6259ca')">C1 Dibatalkan (Auditor)</a>
+            </div>
         </div>
     </div>
 
@@ -163,10 +140,10 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
     }
 </style>
 
-<div id="C1-Koreksi" class="tabcontent mt-0 px-0">
+<div id="C1-Koreksi" class="tabcontent mt-0 pt-0 px-0">
     <livewire:verifikasi-koreksi>
 </div>
-<div id="C1-Dibatalkan" class="tabcontent mt-0 px-0">
+<div id="C1-Dibatalkan" class="tabcontent mt-0 pt-0 px-0">
     <livewire:c1-dibatalkan />
 </div>
 

@@ -1132,7 +1132,7 @@ class AdminController extends Controller
             ->get();
         $data['print'] = QrCode::where('print', 1)->get();
         $data['title']  = 'Jumlah Data Kecurangan Masuk : ' . count($data['list_suara']);
-        $data['title2']  = 'Election Fraud Data Print';
+        // $data['title2']  = 'Election Fraud Data Print';
         return view('administrator.fraudDataprint', $data);
     }
 
@@ -1151,15 +1151,16 @@ class AdminController extends Controller
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->get();
         $data['title']  = 'Jumlah Data Kecurangan Tercetak : ' . count($data['list_suara']);
-        $data['title2']  = 'Election Fraud Data Print';
+        // $data['title2']  = 'Election Fraud Data Print';
         $data['print'] = QrCode::where('print', 1)->get();
-        return view('administrator.fraudDataprint', $data);
+        return view('administrator.fraudDataprintTercetak', $data);
     }
     public function FraudDataReport()
     {
         $data['index_tsm']    = ModelsListkecurangan::get();
         $data['config'] = Config::first();
         $data['qrcode'] = QrCode::join('surat_pernyataan', 'surat_pernyataan.qrcode_hukum_id', '=', 'qrcode_hukum.id')->paginate(15);
+        $data['jumlah_barcode'] = QrCode::join('surat_pernyataan', 'surat_pernyataan.qrcode_hukum_id', '=', 'qrcode_hukum.id')->select('qrcode_hukum.*')->count();
 
         return view('administrator.fraudDatareport', $data);
     }

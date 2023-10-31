@@ -14,7 +14,7 @@
         @foreach($list_suara as $ls)
         <div class="col-md-6 col-xl-4">
             <div class="card">
-                <div class="card-header bg-primary">
+                <div class="card-header" style="background-color: #ff4f4e">
                     <div class="card-title text-white">ARSIP LAPORAN KECURANGAN SAKSI</div>
                 </div>
                 <div class="card-body">
@@ -49,8 +49,9 @@
                             <div class="row mb-2">
                                 <div class="col-md fw-bold">
                                     <a href="fotomasalah"
-                                        class="btn btn-secondary w-90 fotoKecuranganterverifikasi mt-2 rounded-0" id="Cek"
+                                        class="btn w-90 fotoKecuranganterverifikasi mt-2 rounded-0 text-white" id="Cek"
                                         data-bs-toggle="modal" id="" data-bs-target="#fotoKecuranganterverifikasi"
+                                        style="background-color: #ff4f4e"
                                         data-id="{{$ls->tps_id}}">
                                         Arsip Kecurangan</a>
                                 </div>
