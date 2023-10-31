@@ -89,6 +89,10 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
         background-color: #f82649 !important;
     }
 
+    .featured.active-button {
+        background-color: #f82649 !important;
+    }
+
     /* ::-webkit-scrollbar-track {
       background-color: transparent;
     }
@@ -284,9 +288,9 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     </div>
 
                                     <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="Featured">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white featured" style="background-color: #656064; width: 40px; height: 36px;" data-target="featured">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Featured">
-                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-print"></i>
                                             </span>
                                         </button>
                                     </div>
@@ -443,11 +447,6 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{route('superadmin.analisa_dpt_kpu')}}" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0;">
-                                                    Realisasi DPT
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{route('superadmin.rdata')}}" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                                     Riwayat
                                                 </a>
@@ -465,6 +464,31 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/hukum/validator_kecurangan" class="py-1 btn fs-6 w-100 text-white" style="background-color: #f82649; border-radius: 0px 25px 25px 0px;">
                                                     Validator Kecurangan
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md featured tugel-content" style="display: none">
+                                        <div class="row">
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/fraud-data-print" class="py-1 btn fs-6 w-100 text-white" style="background-color: #f82649; border-radius: 25px 0px 0px 25px;">
+                                                    Cetak Bukti Kecurangan
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/fraud-data-report" class="py-1 btn fs-6 w-100 text-white" style="background-color: #f82649; border-radius: 0px;">
+                                                    Cetak Barkode Kecurangan
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/index-tsm" class="py-1 btn fs-6 w-100 text-white" style="background-color: #f82649; border-radius: 0px;">
+                                                    Cetak Jenis Kecurangan
+                                                </a>
+                                            </div>
+                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{route('superadmin.analisa_dpt_kpu')}}" class="py-1 btn fs-6 w-100 text-white" style="background-color: #f82649; border-radius: 0px 25px 25px 0px;;">
+                                                    Cetak Realisasi DPT
                                                 </a>
                                             </div>
                                         </div>

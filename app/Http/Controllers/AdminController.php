@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Buktifoto as ModelsBuktifoto;
 use App\Events\CommanderEvent;
 use App\Models\Config;
@@ -87,9 +88,9 @@ class AdminController extends Controller
             }
         }
         $data['saksi_masuk'] = Saksi::count();
-        
-        $data['tps_masuk'] = Tps::where('setup','terisi')->count();
-        $data['total_tps']   =  Tps::where('setup','belum terisi')->count();
+
+        $data['tps_masuk'] = Tps::where('setup', 'terisi')->count();
+        $data['total_tps']   =  Tps::where('setup', 'belum terisi')->count();
         $data['tps_kosong']  =  $data['total_tps'] - $data['tps_masuk'];
 
 
@@ -145,37 +146,37 @@ class AdminController extends Controller
     }
 
 
-  public function rdata()
+    public function rdata()
     {
         $data['visitor'] = ModelsTracking::count();
         $data['user_baru'] = User::orderBy('created_at')->count();
         $data['saksi_masuk'] = Saksi::count();
-        $data['saksi_teregistrasi']=User::where('role_id',8)->count();
-        $data['auditor_teregistrasi']=User::where('role_id',3)->count();
-        $data['verifikator_teregistrasi']=User::where('role_id',2)->count();
-        $data['validator_teregistrasi']=User::where('role_id',10)->count();
-        $data['checking_teregistrasi']=User::where('role_id',5)->count();
-        $data['hunter_teregistrasi']=User::where('role_id',6)->count();
-        $data['hukum_teregistrasi']=User::where('role_id',7)->count();
-        $data['huver_teregistrasi']=User::where('role_id',20)->count();
-        $data['saksi_terblokir']=User::where('role_id',0)->count();
-        $data['auditor_terblokir']=User::where('role_id',0)->count();
-        $data['verifikator_terblokir']=User::where('role_id',0)->count();
-        $data['auditor_terblokir']=User::where('role_id',0)->count();
-        $data['validator_terblokir']=User::where('role_id',0)->count();
-        $data['checking_terblokir']=User::where('role_id',0)->count();
-        $data['hunter_terblokir']=User::where('role_id',0)->count();
-        $data['hukum_terblokir']=User::where('role_id',0)->count();
-        $data['huver_terblokir']=User::where('role_id',0)->count();
-        $data['saksi_baru'] = User::where('role_id',8)->limit(12)->orderBy('created_at')->get();
-        $data['admin_baru'] =  User::where('role_id','!=',8)->limit(12)->orderBy('created_at')->get();
+        $data['saksi_teregistrasi'] = User::where('role_id', 8)->count();
+        $data['auditor_teregistrasi'] = User::where('role_id', 3)->count();
+        $data['verifikator_teregistrasi'] = User::where('role_id', 2)->count();
+        $data['validator_teregistrasi'] = User::where('role_id', 10)->count();
+        $data['checking_teregistrasi'] = User::where('role_id', 5)->count();
+        $data['hunter_teregistrasi'] = User::where('role_id', 6)->count();
+        $data['hukum_teregistrasi'] = User::where('role_id', 7)->count();
+        $data['huver_teregistrasi'] = User::where('role_id', 20)->count();
+        $data['saksi_terblokir'] = User::where('role_id', 0)->count();
+        $data['auditor_terblokir'] = User::where('role_id', 0)->count();
+        $data['verifikator_terblokir'] = User::where('role_id', 0)->count();
+        $data['auditor_terblokir'] = User::where('role_id', 0)->count();
+        $data['validator_terblokir'] = User::where('role_id', 0)->count();
+        $data['checking_terblokir'] = User::where('role_id', 0)->count();
+        $data['hunter_terblokir'] = User::where('role_id', 0)->count();
+        $data['hukum_terblokir'] = User::where('role_id', 0)->count();
+        $data['huver_terblokir'] = User::where('role_id', 0)->count();
+        $data['saksi_baru'] = User::where('role_id', 8)->limit(12)->orderBy('created_at')->get();
+        $data['admin_baru'] =  User::where('role_id', '!=', 8)->limit(12)->orderBy('created_at')->get();
         $data['data_relawan'] = Relawan::count();
-        $data['data_overlimit'] = Saksi::where('overlimit','!=',0)->count();
-        $data['bukti_foto_kecurangan'] =ModelsBuktifoto::count();
+        $data['data_overlimit'] = Saksi::where('overlimit', '!=', 0)->count();
+        $data['bukti_foto_kecurangan'] = ModelsBuktifoto::count();
         $data['bukti_video_kecurangan'] = Buktividio::count();
         $data['tps_koreksi'] = Saksi::whereNotNull('koreksi')->count();
         $data['config'] = Config::first();
-        return view('administrator.r_data_recorder',$data);
+        return view('administrator.r_data_recorder', $data);
     }
 
 
@@ -287,7 +288,7 @@ class AdminController extends Controller
     public function EnumeratorTeregistrasi()
     {
         $data['config'] = Config::first();
-        $data['jumlah_saksi_teregistrasi'] = User::where('role_id',8)->where('is_active', '=', 1)->count();
+        $data['jumlah_saksi_teregistrasi'] = User::where('role_id', 8)->where('is_active', '=', 1)->count();
         return view('administrator.enumerator.enumerator_teregistrasi', $data);
     }
 
@@ -301,7 +302,7 @@ class AdminController extends Controller
     public function EnumeratorTidakHadir()
     {
         $data['config'] = Config::first();
-        $data['jumlah_tidak_hadir'] = User::where('role_id',8)->where('absen','tidak hadir')->where('is_active', '=', 1)->count();
+        $data['jumlah_tidak_hadir'] = User::where('role_id', 8)->where('absen', 'tidak hadir')->where('is_active', '=', 1)->count();
         return view('administrator.enumerator.enumerator_tidak_hadir', $data);
     }
 
@@ -317,15 +318,14 @@ class AdminController extends Controller
         $data['config'] = Config::first();
         $data['saksi_data'] = Saksi::join('users', 'users.tps_id', '=', 'saksi.tps_id')->where('koreksi', 1)->get();
         // $data['village'] = Village::where('id', $data['saksi_data'][0]->village_id)->first();
-        $data['total_tps']   =  Tps::where('setup','belum terisi')->count();
+        $data['total_tps']   =  Tps::where('setup', 'belum terisi')->count();
         $data['tracking'] = ModelsTracking::get();
         $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->count();
         $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
         if (count($data['saksi_data']) > 0) {
-            $data['village'] = Village::where ('id', $data['saksi_data'][0]->village_id)->first();
+            $data['village'] = Village::where('id', $data['saksi_data'][0]->village_id)->first();
         }
         return view('administrator.verifikasi.verifikasi_koreksi', $data);
-
     }
 
     public function get_koreksi_saksi(Request $request)
@@ -355,9 +355,9 @@ class AdminController extends Controller
                 'status' => 'selesai',
             ]);
         }
-           Saksi::where('id',Crypt::decrypt($id))->update([
-               'verification' => 1
-            ]);
+        Saksi::where('id', Crypt::decrypt($id))->update([
+            'verification' => 1
+        ]);
         return redirect('administrator/verifikasi_koreksi');
     }
 
@@ -506,15 +506,13 @@ class AdminController extends Controller
     {
         $data['user'] = User::find($request['id'])->history()->get();
         $data['config'] = Config::first();
-        $data['profiles'] = User::where('id',$request['id'])->get();
+        $data['profiles'] = User::where('id', $request['id'])->get();
 
         if (count($data['user']) == 0) {
             return view('administrator.ajax.result_eror');
         } else {
             return view('administrator.ajax.get_history_user', $data);
         }
-
-
     }
 
     public function action_verifikasi(Request $request, $id)
@@ -686,23 +684,23 @@ class AdminController extends Controller
 
     public function perhitungan_kelurahan($id)
     {
-         $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->get();
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->get();
 
         $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id, SUM(voice) as total FROM saksi_data GROUP by paslon_id ORDER by total DESC LIMIT 1'));
 
         $data['paslon_tertinggi'] = Paslon::where('id', (string)$paslon_tertinggi['0']->paslon_id)->first();
 
-          $data['paslon'] = Paslon::with(['saksi_data' => function ($query) use ($id) {
+        $data['paslon'] = Paslon::with(['saksi_data' => function ($query) use ($id) {
             $query
                 ->join('saksi', 'saksi_data.saksi_id', 'saksi.id', 'district_id')
                 ->whereNull('saksi.pending')
                 ->where('saksi.village_id', (string)decrypt($id));
         }])->get();
-         $data['paslon_terverifikasi']     = Paslon::with(['saksi_data' => function ($query) use ($id) {
+        $data['paslon_terverifikasi']     = Paslon::with(['saksi_data' => function ($query) use ($id) {
             $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
                 ->whereNull('saksi.pending')
                 ->where('saksi.verification', 1)
-            ->where('saksi.village_id', (string)decrypt($id));
+                ->where('saksi.village_id', (string)decrypt($id));
         }])->get();
         // dd($data['paslon_terverifikasi']);
 
@@ -760,7 +758,7 @@ class AdminController extends Controller
         ]);
         return response()->json(['status' => "berhasil"], 200);
     }
-       public function solution($id)
+    public function solution($id)
     {
         $id = (string)decrypt($id);
         $data['solution'] = SolutionFraud::get();
@@ -776,47 +774,46 @@ class AdminController extends Controller
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->get();
 
-            $cek = 1;
-            $arrayCek = [];
+        $cek = 1;
+        $arrayCek = [];
 
-        foreach($data['data_kecurangan']  as $dat){
-            array_push($arrayCek,$dat->tps_id);
+        foreach ($data['data_kecurangan']  as $dat) {
+            array_push($arrayCek, $dat->tps_id);
         }
 
         $arrayCek = array_unique($arrayCek);
 
-        foreach($data['data_kecurangan'] as $key => $value){
-          if(array_key_exists($key,$arrayCek)){
-
-            }else{
+        foreach ($data['data_kecurangan'] as $key => $value) {
+            if (array_key_exists($key, $arrayCek)) {
+            } else {
                 unset($data['data_kecurangan'][$key]);
             }
         }
 
-   $data['index_tsm']    = ModelsListkecurangan::join('solution_frauds','solution_frauds.id','=','list_kecurangan.solution_fraud_id')->get();
+        $data['index_tsm']    = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
 
-   $data['title'] = $data['titel']['solution'];
+        $data['title'] = $data['titel']['solution'];
         return view('administrator.bapilu.solusi_kecurangan', $data);
     }
-  public function mainPermission(Request $request)
+    public function mainPermission(Request $request)
     {
 
-        if($request->kode == null || $request->kode != "09122020"){
-            return redirect()->back()->with(['error'=>"Gagal Meminta Izin"]);
+        if ($request->kode == null || $request->kode != "09122020") {
+            return redirect()->back()->with(['error' => "Gagal Meminta Izin"]);
         }
 
         event(new CommanderEvent([
-            'izin'=>$request->izin,
-            'jenis'=>$request->jenis,
-            'order'=>Auth::user()->id,
-            ]));
+            'izin' => $request->izin,
+            'jenis' => $request->jenis,
+            'order' => Auth::user()->id,
+        ]));
         NotificationCommander::create([
             'order' => Auth::user()->id,
-            'jenis'=>$request->jenis,
-            'setting'=>$request->izin,
-            'redirect'=>$request->izin,
+            'jenis' => $request->jenis,
+            'setting' => $request->izin,
+            'redirect' => $request->izin,
         ]);
-        return redirect()->back()->with(['status'=>"berhasil"]);
+        return redirect()->back()->with(['status' => "berhasil"]);
     }
     public function admin_verifikator_index($id)
     {
@@ -867,7 +864,7 @@ class AdminController extends Controller
         $data['id'] = Crypt::decrypt($id);
         return view('administrator.rekapitulasi.rekapitulator', $data);
     }
-   
+
 
     public function absensi_hadir()
     {
@@ -887,7 +884,7 @@ class AdminController extends Controller
         $data['config'] = Config::first();
         $config = Config::first();
         $data['kota']      = Regency::where('id', $config->regencies_id)->first();
-        $data['jumlah_saksi_teregistrasi'] = User::where('role_id',8)->where('is_active', '=', 1)->count();
+        $data['jumlah_saksi_teregistrasi'] = User::where('role_id', 8)->where('is_active', '=', 1)->count();
 
         // $data['title'] = 'Saksi Teregistrasi (' . $data['jumlah'] . ')';
         $data['title'] = 'Saksi Teregistrasi';
@@ -895,12 +892,12 @@ class AdminController extends Controller
         return view("administrator.super_feature.absenindex", $data);
     }
 
-       public function absensi_tidak()
+    public function absensi_tidak()
     {
         $data['config'] = Config::first();
         $config = Config::first();
         $data['kota']      = Regency::where('id', $config->regencies_id)->first();
-        $data['jumlah_tidak_hadir'] = User::where('role_id',8)->where('absen','tidak hadir')->where('is_active', '=', 1)->count();
+        $data['jumlah_tidak_hadir'] = User::where('role_id', 8)->where('absen', 'tidak hadir')->where('is_active', '=', 1)->count();
 
         // $data['title'] = 'Saksi Absen (' . $data['jumlah'] . ')';
         $data['title'] = 'Saksi Absen';
@@ -924,7 +921,7 @@ class AdminController extends Controller
     }
     public function index_tsm()
     {
-        $data['index_tsm']    = ModelsListkecurangan::join('solution_frauds','solution_frauds.id','=','list_kecurangan.solution_fraud_id')->get();
+        $data['index_tsm']    = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
         $data['terverifikasi'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->get();
         $data['ditolak'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'ditolak')->get();
         $data['data_masuk'] = Saksi::where('kecurangan', 'yes')->get();
@@ -934,11 +931,10 @@ class AdminController extends Controller
     public function print_index_tsm()
     {
         $data['index_tsm']    = ModelsListkecurangan::get();
-           $config = Config::first();
+        $config = Config::first();
         $data['config'] = $config;
         $data['kota']      = Regency::where('id', $config->regencies_id)->first();
         return view('administrator.hukum.print_index_tsm', $data);
-
     }
     public function luar_negri()
     {
@@ -953,7 +949,7 @@ class AdminController extends Controller
         $data['country'] = Country::get();
         $data['paslon_can'] = Paslon::get();
         $data['luarnegri']  = Country::join('saksi', 'saksi.tps_id', '=', 'country.id')->get();
-        return view("administrator.luar_negri.index",$data);
+        return view("administrator.luar_negri.index", $data);
     }
 
     public function action_luar_negri(Request $request)
@@ -978,23 +974,22 @@ class AdminController extends Controller
                 'district_id' => 00000,
                 'village_id' =>  00000,
                 'regency_id' => 00000,
-                'voice' =>  $request['paslon'.$i.''],
+                'voice' =>  $request['paslon' . $i . ''],
                 'saksi_id' => $ide,
-           ]);
+            ]);
         }
 
         return redirect('/administrator/luar_negri');
-
     }
 
     public function laporanBapilu()
     {
-        $data['index_tsm']    = ModelsListkecurangan::join('solution_frauds','solution_frauds.id','=','list_kecurangan.solution_fraud_id')->get();
+        $data['index_tsm']    = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
 
         $data['config'] = Config::first();
         $data['kota'] = Regency::where('id', $data['config']->regencies_id)->first();
-        $data['qrcode'] = QrCode::join('surat_pernyataan','surat_pernyataan.qrcode_hukum_id','=','qrcode_hukum.id')->get();
-         $data['list_suara']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
+        $data['qrcode'] = QrCode::join('surat_pernyataan', 'surat_pernyataan.qrcode_hukum_id', '=', 'qrcode_hukum.id')->get();
+        $data['list_suara']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
             ->join('users', 'users.tps_id', '=', 'tps.id')
             ->where('saksi.kecurangan', 'yes')
             ->where('saksi.status_kecurangan', 'terverifikasi')
@@ -1006,10 +1001,10 @@ class AdminController extends Controller
     }
     public function data_gugatan()
     {
-        $data['index_tsm']    = ModelsListkecurangan::join('solution_frauds','solution_frauds.id','=','list_kecurangan.solution_fraud_id')->get();
+        $data['index_tsm']    = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
         $data['config'] = Config::first();
         $data['kota'] = Regency::where('id', $data['config']->regencies_id)->first();
-        $data['qrcode'] = QrCode::join('surat_pernyataan','surat_pernyataan.qrcode_hukum_id','=','qrcode_hukum.id')->limit(8)->get();
+        $data['qrcode'] = QrCode::join('surat_pernyataan', 'surat_pernyataan.qrcode_hukum_id', '=', 'qrcode_hukum.id')->limit(8)->get();
         $data['list_suara']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
             ->join('users', 'users.tps_id', '=', 'tps.id')
             ->where('saksi.kecurangan', 'yes')
@@ -1053,7 +1048,7 @@ class AdminController extends Controller
         }
         $data['paslon'] = Paslon::get();
         $data['kecamatan'] = District::where('regency_id', $data['config']['regencies_id'])->get();
-        return view('administrator.rekapitulasi.kota',$data);
+        return view('administrator.rekapitulasi.kota', $data);
     }
     //print
     public function rekapitulator_kota_print()
@@ -1063,30 +1058,31 @@ class AdminController extends Controller
         $data['kotas'] = Regency::where('id', $data['config']['regencies_id'])->first();
         $data['paslon'] = Paslon::get();
         $data['kecamatan'] = District::where('regency_id', $data['config']['regencies_id'])->get();
-        return view('administrator.rekapitulasi.print_kota',$data);
+        return view('administrator.rekapitulasi.print_kota', $data);
     }
 
-    public function rekapitulasiKelurahan(){
-       $config = Config::first();
+    public function rekapitulasiKelurahan()
+    {
+        $config = Config::first();
         $rekapitulator = ModelsRekapitulator::where('regency_id', $config->regencies_id)->get();
         if (count($rekapitulator) == 0) {
             $district = Village::where('regency_id', $config->regencies_id)->get();
-            
+
             $paslon   = Paslon::get();
             foreach ($paslon as $psl) {
                 foreach ($district as $ds) {
-                    $dsc = District::where('id',$ds->district_id)->first();
+                    $dsc = District::where('id', $ds->district_id)->first();
                     $rekapitulator_form =  ModelsRekapitulator::create([
                         'village_id' => $ds['id'],
-                        'district_id' =>$dsc->id,
+                        'district_id' => $dsc->id,
                         'paslon_id' => $psl['id'],
-                        "regency_id"=>$config->regencies_id
+                        "regency_id" => $config->regencies_id
                     ]);
                 }
             }
         }
         $data['config'] = $config;
-        $data['kecamatan'] = Village::where('district_id','like','%'.$config->regencies_id."%")->get();
+        $data['kecamatan'] = Village::where('district_id', 'like', '%' . $config->regencies_id . "%")->get();
         // $data['kec'] = District::where('id', Crypt::decrypt($id))->first();
 
         // $data['rekapitulator'] = Village::join('rekapitulator', 'villages.id', '=', 'rekapitulator.village_id')
@@ -1094,11 +1090,12 @@ class AdminController extends Controller
         // ->get();
         $data['suara'] = Paslon::get();
         // $data['id'] = Crypt::decrypt($id);
-        
-        return view('administrator.rekapitulasi.rekapitulasi_kelurahan',$data);
+
+        return view('administrator.rekapitulasi.rekapitulasi_kelurahan', $data);
     }
 
-    public function rekapitulasiKecamatan(){
+    public function rekapitulasiKecamatan()
+    {
         $data['config'] = Config::first();
 
         $rekapitulator = ModelsRekapitulator::where('regency_id', $data['config']['regencies_id'])->get();
@@ -1119,87 +1116,85 @@ class AdminController extends Controller
         }
         $data['paslon'] = Paslon::get();
         $data['kecamatan'] = District::where('regency_id', $data['config']['regencies_id'])->get();
-        return view('administrator.rekapitulasi.rekapitulasi_kecamatan',$data);
+        return view('administrator.rekapitulasi.rekapitulasi_kecamatan', $data);
     }
 
     public function fraudDataPrint()
     {
         $data['config'] = Config::first();
-       $data['index_tsm']  = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
-       $data['qrcode'] = QrCode::get();
-          $data['list_suara']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
+        $data['index_tsm']  = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
+        $data['qrcode'] = QrCode::get();
+        $data['list_suara']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
             ->join('users', 'users.tps_id', '=', 'tps.id')
             ->where('saksi.kecurangan', 'yes')
             ->where('saksi.status_kecurangan', 'terverifikasi')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->get();
-      $data['print'] = QrCode::where('print',1)->get();
-        $data['title']  ='Election Fraud Data Print (EFDP)';
+        $data['print'] = QrCode::where('print', 1)->get();
+        $data['title']  = 'Jumlah Data Kecurangan Masuk : ' . count($data['list_suara']);
         $data['title2']  = 'Election Fraud Data Print';
-       return view('administrator.fraudDataprint', $data);
+        return view('administrator.fraudDataprint', $data);
     }
 
     public function fraudDataPrint_tercetak()
     {
         $data['config'] = Config::first();
-       $data['index_tsm']  = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
-       $data['qrcode'] = QrCode::get();
-          $data['list_suara']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
+        $data['index_tsm']  = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
+        $data['qrcode'] = QrCode::get();
+        $data['list_suara']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
             ->join('users', 'users.tps_id', '=', 'tps.id')
-             ->join('qrcode_hukum','qrcode_hukum.tps_id','=','users.tps_id')
+            ->join('qrcode_hukum', 'qrcode_hukum.tps_id', '=', 'users.tps_id')
             ->where('saksi.kecurangan', 'yes')
             ->where('saksi.status_kecurangan', 'terverifikasi')
 
-            ->where('print',1)
+            ->where('print', 1)
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->get();
-            $data['title']  ='Election Fraud Data Print (EFDP)';
-            $data['title2']  = 'Election Fraud Data Print';
-      $data['print'] = QrCode::where('print',1)->get();
-       return view('administrator.fraudDataprint', $data);
+        $data['title']  = 'Jumlah Data Kecurangan Tercetak : ' . count($data['list_suara']);
+        $data['title2']  = 'Election Fraud Data Print';
+        $data['print'] = QrCode::where('print', 1)->get();
+        return view('administrator.fraudDataprint', $data);
     }
     public function FraudDataReport()
     {
         $data['index_tsm']    = ModelsListkecurangan::get();
-       $data['config'] = Config::first();
-        $data['qrcode'] = QrCode::join('surat_pernyataan','surat_pernyataan.qrcode_hukum_id','=','qrcode_hukum.id')->paginate(15);
+        $data['config'] = Config::first();
+        $data['qrcode'] = QrCode::join('surat_pernyataan', 'surat_pernyataan.qrcode_hukum_id', '=', 'qrcode_hukum.id')->paginate(15);
 
         return view('administrator.fraudDatareport', $data);
     }
 
-      public function print_qr_code()
+    public function print_qr_code()
     {
         $data['qrcode'] = QrCode::get();
         $config = Config::first();
         $data['config'] = $config;
-        $data['kota']      = Regency::where('id',$config->regencies_id)->first();
+        $data['kota']      = Regency::where('id', $config->regencies_id)->first();
         return view('administrator.printQr', $data);
     }
 
     public function getKecuranganTerverifikasi(Request $request)
     {
-         $data['foto_kecurangan'] = Buktifoto::where('tps_id', $request['id'])->get();
+        $data['foto_kecurangan'] = Buktifoto::where('tps_id', $request['id'])->get();
         $data['vidio_kecurangan'] = Buktividio::where('tps_id', $request['id'])->first();
-        $data['list_kecurangan']     = Bukti_deskripsi_curang::
-        join('list_kecurangan','list_kecurangan.id','=','bukti_deskripsi_curang.list_kecurangan_id')
-        ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
-        ->where('bukti_deskripsi_curang.tps_id', $request['id'])
-        ->get();
-        $data['pelanggaran_umum']    = ModelsListkecurangan::
-        join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
-        ->where('list_kecurangan.jenis', 0)->get();
+        $data['list_kecurangan']     = Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+            ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
+            ->where('bukti_deskripsi_curang.tps_id', $request['id'])
+            ->get();
+        $data['pelanggaran_umum']    = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
+            ->where('list_kecurangan.jenis', 0)->get();
         $data['pelanggaran_petugas'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
-        ->where('list_kecurangan.jenis', 1)->get();
+            ->where('list_kecurangan.jenis', 1)->get();
         $data['tps'] = Tps::where('id', $request['id'])->first();
         $data['kecamatan'] = District::where('id', $data['tps']['district_id'])->first();
         $data['bukti_vidio'] = Buktividio::where('tps_id', $request['id'])->get();
         $data['bukti_foto'] = Buktifoto::where('tps_id', $request['id'])->get();
         $data['saksi'] = Saksi::where('tps_id', $request['id'])->first();
-        $data['solution'] =DB::table('solution_frauds')->where('id', $data['list_kecurangan'][0]->solution_fraud_id)->first();
+        $data['solution'] = DB::table('solution_frauds')->where('id', $data['list_kecurangan'][0]->solution_fraud_id)->first();
         // dd($data);
         return view('administrator.ajax.fotoKecuranganterverifikasi', $data);
     }
-     public function print(Request $request, $id)
+    public function print(Request $request, $id)
     {
         $data['tps']       = Tps::where('id', Crypt::decrypt($request['id']))->first();
         $data['saksi']     = Saksi::where('tps_id', Crypt::decrypt($request['id']))->first();
@@ -1211,26 +1206,24 @@ class AdminController extends Controller
         $data['verifikator'] = User::where('id', $data['qrcode']['verifikator_id'])->first();
         $data['hukum'] = User::where('id', $data['qrcode']['hukum_id'])->first();
         $data['databukti'] = Databukti::where('tps_id', Crypt::decrypt($request['id']))->first();
-        $data['list_kecurangan']     = Bukti_deskripsi_curang::
-        join('list_kecurangan','list_kecurangan.id','=','bukti_deskripsi_curang.list_kecurangan_id')
-        ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
-        ->where('bukti_deskripsi_curang.tps_id',Crypt::decrypt( $request['id']))
-        ->get();
+        $data['list_kecurangan']     = Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+            ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
+            ->where('bukti_deskripsi_curang.tps_id', Crypt::decrypt($request['id']))
+            ->get();
         $data['foto_kecurangan'] = Buktifoto::where('tps_id', Crypt::decrypt($request['id']))->get();
         $data['vidio_kecurangan'] = Buktividio::where('tps_id', Crypt::decrypt($request['id']))->first();
 
         $status =  Qrcode::where('tps_id', Crypt::decrypt($request['id']))->update([
             'print' => 1
-            ]);
+        ]);
 
         return view('hukum.print.kecurangan', $data);
-
     }
     public function rDataRecord()
     {
         $data['history'] = History::join('users', 'users.id', '=', 'history.user_id')->get();
         $data['config'] = Config::first();
-        return view('administrator.r_data',$data);
+        return view('administrator.r_data', $data);
     }
 
     public function analisa_dpt_kpu()
@@ -1245,15 +1238,15 @@ class AdminController extends Controller
         $data['tracking'] = ModelsTracking::get();
         $data['paslon']                   = Paslon::with('saksi_data')->get();
         $data['kecamatan'] =  District::where('regency_id', $data['config']['regencies_id'])->get();
-        return view('administrator.super_feature.analisa_dpt_kpu',$data);
+        return view('administrator.super_feature.analisa_dpt_kpu', $data);
     }
 
     public function analisa_dpt_kpu_print()
     {
         $data['config'] = Config::first();
         $data['kecamatan'] =  District::where('regency_id', $data['config']['regencies_id'])->get();
-         $data['kota'] = Regency::where('id', $data['config']['regencies_id'])->first();
-        return view('administrator.super_feature.print',$data);
+        $data['kota'] = Regency::where('id', $data['config']['regencies_id'])->first();
+        return view('administrator.super_feature.print', $data);
     }
 
     public function get_qrsidang(Request $request)
@@ -1261,7 +1254,7 @@ class AdminController extends Controller
         $data['config'] = Config::first();
         $config = $data['config'];
         $data['qrcode_hukum'] = Qrcode::join('surat_pernyataan', 'surat_pernyataan.qrcode_hukum_id', '=', 'qrcode_hukum.id')
-            ->join('users', 'users.tps_id', '=', 'qrcode_hukum.tps_id')->where('qrcode_hukum.tps_id',$request->id_tps )->first();
+            ->join('users', 'users.tps_id', '=', 'qrcode_hukum.tps_id')->where('qrcode_hukum.tps_id', $request->id_tps)->first();
         $data['verifikator_id'] = User::where('id', $data['qrcode_hukum']['verifikator_id'])->first();
         $data['hukum_id'] = User::where('id', $data['qrcode_hukum']['hukum_id'])->first();
         $data['data_tps'] = Tps::where('id', $request->id_tps)->first();
@@ -1279,8 +1272,8 @@ class AdminController extends Controller
         $data['config'] = Config::first();
         $config = $data['config'];
         $data['qrcode_hukum'] = Qrcode::join('surat_pernyataan', 'surat_pernyataan.qrcode_hukum_id', '=', 'qrcode_hukum.id')
-            ->join('users', 'users.tps_id', '=', 'qrcode_hukum.tps_id')->where('qrcode_hukum.tps_id',$id )->first();
-    
+            ->join('users', 'users.tps_id', '=', 'qrcode_hukum.tps_id')->where('qrcode_hukum.tps_id', $id)->first();
+
         $data['verifikator_id'] = User::where('id', $data['qrcode_hukum']['verifikator_id'])->first();
         $data['hukum_id'] = User::where('id', $data['qrcode_hukum']['hukum_id'])->first();
         $data['data_tps'] = Tps::where('id', $id)->first();
@@ -1294,21 +1287,20 @@ class AdminController extends Controller
 
         return view('administrator.sidang_saksi_online.print-sidang', $data);
     }
-     public function sidang_online_action($id,$role)
+    public function sidang_online_action($id, $role)
     {
-       $saksi = Saksi::where('tps_id',(string)decrypt($id))->update([
-           'makamah_konsitusi' => decrypt($role),
-       ]);
-       return redirect('/administrator/sidang_online');
+        $saksi = Saksi::where('tps_id', (string)decrypt($id))->update([
+            'makamah_konsitusi' => decrypt($role),
+        ]);
+        return redirect('/administrator/sidang_online');
     }
-      public function get_sidang_online(Request $request,$id)
+    public function get_sidang_online(Request $request, $id)
     {
-      $data['tps_id'] =  (string)decrypt($id);
-       $data['index_tsm']    = ModelsListkecurangan::get();
-      return view('administrator.sidang_saksi_online.modal-sidang-online', $data);
-
+        $data['tps_id'] =  (string)decrypt($id);
+        $data['index_tsm']    = ModelsListkecurangan::get();
+        return view('administrator.sidang_saksi_online.modal-sidang-online', $data);
     }
-     public function sidangOnline()
+    public function sidangOnline()
     {
         $data['config'] = Config::first();
         $data['kota']   = Regency::where('id', $data['config']->regencies_id)->first();
@@ -1322,15 +1314,15 @@ class AdminController extends Controller
             ->get();
         $data['tag'] = 1;
         $data['terverifikasi'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->get();
-        $data['tidak_menjawab'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->where('makamah_konsitusi','Tidak Menjawab')->get();
-        $data['selesai'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->where('makamah_konsitusi','Selesai')->get();
+        $data['tidak_menjawab'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->where('makamah_konsitusi', 'Tidak Menjawab')->get();
+        $data['selesai'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->where('makamah_konsitusi', 'Selesai')->get();
         $data['ditolak'] = Saksi::where('kecurangan', 'yes')->where('makamah_konsitusi', 'Ditolak')->get();
         $data['data_masuk'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->get();
-        
+
         return view('administrator.sidang_saksi_online.index', $data);
     }
 
-     public function sidangOnlineAll()
+    public function sidangOnlineAll()
     {
         $data['config'] = Config::first();
         $data['kota']   = Regency::where('id', $data['config']->regencies_id)->first();
@@ -1343,8 +1335,8 @@ class AdminController extends Controller
             ->get();
         $data['tag'] = 1;
         $data['terverifikasi'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->get();
-          $data['tidak_menjawab'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->where('makamah_konsitusi','Tidak Menjawab')->get();
-           $data['selesai'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->where('makamah_konsitusi','Selesai')->get();
+        $data['tidak_menjawab'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->where('makamah_konsitusi', 'Tidak Menjawab')->get();
+        $data['selesai'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->where('makamah_konsitusi', 'Selesai')->get();
         $data['ditolak'] = Saksi::where('kecurangan', 'yes')->where('makamah_konsitusi', 'Ditolak')->get();
         $data['data_masuk'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->get();
         $data['_data_masuk_'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
@@ -1357,7 +1349,7 @@ class AdminController extends Controller
         return view('administrator.sidang_saksi_online.all-data', $data);
     }
 
-     public function sidangOnlinestatus($role)
+    public function sidangOnlinestatus($role)
     {
         $data['config'] = Config::first();
         $data['kota']   = Regency::where('id', $data['config']->regencies_id)->first();
@@ -1366,66 +1358,63 @@ class AdminController extends Controller
             ->join('users', 'users.tps_id', '=', 'tps.id')
             ->where('saksi.kecurangan', 'yes')
             ->where('saksi.status_kecurangan', 'terverifikasi')
-            ->where('makamah_konsitusi',decrypt($role))
+            ->where('makamah_konsitusi', decrypt($role))
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->get();
         $data['tag'] = 2;
         $data['config'] = Config::first();
         $data['kota']   = Regency::where('id', $data['config']->regencies_id)->first();
-        $data['tidak_menjawab'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->where('makamah_konsitusi','Tidak Menjawab')->get();
-        $data['selesai'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->where('makamah_konsitusi','Selesai')->get();
+        $data['tidak_menjawab'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->where('makamah_konsitusi', 'Tidak Menjawab')->get();
+        $data['selesai'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->where('makamah_konsitusi', 'Selesai')->get();
         $data['ditolak'] = Saksi::where('kecurangan', 'yes')->where('makamah_konsitusi', 'Ditolak')->get();
         $data['data_masuk'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->get();
         return view('administrator.sidang_saksi_online.index', $data);
     }
 
 
-    public function batalkan_history($id,$user_id){
+    public function batalkan_history($id, $user_id)
+    {
         $decrypt_id = Crypt::decrypt($id);
-        $history = History::where('id',Crypt::decrypt($id))->first();
-          History::where('id',Crypt::decrypt($id))->update([
-              'status' => 0,
-              ]);
-        if($history['status'] == 1){
-            Saksi::where('id',$history['saksi_id'])->update([
+        $history = History::where('id', Crypt::decrypt($id))->first();
+        History::where('id', Crypt::decrypt($id))->update([
+            'status' => 0,
+        ]);
+        if ($history['status'] == 1) {
+            Saksi::where('id', $history['saksi_id'])->update([
                 'verification' => "",
             ]);
-            return redirect('/administrator/patroli_mode/tracking/detail/'.$user_id);
+            return redirect('/administrator/patroli_mode/tracking/detail/' . $user_id);
         }
-        if($history['status'] == 2){
-            Saksi::where('id',$history['saksi_id'])->update([
+        if ($history['status'] == 2) {
+            Saksi::where('id', $history['saksi_id'])->update([
                 'audit' => "",
             ]);
-            return redirect('/administrator/patroli_mode/tracking/detail/'.$user_id);
+            return redirect('/administrator/patroli_mode/tracking/detail/' . $user_id);
         }
-
     }
 
 
-     public function batalkan_semua($id)
+    public function batalkan_semua($id)
     {
-         $decrypt_id = Crypt::decrypt($id);
-         $history = History::where('user_id',$decrypt_id)->get();
-         foreach($history as $hs){
-              History::where('id',$hs->id)->update([
-              'status' => 0,
-              ]);
-              if($hs['status'] == 1){
-            Saksi::where('id',$hs['saksi_id'])->update([
-                'verification' => "",
+        $decrypt_id = Crypt::decrypt($id);
+        $history = History::where('user_id', $decrypt_id)->get();
+        foreach ($history as $hs) {
+            History::where('id', $hs->id)->update([
+                'status' => 0,
             ]);
-
+            if ($hs['status'] == 1) {
+                Saksi::where('id', $hs['saksi_id'])->update([
+                    'verification' => "",
+                ]);
+            }
+            if ($hs['status'] == 2) {
+                Saksi::where('id', $hs['saksi_id'])->update([
+                    'audit' => "",
+                ]);
+            }
         }
-        if($hs['status'] == 2){
-            Saksi::where('id',$hs['saksi_id'])->update([
-                'audit' => "",
-            ]);
 
-        }
-         }
-
-        return redirect('/administrator/patroli_mode/tracking/detail/'.$id);
-
+        return redirect('/administrator/patroli_mode/tracking/detail/' . $id);
     }
 
 
@@ -1442,14 +1431,14 @@ class AdminController extends Controller
         $data['village'] = Village::first();
         $data['villages'] = Village::get();
         $data['district'] = District::first();
-        return view('administrator.developer.index',$data);
+        return view('administrator.developer.index', $data);
     }
     public function cek_pass(Request $request)
     {
-        if($request->password == "#Pentagon2024"){
+        if ($request->password == "#Pentagon2024") {
             return redirect('administrator/developer');
-        }else{
-            return redirect()->back()->with('error','Password yang anda masukan salah');
+        } else {
+            return redirect()->back()->with('error', 'Password yang anda masukan salah');
         }
     }
 
@@ -1480,7 +1469,7 @@ class AdminController extends Controller
         $data['district'] = District::first();
 
         // dd($data['paslon']);
-        return view('administrator.realcount.real_count2',$data);
+        return view('administrator.realcount.real_count2', $data);
     }
 
     public function Rekapitulasi()
@@ -1510,11 +1499,12 @@ class AdminController extends Controller
         $data['district'] = District::first();
 
         // dd($data['paslon']);
-        return view('administrator.rekapitulasi-perhitungan.rekapitulasi',$data);
+        return view('administrator.rekapitulasi-perhitungan.rekapitulasi', $data);
     }
 
 
-    public function quick_count2(){
+    public function quick_count2()
+    {
 
         $data['config'] = Config::first();
         $config = Config::first();
@@ -1537,19 +1527,20 @@ class AdminController extends Controller
         $data['kecamatan'] = District::where('regency_id', $config['regencies_id'])->get();
         $data['district'] = District::first();
         $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")
-        ->join('tps', 'tps.id', "=", "saksi.tps_id")
-        ->where('tps.sample',5)
-        ->get();
+            ->join('tps', 'tps.id', "=", "saksi.tps_id")
+            ->where('tps.sample', 5)
+            ->get();
         $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data GROUP by paslon_id ORDER by total DESC'));
         $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
         $data['urutan'] = $paslon_tertinggi;
         $data['district_quick'] = District::join('villages', 'villages.district_id', '=', 'districts.id')->where('regency_id', $data['config']['regencies_id'])->get();
-        return view('administrator.quickcount.quick_count2',$data);
+        return view('administrator.quickcount.quick_count2', $data);
         // dd($data['paslon']);
 
     }
 
-    public function terverifikasi(){
+    public function terverifikasi()
+    {
 
         $data['config'] = Config::first();
         $config = Config::first();
@@ -1595,16 +1586,17 @@ class AdminController extends Controller
         $data['kecamatan'] = District::where('regency_id', $config['regencies_id'])->get();
         $data['district'] = District::first();
         $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")
-        ->join('tps', 'tps.id', "=", "saksi.tps_id")
-        ->where('tps.sample',5)
-        ->get();
+            ->join('tps', 'tps.id', "=", "saksi.tps_id")
+            ->where('tps.sample', 5)
+            ->get();
         $data['district_quick'] = District::join('villages', 'villages.district_id', '=', 'districts.id')->where('regency_id', $data['config']['regencies_id'])->get();
-        return view('administrator.terverifikasi.terverifikasi',$data);
+        return view('administrator.terverifikasi.terverifikasi', $data);
         // dd($data['paslon']); 
 
     }
 
-    public function Relawan() {
+    public function Relawan()
+    {
         $data['config'] = Config::first();
         $config = Config::first();
         $data['paslon'] = Paslon::with('quicksaksidata')->get();
@@ -1620,7 +1612,8 @@ class AdminController extends Controller
         return view('administrator.relawan.relawan', $data);
     }
 
-    public function RelawanDihapus() {
+    public function RelawanDihapus()
+    {
         $data['config'] = Config::first();
         $config = Config::first();
         $data['paslon'] = Paslon::with('quicksaksidata')->get();
@@ -1638,7 +1631,7 @@ class AdminController extends Controller
 
 
 
-   
+
     /**
      * Show the form for creating a new resource.
      *
