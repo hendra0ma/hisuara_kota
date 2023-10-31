@@ -21,11 +21,11 @@
                     <div class="row">
                         <div class="col-md">
                             @if ($ls->profile_photo_path == NULL)
-                            <img class="" style="width: 250px;"
+                            <img class="" style="width: 250px; height: 250px; object-fit:cover"
                                 src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF"
                                 alt="img">
                             @else
-                            <img class="" style="width: 250px;"
+                            <img class="" style="width: 250px; height: 250px; object-fit:cover"
                                 src="{{url("/storage/profile-photos/".$ls->profile_photo_path) }}">
                             @endif
                         </div>

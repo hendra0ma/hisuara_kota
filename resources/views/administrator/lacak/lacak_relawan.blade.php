@@ -16,8 +16,8 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 
 <!-- PAGE-HEADER -->
 <div class="row mt-5">
-    <div class="col-lg">
-        <h1 class="page-title fs-1 mt-2">Lacak Relawan
+    <div class="col-lg-3">
+        <h1 class="page-title fs-1 mt-2">Pelacakan Relawan
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">
@@ -26,6 +26,20 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
                 <!-- Kota -->
             </li>
         </ol>
+    </div>
+    <div class="col-lg-9">
+        <div class="row" style="flex-wrap: nowrap; width: 100%; overflow: scroll">
+            @foreach ($relawan as $ls)
+            <div class="col-md-auto">
+                @if ($ls->profile_photo_path == NULL)
+                <img class="" style="width: 125px; height: 125px; object-fit: cover"
+                    src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF" alt="img">
+                @else
+                <img class="" style="width: 125px; height: 125px; object-fit: cover" src="{{url("/storage/profile-photos/".$ls->profile_photo_path) }}">
+                @endif
+            </div>
+            @endforeach
+        </div>
     </div>
 </div>
 <!-- PAGE-HEADER END -->

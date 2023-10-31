@@ -5,9 +5,9 @@
             <div class="product-grid6 card-body">
                 <div class="product-image6">
                     @if ($ls->profile_photo_path == NULL)
-                    <img class="img-fluid" style="width: 250px;" src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF" alt="img">
+                    <img class="img-fluid" style="width: 250px; height: 250px; object-fit:cover" src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF" alt="img">
                     @else
-                    <img class="img-fluid" style="width: 250px;" src="{{url("/storage/profile-photos/".$ls->profile_photo_path) }}">
+                    <img class="img-fluid" style="width: 250px; height: 250px; object-fit:cover" src="{{url("/storage/profile-photos/".$ls->profile_photo_path) }}">
                     @endif
 
                 </div>

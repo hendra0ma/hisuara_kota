@@ -387,28 +387,31 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         <h4 class="mb-0 fw-bold setting tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
                                             Settings
                                         </h4>
+                                        <h4 class="mb-0 fw-bold lacak tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                            Pelacakan
+                                        </h4>
                                     </div>
 
                                     <div class="col-md petugas tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/verifikasi_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
-                                                    Saksi
+                                                    Lacak Saksi
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/relawan" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
-                                                    Relawan
+                                                    Lacak Relawan
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/enumerator" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
-                                                    Enumerator
+                                                    Lacak Enumerator
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/verifikasi_akun" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
-                                                    Admin
+                                                    Lacak Admin
                                                 </a>
                                             </div>
                                         </div>
@@ -963,7 +966,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     </div><div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white"
                                             style="background-color: #656064; width: 40px; height: 36px;" data-target="lacak">
-                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Lacak">
+                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Pelacakan">
                                                 <i class="fa-solid fa-location-dot"></i>
                                             </span>
                                         </button>

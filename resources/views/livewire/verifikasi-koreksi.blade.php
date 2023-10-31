@@ -32,9 +32,9 @@ use App\Models\Koreksi;
                         <div class="row">
                             <div class="col-md">
                                 @if ($ls->profile_photo_path == NULL)
-                                <img class="shadow-lg" style="width: 250px;" src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF" alt="img">
+                                <img class="shadow-lg" style="width: 250px; height: 250px; object-fit:cover" src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF" alt="img">
                                 @else
-                                <img class="shadow-lg" style="width: 250px;" src="{{url("/storage/profile-photos/".$ls->profile_photo_path) }}">
+                                <img class="shadow-lg" style="width: 250px; height: 250px; object-fit:cover" src="{{url("/storage/profile-photos/".$ls->profile_photo_path) }}">
                                 @endif
                             </div>
                             <div class="col-md my-auto">
