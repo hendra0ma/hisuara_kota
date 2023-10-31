@@ -1,30 +1,41 @@
+<?php
+use App\Models\District;
+use App\Models\Village;
+use App\Models\Tps;
+use App\Models\Regency;
+use App\Models\Config;
+
+$data['config'] = Config::first();
+$config = Config::first();
+$kota = Regency::where('id', $config['regencies_id'])->first();
+?>
+
 @extends('layouts.main-indekTSM')
 
 @section('content')
 <div class="row mt-3">
-    <div class="col-lg-4">
-        <h1 class="page-title fs-1 mt-2">Dashboard Rekapitung
+    <div class="col-lg">
+        <h1 class="page-title fs-1 mt-2">Jenis Kecurangan
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Indikator Data TSM
+            {{-- <li class="breadcrumb-item"><a href="#">Bukti Kecurangan</a></li> --}}
+            <li class="breadcrumb-item active" aria-current="page">
+                {{$kota->name}}
                 <!-- Kota -->
             </li>
         </ol>
-        <h4 class="fs-4 mt-2 fw-bold">Indikator Data TSM (ETSMI)</h4>
     </div>
-    <div class="col-lg-8">
-        <div class="row justify-content-end">
-            <div class="col-md-2">
-                <a href="{{url('')}}/administrator/print-index-tsm" target="_blank"
-                    class="btn btn-block btn-dark ml-2 mr-2">Print &nbsp;&nbsp;<i class="fa fa-print"></i></a>
-            </div>
-        </div>
+    <div class="col-lg-auto my-auto">
+        <a href="{{url('')}}/administrator/print-index-tsm" target="_blank" class="btn btn-block btn-dark">Print
+            &nbsp;&nbsp;<i class="fa fa-print"></i></a>
     </div>
 </div>
 
-<h4 class="fs-4 mt-5 fw-bold">Election TSM Indicator <div>Dilindungi Paten Rekapitung</div>
+{{-- <h4 class="fs-4 mt-5 fw-bold">Election TSM Indicator <div>Dilindungi Paten Rekapitung</div>
+</h4> --}}
+<h4 class="fw-bold fs-4 mt-5 mb-0">
+    Jumlah : 4
 </h4>
 <hr style="border: 1px solid">
 

@@ -184,4 +184,12 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
     
 </div> --}}
 
+<script>
+    $(document).ready(function() {
+        var specificUrl = "{{ url('') }}/administrator/enumerator"; // Specific URL to match
+    
+        $('.glowy-menu[href="' + specificUrl + '"]').addClass('active');
+    });
+</script>
+
 @endsection

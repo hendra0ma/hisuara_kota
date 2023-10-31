@@ -316,6 +316,10 @@ foreach ($domainKota as $domain) {
                 Route::get('sidang_online/action/{id}/{role}', 'sidang_online_action');
                 Route::get('action/batalkan_history/{id}/{user_id}', 'batalkan_history');
                 Route::get('patroli/batalkan_semua/{id}', 'batalkan_semua');
+                Route::get('lacak_saksi', 'lacakSaksi');
+                Route::get('lacak_enumerator', 'lacakEnumerator');
+                Route::get('lacak_relawan', 'lacakRelawan');
+                Route::get('lacak_admin', 'lacakAdmin');
             });
         });
         // End Setup Page

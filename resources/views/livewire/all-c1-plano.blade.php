@@ -1,4 +1,4 @@
-<div class="mt-5 d-flex flex-wrap" style="gap: 5px;">
+<div class="d-flex flex-wrap" style="gap: 5px;">
 
     <div class="col-12 mb-3 px-0">
         <input wire:model="search" type="search" class="form-control border-1 border-dark" placeholder="Search posts by title...">
