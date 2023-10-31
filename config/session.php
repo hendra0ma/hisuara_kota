@@ -155,7 +155,8 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN', null),
+    // 'domain' => env('SESSION_DOMAIN', null),
+    'domain' => '.hisuara.id',
 
     /*
     |--------------------------------------------------------------------------
@@ -196,6 +197,6 @@ return [
     |
     */
 
-    'same_site' => 'lax',
+    'same_site' => null,
 
 ];
