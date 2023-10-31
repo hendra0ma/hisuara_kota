@@ -73,7 +73,7 @@ class DevelopingController extends Controller
         if ($request->file('c1_plano')) {
             $image = $request->file('c1_plano');
             $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $randomString = substr(str_shuffle($characters), 0, 13); // Menghasilkan string acak sepanjang 10 karakter
+            $randomString = substr(str_shuffle($characters), 0, 20); // Menghasilkan string acak sepanjang 10 karakter
             $c1_plano = time()  . $randomString  .".". $image->getClientOriginalExtension();
             $image->move(public_path('storage/c1_plano'), $c1_plano);
         } else {
@@ -149,7 +149,7 @@ class DevelopingController extends Controller
             $c1_plano = $request->file('c1_plano');
             $pathFotoArray = [];
             foreach ($c1_plano as $image) {
-                $randomString = substr(str_shuffle($characters), 0, 15); // Menghasilkan string acak sepanjang 10 karakter
+                $randomString = substr(str_shuffle($characters), 0, 20); // Menghasilkan string acak sepanjang 10 karakter
                 $imageName = time()  . $randomString  .".".  $image->getClientOriginalName();
                 $image->move(public_path('storage/c_images'), $imageName);
                 $pathFotoArray[] = $imageName;
@@ -229,7 +229,7 @@ class DevelopingController extends Controller
             $surat_suara = $request->file('surat_suara');
             $pathFotoArray = [];
             foreach ($surat_suara as $image) {
-                $randomString = substr(str_shuffle($characters), 0, 15); // Menghasilkan string acak sepanjang 10 karakter
+                $randomString = substr(str_shuffle($characters), 0, 25); // Menghasilkan string acak sepanjang 10 karakter
                 $imageName = time()  . $randomString  .".".  $image->getClientOriginalName();
                 $image->move(public_path('storage/surat_suara'), $imageName);
                 $pathFotoArray[] = $imageName;
@@ -264,15 +264,12 @@ class DevelopingController extends Controller
         if ($request->file('selfie_lokasi')) {
             $image = $request->file('selfie_lokasi');
             $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $randomString = substr(str_shuffle($characters), 0, 13); // Menghasilkan string acak sepanjang 10 karakter
+            $randomString = substr(str_shuffle($characters), 0, 25); // Menghasilkan string acak sepanjang 10 karakter
             $foto_profil = time()  . $randomString  .".". $image->getClientOriginalExtension();
             $image->move(public_path('storage/absensi'), $foto_profil);
         } else {
             return redirect()->back()->with("error", 'gagal mengupload data absensi');
         }
-
-      
-
         Absensi::create([
             'user_id' => $user_id,
             'longitude' => $tracking->longitude,

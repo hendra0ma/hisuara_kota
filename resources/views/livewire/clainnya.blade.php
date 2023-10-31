@@ -2,13 +2,21 @@
     <div class="row justify-content-center">
         <div class="col-lg-5" style="height:100vh">
             <div class="card border-0">
+
+
+                <div class="card-header bg-primary text-light text-center fw-bold">
+                    Foto dan Kirim Data C6
+                </div>
+
+                
+                
                 <div class="card-body">
-
-                    <!-- As a link -->
-                    <nav class="navbar bg-primary py-1">
-                        <b class="navbar-brand mx-auto text-white fw-bold" style="font-size: 16px">Foto dan Kirim Data C2-8</b>
-                    </nav>
-
+                    <form action="{{route('logout')}}" method="post" class="pe-2 ps-3">
+                        @csrf
+                        <button class="btn btn-danger" type="submit">
+                            Sign out
+                        </button>
+                    </form>
                     <h1 class="text-center">
                         <img src="{{asset('')}}images/logo/hisuara.png" class="hadow-4 mb-3 mt-3 bg-dark rounded-2" style="width: 150px;" alt="Avatar" />
                     </h1>
@@ -28,10 +36,10 @@
                         <div class="row no-gutters">
                             <div class="col-lg-12 mt-2">
 
-                                <div class="col-lg-12">
+                                <!-- <div class="col-lg-12">
                                     <label for="pilih-c">Pilih Dokumen</label>
                                     <select name="dokumen" id="dokumen" class="form-select">
-                                        
+
                                         <option value="c2">C2</option>
                                         <option value="c3">C3</option>
                                         <option value="c4">C4</option>
@@ -40,7 +48,8 @@
                                         <option value="c7">C7</option>
                                         <option value="c8">C8</option>
                                     </select>
-                                </div>
+                                </div> -->
+                                <input type="hidden" name="dokumen"value="c6">
 
                                 @foreach ($paslon as $item)
                                 <div class="col-lg-12">

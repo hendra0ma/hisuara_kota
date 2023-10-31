@@ -21,7 +21,7 @@
 
         .phone {
 
-            border: 3px solid #eee;
+            /* border: 3px solid #eee; */
             border-radius: 15px;
             height: 600px;
             width: 340px;
@@ -83,6 +83,7 @@
 <body>
 
     <div class="phone">
+
         @if (Auth::user()->absen == "hadir")
         @else
         <div alt="home" class="content show">
@@ -90,13 +91,43 @@
         </div>
         @endif
         <div alt="work" class="content {{Auth::user()->absen == 'hadir'?'show':''}}">
+
+            <?php
+            $cekSaksi = App\Models\Saksi::where('tps_id', Auth::user()->tps_id)->count('id'); ?>
+            @if( $cekSaksi == null)
+          
             <livewire:upload-c1>
 
+            @else
+                <div class="container mt-3">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <div class="card border-0 shadow">
+                                <div class="card-body text-center">
+                                    <h3>
+                                        Terima Kasih telah mengirim data C1.
+                                    </h3>
+                                    <form action="{{route('logout')}}" method="post" class="py-2 pe-2 ps-3">
+                                        @csrf
+                                        <div class="d-grid gap-2 mx-auto">
+                                            <button class="btn btn-danger" type="submit">
+                                                Sign out
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
         <div alt="blog" class="content ">
+          
             <livewire:surat-suara>
         </div>
         <div alt="blog" class="content ">
+          
             <livewire:clainnya>
         </div>
 
@@ -105,8 +136,8 @@
 
         <nav class="position-fixed">
             <ul>
-            @if (Auth::user()->absen == "hadir")
-        @else
+                @if (Auth::user()->absen == "hadir")
+                @else
                 <li class="active">
                     <i class="fas fa-home"></i>
                     <p>Absensi</p>
@@ -122,11 +153,45 @@
                 </li>
                 <li>
                     <i class="fas fa-book-open"></i>
-                    <p>Upload Cn</p>
+                    <p>Upload C6</p>
                 </li>
 
             </ul>
         </nav>
+    </div>
+
+    <div class="modal fade" id="validasi" tabindex="-1" aria-labelledby="validasiLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="validasiLabel">Validation</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                    @if(session()->has('error'))
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            {{ session()->get('error') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        @endif
+                        @if(session('errors'))
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            <ul>
+                                @foreach (session('errors')->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -154,7 +219,16 @@
             listItems.forEach(item => item.classList.remove('active'))
         }
     </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    @if(session()->has('error') || session('errors'))
+    <script>
+        var modalvalidasi = new bootstrap.Modal(document.getElementById("validasi"), {});
+        document.onreadystatechange = function() {
+            modalvalidasi.show();
+        };
+    </script>
+    @endif
 </body>
 
 </html>

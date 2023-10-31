@@ -77,6 +77,11 @@ Route::get('/kontol', function () {
     }
 });
 
+Route::domain('mencoba.hisuara.id')->group(function (){
+    Route::get('/', function () {
+        return 'mencoba hisuara';
+    });
+});
 
 Route::get('/ceksetup', function () {
     $config = Config::first();
@@ -702,6 +707,8 @@ Route::get('/cek-user-saksi', function () {
         // ]);
     }
 });
+
+
 
 // Route::get('/passcoba',function () {
 //    return bcrypt("210581");
