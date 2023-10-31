@@ -29,14 +29,20 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
     </div>
 </div>
 
-<h4 class="fw-bold fs-4 mt-5 mb-0 d-inline">
-    Jumlah C1 : {{$jumlah_c1}}
-</h4>
-
-        <div class="btn btn-success float-end">
+<div class="row">
+    <div class="col">
+        <h4 class="fw-bold fs-4 mt-5 mb-0">
+            Jumlah C1 : {{$jumlah_c1}}
+        </h4>
+        
+    </div>
+    <div class="col-auto mt-auto">
+        <div class="btn btn-success">
             <i class="fa-solid fa-download"></i>
             Unduh
         </div>
+    </div>
+</div>
 
 <hr style="border: 1px solid">
 

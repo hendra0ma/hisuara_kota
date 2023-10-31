@@ -94,15 +94,11 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
     }
 
     .glowy-menu.active{
-        -webkit-box-shadow:0px 0px 100px 30px rgba(82,140,255,1);
-        -moz-box-shadow: 0px 0px 100px 30px rgba(82,140,255,1);
-        box-shadow: 0px 0px 100px 30px rgba(82,140,255,1);
+        color: #e1af0a !important
     }
     
     .glowy-menu.glow-kecurangan.active{
-        -webkit-box-shadow:0px 0px 100px 30px rgba(248, 38, 73, 1);
-        -moz-box-shadow: 0px 0px 100px 30px rgba(248, 38, 73, 1);
-        box-shadow: 0px 0px 100px 30px rgba(248, 38, 73, 1);
+        color: #e1af0a !important
     }
 
     /* ::-webkit-scrollbar-track {

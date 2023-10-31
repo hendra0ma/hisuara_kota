@@ -180,5 +180,13 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+        var specificUrl = "{{ url('') }}/administrator/verifikasi_saksi"; // Specific URL to match
+    
+        $('.glowy-menu[href="' + specificUrl + '"]').addClass('active');
+    });
+</script>
+
 
 @endsection
