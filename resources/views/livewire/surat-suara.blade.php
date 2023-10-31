@@ -2,12 +2,18 @@
     <div class="row justify-content-center">
         <div class="col-lg-5" style="height:100vh">
             <div class="card border-0">
-                <div class="card-body">
 
-                    <!-- As a link -->
-                    <nav class="navbar bg-primary py-1">
-                        <b class="navbar-brand mx-auto text-white fw-bold" style="font-size: 16px">Surat Suara</b>
-                    </nav>
+                <div class="card-header bg-primary text-light text-center fw-bold">
+                Surat Suara
+                </div>
+                
+                <form action="{{route('logout')}}" method="post" class="py-2 pe-2 ps-3">
+                    @csrf
+                    <button class="btn btn-danger" type="submit">
+                        Sign out
+                    </button>
+                </form>
+                <div class="card-body">
 
                     <h1 class="text-center">
                         <img src="{{asset('')}}images/logo/hisuara.png" class="hadow-4 mb-3 mt-3 bg-dark rounded-2" style="width: 150px;" alt="Avatar" />

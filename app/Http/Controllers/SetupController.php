@@ -186,7 +186,6 @@ class SetupController extends Controller
             $villages_update = Village::where('id',$vg['id'])->update(
                 [
                     'tps' => $input[$vg['id']],
-                    
                 ]
                 );
             for ($x = 1; $x <=  $input[$vg['id']]; $x++) {

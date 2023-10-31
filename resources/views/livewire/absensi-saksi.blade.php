@@ -2,14 +2,22 @@
     
         <div class="row justify-content-center ">
             <div class="col-lg-5">
-                <div class="card border-0  mt-2">
-                    <div class="card-body">
+                <div class="card border-0">
+
+                <div class="card-header bg-primary text-light text-center fw-bold">
+                Foto dan Kirim Absensi
+                </div>
+                
+                <form action="{{route('logout')}}" method="post" class="py-2 pe-2 ps-3">
+                    @csrf
+                    <button class="btn btn-danger" type="submit">
+                        Sign out
+                    </button>
+                </form>
+                <div class="card-body">
 
                         <!-- As a link -->
-                        <nav class="navbar bg-primary py-1">
-                            <b class="navbar-brand mx-auto  fw-bold text-light " style="font-size: 16px">Foto dan Kirim Absensi</b>
-                        </nav>
-
+                    
                         <h1 class="text-center">
                             <img src="{{asset('')}}images/logo/hisuara.png" class="mb-3 mt-3 bg-dark rounded-2 shadow-sm" style="width: 150px;" alt="Avatar" />
                         </h1>

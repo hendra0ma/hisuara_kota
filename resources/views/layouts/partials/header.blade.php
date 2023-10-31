@@ -127,8 +127,8 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                   
                                     <div class="col-md ps-3 mb-0 text-light headerAnimate">
                                         <h2 class="text-white mb-0 text-center headerPojokan"></h2>
-                                        <h2 class="text-white mb-0 text-center headerPojokanText1" style="display:none"></h2>
-                                        <h2 class="text-white mb-0 text-center headerPojokanText2" style="display:none"> </h2>
+                                        <h2 class="text-white mb-0 text-center headerPojokanText1" style="display:none;font-size:medium"></h2>
+                                        <h2 class="text-white mb-0 text-center headerPojokanText2" style="display:none;"> </h2>
                                     </div>
                                 </div>
                             </div>
@@ -191,10 +191,9 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
                                 function animateHeaderPojokanText1() {
                                     $container = $(".headerPojokanText1");
-
-                                    const text = "Vox Populi"
+                                    const text = "Vox Populi, Vox Dei"
                                     const $elements = text.split("").map((s) => $(
-                                        `<span style="text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}</span>`
+                                        `<span style="margin-left:5px;text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}${(s == ",")?'<br>':""}</span>`
                                     ));
 
                                     $container.html($elements);
@@ -216,49 +215,17 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     });
                                     setTimeout(() => {
                                         $($(".headerPojokanText1").find('span')).remove();
-                                        animateHeaderPojokanText2()
-                                    }, 2000);
+                                            $('.col-hisuara').hide()
+                                            $('.col-pilpres').show()
+                                            setTimeout(() => {
+                                                $('.col-hisuara').css('display') = 'flex'
+                                                $('.col-pilpres').hide()
+
+                                                animateHeaderPojokan()
+                                            }, 1000 * 60);
+                                     
+                                    },4000);
                                 }
-
-                                function animateHeaderPojokanText2() {
-                                    $container = $(".headerPojokanText2");
-
-                                    const text = "Vox Dei"
-                                    const $elements = text.split("").map((s) => $(
-                                        `<span style="text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}</span>`
-                                    ));
-
-                                    $container.html($elements);
-                                    $container.show();
-                                    // $("#gantiBackground").css({
-                                    //     "background-color": "#007bff"
-                                    // }, 1000);
-                                    $elements.forEach(function($el, i) {
-                                        $el
-                                            .css({
-                                                top: -60,
-                                                opacity: 0
-                                            })
-                                            .delay(100 * i)
-                                            .animate({
-                                                top: 0,
-                                                opacity: 1
-                                            }, 200);
-                                    });
-                                    setTimeout(() => {
-                                        $($(".headerPojokanText2").find('span')).remove();
-                                        $('.col-hisuara').hide()
-                                        $('.col-pilpres').show()
-                                        setTimeout(() => {
-                                            $('.col-hisuara').css('display') = 'flex'
-                                            $('.col-pilpres').hide()
-
-                                            animateHeaderPojokan()
-                                        }, 1000 * 60);
-                                    }, 2000);
-
-                                }
-                              
                             </script>
 
 
