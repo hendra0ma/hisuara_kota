@@ -137,22 +137,22 @@
         panjang/tinggi lingkaran = pt
         margin kiri = mk
         lebar background = lb
-        jarak ke paling kanan lebar bg = jmkb
+        jarak ke paling kanan lebar bg = jarak-maks-bg
         jadi
 
-        p + mk = pmk
-        lb - pmk = jmkb
-        jmkb - mk = hasil
+        p + mk = panjang-n-jarak
+        lb - panjang-n-jarak = jarak-maks-bg
+        jarak-maks-bg - mk = hasil
         */
 
         :root {
-            --hebag: 25px;
-            --panting: calc(var(--hebag) - 8px);
-            --makir: 4px;
-            --lebag: 60px;
-            --pmk: calc(var(--panting) + var(--makir));
-            --jmkb: calc(var(--lebag) - var(--pmk));
-            --trans-need: calc(var(--jmkb) - var(--makir)); /* Changed reference to --panting */
+            --tinggi-bg: 25px;
+            --panjang-tinggi-lingkaran: calc(var(--tinggi-bg) - 8px);
+            --jarak-kiri-lingkaran: 4px;
+            --lebar-bg: 60px;
+            --panjang-n-jarak: calc(var(--panjang-tinggi-lingkaran) + var(--jarak-kiri-lingkaran));
+            --jarak-maks-bg: calc(var(--lebar-bg) - var(--panjang-n-jarak));
+            --trans-dibutuhkan: calc(var(--jarak-maks-bg) - var(--jarak-kiri-lingkaran)); /* Changed reference to --panjang-tinggi-lingkaran */
         }
 
         /* Your other styles remain unchanged */
@@ -168,8 +168,8 @@
         .switch {
             position: relative;
             display: inline-block;
-            width: var(--lebag);
-            height: var(--hebag);
+            width: var(--lebar-bg);
+            height: var(--tinggi-bg);
         }
         /* Hide default HTML checkbox */
         .switch input {
@@ -194,9 +194,9 @@
         .slider:before {
             position: absolute;
             content: "";
-            height: var(--panting);
-            width: var(--panting);
-            left: var(--makir);
+            height: var(--panjang-tinggi-lingkaran);
+            width: var(--panjang-tinggi-lingkaran);
+            left: var(--jarak-kiri-lingkaran);
             bottom: 4px;
             background-color: white;
             -webkit-transition: .4s;
@@ -211,9 +211,9 @@
             box-shadow: 0 0 1px #2196F3;
         }
         input:checked+.slider:before {
-            -webkit-transform: translateX(var(--trans-need));
-            -ms-transform: translateX(var(--trans-need));
-            transform: translateX(var(--trans-need));
+            -webkit-transform: translateX(var(--trans-dibutuhkan));
+            -ms-transform: translateX(var(--trans-dibutuhkan));
+            transform: translateX(var(--trans-dibutuhkan));
         }
         /* Rounded sliders */
         .slider.round {
