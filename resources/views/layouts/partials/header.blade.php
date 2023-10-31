@@ -396,22 +396,22 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/verifikasi_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
-                                                    Lacak Saksi
+                                                    Saksi
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/relawan" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
-                                                    Lacak Relawan
+                                                    Relawan
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/enumerator" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
-                                                    Lacak Enumerator
+                                                    Enumerator
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/verifikasi_akun" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
-                                                    Lacak Admin
+                                                    Admin
                                                 </a>
                                             </div>
                                         </div>
@@ -549,25 +549,25 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/lacak_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
-                                                    Saksi
+                                                    Lacak Saksi
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/lacak_relawan" class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0;">
-                                                    Relawan
+                                                    Lacak Relawan
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/lacak_enumerator" class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0;">
-                                                    Enumerator
+                                                    Lacak Enumerator
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/lacak_admin" class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
-                                                    Admin
+                                                    Lacak Admin
                                                 </a>
                                             </div>
                                         </div>
