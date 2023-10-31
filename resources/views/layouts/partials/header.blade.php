@@ -93,6 +93,18 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
         background-color: #f82649 !important;
     }
 
+    .glowy-menu.active{
+        -webkit-box-shadow:0px 0px 100px 30px rgba(82,140,255,1);
+        -moz-box-shadow: 0px 0px 100px 30px rgba(82,140,255,1);
+        box-shadow: 0px 0px 100px 30px rgba(82,140,255,1);
+    }
+    
+    .glowy-menu.glow-kecurangan.active{
+        -webkit-box-shadow:0px 0px 100px 30px rgba(248, 38, 73, 1);
+        -moz-box-shadow: 0px 0px 100px 30px rgba(248, 38, 73, 1);
+        box-shadow: 0px 0px 100px 30px rgba(248, 38, 73, 1);
+    }
+
     /* ::-webkit-scrollbar-track {
       background-color: transparent;
     }
@@ -127,8 +139,8 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                   
                                     <div class="col-md ps-3 mb-0 text-light headerAnimate">
                                         <h2 class="text-white mb-0 text-center headerPojokan"></h2>
-                                        <h2 class="text-white mb-0 text-center headerPojokanText1" style="display:none;font-size:medium"></h2>
-                                        <h2 class="text-white mb-0 text-center headerPojokanText2" style="display:none;"> </h2>
+                                        <h2 class="text-white mb-0 text-center headerPojokanText1" style="display:none"></h2>
+                                        <h2 class="text-white mb-0 text-center headerPojokanText2" style="display:none"> </h2>
                                     </div>
                                 </div>
                             </div>
@@ -191,9 +203,10 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
                                 function animateHeaderPojokanText1() {
                                     $container = $(".headerPojokanText1");
-                                    const text = "Vox Populi, Vox Dei"
+
+                                    const text = "Vox Populi"
                                     const $elements = text.split("").map((s) => $(
-                                        `<span style="margin-left:5px;text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}${(s == ",")?'<br>':""}</span>`
+                                        `<span style="text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}</span>`
                                     ));
 
                                     $container.html($elements);
@@ -215,17 +228,49 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     });
                                     setTimeout(() => {
                                         $($(".headerPojokanText1").find('span')).remove();
-                                            $('.col-hisuara').hide()
-                                            $('.col-pilpres').show()
-                                            setTimeout(() => {
-                                                $('.col-hisuara').css('display') = 'flex'
-                                                $('.col-pilpres').hide()
-
-                                                animateHeaderPojokan()
-                                            }, 1000 * 60);
-                                     
-                                    },4000);
+                                        animateHeaderPojokanText2()
+                                    }, 2000);
                                 }
+
+                                function animateHeaderPojokanText2() {
+                                    $container = $(".headerPojokanText2");
+
+                                    const text = "Vox Dei"
+                                    const $elements = text.split("").map((s) => $(
+                                        `<span style="text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}</span>`
+                                    ));
+
+                                    $container.html($elements);
+                                    $container.show();
+                                    // $("#gantiBackground").css({
+                                    //     "background-color": "#007bff"
+                                    // }, 1000);
+                                    $elements.forEach(function($el, i) {
+                                        $el
+                                            .css({
+                                                top: -60,
+                                                opacity: 0
+                                            })
+                                            .delay(100 * i)
+                                            .animate({
+                                                top: 0,
+                                                opacity: 1
+                                            }, 200);
+                                    });
+                                    setTimeout(() => {
+                                        $($(".headerPojokanText2").find('span')).remove();
+                                        $('.col-hisuara').hide()
+                                        $('.col-pilpres').show()
+                                        setTimeout(() => {
+                                            $('.col-hisuara').css('display') = 'flex'
+                                            $('.col-pilpres').hide()
+
+                                            animateHeaderPojokan()
+                                        }, 1000 * 60);
+                                    }, 2000);
+
+                                }
+                              
                             </script>
 
 
@@ -345,24 +390,22 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     <div class="col-md petugas tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/verifikasi_saksi" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 25px 0px 0px 25px; -webkit-box-shadow:0px 0px 100px 30px rgba(82,140,255,1);
--moz-box-shadow: 0px 0px 100px 30px rgba(82,140,255,1);
-box-shadow: 0px 0px 100px 30px rgba(82,140,255,1);">
+                                                <a href="{{url('')}}/administrator/verifikasi_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
                                                     Saksi
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/relawan" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0;">
+                                                <a href="{{url('')}}/administrator/relawan" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
                                                     Relawan
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/enumerator" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0;">
+                                                <a href="{{url('')}}/administrator/enumerator" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
                                                     Enumerator
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/verifikasi_akun" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                                <a href="{{url('')}}/administrator/verifikasi_akun" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                                     Admin
                                                 </a>
                                             </div>
@@ -372,17 +415,17 @@ box-shadow: 0px 0px 100px 30px rgba(82,140,255,1);">
                                     <div class="col-md operator tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/verifikator/verifikasi-c1" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                                <a href="{{url('')}}/verifikator/verifikasi-c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
                                                     Verifikasi C1
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/auditor/audit-c1" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px;">
+                                                <a href="{{url('')}}/auditor/audit-c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
                                                     Audit C1
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/verifikasi_koreksi" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                                <a href="{{url('')}}/administrator/verifikasi_koreksi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                                     Koreksi
                                                 </a>
                                             </div>
@@ -392,23 +435,23 @@ box-shadow: 0px 0px 100px 30px rgba(82,140,255,1);">
                                     <div class="col-md perhitungan tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/real_count2" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                                <a href="{{url('')}}/administrator/real_count2" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
                                                     Real Count
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/quick_count2" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px">
+                                                <a href="{{url('')}}/administrator/quick_count2" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px">
                                                     Quick Count
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/terverifikasi" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px;">
+                                                <a href="{{url('')}}/administrator/terverifikasi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
                                                     Terverifikasi
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/rekapitulasi"
-                                                    class="py-1 btn fs-6 w-100 text-white"
+                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                                     Rekapitulasi
                                                 </a>
@@ -419,12 +462,12 @@ box-shadow: 0px 0px 100px 30px rgba(82,140,255,1);">
                                     <div class="col-md rekapitulasi tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/rekapitulasi_kelurahan" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                                <a href="{{url('')}}/administrator/rekapitulasi_kelurahan" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
                                                     Rekapitulasi Kelurahan
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/rekapitulasi_kecamatan" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                                <a href="{{url('')}}/administrator/rekapitulasi_kecamatan" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                                     Rekapitulasi Kecamatan
                                                 </a>
                                             </div>
@@ -434,22 +477,22 @@ box-shadow: 0px 0px 100px 30px rgba(82,140,255,1);">
                                     <div class="col-md dokumentasi tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/data-c1" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                                <a href="{{url('')}}/administrator/data-c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
                                                     Data C1
                                                 </a>
                                             </div>
                                             <!-- <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="#" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0;">
+                                                <a href="#" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
                                                     Data C6
                                                 </a>
                                             </div> -->
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="#" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0;">
+                                                <a href="#" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
                                                     Surat Suara
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{route('superadmin.rdata')}}" class="py-1 btn fs-6 w-100 text-white" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                                <a href="{{route('superadmin.rdata')}}" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                                     Riwayat
                                                 </a>
                                             </div>
@@ -459,12 +502,12 @@ box-shadow: 0px 0px 100px 30px rgba(82,140,255,1);">
                                     <div class="col-md kecurangan tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/verifikator/verifikator_kecurangan" class="py-1 btn fs-6 w-100 text-white" style="background-color: #f82649; border-radius: 25px 0px 0px 25px;">
+                                                <a href="{{url('')}}/verifikator/verifikator_kecurangan" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 25px 0px 0px 25px;">
                                                     Verifikator Kecurangan
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/hukum/validator_kecurangan" class="py-1 btn fs-6 w-100 text-white" style="background-color: #f82649; border-radius: 0px 25px 25px 0px;">
+                                                <a href="{{url('')}}/hukum/validator_kecurangan" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 0px 25px 25px 0px;">
                                                     Validator Kecurangan
                                                 </a>
                                             </div>
@@ -474,22 +517,22 @@ box-shadow: 0px 0px 100px 30px rgba(82,140,255,1);">
                                     <div class="col-md featured tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/fraud-data-print" class="py-1 btn fs-6 w-100 text-white" style="background-color: #f82649; border-radius: 25px 0px 0px 25px;">
+                                                <a href="{{url('')}}/administrator/fraud-data-print" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 25px 0px 0px 25px;">
                                                     Cetak Bukti Kecurangan
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/fraud-data-report" class="py-1 btn fs-6 w-100 text-white" style="background-color: #f82649; border-radius: 0px;">
+                                                <a href="{{url('')}}/administrator/fraud-data-report" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 0px;">
                                                     Cetak Barkode Kecurangan
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/index-tsm" class="py-1 btn fs-6 w-100 text-white" style="background-color: #f82649; border-radius: 0px;">
+                                                <a href="{{url('')}}/administrator/index-tsm" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 0px;">
                                                     Cetak Jenis Kecurangan
                                                 </a>
                                             </div>
                                              <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{route('superadmin.analisa_dpt_kpu')}}" class="py-1 btn fs-6 w-100 text-white" style="background-color: #f82649; border-radius: 0px 25px 25px 0px;;">
+                                                <a href="{{route('superadmin.analisa_dpt_kpu')}}" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 0px 25px 25px 0px;;">
                                                     Cetak Realisasi DPT
                                                 </a>
                                             </div>
@@ -1108,6 +1151,18 @@ box-shadow: 0px 0px 100px 30px rgba(82,140,255,1);">
     </div>
 </div>
 <!-- /Mobile Header -->
+
+<script>
+    $(document).ready(function() {
+        var currentUrl = window.location.href; // Get the current URL
+        
+        $('.glowy-menu').each(function() {
+            if ($(this).attr('href') === currentUrl) {
+                $(this).addClass('active'); // Add 'active' class if href matches current URL
+            }
+        });
+    });
+</script>
 
 <!--app-content open-->
 <div class="app-content for-kolapse-kurangin" style="margin-top: 40px; margin-left: 0px !important">
