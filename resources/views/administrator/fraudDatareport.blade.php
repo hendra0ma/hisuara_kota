@@ -1,10 +1,10 @@
 @include('layouts.partials.head')
-@include('layouts.partials.sidebar-fbr')
+{{-- @include('layouts.partials.sidebar-fbr') --}}
         @include('layouts.partials.header')
 
 <div class="row mt-3 justify-content-end">
     <div class="col-lg">
-        <h1 class="page-title fs-1 mt-2">Dashboard Rekapitung
+        <h1 class="page-title fs-1 mt-2">Dashboard Hisuara
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">

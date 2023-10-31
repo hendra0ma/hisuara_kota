@@ -1,10 +1,10 @@
 @include('layouts.partials.head')
-@include('layouts.partials.sidebar-fdp')
+{{-- @include('layouts.partials.sidebar-fdp') --}}
 @include('layouts.partials.header')
 
 <div class="row mt-3">
     <div class="col-lg-4">
-        <h1 class="page-title fs-1 mt-2">Dashboard Rekapitung
+        <h1 class="page-title fs-1 mt-2">Dashboard Hisuara
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">
@@ -15,29 +15,47 @@
         </ol>
         <h4 class="fs-4 mt-2 fw-bold">Percetakan Data Kecurangan</h4>
     </div>
-    <div class="col-lg-8 mt-2">
-        <div class="row">
-            
-            <div class="col-lg-4">
-                
+    <div class="col-lg-8">
+        <div class="row mt-2">
+
+            {{-- <div class="col parent-link">
+                <a href="{{url('')}}/administrator/verifikasi_saksi" class="btn text-white w-100 py-3">Verifikasi Saksi</a>
             </div>
-            <div class="col-lg-4 justify-content-end">
-                <div class="card">
-                    <div class="card-header bg-secondary">
-                        <div class="card-title text-white">Total Kecurangan Masuk</div>
-                    </div>
-                    <div class="card-body">
-                        <p class="">{{count($list_suara)}}</p>
-                    </div>
-                </div>
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/absensi" class="btn text-white w-100 py-3">Saksi Teregristrasi</a>
             </div>
-            <div class="col-lg-4">
-                <div class="card">
-                    <div class="card-header bg-success">
-                        <div class="card-title text-white">Total Data Tercetak</div>
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/absensi/hadir" class="btn text-white w-100 py-3">Saksi Hadir</a>
+            </div>
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/absensi/tidak_hadir" class="btn text-white w-100 py-3">Saksi Tidak Hadir</a>
+            </div> --}}
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/fraud-data-print" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/fraud-data-print')?'active' : '' }}">Data Kecurangan Masuk</a>
+            </div>
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/fraud-data-print-tercetak" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/fraud-data-print-tercetak')?'active' : '' }}">Data Tercetak</a>
+            </div>
+
+            <div class="col-lg-12 mt-2">
+                <div class="row">
+                    
+                    <div class="col-lg-4">
+                        
                     </div>
-                    <div class="card-body">
-                        <p class="">{{count($print)}}</p>
+                    <div class="col-lg-4 justify-content-end">
+                        <div class="card">
+                            <div class="card-header bg-secondary">
+                                <div class="card-title text-white">Total Kecurangan Masuk : {{count($list_suara)}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header bg-success">
+                                <div class="card-title text-white">Total Data Tercetak : {{count($print)}}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
