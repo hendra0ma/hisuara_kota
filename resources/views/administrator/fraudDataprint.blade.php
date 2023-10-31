@@ -1,19 +1,31 @@
+<?php
+use App\Models\District;
+use App\Models\Village;
+use App\Models\Tps;
+use App\Models\Regency;
+use App\Models\Config;
+
+$data['config'] = Config::first();
+$config = Config::first();
+$kota = Regency::where('id', $config['regencies_id'])->first();
+?>
+
 @include('layouts.partials.head')
 {{-- @include('layouts.partials.sidebar-fdp') --}}
 @include('layouts.partials.header')
 
 <div class="row mt-3">
     <div class="col-lg-4">
-        <h1 class="page-title fs-1 mt-2">Dashboard Hisuara
+        <h1 class="page-title fs-1 mt-2">Bukti Kecurangan
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Percetakan Data Kecurangan
+            {{-- <li class="breadcrumb-item"><a href="#">Bukti Kecurangan</a></li> --}}
+            <li class="breadcrumb-item active" aria-current="page">
+                {{$kota->name}}
                 <!-- Kota -->
             </li>
         </ol>
-        <h4 class="fs-4 mt-2 fw-bold">Percetakan Data Kecurangan</h4>
     </div>
     <div class="col-lg-8">
         <div class="row mt-2">
@@ -37,7 +49,7 @@
                 <a href="{{url('')}}/administrator/fraud-data-print-tercetak" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/fraud-data-print-tercetak')?'active' : '' }}">Data Tercetak</a>
             </div>
 
-            <div class="col-lg-12 mt-2">
+            {{-- <div class="col-lg-12 mt-2">
                 <div class="row">
                     
                     <div class="col-lg-4">
@@ -58,17 +70,17 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
 
-<h4 class="fs-4 mt-2 fw-bold">{{$title}} 
-     <div>Dilindungi Paten Rekapitung</div>
- </h4>
-<hr style="border: 1px solid;">
+<h4 class="fw-bold fs-4 mt-5 mb-0">
+    {{-- Jumlah Admin Terverifikasi :  --}} {{$title}}
+</h4>
+<hr style="border: 1px solid">
 
-<div class="row" style="margin-top: 30px;">
+<div class="row">
 
     @foreach($list_suara as $ls)
     <div class="col-md-6 col-xl-4">
