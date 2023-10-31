@@ -11,52 +11,52 @@
     <meta name="author" content="Spruko Technologies Private Limited">
     <meta name="keywords" content="admin, dashboard, dashboard ui, admin dashboard template, admin panel dashboard, admin panel html, admin panel html template, admin panel template, admin ui templates, administrative templates, best admin dashboard, best admin templates, bootstrap 4 admin template, bootstrap admin dashboard, bootstrap admin panel, html css admin templates, html5 admin template, premium bootstrap templates, responsive admin template, template admin bootstrap 4, themeforest html">
     <!-- FAVICON -->
-    <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/brand/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('')}}assets/images/brand/favicon.ico" />
     <!-- TITLE -->
     <title>Hisuara</title>
 
     <!-- BOOTSTRAP CSS -->
-    <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{{asset('')}}assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- STYLE CSS -->
-    <link href="../../assets/css/style.css" rel="stylesheet" />
-    <link href="../../assets/css/dark-style.css" rel="stylesheet" />
-    <link href="../../assets/css/skin-modes.css" rel="stylesheet" />
+    <link href="{{asset('')}}assets/css/style.css" rel="stylesheet" />
+    <link href="{{asset('')}}assets/css/dark-style.css" rel="stylesheet" />
+    <link href="{{asset('')}}assets/css/skin-modes.css" rel="stylesheet" />
 
     <!-- SIDE-MENU CSS -->
-    <link href="../../assets/css/sidemenu.css" rel="stylesheet" id="sidemenu-theme">
+    <link href="{{asset('')}}assets/css/sidemenu.css" rel="stylesheet" id="sidemenu-theme">
 
     <!--C3 CHARTS CSS -->
-    <link href="../../assets/plugins/charts-c3/c3-chart.css" rel="stylesheet" />
+    <link href="{{asset('')}}assets/plugins/charts-c3/c3-chart.css" rel="stylesheet" />
 
     <!-- P-scroll bar css-->
-    <link href="../../assets/plugins/p-scroll/perfect-scrollbar.css" rel="stylesheet" />
+    <link href="{{asset('')}}assets/plugins/p-scroll/perfect-scrollbar.css" rel="stylesheet" />
 
     <!--- FONT-ICONS CSS -->
-    <link href="../../assets/css/icons.css" rel="stylesheet" />
+    <link href="{{asset('')}}assets/css/icons.css" rel="stylesheet" />
 
     <!-- SIDEBAR CSS -->
-    <link href="../../assets/plugins/sidebar/sidebar.css" rel="stylesheet">
+    <link href="{{asset('')}}assets/plugins/sidebar/sidebar.css" rel="stylesheet">
 
     <!-- SELECT2 CSS -->
-    <link href="../../assets/plugins/select2/select2.min.css" rel="stylesheet" />
+    <link href="{{asset('')}}assets/plugins/select2/select2.min.css" rel="stylesheet" />
 
     <!-- DATA TABLE CSS -->
-    <link href="../../assets/plugins/datatable/css/dataTables.bootstrap5.css" rel="stylesheet" />
-    <link href="../../assets/plugins/datatable/css/buttons.bootstrap5.min.css" rel="stylesheet">
-    <link href="../../assets/plugins/datatable/responsive.bootstrap5.css" rel="stylesheet" />
+    <link href="{{asset('')}}assets/plugins/datatable/css/dataTables.bootstrap5.css" rel="stylesheet" />
+    <link href="{{asset('')}}assets/plugins/datatable/css/buttons.bootstrap5.min.css" rel="stylesheet">
+    <link href="{{asset('')}}assets/plugins/datatable/responsive.bootstrap5.css" rel="stylesheet" />
 
     <!-- COLOR SKIN CSS -->
-    <link id="theme" rel="stylesheet" type="text/css" media="all" href="../../assets/colors/color1.css" />
+    <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{asset('')}}assets/colors/color1.css" />
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
      crossorigin=""/>
 
-    <link href="../../assets/plugins/sweet-alert/sweetalert.css" rel="stylesheet" />
+    <link href="{{asset('')}}assets/plugins/sweet-alert/sweetalert.css" rel="stylesheet" />
     <!-- INTERNAL Notifications  Css -->
-    <link href="../../assets/plugins/notify/css/jquery.growl.css" rel="stylesheet" />
-    <link href="../../assets/plugins/notify/css/notifIt.css" rel="stylesheet" />
+    <link href="{{asset('')}}assets/plugins/notify/css/jquery.growl.css" rel="stylesheet" />
+    <link href="{{asset('')}}assets/plugins/notify/css/notifIt.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet" />
     
     <link rel="stylesheet" href="https://raw.githack.com/thdoan/magnify/master/dist/css/magnify.css">
@@ -133,6 +133,32 @@
             margin-top: 25px;
         }
 
+         /* 
+        panjang/tinggi lingkaran = pt
+        margin kiri = mk
+        lebar background = lb
+        jarak ke paling kanan lebar bg = jmkb
+        jadi
+
+        p + mk = pmk
+        lb - pmk = jmkb
+        jmkb - mk = hasil
+        */
+
+        :root {
+            --hebag: 25px;
+            --panting: calc(var(--hebag) - 8px);
+            --makir: 4px;
+            --lebag: 60px;
+            --pmk: calc(var(--panting) + var(--makir));
+            --jmkb: calc(var(--lebag) - var(--pmk));
+            --trans-need: calc(var(--jmkb) - var(--makir)); /* Changed reference to --panting */
+        }
+
+        /* Your other styles remain unchanged */
+
+
+
         .mid {
             display: flex;
             align-items: center;
@@ -142,8 +168,8 @@
         .switch {
             position: relative;
             display: inline-block;
-            width: 60px;
-            height: 34px;
+            width: var(--lebag);
+            height: var(--hebag);
         }
         /* Hide default HTML checkbox */
         .switch input {
@@ -151,7 +177,8 @@
             width: 0;
             height: 0;
         }
-        /* The slider */
+
+        
         .slider {
             position: absolute;
             cursor: pointer;
@@ -163,17 +190,20 @@
             -webkit-transition: .4s;
             transition: .4s;
         }
+
         .slider:before {
             position: absolute;
             content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
+            height: var(--panting);
+            width: var(--panting);
+            left: var(--makir);
             bottom: 4px;
             background-color: white;
             -webkit-transition: .4s;
             transition: .4s;
         }
+
+
         input:checked+.slider {
             background-color: #2196F3;
         }
@@ -181,9 +211,9 @@
             box-shadow: 0 0 1px #2196F3;
         }
         input:checked+.slider:before {
-            -webkit-transform: translateX(26px);
-            -ms-transform: translateX(26px);
-            transform: translateX(26px);
+            -webkit-transform: translateX(var(--trans-need));
+            -ms-transform: translateX(var(--trans-need));
+            transform: translateX(var(--trans-need));
         }
         /* Rounded sliders */
         .slider.round {
@@ -206,7 +236,7 @@
         }
     </style>
 
-    <script src="../../assets/js/jquery.min.js"></script>
+    <script src="{{asset('')}}assets/js/jquery.min.js"></script>
 
     <link rel="stylesheet" href="https://raw.githack.com/thdoan/magnify/master/dist/css/magnify.css">
 
