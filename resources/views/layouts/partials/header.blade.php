@@ -369,7 +369,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             style="background-color: #656064; width: 40px; height: 36px;"
                                             data-target="sirantap">
                                             <span class="dark-layout" data-bs-placement="bottom"
-                                                data-bs-toggle="tooltip" title="Sirantap">
+                                                data-bs-toggle="tooltip" title="Sistem Laporan Data Pemilu">
                                                 <i class="fa-solid fa-print"></i>
                                             </span>
                                         </button>
