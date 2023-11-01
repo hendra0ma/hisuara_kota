@@ -209,9 +209,9 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                 function animateHeaderPojokanText1() {
                                     $container = $(".headerPojokanText1");
 
-                                    const text = "Vox Populi"
+                                    const text = "Vox Populi, Vox Dei"
                                     const $elements = text.split("").map((s) => $(
-                                        `<span style="text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}</span>`
+                                        `<span style="margin-left:4px;text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}</span>`
                                     ));
 
                                     $container.html($elements);
@@ -233,8 +233,15 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     });
                                     setTimeout(() => {
                                         $($(".headerPojokanText1").find('span')).remove();
-                                        animateHeaderPojokanText2()
-                                    }, 2000);
+                                        $('.col-hisuara').hide()
+                                        $('.col-pilpres').show()
+                                        setTimeout(() => {
+                                            $('.col-hisuara').css('display') = 'flex'
+                                            $('.col-pilpres').hide()
+
+                                            animateHeaderPojokan()
+                                        }, 1000 * 60);
+                                    }, 4000);
                                 }
 
                                 function animateHeaderPojokanText2() {
@@ -723,9 +730,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                     </div>
                                                     @foreach($domainKota as $dokota)
                                                     <div class="col-auto">
-                                                        <a class="text-white btn rounded-0 item"
-                                                            style="background: #528bff"
-                                                            href="{{$dokota->domain}}">{{$dokota->name}}</a>
+                                                        <a class="text-white btn rounded-0 item" style="background: #528bff" href="http://{{$dokota->domain}}">{{$dokota->name}}</a>
                                                     </div>
                                                     @endforeach
                                                 </div>
@@ -1162,21 +1167,21 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 <a class="dropdown-item" href="/user/profile">
                                                     <i class="dropdown-icon fe fe-user"></i> Profile
                                                 </a>
-                                                <a class="dropdown-item" href="#">
+                                                <a class="dropdown-item" href="{{url('')}}/saksi-dashboard">
                                                     <i class="dropdown-icon fe fe-user"></i> Upload C1
                                                 </a>
-                                                <a class="dropdown-item" href="#">
+                                                <a class="dropdown-item" href="{{url('')}}/upload_c1">
                                                     <i class="dropdown-icon fe fe-user"></i> Upload C1 Enumerator
                                                 </a>
-                                                <a class="dropdown-item" href="#">
+                                                <a class="dropdown-item" href="{{url('')}}/c1-relawan">
                                                     <i class="dropdown-icon fe fe-user"></i> Upload C1 Relawan
                                                 </a>
-                                                <a class="dropdown-item" href="#">
+                                                <a class="dropdown-item" href="{{url('')}}/upload_kecurangan">
                                                     <i class="dropdown-icon fe fe-user"></i> Upload Kecurangan
                                                 </a>
-                                                <button class="dropdown-item tugel-kolaps" href="#" data-target="setting">
+                                                <!-- <button class="dropdown-item tugel-kolaps" href="#" data-target="setting">
                                                     <i class="dropdown-icon fa-solid fa-gear"></i> Setting
-                                                </button>
+                                                </button> -->
 
                                                 <form action="{{ route('logout') }}" method="post">
                                                     @csrf

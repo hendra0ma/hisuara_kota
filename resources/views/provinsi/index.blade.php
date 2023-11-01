@@ -252,7 +252,7 @@ $config = Config::first();
                                         @foreach ($kota as $item)
                                             <?php $domainProv = RegenciesDomain::where('regency_id',$item->id)->first(); ?>
                                         <tr onclick='check("{{$domainProv->domain}}")'>
-                                            <td><a href="https://{{$domainProv->domain}}/administrator/index">{{$item['name']}}</a>
+                                            <td><a href="http://{{$domainProv->domain}}:8000/administrator/index">{{$item['name']}}</a>
                                             </td>
                                             @foreach ($paslon as $cd)
                                             <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('saksi_data.paslon_id', $cd['id'])
@@ -344,7 +344,7 @@ $config = Config::first();
                                         @foreach ($kota as $item)
                                             <?php $domainProv = App\Models\RegenciesDomain::where('regency_id',$item->id)->first(); ?>
                                         <tr onclick='check("{{$domainProv->domain}}")'>
-                                            <td><a href="https://{{$domainProv->domain}}/administrator/index">{{$item['name']}}</a>
+                                            <td><a href="http://{{$domainProv->domain}}:8000/administrator/index">{{$item['name']}}</a>
                                             </td>
                                             @foreach ($paslon as $cd)
                                             <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('saksi_data.paslon_id', $cd['id'])
@@ -431,7 +431,7 @@ $config = Config::first();
                                         @foreach ($kota as $item)
                                             <?php $domainProv = App\Models\RegenciesDomain::where('regency_id',$item->id)->first(); ?>
                                         <tr onclick='check("{{$domainProv->domain}}")'>
-                                            <td><a href="https://{{$domainProv->domain}}/administrator/index">{{$item['name']}}</a>
+                                            <td><a href="http://{{$domainProv->domain}}:8000/administrator/index">{{$item['name']}}</a>
                                             </td>
                                             @foreach ($paslon as $cd)
                                             <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('saksi_data.paslon_id', $cd['id'])
