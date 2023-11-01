@@ -426,34 +426,12 @@ $track = Tracking::where('id_user',$user['id'])->first();
             </div>
             @if ($saksi != NULL)
             @if ($saksi['kecurangan'] == "yes")
-            <div class="row mt-5">
-                <div class="col-12">
-                    <hr>
-                    <div class="row">
-                        <div class="col"> <strong>Estimasi Kecurangan Terverfikasi:</strong> <br>29 nov 2019 </div>
-                        <div class="col"> <strong>Status:</strong> <br> Selesai </div>
-                    </div>
-                    <div class="track">
-                        @if ($saksi['status_kecurangan'] == 'belum terverifikasi')
-                        <div class="step active secondary"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">Saksi Mengirim Kecurangan</span> </div>
-                        <div class="step secondary"> <span class="icon"> <i class="fa fa-send"></i> </span> <span class="text">Terverifikasi/Selesai</span> </div>
-                        @elseif($saksi['status_kecurangan'] == 'terverifikasi')
-                        <div class="step active secondary"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">Saksi Mengirim Kecurangan</span> </div>
-                        <div class="step active secondary"> <span class="icon"> <i class="fa fa-send"></i> </span> <span class="text">Terverifikasi/Selesai</span> </div>
-                        @elseif($saksi['status_kecurangan'] == 'ditolak')
-                        <div class="step active danger"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">Saksi Mengirim Kecurangan</span> </div>
-                        <div class="step active danger"> <span class="icon"> <i class="fa fa-send"></i> </span> <span class="text">Ditolak</span> </div>
-                        @endif
-                    </div>
-                    <hr>
-                </div>
-            </div>
 
-            <div class="row my-3">
-                <div class="col-12">
-                    <div class="alert alert-danger" role="alert">
-                        <i class="fa fa-check-circle"></i> Laporan Kecurangan Saksi
-                    </div>
+            <div class="row mt-5">
+                <div class="col-12 bg-danger text-white py-3 text-center">  
+                    <h4 class="fw-bold mb-0">
+                        Laporan Kecurangan Saksi
+                    </h4>
                 </div>
                 <div class="col-12">
                     <div class="row">
@@ -496,6 +474,35 @@ $track = Tracking::where('id_user',$user['id'])->first();
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="row my-3">
+                <div class="col-12">
+                    <hr>
+                    <div class="row">
+                        <div class="col"> <strong>Estimasi Kecurangan Terverfikasi:</strong> <br>29 nov 2019 </div>
+                        <div class="col"> <strong>Status:</strong> <br> Selesai </div>
+                    </div>
+                    <div class="track">
+                        @if ($saksi['status_kecurangan'] == 'belum terverifikasi')
+                        <div class="step active secondary"> <span class="icon"> <i class="fa fa-user"></i> </span> <span
+                                class="text">Saksi Mengirim Kecurangan</span> </div>
+                        <div class="step secondary"> <span class="icon"> <i class="fa fa-send"></i> </span> <span
+                                class="text">Terverifikasi/Selesai</span> </div>
+                        @elseif($saksi['status_kecurangan'] == 'terverifikasi')
+                        <div class="step active secondary"> <span class="icon"> <i class="fa fa-user"></i> </span> <span
+                                class="text">Saksi Mengirim Kecurangan</span> </div>
+                        <div class="step active secondary"> <span class="icon"> <i class="fa fa-send"></i> </span> <span
+                                class="text">Terverifikasi/Selesai</span> </div>
+                        @elseif($saksi['status_kecurangan'] == 'ditolak')
+                        <div class="step active danger"> <span class="icon"> <i class="fa fa-user"></i> </span> <span
+                                class="text">Saksi Mengirim Kecurangan</span> </div>
+                        <div class="step active danger"> <span class="icon"> <i class="fa fa-send"></i> </span> <span
+                                class="text">Ditolak</span> </div>
+                        @endif
+                    </div>
+                    <hr>
                 </div>
             </div>
             @else
