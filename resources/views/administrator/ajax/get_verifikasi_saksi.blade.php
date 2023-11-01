@@ -60,12 +60,16 @@ $track = Tracking::where('id_user',$user['id'])->first();
     
     <div id="section-to-print">
         <div class="row">
+            <?php $scan_url = url('') . "/scanning-secure/" . (string)Crypt::encrypt($qrcode->nomor_berkas); ?>
+            <div class="col-auto my-auto">
+                {!! QrCode::size(100)->generate( $scan_url); !!}
+            </div>
             <div class="col mt-2">
                 <div class="media">
                     @if ($user['profile_photo_path'] == NULL)
-                    <img class="rounded-circle" style="width: 70px; height: 70px; object-fit: cover; margin-right: 10px;" src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
+                    <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
                     @else
-                    <img class="rounded-circle" style="width: 70px; height: 70px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
+                    <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
                     @endif
                 
                     <div class="media-body my-auto">
@@ -426,38 +430,16 @@ $track = Tracking::where('id_user',$user['id'])->first();
             </div>
             @if ($saksi != NULL)
             @if ($saksi['kecurangan'] == "yes")
-            <div class="row mt-5">
-                <div class="col-12">
-                    <hr>
-                    <div class="row">
-                        <div class="col"> <strong>Estimasi Kecurangan Terverfikasi:</strong> <br>29 nov 2019 </div>
-                        <div class="col"> <strong>Status:</strong> <br> Selesai </div>
-                    </div>
-                    <div class="track">
-                        @if ($saksi['status_kecurangan'] == 'belum terverifikasi')
-                        <div class="step active secondary"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">Saksi Mengirim Kecurangan</span> </div>
-                        <div class="step secondary"> <span class="icon"> <i class="fa fa-send"></i> </span> <span class="text">Terverifikasi/Selesai</span> </div>
-                        @elseif($saksi['status_kecurangan'] == 'terverifikasi')
-                        <div class="step active secondary"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">Saksi Mengirim Kecurangan</span> </div>
-                        <div class="step active secondary"> <span class="icon"> <i class="fa fa-send"></i> </span> <span class="text">Terverifikasi/Selesai</span> </div>
-                        @elseif($saksi['status_kecurangan'] == 'ditolak')
-                        <div class="step active danger"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">Saksi Mengirim Kecurangan</span> </div>
-                        <div class="step active danger"> <span class="icon"> <i class="fa fa-send"></i> </span> <span class="text">Ditolak</span> </div>
-                        @endif
-                    </div>
-                    <hr>
-                </div>
-            </div>
 
-            <div class="row my-3">
-                <div class="col-12">
-                    <div class="alert alert-danger" role="alert">
-                        <i class="fa fa-check-circle"></i> Laporan Kecurangan Saksi
-                    </div>
+            <div class="row mt-5">
+                <div class="col-12 bg-danger text-white py-3 text-center">  
+                    <h4 class="fw-bold mb-0">
+                        Laporan Kecurangan Saksi
+                    </h4>
                 </div>
                 <div class="col-12">
                     <div class="row">
-                        <div class="col-6 pe-0">
+                        <div class="col-6 px-0">
                             <div class="card">
                                 <div class="card-header" style="border: 1px #eee solid !important">
                                     <h3 class="card-title">Bukti Foto</h3>
@@ -473,7 +455,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 ps-0">
+                        <div class="col-6 px-0">
                             <div class="card">
                                 <div class="card-header" style="border: 1px #eee solid !important">
                                     <h3 class="card-title">Bukti Video</h3>
@@ -489,13 +471,51 @@ $track = Tracking::where('id_user',$user['id'])->first();
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header" style="border: 1px #eee solid !important">
-                                    <h3 class="card-title">Bukti Rekaman</h3>
+                                    <h3 class="card-title">Video Pernyataan Saksi (Bahwa ada kecurangan)</h3>
+                                </div>
+                                <div class="card-body" style="border: 1px #eee solid !important">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header" style="border: 1px #eee solid !important">
+                                    <h3 class="card-title">Surat Pernyataan</h3>
                                 </div>
                                 <div class="card-body" style="border: 1px #eee solid !important">
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="row my-3">
+                <div class="col-12">
+                    <hr>
+                    <div class="row">
+                        <div class="col"> <strong>Saksi Mengirim Data Kecurangan:</strong> <br>29 nov 2019 </div>
+                        <div class="col"> <strong>Status:</strong> <br> Selesai </div>
+                    </div>
+                    <div class="track">
+                        @if ($saksi['status_kecurangan'] == 'belum terverifikasi')
+                        <div class="step active secondary"> <span class="icon"> <i class="fa fa-user"></i> </span> <span
+                                class="text">Saksi Mengirim Kecurangan</span> </div>
+                        <div class="step secondary"> <span class="icon"> <i class="fa fa-send"></i> </span> <span
+                                class="text">Terverifikasi/Selesai</span> </div>
+                        @elseif($saksi['status_kecurangan'] == 'terverifikasi')
+                        <div class="step active secondary"> <span class="icon"> <i class="fa fa-user"></i> </span> <span
+                                class="text">Saksi Mengirim Kecurangan</span> </div>
+                        <div class="step active secondary"> <span class="icon"> <i class="fa fa-send"></i> </span> <span
+                                class="text">Terverifikasi/Selesai</span> </div>
+                        @elseif($saksi['status_kecurangan'] == 'ditolak')
+                        <div class="step active danger"> <span class="icon"> <i class="fa fa-user"></i> </span> <span
+                                class="text">Saksi Mengirim Kecurangan</span> </div>
+                        <div class="step active danger"> <span class="icon"> <i class="fa fa-send"></i> </span> <span
+                                class="text">Ditolak</span> </div>
+                        @endif
+                    </div>
+                    <hr>
                 </div>
             </div>
             @else
