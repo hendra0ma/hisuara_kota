@@ -369,6 +369,18 @@
         .parent-link a.active {
             background: #6259ca;
         }
+        
+        .parent-link a.active:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            right: 0;
+            width: 40%;
+            border-top: 3px solid #6259ca;
+            z-index: -1;
+        }
 
         .parent-link a {
             background: rgba(98, 88, 202, 0.65);
@@ -382,6 +394,18 @@
             background: #f82649;
         }
 
+        .parent-link .btn-fdp.active:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            right: 0;
+            width: 40%;
+            border-top: 3px solid #f82649;
+            z-index: -1;
+        }
+
         .parent-link .btn-fdp {
             background: rgba(248, 38, 73, 0.65);
         }
@@ -392,6 +416,18 @@
 
         .parent-link .btn-ver.active {
             background: #ff4f4e;
+        }
+
+        .parent-link .btn-ver.active:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            right: 0;
+            width: 40%;
+            border-top: 3px solid #f82649;
+            z-index: -1;
         }
 
         .parent-link .btn-ver {

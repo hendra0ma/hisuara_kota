@@ -178,5 +178,4 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 
 
 
-
 @endsection

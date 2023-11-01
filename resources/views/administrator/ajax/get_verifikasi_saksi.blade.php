@@ -3,7 +3,7 @@ use App\Models\Tracking;
 
 
 $track = Tracking::where('id_user',$user['id'])->first();
-// dump($url);
+// dump($absensi);
 ?>
 
 <style>
@@ -45,6 +45,16 @@ $track = Tracking::where('id_user',$user['id'])->first();
       }
     }
 </style>
+
+<div class="mt-3">
+    @if($url == 'verifikasi_saksi')
+    @if ($user['foto_ktp'] != null)
+    <img style="height: 415px; object-fit: cover; width: 100%" src="{{ $user['foto_ktp'] }}" alt="">
+    @else
+    <img style="height: 415px; object-fit: cover; width: 100%" src="https://t-2.tstatic.net/default-2.jpg" alt="">
+    @endif
+    @else
+</div>
 
 <div class="container">
     
@@ -312,8 +322,8 @@ $track = Tracking::where('id_user',$user['id'])->first();
                             </h6>
                         </div>
                         <div class="card-body p-0">
-                            @if ($tps['foto_lokasi'] != null)
-                                <img style="height: 415px; object-fit: cover" src="{{ $tps['foto_lokasi'] }}" alt="">
+                            @if ($absensi['selfie_lokasi'] != null)
+                                <img style="height: 415px; object-fit: cover" src="{{ $absensi['selfie_lokasi'] }}" alt="">
                             @else
                                 <img style="height: 415px; object-fit: cover" src="https://t-2.tstatic.net/default-2.jpg" alt="">
                             @endif
@@ -438,6 +448,56 @@ $track = Tracking::where('id_user',$user['id'])->first();
                     <hr>
                 </div>
             </div>
+
+            <div class="row my-3">
+                <div class="col-12">
+                    <div class="alert alert-danger" role="alert">
+                        <i class="fa fa-check-circle"></i> Laporan Kecurangan Saksi
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6 pe-0">
+                            <div class="card">
+                                <div class="card-header" style="border: 1px #eee solid !important">
+                                    <h3 class="card-title">Bukti Foto</h3>
+                                </div>
+                                <div class="card-body" style="border: 1px #eee solid !important">
+                                    <div class="row">
+                                        @foreach ($bukti_foto as $bf)
+                                        <div class="col-12 mt-1">
+                                            <img class="w-100" src="{{asset('')}}storage/{{$bf->url}}" alt="">
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 ps-0">
+                            <div class="card">
+                                <div class="card-header" style="border: 1px #eee solid !important">
+                                    <h3 class="card-title">Bukti Video</h3>
+                                </div>
+                                <div class="card-body" style="border: 1px #eee solid !important">
+                                    <video width="100%" controls>
+                                        <source src="{{asset('')}}storage/{{$bukti_vidio->url}}" type="video/mp4">
+                                        <source src="{{asset('')}}storage/{{$bukti_vidio->url}}" type="video/ogg">
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header" style="border: 1px #eee solid !important">
+                                    <h3 class="card-title">Bukti Rekaman</h3>
+                                </div>
+                                <div class="card-body" style="border: 1px #eee solid !important">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             @else
             
             @endif
@@ -449,3 +509,4 @@ $track = Tracking::where('id_user',$user['id'])->first();
     </div>
 
 </div>
+@endif
