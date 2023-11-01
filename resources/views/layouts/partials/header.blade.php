@@ -188,12 +188,12 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         $($(".headerPojokan").find('span')).remove();
                                         $('.col-pilpres').show()
 
-                                        setTimeout(()=>{
-                                            $('.col-hisuara').show()
-                                            animateHeaderPojokan()
-                                         $('.col-pilpres').hide()
-                                         pilpresAnimate();
-                                        },5000)
+                                        // setTimeout(()=>{
+                                        //     $('.col-hisuara').show()
+                                        //     animateHeaderPojokan()
+                                        //  $('.col-pilpres').hide()
+                                        //  pilpresAnimate();
+                                        // },5000)
 
                                     },5000)
                                 }
@@ -206,7 +206,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                       $('.col-hisuara').show()
                                         $('.col-pilpres').hide()
                                         pilpresAnimate();
-                                    },5000)
+                                    },4000)
                                 })
 
                                 function animateHeaderPojokan() {
@@ -971,12 +971,17 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             setTimeout(() => {
                                                 $("#text-effect").hide();
                                                 $("#text-effect").html("");
-                                                $('#img-effect').fadeIn(500);
+                                                // $('#img-effect').fadeIn(500);
+                                                const dataTarget = getCookie('dataTarget');
+                                                if (dataTarget != "") {
+                                                $(`[data-target='${dataTarget}']`).click();
+                                                } else {
+                                                $('.active-button').click()
+                                                }
 
-                                                setTimeout(() => {
-                                                    $('#img-effect').fadeOut(200)
-                                                    animate();
-                                                }, 5000);
+                                                // setTimeout(() => {
+                                                //     $('#img-effect').fadeOut(200)
+                                                // }, 5000);
 
                                             }, 5000)
 
