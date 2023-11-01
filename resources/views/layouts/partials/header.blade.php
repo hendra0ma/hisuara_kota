@@ -136,7 +136,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                     <div class="card-body for-kolapse py-1 pl-5" style="background: #000; padding-right: 2.5rem">
                         <div class="row py-2 justify-content-between" style="gap: 15px">
 
-                            <div class="col-auto col-hisuara" style="display:none;width:238px;height:54px">
+                            <!-- <div class="col-auto col-hisuara" style="display:none;width:238px;height:54px">
                                 <div class="row my-auto mx-auto">
 
                                     <div class="col-md ps-3 mb-0 text-light headerAnimate">
@@ -147,11 +147,10 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         </h2>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="col-auto col-pilpres">
                                 <div class="row">
-
                                     <div class="col-md-auto pe-0 my-auto">
                                         <img src="{{asset('')}}storage/{{$config->regencies_logo}}" style="width: 50px"
                                             alt="">
@@ -173,115 +172,110 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                 </div>
                             </div>
 
+                            <div class="col-auto col-hisuara"style="display:none">
+                                <div class="row">
+                                    <div class="col-md-auto pe-0 my-auto">
+                                        <img src="{{asset('')}}images/logo/Hisuara_new_white.png" class="img-fluid"style="height:50px;width:auto">
+                                    </div>
+                                </div>
+                            </div>
 
-                            <script>
-                                function animateHeaderPojokan() {
-                                    $container = $(".headerPojokan");
-                                    const text = "HISUARA"
-                                    const $elements = text.split("").map((s) => $(
-                                        `<span style="margin-left:5px;text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}</span>`
-                                    ));
 
-                                    $container.html($elements);
-                                    $container.show();
-                                    // $("#gantiBackground").css({
-                                    //     "background-color": "#007bff"
-                                    // }, 1000);
-                                    $elements.forEach(function($el, i) {
-                                        $el
-                                            .css({
-                                                top: -60,
-                                                opacity: 0
-                                            })
-                                            .delay(100 * i)
-                                            .animate({
-                                                top: 0,
-                                                opacity: 1
-                                            }, 200);
-                                    });
-                                    setTimeout(() => {
-                                        $($(".headerPojokan").find('span')).remove();
-                                        animateHeaderPojokanText1()
-                                    }, 2000);
+                            <script>   
+                                let pilpresAnimate = function(){
+                                    setTimeout(()=>{
+                                        $('.col-hisuara').hide(500)
+                                        $('.col-pilpres').show(500)
 
+                                        setTimeout(()=>{
+                                            $('.col-hisuara').show(500)
+                                         $('.col-pilpres').hide(500)
+                                         pilpresAnimate();
+                                        },5000)
+
+                                    },5000)
                                 }
 
-                                function animateHeaderPojokanText1() {
-                                    $container = $(".headerPojokanText1");
 
-                                    const text = "Vox Populi, Vox Dei"
-                                    const $elements = text.split("").map((s) => $(
-                                        `<span style="margin-left:4px;text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}</span>`
-                                    ));
+                                $(function () {
+                                  
+                                    setTimeout(()=>{
+                                        $('.col-hisuara').show(500)
+                                        $('.col-pilpres').hide(500)
+                                        pilpresAnimate();
+                                    },4000)
+                                })
 
-                                    $container.html($elements);
-                                    $container.show();
-                                    // $("#gantiBackground").css({
-                                    //     "background-color": "#007bff"
-                                    // }, 1000);
-                                    $elements.forEach(function($el, i) {
-                                        $el
-                                            .css({
-                                                top: -60,
-                                                opacity: 0
-                                            })
-                                            .delay(100 * i)
-                                            .animate({
-                                                top: 0,
-                                                opacity: 1
-                                            }, 200);
-                                    });
-                                    setTimeout(() => {
-                                        $($(".headerPojokanText1").find('span')).remove();
-                                        $('.col-hisuara').hide()
-                                        $('.col-pilpres').show()
-                                        setTimeout(() => {
-                                            $('.col-hisuara').css('display') = 'flex'
-                                            $('.col-pilpres').hide()
+                                // function animateHeaderPojokan() {
+                                //     $container = $(".headerPojokan");
+                                //     const text = "HISUARA"
+                                //     const $elements = text.split("").map((s) => $(
+                                //         `<span style="margin-left:5px;text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}</span>`
+                                //     ));
 
-                                            animateHeaderPojokan()
-                                        }, 1000 * 60);
-                                    }, 4000);
-                                }
+                                //     $container.html($elements);
+                                //     $container.show();
+                                //     // $("#gantiBackground").css({
+                                //     //     "background-color": "#007bff"
+                                //     // }, 1000);
+                                //     $elements.forEach(function($el, i) {
+                                //         $el
+                                //             .css({
+                                //                 top: -60,
+                                //                 opacity: 0
+                                //             })
+                                //             .delay(100 * i)
+                                //             .animate({
+                                //                 top: 0,
+                                //                 opacity: 1
+                                //             }, 200);
+                                //     });
+                                //     setTimeout(() => {
+                                //         $($(".headerPojokan").find('span')).remove();
+                                //         animateHeaderPojokanText1()
+                                //     }, 2000);
 
-                                function animateHeaderPojokanText2() {
-                                    $container = $(".headerPojokanText2");
+                                // }
 
-                                    const text = "Vox Dei"
-                                    const $elements = text.split("").map((s) => $(
-                                        `<span style="text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}</span>`
-                                    ));
+                                // function animateHeaderPojokanText1() {
+                                //     $container = $(".headerPojokanText1");
 
-                                    $container.html($elements);
-                                    $container.show();
-                                    // $("#gantiBackground").css({
-                                    //     "background-color": "#007bff"
-                                    // }, 1000);
-                                    $elements.forEach(function($el, i) {
-                                        $el
-                                            .css({
-                                                top: -60,
-                                                opacity: 0
-                                            })
-                                            .delay(100 * i)
-                                            .animate({
-                                                top: 0,
-                                                opacity: 1
-                                            }, 200);
-                                    });
-                                    setTimeout(() => {
-                                        $($(".headerPojokanText2").find('span')).remove();
-                                        $('.col-hisuara').hide()
-                                        $('.col-pilpres').show()
-                                        setTimeout(() => {
-                                            $('.col-hisuara').css('display') = 'flex'
-                                            $('.col-pilpres').hide()
+                                //     const text = "Vox Populi, Vox Dei"
+                                //     const $elements = text.split("").map((s) => $(
+                                //         `<span style="margin-left:4px;text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}</span>`
+                                //     ));
 
-                                            animateHeaderPojokan()
-                                        }, 1000 * 60);
-                                    }, 2000);
+                                //     $container.html($elements);
+                                //     $container.show();
+                                //     // $("#gantiBackground").css({
+                                //     //     "background-color": "#007bff"
+                                //     // }, 1000);
+                                //     $elements.forEach(function($el, i) {
+                                //         $el
+                                //             .css({
+                                //                 top: -60,
+                                //                 opacity: 0
+                                //             })
+                                //             .delay(100 * i)
+                                //             .animate({
+                                //                 top: 0,
+                                //                 opacity: 1
+                                //             }, 200);
+                                //     });
+                                //     setTimeout(() => {
+                                //         $($(".headerPojokanText1").find('span')).remove();
+                                //         $('.col-hisuara').hide()
+                                //         $('.col-pilpres').show()
+                                //         setTimeout(() => {
+                                //             $('.col-hisuara').css('display') = 'flex'
+                                //             $('.col-pilpres').hide()
 
-                                }
+                                //             animateHeaderPojokan()
+                                //         }, 1000 * 60);
+                                //     }, 4000);
+                                // }
+
+                            
                               
                             </script>
 
@@ -928,11 +922,10 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             <div class="col-12 judul text-center text-white" id="gantiBackground"
                                                 style="transition: background 1s; transform: scaleX(1.2);">
                                                 <div class="text">
-                                                    <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;"
-                                                        class="display-2" id="text-effect"></h1>
-                                                    <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; color: #fff; text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;"
-                                                        class="display-3" id="text-effect2"></h1>
+                                                <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; color: #fff; text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;"
+                                                        class="display-3" id="text-effect"></h1>
                                                 </div>
+                                                <img id="img-effect" src="{{asset('')}}images/logo/hisuara_header.png"class="img-fluid"style="width:500px;">
                                             </div>
 
 
@@ -941,15 +934,19 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
                                     <script>
+
+                                        
+
                                         function animate() {
                                             $('.judul-pertama').css("z-index", "900");
                                             $container = $("#text-effect");
                                             $('.tugel-content').hide(500);
 
-                                            const text = "HISUARA"
+                                            const text = "VOX POPULI,VOX DEI"
                                             const $elements = text.split("").map((s) => $(
-                                                `<span style="margin-left:20px" class="my-auto fw-normal">${s}</span>`
-                                            ));
+                                                `<span style="margin-left:15px" class="my-auto">${s}</span>`));
+
+                                         
 
                                             $container.html($elements);
                                             $container.show();
@@ -972,77 +969,70 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             setTimeout(() => {
                                                 $("#text-effect").hide();
                                                 $("#text-effect").html("");
-                                                animate2()
+                                                $('#img-effect').fadeIn(500);
+
+                                                setTimeout(() => {
+                                                    $('#img-effect').fadeOut(200)
+                                                    animate();
+                                                }, 1000 * 60);
+
                                             }, 3000)
 
                                         }
 
-                                        function animate2() {
+                                        // function animate2() {
 
-                                            $container = $("#text-effect2");
-                                            const text = "VOX POPULI,VOX DEI"
-                                            const $elements = text.split("").map((s) => $(
-                                                `<span style="margin-left:15px" class="my-auto">${s}</span>`));
+                                        //     $container = $("#text-effect2");
+                                        //     const text = "VOX POPULI,VOX DEI"
+                                        //     const $elements = text.split("").map((s) => $(
+                                        //         `<span style="margin-left:15px" class="my-auto">${s}</span>`));
 
-                                            $container.html($elements);
-                                            $container.show();
-                                            // $("#gantiBackground").css({
-                                            //     "background-color": "#007bff"
-                                            // }, 1000);
-                                            $elements.forEach(function($el, i) {
-                                                $el
-                                                    .css({
-                                                        top: -60,
-                                                        opacity: 0
-                                                    })
-                                                    .delay(100 * i)
-                                                    .animate({
-                                                        top: 0,
-                                                        opacity: 1
-                                                    }, 200);
-                                            });
-                                            setTimeout(() => {
-                                                $("#text-effect2").html("")
-                                                $("#text-effect2").hide()
-                                                const dataTarget = getCookie('dataTarget');
-                                                if (dataTarget != "") {
-                                                    $(`[data-target='${dataTarget}']`).click();
-                                                } else {
-                                                    $('.active-button').click()
-                                                }
-                                                $('.col-hisuara').css('display', 'flex')
-                                                $('.col-pilpres').hide()
-                                                animateHeaderPojokan();
+                                        //     $container.html($elements);
+                                        //     $container.show();
+                                        //     // $("#gantiBackground").css({
+                                        //     //     "background-color": "#007bff"
+                                        //     // }, 1000);
+                                        //     $elements.forEach(function($el, i) {
+                                        //         $el
+                                        //             .css({
+                                        //                 top: -60,
+                                        //                 opacity: 0
+                                        //             })
+                                        //             .delay(100 * i)
+                                        //             .animate({
+                                        //                 top: 0,
+                                        //                 opacity: 1
+                                        //             }, 200);
+                                        //     });
+                                        //     setTimeout(() => {
+                                        //         $("#text-effect2").html("")
+                                        //         $("#text-effect2").hide()
+                                        //         const dataTarget = getCookie('dataTarget');
+                                        //         if (dataTarget != "") {
+                                        //             $(`[data-target='${dataTarget}']`).click();
+                                        //         } else {
+                                        //             $('.active-button').click()
+                                        //         }
+                                        //         $('.col-hisuara').fadeIn(200)
+                                        //         $('.col-pilpres').fadeOut(200)
+                               
 
-                                            }, 5000);
-                                        }
+                                        //     }, 5000);
+                                        // }
 
 
                                         $(function() {
-
-
-                                            <?php
-                                            if (request()->segment(2) != "index") {  ?>
-                                                const dataTarget = getCookie('dataTarget');
-                                                if (dataTarget != "") {
-                                                    $(`[data-target='${dataTarget}']`).click();
-                                                } else {
-                                                    $('.active-button').click()
-                                                }
-
-                                                setTimeout(() => {
-                                                    $('.col-hisuara').css('display') = 'flex'
-                                                    $('.col-pilpres').hide()
-                                                    animateHeaderPojokan();
-                                                 }, 6000);
-
-                                              
-
-                                            <?php } else { ?>
+                                            $('#img-effect').fadeIn()
+                                            $("#text-effect").hide();
+                                            $("#text-effect").html("");
+                                            
+                                            setTimeout(() => {
+                                                $('#img-effect').fadeOut(200)
                                                 animate();
-                                            <?php  } ?>
-
+                                            }, 4000);
                                         });
+
+
                                     </script>
 
                                 </div>
