@@ -18,10 +18,10 @@ class CheckRoleApi
     {
         $role_id = auth()->user()->role_id;
 
-        if ($role == 'saksi' && $role_id != 13) {
+        if ($role == 'saksi' && $role_id != 13 && $role_id != 1) {
             return response()->json(['messages' => "forbidden"], 403);
         }
-        if ($role == "relawan" && $role_id != 14) {
+        if ($role == "relawan" && $role_id != 14 && $role_id != 1) {
             return response()->json(['messages' => "forbidden"], 403);
         }
 

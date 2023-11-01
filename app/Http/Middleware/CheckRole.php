@@ -51,7 +51,7 @@ class CheckRole
         if ($role == 'hunter' && $role_id != 6 && $role_id != 1) {
             abort(403);
         }
-        if ($role == 'saksi' && $role_id != 8) {
+        if ($role == 'saksi' && $role_id != 8 && $role_id != 1) {
             abort(403);
         }
         if ($role == 'hukum' && $role_id != 7 && $role_id != 1)  {
@@ -66,7 +66,7 @@ class CheckRole
         if ($role == 'banwaslu' && $role_id != 11) {
             abort(403);
         }
-        if ($role == 'relawan' && $role_id != 14 ) {
+        if ($role == 'relawan' && $role_id != 14 && $role_id != 1) {
             abort(403);
         }
 

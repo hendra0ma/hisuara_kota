@@ -1167,21 +1167,21 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 <a class="dropdown-item" href="/user/profile">
                                                     <i class="dropdown-icon fe fe-user"></i> Profile
                                                 </a>
-                                                <a class="dropdown-item" href="#">
+                                                <a class="dropdown-item" href="{{url('')}}/saksi-dashboard">
                                                     <i class="dropdown-icon fe fe-user"></i> Upload C1
                                                 </a>
-                                                <a class="dropdown-item" href="#">
+                                                <a class="dropdown-item" href="{{url('')}}/upload_c1">
                                                     <i class="dropdown-icon fe fe-user"></i> Upload C1 Enumerator
                                                 </a>
-                                                <a class="dropdown-item" href="#">
+                                                <a class="dropdown-item" href="{{url('')}}/c1-relawan">
                                                     <i class="dropdown-icon fe fe-user"></i> Upload C1 Relawan
                                                 </a>
-                                                <a class="dropdown-item" href="#">
+                                                <a class="dropdown-item" href="{{url('')}}/upload_kecurangan">
                                                     <i class="dropdown-icon fe fe-user"></i> Upload Kecurangan
                                                 </a>
-                                                <button class="dropdown-item tugel-kolaps" href="#" data-target="setting">
+                                                <!-- <button class="dropdown-item tugel-kolaps" href="#" data-target="setting">
                                                     <i class="dropdown-icon fa-solid fa-gear"></i> Setting
-                                                </button>
+                                                </button> -->
 
                                                 <form action="{{ route('logout') }}" method="post">
                                                     @csrf
