@@ -206,9 +206,9 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                 function animateHeaderPojokanText1() {
                                     $container = $(".headerPojokanText1");
 
-                                    const text = "Vox Populi"
+                                    const text = "Vox Populi, Vox Dei"
                                     const $elements = text.split("").map((s) => $(
-                                        `<span style="text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}</span>`
+                                        `<span style="margin-left:4px;text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}</span>`
                                     ));
 
                                     $container.html($elements);
@@ -230,8 +230,15 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     });
                                     setTimeout(() => {
                                         $($(".headerPojokanText1").find('span')).remove();
-                                        animateHeaderPojokanText2()
-                                    }, 2000);
+                                        $('.col-hisuara').hide()
+                                        $('.col-pilpres').show()
+                                        setTimeout(() => {
+                                            $('.col-hisuara').css('display') = 'flex'
+                                            $('.col-pilpres').hide()
+
+                                            animateHeaderPojokan()
+                                        }, 1000 * 60);
+                                    }, 4000);
                                 }
 
                                 function animateHeaderPojokanText2() {
@@ -616,7 +623,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                     </div>
                                                     @foreach($domainKota as $dokota)
                                                     <div class="col-auto">
-                                                        <a class="text-white btn rounded-0 item" style="background: #528bff" href="{{$dokota->domain}}">{{$dokota->name}}</a>
+                                                        <a class="text-white btn rounded-0 item" style="background: #528bff" href="http://{{$dokota->domain}}">{{$dokota->name}}</a>
                                                     </div>
                                                     @endforeach
                                                 </div>
