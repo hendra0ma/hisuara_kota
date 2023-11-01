@@ -935,7 +935,8 @@ s    </div>
 <div class="row">
     <div class="col-lg-6" style="{{($config->quick_count == 'yes')?'':'display:none'}}">
         <div class="card" style="margin-bottom: 1rem">
-            <div class="card-body">
+            <div class="card-body" style="position: relative">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
                     <div class="col-xxl-12">
                         <div class="container">
@@ -1018,7 +1019,8 @@ s    </div>
             {{-- <div class="card-header bg-info">
                 <h3 class="card-title text-white">Suara TPS Masuk</h3>
             </div> --}}
-            <div class="card-body">
+            <div class="card-body" style="position: relative;">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
                     <div class="col-xxl-12">
                         <div class="container">
@@ -1169,7 +1171,8 @@ s    </div>
             {{-- <div class="card-header bg-secondary">
                 <h3 class="card-title text-white">Suara TPS Terverifikasi</h3>
             </div> --}}
-            <div class="card-body">
+            <div class="card-body" style="position: relative">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
                     <div class="col-6">
                         <div class="row">
@@ -1255,7 +1258,8 @@ s    </div>
             {{-- <div class="card-header bg-secondary">
                 <h3 class="card-title text-white">Suara TPS Terverifikasi</h3>
             </div> --}}
-            <div class="card-body">
+            <div class="card-body" style="position: relative">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
                     <div class="col-12">
                         <div class="row">

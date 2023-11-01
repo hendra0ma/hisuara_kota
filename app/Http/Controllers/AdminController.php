@@ -462,6 +462,7 @@ class AdminController extends Controller
         $village     = Village::where('id', $user['villages'])->first();
         $tps         = Tps::where('user_id', $user['id'])->first();
         $absensi     = Absensi::where('user_id', $user['id'])->first();
+        $qrcode     = Qrcode::where('tps_id', $user['tps_id'])->first();
         $bukti_vidio = Buktividio::where('tps_id', $tps['id'])->first();
         $bukti_foto  = Buktifoto::where('tps_id', $tps['id'])->get();
 
@@ -473,6 +474,7 @@ class AdminController extends Controller
             'tps' => $tps,
             'absensi' => $absensi,
             'saksi' => $saksi,
+            'qrcode' => $qrcode,
             'bukti_vidio' => $bukti_vidio,
             'bukti_foto' => $bukti_foto,
             'config' => Config::first(),
