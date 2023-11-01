@@ -136,18 +136,18 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                     <div class="card-body for-kolapse py-1 pl-5" style="background: #000; padding-right: 2.5rem">
                         <div class="row py-2 justify-content-between" style="gap: 15px">
 
-                            <!-- <div class="col-auto col-hisuara" style="display:none;width:238px;height:54px">
-                                <div class="row my-auto mx-auto">
+                            <div class="col-auto col-hisuara" style="display:none;width:238px;height:54px">
+                                <div class="row my-auto mx-auto h-100">
 
-                                    <div class="col-md ps-3 mb-0 text-light headerAnimate">
-                                        <h2 class="text-white mb-0 text-center headerPojokan"></h2>
-                                        <h2 class="text-white mb-0 text-center headerPojokanText1" style="display:none">
-                                        </h2>
-                                        <h2 class="text-white mb-0 text-center headerPojokanText2" style="display:none">
-                                        </h2>
+                                    <div class="col-md mx-auto mb-0 text-light headerAnimate my-auto">
+                                        <h1 class="text-white mb-0 text-center headerPojokan"></h1>
+                                        {{-- <h2 class="text-white mb-0 text-center headerPojokanText1" style="display:none">
+                                        </h2> --}}
+                                        {{-- <h2 class="text-white mb-0 text-center headerPojokanText2" style="display:none">
+                                        </h2> --}}
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
 
                             <div class="col-auto col-pilpres">
                                 <div class="row">
@@ -172,24 +172,26 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                 </div>
                             </div>
 
-                            <div class="col-auto col-hisuara"style="display:none">
+                            {{-- <div class="col-auto col-hisuara"style="display:none">
                                 <div class="row">
                                     <div class="col-md-auto pe-0 my-auto">
                                         <img src="{{asset('')}}images/logo/Hisuara_new_white.png" class="img-fluid"style="height:50px;width:auto">
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
 
                             <script>   
                                 let pilpresAnimate = function(){
                                     setTimeout(()=>{
-                                        $('.col-hisuara').hide(500)
-                                        $('.col-pilpres').show(500)
+                                        $('.col-hisuara').hide()
+                                        $($(".headerPojokan").find('span')).remove();
+                                        $('.col-pilpres').show()
 
                                         setTimeout(()=>{
-                                            $('.col-hisuara').show(500)
-                                         $('.col-pilpres').hide(500)
+                                            $('.col-hisuara').show()
+                                            animateHeaderPojokan()
+                                         $('.col-pilpres').hide()
                                          pilpresAnimate();
                                         },5000)
 
@@ -200,42 +202,42 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                 $(function () {
                                   
                                     setTimeout(()=>{
-                                        $('.col-hisuara').show(500)
-                                        $('.col-pilpres').hide(500)
+                                      animateHeaderPojokan()
+                                      $('.col-hisuara').show()
+                                        $('.col-pilpres').hide()
                                         pilpresAnimate();
-                                    },4000)
+                                    },5000)
                                 })
 
-                                // function animateHeaderPojokan() {
-                                //     $container = $(".headerPojokan");
-                                //     const text = "HISUARA"
-                                //     const $elements = text.split("").map((s) => $(
-                                //         `<span style="margin-left:5px;text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}</span>`
-                                //     ));
+                                function animateHeaderPojokan() {
+                                    $container = $(".headerPojokan");
+                                    const text = "HISUARA"
+                                    const $elements = text.split("").map((s) => $(
+                                        `<span style="margin-left:5px;text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}</span>`
+                                    ));
 
-                                //     $container.html($elements);
-                                //     $container.show();
-                                //     // $("#gantiBackground").css({
-                                //     //     "background-color": "#007bff"
-                                //     // }, 1000);
-                                //     $elements.forEach(function($el, i) {
-                                //         $el
-                                //             .css({
-                                //                 top: -60,
-                                //                 opacity: 0
-                                //             })
-                                //             .delay(100 * i)
-                                //             .animate({
-                                //                 top: 0,
-                                //                 opacity: 1
-                                //             }, 200);
-                                //     });
-                                //     setTimeout(() => {
-                                //         $($(".headerPojokan").find('span')).remove();
-                                //         animateHeaderPojokanText1()
-                                //     }, 2000);
+                                    $container.html($elements);
+                                    $container.show();
+                                    // $("#gantiBackground").css({
+                                    //     "background-color": "#007bff"
+                                    // }, 1000);
+                                    $elements.forEach(function($el, i) {
+                                        $el
+                                            .css({
+                                                top: -60,
+                                                opacity: 0
+                                            })
+                                            .delay(100 * i)
+                                            .animate({
+                                                top: 0,
+                                                opacity: 1
+                                            }, 200);
+                                    });
+                             
+                                        // animateHeaderPojokanText1()
+                           
 
-                                // }
+                                }
 
                                 // function animateHeaderPojokanText1() {
                                 //     $container = $(".headerPojokanText1");
@@ -925,7 +927,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; color: #fff; text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;"
                                                         class="display-3" id="text-effect"></h1>
                                                 </div>
-                                                <img id="img-effect" src="{{asset('')}}images/logo/hisuara_header.png"class="img-fluid"style="width:500px;">
+                                                <img id="img-effect" src="{{asset('')}}images/logo/hisuara_header.png"class="img-fluid" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width:500px;">
                                             </div>
 
 
@@ -942,7 +944,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             $container = $("#text-effect");
                                             $('.tugel-content').hide(500);
 
-                                            const text = "VOX POPULI,VOX DEI"
+                                            const text = "VOX POPULI VOX DEI"
                                             const $elements = text.split("").map((s) => $(
                                                 `<span style="margin-left:15px" class="my-auto">${s}</span>`));
 
@@ -974,9 +976,9 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 setTimeout(() => {
                                                     $('#img-effect').fadeOut(200)
                                                     animate();
-                                                }, 1000 * 60);
+                                                }, 5000);
 
-                                            }, 3000)
+                                            }, 5000)
 
                                         }
 
