@@ -131,7 +131,7 @@
 
                         <div class="row mt-2">
                             <div class="col-12 px-0">
-                                <button class="btn btn-primary rounded-0 w-100">Foto E-KTP</button>
+                                <button class="btn btn-primary rounded-0 w-100 cekmodal" id="Cek" data-id="{{$ls['id']}}" data-bs-toggle="modal" id="" data-bs-target="#cekmodal">Foto E-KTP</button>
                             </div>
                         </div>
                     </div>
@@ -140,71 +140,6 @@
                 <div class="hiasan-1" style="height: 30px"></div>
             </div>
         </div>
-        {{-- @elseif($ls['is_active'] == 5)
-        <div class="col-xl-3">
-            <div class="card">
-                <div class="disabled"></div>
-                <div class="police-line">
-                    <div class="inner-police">Ditolak</div>
-                </div>
-                <div class="card-header text-white border-0" style="background-color: #404042">
-                    <span class="mx-auto py-6 fs-6">TPS <?php if($tps == null){?> <?php }else{ ?> {{$tps['number']}}<?php } ?> / Kelurahan {{ $kelurahan['name'] }}</span>
-                </div>
-                <div class="hiasan-1">
-                    <div class="gambar-bulat">
-                        @if ($ls->profile_photo_path == NULL)
-                        <img class="rounded-circle" style="width: 125px; height: 125px; object-fit:cover;" src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF" alt="img">
-                        @else
-                        <img class="rounded-circle" style="width: 125px; height: 125px; object-fit:cover;" src="{{url("/storage/profile-photos/".$ls->profile_photo_path) }}">
-                        @endif
-                    </div>
-                </div>
-                <div class="card-body py-7">
-                    <div class="text-center fs-4 fw-bold mb-3">{{$ls->name}}</div>
-                    <div class="px-5">
-                        <table class="table">
-                            <tr>
-                                <td class="text-primary fw-bold ps-0">
-                                    NIK
-                                </td>
-                                <td class="px-0">:</td>
-                                <td class="ps-2">{{$ls->nik}}</td>
-                            </tr>
-                            <tr>
-                                <td class="text-primary fw-bold ps-0">
-                                    No HP
-                                </td>
-                                <td class="px-0">:</td>
-                                <td class="ps-2">{{$ls->no_hp}}</td>
-                            </tr>
-                            <tr>
-                                <td class="text-primary fw-bold ps-0">
-                                    Kecamatan
-                                </td>
-                                <td class="px-0">:</td>
-                                <td class="ps-2">{{$kecamatan['name'] }}</td>
-                            </tr>
-                            <tr>
-                                <td class="text-primary fw-bold ps-0">
-                                    Kelurahan
-                                </td>
-                                <td class="px-0">:</td>
-                                <td class="ps-2">{{$kelurahan['name'] }}</td>
-                            </tr>
-                        </table>
-
-                        <div class="row mt-2">
-                            <div class="col-12 px-0">
-                                <button class="btn btn-primary rounded-0 w-100">Foto E-KTP</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="hiasan-2" style="height: 30px"></div>
-                <div class="hiasan-1" style="height: 30px"></div>
-            </div>
-        </div>
-        @endif --}}
         @endforeach
     </div>
 
