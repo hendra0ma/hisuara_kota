@@ -61,10 +61,9 @@ class AdminController extends Controller
 
         $currentDomain = request()->getHttpHost();
         if (isset(parse_url($currentDomain)['port'])) {
-            $url = $currentDomain;
-        }else{
-
             $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
+        }else{
+            $url = $currentDomain;
         }
         $regency_id = RegenciesDomain::where('domain',"LIKE","%".$url."%")->first();
 
