@@ -38,7 +38,7 @@
             </div> --}}
             <div class="col parent-link">
                 <a class="btn text-white w-100 py-3 c1koreksi tablink"
-                    onclick="openPage('C1-Koreksi', this, '#6259ca')">C1 Koreksi</a>
+                    onclick="openPage('C1-Koreksi', this, '#6259ca')">Pengajuan Koreksi C1</a>
             </div>
         </div>
     </div>

@@ -206,7 +206,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                       $('.col-hisuara').show()
                                         $('.col-pilpres').hide()
                                         pilpresAnimate();
-                                    },4000)
+                                    },9000)
                                 })
 
                                 function animateHeaderPojokan() {
@@ -1176,9 +1176,9 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 <a class="dropdown-item" href="{{url('')}}/upload_kecurangan">
                                                     <i class="dropdown-icon fe fe-user"></i> Upload Kecurangan
                                                 </a>
-                                                <!-- <button class="dropdown-item tugel-kolaps" href="#" data-target="setting">
+                                                <button class="dropdown-item tugel-kolaps" href="#" data-target="setting">
                                                     <i class="dropdown-icon fa-solid fa-gear"></i> Setting
-                                                </button> -->
+                                                </button>
 
                                                 <form action="{{ route('logout') }}" method="post">
                                                     @csrf

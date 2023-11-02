@@ -175,6 +175,28 @@
     </div>
 </div>
 
+<div class="modal fade" id="periksakecurangan" tabindex="-1" aria-labelledby="periksakecuranganLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="container-md">
+                    <h5 class="modal-title fw-bold fs-1" id="periksakecuranganLabel">Proses Verifikasi Data Kecurangan
+                    </h5>
+                </div>
+                <button type="button" class="me-auto btn-close my-auto bg-danger btn-sm text-white"
+                    data-bs-dismiss="modal" aria-label="Close">X</button>
+            </div>
+            <div class="modal-body scrolled" style="overflow-y: scroll;">
+                <div class="row" id="container-view-modal-kecurangan">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     const buttonperiksaC1Relawan = $("button.periksa-c1-relawan");

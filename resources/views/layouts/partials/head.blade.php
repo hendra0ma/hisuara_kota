@@ -382,6 +382,22 @@
             z-index: -1;
         }
 
+        .parent-link a.active-tab {
+            background: #6259ca;
+        }
+        
+        .parent-link a.active-tab:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            right: 0;
+            width: 40%;
+            border-top: 3px solid #6259ca;
+            z-index: -1;
+        }
+
         .parent-link a {
             background: rgba(98, 88, 202, 0.65);
         }
