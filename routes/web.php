@@ -54,7 +54,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-
+use Imagine\Image\Metadata\ExifMetadataReader;
 use function GuzzleHttp\Promise\all;
 
 /*
@@ -298,6 +298,7 @@ foreach ($kotas as $kota) {
                     Route::get('sidang_online', 'sidangOnline');
                     Route::get('sidang_online_all', 'sidangOnlineAll');
                     Route::get('sidang_online_status/{role}', 'sidangOnlinestatus');
+                    Route::get('crowd-c1-kpu', 'crowdC1');
 
 
                     Route::get('/dev-pass', function () {
@@ -837,4 +838,16 @@ Route::get('prov-users', function () {
         ]);
     }
     echo "berhasil";
+});
+
+Route::get('metadata-test',function () {
+
+    // return "hai";
+    $imagine = new Imagine\Gd\Imagine();
+    $image = $imagine
+    ->setMetadataReader(new ExifMetadataReader())
+    ->open(asset('images/card-logo.png'));
+    $metadata = $image->metadata();
+    return $metadata;
+    
 });

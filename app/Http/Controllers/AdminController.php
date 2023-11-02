@@ -41,6 +41,7 @@ use Illuminate\Support\Facades\Crypt;
 use Rekapitulator;
 use Rekening;
 use Tracking;
+use Imagine\Image\Metadata\ExifMetadataReader;
 
 class AdminController extends Controller
 {
@@ -256,6 +257,13 @@ class AdminController extends Controller
         $data['config'] = Config::first();
         $data['jumlah_c1'] = Saksi::count();
         return view('administrator.perdataan.data-c1', $data);
+    }
+
+    public function crowdC1()
+    {
+        $data['config'] = Config::first();
+        $data['jumlah_c1'] = Saksi::count();
+        return view('administrator.c1.crowd-c1-kpu', $data);
     }
 
     public function admin_terverifikasi()
@@ -476,6 +484,7 @@ class AdminController extends Controller
                                                             ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
                                                             ->where('bukti_deskripsi_curang.tps_id', $tps['id'])
                                                             ->get();
+    
         
         return view('administrator.ajax.get_verifikasi_saksi', [
             'user' => $user,

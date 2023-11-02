@@ -19,7 +19,8 @@
         "livewire/livewire": "^2.5",
         "pusher/pusher-php-server": "^7.0",
         "simplesoftwareio/simple-qrcode": "~4",
-        "zbrettonye/geetest": "^1.2"
+        "zbrettonye/geetest": "^1.2",
+        "imagine/imagine": "~0.6.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
