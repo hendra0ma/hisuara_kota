@@ -34,9 +34,9 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
                     <i class="fa-solid fa-circle-exclamation" style="font-size: 50px"></i>
                 </div>
                 <div class="col">
-                    Data C1 ini belum terproses pada Realcount. Anda harus melakukan proses verifikasi terlebih dahulu dengan cara klik
-                    pada gambar C1. Data C1 ini didapat dari situs KPU
-                    dan belum terproses pada Realcount.
+                    Data C1 ini didapat dari situs KPU dan belum terproses pada Realcount. 
+                    Anda harus melakukan proses verifikasi terlebih dahulu dengan cara klik
+                    pada gambar C1. 
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 <div class="row">
     <div class="col">
         <h4 class="fw-bold fs-4 mt-5 mb-0">
-            Jumlah C1 : {{$jumlah_c1}}
+            Jumlah Crowd C1 KPU : {{$jumlah_c1}}
         </h4>
 
     </div>
