@@ -1,6 +1,6 @@
 <div class="col-lg-6" style="height: 100vh; overflow: scroll">
     <center>
-        <img src="{{asset('storage'.'/'.$paslon[0]->saksi_data[0]->c1_images)}}" alt="" class="img-fluid zoom" data-magnify-src="{{asset('storage'.'/'.$paslon[0]->saksi_data[0]->c1_images)}}">
+        <img src="{{asset('storage'.'/'.$paslon[0]->saksi_data[0]->c1_images)}}"data-magnify-speed="200" alt="" data-magnify-magnifiedwidth="2500"data-magnify-magnifiedheight="2500"    class="img-fluid zoom" data-magnify-src="{{asset('storage'.'/'.$paslon[0]->saksi_data[0]->c1_images)}}">
     </center>
 </div>
 

@@ -6,6 +6,7 @@ use App\Models\Acakey;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\District;
+use App\Models\RegenciesDomain;
 use App\Models\Tracking;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
@@ -35,10 +36,16 @@ class LoginController extends Controller
 
             if ($request) {
                 if(Auth::check()){
-                $role = Auth::user()->role;
-                return view('auth.redirect', [
-                    'role_id' => $role,
-                ]);
+                $role = Auth::user()->role_id;
+                // return gettype($role)." > ".$role;
+                if ($role == "1") {
+                    return redirect('dashboard-pusats');
+                }else{
+                    $regency_id = substr(Auth::user()->districts,0,4);
+                    $regency_domain = RegenciesDomain::where('regency_id',$regency_id)->first();
+             
+                    return redirect(env("HTTP_SSL","").$regency_domain->domain.env("HTTP_PORT","")."/redirect-page");
+                }
                 }else{
                     return redirect('login');
                 }

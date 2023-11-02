@@ -40,6 +40,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Controllers\CheckingController;
 use App\Http\Controllers\CommanderController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\HunterController;
 use App\Http\Controllers\Payrole;
 use App\Http\Controllers\ProvinsiController;
@@ -71,15 +72,38 @@ use function GuzzleHttp\Promise\all;
 
 
 
-Route::get('/kontol', function () {
-    $config = App\Models\Config::first();
-    $kotas = App\Models\Regency::where('province_id', $config->provinces_id)->get();
+// Route::get('/kontol', function () {
+//     $config = App\Models\Config::first();
+//     $kotas = App\Models\Regency::where('province_id', $config->provinces_id)->get();
 
-    foreach ($kotas as $kot) {
-        dump($kot->id, $kot->name);
-    }
+//     foreach ($kotas as $kot) {
+//         dump($kot->id, $kot->name);
+//     }
+// });
+
+Route::get("redirect-page",function (){
+    $role = Auth::user()->role;
+    $regency_id = substr(Auth::user()->districts,0,4);
+    $regency_domain = RegenciesDomain::where('regency_id',$regency_id)->first();
+
+    cookie("reg_id",$regency_domain->domain,60*240);
+     return view('auth.redirect', [
+                    'role_id' => $role,
+                ]);
 });
 
+
+
+Route::get("test-excel",function (){
+    return view('excel.test');
+});
+Route::post("import-excel",[ExcelController::class,"importExcel"])->name("import-excel");
+
+
+
+
+
+Route::get('/redirect', [LoginController::class, 'index']);
 
 //Hisuara Pusat
 Route::domain('hisuara.id')->name('pusat.')->group(function () {
@@ -100,9 +124,14 @@ foreach ($provinsi as $provinsis) {
 $config = Config::first();
 $kotas = RegenciesDomain::where('province_id', $config->provinces_id)->get();
 
+
 foreach ($kotas as $kota) {
 
     Route::domain($kota->domain)->group(function () {
+
+
+    
+
         Route::get('/ceksetup', function () {
             $config = Config::first();
             if ($config->setup == 'yes') {
@@ -162,7 +191,7 @@ foreach ($kotas as $kota) {
                 'kec' => $kecamatan
             ]);
         })->name('registrasi');
-        Route::get('/redirect', [LoginController::class, 'index']);
+
         Route::get('/get-aca', [EmailController::class, 'getAca'])->name('getAca');
         // Ajax Kelurahan / Kecamatan
         Route::get('getCourse/{id}', function ($id) {
@@ -734,6 +763,8 @@ foreach ($kotas as $kota) {
     });
 }
 
+
+
 // Route::get('/passcoba',function () {
 //    return bcrypt("210581");
 // });
@@ -838,3 +869,5 @@ Route::get('prov-users', function () {
     }
     echo "berhasil";
 });
+
+

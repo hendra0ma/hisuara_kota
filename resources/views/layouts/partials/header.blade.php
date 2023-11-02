@@ -974,9 +974,9 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 // $('#img-effect').fadeIn(500);
                                                 const dataTarget = getCookie('dataTarget');
                                                 if (dataTarget != "") {
-                                                $(`[data-target='${dataTarget}']`).click();
+                                                    $(`[data-target='${dataTarget}']`).click();
                                                 } else {
-                                                $('.active-button').click()
+                                                  $('.active-button').click()
                                                 }
 
                                                 // setTimeout(() => {
@@ -1027,16 +1027,28 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         //     }, 5000);
                                         // }
 
-
+                                    
                                         $(function() {
-                                            $('#img-effect').fadeIn()
-                                            $("#text-effect").hide();
-                                            $("#text-effect").html("");
-                                            
-                                            setTimeout(() => {
-                                                $('#img-effect').fadeOut(200)
-                                                animate();
-                                            }, 4000);
+                                            @if (Request::segment(1) == "administrator" && Request::segment(2) == "index" )
+                                                $('#img-effect').fadeIn()
+                                                $("#text-effect").hide();
+                                                $("#text-effect").html("");
+                                                
+                                                setTimeout(() => {
+                                                    $('#img-effect').fadeOut(200)
+                                                    animate();
+                                                }, 4000);
+                                            @else
+                                                $('#img-effect').fadeOut()
+                                                $("#text-effect").hide();
+                                                $("#text-effect").html("");
+                                                const dataTarget = getCookie('dataTarget');
+                                                if (dataTarget != "") {
+                                                    $(`[data-target='${dataTarget}']`).click();
+                                                } else {
+                                                  $('.active-button').click()
+                                                }
+                                            @endif
                                         });
 
 
