@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Config;
+use App\Models\Configs;
 use App\Models\District;
 use App\Models\Paslon;
+use App\Models\RegenciesDomain;
 use App\Models\Regency;
 use App\Models\Relawan;
 use App\Models\RelawanData;
@@ -19,13 +21,43 @@ use Illuminate\Support\Facades\Validator;
 
 class RelawanController extends Controller
 {
+    public $config;
+    public $configs;
+    public function __construct()
+    {
+
+        $currentDomain = request()->getHttpHost();
+        $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
+        $regency_id = RegenciesDomain::where('domain',"LIKE","%".$url."%")->first();
+
+        $this->configs = Config::first();
+        $this->config = new Configs;
+        $this->config->regencies_id =  (string) $regency_id->regency_id;
+        $this->config->provinces_id =  $this->configs->provinces_id;
+        $this->config->setup =  $this->configs->setup;
+        $this->config->updated_at =  $this->configs->updated_at;
+        $this->config->created_at =  $this->configs->created_at;
+        $this->config->partai_logo =  $this->configs->partai_logo;
+        $this->config->date_overlimit =  $this->configs->date_overlimit;
+        $this->config->show_public =  $this->configs->show_public;
+        $this->config->show_terverifikasi =  $this->configs->show_terverifikasi;
+        $this->config->lockdown =  $this->configs->lockdown;
+        $this->config->multi_admin =  $this->configs->multi_admin;
+        $this->config->otonom =  $this->configs->otonom;
+        $this->config->dark_mode =  $this->configs->dark_mode;
+        $this->config->jumlah_multi_admin =  $this->configs->jumlah_multi_admin;
+        $this->config->jenis_pemilu =  $this->configs->jenis_pemilu;
+        $this->config->tahun =  $this->configs->tahun;
+        $this->config->quick_count =  $this->configs->quick_count;
+        $this->config->default =  $this->configs->default;
+    }
     public function index()
     {
         $data['tps'] = Tps::get();
         $config =Config::first();
         $data['config'] =$config;
-        $data['kota']   = Regency::where('id', $data['config']->regencies_id)->first();
-        $data['kecamatan']= District::where('regency_id',$config->regencies_id)->get();
+        $data['kota']   = Regency::where('id', $this->config->regencies_id)->first();
+        $data['kecamatan']= District::where('regency_id',$this->config->regencies_id)->get();
         return view('publik.relawan',$data);
     }
     
@@ -35,7 +67,7 @@ class RelawanController extends Controller
         $config =Config::first();
         $data['config'] = $config;
         $data['kota']   = Regency::where('id', $data['config']->regencies_id)->first();
-        $data['kecamatan'] = District::where('regency_id', $config->regencies_id)->get();
+        $data['kecamatan'] = District::where('regency_id', $this->config->regencies_id)->get();
         return view('publik.relawanBanding',$data);
     }
     public function daftarRelawanBanding(Request $request)
@@ -129,7 +161,7 @@ class RelawanController extends Controller
         }
         $upload_relawan = new Relawan;
         $upload_relawan->c1_images = $file;
-        $upload_relawan->regency_id = $config->regencies_id;
+        $upload_relawan->regency_id = $this->config->regencies_id;
         $upload_relawan->district_id = $user->districts;
         $upload_relawan->village_id = $user->villages;
         $upload_relawan->tps_id = $user->tps_id;
@@ -169,7 +201,7 @@ class RelawanController extends Controller
 
         $upload_relawan = new Relawan;
         $upload_relawan->c1_images = $file;
-        $upload_relawan->regency_id = $config->regencies_id;
+        $upload_relawan->regency_id = $this->config->regencies_id;
         $upload_relawan->district_id = $user->districts;
         $upload_relawan->village_id = $user->villages;
         $upload_relawan->tps_id = $user->tps_id;
@@ -186,7 +218,7 @@ class RelawanController extends Controller
             $relawan_data->c1_relawan_id = $id;
             $relawan_data->paslon_id = $pas->id;
             $relawan_data->village_id = Auth::user()->village_id;
-            $relawan_data->regency_id = $config->regencies_id;
+            $relawan_data->regency_id = $this->config->regencies_id;
             $relawan_data->district_id = Auth::user()->district_id;
             $relawan_data->voice = $request->suara[$i];
             $relawan_data->save();

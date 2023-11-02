@@ -16,11 +16,43 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Crypt;
 use App\Events\NotifEvent;
+use App\Models\Configs;
 use App\Models\QuickSaksiData;
+use App\Models\RegenciesDomain;
 use App\Models\Tracking as ModelsTracking;
 
 class AuditorController extends Controller
 {
+    public $config;
+    public $configs;
+    public function __construct()
+    {
+
+        $currentDomain = request()->getHttpHost();
+        $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
+        $regency_id = RegenciesDomain::where('domain',"LIKE","%".$url."%")->first();
+
+        $this->configs = Config::first();
+        $this->config = new Configs;
+        $this->config->regencies_id =  (string) $regency_id->regency_id;
+        $this->config->provinces_id =  $this->configs->provinces_id;
+        $this->config->setup =  $this->configs->setup;
+        $this->config->updated_at =  $this->configs->updated_at;
+        $this->config->created_at =  $this->configs->created_at;
+        $this->config->partai_logo =  $this->configs->partai_logo;
+        $this->config->date_overlimit =  $this->configs->date_overlimit;
+        $this->config->show_public =  $this->configs->show_public;
+        $this->config->show_terverifikasi =  $this->configs->show_terverifikasi;
+        $this->config->lockdown =  $this->configs->lockdown;
+        $this->config->multi_admin =  $this->configs->multi_admin;
+        $this->config->otonom =  $this->configs->otonom;
+        $this->config->dark_mode =  $this->configs->dark_mode;
+        $this->config->jumlah_multi_admin =  $this->configs->jumlah_multi_admin;
+        $this->config->jenis_pemilu =  $this->configs->jenis_pemilu;
+        $this->config->tahun =  $this->configs->tahun;
+        $this->config->quick_count =  $this->configs->quick_count;
+        $this->config->default =  $this->configs->default;
+    }
     public function index()
     {
 
@@ -61,7 +93,7 @@ class AuditorController extends Controller
     {
         $id = Crypt::decrypt($id);
         $config = Config::first();
-        $data['regency'] = Regency::where('id', $config->regencies_id)->first();
+        $data['regency'] = Regency::where('id', $this->config->regencies_id)->first();
         $data['village'] = Village::where('id', $id)->first();
         $data['district'] = District::where('id', $data['village']->district_id)->first();
         $data['jumlah_tps_teraudit']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', $id)->where('saksi.audit', 1)->count();
@@ -90,7 +122,7 @@ class AuditorController extends Controller
     {
         $id = Crypt::decrypt($id);
         $config = Config::first();
-        $data['regency'] = Regency::where('id', (string)$config->regencies_id)->first();
+        $data['regency'] = Regency::where('id', (string)$this->config->regencies_id)->first();
         $data['village'] = Village::where('id', (string)$id)->first();
          $data['villages'] = Village::where('id', (string)$id)->get();
 
@@ -147,7 +179,7 @@ class AuditorController extends Controller
                 ->where('quicksaksi.verification', 1);
         }])->get();
         $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
-        $data['kota'] = Regency::where('id', $config['regencies_id'])->first();
+        $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
         $data['tracking'] = ModelsTracking::get();
         $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->count();
         $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
