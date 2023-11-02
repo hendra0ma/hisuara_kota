@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit3a702ad69964ebc116e279d49146f69b
+class ComposerStaticInite136a52bc2170717c48359cf1e4a8751
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -387,8 +387,8 @@ class ComposerStaticInit3a702ad69964ebc116e279d49146f69b
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -673,6 +673,13 @@ class ComposerStaticInit3a702ad69964ebc116e279d49146f69b
                 0 => __DIR__ . '/..' . '/imagine/imagine/lib',
             ),
         ),
+        'H' => 
+        array (
+            'HTMLPurifier' => 
+            array (
+                0 => __DIR__ . '/..' . '/ezyang/htmlpurifier/library',
+            ),
+        ),
         'D' => 
         array (
             'Detection' => 
@@ -758,7 +765,6 @@ class ComposerStaticInit3a702ad69964ebc116e279d49146f69b
         'App\\Http\\Livewire\\ChatInputPerson' => __DIR__ . '/../..' . '/app/Http/Livewire/ChatInputPerson.php',
         'App\\Http\\Livewire\\ChatPerson' => __DIR__ . '/../..' . '/app/Http/Livewire/ChatPerson.php',
         'App\\Http\\Livewire\\Clainnya' => __DIR__ . '/../..' . '/app/Http/Livewire/Clainnya.php',
-<<<<<<< HEAD
         'App\\Http\\Livewire\\CrowdC1Kpu' => __DIR__ . '/../..' . '/app/Http/Livewire/CrowdC1Kpu.php',
         'App\\Http\\Livewire\\DataKecuranganDitolak' => __DIR__ . '/../..' . '/app/Http/Livewire/DataKecuranganDitolak.php',
         'App\\Http\\Livewire\\DataKecuranganMasuk' => __DIR__ . '/../..' . '/app/Http/Livewire/DataKecuranganMasuk.php',
@@ -768,11 +774,6 @@ class ComposerStaticInit3a702ad69964ebc116e279d49146f69b
         'App\\Http\\Livewire\\EnumeratorHadir' => __DIR__ . '/../..' . '/app/Http/Livewire/EnumeratorHadir.php',
         'App\\Http\\Livewire\\EnumeratorTeregistrasi' => __DIR__ . '/../..' . '/app/Http/Livewire/EnumeratorTeregistrasi.php',
         'App\\Http\\Livewire\\EnumeratorTidakHadir' => __DIR__ . '/../..' . '/app/Http/Livewire/EnumeratorTidakHadir.php',
-=======
-        'App\\Http\\Livewire\\DataKecuranganDitolak' => __DIR__ . '/../..' . '/app/Http/Livewire/DataKecuranganDitolak.php',
-        'App\\Http\\Livewire\\DataKecuranganMasuk' => __DIR__ . '/../..' . '/app/Http/Livewire/DataKecuranganMasuk.php',
-        'App\\Http\\Livewire\\DataKecuranganTerverifikasi' => __DIR__ . '/../..' . '/app/Http/Livewire/DataKecuranganTerverifikasi.php',
->>>>>>> ac925382d6bc11b7872060dd75a4247c6b815c8a
         'App\\Http\\Livewire\\FraudBarcodeReportComponent' => __DIR__ . '/../..' . '/app/Http/Livewire/FraudBarcodeReportComponent.php',
         'App\\Http\\Livewire\\FraudDataPrint' => __DIR__ . '/../..' . '/app/Http/Livewire/FraudDataPrint.php',
         'App\\Http\\Livewire\\FraudDataPrintTercetak' => __DIR__ . '/../..' . '/app/Http/Livewire/FraudDataPrintTercetak.php',
@@ -1536,7 +1537,6 @@ class ComposerStaticInit3a702ad69964ebc116e279d49146f69b
         'Dompdf\\Adapter\\CPDF' => __DIR__ . '/..' . '/dompdf/dompdf/src/Adapter/CPDF.php',
         'Dompdf\\Adapter\\GD' => __DIR__ . '/..' . '/dompdf/dompdf/src/Adapter/GD.php',
         'Dompdf\\Adapter\\PDFLib' => __DIR__ . '/..' . '/dompdf/dompdf/src/Adapter/PDFLib.php',
-        'Dompdf\\Autoloader' => __DIR__ . '/..' . '/dompdf/dompdf/src/Autoloader.php',
         'Dompdf\\Canvas' => __DIR__ . '/..' . '/dompdf/dompdf/src/Canvas.php',
         'Dompdf\\CanvasFactory' => __DIR__ . '/..' . '/dompdf/dompdf/src/CanvasFactory.php',
         'Dompdf\\Cellmap' => __DIR__ . '/..' . '/dompdf/dompdf/src/Cellmap.php',
@@ -7935,10 +7935,10 @@ class ComposerStaticInit3a702ad69964ebc116e279d49146f69b
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit3a702ad69964ebc116e279d49146f69b::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit3a702ad69964ebc116e279d49146f69b::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit3a702ad69964ebc116e279d49146f69b::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit3a702ad69964ebc116e279d49146f69b::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInite136a52bc2170717c48359cf1e4a8751::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInite136a52bc2170717c48359cf1e4a8751::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInite136a52bc2170717c48359cf1e4a8751::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInite136a52bc2170717c48359cf1e4a8751::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -871,14 +871,14 @@ Route::get('prov-users', function () {
     echo "berhasil";
 });
 
-Route::get('metadata-test',function () {
+// Route::get('metadata-test',function () {
 
-    // return "hai";
-    $imagine = new Imagine\Gd\Imagine();
-    $image = $imagine
-    ->setMetadataReader(new ExifMetadataReader())
-    ->open(asset('images/card-logo.png'));
-    $metadata = $image->metadata();
-    return $metadata;
+//     // return "hai";
+//     $imagine = new Imagine\Gd\Imagine();
+//     $image = $imagine
+//     ->setMetadataReader(new ExifMetadataReader())
+//     ->open(asset('images/card-logo.png'));
+//     $metadata = $image->metadata();
+//     return $metadata;
     
-});
+// });

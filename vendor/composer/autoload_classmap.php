@@ -853,7 +853,6 @@ return array(
     'Dompdf\\Adapter\\CPDF' => $vendorDir . '/dompdf/dompdf/src/Adapter/CPDF.php',
     'Dompdf\\Adapter\\GD' => $vendorDir . '/dompdf/dompdf/src/Adapter/GD.php',
     'Dompdf\\Adapter\\PDFLib' => $vendorDir . '/dompdf/dompdf/src/Adapter/PDFLib.php',
-    'Dompdf\\Autoloader' => $vendorDir . '/dompdf/dompdf/src/Autoloader.php',
     'Dompdf\\Canvas' => $vendorDir . '/dompdf/dompdf/src/Canvas.php',
     'Dompdf\\CanvasFactory' => $vendorDir . '/dompdf/dompdf/src/CanvasFactory.php',
     'Dompdf\\Cellmap' => $vendorDir . '/dompdf/dompdf/src/Cellmap.php',
