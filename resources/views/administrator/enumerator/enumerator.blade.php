@@ -86,7 +86,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 <div class="row mt-3">
 
 
-    <livewire:verifikasi-saksi>
+    <livewire:enumerator>
 
     {{-- <div class="col-lg-12 col-md-12">
         <div class="card">
@@ -160,7 +160,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-header bg-primary text-white">
             <div class="modal-title mx-auto">
-                <h4 class="mb-0 fw-bold">Verifikasi Saksi</h4>
+                <h4 class="mb-0 fw-bold">Verifikasi Enumerator</h4>
             </div>
         </div>
         <div class="modal-content">

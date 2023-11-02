@@ -2,18 +2,18 @@
 @include('layouts.partials.sidebar-log')
 @include('layouts.partials.header')
 
-<div class="row mt-3">
-    <div class="col-lg-4">
-        <h1 class="page-title fs-1 mt-2">Dashboard Rekapitung
+<!-- PAGE-HEADER -->
+<div class="row mt-5">
+    <div class="col-lg">
+        <h1 class="page-title fs-1 mt-2">Verifikasi Saksi
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Log Histori
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ $kota->name }}
                 <!-- Kota -->
             </li>
         </ol>
-        <h4 class="fs-4 mt-2 fw-bold">Log Histori</h4>
     </div>
 </div>
 

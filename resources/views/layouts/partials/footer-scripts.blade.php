@@ -119,6 +119,22 @@ use App\Models\User;
 
 <script>
 
+const buttonkecurangan = $("button.periksa-c1-kecurangan");
+buttonkecurangan.on('click', function() {
+    const id = $(this).data('id');
+    $.ajax({
+        url: "{{route('verifikator.getKecuranganSaksi')}}",
+        data: {
+            id
+        },
+        type: "get",
+        dataType: "html",
+        success: function(data) {
+            $('#container-view-modal-kecurangan').html(data)
+        }
+    });
+})
+
 let myModal = new bootstrap.Modal(document.getElementById('modallockdown'), {
    keyboard : false,
    backdrop : "static"

@@ -36,7 +36,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
                 <a class="btn text-white w-100 py-3 c1koreksi tablink" onclick="openPage('C1-Koreksi', this, '#6259ca')"  id="defaultOpen">C1 Koreksi (Verifikator)</a>
             </div>
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 c1teraudit tablink" onclick="openPage('C1-Dibatalkan', this, '#6259ca')">C1 Dibatalkan (Auditor)</a>
+                <a class="btn text-white w-100 py-3 c1teraudit tablink" onclick="openPage('C1-Dibatalkan', this, '#6259ca')">C1 Koreksi (Auditor)</a>
             </div>
         </div>
     </div>

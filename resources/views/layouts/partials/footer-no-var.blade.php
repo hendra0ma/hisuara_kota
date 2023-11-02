@@ -86,13 +86,15 @@
         <script src="../../assets/plugins/gallery/lg-share.js"></script>
         @livewireScripts
         <script>
-            $('.cekmodal').on('click', function () {
-                let id = $(this).data('id');
+
+            let cekModal = function(el,id){
+ // let id = $(this).data('id');
+                // console.log(id)
                 $.ajax({
                     url: '{{url("/")}}/administrator/ajax/get_verifikasi_saksi',
                     type: "GET",
                     data: {
-                        id,
+                        id:id,
                         url: "<?= request()->segment(count(request()->segments())) ?>"
                     },
                     success: function (response) {
@@ -101,7 +103,11 @@
                         }
                     }
                 });
-            });
+            }
+
+            // $(document).on('click','.cekmodal' ,function () {
+               
+            // });
 
         </script>
 

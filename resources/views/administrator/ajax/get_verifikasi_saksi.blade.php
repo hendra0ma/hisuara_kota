@@ -60,10 +60,13 @@ $track = Tracking::where('id_user',$user['id'])->first();
     
     <div id="section-to-print">
         <div class="row">
+            @if ($saksi['kecurangan'] == "yes")
             <?php $scan_url = url('') . "/scanning-secure/" . (string)Crypt::encrypt($qrcode->nomor_berkas); ?>
             <div class="col-auto my-auto">
                 {!! QrCode::size(100)->generate( $scan_url); !!}
             </div>
+            @else
+            @endif
             <div class="col mt-2">
                 <div class="media">
                     @if ($user['profile_photo_path'] == NULL)
@@ -432,46 +435,123 @@ $track = Tracking::where('id_user',$user['id'])->first();
             @if ($saksi['kecurangan'] == "yes")
 
             <div class="row mt-5">
-                <div class="col-12 bg-danger text-white py-3 text-center">  
+                <div class="col-12 bg-danger text-white py-3 text-center mb-3">  
                     <h4 class="fw-bold mb-0">
                         Laporan Kecurangan Saksi
                     </h4>
                 </div>
-                <div class="col-12">
+                <div class="col-12 px-0 py-0">
+                    <div class="card">
+                        <div class="card-header" style="border: 1px #eee solid !important">
+                            <h3 class="mb-0 card-title">1. Daftar Laporan Kecurangan</h3>
+                        </div>
+                        <div class="card-body" style="border: 1px #eee solid !important">
+                            <ul class="list-group">
+                                @foreach ($list_kecurangan as $item)
+                                <li class="list-group-item">{{ $item->text }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 px-0 py-0">
+                    <div class="card">
+                        <div class="card-header" style="border: 1px #eee solid !important">
+                            <h3 class="mb-0 card-title">2. Rekomendasi Tindakan</h3>
+                        </div>
+                        <div class="card-body" style="border: 1px #eee solid !important">
+                            <ul class="list-group" id="appendDataSolution">
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 px-0 py-0">
+                    <div class="card">
+                        <div class="card-header" style="border: 1px #eee solid !important">
+                            <h3 class="mb-0 card-title">3. Pelapor dan Pemeriksa</h3>
+                        </div>
+                        <div class="card-body" style="border: 1px #eee solid !important">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td class="fw-bold">
+                                        <div class="text-center">Petugas Saksi</div>
+                                    </td>
+                                    <td class="fw-bold">
+                                        <div class="text-center">Petugas Verifikator</div>
+                                    </td>
+                                    <td class="fw-bold">
+                                        <div class="text-center">Petugas Validasi Kecurangan</div>
+                                    </td>
+                                    <td class="fw-bold">
+                                        <div class="text-center">Tanggal Dokumen</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td> {{$user->name}}</td>
+                                    <td> {{ $verifikator->name }}</td>
+                                    <td> {{ $hukum->name }}</td>
+                                    <td rowspan="2" class="align-middle text-center"> {{ $qrcode->created_at }}</td>
+                                </tr>
+                                <tr>
+                                    <td> {{$user->no_hp}}</td>
+                                    <td> {{ $verifikator->no_hp}}</td>
+                                    <td> {{ $hukum->no_hp }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 px-0">
                     <div class="row">
-                        <div class="col-6 px-0">
-                            <div class="card">
-                                <div class="card-header" style="border: 1px #eee solid !important">
-                                    <h3 class="card-title">Bukti Foto</h3>
-                                </div>
-                                <div class="card-body" style="border: 1px #eee solid !important">
-                                    <div class="row">
-                                        @foreach ($bukti_foto as $bf)
-                                        <div class="col-12 mt-1">
-                                            <img class="w-100" src="{{asset('')}}storage/{{$bf->url}}" alt="">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header" style="border: 1px #eee solid !important">
+                                        <h3 class="card-title">4. Barang Bukti</h3>
+                                    </div>
+                                    <div class="card-body" style="border: 1px #eee solid !important">
+                                        <div class="row">
+
+                                            <div class="col-6">
+                                                <div class="card">
+                                                    <div class="card-header" style="border: 1px #eee solid !important">
+                                                        <h3 class="card-title">Bukti Foto</h3>
+                                                    </div>
+                                                    <div class="card-body" style="border: 1px #eee solid !important">
+                                                        <div class="row">
+                                                            @foreach ($bukti_foto as $bf)
+                                                            <div class="col-12 mt-1">
+                                                                <img class="w-100" src="{{asset('')}}storage/{{$bf->url}}" alt="">
+                                                            </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="card">
+                                                    <div class="card-header" style="border: 1px #eee solid !important">
+                                                        <h3 class="card-title">Bukti Video</h3>
+                                                    </div>
+                                                    <div class="card-body" style="border: 1px #eee solid !important">
+                                                        <video width="100%" controls>
+                                                            <source src="{{asset('')}}storage/{{$bukti_vidio->url}}" type="video/mp4">
+                                                            <source src="{{asset('')}}storage/{{$bukti_vidio->url}}" type="video/ogg">
+                                                        </video>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
-                                        @endforeach
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 px-0">
-                            <div class="card">
-                                <div class="card-header" style="border: 1px #eee solid !important">
-                                    <h3 class="card-title">Bukti Video</h3>
-                                </div>
-                                <div class="card-body" style="border: 1px #eee solid !important">
-                                    <video width="100%" controls>
-                                        <source src="{{asset('')}}storage/{{$bukti_vidio->url}}" type="video/mp4">
-                                        <source src="{{asset('')}}storage/{{$bukti_vidio->url}}" type="video/ogg">
-                                    </video>
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header" style="border: 1px #eee solid !important">
-                                    <h3 class="card-title">Video Pernyataan Saksi (Bahwa ada kecurangan)</h3>
+                                    <h3 class="card-title">5. Video Pernyataan Saksi (Bahwa ada kecurangan)</h3>
                                 </div>
                                 <div class="card-body" style="border: 1px #eee solid !important">
                                 </div>
@@ -480,9 +560,125 @@ $track = Tracking::where('id_user',$user['id'])->first();
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header" style="border: 1px #eee solid !important">
-                                    <h3 class="card-title">Surat Pernyataan</h3>
+                                    <h3 class="card-title">6. Surat Pernyataan</h3>
                                 </div>
                                 <div class="card-body" style="border: 1px #eee solid !important">
+                                    <div class="page-content-wrapper" style="width:100%;height:100%;">
+                                        <div class="row mt-2">
+
+                                            <div class="container">
+                                                <div class="col-lg-12">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <h3 class="text-center"><u>SURAT PERNYATAAN</u></h3>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col-lg-12">
+                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-1">
+                                                        <div class="col-lg-12">
+                                                            <div class="col-lg-6">
+                                                                <h6>Yang bertanda tangan dibawah ini :</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                            
+                                                            <div class="col-lg-12 mb-2">
+                                                                <table class="w-100">
+                                                                    <tr>
+                                                                        <td style="width: 85px">NIK</td>
+                                                                        <td>:</td>
+                                                                        <td> {{$user->nik}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 85px">Nama</td>
+                                                                        <td>:</td>
+                                                                        <td> {{$user->name}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 85px">Alamat</td>
+                                                                        <td>:</td>
+                                                                        <td> {{$user->address}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 85px">No Hp</td>
+                                                                        <td>:</td>
+                                                                        <td> {{$user->no_hp}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 85px">Email</td>
+                                                                        <td>:</td>
+                                                                        <td>{{$user->email}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 85px">Kecamatan</td>
+                                                                        <td>:</td>
+                                                                        <td>{{ $district['name'] }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 85px">Kelurahan</td>
+                                                                        <td>:</td>
+                                                                        <td>{{ $village['name'] }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 85px">TPS</td>
+                                                                        <td>:</td>
+                                                                        <td>{{ $tps->number }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 85px">Kota</td>
+                                                                        <td>:</td>
+                                                                        <td class="text-capitalize">{{ $kota->name }}</td>
+                            
+                                                                    </tr>
+                                                                </table>
+                            
+                                                            </div>
+                                                        </div>
+                            
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="col-lg-12 text-justify" style="line-height:1.8">
+                                                                {{$surat_pernyataan->deskripsi}}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-5">
+                                                        <div class="col-lg-12">
+                                                            <div class="col-lg-12">
+                                                                <b>Tanggal Kirim </b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-11">
+                                                            <div class="col-lg-12 text-left">
+                                                                <p>Yang Membuat Pernyataan Ini:</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-3">
+                                                        <div class="col-lg-11">
+                                                            <div class="col-lg-12 text-left">
+                                                                <p class="mt-5"><u> {{$user->name}}</u></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{-- <p class="mb-3 text-center mt-2">
+                                                <i>Laporan Ini Dicetak Oleh Komputer Dan Tidak Memerlukan Tanda Tangan.
+                                                    Berkas Terlampir</i>
+                                            </p> --}}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -527,6 +723,26 @@ $track = Tracking::where('id_user',$user['id'])->first();
             @endif
         </div>
     </div>
+
+    <script>
+        setTimeout(function () {
+            let uniqueData = [@foreach($list_kecurangan as $item)
+                '{{$item->solution}} | {{$item->kode}}', @endforeach
+            ];
+        
+            uniqueArray = uniqueData.filter(function (item, pos) {
+                return uniqueData.indexOf(item) == pos;
+            });
+
+            uniqueArray.forEach(function (item, index) {
+                $('#appendDataSolution').append(`
+                    <li class="list-group-item">
+                        ${item}
+                    </li>
+                `)
+            });
+        }, 200)
+    </script>
 
 </div>
 @endif

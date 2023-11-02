@@ -131,7 +131,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 </div>
 <hr style="border: 1px solid">
 
-<livewire:absensi-tidak-hadir>
+<livewire:enumerator-tidak-hadir>
 
 {{-- <div class="row mt-5">
     <div class="col-md">

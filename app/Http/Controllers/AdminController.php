@@ -36,6 +36,7 @@ use App\Models\Province;
 use App\Models\QuickSaksiData;
 use App\Models\Configs;
 use App\Models\RegenciesDomain;
+use App\Models\SuratPernyataan;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -486,16 +487,25 @@ class AdminController extends Controller
     public function get_verifikasi_saksi(Request $request)
     {
         // dump($request->url);
-        $user        = User::where('id', $request['id'])->first();
-        $district    = District::where('id', $user['districts'])->first();
-        $village     = Village::where('id', $user['villages'])->first();
-        $tps         = Tps::where('user_id', $user['id'])->first();
-        $absensi     = Absensi::where('user_id', $user['id'])->first();
-        $qrcode     = Qrcode::where('tps_id', $user['tps_id'])->first();
-        $bukti_vidio = Buktividio::where('tps_id', $tps['id'])->first();
-        $bukti_foto  = Buktifoto::where('tps_id', $tps['id'])->get();
-
-        $saksi       = Saksi::where('tps_id', $tps['id'])->first();
+        $user                       = User::where('id', $request['id'])->first();
+        $district                   = District::where('id', $user['districts'])->first();
+        $village                    = Village::where('id', $user['villages'])->first();
+        $tps                        = Tps::where('user_id', $user['id'])->first();
+        $absensi                    = Absensi::where('user_id', $user['id'])->first();
+        $qrcode                     = Qrcode::where('tps_id', $user['tps_id'])->first();
+        $bukti_vidio                = Buktividio::where('tps_id', $tps['id'])->first();
+        $bukti_foto                 = Buktifoto::where('tps_id', $tps['id'])->get();
+        $saksi                      = Saksi::where('tps_id', $tps['id'])->first();
+        $surat_pernyataan           = SuratPernyataan::where('saksi_id', $saksi['id'])->first();
+        $config                     = Config::first();
+        $kota                       = Regency::where('id', $config->regencies_id)->first();
+        $verifikator                = User::where('id', $qrcode['verifikator_id'])->first();
+        $hukum                      = User::where('id', $qrcode['hukum_id'])->first();
+        $list_kecurangan            = Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+                                                            ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
+                                                            ->where('bukti_deskripsi_curang.tps_id', $tps['id'])
+                                                            ->get();
+        
         return view('administrator.ajax.get_verifikasi_saksi', [
             'user' => $user,
             'village' => $village,
@@ -506,6 +516,11 @@ class AdminController extends Controller
             'qrcode' => $qrcode,
             'bukti_vidio' => $bukti_vidio,
             'bukti_foto' => $bukti_foto,
+            'surat_pernyataan' => $surat_pernyataan,
+            'verifikator' => $verifikator,
+            'hukum' => $hukum,
+            'kota' => $kota,
+            'list_kecurangan' => $list_kecurangan,
             'config' => Config::first(),
             'url' => $request->url,
         ]);

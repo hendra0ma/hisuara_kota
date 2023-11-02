@@ -5,7 +5,7 @@
 
     <!-- META DATA -->
     <meta charset="UTF-8">
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+    <meta name='viewport' content='width=1920px, initial-scale=0.75, user-scalable=yes'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Zanex – Bootstrap  Admin & Dashboard Template">
     <meta name="author" content="Spruko Technologies Private Limited">
@@ -62,6 +62,17 @@
     <link rel="stylesheet" href="https://raw.githack.com/thdoan/magnify/master/dist/css/magnify.css">
     
     <style>
+
+        @media screen and (max-width: 1366px) {
+            body {
+                min-width: 1903px;
+                -moz-transform: scale(0.7091352);
+                -moz-transform-origin: 0 0;
+                transform: scale(0.7091352);
+                transform-origin: 0 0;
+            }
+        }
+
         .inner-card {
             border-radius: 10px;
             background-color: #cbd7ff;
@@ -379,6 +390,38 @@
             right: 0;
             width: 40%;
             border-top: 3px solid #6259ca;
+            z-index: -1;
+        }
+
+        .parent-link a.active-tab {
+            background: #6259ca;
+        }
+        
+        .parent-link a.active-tab:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            right: 0;
+            width: 40%;
+            border-top: 3px solid #6259ca;
+            z-index: -1;
+        }
+
+        .parent-link.kecurangan a.active-tab {
+            background: #ff4f4e;
+        }
+        
+        .parent-link.kecurangan a.active-tab:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            right: 0;
+            width: 40%;
+            border-top: 3px solid #ff4f4e;
             z-index: -1;
         }
 
