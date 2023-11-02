@@ -93,9 +93,7 @@
 
                         <div class="row mt-2">
                             <div class="col-12 px-0">
-                                <a class="btn btn-primary rounded-0 w-100 cekmodal" id="Cek" data-id="{{$ls['id']}}" data-bs-toggle="modal" id="" data-bs-target="#cekmodal">
-                                    <div class="result"></div>
-                                </a>
+                                <a class="btn btn-primary rounded-0 w-100 cekmodal" id="Cek" data-id="{{$ls['id']}}" data-bs-toggle="modal" id="" data-bs-target="#cekmodal" onclick="cekModal(this,{{$ls['id']}})">Detail Data Saksi</a>
                             </div>
                         </div>
                     </div>
@@ -109,18 +107,4 @@
     <div class="mb-4">
         {{$absen->links()}}
     </div>
-
-    <script>
-        $(document).ready(function() {
-        // Retrieve the path after the domain
-        var pathAfterDomain = window.location.pathname;
-        
-        // Check if the path contains 'enumerator'
-        if (pathAfterDomain.includes('enumerator')) {
-        $('.result').html("Detail Data Enumerator");
-        } else {
-        $('.result').html("Detail Data Saksi");
-        }
-        });
-    </script>
 </div>

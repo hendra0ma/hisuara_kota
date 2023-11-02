@@ -86,7 +86,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 
 <div class="row mt-3">
 
-    <livewire:saksi-ditolak>
+    <livewire:enumerator-ditolak>
 
     {{-- <div class="col-lg-12 col-md-12">
         <div class="card">

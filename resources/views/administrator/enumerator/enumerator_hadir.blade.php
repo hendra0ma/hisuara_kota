@@ -111,7 +111,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 </div>
 <hr style="border: 1px solid">
 
-<livewire:absensi>
+<livewire:enumerator-hadir>
 {{-- <div class="row mt-5">
     <div class="col-md">
 
@@ -174,7 +174,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-header bg-primary text-white">
             <div class="modal-title mx-auto">
-                <h4 class="mb-0 fw-bold">Detail Data Saksi</h4>
+                <h4 class="mb-0 fw-bold">Detail Data Enumerator</h4>
             </div>
         </div>
         <div class="modal-content h-auto">

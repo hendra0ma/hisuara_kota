@@ -938,7 +938,7 @@ s    </div>
             <div class="card-body" style="position: relative">
                 <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
-                    <div class="col-xxl-12">
+                    <div class="col-12">
                         <div class="container">
                             <div class="text-center fs-3 mb-3 fw-bold">QUICK COUNT</div>
                             <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
@@ -1022,7 +1022,7 @@ s    </div>
             <div class="card-body" style="position: relative;">
                 <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
-                    <div class="col-xxl-12">
+                    <div class="col-12">
                         <div class="container">
                             <div class="text-center fs-3 mb-3 fw-bold">REAL COUNT</div>
                             <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
@@ -1166,7 +1166,7 @@ s    </div>
     </div>
 
     @if ($config->quick_count == 'yes')
-    <div class="col-lg col-md" style="display:{{($config->otonom == 'yes')?'none':'block'}}">
+    <div class="col-lg-12 col-md" style="display:{{($config->otonom == 'yes')?'none':'block'}}">
         <div class="card">
             {{-- <div class="card-header bg-secondary">
                 <h3 class="card-title text-white">Suara TPS Terverifikasi</h3>
@@ -1176,7 +1176,7 @@ s    </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="row">
-                            <div class="col-xxl-12">
+                            <div class="col-12">
                                 <div class="container">
                                     <div class="text-center fs-3 mb-3 fw-bold">SUARA TERVERIFIKASI</div>
                                     <div class="text-center">Terverifikasi {{$saksi_terverifikasi}} TPS dari {{$saksi_masuk}}
@@ -1253,7 +1253,7 @@ s    </div>
         </div>
     </div>
     @else
-    <div class="col-lg col-md" style="display:{{($config->otonom == 'yes')?'none':'block'}}">
+    <div class="col-lg-6 col-md" style="display:{{($config->otonom == 'yes')?'none':'block'}}">
         <div class="card">
             {{-- <div class="card-header bg-secondary">
                 <h3 class="card-title text-white">Suara TPS Terverifikasi</h3>
@@ -1263,7 +1263,7 @@ s    </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-xxl-12">
+                            <div class="col-12">
                                 <div class="container">
                                     <div class="text-center fs-3 mb-3 fw-bold">SUARA TERVERIFIKASI</div>
                                     <div class="text-center">Terverifikasi {{$saksi_terverifikasi}} TPS dari {{$saksi_masuk}}

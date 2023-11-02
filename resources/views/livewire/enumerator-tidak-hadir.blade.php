@@ -31,10 +31,11 @@
             background: #f82649;
         }
     </style>
-    
+
     <div class="row">
         <div class="col-12 mb-3">
-            <input wire:model="search" type="search" class="form-control border-1 border-dark" placeholder="Search posts by title...">
+            <input wire:model="search" type="search" class="form-control border-1 border-dark"
+                placeholder="Search posts by title...">
         </div>
     </div>
 
@@ -55,7 +56,9 @@
                 <div class="hiasan-1">
                     <div class="gambar-bulat">
                         @if ($ls->profile_photo_path == NULL)
-                        <img class="rounded-circle" style="width: 125px; height: 125px; object-fit:cover;" src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF" alt="img">
+                        <img class="rounded-circle" style="width: 125px; height: 125px; object-fit:cover;"
+                            src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF"
+                            alt="img">
                         @else
                         <img class="rounded-circle" style="width: 125px; height: 125px; object-fit:cover;" src="{{url("/storage/profile-photos/".$ls->profile_photo_path) }}">
                         @endif
@@ -103,7 +106,8 @@
                         </table>
                         <div class="row mt-2">
                             <div class="col-12 px-0">
-                                <a class="btn btn-primary rounded-0 w-100 cekmodal" id="Cek" data-id="{{$ls['id']}}" data-bs-toggle="modal" id="" data-bs-target="#cekmodal" onclick="cekModal(this,{{$ls['id']}})">Detail Data Saksi</a>
+                                <a class="btn btn-primary rounded-0 w-100 cekmodal" id="Cek" data-id="{{$ls['id']}}"
+                                    data-bs-toggle="modal" id="" data-bs-target="#cekmodal" onclick="cekModal(this,{{$ls['id']}})">Detail Data Enumerator</a>
                             </div>
                         </div>
                     </div>
