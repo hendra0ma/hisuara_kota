@@ -29,10 +29,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
 class PublicController extends Controller
 {
-    // public function index()
-    // {
-    //     // return view('publik.index');
-    // }
+  
     public $config;
     public $configs;
     public function __construct()

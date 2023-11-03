@@ -34,10 +34,22 @@ class LoginController extends Controller
                 ['geetest' => config('geetest.server_fail_alert')]
             );
 
+            $currentDomain = request()->getHttpHost();
+            if (isset(parse_url($currentDomain)['port'])) {
+                $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
+            }else{
+                $url = $currentDomain;
+            }
+
+            if ($url != "hisuara.id") {
+                return redirect('/redirect-page');
+            }
+
             if ($request) {
                 if(Auth::check()){
                 $role = Auth::user()->role_id;
                 // return gettype($role)." > ".$role;
+
                 if ($role == "1") {
                     return redirect('dashboard-pusats');
                 }else{
