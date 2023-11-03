@@ -20,9 +20,7 @@
            if (!isset($row[2])) {
                unset($filteredExcelData[$j][$i]);
            }
-           if ($j == 9) {
-               unset($filteredExcelData[$j][$i]);
-            }
+          
         }
         if (empty($row)) {
             unset($filteredExcelData[$j]);
