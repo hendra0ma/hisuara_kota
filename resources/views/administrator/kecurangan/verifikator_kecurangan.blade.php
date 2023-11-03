@@ -80,8 +80,8 @@
                     ->count();
                 
                 ?>
-                <button class="btn tablink w-100 rounded-0 c1saksi" onclick="openPage('Verifikator-Kecurangan', this, '#45aaf2 ')"
-                    id="defaultOpen">C1 Saksi <span
+                <button class="btn tablink w-100 rounded-0 c1saksi"
+                    onclick="openPage('Verifikator-Kecurangan', this, '#45aaf2 ')" id="defaultOpen">C1 Saksi <span
                         class="badge rounded-pill bg-danger">{{ $count_suara }}</span></button>
             </div>
             <!-- <div class="col-md">
@@ -101,7 +101,7 @@
                 <button class="btn tablink w-100 rounded-0 c1koreksi"
                     onclick="openPage('C1-Koreksi', this, '#09ad95')">C1 Koreksi</button>
             </div>
-          
+
             <!-- <div class="col-md">
                 <button class="btn tablink w-100 rounded-0 kecurangan" onclick="openPage('Kecurangan', this, '#09ad95')">Kecurangan <span class="badge rounded-pill bg-danger">{{ $count_kecurangan }}</span></button>
             </div> -->
@@ -118,7 +118,8 @@
         <div class="modal-content">
             <div class="modal-header" style="padding-right: 3rem">
                 <h3 class="modal-title fw-bold" id="periksaC1VerifikatorLabel">Verifikasi Data C1 TPS</h3>
-                <button type="button" class="btn-close btn-danger text-white mr-5" style="width: 50px" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                <button type="button" class="btn-close btn-danger text-white mr-5" style="width: 50px"
+                    data-bs-dismiss="modal" aria-label="Close">Close</button>
             </div>
             <div class="modal-body">
                 <div class="row" id="container-view-modal">
@@ -130,8 +131,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="periksaC1Relawan" tabindex="-1" aria-labelledby="periksaC1RelawanLabel"
-    aria-hidden="true">
+<div class="modal fade" id="periksaC1Relawan" tabindex="-1" aria-labelledby="periksaC1RelawanLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
@@ -199,75 +199,22 @@
 </div>
 
 <script>
-    const buttonperiksaC1Relawan = $("button.periksa-c1-relawan");
-    //   const buttonkecurangan = $("button.periksa-c1-kecurangan");
-    // const buttonC1Pending = $("button.periksa-c1-pending");
-    const buttonperiksaC1 = $(".periksa-c1-plano");
-    buttonperiksaC1.on('click', function() {
+    const buttonkecurangan = $(".periksa-c1-kecurangan");
+
+    buttonkecurangan.on('click', function() {
         const id = $(this).data('id');
         $.ajax({
-            url: "{{ route('verifikator.getSaksiData') }}",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                id
-            },
-            type: "post",
-            dataType: "html",
-            success: function(data) {
-                $('#container-view-modal').html(data)
-            }
+          url: "{{ route('verifikator.getKecuranganSaksi') }}",
+          data: {
+            id
+          },
+          type: "get",
+          dataType: "html",
+          success: function(data) {
+            $('#container-view-modal-kecurangan').html(data)
+          }
         });
-    });
-    buttonC1Pending.on('click', function() {
-        const id = $(this).data('id');
-        $.ajax({
-            url: "{{ route('verifikator.getSaksiPending') }}",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                id
-            },
-            type: "get",
-            dataType: "html",
-            success: function(data) {
-                $('#container-view-modal-c1-pending').html(data)
-            }
-        });
-    });
-
-    // buttonperiksaC1Relawan.on('click', function() {
-    //     const id = $(this).data('id');
-    //     $.ajax({
-    //         url: "{{ route('verifikator.getRelawanData') }}",
-    //         data: {
-    //             "_token": "{{ csrf_token() }}",
-    //             id
-    //         },
-    //         type: "post",
-    //         dataType: "html",
-    //         success: function(data) {
-    //             $('#container-view-modal-relawan').html(data)
-    //         }
-    //     });
-    // });
-
-    //   buttonkecurangan.on('click', function() {
-    //     const id = $(this).data('id');
-    //     $.ajax({
-    //       url: "{{ route('verifikator.getKecuranganSaksi') }}",
-    //       data: {
-    //         id
-    //       },
-    //       type: "get",
-    //       dataType: "html",
-    //       success: function(data) {
-    //         $('#container-view-modal-kecurangan').html(data)
-    //       }
-    //     });
-    //   })
+      })
 </script>
-
-    </div>
-
-</div>
 
 @endsection

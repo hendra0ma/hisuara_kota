@@ -1,4 +1,4 @@
-@extends('layouts.mainlayout')
+@extends('layouts.main-hukum')
 
 @section('content')
 
@@ -159,64 +159,96 @@
     
 </div>
 
-<div class="modal fade" id="periksaC1Verifikator" tabindex="-1" aria-labelledby="periksaC1VerifikatorLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
+<div id="fotoKecurangan" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen" role="document">
         <div class="modal-content">
-            <div class="modal-header" style="padding-right: 3rem">
-                <h3 class="modal-title fw-bold" id="periksaC1VerifikatorLabel">Verifikasi Data C1 TPS</h3>
-                <button type="button" class="btn-close btn-danger text-white mr-5" style="width: 50px" data-bs-dismiss="modal" aria-label="Close">Close</button>
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button aria-label="Close" class="btn-close bg-danger text-white rounded-0" data-bs-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                </button>
             </div>
-            <div class="modal-body">
-                <div class="row" id="container-view-modal">
 
-                </div>
+            <div class="modal-body">
+                <div id="container-hukum-foto"></div>
             </div>
-            {{-- <div class="modal-footer">
-            </div> --}}
+
         </div>
     </div>
 </div>
-<div class="modal fade" id="periksaC1Relawan" tabindex="-1" aria-labelledby="periksaC1RelawanLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
+
+<div id="fotoKecuranganterverifikasi" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="periksaC1RelawanLabel">Data TPS</h3>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                <button aria-label="Close" class="btn-close bg-danger text-white rounded-0" data-bs-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                </button>
             </div>
-            <div class="modal-body">
-                <div class="row" id="container-view-modal-relawan">
 
-                </div>
+            <div class="modal-body">
+                <div id="container-hukum-verifikasi"></div>
             </div>
-            {{-- <div class="modal-footer">
-            </div> --}}
+
         </div>
     </div>
 </div>
-<div class="modal fade" id="modalPeriksa" tabindex="-1" aria-labelledby="modalPeriksaLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<div id="fotoKecuranganditolak" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="modalPeriksaLabel">Persetujuan Koreksi</h3>
+                <button aria-label="Close" class="btn-close bg-danger text-white rounded-0" data-bs-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div id="container-hukum-ditolak"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cekKecurangan" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Laporan Kecurangan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="container">
-                    <ul>
-                        <li>Setiap perubahan data yang di lakukan wajib memerlukan izin dan persetujuan dari
-                            administrator (Human Verifikasi)</li>
-                        <li>Aktifitas perubahan data yang anda lakukan akan di tampilkan pada history publik yang dapat
-                            di lihat oleh masyarakat
-                            . Segala perbuatan yang melanggar hukum dengan merubah hasil perhitungan suara yang sah
-                            dapat di kenakan Pasal 505 UU No.7 Tahun 2017</li>
-                    </ul>
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Ciputat - TPS 87</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">List Kecurangan</p>
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer ajukanPerubahan">
+            <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <a href="" class="btn btn-primary">Ajukan Perubahan</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="catatanAdmin" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Catatan Admin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Body
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

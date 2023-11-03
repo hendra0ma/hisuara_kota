@@ -83,81 +83,6 @@
         <script src="../../assets/plugins/gallery/lg-share.js"></script>
 
 
-        <script>
-               var chart = c3.generate({
-                bindto: '#chart-pie', // id of chart wrapper
-                data: {
-                    columns: [
-                         <?php $i = 1 ?>
-                                    <?php foreach ($index_tsm as $item): ?>
-                                        <?php    if($item->jenis !=0){
-                                            continue;
-                                        } ?>
-                                        <?php
-                                    $totalKec =  App\Models\Bukti_deskripsi_curang::join('list_kecurangan','list_kecurangan.id','=','bukti_deskripsi_curang.list_kecurangan_id')
-                                    ->where('bukti_deskripsi_curang.list_kecurangan_id',$item->id)
-                                    ->where('list_kecurangan.jenis',0)
-                                    ->count();
-                                    $jumlahSaksi = App\Models\Saksi::where('kecurangan',"yes")->count();
-                                    $persen = ($totalKec/ $jumlahSaksi)*100;
-                                      ?>
-                                      ['{{$i++}}',<?=$persen?>],
-                                    <?php endforeach ?>
-                    ],
-                                type: 'pie',
-                },
-                axis: {},
-                legend: {
-                    show: true, //hide legend
-                },
-                padding: {
-                    bottom: 0,
-                    top: 0
-                },
-                size: {
-                    height: 250,
-                    width: 250
-                }
-            });
-               var chart2 = c3.generate({
-                bindto: '#chart-donut', // id of chart wrapper
-                data: {
-                    columns: [
-                         <?php $i = 1 ?>
-                                    <?php foreach ($index_tsm as $item): ?>
-                                        <?php    if($item->jenis !=1){
-                                            continue;
-                                        } ?>
-                                        <?php
-                                    $totalKec =  App\Models\Bukti_deskripsi_curang::join('list_kecurangan','list_kecurangan.id','=','bukti_deskripsi_curang.list_kecurangan_id')
-                                    ->where('bukti_deskripsi_curang.list_kecurangan_id',$item->id)
-                                    ->where('list_kecurangan.jenis',1)
-                                    ->count();
-                                    $jumlahSaksi = App\Models\Saksi::where('kecurangan',"yes")->count();
-                                    $persen = ($totalKec/ $jumlahSaksi)*100;
-                                      ?>
-                                      ['{{$i++}}',<?=$persen?>],
-                                    <?php endforeach ?>
-                    ],
-                                type: 'donut',
-                },
-                axis: {},
-                legend: {
-                    show: true, //hide legend
-                },
-                padding: {
-                    bottom: 0,
-                    top: 0
-                },
-                size: {
-                    height: 250,
-                    width: 250
-                }
-            });
-        </script>
-        
-
-
         @livewireScripts
         @if ($message = Session::get('success'))
         <script>
@@ -174,7 +99,7 @@
         </script>
         @endif
         <script>
-            $('a.fotoKecuranganterverifikasi').on('click', function() {
+            $('.fotoKecuranganterverifikasi').on('click', function() {
                 let id = $(this).data('id');
                 $.ajax({
                     url: 'ajax/get_fotoKecuranganterverifikasi',
@@ -191,7 +116,7 @@
             });
         </script>
         <script>
-            $('a.fotoKecuranganditolak').on('click', function() {
+            $('.fotoKecuranganditolak').on('click', function() {
                 let id = $(this).data('id');
                 $.ajax({
                     url: 'ajax/get_fotoKecuranganditolak',
@@ -208,7 +133,7 @@
             });
         </script>
         <script>
-            $('a.fotoKecurangan').on('click', function() {
+            $('.fotoKecurangan').on('click', function() {
                 let id = $(this).data('id');
                 $.ajax({
                     url: 'ajax/get_foto_kecurangan',
@@ -225,7 +150,7 @@
             });
         </script>
         <script>
-            $('a.videoKecurangan').on('click', function() {
+            $('.videoKecurangan').on('click', function() {
                 let id = $(this).data('id');
                 $.ajax({
                     url: 'ajax/get_vidio_kecurangan',
@@ -242,7 +167,7 @@
             });
         </script>
         <script>
-            $('a.listkecurangan').on('click', function() {
+            $('.listkecurangan').on('click', function() {
                 let id = $(this).data('id');
                 $.ajax({
                     url: 'ajax/get_list_kecurangan',

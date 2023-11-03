@@ -181,6 +181,16 @@ class VerificatorController extends Controller
         $data['kecamatan'] = District::where('id', $data['tps']['district_id'])->first();
         $data['bukti_vidio'] = ModelsBuktividio::where('tps_id', $request['id'])->get();
         $data['bukti_foto'] = ModelsBuktifoto::where('tps_id', $request['id'])->get();
+        $data['user'] = User::where('tps_id', $request['id'])->first();
+        $data['qrcode'] = Qrcode::where('tps_id', $data['user']['tps_id'])->first();
+        if ($data['qrcode'] != null) {
+            $data['verifikator']            = User::where('id', $data['qrcode']['verifikator_id'])->first();
+            $data['hukum']                  = User::where('id', $data['qrcode']['hukum_id'])->first();
+        } else {
+            $data['verifikator']            = null;
+            $data['hukum']                  = null;
+        }
+        $data['saksi'] = Saksi::where('tps_id', $data['tps']['id'])->first();
 
         return view('verificator.modal-view-kecurangan', $data);
     }

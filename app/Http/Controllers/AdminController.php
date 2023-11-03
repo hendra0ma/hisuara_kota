@@ -505,14 +505,20 @@ class AdminController extends Controller
         $tps                        = Tps::where('user_id', $user['id'])->first();
         $absensi                    = Absensi::where('user_id', $user['id'])->first();
         $qrcode                     = Qrcode::where('tps_id', $user['tps_id'])->first();
+        if ($qrcode != null){
+            $verifikator            = User::where('id', $qrcode['verifikator_id'])->first();
+            $hukum                  = User::where('id', $qrcode['hukum_id'])->first();
+        }else{
+            $verifikator            = null;
+            $hukum                  = null;
+
+        }
         $bukti_vidio                = Buktividio::where('tps_id', $tps['id'])->first();
         $bukti_foto                 = Buktifoto::where('tps_id', $tps['id'])->get();
         $saksi                      = Saksi::where('tps_id', $tps['id'])->first();
         $surat_pernyataan           = SuratPernyataan::where('saksi_id', $saksi['id'])->first();
         $config                     = Config::first();
         $kota                       = Regency::where('id', $config->regencies_id)->first();
-        $verifikator                = User::where('id', $qrcode['verifikator_id'])->first();
-        $hukum                      = User::where('id', $qrcode['hukum_id'])->first();
         $list_kecurangan            = Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
                                                             ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
                                                             ->where('bukti_deskripsi_curang.tps_id', $tps['id'])
@@ -1278,6 +1284,7 @@ class AdminController extends Controller
             ->get();
         $data['foto_kecurangan'] = Buktifoto::where('tps_id', Crypt::decrypt($request['id']))->get();
         $data['vidio_kecurangan'] = Buktividio::where('tps_id', Crypt::decrypt($request['id']))->first();
+        $data['surat_pernyataan'] = SuratPernyataan::where('saksi_id', $data['saksi']['id'])->first();
 
         $status =  Qrcode::where('tps_id', Crypt::decrypt($request['id']))->update([
             'print' => 1

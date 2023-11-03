@@ -80,7 +80,9 @@ $props = Province::where('id',$kota['province_id'])->first();
             {{-- <div class="card-header bg-info">
                 <h3 class="card-title text-white">Suara TPS Masuk</h3>
             </div> --}}
-            <div class="card-body">
+            <div class="card-body" style="position: relative">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px"
+                    alt="">
                 <div class="row">
                     <div class="col-xxl-6">
                         <div class="container">

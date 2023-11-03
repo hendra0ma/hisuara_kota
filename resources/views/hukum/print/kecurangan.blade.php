@@ -22,17 +22,22 @@
     <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
     <style>
-      .page-break{
-        page-break-before: always;
-        page-break-after: always;
-        page-break-inside: avoid;
+        body {
+            font-size: 18px
+        }
 
-      }
+        .page-break {
+            page-break-before: always;
+            page-break-after: always;
+            page-break-inside: avoid;
+
+        }
 
         @media screen {
             div.divFooter {
                 display: none;
             }
+
             body {
                 display: none;
             }
@@ -43,12 +48,13 @@
                 position: fixed;
                 bottom: 0;
             }
+
             .stamp {
                 position: fixed;
                 bottom: 0px;
                 top: 75%;
                 left: 75%;
-                
+
             }
         }
 
@@ -64,25 +70,24 @@
                 color: white !important;
             }
         }
-
     </style>
 </head>
 
 <body>
 
-<img src="{{asset('')}}assets/stamp.png"class="img-flluid stamp"style="width:150px;height:auto" alt="">
 
-    <div class="asdf"
-        style="position: relative;width:100%;height:100%;">
+    <div class="asdf" style="position: relative;width:100%;height:100%;">
 
+        {{-- <img src="{{asset('')}}assets/stamp.png" class="img-flluid stamp"
+            style="width:150px;height:auto; z-index: 2000;" alt=""> --}}
         <div class="row">
             <div class="col-12">
                 <center>
                     <h1 class="mt-2 text-danger text-uppercase" style="font-size: 40px;">bukti kecurangan rekapitung
                     </h1>
-                    <h3 class="mt-1 mb-1">
+                    <h5 class="mt-1 mb-1">
                         NO BERKAS : {{ $qrcode->nomor_berkas }}
-                    </h3>
+                    </h5>
 
                     <img style="width: 350px; height: auto; margin-top:75px"
                         src="{{url('/')}}/images/logo/rekapitung_gold.png" alt="">
@@ -91,7 +96,7 @@
             </div>
         </div>
 
-     
+
         <div class="row justify-content-center border border-dark"
             style="align-items:center;height:100%;margin-top:75px">
             <?php $scan_url = url('') . "/scanning-secure/" . (string)Crypt::encrypt($qrcode->nomor_berkas); ?>
@@ -100,26 +105,94 @@
             </div>
             <div class="col-6">
 
-                <h3>
+                <h5>
                     {{$kota->name }}<br>
                     kec
                     {{$kecamatan->name}} / Kel
                     {{$kelurahan->name}} <br>
-                </h3>
+                </h5>
                 <h2 class="text-danger" style="font-size:40px">TPS {{ $tps->number }} <br></h2>
 
             </div>
         </div>
 
     </div>
-   
 
-    <div style="width:100%;height:100%;"class="page-break">
-        <center>
+
+    <div style="width:100%;height:100%;" class="page-break">
+        <div class="col-12 px-0 py-0 mb-3">
+            <div class="card">
+                <div class="card-header" style="border: 1px #eee solid !important; background-color: #eee">
+                    <h5 class="mb-0 card-title">1. Daftar Laporan Kecurangan</h5>
+                </div>
+                <div class="card-body" style="border: 1px #eee solid !important">
+                    <ul class="list-group">
+                        @foreach ($list_kecurangan as $item)
+                        <li class="list-group-item">{{ $item->text }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 px-0 py-0 mb-3">
+            <div class="card">
+                <div class="card-header" style="border: 1px #eee solid !important; background-color: #eee">
+                    <h5 class="mb-0 card-title">2. Rekomendasi Tindakan</h5>
+                </div>
+                <div class="card-body" style="border: 1px #eee solid !important">
+                    <ul class="list-group" id="appendDataSolution">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 px-0 py-0 mb-3">
+            <div class="card">
+                <div class="card-header" style="border: 1px #eee solid !important; background-color: #eee">
+                    <h5 class="mb-0 card-title">3. Pelapor dan Pemeriksa</h5>
+                </div>
+                <div class="card-body" style="border: 1px #eee solid !important">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td class="fw-bold">
+                                <div class="text-center">Petugas Saksi</div>
+                            </td>
+                            <td class="fw-bold">
+                                <div class="text-center">Petugas Verifikator</div>
+                            </td>
+                            <td class="fw-bold">
+                                <div class="text-center">Petugas Validasi Kecurangan</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> {{$user->name}}</td>
+                            <td> {{ $verifikator->name }}</td>
+                            <td> {{ $hukum->name }}</td>
+                        </tr>
+                        <tr>
+                            <td> {{$user->no_hp}}</td>
+                            <td> {{ $verifikator->no_hp}}</td>
+                            <td> {{ $hukum->no_hp }}</td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td class="fw-bold">
+                                <div class="text-center">Tanggal Dokumen</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="align-middle text-center"> {{ $qrcode->created_at }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {{-- <center>
             <h1 class="mt-2 text-danger">DOKUMEN REKAPITUNG</h1>
             <center>
                 <h2 style="margin-top : -5px;text-transform:uppercase;">Berkas Laporan Kecurangan</h2>
-                <h3 style="margin-top : -10px;text-transform:uppercase;">Pilpres 2024</h3>
+                <h5 style="margin-top : -10px;text-transform:uppercase;">Pilpres 2024</h5>
             </center>
         </center>
         <div class="text-center">
@@ -150,22 +223,20 @@
                     <td class="font-weight-bold">
                         <div class="text-center">Petugas Validasi Kecurangan</div>
                     </td>
+                    <td class="font-weight-bold">
+                        <div class="text-center">Tanggal</div>
+                    </td>
                 </tr>
                 <tr>
                     <td> {{$user->name}}</td>
                     <td> {{ $verifikator->name }}</td>
                     <td> {{ $hukum->name }}</td>
+                    <td rowspan="2" class="align-middle text-center"> {{ $qrcode->created_at }} </td>
                 </tr>
                 <tr>
                     <td> {{$user->no_hp}}</td>
                     <td> {{ $verifikator->no_hp}}</td>
                     <td> {{ $hukum->no_hp }}</td>
-                </tr>
-            </table>
-            <table class="table table-bordered">
-                <tr>
-                    <td>Tanggal Dokumen</td>
-                    <td>{{ $qrcode->created_at }}</td>
                 </tr>
             </table>
             <table class="table">
@@ -195,11 +266,52 @@
 
                 </script>
             </table>
-        </center>
+        </center> --}}
     </div>
 
     <div style="width:100%;height:100%;">
-        <table style="table-layout: fixed;" class="table text-center">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
+
+                        <div class="card">
+                            <div class="card-header" style="border: 1px #eee solid !important">
+                                <h5 class="card-title">Bukti Foto</h5>
+                            </div>
+                            <div class="card-body" style="border: 1px #eee solid !important">
+                                <div class="row">
+                                    @foreach ($foto_kecurangan as $bf)
+                                    <div class="col-12 mt-1">
+                                        <center>
+                                            <img class="image my-1" style="width: 250px" src="{{asset('storage/' . $bf->url)}}"
+                                                data-url="{{asset('storage/' . $bf->url)}}" alt="">
+                                        </center>
+                                    </div>
+                                    @endforeach
+                                    <div id="metadataDisplay"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header" style="border: 1px #eee solid !important">
+                                <h5 class="card-title">Metadata</h5>
+                            </div>
+                            <div class="card-body" style="border: 1px #eee solid !important">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {{-- <table style="table-layout: fixed;" class="table text-center">
             <thead>
                 <tr>
                     <td width="350px">Bukti Foto</td>
@@ -229,7 +341,7 @@
                 </tr>
                 <tr>
                     <td>Bukti Vidio</td>
-                    <td>{{url('')}}/storage/($vidio_kecurangan->url)}}</td>
+                    <td>{!! QrCode::size(200)->generate( $scan_url); !!}</td>
                 </tr>
                 @else
                 <tr>
@@ -243,33 +355,174 @@
                         @endforeach
                     </td>
                     <td>
-                        {{url('')}}/storage/($vidio_kecurangan->url)}}
+                        {!! QrCode::size(200)->generate( $scan_url); !!}
                     </td>
                 </tr>
                 @endif
             </tbody>
-        </table>
+        </table> --}}
+    </div>
+    <div class="page-content-wrapper page-break">
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header" style="border: 1px #eee solid !important">
+                        <h5 class="card-title">Bukti Video</h5>
+                    </div>
+                    <div class="card-body" style="border: 1px #eee solid !important">
+                        <div class="mx-auto">
+                            <center>{!! QrCode::size(200)->generate( $scan_url); !!}</center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header" style="border: 1px #eee solid !important">
+                        <h5 class="card-title">Metadata</h5>
+                    </div>
+                    <div class="card-body" style="border: 1px #eee solid !important">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
-    @foreach ($foto_kecurangan as $foto)
-  
-    <img style="width:100%;" class="d-block page-break"
-        alt="" src="{{url('')}}/storage/{{ $foto->url }}" data-bs-holder-rendered="true">
+    {{-- @foreach ($foto_kecurangan as $foto)
 
-    @endforeach
+    <img style="width:100%;" class="d-block page-break" alt="" src="{{url('')}}/storage/{{ $foto->url }}"
+        data-bs-holder-rendered="true">
+
+    @endforeach --}}
 
 
-    <div class="page-content-wrapper"
-        style="width:100%;height:100%;">
-        <div class="row mt-2">
+    <div class="page-content-wrapper page-break" style="width:100%;height:100%;">
+        <div class="col-12">
+
+            <div class="row mt-2">
+
+                <div class="container">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h5 class="text-center"><u>SURAT PERNYATAAN</u></h5>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-12">
+
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-lg-12">
+                                <div class="col-lg-6">
+                                    <h6>Yang bertanda tangan dibawah ini :</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                <div class="col-lg-12 mb-2">
+                                    <table class="w-100">
+                                        <tr>
+                                            <td style="width: 85px">NIK</td>
+                                            <td>:</td>
+                                            <td> {{$user->nik}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 85px">Nama</td>
+                                            <td>:</td>
+                                            <td> {{$user->name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 85px">Alamat</td>
+                                            <td>:</td>
+                                            <td> {{$user->address}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 85px">No Hp</td>
+                                            <td>:</td>
+                                            <td> {{$user->no_hp}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 85px">Email</td>
+                                            <td>:</td>
+                                            <td>{{$user->email}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 85px">Kecamatan</td>
+                                            <td>:</td>
+                                            <td>{{ $kecamatan->name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 85px">Kelurahan</td>
+                                            <td>:</td>
+                                            <td>{{ $kelurahan->name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 85px">TPS</td>
+                                            <td>:</td>
+                                            <td>{{ $tps->number }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 85px">Kota</td>
+                                            <td>:</td>
+                                            <td class="text-capitalize">{{ $kota->name }}</td>
+
+                                        </tr>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-lg-12">
+                                <div class="col-lg-12 text-justify" style="line-height:1.8">
+                                    {{$surat_pernyataan->deskripsi}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-lg-12">
+                                <div class="col-lg-12">
+                                    <b>Tanggal Kirim </b>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-11">
+                                <div class="col-lg-12 text-left">
+                                    <p>Yang Membuat Pernyataan Ini:</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-11">
+                                <div class="col-lg-12 text-left">
+                                    <p class="mt-5"><u> {{$user->name}}</u></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="mb-3 text-center mt-2">
+                    <i>Laporan Ini Dicetak Oleh Komputer Dan Tidak Memerlukan Tanda Tangan.
+                        Berkas Terlampir</i>
+                </p>
+            </div>
+
+        </div>
+        {{-- <div class="row mt-2">
             <div class="container">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <h3 class="text-center"><u>SURAT PERNYATAAN</u></h3>
+                                    <h5 class="text-center"><u>SURAT PERNYATAAN</u></h5>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -388,21 +641,26 @@
                     </p>
                 </div>
             </div>
+        </div> --}}
+    </div>
+
+    <div class="row page-content-wrapper page-break">
+        <div class="col-md-12 mb-2">
+            <h1 class="fs-3 text-center"> Lampiran C1</h1>
+        </div>
+        <div class="col-md-12">
+            <img alt="" class="d-block mx-auto" style="width: 90%; height: 90%;" src="{{url('')}}/storage/{{ $saksi->c1_images }}"
+                data-bs-holder-rendered="true">
         </div>
     </div>
-    <div class="page-content-wrapper page-break"
-        style="width:100%;height:100%;">
-        <h1 class="display-3" style="margin: auto;width: 100%;padding: 10px;text-align:center"> Lampiran C1</h1>
-    </div>
-    <img style="width:90%;height:90%;" alt=""
-        class="d-block" src="{{url('')}}/storage/{{ $saksi->c1_images }}" data-bs-holder-rendered="true">
 
 
 
-    <div class="divFooter">{{ $qrcode->nomor_berkas }} <br /> <small class="text-danger"> Dokumen ini telah dihasilkan
+    {{-- <div class="divFooter" style="font-size: 18px">{{ $qrcode->nomor_berkas }} <br /> <small class="text-danger">
+            Dokumen ini telah dihasilkan
             dari rekapitung.id dengan nomor berkas : {{ $qrcode->nomor_berkas }}
             Untuk Paslon Muhammad - Saraswati. Hasil cetak dokumen ini dapat diverifikasi berdasarkan kode
-            barcode di rekapitung.id </small> </div>
+            barcode di rekapitung.id </small> </div> --}}
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
