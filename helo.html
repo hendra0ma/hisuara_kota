@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -52,4 +52,48 @@
 
 </body>
 
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <img class="image" src="data:image/jpeg;base64,9gjCgT8WL4HHgKzYS3VdFmSidSeQ7PBHzXVv85Cd.jpg" />
+        <!-- <img class="image" src="D:\Coding Codingan\img-2.jpg" />
+        <img class="image" src="D:\Coding Codingan\img-3.jpg" /> -->
+        <div class="exifResults"></div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+        <script>
+            if (typeof EXIF !== "undefined") {
+            console.log("EXIF library is loaded.");
+            // Perform your code to extract EXIF data here
+            } else {
+            console.log("EXIF library is not loaded or available.");
+            }
+            $(document).ready(function () {
+                var images = $(".image");
+                var exifResults = $(".exifResults");
+
+                images.each(function (index) {
+                    var currentImage = this;
+                    EXIF.getData(currentImage, function () {
+                        var dateTaken = EXIF.getTag(this, "DateTimeOriginal");
+                        var result = $("<p>").text(
+                            "Image " +
+                                (index + 1) +
+                                " - Date taken: " +
+                                (dateTaken ? dateTaken : "Date taken not found")
+                        );
+                        exifResults.append(result);
+                    });
+                });
+            });
+        </script>
+    </body>
 </html>

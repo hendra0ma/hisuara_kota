@@ -12,6 +12,8 @@
         "endroid/qr-code": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "imagine/imagine": "~0.6.0",
+        "intervention/image": "^2.7",
         "laravel/framework": "^8.75",
         "laravel/jetstream": "^2.6",
         "laravel/sanctum": "^2.11",
@@ -21,8 +23,7 @@
         "phpoffice/phpspreadsheet": "^1.29",
         "pusher/pusher-php-server": "^7.0",
         "simplesoftwareio/simple-qrcode": "~4",
-        "zbrettonye/geetest": "^1.2",
-        "imagine/imagine": "~0.6.0"
+        "zbrettonye/geetest": "^1.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

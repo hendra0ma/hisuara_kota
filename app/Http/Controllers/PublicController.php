@@ -270,6 +270,9 @@ class PublicController extends Controller
         $data['kelurahan'] = Village::where('id', ''.$data['qrcode_hukum']['villages'])->first();
         $data['kecamatan'] = District::where('id', $data['qrcode_hukum']['districts'])->first();
         $data['kota'] = Regency::where('id',$this->config->regencies_id)->first();
+        $data['tps']       = Tps::where('id', $data['qrcode_hukum']['tps_id'])->first();
+        $data['user'] = User::where('id', $data['tps']['user_id'])->first();
+        // dd($data['user']);
         return view('publik.scan', $data);
         // dd($data['qrcode_hukum']);
     }

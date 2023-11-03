@@ -53,7 +53,7 @@
 
         <div class="row mt-5 justify-content-center">
             <div class="col-md-12 text-center">
-                <h1 class="mx-auto fw-bold">DOKUMEN EFBR REKAPITUNG</h1>
+                {{-- <h1 class="mx-auto fw-bold">DOKUMEN EFBR REKAPITUNG</h1> --}}
                 <h1 class="mx-auto fw-bold mb-0">BUKTI KECURANGAN</h1>
             </div>
             <div class="col-md-6 mt-5">
@@ -229,7 +229,31 @@
                     </div>
                 </div> --}}
                 <div class="card">
-                    <div class="card-header mx-auto text-center">
+                    <div class="card-header">
+                        <div class="row w-100">
+                            <div class="col mt-2">
+                                <div class="media">
+                                    @if ($user['profile_photo_path'] == NULL)
+                                    <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                                        src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
+                                    @else
+                                    <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                                        src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
+                                    @endif
+                        
+                                    <div class="media-body my-auto">
+                                        <h5 class="mb-0">{{ $user['name'] }}</h5>
+                                        NIK : {{ $user['nik'] }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-auto pt-2 my-auto px-1">
+                                <a href="https://wa.me/{{$user->no_hp}}" class="btn btn-success text-white">
+                                    Hubungi</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body mx-auto text-center">
                         <div class="row">
                             <div class="col-md-12">
                                 <h5>{{$kota['name']}}, </h5>
@@ -248,24 +272,34 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-footer">
                         <div class="row">
                             <div class="col-md table-responsive">
-                                <table class="table table-bordered table-hover">
+                                <table class="table table-bordered">
                                     <tr>
-                                        <td class="bg-dark text-white">Petugas Saksi</td>
-                                        <td class="bg-dark text-white">Petugas Verifikator</td>
-                                        <td class="bg-dark text-white">Petugas Validasi Kecurangan</td>
+                                        <td class="fw-bold bg-primary text-white">
+                                            <div class="text-center">Petugas Saksi</div>
+                                        </td>
+                                        <td class="fw-bold bg-primary text-white">
+                                            <div class="text-center">Petugas Verifikator</div>
+                                        </td>
+                                        <td class="fw-bold bg-primary text-white">
+                                            <div class="text-center">Petugas Validasi Kecurangan</div>
+                                        </td>
+                                        {{-- <td class="fw-bold bg-primary text-white">
+                                            <div class="text-center">Tanggal Dokumen</div>
+                                        </td> --}}
                                     </tr>
                                     <tr>
-                                        <td>{{$qrcode_hukum['name']}}</td>
-                                        <td>{{$verifikator_id['name']}}</td>
-                                        <td>{{$hukum_id['name']}}</td>
+                                        <td> {{ $qrcode_hukum->name }}</td>
+                                        <td> {{ $verifikator_id->name }}</td>
+                                        <td> {{ $hukum_id->name }}</td>
+                                        {{-- <td rowspan="2" class="align-middle text-center"> {{ $qrcode_hukum->created_at }}</td> --}}
                                     </tr>
                                     <tr>
-                                        <td>{{$qrcode_hukum['no_hp']}}</td>
-                                        <td>{{$verifikator_id['no_hp']}}</td>
-                                        <td>{{$hukum_id['no_hp']}}</td>
+                                        <td> {{ $qrcode_hukum->no_hp }}</td>
+                                        <td> {{ $verifikator_id->no_hp}}</td>
+                                        <td> {{ $hukum_id->no_hp }}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -317,6 +351,18 @@
                                     </video>
                                 </div>
                                 @endforeach
+
+                                <h1 class="mt-5 mb-0">Bukti Rekaman Video</h1>
+                                <hr style="border: 1px solid black">
+                                <div id="carouselFotoKecurangan" class="carousel slide mt-2 mb-2" data-bs-ride="carousel">
+                                {{-- @foreach ($bukti_vidio as $item) --}}
+                                <div class="mt-2 mb-2" id="video" role="tabpanel" aria-labelledby="pills-home-tab">
+                                    <video style="width: 100%; height: auto;" controls>
+                                        <source src="#" type=video/ogg>
+                                        <source src="#" type=video/mp4>
+                                    </video>
+                                </div>
+                                {{-- @endforeach --}}
                             
                             </div>
                         </div>
@@ -376,9 +422,9 @@
                                 </table>
                                 {!! html_entity_decode($qrcode_hukum['deskripsi']) !!}
                             </div>
-                            <div class="col-md-8 text-center py-3 mt-3" style="border: 1px solid #45aaf2;">
+                            <div class="col-md-12 text-center py-3 mt-3" style="border: 1px solid #45aaf2;">
                                 <div class="row align-items-center">
-                                    <div class="col-md-7">
+                                    <div class="col-md-12">
                                         <h4 class="card-title mb-1">Mengesahkan</h4>
                                         <p class="mb-0">Data Laporan Kecurangan</p>
                                         <p class="mb-0">Tanggal, 14 Februari 2024</p>
@@ -387,7 +433,7 @@
                                         <p class="mb-0">Validator Kecurangan</p>
                                     </div>
                                     <div class="col-md">
-                                        <img style="width: 150px" src="{{url('/')}}/assets/stamp.png" alt="">
+                                        {{-- <img style="width: 150px" src="{{url('/')}}/assets/stamp.png" alt=""> --}}
                                     </div>
                                 </div>
                             </div>
