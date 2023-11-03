@@ -75,17 +75,19 @@ $props = Province::where('id',$kota['province_id'])->first();
            </center>
         </div>
 
-        <div class="col-12 mt-1">
+        <div class="col-12">
             
             <div class="card" style="margin-bottom: 1rem">
-                <div class="card-body">
+                <div class="card-body" style="position: relative">
+                    <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px"
+                        alt="">
                     <div class="row">
                         <div class="col-xxl-6">
-                            <div class="container" style="margin-left: 3%; margin-top: 2.5%;">
-                                <div class="text-center fs-2 mb-3 fw-bold">Suara Masuk</div>
+                            <div class="container">
+                                <div class="text-center fs-3 mb-3 fw-bold">Suara Masuk</div>
                                 <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
-                                <div class="text-center mt-2 mb-2"><span
-                                        class="badge bg-success">{{$total_incoming_vote}} / {{$dpt}}</span></div>
+                                <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
+                                        {{$dpt}}</span></div>
                                 <div id="chart-pie2" class="chartsh h-100 w-100"></div>
                             </div>
 

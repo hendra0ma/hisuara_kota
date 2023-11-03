@@ -60,7 +60,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
     
     <div id="section-to-print">
         <div class="row">
-            @if ($saksi['kecurangan'] == "yes")
+            @if ($saksi['kecurangan'] == "yes" && $qrcode != null)
             <?php $scan_url = url('') . "/scanning-secure/" . (string)Crypt::encrypt($qrcode->nomor_berkas); ?>
             <div class="col-auto my-auto">
                 {!! QrCode::size(100)->generate( $scan_url); !!}
@@ -87,35 +87,6 @@ $track = Tracking::where('id_user',$user['id'])->first();
             <div class="col-md-auto pt-2 my-auto px-1">
                 <button class="btn btn-warning text-white" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
             </div>
-            {{-- <div class="col-md-3 mt-2 ">
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle justify-content-end" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Action Saksi
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                      @if ($user['is_active'] == 1)
-                    
-                    <form action="action_verifikasi/{{ encrypt($user['id']) }}" method="post">
-                        @csrf
-                        <input type="hidden" name="aksi" value="{{ encrypt(0) }}">
-                        <li><button class="dropdown-item" type="submit">Hapus Saksi</button></li>
-                    </form>
-                      @endif
-                      @if ($user['is_active'] == 0)
-                      <form action="action_verifikasi/{{ encrypt($user['id']) }}" method="post">
-                        @csrf
-                        <input type="hidden" name="aksi" value="{{ encrypt(1) }}">
-                        <li><button class="dropdown-item" type="submit">Verifikasi Saksi</button></li>
-                    </form>
-                    <form action="action_verifikasi/{{ encrypt($user['id']) }}" method="post">
-                        @csrf
-                        <input type="hidden" name="aksi" value="{{ encrypt(0) }}">
-                        <li><button class="dropdown-item" type="submit">Hapus Saksi</button></li>
-                    </form>
-                      @endif
-                    </ul>
-                </div>
-            </div> --}}
         </div>
         <div class="row mt-5">
             @if ($user['is_active'] == 2)
@@ -395,12 +366,12 @@ $track = Tracking::where('id_user',$user['id'])->first();
             @endif
         </div>
     
+        @if($url == 'hadir')
         <div class="col-12">
             <b>Progres Kinerja Saksi</b>
         </div>
 
         <div class="col-12">
-            @if($url == 'hadir')
             <div class="row">
                 <div class="col-12">
                     <hr>
@@ -442,7 +413,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                 </div>
                 <div class="col-12 px-0 py-0">
                     <div class="card">
-                        <div class="card-header" style="border: 1px #eee solid !important">
+                        <div class="card-header" style="border: 1px #eee solid !important; background-color: #eee">
                             <h3 class="mb-0 card-title">1. Daftar Laporan Kecurangan</h3>
                         </div>
                         <div class="card-body" style="border: 1px #eee solid !important">
@@ -456,7 +427,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                 </div>
                 <div class="col-12 px-0 py-0">
                     <div class="card">
-                        <div class="card-header" style="border: 1px #eee solid !important">
+                        <div class="card-header" style="border: 1px #eee solid !important; background-color: #eee">
                             <h3 class="mb-0 card-title">2. Rekomendasi Tindakan</h3>
                         </div>
                         <div class="card-body" style="border: 1px #eee solid !important">
@@ -468,7 +439,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                 </div>
                 <div class="col-12 px-0 py-0">
                     <div class="card">
-                        <div class="card-header" style="border: 1px #eee solid !important">
+                        <div class="card-header" style="border: 1px #eee solid !important; background-color: #eee">
                             <h3 class="mb-0 card-title">3. Pelapor dan Pemeriksa</h3>
                         </div>
                         <div class="card-body" style="border: 1px #eee solid !important">
@@ -504,45 +475,61 @@ $track = Tracking::where('id_user',$user['id'])->first();
                 </div>
                 <div class="col-12 px-0">
                     <div class="row">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-header" style="border: 1px #eee solid !important">
-                                        <h3 class="card-title">4. Barang Bukti</h3>
-                                    </div>
-                                    <div class="card-body" style="border: 1px #eee solid !important">
-                                        <div class="row">
-
-                                            <div class="col-6">
-                                                <div class="card">
-                                                    <div class="card-header" style="border: 1px #eee solid !important">
-                                                        <h3 class="card-title">Bukti Foto</h3>
-                                                    </div>
-                                                    <div class="card-body" style="border: 1px #eee solid !important">
-                                                        <div class="row">
-                                                            @foreach ($bukti_foto as $bf)
-                                                            <div class="col-12 mt-1">
-                                                                <img class="w-100" src="{{asset('')}}storage/{{$bf->url}}" alt="">
-                                                            </div>
-                                                            @endforeach
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header" style="border: 1px #eee solid !important; background-color: #eee">
+                                    <h3 class="card-title">4. Barang Bukti</h3>
+                                </div>
+                                <div class="card-body" style="border: 1px #eee solid !important">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="card">
+                                                <div class="card-header" style="border: 1px #eee solid !important">
+                                                    <h3 class="card-title">Bukti Foto</h3>
+                                                </div>
+                                                <div class="card-body" style="border: 1px #eee solid !important">
+                                                    <div class="row">
+                                                        @foreach ($bukti_foto as $bf)
+                                                        <div class="col-12 mt-1">
+                                                            <img class="w-100 image" src="{{asset('storage/' . $bf->url)}}"
+                                                                data-url="{{asset('storage/' . $bf->url)}}" alt="">
                                                         </div>
+                                                        @endforeach
+                                                        <div id="metadataDisplay"></div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-6">
-                                                <div class="card">
-                                                    <div class="card-header" style="border: 1px #eee solid !important">
-                                                        <h3 class="card-title">Bukti Video</h3>
-                                                    </div>
-                                                    <div class="card-body" style="border: 1px #eee solid !important">
-                                                        <video width="100%" controls>
-                                                            <source src="{{asset('')}}storage/{{$bukti_vidio->url}}" type="video/mp4">
-                                                            <source src="{{asset('')}}storage/{{$bukti_vidio->url}}" type="video/ogg">
-                                                        </video>
-                                                    </div>
+                                        </div>
+                                        
+                                        <script>
+                                            // function getImageMetadata(url, imageElement) {
+                                            //   const img = new Image();
+                                            //   img.onload = function() {
+                                            //     const metadataDisplay = `<div>Image Size: ${img.width} x ${img.height}</div>`;
+                                            //     $(imageElement).after(metadataDisplay);
+                                            //   };
+                                            //   img.src = url;
+                                            // }
+                                            
+                                            // $(document).ready(function() {
+                                            //   $('.image').each(function() {
+                                            //     const imageUrl = $(this).data('url');
+                                            //     getImageMetadata(imageUrl, this);
+                                            //   });
+                                            // });
+                                        </script>
+                                        <div class="col-6">
+                                            <div class="card">
+                                                <div class="card-header" style="border: 1px #eee solid !important">
+                                                    <h3 class="card-title">Bukti Video</h3>
+                                                </div>
+                                                <div class="card-body" style="border: 1px #eee solid !important">
+                                                    <video width="100%" controls>
+                                                        <source src="{{asset('')}}storage/{{$bukti_vidio->url}}" type="video/mp4">
+                                                        <source src="{{asset('')}}storage/{{$bukti_vidio->url}}" type="video/ogg">
+                                                    </video>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -550,7 +537,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                         </div>
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-header" style="border: 1px #eee solid !important">
+                                <div class="card-header" style="border: 1px #eee solid !important; background-color: #eee">
                                     <h3 class="card-title">5. Video Pernyataan Saksi (Bahwa ada kecurangan)</h3>
                                 </div>
                                 <div class="card-body" style="border: 1px #eee solid !important">
@@ -558,8 +545,9 @@ $track = Tracking::where('id_user',$user['id'])->first();
                             </div>
                         </div>
                         <div class="col-12">
+                            
                             <div class="card">
-                                <div class="card-header" style="border: 1px #eee solid !important">
+                                <div class="card-header" style="border: 1px #eee solid !important; background-color: #eee">
                                     <h3 class="card-title">6. Surat Pernyataan</h3>
                                 </div>
                                 <div class="card-body" style="border: 1px #eee solid !important">
@@ -681,6 +669,19 @@ $track = Tracking::where('id_user',$user['id'])->first();
                                     </div>
                                 </div>
                             </div>
+                            
+                        </div>
+
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header" style="border: 1px #eee solid !important; background-color: #eee">
+                                    <h3 class="card-title">7. Data C1</h3>
+                                </div>
+                                <div class="card-body" style="border: 1px #eee solid !important">
+                                    <img alt="" class="d-block w-100" src="{{url('')}}/storage/{{ $saksi->c1_images }}"
+                                        data-bs-holder-rendered="true">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -720,9 +721,9 @@ $track = Tracking::where('id_user',$user['id'])->first();
             @endif
         
             @else
-            @endif
         </div>
     </div>
+    @endif
 
     <script>
         setTimeout(function () {

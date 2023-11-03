@@ -21,7 +21,7 @@ class ListKecuranganComponent extends Component
             ->where('saksi.status_kecurangan', 'belum terverifikasi')
             ->where('name', 'like', '%'.$this->search.'%')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
-            ->paginate(18);
+            ->paginate(16);
 
         $data['jumlah_data_kecurangan']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
             ->join('users', 'users.tps_id', '=', 'tps.id')
