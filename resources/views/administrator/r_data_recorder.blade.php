@@ -1,5 +1,6 @@
 @include('layouts.partials.head')
 @include('layouts.partials.header')
+@include('layouts.partials.sidebar')
 
 <style>
     .app-content {
@@ -26,7 +27,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
     <!-- PAGE-HEADER -->
     <div class="row mt-3">
         <div class="col-lg-4">
-            <h1 class="page-title fs-1 mt-2">Dashboard Rekapitung
+            <h1 class="page-title fs-1 mt-2">History
                 <!-- Kota -->
             </h1>
             <ol class="breadcrumb">
