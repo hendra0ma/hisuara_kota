@@ -20,6 +20,6 @@ class ExcelController extends Controller
         $rows = $worksheet->toArray();
     
         // Lakukan sesuatu dengan data yang dibaca, seperti menampilkan dalam view
-        return $rows;
+        return view('excel.display-excel-data', ['excelData' => $rows]);
     }//
 }
