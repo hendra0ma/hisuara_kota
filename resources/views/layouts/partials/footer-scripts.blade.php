@@ -608,6 +608,8 @@ let myModal = new bootstrap.Modal(document.getElementById('modallockdown'), {
     })
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+
 
 </body>
 

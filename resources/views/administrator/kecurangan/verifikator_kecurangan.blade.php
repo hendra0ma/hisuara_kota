@@ -175,9 +175,29 @@
     </div>
 </div>
 
+<div class="modal fade" id="periksakecurangan" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-header bg-primary text-white">
+            <div class="modal-title mx-auto">
+                <h4 class="mb-0 fw-bold">Proses Verifikasi Data Kecurangan</h4>
+            </div>
+        </div>
+        <div class="modal-content h-auto">
+            <div class="container">
+                <div id="container-view-modal-kecurangan">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- 
 <div class="modal fade" id="periksakecurangan" tabindex="-1" aria-labelledby="periksakecuranganLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <div class="container-md">
@@ -196,7 +216,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 <script>
     const buttonkecurangan = $(".periksa-c1-kecurangan");

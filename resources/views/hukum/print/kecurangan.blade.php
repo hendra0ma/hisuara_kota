@@ -16,7 +16,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Laporan Kecurangan {{ $qrcode->nomor_berkas }}</title>
+    {{-- <title>Laporan Kecurangan {{ $qrcode->nomor_berkas }}</title> --}}
 
     <!-- BOOTSTRAP CSS -->
     <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />

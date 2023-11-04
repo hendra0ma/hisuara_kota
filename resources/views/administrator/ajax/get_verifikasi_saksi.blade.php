@@ -465,16 +465,16 @@ $track = Tracking::where('id_user',$user['id'])->first();
                             <table class="table table-bordered">
                                 <tr>
                                     <td class="fw-bold">
-                                        <div class="text-center">Petugas Saksi</div>
+                                        <div>A. Petugas Saksi</div>
                                     </td>
                                     <td class="fw-bold">
-                                        <div class="text-center">Petugas Verifikator</div>
+                                        <div>B. Petugas Verifikator</div>
                                     </td>
                                     <td class="fw-bold">
-                                        <div class="text-center">Petugas Validasi Kecurangan</div>
+                                        <div>C. Petugas Validasi Kecurangan</div>
                                     </td>
                                     <td class="fw-bold">
-                                        <div class="text-center">Tanggal Dokumen</div>
+                                        <div>Tanggal Dokumen</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -492,31 +492,30 @@ $track = Tracking::where('id_user',$user['id'])->first();
                         </div>
                     </div>
                 </div>
+
+                <div class="col-12 px-0">
+                    <div class="card">
+                        <div class="card-header" style="border: 1px #eee solid !important; background: #eee">
+                            <h3 class="mb-0 card-title">4. Barang Bukti</h3>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-12 px-0">
                     <div class="row">
                         <div class="col-12">
-                            <div class="card">
-                                <div class="card-header"
-                                    style="border: 1px #eee solid !important; background-color: #eee">
-                                    <h3 class="card-title">4. Barang Bukti</h3>
-                                </div>
-                                <div class="card-body" style="border: 1px #eee solid !important">
-                                    <table class="table">
+                                <div class="card-body p-0" style="border: 1px #eee solid !important">
+                                    <table class="table table-bordered mb-0">
                                         <tr>
-                                            <td>
-                                                <h3>Bukti Foto</h3>
-                                            </td>
-                                            <td>
-                                                <h3>Metadata</h3>
-                                            </td>
+                                            <td class="fw-bold">Foto</td>
+                                            <td class="fw-bold">Metadata</td>
                                         </tr>
                                         @foreach ($bukti_foto as $bf)
                                         <tr>
-                                            <td>
-                                                <img class="w-100 image" src="{{asset('storage/' . $bf->url)}}"
+                                            <td class="text-center" style="width: 50%">
+                                                <img class="image" style="height: 350px" src="{{asset('storage/' . $bf->url)}}"
                                                     data-url="{{asset('storage/' . $bf->url)}}" alt="">
                                             </td>
-                                            <td class="exifResults">
+                                            <td class="exifResultsPhoto" style="width: 50%">
 
                                             </td>
                                         </tr>
@@ -524,60 +523,108 @@ $track = Tracking::where('id_user',$user['id'])->first();
                                     </table>
                                     <script>
                                         $(document).ready(function () {
-                                        $(".image").each(function (index) {
-                                            var currentImage = this;
-                                            
-                                                EXIF.getData(currentImage, function () {
-                                                    var dateTaken = EXIF.getTag(this, "DateTimeOriginal");
-                                                    var result = $("<p>").text(
-                                                        " - Date taken: " + (dateTaken ? dateTaken : "Date taken not found")
-                                                    );
-                                                    $(currentImage).closest('tr').find('.exifResults').html(result);
+                                            setTimeout(()=>{
+                                                $(".image").each(function (index) {
+                                                    
+                                                    var currentImage = this;
+                                                    EXIF.getData(currentImage, function () {
+                                                        var exifData = EXIF.getAllTags(this);
+                                                        var locationInfo = "Image " + (index + 1) + " EXIF Data:<br>";
+                                                        
+                                                        if (exifData && (exifData.DateTimeOriginal || (exifData.GPSLatitude && exifData.GPSLongitude))) {
+                                                            if (exifData.DateTimeOriginal) {
+                                                            locationInfo += "Date taken: " + exifData.DateTimeOriginal + "<br>";
+                                                            }
+                                                            if (exifData.GPSLatitude && exifData.GPSLongitude) {
+                                                                var latitude = exifData.GPSLatitude[0] + exifData.GPSLatitude[1] / 60 + exifData.GPSLatitude[2] / 3600;
+                                                                var longitude = exifData.GPSLongitude[0] + exifData.GPSLongitude[1] / 60 + exifData.GPSLongitude[2] / 3600;
+                                                                locationInfo += "Location: Latitude " + latitude + ", Longitude " + longitude + "<br>";
+                                                            }
+                                                            if (exifData.Make) {
+                                                                locationInfo += "Camera Make: " + exifData.Make + "<br>";
+                                                            }
+                                                            if (exifData.Model) {
+                                                                locationInfo += "Camera Model: " + exifData.Model + "<br>";
+                                                            }
+                                                            if (exifData.ApertureValue) {
+                                                                locationInfo += "Aperture: f/" + exifData.ApertureValue + "<br>";
+                                                            }
+                                                            if (exifData.ExposureTime) {
+                                                                locationInfo += "Exposure Time: " + exifData.ExposureTime + " sec<br>";
+                                                            }
+                                                            if (exifData.ISO) {
+                                                                locationInfo += "ISO: " + exifData.ISO + "<br>";
+                                                            }
+                                                            if (exifData.FocalLength) {
+                                                                locationInfo += "Focal Length: " + exifData.FocalLength + "mm<br>";
+                                                            }
+                                                            if (exifData.Flash) {
+                                                                locationInfo += "Flash: " + exifData.Flash + "<br>";
+                                                            }
+                                                            if (exifData.ImageWidth && exifData.ImageHeight) {
+                                                                locationInfo += "Image Resolution: " + exifData.ImageWidth + "x" + exifData.ImageHeight + "<br>";
+                                                            }
+                                                            // Include more EXIF tags as needed
+                                                        } else {
+                                                            locationInfo += "EXIF data not found";
+                                                        }
+                                                        
+                                                        // Display the information in the console to ensure it's being correctly constructed
+                                                        console.log(locationInfo);
+                                                        
+                                                        // Find the corresponding .exifResults element related to the current image and update its content
+                                                        $(currentImage).closest('tr').find('.exifResultsPhoto').html(locationInfo);
+                                                    });
                                                 });
-                                            });
+                                            },100)
                                         });
                                     </script>
-                                    <div class="row">
-                                        {{-- <div class="col-6">
-                                            <div class="card">
-                                                <div class="card-header" style="border: 1px #eee solid !important">
-                                                    <h3 class="card-title">Bukti Foto</h3>
-                                                </div>
-                                                <div class="card-body" style="border: 1px #eee solid !important">
-                                                    <div class="row">
-                                                        @foreach ($bukti_foto as $bf)
-                                                        <div class="col-12 mt-1">
-                                                            <img class="w-100 image"
-                                                                src="{{asset('storage/' . $bf->url)}}"
-                                                                data-url="{{asset('storage/' . $bf->url)}}" alt="">
-                                                        </div>
-                                                        @endforeach
-                                                        <div class="exifResults"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> --}}
-
-                                        <div class="col-6">
-                                            <div class="card">
-                                                <div class="card-header" style="border: 1px #eee solid !important">
-                                                    <h3 class="card-title">Bukti Video</h3>
-                                                </div>
-                                                <div class="card-body" style="border: 1px #eee solid !important">
-                                                    <video width="100%" controls>
-                                                        <source src="{{asset('')}}storage/{{$bukti_vidio->url}}"
-                                                            type="video/mp4">
-                                                        <source src="{{asset('')}}storage/{{$bukti_vidio->url}}"
-                                                            type="video/ogg">
-                                                    </video>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 px-0 mt-3">
+                            <div class="card">
+                                <div class="card-body p-0" style="border: 1px #eee solid !important">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td class="fw-bold">Video</td>
+                                            <td class="fw-bold">Metadata</td>
+                                        </tr>
+                                        @foreach ($bukti_vidio as $bv)
+                                        <tr>
+                                            <td class="text-center" style="width: 50%">
+                                                <video width="100%" controls>
+                                                    <source src="{{asset('')}}storage/{{$bv->url}}" type="video/mp4">
+                                                    <source src="{{asset('')}}storage/{{$bv->url}}" type="video/ogg">
+                                                </video>
+                                            </td>
+                                            <td class="exifResults" style="width: 50%">
+
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                    <script>
+                                        // $(document).ready(function () {
+                                        //     setTimeout(()=>{
+                                        //         $(".image").each(function (index) {
+                                        //            var currentImage = this;
+                                                   
+                                        //                EXIF.getData(currentImage, function () {
+                                        //                    var dateTaken = EXIF.getTag(this, "DateTimeOriginal");
+                                        //                    var result = $("<p>").text(
+                                        //                        " - Date taken: " + (dateTaken ? dateTaken : "Date taken not found")
+                                        //                    );
+                                        //                    $(currentImage).closest('tr').find('.exifResults').html(result);
+                                        //                });
+                                        //            });
+                                        //     },100)
+                                        // });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 px-0">
                             <div class="card">
                                 <div class="card-header"
                                     style="border: 1px #eee solid !important; background-color: #eee">
@@ -587,7 +634,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 px-0">
 
                             <div class="card">
                                 <div class="card-header"
@@ -717,7 +764,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
 
                         </div>
 
-                        <div class="col-12">
+                        <div class="col-12 px-0">
                             <div class="card">
                                 <div class="card-header"
                                     style="border: 1px #eee solid !important; background-color: #eee">
