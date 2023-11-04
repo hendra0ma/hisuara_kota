@@ -103,13 +103,27 @@ Route::get("import-excel-dpt",function (){
 });
 
 Route::get("update-dpt",function (){
-    $dpt_indonesia = DB::table('dpt_indonesia')->limit(100000)->get();
+    set_time_limit(999999999999);
+    $dpt_indonesia = DB::table('dpt_indonesia')->limit(1000)->get();
+    // return $dpt_indonesia; 
     foreach ($dpt_indonesia as $dpt) {
         $province = Province::where('name',$dpt->province_name)->first();
         $regency = Regency::where('province_id',$province->id)->where('name',$dpt->regency_name)->first();
-        $district = Regency::where('province_id',$province->id)->where('id',$regency->id)->where('name',$dpt->district_name)->first();
-        $village = Regency::where('province_id', $province->id)->where('id', $regency->id)->where('name',$district->id)->where('name',$dpt->village_name)->first();
+     
+        $district = District::where('regency_id',$regency->id)->where('name',$dpt->district_name)->first();
+        $village = Village::where('district_id',$district->id)->where('name',$dpt->village_name)->first();
         
+        DB::table('dpt_indonesia')
+            ->where('province_name',$province->name)
+            ->where('regency_name',$regency->name)
+            ->where('district_name',$district->name)
+            ->where('village_name',$village->name)
+            ->update([
+                "province_id"=>$province->id,
+                "regency_id"=>$regency->id,
+                "district_id"=>$district->id,
+                "village_id"=>$village->id,
+            ]);
     }
 });
 
