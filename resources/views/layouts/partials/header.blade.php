@@ -213,7 +213,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     $container = $(".headerPojokan");
                                     const text = "HISUARA"
                                     const $elements = text.split("").map((s) => $(
-                                        `<span style="margin-left:5px;text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}</span>`
+                                        `<span style="margin-left:5px;">${s}</span>`
                                     ));
 
                                     $container.html($elements);
@@ -244,7 +244,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
                                 //     const text = "Vox Populi, Vox Dei"
                                 //     const $elements = text.split("").map((s) => $(
-                                //         `<span style="margin-left:4px;text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">${s}</span>`
+                                //         `<span style="margin-left:4px;">${s}</span>`
                                 //     ));
 
                                 //     $container.html($elements);
@@ -931,7 +931,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             <div class="col-12 judul text-center text-white" id="gantiBackground"
                                                 style="transition: background 1s; transform: scaleX(1.2);">
                                                 <div class="text">
-                                                <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; color: #fff; text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;"
+                                                <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; color: #fff; "
                                                         class="display-3" id="text-effect"></h1>
                                                 </div>
                                                 <img id="img-effect" src="{{asset('')}}images/logo/hisuara_header.png"class="img-fluid" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width:500px;">

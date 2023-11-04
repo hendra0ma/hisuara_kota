@@ -94,10 +94,19 @@ Route::get("redirect-page",function (){
 
 
 
-Route::get("test-excel",function (){
+Route::get("import-excel-pemilih",function (){
     return view('excel.test');
 });
+
+Route::get("import-excel-dpt",function (){
+    return view('excel.dpt');
+});
+
+
+
+
 Route::post("import-excel",[ExcelController::class,"importExcel"])->name("import-excel");
+Route::post("import-dpt-excel",[ExcelController::class,"importDptExcel"])->name("import-dpt-excel");
 
 
 

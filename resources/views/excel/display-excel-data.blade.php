@@ -9,45 +9,42 @@
 
 <body>
     <?php
-   $filteredExcelData = $excelData;
+    $filteredExcelData = $excelData;
 
-   foreach ($filteredExcelData as $j => $row) {
-       foreach ($row as $i => $cell) {
-           if (trim($cell) == "") {
-               unset($filteredExcelData[$j][$i]);
-               unset($filteredExcelData[$j]);
-           }
-           if (!isset($row[2])) {
-               unset($filteredExcelData[$j][$i]);
-           }
-          
+    foreach ($filteredExcelData as $j => $row) {
+        foreach ($row as $i => $cell) {
+            if (trim($cell) == "") {
+                unset($filteredExcelData[$j][$i]);
+            }
+            if (isset($row[2])) {
+                unset($filteredExcelData[$j][$i]);
+            }
         }
-        if (empty($row)) {
-            unset($filteredExcelData[$j]);
-        }
-
-   }
-
+    }
     ?>
     <table>
-        @foreach($filteredExcelData as  $j => $row)
+
+    kecamatan {{$filteredExcelData[2][1]}}
+    kelurahan {{$filteredExcelData[3][1]}}
+    DPT {{$filteredExcelData[7][1]}}
+
+        @foreach($filteredExcelData as $j => $row)
         <tr>
-            @if (empty($row)) 
-              @continue
-            @endif
+
+        
+
+
+            <?php
+            if (empty($row)) {
+                continue;
+            }
+            ?>
             <td>
-                {{$row[0]}} <br>
-                {{$row[1]}}<br>
-                {{$row[2]}}<br>
-                {{$row[3]}}<br>
-                {{$row[4]}}<br>
-                {{$row[5]}}<br>
-                {{$row[6]}}<br>
-                {{$row[7]}}<br>
-                {{$row[8]}}<br>
-                {{$row[9]}}<br>
+                {{$row[0]}}
+                {{$row[1]}}
             </td>
         </tr>
+        
         @endforeach
     </table>
 </body>
