@@ -104,7 +104,7 @@ Route::get("import-excel-dpt",function (){
 
 Route::get("update-dpt",function (){
     set_time_limit(999999999999);
-    $dpt_indonesia = DB::table('dpt_indonesia')->limit(1000)->get();
+    $dpt_indonesia = DB::table('dpt_indonesia')->limit(10000)->get();
     // return $dpt_indonesia; 
     foreach ($dpt_indonesia as $dpt) {
         $province = Province::where('name',$dpt->province_name)->first();
