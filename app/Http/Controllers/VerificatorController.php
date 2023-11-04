@@ -197,6 +197,8 @@ class VerificatorController extends Controller
         $data['kota'] = Regency::where('id', $config->regencies_id)->first();
         $data['saksi'] = Saksi::where('tps_id', $data['tps']['id'])->first();
         $data['surat_pernyataan'] = SuratPernyataan::where('saksi_id', $data['saksi']['id'])->first();
+        $data['pelanggaran_umum']    = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->where('list_kecurangan.jenis', 0)->get();
+        $data['pelanggaran_petugas'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->where('list_kecurangan.jenis', 1)->get();
 
         return view('verificator.modal-view-kecurangan', $data);
     }
