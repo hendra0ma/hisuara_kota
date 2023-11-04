@@ -399,10 +399,10 @@ $track = Tracking::where('id_user',$user['id'])->first();
                     </div>
                     <div class="track">
                         <div class="step active success"> <span class="icon"> <i class="fa fa-user"></i> </span> <span
-                                class="text">Saksi Mendaftar</span> </div>
+                                class="text">Saksi Mendaftar/Register</span> </div>
                         @if ($tps['setup'] == "terisi")
                         <div class="step active  success"> <span class="icon"> <i class="fa fa-send"></i> </span> <span
-                                class="text">Saksi Mengirimkan TPS</span> </div>
+                                class="text">Saksi Mengirimkan C1</span> </div>
                         @if ($saksi['verification'] != NULL)
                         <div class="step active success"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
                                 class="text">Terverifikasi</span> </div>
@@ -412,7 +412,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                         @endif
                         @else
                         <div class="step  success"> <span class="icon"> <i class="fa fa-send"></i> </span> <span
-                                class="text">Saksi Mengirimkan TPS</span> </div>
+                                class="text">Saksi Mengirimkan C1</span> </div>
                         <div class="step success"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
                                 class="text">Selesai</span> </div>
                         @endif
@@ -481,7 +481,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                                     <td> {{$user->name}}</td>
                                     <td> {{ $verifikator->name }}</td>
                                     <td> {{ $hukum->name }}</td>
-                                    <td rowspan="2" class="align-middle text-center"> {{ $qrcode->created_at }}</td>
+                                    <td rowspan="2" class="align-middle"> {{ $qrcode->created_at }}</td>
                                 </tr>
                                 <tr>
                                     <td> {{$user->no_hp}}</td>
@@ -512,7 +512,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                                         @foreach ($bukti_foto as $bf)
                                         <tr>
                                             <td class="text-center" style="width: 50%">
-                                                <img class="image" style="height: 350px" src="{{asset('storage/' . $bf->url)}}"
+                                                <img class="image" style="height: 350px; object-fit: cover" src="{{asset('storage/' . $bf->url)}}"
                                                     data-url="{{asset('storage/' . $bf->url)}}" alt="">
                                             </td>
                                             <td class="exifResultsPhoto" style="width: 50%">
