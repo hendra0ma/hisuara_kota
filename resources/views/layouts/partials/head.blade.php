@@ -480,6 +480,47 @@
         .parent-link .btn-ver:hover {
             background: #ff4f4e;
         }
+
+        .security-keluar {
+            position: fixed;
+            z-index: 10;
+            background-image: url('https://t3.ftcdn.net/jpg/02/69/46/42/360_F_269464287_Q2DoeIRT847orJlYDSX59T8pjlF9nO94.jpg');
+            background-size: cover;
+            height: 100vh;
+            width: 100vw;
+            top: 0;
+            left: 0;
+        }
+
+        .box-security {
+            width: 1000px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%)
+        }
+
+        .box-security ul {
+            margin-bottom: 15px;
+        }
+
+        .box-security ul li {
+            font-weight: bold;
+            color: black;
+            line-height: 2.5rem;            
+            font-size: 20px;
+        }
+
+        .icon-shield {
+            font-size: 350px;
+        }
+
+        .close-security {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 20;
+        }
     </style>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script>
@@ -512,3 +553,35 @@
 <?php $dark_mode = ($config->darkmode == "yes") ? 'dark-mode' : ""; ?>
 
 <body class="app sidebar-mini {{$dark_mode}}">
+    <div class="security-keluar" style="display: none">
+        <div class="box-security">
+            <div class="row">
+                <div class="col-6 text-center">
+                    
+                </div>
+                <div class="col-6">
+                    <ul>
+                        <li><img src="{{asset('')}}images/logo/hisuara_new_white.png" class="mb-5" alt=""></li>
+                        <li class="text-danger fs-4">SECURITY SYSTEM</li>
+                        <li>Admin Code Authentication</li>
+                        <li>Malware Removal & Hack Repair</li>
+                        <li>Continuous Malware & Hack Scanning</li>
+                        <li>Brand Reputation & Blacklist Monitoring</li>
+                        <li>Stop Hacks</li>
+                        <li>Website Application Firewall</li>
+                        <li>DDoS Protection</li>
+                        <li>Advanced DDoS Mitigation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <button class="btn close-security">
+            <i class="fa-solid fa-x text-danger fs-1 fw-bold"></i>
+        </button>
+    </div>
+
+    <script>
+        $('.close-security').on('click', function() {
+            $('.security-keluar').hide()
+        })
+    </script>

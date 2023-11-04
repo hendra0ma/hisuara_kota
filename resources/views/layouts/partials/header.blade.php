@@ -134,16 +134,16 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
     .glowy-menu.active {
         background-color: rgb(4, 217, 255) !important;
-        -webkit-box-shadow: 0px 0px 50px 0px rgb(4, 217, 255);
+        /* -webkit-box-shadow: 0px 0px 50px 0px rgb(4, 217, 255);
         -moz-box-shadow: 0px 0px 50px 0px rgb(4, 217, 255);
-        box-shadow: 0px 0px 50px 0px rgb(4, 217, 255);
+        box-shadow: 0px 0px 50px 0px rgb(4, 217, 255); */
     }
 
     .glowy-menu.glow-kecurangan.active {
         background-color: rgb(254, 118, 8) !important;
-        -webkit-box-shadow: 0px 0px 50px 0px rgb(254, 118, 8);
+        /* -webkit-box-shadow: 0px 0px 50px 0px rgb(254, 118, 8);
         -moz-box-shadow: 0px 0px 50px 0px rgb(254, 118, 8);
-        box-shadow: 0px 0px 50px 0px rgb(254, 118, 8);
+        box-shadow: 0px 0px 50px 0px rgb(254, 118, 8); */
     }
 
     /* ::-webkit-scrollbar-track {
@@ -335,6 +335,15 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     </div>
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white"
+                                            style="background-color: #656064; width: 40px; height: 36px;" data-target="perhitungan">
+                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Perhitungan">
+                                                <i class="fa-solid fa-chart-simple"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+
+                                    <div class="col-md-auto px-0">
+                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
                                             style="background-color: #656064; width: 40px; height: 36px;"
                                             data-target="petugas">
                                             <span class="dark-layout" data-bs-placement="bottom"
@@ -357,15 +366,13 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white"
-                                            style="background-color: #656064; width: 40px; height: 36px;"
-                                            data-target="perhitungan">
-                                            <span class="dark-layout" data-bs-placement="bottom"
-                                                data-bs-toggle="tooltip" title="Perhitungan">
-                                                <i class="fa-solid fa-chart-simple"></i>
+                                            style="background-color: #656064; width: 40px; height: 36px;" data-target="lacak">
+                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Pelacakan">
+                                                <i class="fa-solid fa-location-dot"></i>
                                             </span>
                                         </button>
                                     </div>
-
+                                    
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white"
                                             style="background-color: #656064; width: 40px; height: 36px;"
@@ -408,7 +415,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white sirantap"
-                                            style="background-color: #656064; width: 40px; height: 36px;"
+                                            style="background-color: #f82649; width: 40px; height: 36px;"
                                             data-target="sirantap">
                                             <span class="dark-layout" data-bs-placement="bottom"
                                                 data-bs-toggle="tooltip" title="Sistem Laporan Data Pemilu">
@@ -663,12 +670,19 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         </div>
                                     </div> -->
 
-                                    <div class="col-md sirantap tugel-content" style="display: none">
+                                    <div class="col-md sirantap tugel-content" style="display: none;">
                                         <div class="row">
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/verifikator/verifikator_kecurangan"
+                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan"
+                                                    style="background-color: #f82649; border-radius: 25px 0px 0px 25px;;">
+                                                    Verifikasi Kecurangan
+                                                </a>
+                                            </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/fraud-data-print"
                                                     class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan"
-                                                    style="background-color: #f82649; border-radius: 25px 0px 0px 25px;">
+                                                    style="background-color: #f82649; border-radius: 0px;">
                                                     Bukti Kecurangan
                                                 </a>
                                             </div>
@@ -682,15 +696,8 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/index-tsm"
                                                     class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan"
-                                                    style="background-color: #f82649; border-radius: 0px;">
+                                                    style="background-color: #f82649; border-radius: 0px 25px 25px 0px;">
                                                     Jenis Kecurangan
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/verifikator/verifikator_kecurangan"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan"
-                                                    style="background-color: #f82649; border-radius: 0px 25px 25px 0px;;">
-                                                    Verifikator Kecurangan
                                                 </a>
                                             </div>
                                         </div>
@@ -1182,14 +1189,6 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white"
-                                            style="background-color: #656064; width: 40px; height: 36px;" data-target="lacak">
-                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Pelacakan">
-                                                <i class="fa-solid fa-location-dot"></i>
-                                            </span>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
                                             style="background-color: #656064; width: 40px; height: 36px;"
                                             data-target="support">
                                             <span class="dark-layout" data-bs-placement="bottom"
@@ -1251,8 +1250,11 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 <a class="dropdown-item" href="{{url('')}}/upload_kecurangan">
                                                     <i class="dropdown-icon fe fe-user"></i> Upload Kecurangan
                                                 </a>
+                                                <button class="dropdown-item security">
+                                                    <i class="dropdown-icon fa-solid fa-shield"></i> Security System
+                                                </button>
                                                 <button class="dropdown-item tugel-kolaps" href="#" data-target="setting">
-                                                    <i class="dropdown-icon fa-solid fa-gear"></i> Setting
+                                                    <i class="dropdown-icon fa-solid fa-gear"></i> Settings
                                                 </button>
 
                                                 <form action="{{ route('logout') }}" method="post">
@@ -1261,6 +1263,12 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                         <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                     </button>
                                                 </form>
+                                                
+                                                <script>
+                                                    $('.security').on('click', function() {
+                                                        $('.security-keluar').show();
+                                                    })
+                                                </script>
                                             </div>
                                         </div>
                                     </div>
