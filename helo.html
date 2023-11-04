@@ -1,55 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memek</title>
-<style>
-
-
-  span{
-    position: relative;
-  }
-
-</style>
+    <title>Video Metadata Extraction</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-
 <body>
-    <img src="1698156219.jpg" id="image"style="position:relative">
-    <h1 id="text-effect">Lorem ipsum, dolor sit amet </h1>
-      <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        function animate() {
-            $container = $("#text-effect");
-            const text = $container.text();
-            const $elements = text.split("").map((s) => $(`<span>${s}</span>`));
-          
-            $container.html($elements);
-            $container.show();
 
-            const $image = $('#image');
-            $image.css({ top: -60, opacity: 0 })
-            .delay(40)
-            .animate({ top: 0, opacity: 1 }, {
-                duration: 1000,
-                easing: "easeOutBounce",
-            });
-          
-            $elements.forEach(function ($el, i) {
-              $el
-                .css({ top: -60, opacity: 0 })
-                .delay(40 * i)
-                .animate({ top: 0, opacity: 1 }, 100, "easeOutExpo");
-            });
-          }
-          $(function () {
-            animate();
-          });
-          
-    </script>
+<video id="myVideo" src="C:\Users\Administrator\Videos\Overwolf\Outplayed\Valorant\Valorant_04-13-2023_21-34-5-277\Valorant_04-13-2023_22-10-18-676.mp4" controls></video>
+
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: 'get_video_metadata.php',
+        method: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            console.log('Video Creation Date: ' + data.creationDate);
+            // Use the creation date data as needed
+        },
+        error: function(err) {
+            console.error('Error retrieving video metadata:', err);
+        }
+    });
+});
+</script>
 
 </body>
-
 </html>

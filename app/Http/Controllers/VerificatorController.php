@@ -34,6 +34,7 @@ use App\Models\Relawan;
 use App\Models\RelawanData;
 use App\Models\QuickSaksiData;
 use App\Models\RegenciesDomain;
+use App\Models\SuratPernyataan;
 use App\Models\Tracking as ModelsTracking;
 
 class VerificatorController extends Controller
@@ -170,8 +171,8 @@ class VerificatorController extends Controller
     public function getKecuranganSaksi(Request $request)
     {
 
-        $data['foto_kecurangan'] = ModelsBuktifoto::where('tps_id', $request['id'])->get();
-        $data['vidio_kecurangan'] = ModelsBuktividio::where('tps_id', $request['id'])->first();
+        // $data['foto_kecurangan'] = ModelsBuktifoto::where('tps_id', $request['id'])->get();
+        // $data['vidio_kecurangan'] = ModelsBuktividio::where('tps_id', $request['id'])->first();
         $data['list_kecurangan']     = Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
         ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
         ->where('bukti_deskripsi_curang.tps_id', $request->id)
@@ -183,6 +184,8 @@ class VerificatorController extends Controller
         $data['bukti_foto'] = ModelsBuktifoto::where('tps_id', $request['id'])->get();
         $data['user'] = User::where('tps_id', $request['id'])->first();
         $data['qrcode'] = Qrcode::where('tps_id', $data['user']['tps_id'])->first();
+        $data['district'] = District::where('id', $data['user']['districts'])->first();
+        $data['village'] = Village::where('id', $data['user']['villages'])->first();
         if ($data['qrcode'] != null) {
             $data['verifikator']            = User::where('id', $data['qrcode']['verifikator_id'])->first();
             $data['hukum']                  = User::where('id', $data['qrcode']['hukum_id'])->first();
@@ -190,7 +193,10 @@ class VerificatorController extends Controller
             $data['verifikator']            = null;
             $data['hukum']                  = null;
         }
+        $config = Config::first();
+        $data['kota'] = Regency::where('id', $config->regencies_id)->first();
         $data['saksi'] = Saksi::where('tps_id', $data['tps']['id'])->first();
+        $data['surat_pernyataan'] = SuratPernyataan::where('saksi_id', $data['saksi']['id'])->first();
 
         return view('verificator.modal-view-kecurangan', $data);
     }

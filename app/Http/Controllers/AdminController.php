@@ -513,7 +513,7 @@ class AdminController extends Controller
             $hukum                  = null;
 
         }
-        $bukti_vidio                = Buktividio::where('tps_id', $tps['id'])->first();
+        $bukti_vidio                = Buktividio::where('tps_id', $tps['id'])->get();
         $bukti_foto                 = Buktifoto::where('tps_id', $tps['id'])->get();
         $saksi                      = Saksi::where('tps_id', $tps['id'])->first();
         $surat_pernyataan           = SuratPernyataan::where('saksi_id', $saksi['id'])->first();

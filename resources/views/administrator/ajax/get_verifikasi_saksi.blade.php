@@ -24,25 +24,25 @@ $track = Tracking::where('id_user',$user['id'])->first();
     } */
 
     @media print {
-      body {
-        visibility: hidden;
-        position: relative;
-      }
+        body {
+            visibility: hidden;
+            position: relative;
+        }
 
-      .container {
-        width: auto;
-        margin-right: auto;
-        margin-left: auto;
-        padding-right: auto;
-        padding-left: auto;
-      }
+        .container {
+            width: auto;
+            margin-right: auto;
+            margin-left: auto;
+            padding-right: auto;
+            padding-left: auto;
+        }
 
-      #section-to-print {
-        visibility: visible;
-        position: absolute;
-        left: 0;
-        top: 0;
-      }
+        #section-to-print {
+            visibility: visible;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
     }
 </style>
 
@@ -57,7 +57,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
 </div>
 
 <div class="container">
-    
+
     <div id="section-to-print">
         <div class="row">
             @if ($saksi['kecurangan'] == "yes" && $qrcode != null)
@@ -70,11 +70,14 @@ $track = Tracking::where('id_user',$user['id'])->first();
             <div class="col mt-2">
                 <div class="media">
                     @if ($user['profile_photo_path'] == NULL)
-                    <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
+                    <img class="rounded-circle"
+                        style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                        src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
                     @else
-                    <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
+                    <img class="rounded-circle"
+                        style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
                     @endif
-                
+
                     <div class="media-body my-auto">
                         <h5 class="mb-0">{{ $user['name'] }}</h5>
                         NIK : {{ $user['nik'] }}
@@ -82,10 +85,12 @@ $track = Tracking::where('id_user',$user['id'])->first();
                 </div>
             </div>
             <div class="col-md-auto pt-2 my-auto px-1">
-                <a href="https://wa.me/{{$user->no_hp}}" class="btn btn-success text-white"><i class="fa-solid fa-phone"></i> Hubungi</a>
+                <a href="https://wa.me/{{$user->no_hp}}" class="btn btn-success text-white"><i
+                        class="fa-solid fa-phone"></i> Hubungi</a>
             </div>
             <div class="col-md-auto pt-2 my-auto px-1">
-                <button class="btn btn-warning text-white" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
+                <button class="btn btn-warning text-white" onclick="window.print()"><i class="fa-solid fa-print"></i>
+                    Print</button>
             </div>
         </div>
         <div class="row mt-5">
@@ -104,15 +109,15 @@ $track = Tracking::where('id_user',$user['id'])->first();
             @endif
         </div>
         <div class="row">
-        
+
             <div class="col-md-4">
                 <div class="row mt-5">
                     <div class="col-12">
                         <b>Detail Akun <i class="fa fa-info-circle"></i></b>
                     </div>
-                    
+
                     <hr class="mt-1 ms-3" style="margin-bottom: 0px; background: #000;; width: 300px">
-                
+
                     <div class="col-12">
                         <table class="table">
                             <tr>
@@ -147,15 +152,15 @@ $track = Tracking::where('id_user',$user['id'])->first();
                     </div>
                 </div>
             </div>
-        
+
             <div class="col-md-4">
                 <div class="row mt-5">
                     <div class="col-12">
                         <b>Lokasi <i class="fa fa-info-circle"></i></b>
                     </div>
-                
+
                     <hr class="mt-1 ms-3" style="margin-bottom: 0px; background: #000;; width: 300px">
-                
+
                     <div class="col-12">
                         <table class="table">
                             <tr>
@@ -177,15 +182,15 @@ $track = Tracking::where('id_user',$user['id'])->first();
                     </div>
                 </div>
             </div>
-        
+
             <div class="col-md-4">
                 <div class="row mt-5">
                     <div class="col-12">
                         <b>Meta Data <i class="fa fa-info-circle"></i></b>
                     </div>
-                @if ($track == NULL)
+                    @if ($track == NULL)
                     <hr class="mt-1 ms-3" style="margin-bottom: 0px; background: #000;; width: 300px">
-                
+
                     <div class="col-12">
                         <table class="table">
                             <tr>
@@ -201,7 +206,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                             <tr>
                                 <td class="ps-0 pe-2">Ip Address</td>
                                 <td class="px-0">:</td>
-                                <td class="ps-2"Tidak Terdeteksi</td>
+                                <td class="ps-2" Tidak Terdeteksi</td>
                             </tr>
                             <tr>
                                 <td class="ps-0 pe-2">Tanggal Teregistrasi</td>
@@ -218,10 +223,10 @@ $track = Tracking::where('id_user',$user['id'])->first();
                             @endif
                         </table>
                     </div>
-                
-                @else
+
+                    @else
                     <hr class="mt-1 ms-3" style="margin-bottom: 0px; background: #000;; width: 300px">
-                
+
                     <div class="col-12">
                         <table class="table">
                             <tr>
@@ -250,7 +255,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                 @endif
             </div>
         </div>
-    
+
         <div class="col-12">
             @if($url == 'hadir')
             <div class="row">
@@ -266,9 +271,10 @@ $track = Tracking::where('id_user',$user['id'])->first();
                         </div>
                         <div class="card-body p-0">
                             @if ($user['profile_photo_path'] == NULL)
-                                <img style="height: 415px; object-fit: cover;" src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
+                            <img style="height: 415px; object-fit: cover;"
+                                src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
                             @else
-                                <img style="height: 415px; object-fit: cover;" src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
+                            <img style="height: 415px; object-fit: cover;" src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
                             @endif
                         </div>
                     </div>
@@ -282,15 +288,17 @@ $track = Tracking::where('id_user',$user['id'])->first();
                         </div>
                         <div class="card-body p-0">
                             @if ($user['foto_ktp'] != null)
-                                <img style="height: 415px; object-fit: cover; width: 735px" src="{{ $user['foto_ktp'] }}" alt="">
+                            <img style="height: 415px; object-fit: cover; width: 735px" src="{{ $user['foto_ktp'] }}"
+                                alt="">
                             @else
-                                <img style="height: 415px; object-fit: cover; width: 735px" src="https://t-2.tstatic.net/default-2.jpg" alt="">
+                            <img style="height: 415px; object-fit: cover; width: 735px"
+                                src="https://t-2.tstatic.net/default-2.jpg" alt="">
                             @endif
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="row mb-5">
                 <div class="col-6 mt-2 px-1">
                     <div class="card">
@@ -301,9 +309,10 @@ $track = Tracking::where('id_user',$user['id'])->first();
                         </div>
                         <div class="card-body p-0">
                             @if ($absensi['selfie_lokasi'] != null)
-                                <img style="height: 415px; object-fit: cover" src="{{ $absensi['selfie_lokasi'] }}" alt="">
+                            <img style="height: 415px; object-fit: cover" src="{{ $absensi['selfie_lokasi'] }}" alt="">
                             @else
-                                <img style="height: 415px; object-fit: cover" src="https://t-2.tstatic.net/default-2.jpg" alt="">
+                            <img style="height: 415px; object-fit: cover" src="https://t-2.tstatic.net/default-2.jpg"
+                                alt="">
                             @endif
                         </div>
                     </div>
@@ -317,9 +326,10 @@ $track = Tracking::where('id_user',$user['id'])->first();
                         </div>
                         <div class="card-body p-0">
                             @if ($tps['foto_lokasi'] != null)
-                                <img style="height: 415px; object-fit: cover" src="{{ $tps['foto_lokasi'] }}" alt="">
+                            <img style="height: 415px; object-fit: cover" src="{{ $tps['foto_lokasi'] }}" alt="">
                             @else
-                                <img style="height: 415px; object-fit: cover" src="https://t-2.tstatic.net/default-2.jpg" alt="">
+                            <img style="height: 415px; object-fit: cover" src="https://t-2.tstatic.net/default-2.jpg"
+                                alt="">
                             @endif
                         </div>
                     </div>
@@ -339,9 +349,10 @@ $track = Tracking::where('id_user',$user['id'])->first();
                         </div>
                         <div class="card-body p-0">
                             @if ($user['profile_photo_path'] == NULL)
-                                <img style="height: 415px; object-fit: cover;" src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
+                            <img style="height: 415px; object-fit: cover;"
+                                src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
                             @else
-                                <img style="height: 415px; object-fit: cover;" src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
+                            <img style="height: 415px; object-fit: cover;" src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
                             @endif
                         </div>
                     </div>
@@ -355,9 +366,11 @@ $track = Tracking::where('id_user',$user['id'])->first();
                         </div>
                         <div class="card-body p-0">
                             @if ($user['foto_ktp'] != null)
-                                <img style="height: 415px; object-fit: cover; width: 735px" src="{{ $user['foto_ktp'] }}" alt="">
+                            <img style="height: 415px; object-fit: cover; width: 735px" src="{{ $user['foto_ktp'] }}"
+                                alt="">
                             @else
-                                <img style="height: 415px; object-fit: cover; width: 735px" src="https://t-2.tstatic.net/default-2.jpg" alt="">
+                            <img style="height: 415px; object-fit: cover; width: 735px"
+                                src="https://t-2.tstatic.net/default-2.jpg" alt="">
                             @endif
                         </div>
                     </div>
@@ -365,7 +378,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
             </div>
             @endif
         </div>
-    
+
         @if($url == 'hadir')
         <div class="col-12">
             <b>Progres Kinerja Saksi</b>
@@ -378,35 +391,41 @@ $track = Tracking::where('id_user',$user['id'])->first();
                     <div class="row">
                         <div class="col"> <strong>Saksi Mengirim Data TPS:</strong> <br>{{$saksi['created_at']}}</div>
                         <div class="col"> <strong>Status:</strong> <br> @if ($saksi['verification'] == 1)
-                          Selesai
-                        @else
-                        Proses
-                        @endif
-                    </div>
+                            Selesai
+                            @else
+                            Proses
+                            @endif
+                        </div>
                     </div>
                     <div class="track">
-                        <div class="step active success"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">Saksi Mendaftar</span> </div>
+                        <div class="step active success"> <span class="icon"> <i class="fa fa-user"></i> </span> <span
+                                class="text">Saksi Mendaftar</span> </div>
                         @if ($tps['setup'] == "terisi")
-                        <div class="step active  success"> <span class="icon"> <i class="fa fa-send"></i> </span> <span class="text">Saksi Mengirimkan TPS</span> </div>
+                        <div class="step active  success"> <span class="icon"> <i class="fa fa-send"></i> </span> <span
+                                class="text">Saksi Mengirimkan TPS</span> </div>
                         @if ($saksi['verification'] != NULL)
-                        <div class="step active success"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Terverifikasi</span> </div>
+                        <div class="step active success"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
+                                class="text">Terverifikasi</span> </div>
                         @else
-                        <div class="step success"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Terverifikasi</span> </div>
+                        <div class="step success"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
+                                class="text">Terverifikasi</span> </div>
                         @endif
                         @else
-                        <div class="step  success"> <span class="icon"> <i class="fa fa-send"></i> </span> <span class="text">Saksi Mengirimkan TPS</span> </div>
-                        <div class="step success"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Selesai</span> </div>
+                        <div class="step  success"> <span class="icon"> <i class="fa fa-send"></i> </span> <span
+                                class="text">Saksi Mengirimkan TPS</span> </div>
+                        <div class="step success"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
+                                class="text">Selesai</span> </div>
                         @endif
                     </div>
                     <hr>
-                
+
                 </div>
             </div>
             @if ($saksi != NULL)
             @if ($saksi['kecurangan'] == "yes")
 
             <div class="row mt-5">
-                <div class="col-12 bg-danger text-white py-3 text-center mb-3">  
+                <div class="col-12 bg-danger text-white py-3 text-center mb-3">
                     <h4 class="fw-bold mb-0">
                         Laporan Kecurangan Saksi
                     </h4>
@@ -432,7 +451,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                         </div>
                         <div class="card-body" style="border: 1px #eee solid !important">
                             <ul class="list-group" id="appendDataSolution">
-                                
+
                             </ul>
                         </div>
                     </div>
@@ -446,16 +465,16 @@ $track = Tracking::where('id_user',$user['id'])->first();
                             <table class="table table-bordered">
                                 <tr>
                                     <td class="fw-bold">
-                                        <div class="text-center">Petugas Saksi</div>
+                                        <div>A. Petugas Saksi</div>
                                     </td>
                                     <td class="fw-bold">
-                                        <div class="text-center">Petugas Verifikator</div>
+                                        <div>B. Petugas Verifikator</div>
                                     </td>
                                     <td class="fw-bold">
-                                        <div class="text-center">Petugas Validasi Kecurangan</div>
+                                        <div>C. Petugas Validasi Kecurangan</div>
                                     </td>
                                     <td class="fw-bold">
-                                        <div class="text-center">Tanggal Dokumen</div>
+                                        <div>Tanggal Dokumen</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -473,81 +492,153 @@ $track = Tracking::where('id_user',$user['id'])->first();
                         </div>
                     </div>
                 </div>
+
+                <div class="col-12 px-0">
+                    <div class="card">
+                        <div class="card-header" style="border: 1px #eee solid !important; background: #eee">
+                            <h3 class="mb-0 card-title">4. Barang Bukti</h3>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-12 px-0">
                     <div class="row">
                         <div class="col-12">
-                            <div class="card">
-                                <div class="card-header" style="border: 1px #eee solid !important; background-color: #eee">
-                                    <h3 class="card-title">4. Barang Bukti</h3>
-                                </div>
-                                <div class="card-body" style="border: 1px #eee solid !important">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="card">
-                                                <div class="card-header" style="border: 1px #eee solid !important">
-                                                    <h3 class="card-title">Bukti Foto</h3>
-                                                </div>
-                                                <div class="card-body" style="border: 1px #eee solid !important">
-                                                    <div class="row">
-                                                        @foreach ($bukti_foto as $bf)
-                                                        <div class="col-12 mt-1">
-                                                            <img class="w-100 image" src="{{asset('storage/' . $bf->url)}}"
-                                                                data-url="{{asset('storage/' . $bf->url)}}" alt="">
-                                                        </div>
-                                                        @endforeach
-                                                        <div id="metadataDisplay"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <script>
-                                            // function getImageMetadata(url, imageElement) {
-                                            //   const img = new Image();
-                                            //   img.onload = function() {
-                                            //     const metadataDisplay = `<div>Image Size: ${img.width} x ${img.height}</div>`;
-                                            //     $(imageElement).after(metadataDisplay);
-                                            //   };
-                                            //   img.src = url;
-                                            // }
-                                            
-                                            // $(document).ready(function() {
-                                            //   $('.image').each(function() {
-                                            //     const imageUrl = $(this).data('url');
-                                            //     getImageMetadata(imageUrl, this);
-                                            //   });
-                                            // });
-                                        </script>
-                                        <div class="col-6">
-                                            <div class="card">
-                                                <div class="card-header" style="border: 1px #eee solid !important">
-                                                    <h3 class="card-title">Bukti Video</h3>
-                                                </div>
-                                                <div class="card-body" style="border: 1px #eee solid !important">
-                                                    <video width="100%" controls>
-                                                        <source src="{{asset('')}}storage/{{$bukti_vidio->url}}" type="video/mp4">
-                                                        <source src="{{asset('')}}storage/{{$bukti_vidio->url}}" type="video/ogg">
-                                                    </video>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="card-body p-0" style="border: 1px #eee solid !important">
+                                    <table class="table table-bordered mb-0">
+                                        <tr>
+                                            <td class="fw-bold">Foto</td>
+                                            <td class="fw-bold">Metadata</td>
+                                        </tr>
+                                        @foreach ($bukti_foto as $bf)
+                                        <tr>
+                                            <td class="text-center" style="width: 50%">
+                                                <img class="image" style="height: 350px" src="{{asset('storage/' . $bf->url)}}"
+                                                    data-url="{{asset('storage/' . $bf->url)}}" alt="">
+                                            </td>
+                                            <td class="exifResultsPhoto" style="width: 50%">
+
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                    <script>
+                                        $(document).ready(function () {
+                                            setTimeout(()=>{
+                                                $(".image").each(function (index) {
+                                                    
+                                                    var currentImage = this;
+                                                    EXIF.getData(currentImage, function () {
+                                                        var exifData = EXIF.getAllTags(this);
+                                                        var locationInfo = "Image " + (index + 1) + " EXIF Data:<br>";
+                                                        
+                                                        if (exifData && (exifData.DateTimeOriginal || (exifData.GPSLatitude && exifData.GPSLongitude))) {
+                                                            if (exifData.DateTimeOriginal) {
+                                                            locationInfo += "Date taken: " + exifData.DateTimeOriginal + "<br>";
+                                                            }
+                                                            if (exifData.GPSLatitude && exifData.GPSLongitude) {
+                                                                var latitude = exifData.GPSLatitude[0] + exifData.GPSLatitude[1] / 60 + exifData.GPSLatitude[2] / 3600;
+                                                                var longitude = exifData.GPSLongitude[0] + exifData.GPSLongitude[1] / 60 + exifData.GPSLongitude[2] / 3600;
+                                                                locationInfo += "Location: Latitude " + latitude + ", Longitude " + longitude + "<br>";
+                                                            }
+                                                            if (exifData.Make) {
+                                                                locationInfo += "Camera Make: " + exifData.Make + "<br>";
+                                                            }
+                                                            if (exifData.Model) {
+                                                                locationInfo += "Camera Model: " + exifData.Model + "<br>";
+                                                            }
+                                                            if (exifData.ApertureValue) {
+                                                                locationInfo += "Aperture: f/" + exifData.ApertureValue + "<br>";
+                                                            }
+                                                            if (exifData.ExposureTime) {
+                                                                locationInfo += "Exposure Time: " + exifData.ExposureTime + " sec<br>";
+                                                            }
+                                                            if (exifData.ISO) {
+                                                                locationInfo += "ISO: " + exifData.ISO + "<br>";
+                                                            }
+                                                            if (exifData.FocalLength) {
+                                                                locationInfo += "Focal Length: " + exifData.FocalLength + "mm<br>";
+                                                            }
+                                                            if (exifData.Flash) {
+                                                                locationInfo += "Flash: " + exifData.Flash + "<br>";
+                                                            }
+                                                            if (exifData.ImageWidth && exifData.ImageHeight) {
+                                                                locationInfo += "Image Resolution: " + exifData.ImageWidth + "x" + exifData.ImageHeight + "<br>";
+                                                            }
+                                                            // Include more EXIF tags as needed
+                                                        } else {
+                                                            locationInfo += "EXIF data not found";
+                                                        }
+                                                        
+                                                        // Display the information in the console to ensure it's being correctly constructed
+                                                        console.log(locationInfo);
+                                                        
+                                                        // Find the corresponding .exifResults element related to the current image and update its content
+                                                        $(currentImage).closest('tr').find('.exifResultsPhoto').html(locationInfo);
+                                                    });
+                                                });
+                                            },100)
+                                        });
+                                    </script>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 px-0 mt-3">
                             <div class="card">
-                                <div class="card-header" style="border: 1px #eee solid !important; background-color: #eee">
+                                <div class="card-body p-0" style="border: 1px #eee solid !important">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td class="fw-bold">Video</td>
+                                            <td class="fw-bold">Metadata</td>
+                                        </tr>
+                                        @foreach ($bukti_vidio as $bv)
+                                        <tr>
+                                            <td class="text-center" style="width: 50%">
+                                                <video width="100%" controls>
+                                                    <source src="{{asset('')}}storage/{{$bv->url}}" type="video/mp4">
+                                                    <source src="{{asset('')}}storage/{{$bv->url}}" type="video/ogg">
+                                                </video>
+                                            </td>
+                                            <td class="exifResults" style="width: 50%">
+
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                    <script>
+                                        // $(document).ready(function () {
+                                        //     setTimeout(()=>{
+                                        //         $(".image").each(function (index) {
+                                        //            var currentImage = this;
+                                                   
+                                        //                EXIF.getData(currentImage, function () {
+                                        //                    var dateTaken = EXIF.getTag(this, "DateTimeOriginal");
+                                        //                    var result = $("<p>").text(
+                                        //                        " - Date taken: " + (dateTaken ? dateTaken : "Date taken not found")
+                                        //                    );
+                                        //                    $(currentImage).closest('tr').find('.exifResults').html(result);
+                                        //                });
+                                        //            });
+                                        //     },100)
+                                        // });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 px-0">
+                            <div class="card">
+                                <div class="card-header"
+                                    style="border: 1px #eee solid !important; background-color: #eee">
                                     <h3 class="card-title">5. Video Pernyataan Saksi (Bahwa ada kecurangan)</h3>
                                 </div>
                                 <div class="card-body" style="border: 1px #eee solid !important">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
-                            
+                        <div class="col-12 px-0">
+
                             <div class="card">
-                                <div class="card-header" style="border: 1px #eee solid !important; background-color: #eee">
+                                <div class="card-header"
+                                    style="border: 1px #eee solid !important; background-color: #eee">
                                     <h3 class="card-title">6. Surat Pernyataan</h3>
                                 </div>
                                 <div class="card-body" style="border: 1px #eee solid !important">
@@ -563,7 +654,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                                                     </div>
                                                     <div class="row mb-3">
                                                         <div class="col-lg-12">
-                            
+
                                                         </div>
                                                     </div>
                                                     <div class="row mt-1">
@@ -575,7 +666,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-12">
-                            
+
                                                             <div class="col-lg-12 mb-2">
                                                                 <table class="w-100">
                                                                     <tr>
@@ -621,14 +712,15 @@ $track = Tracking::where('id_user',$user['id'])->first();
                                                                     <tr>
                                                                         <td style="width: 85px">Kota</td>
                                                                         <td>:</td>
-                                                                        <td class="text-capitalize">{{ $kota->name }}</td>
-                            
+                                                                        <td class="text-capitalize">{{ $kota->name }}
+                                                                        </td>
+
                                                                     </tr>
                                                                 </table>
-                            
+
                                                             </div>
                                                         </div>
-                            
+
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-12">
@@ -669,12 +761,13 @@ $track = Tracking::where('id_user',$user['id'])->first();
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
 
-                        <div class="col-12">
+                        <div class="col-12 px-0">
                             <div class="card">
-                                <div class="card-header" style="border: 1px #eee solid !important; background-color: #eee">
+                                <div class="card-header"
+                                    style="border: 1px #eee solid !important; background-color: #eee">
                                     <h3 class="card-title">7. Data C1</h3>
                                 </div>
                                 <div class="card-body" style="border: 1px #eee solid !important">
@@ -716,10 +809,10 @@ $track = Tracking::where('id_user',$user['id'])->first();
                 </div>
             </div>
             @else
-            
+
             @endif
             @endif
-        
+
             @else
         </div>
     </div>

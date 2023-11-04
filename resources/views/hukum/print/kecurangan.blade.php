@@ -16,7 +16,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Laporan Kecurangan {{ $qrcode->nomor_berkas }}</title>
+    {{-- <title>Laporan Kecurangan {{ $qrcode->nomor_berkas }}</title> --}}
 
     <!-- BOOTSTRAP CSS -->
     <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -273,7 +273,49 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <h3>Bukti Foto</h3>
+                                </td>
+                                <td>
+                                    <h3>Metadata</h3>
+                                </td>
+                            </tr>
+                            @foreach ($foto_kecurangan as $bf)
+                            <tr>
+                                <td>
+                                    <img class="w-100 image" src="{{asset('storage/' . $bf->url)}}" data-url="{{asset('storage/' . $bf->url)}}"
+                                        alt="">
+                                </td>
+                                <td class="exifResults">
+                        
+                                </td>
+                            </tr>
+                            @endforeach
+                        </table>
+                        <script>
+                            $(document).ready(function () {
+                                $(".image").each(function (index) {
+                                    var currentImage = this;
+
+                                    EXIF.getData(currentImage, function () {
+                                        var dateTaken = EXIF.getTag(this, "DateTimeOriginal");
+                                        var result = $("<p>").text(
+                                            " - Date taken: " + (dateTaken ? dateTaken : "Date taken not found")
+                                        );
+                                        $(currentImage).closest('tr').find('.exifResults').html(result);
+                                    });
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+                {{-- <div class="row">
                     <div class="col-6">
 
                         <div class="card">
@@ -308,7 +350,7 @@
                         </div>
                     </div>
 
-                </div>
+                </div> --}}
             </div>
         </div>
         {{-- <table style="table-layout: fixed;" class="table text-center">
