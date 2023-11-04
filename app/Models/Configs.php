@@ -8,6 +8,9 @@ class Configs
 {
     public $regencies_id;
     public $provinces_id;
+    public $regencies_logo;
+
+
     public $setup;
     public $updated_at;
     public $created_at;

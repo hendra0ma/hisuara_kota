@@ -64,7 +64,4 @@ class PusatController extends Controller
         return view('pusat.index', $data);
         // return "hai";
     }
-    
-   
-
 }

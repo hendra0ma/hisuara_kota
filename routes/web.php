@@ -94,10 +94,30 @@ Route::get("redirect-page",function (){
 
 
 
-Route::get("test-excel",function (){
+Route::get("import-excel-pemilih",function (){
     return view('excel.test');
 });
+
+Route::get("import-excel-dpt",function (){
+    return view('excel.dpt');
+});
+
+Route::get("update-dpt",function (){
+    $dpt_indonesia = DB::table('dpt_indonesia')->limit(100000)->get();
+    foreach ($dpt_indonesia as $dpt) {
+        $province = Province::where('name',$dpt->province_name)->first();
+        $regency = Regency::where('province_id',$province->id)->where('name',$dpt->regency_name)->first();
+        $district = Regency::where('province_id',$province->id)->where('id',$regency->id)->where('name',$dpt->district_name)->first();
+        $village = Regency::where('province_id', $province->id)->where('id', $regency->id)->where('name',$district->id)->where('name',$dpt->village_name)->first();
+        
+    }
+});
+
+
+
+
 Route::post("import-excel",[ExcelController::class,"importExcel"])->name("import-excel");
+Route::post("import-dpt-excel",[ExcelController::class,"importDptExcel"])->name("import-dpt-excel");
 
 
 
