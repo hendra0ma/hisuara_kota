@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Config;
+use App\Models\Configs;
 use App\Models\District;
 use App\Models\Regency;
 use App\Models\SaksiData;
@@ -12,10 +13,43 @@ use App\Models\Saksi;
 use App\Models\RegenciesDomain;
 use App\Models\Province;
 
-$config = Config::all()->first();
-$regency = District::where('regency_id', $config['regencies_id'])->get();
-$kota = Regency::where('id', $config['regencies_id'])->first();
-$dpt = District::where('regency_id', $config['regencies_id'])->sum('dpt');
+// $config = Config::all()->first();
+
+
+$currentDomain = request()->getHttpHost();
+if (isset(parse_url($currentDomain)['port'])) {
+    $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
+}else{
+    $url = $currentDomain;
+}
+$regency_id = RegenciesDomain::where('domain',"LIKE","%".$url."%")->first();
+
+$configs = Config::first();
+$config = new Configs;
+$config->regencies_id =  (string) $regency_id->regency_id;
+$config->provinces_id =  $configs->provinces_id;
+$config->regencies_logo =  $configs->regencies_logo;
+
+$config->setup =  $configs->setup;
+$config->updated_at =  $configs->updated_at;
+$config->created_at =  $configs->created_at;
+$config->partai_logo =  $configs->partai_logo;
+$config->date_overlimit =  $configs->date_overlimit;
+$config->show_public =  $configs->show_public;
+$config->show_terverifikasi =  $configs->show_terverifikasi;
+$config->lockdown =  $configs->lockdown;
+$config->multi_admin =  $configs->multi_admin;
+$config->otonom =  $configs->otonom;
+$config->dark_mode =  $configs->dark_mode;
+$config->jumlah_multi_admin =  $configs->jumlah_multi_admin;
+$config->jenis_pemilu =  $configs->jenis_pemilu;
+$config->tahun =  $configs->tahun;
+$config->quick_count =  $configs->quick_count;
+$config->default =  $configs->default;
+
+$regency = District::where('regency_id', $config->regencies_id)->get();
+$kota = Regency::where('id', $config->regencies_id)->first();
+$dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
 $tps = Tps::count();
 $marquee = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->get();
 $total_tps = Tps::where('setup', 'belum terisi')->count();;
@@ -33,6 +67,11 @@ $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FRO
 $urutan = $paslon_tertinggi;
 $props = Province::where('id', $kota['province_id'])->first();
 $cityProp = Regency::where('province_id', $kota['province_id'])->get();
+
+
+
+
+
 ?>
 
 
@@ -338,7 +377,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         </button>
                                     </div>
 
-                                    <div class="col-md-auto px-0">
+                                    <!-- <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white kecurangan"
                                             style="background-color: #656064; width: 40px; height: 36px;"
                                             data-target="kecurangan">
@@ -365,7 +404,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 </svg>
                                             </span>
                                         </button>
-                                    </div>
+                                    </div> -->
 
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white sirantap"
@@ -373,7 +412,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             data-target="sirantap">
                                             <span class="dark-layout" data-bs-placement="bottom"
                                                 data-bs-toggle="tooltip" title="Sistem Laporan Data Pemilu">
-                                                <i class="fa-solid fa-print"></i>
+                                                <i class="fa-solid fa-s"></i>
                                             </span>
                                         </button>
                                     </div>
@@ -590,6 +629,12 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{route('superadmin.analisa_dpt_kpu')}}" class="py-1 btn fs-6 w-100 text-white glowy-menu"
+                                                    style="background-color: #528bff; border-radius: 0;">
+                                                    Realisasi DPT
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{route('superadmin.rdata')}}"
                                                     class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
@@ -599,7 +644,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         </div>
                                     </div>
 
-                                    <div class="col-md kecurangan tugel-content" style="display: none">
+                                    <!-- <div class="col-md kecurangan tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/verifikator/verifikator_kecurangan"
@@ -616,7 +661,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 </a>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="col-md sirantap tugel-content" style="display: none">
                                         <div class="row">
@@ -642,10 +687,10 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{route('superadmin.analisa_dpt_kpu')}}"
+                                                <a href="{{url('')}}/verifikator/verifikator_kecurangan"
                                                     class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan"
                                                     style="background-color: #f82649; border-radius: 0px 25px 25px 0px;;">
-                                                    Realisasi DPT
+                                                    Verifikator Kecurangan
                                                 </a>
                                             </div>
                                         </div>
@@ -694,9 +739,20 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 <div class="text">TPS Masuk : <b>{{ $tps_masuk }}</b></div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-primary text-white">
-                                                <div class="text">TPS Kosong : <b>{{ $tps_kosong }}</b></div>
+                                            <?php  
+                                                    $total_dpt = 0;
+                                                    if (request()->segment(2) == 'index') {
+                                                        $total_dpt = District::where('regency_id',$config->regencies_id)->sum('dpt');
+                                                    }elseif(request()->segment(2) == 'perhitungan_kecamatan'){
+                                                        $total_dpt = District::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt');
+                                                    }else{
+
+                                                    }
+                                                ?>
+                                                <div class="text">Total DPT : <b>{{ $total_dpt }}</b></div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-info text-white">
+                                              
                                                 <div class="text">Suara Masuk : <b>{{ $suara_masuk }}</b></div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-success text-white"
