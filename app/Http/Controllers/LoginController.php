@@ -72,28 +72,95 @@ class LoginController extends Controller
             'kec' => District::where('regency_id', 3674)->get()
         ]);
     }
-    public function storeAdmin(Request $req)
+
+    
+    public function storeAdmin(Request $request)
     {
-        Validator::make($req->all(), [
+       $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
+            'alamat' => ['required','string'],
+            'role_id' => ['required'],
+            'no_hp' => ['required','string','unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' =>  ['required', 'string', 'confirmed'],
+            'nik' => 'required|string',
+          
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
-        ])->validate();
-        User::create([
-            'nik' => $req['nik'],
-            'name' => $req['name'],
-            'address'  => $req['alamat'],
-            'role_id' => Crypt::decryptString($req['role_id']),
-            'is_active' => '1',
-            'no_hp'  => $req['no_hp'],
-            'districts'  =>  $req['kecamatan'],
-            'email' => $req['email'],
-            'password' => Hash::make($req['password']),
-            'cek' => 0,
         ]);
+        if (!$request->file('foto_ktp')) {
+            return redirect()->back()->with('error','foto ktp wajib di isi');
+          }
+          if (!$request->file('foto_profil')) {
+            return redirect()->back()->with('error','foto profil wajib di isi');
+          }
+
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+
+        if ($request->file('foto_ktp')) {
+            $image = $request->file('foto_ktp');
+            $randomString = substr(str_shuffle($characters), 0, 13); // Menghasilkan string acak sepanjang 10 karakter
+            $foto_ktp = time() . $randomString  .".".  $image->getClientOriginalExtension();
+            $image->move(public_path('storage/profile-photos'), $foto_ktp);
+        } else {
+            return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
+        }
+
+        if ($request->file('foto_profil')) {
+            $image = $request->file('foto_profil');
+            $randomString = substr(str_shuffle($characters), 0, 13); // Menghasilkan string acak sepanjang 10 karakter
+            $foto_profil = time() . $randomString  .".".  $image->getClientOriginalExtension();
+            $image->move(public_path('storage/profile-photos'), $foto_profil);
+        } else {
+            return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
+        }
+        $role = explode('|',$request->input('role_id'));
+
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->address = $request->input('address');
+        $user->no_hp = $request->input('no_hp');
+
+        $user->province_id = $request->input('provinsi');
+        
+        if ($role[0] == "tps") {
+            $user->districts = $request->input('kecamatan');
+            $user->villages = $request->input('kelurahan');
+        }else{
+            $user->regency_id = $request->input('kota');
+            $user->districts = "0";
+            
+
+        }
+
+        
+        $user->tps_id = $request->input('tps');
+
+        $user->role_id = $role[1];
+        $user->is_active = "0"  ;
+        $user->email = $request->input('email');
+        $user->address = $request->input('alamat');
+        $user->password = bcrypt($request->input('password'));
+        $user->cek = "0";
+        $user->absen = "";
+        $user->nik = $request->input('nik');
+        $user->profile_photo_path = $foto_profil;
+        $user->foto_ktp = $foto_ktp;
+        $user->save();
+
+
+
         return redirect()->route('login');
     }
+
+
+
 
     public function track_rec(Request $request)
     {

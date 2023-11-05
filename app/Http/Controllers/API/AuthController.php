@@ -129,8 +129,8 @@ class AuthController extends Controller
             'cek' => 'required|string',
             'absen' => 'required|string',
             'nik' => 'required|string',
-            'foto_ktp' => 'required|image|mimes:jpeg,png,jpg,gif', 
-            'foto_profil' => 'required|image|mimes:jpeg,png,jpg,gif', 
+            'foto_ktp' => 'required', 
+            'foto_profil' => 'required', 
         ]);
       
         //UnComment Kode iini setelah pencobaan
