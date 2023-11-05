@@ -30,7 +30,7 @@ use App\Models\Koreksi;
                         / Kelurahan {{ $village->name }}
                     </span>
                 </div>
-                <div class="hiasan-1" style="background-color: rgba(251, 107, 37, 0.8)">
+                <div class="hiasan-1" style="background-color: rgba(248, 38, 73, 0.8)">
                     <div class="gambar-bulat">
                         @if ($ls->profile_photo_path == NULL)
                         <img class="rounded-circle" style="width: 125px; height: 125px; object-fit:cover;"
@@ -79,13 +79,13 @@ use App\Models\Koreksi;
                                 <button class="btn rounded-0 w-100 disetujuimodal text-white" id="Cek"
                                     data-id="{{$koreksi_by['saksi_id']}}" data-bs-toggle="modal" id=""
                                     data-bs-target="#disetujuimodal"
-                                    style="background-color: rgb(251, 107, 37)">Koreksi Kiriman C1</button>
+                                    style="background-color: rgb(248, 38, 73)">Koreksi Kiriman C1</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="hiasan-2" style="height: 30px"></div>
-                <div class="hiasan-1" style="height: 30px; background-color: rgba(251, 107, 37, 0.8)"></div>
+                <div class="hiasan-1" style="height: 30px; background-color: rgba(248, 38, 73, 0.8)"></div>
             </div>
         </div>
         @endforeach

@@ -23,7 +23,7 @@
                         / Kelurahan {{ $village->name }}
                     </span>
                 </div>
-                <div class="hiasan-1">
+                <div class="hiasan-1" style="background-color: rgba(251, 107, 37, 0.8)">
                     <div class="gambar-bulat">
                         @if ($ls->profile_photo_path == NULL)
                         <img class="rounded-circle" style="width: 125px; height: 125px; object-fit:cover;"
@@ -69,14 +69,14 @@
     
                         <div class="row mt-2">
                             <div class="col-12 px-0">
-                                <button class="btn btn-primary rounded-0 w-100 periksa-c1-plano" id="Cek" data-id="{{$ls->tps_id}}"
+                                <button class="btn text-white rounded-0 w-100 periksa-c1-plano" style="background-color: rgb(251, 107, 37)" id="Cek" data-id="{{$ls->tps_id}}"
                                     data-bs-toggle="modal" id="" data-bs-target="#periksaC1Verifikator">Verifikasi Kiriman C1</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="hiasan-2" style="height: 30px"></div>
-                <div class="hiasan-1" style="height: 30px"></div>
+                <div class="hiasan-1" style="height: 30px; background-color: rgba(251, 107, 37, 0.8)"></div>
             </div>
         </div>
         @endforeach
