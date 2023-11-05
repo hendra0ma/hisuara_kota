@@ -159,6 +159,20 @@ $config = Config::first();
 $kotas = RegenciesDomain::where('province_id', $config->provinces_id)->get();
 
 
+Route::get('/getKota/{id}', function ($id) {
+    $course = Regency::where('province_id', $id)->get();
+    return response()->json($course);
+});
+Route::get('/getKecamatan/{id}', function ($id) {
+    $course = District::where('regency_id', $id)->get();
+    return response()->json($course);
+});
+Route::get('/getKelurahan/{id}', function ($id) {
+    $course = Village::where('district_id', $id)->get();
+    return response()->json($course);
+});
+
+
 foreach ($kotas as $kota) {
 
     Route::domain($kota->domain)->group(function () {
@@ -232,6 +246,10 @@ foreach ($kotas as $kota) {
             $course = Regency::where('province_id', $id)->get();
             return response()->json($course);
         });
+        Route::get('getKota/{id}', function ($id) {
+            $course = District::where('regency_id', $id)->get();
+            return response()->json($course);
+        });
         Route::get('getKecamatan/{id}', function ($id) {
             $course = District::where('regency_id', $id)->get();
             return response()->json($course);
@@ -240,6 +258,10 @@ foreach ($kotas as $kota) {
             $course = Village::where('district_id', $id)->get();
             return response()->json($course);
         });
+
+
+
+
         //auth
         //register Admin
         Route::get('register-admin', [LoginController::class, 'createAdmin'])->name('formRegister.admin');
@@ -600,9 +622,10 @@ foreach ($kotas as $kota) {
         Route::get("upload-surat-suara", [DevelopingController::class, 'uploadSuratSuara'])->middleware(['auth', 'role:saksi'])->name('uploadSuratSuara');
 
         Route::post("action_absen_saksi", [DevelopingController::class, 'actionAbsensiSaksi'])->middleware(['auth', 'role:saksi'])->name('actionAbsensiSaksi');
+
         Route::post("action-surat-suara", [DevelopingController::class, 'actionSuratSuara'])->middleware(['auth', 'role:saksi'])->name('actionSuratSuara');
-
-
+        
+        
         Route::get('/saksi-dashboard', function () {
 
             return view('developing.template_phone.phone');
@@ -632,6 +655,11 @@ foreach ($kotas as $kota) {
 
         Route::controller(DevelopingController::class)->group(function () {
             Route::get('dev/index', 'index');
+
+            Route::get('c1Crowd/index', 'c1Crowd')->name('crowd_c1');
+            Route::post('c1Crowd/upload', 'upploadC1Crowd');
+
+
             Route::post('dev/action_saksi', 'action_saksi');
             Route::get('dev/tps_update', 'tps_update');
             Route::get('dev/saksi_update', 'saksi_update');

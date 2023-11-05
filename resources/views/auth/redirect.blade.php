@@ -93,6 +93,9 @@
                     window.location.href = "{{ route('banwaslu.index') }}"
                 @elseif (auth()->user()->role_id == 12)
                     window.location.href = "{{ route('payrole.index') }}"
+
+                @elseif (auth()->user()->role_id == 17)
+                    window.location.href = "{{ route('crowd_c1') }}"
                 @endif
             }, 5000);
             getLocation();

@@ -830,6 +830,7 @@ class ComposerStaticInite136a52bc2170717c48359cf1e4a8751
         'App\\Models\\Config' => __DIR__ . '/../..' . '/app/Models/Config.php',
         'App\\Models\\Configs' => __DIR__ . '/../..' . '/app/Models/Configs.php',
         'App\\Models\\Country' => __DIR__ . '/../..' . '/app/Models/Country.php',
+        'App\\Models\\CrowdC1' => __DIR__ . '/../..' . '/app/Models/CrowdC1.php',
         'App\\Models\\DataRekapitulasi' => __DIR__ . '/../..' . '/app/Models/DataRekapitulasi.php',
         'App\\Models\\DataSaksiC' => __DIR__ . '/../..' . '/app/Models/DataSaksiC.php',
         'App\\Models\\Databukti' => __DIR__ . '/../..' . '/app/Models/Databukti.php',

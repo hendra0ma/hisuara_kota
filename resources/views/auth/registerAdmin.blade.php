@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
-<div class="login-img">
+<div class="login-img bg-dark">
 
     <!-- GLOABAL LOADER -->
     <div id="global-loader">
@@ -24,12 +24,31 @@
                         <div class="wrap-login100 p-0">
 
                             <div class="card-body">
-                                <form class="justify-content-center  validate-form" method="POST" action="{{ route('storeRegister.admin') }}">
+                                <form class="justify-content-center  validate-form" method="POST" action="{{ route('storeRegister.admin') }}"enctype="multipart/form-data">
                                     @csrf
                                     <span class="login100-form-title">
                                         Registration
                                     </span>
                                     <x-jet-validation-errors class="mb-4" />
+
+                                    @if(Session::flash("error"))
+                                    <div class="alert alert-danger" role="alert">
+                                        {{Session::flash('error')}}
+                                    </div>
+                                    @endif
+
+                                    <div class="form-group">
+                                        <select class="form-control select2-show-search form-select" name="role_id" id="role">
+                                            <option disabled selected>Pilih Role</option>
+                                            <option value="tps|8">Saksi</option>
+                                            <option value="tps|16">Enumerator</option>
+                                            <option value="tps|17">Crowd C1</option>
+                                            <option value="tdk|9">Rekapitulator</option>
+                                            <option value="tps|14">Relawan Tps</option>
+                                            <option value="tdk|1">Admin</option>
+                                        </select>
+
+                                    </div>
                                     <div class="wrap-input100 validate-input">
                                         <input class="input100" type="text" name="nik" placeholder="Masukkan Nomor Induk Kependudukan (No. KTP)" maxlength="16" autocomplete="nik">
                                         <span class="focus-input100"></span>
@@ -80,33 +99,60 @@
                                         </span>
                                     </div>
 
-                                    <div class="form-group">
-                                        <select class="form-control select2-show-search form-select" name="role_id" id="kecamatan">
-                                            <option value="{{Crypt::encryptString('2')}}">Verifikator</option>
-                                            <option value="{{Crypt::encryptString('3')}}">Auditor Forensik</option>
-                                            <option value="{{Crypt::encryptString('9')}}">Komparasi</option>
-                                            <option value="{{Crypt::encryptString('5')}}">Checking Overlimit</option>
-                                            <option value="{{Crypt::encryptString('6')}}">Checking Hunter</option>
-                                            <option value="{{Crypt::encryptString('20')}}">Otentifikasi</option>
-                                            <option value="{{Crypt::encryptString('26')}}">Luar Negeri</option>
-                                            <option value="{{Crypt::encryptString('12')}}">Payrole Saksi</option>
-                                            <option value="{{Crypt::encryptString('7')}}">Validator Hukum</option>
-                                            <option value="{{Crypt::encryptString('7')}}">Tim Hukum Paslon</option>
-                                            <option value="{{Crypt::encryptString('7')}}">Bawaslu</option>
-                                            <option value="{{Crypt::encryptString('25')}}">Mahkamah Konstitusi</option>
-                                        </select>
+                                    <div class="wrap-input100 validate-input" data-bs-validate="Password is required">
+                                        <label class="form-label mt-3">Upload Foto Ktp</label>
+                                        <label class="picture" for="picture__input" tabIndex="0">
+                                            <span class="picture__image"></span>
+                                        </label>
 
+                                        <input type="file" name="foto_ktp" id="picture__input" class="picture___input">
                                     </div>
-                                    <div class="form-group">
-                                        <select class="form-control select2-show-search form-select" name="kecamatan" id="kecamatan">
-                                            <option hidden>Pilih Kecamatan</option>
-                                            @foreach ($kec as $kc)
-                                            <option value="{{ $kc->id }}">{{ $kc->name }}</option>
-                                            @endforeach
-                                        </select>
+
+                                    <div class="wrap-input100 validate-input" data-bs-validate="Password is required">
+                                        <label class="form-label mt-3">Upload Foto Profile</label>
+                                        <label class="picture" for="picture__input2" tabIndex="0">
+                                            <span class="picture__image2"></span>
+                                        </label>
+
+                                        <input type="file" name="foto_profil" id="picture__input2" class="picture___input">
                                     </div>
-                                    <div class="form-group">
-                                        {!! Geetest::render() !!}
+
+                                    <div id="role-admin" style="display:none">
+                                        <div class="form-group">
+                                            <select class="form-control select2-show-search form-select" name="provinsi" id="provinsi">
+                                                <?php
+                                                $provinsi = App\Models\Province::get();
+                                                ?>
+                                                <option disabled selected>Pilih Provinsi</option>
+                                                @foreach ($provinsi as $kc)
+                                                <option value="{{ $kc->id }}">{{ $kc->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <select class="form-control select2-show-search form-select" name="kota" id="kota">
+                                                <option disabled selected>Pilih Kota</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div id="role-saksi" style="display:none">
+                                        <div class="form-group">
+                                            <select class="form-control select2-show-search form-select" name="kecamatan" id="kecamatan">
+                                                <option disabled selected>Pilih Kecamatan</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <select class="form-control select2-show-search form-select" name="tps" id="kelurahan">
+                                                <option disabled selected>Pilih Kelurahan</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <select class="form-control select2-show-search form-select" name="tps" id="tps">
+                                                <option disabled selected>Pilih Tps</option>
+                                            </select>
+                                        </div>
+
                                     </div>
 
                                     <label class="custom-control custom-checkbox mt-4">
@@ -120,23 +166,12 @@
                                         </button>
                                     </div>
                                     <div class="text-center pt-3">
-                                        <p class="text-dark mb-0">Already have account?<a href="login.html" class="text-primary ms-1">Sign In</a></p>
+                                        <p class="text-dark mb-0">Already have account?<a href="{{url('')}}/login" class="text-primary ms-1">Sign In</a></p>
                                     </div>
+
                                 </form>
                             </div>
-                            <div class="card-footer">
-                                <div class="d-flex justify-content-center my-3">
-                                    <a href="" class="social-login  text-center me-4">
-                                        <i class="fa fa-google"></i>
-                                    </a>
-                                    <a href="" class="social-login  text-center me-4">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                    <a href="" class="social-login  text-center">
-                                        <i class="fa fa-whatsapp"></i>
-                                    </a>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -146,8 +181,8 @@
                 <div class="container">
                     <img style="display: block; margin-left: auto; margin-right: auto;" src="../../assets/images/acakey_new.png" width="250px" class="pt-5 mb-5">
                     <div class="text-center pb-5" style="font-size: 13px;">
-                        © PT.Mahadaya Swara Semesta <br />
-                        All Right Reserved 2021
+                        © PT.Hisuara.id<br />
+                        All Right Reserved 2023
                     </div>
                 </div>
             </section>

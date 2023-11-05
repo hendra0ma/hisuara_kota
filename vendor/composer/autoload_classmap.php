@@ -141,6 +141,7 @@ return array(
     'App\\Models\\Config' => $baseDir . '/app/Models/Config.php',
     'App\\Models\\Configs' => $baseDir . '/app/Models/Configs.php',
     'App\\Models\\Country' => $baseDir . '/app/Models/Country.php',
+    'App\\Models\\CrowdC1' => $baseDir . '/app/Models/CrowdC1.php',
     'App\\Models\\DataRekapitulasi' => $baseDir . '/app/Models/DataRekapitulasi.php',
     'App\\Models\\DataSaksiC' => $baseDir . '/app/Models/DataSaksiC.php',
     'App\\Models\\Databukti' => $baseDir . '/app/Models/Databukti.php',
