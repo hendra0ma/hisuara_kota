@@ -54,7 +54,13 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 <hr style="border: 1px solid">
 <div class="row mt-3">
 
-    {{-- content --}}
+    <div class="col-12">
+        <div class="card mg-b-20" style="display:{{($config->otonom == 'yes')?' none':'block'}}">
+            <div class="card-body">
+                <div class="ht-300" id="map" style="height:600px; z-index: 2"></div>
+            </div>
+        </div>
+    </div>
 
 </div>
 @endsection

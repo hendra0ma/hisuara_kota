@@ -20,7 +20,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 
 <!-- PAGE-HEADER -->
 <div class="row mt-5">
-    <div class="col-lg-4">
+    <div class="col-lg">
         <h1 class="page-title fs-1 mt-2">Koreksi C1
             <!-- Kota -->
         </h1>
@@ -30,7 +30,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
             </li>
         </ol> <!-- This Dummy Data -->
     </div>
-    <div class="col-md">
+    <div class="col-md-4">
         <div class="row mt-2">
             <div class="col parent-link">
                 <a class="btn text-white w-100 py-3 c1koreksi tablink" onclick="openPage('C1-Koreksi', this, '#6259ca')"  id="defaultOpen">C1 Koreksi (Verifikator)</a>
@@ -250,5 +250,43 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
     </div>
 </div>
 
+<div class="modal fade" id="periksaC1Verifikator" tabindex="-1" aria-labelledby="periksaC1VerifikatorLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header" style="padding-right: 3rem">
+                <h3 class="modal-title fw-bold" id="periksaC1VerifikatorLabel">VERIFIKASI DATA C1 TPS</h3>
+                <button type="button" class="btn-close btn-danger text-white mr-5" style="width: 50px"
+                    data-bs-dismiss="modal" aria-label="Close">Close</button>
+            </div>
+            <div class="modal-body">
+                <div class="row" id="container-view-modal">
+
+                </div>
+            </div>
+            {{-- <div class="modal-footer">
+            </div> --}}
+        </div>
+    </div>
+</div>
+
+<script>
+    const buttonperiksaC1 = $(".periksa-c1-plano");
+    buttonperiksaC1.on('click', function() {
+    const id = $(this).data('id');
+    $.ajax({
+    url: "{{route('auditor.getSaksiData')}}",
+    data: {
+    "_token": "{{ csrf_token() }}",
+    id
+    },
+    type: "post",
+    dataType: "html",
+    success: function(data) {
+    $('#container-view-modal').html(data)
+    }
+    });
+    })
+</script>
 
 @endsection

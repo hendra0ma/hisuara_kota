@@ -425,6 +425,9 @@ $track = Tracking::where('id_user',$user['id'])->first();
             @if ($saksi['kecurangan'] == "yes")
 
             <div class="row mt-5">
+                <div class="col-12 text-center mb-3">
+                    <img src="{{asset('')}}images/logo/timbangan.png" style="width: 200px" alt="">
+                </div>
                 <div class="col-12 bg-danger text-white py-3 text-center mb-3">
                     <h4 class="fw-bold mb-0">
                         Laporan Kecurangan Saksi

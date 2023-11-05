@@ -355,6 +355,26 @@ class AdminController extends Controller
         return view('administrator.enumerator.enumerator_ditolak', $data);
     }
 
+    public function VerifikasiCrowdC1()
+    {
+        $data['config'] = Config::first();
+        $data['jumlah_saksi'] = User::where('role_id', '=', 8)->where('is_active', '=', 0)->count();
+        return view('administrator.verifikasi.crowd-c1', $data);
+    }
+
+    public function CrowdC1Terverifikasi()
+    {
+        $data['config'] = Config::first();
+        $config = Config::first();
+        $data['kota']      = Regency::where('id', $this->config->regencies_id)->first();
+        $data['jumlah_saksi_teregistrasi'] = User::where('role_id', 8)->where('is_active', '=', 1)->count();
+
+        // $data['title'] = 'Saksi Teregistrasi (' . $data['jumlah'] . ')';
+        $data['title'] = 'Saksi Teregistrasi';
+
+        return view("administrator.verifikasi.crowd-c1-terverifikasi", $data);
+    }
+
     public function verifikasi_koreksi()
     {
         $data['config'] = Config::first();

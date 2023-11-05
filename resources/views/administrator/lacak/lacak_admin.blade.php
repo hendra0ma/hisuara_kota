@@ -30,14 +30,14 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
     <div class="col-lg-9">
         <div class="row" style="flex-wrap: nowrap; width: 100%; overflow: scroll">
             @foreach ($admin as $ls)
-                <div class="col-md-auto">
-                    @if ($ls->profile_photo_path == NULL)
-                    <img class="" style="width: 125px; height: 125px; object-fit: cover"
-                        src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF" alt="img">
-                    @else
-                    <img class="" style="width: 125px; height: 125px; object-fit: cover" src="{{url("/storage/profile-photos/".$ls->profile_photo_path) }}">
-                    @endif
-                </div>
+            <div class="col-md-auto">
+                @if ($ls->profile_photo_path == NULL)
+                <img class="" style="width: 125px; height: 125px; object-fit: cover"
+                    src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF" alt="img">
+                @else
+                <img class="" style="width: 125px; height: 125px; object-fit: cover" src="{{url("/storage/profile-photos/".$ls->profile_photo_path) }}">
+                @endif
+            </div>
             @endforeach
         </div>
     </div>
@@ -54,7 +54,13 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 <hr style="border: 1px solid">
 <div class="row mt-3">
 
-    {{-- content --}}
+    <div class="col-12">
+        <div class="card mg-b-20" style="display:{{($config->otonom == 'yes')?' none':'block'}}">
+            <div class="card-body">
+                <div class="ht-300" id="map" style="height:600px; z-index: 2"></div>
+            </div>
+        </div>
+    </div>
 
 </div>
 @endsection
