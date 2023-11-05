@@ -1305,6 +1305,7 @@ class AdminController extends Controller
         $data['foto_kecurangan'] = Buktifoto::where('tps_id', Crypt::decrypt($request['id']))->get();
         $data['vidio_kecurangan'] = Buktividio::where('tps_id', Crypt::decrypt($request['id']))->first();
         $data['surat_pernyataan'] = SuratPernyataan::where('saksi_id', $data['saksi']['id'])->first();
+        $data['absensi'] = Absensi::where('user_id', $data['saksi']['id'])->first();
 
         $status =  Qrcode::where('tps_id', Crypt::decrypt($request['id']))->update([
             'print' => 1

@@ -380,47 +380,9 @@ $track = Tracking::where('id_user',$user['id'])->first();
         </div>
 
         @if($url == 'hadir')
-        <div class="col-12">
-            <b>Progres Kinerja Saksi</b>
-        </div>
+
 
         <div class="col-12">
-            <div class="row">
-                <div class="col-12">
-                    <hr>
-                    <div class="row">
-                        <div class="col"> <strong>Saksi Mengirim Data TPS:</strong> <br>{{$saksi['created_at']}}</div>
-                        <div class="col"> <strong>Status:</strong> <br> @if ($saksi['verification'] == 1)
-                            Selesai
-                            @else
-                            Proses
-                            @endif
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="step active success"> <span class="icon"> <i class="fa fa-user"></i> </span> <span
-                                class="text">Saksi Mendaftar/Register</span> </div>
-                        @if ($tps['setup'] == "terisi")
-                        <div class="step active  success"> <span class="icon"> <i class="fa fa-send"></i> </span> <span
-                                class="text">Saksi Mengirimkan C1</span> </div>
-                        @if ($saksi['verification'] != NULL)
-                        <div class="step active success"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
-                                class="text">Terverifikasi</span> </div>
-                        @else
-                        <div class="step success"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
-                                class="text">Terverifikasi</span> </div>
-                        @endif
-                        @else
-                        <div class="step  success"> <span class="icon"> <i class="fa fa-send"></i> </span> <span
-                                class="text">Saksi Mengirimkan C1</span> </div>
-                        <div class="step success"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
-                                class="text">Selesai</span> </div>
-                        @endif
-                    </div>
-                    <hr>
-
-                </div>
-            </div>
             @if ($saksi != NULL)
             @if ($saksi['kecurangan'] == "yes")
 
@@ -506,83 +468,83 @@ $track = Tracking::where('id_user',$user['id'])->first();
                 <div class="col-12 px-0">
                     <div class="row">
                         <div class="col-12">
-                                <div class="card-body p-0" style="border: 1px #eee solid !important">
-                                    <table class="table table-bordered mb-0">
-                                        <tr>
-                                            <td class="fw-bold">Foto</td>
-                                            <td class="fw-bold">Metadata</td>
-                                        </tr>
-                                        @foreach ($bukti_foto as $bf)
-                                        <tr>
-                                            <td class="text-center" style="width: 50%">
-                                                <img class="image" style="height: 350px; object-fit: cover" src="{{asset('storage/' . $bf->url)}}"
-                                                    data-url="{{asset('storage/' . $bf->url)}}" alt="">
-                                            </td>
-                                            <td class="exifResultsPhoto" style="width: 50%">
+                            <div class="card-body p-0" style="border: 1px #eee solid !important">
+                                <table class="table table-bordered mb-0">
+                                    <tr>
+                                        <td class="fw-bold">Foto</td>
+                                        <td class="fw-bold">Metadata</td>
+                                    </tr>
+                                    @foreach ($bukti_foto as $bf)
+                                    <tr>
+                                        <td class="text-center" style="width: 50%">
+                                            <img class="image" style="height: 350px; object-fit: cover"
+                                                src="{{asset('storage/' . $bf->url)}}"
+                                                data-url="{{asset('storage/' . $bf->url)}}" alt="">
+                                        </td>
+                                        <td class="exifResultsPhoto" style="width: 50%">
 
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </table>
-                                    <script>
-                                        $(document).ready(function () {
-                                            setTimeout(()=>{
-                                                $(".image").each(function (index) {
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </table>
+                                <script>
+                                    $(document).ready(function () {
+                                        setTimeout(()=>{
+                                            $(".image").each(function (index) {
+                                                
+                                                var currentImage = this;
+                                                EXIF.getData(currentImage, function () {
+                                                    var exifData = EXIF.getAllTags(this);
+                                                    var locationInfo = "Image " + (index + 1) + " EXIF Data:<br>";
                                                     
-                                                    var currentImage = this;
-                                                    EXIF.getData(currentImage, function () {
-                                                        var exifData = EXIF.getAllTags(this);
-                                                        var locationInfo = "Image " + (index + 1) + " EXIF Data:<br>";
-                                                        
-                                                        if (exifData && (exifData.DateTimeOriginal || (exifData.GPSLatitude && exifData.GPSLongitude))) {
-                                                            if (exifData.DateTimeOriginal) {
-                                                            locationInfo += "Date taken: " + exifData.DateTimeOriginal + "<br>";
-                                                            }
-                                                            if (exifData.GPSLatitude && exifData.GPSLongitude) {
-                                                                var latitude = exifData.GPSLatitude[0] + exifData.GPSLatitude[1] / 60 + exifData.GPSLatitude[2] / 3600;
-                                                                var longitude = exifData.GPSLongitude[0] + exifData.GPSLongitude[1] / 60 + exifData.GPSLongitude[2] / 3600;
-                                                                locationInfo += "Location: Latitude " + latitude + ", Longitude " + longitude + "<br>";
-                                                            }
-                                                            if (exifData.Make) {
-                                                                locationInfo += "Camera Make: " + exifData.Make + "<br>";
-                                                            }
-                                                            if (exifData.Model) {
-                                                                locationInfo += "Camera Model: " + exifData.Model + "<br>";
-                                                            }
-                                                            if (exifData.ApertureValue) {
-                                                                locationInfo += "Aperture: f/" + exifData.ApertureValue + "<br>";
-                                                            }
-                                                            if (exifData.ExposureTime) {
-                                                                locationInfo += "Exposure Time: " + exifData.ExposureTime + " sec<br>";
-                                                            }
-                                                            if (exifData.ISO) {
-                                                                locationInfo += "ISO: " + exifData.ISO + "<br>";
-                                                            }
-                                                            if (exifData.FocalLength) {
-                                                                locationInfo += "Focal Length: " + exifData.FocalLength + "mm<br>";
-                                                            }
-                                                            if (exifData.Flash) {
-                                                                locationInfo += "Flash: " + exifData.Flash + "<br>";
-                                                            }
-                                                            if (exifData.ImageWidth && exifData.ImageHeight) {
-                                                                locationInfo += "Image Resolution: " + exifData.ImageWidth + "x" + exifData.ImageHeight + "<br>";
-                                                            }
-                                                            // Include more EXIF tags as needed
-                                                        } else {
-                                                            locationInfo += "EXIF data not found";
+                                                    if (exifData && (exifData.DateTimeOriginal || (exifData.GPSLatitude && exifData.GPSLongitude))) {
+                                                        if (exifData.DateTimeOriginal) {
+                                                        locationInfo += "Date taken: " + exifData.DateTimeOriginal + "<br>";
                                                         }
-                                                        
-                                                        // Display the information in the console to ensure it's being correctly constructed
-                                                        console.log(locationInfo);
-                                                        
-                                                        // Find the corresponding .exifResults element related to the current image and update its content
-                                                        $(currentImage).closest('tr').find('.exifResultsPhoto').html(locationInfo);
-                                                    });
+                                                        if (exifData.GPSLatitude && exifData.GPSLongitude) {
+                                                            var latitude = exifData.GPSLatitude[0] + exifData.GPSLatitude[1] / 60 + exifData.GPSLatitude[2] / 3600;
+                                                            var longitude = exifData.GPSLongitude[0] + exifData.GPSLongitude[1] / 60 + exifData.GPSLongitude[2] / 3600;
+                                                            locationInfo += "Location: Latitude " + latitude + ", Longitude " + longitude + "<br>";
+                                                        }
+                                                        if (exifData.Make) {
+                                                            locationInfo += "Camera Make: " + exifData.Make + "<br>";
+                                                        }
+                                                        if (exifData.Model) {
+                                                            locationInfo += "Camera Model: " + exifData.Model + "<br>";
+                                                        }
+                                                        if (exifData.ApertureValue) {
+                                                            locationInfo += "Aperture: f/" + exifData.ApertureValue + "<br>";
+                                                        }
+                                                        if (exifData.ExposureTime) {
+                                                            locationInfo += "Exposure Time: " + exifData.ExposureTime + " sec<br>";
+                                                        }
+                                                        if (exifData.ISO) {
+                                                            locationInfo += "ISO: " + exifData.ISO + "<br>";
+                                                        }
+                                                        if (exifData.FocalLength) {
+                                                            locationInfo += "Focal Length: " + exifData.FocalLength + "mm<br>";
+                                                        }
+                                                        if (exifData.Flash) {
+                                                            locationInfo += "Flash: " + exifData.Flash + "<br>";
+                                                        }
+                                                        if (exifData.ImageWidth && exifData.ImageHeight) {
+                                                            locationInfo += "Image Resolution: " + exifData.ImageWidth + "x" + exifData.ImageHeight + "<br>";
+                                                        }
+                                                        // Include more EXIF tags as needed
+                                                    } else {
+                                                        locationInfo += "EXIF data not found";
+                                                    }
+                                                    
+                                                    // Display the information in the console to ensure it's being correctly constructed
+                                                    console.log(locationInfo);
+                                                    
+                                                    // Find the corresponding .exifResults element related to the current image and update its content
+                                                    $(currentImage).closest('tr').find('.exifResultsPhoto').html(locationInfo);
                                                 });
-                                            },100)
-                                        });
-                                    </script>
-                                </div>
+                                            });
+                                        },100)
+                                    });
+                                </script>
                             </div>
                         </div>
                         <div class="col-12 px-0 mt-3">
@@ -771,11 +733,58 @@ $track = Tracking::where('id_user',$user['id'])->first();
                             <div class="card">
                                 <div class="card-header"
                                     style="border: 1px #eee solid !important; background-color: #eee">
-                                    <h3 class="card-title">7. Data C1</h3>
+                                    <h3 class="card-title">7. Lampiran C1</h3>
                                 </div>
                                 <div class="card-body" style="border: 1px #eee solid !important">
                                     <img alt="" class="d-block w-100" src="{{url('')}}/storage/{{ $saksi->c1_images }}"
                                         data-bs-holder-rendered="true">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 px-0">
+                            <div class="card">
+                                <div class="card-header" style="background-color: #eee">
+                                    <h4 class="mb-0 mx-auto text-black card-title">Surat Suara TPS</h4>
+                                </div>
+                                <div class="card-body p-0">
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <td style="width: 33.3333333%">Total Surat Suara</td>
+                                            <td style="width: 33.3333333%">:</td>
+                                            <td style="width: 33.3333333%">(dummy)</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 33.3333333%">Jumlah Pemilih</td>
+                                            <td style="width: 33.3333333%">:</td>
+                                            <td style="width: 33.3333333%">(dummy)</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 33.3333333%">Jumlah Hak Pilih</td>
+                                            <td style="width: 33.3333333%">:</td>
+                                            <td style="width: 33.3333333%">(dummy)</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 33.3333333%">Surat Suara Sah</td>
+                                            <td style="width: 33.3333333%">:</td>
+                                            <td style="width: 33.3333333%">(dummy)</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 33.3333333%">Suara Tidak Sah</td>
+                                            <td style="width: 33.3333333%">:</td>
+                                            <td style="width: 33.3333333%">(dummy)</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 33.3333333%">Total Suara</td>
+                                            <td style="width: 33.3333333%">:</td>
+                                            <td style="width: 33.3333333%">(dummy)</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 33.3333333%">Sisa Surat Suara</td>
+                                            <td style="width: 33.3333333%">:</td>
+                                            <td style="width: 33.3333333%">(dummy)</td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -812,7 +821,117 @@ $track = Tracking::where('id_user',$user['id'])->first();
                 </div>
             </div>
             @else
+            <div class="row">
+                <div class="col-12 bg-success text-white py-3 text-center mb-3">
+                    <h4 class="fw-bold mb-0">
+                        Laporan Kecurangan Saksi
+                    </h4>
+                </div>
 
+                <div class="col-12 px-0">
+                    <div class="card">
+                        <div class="card-header" style="border: 1px #eee solid !important; background-color: #eee">
+                            <h3 class="card-title">Lampiran C1</h3>
+                        </div>
+                        <div class="card-body" style="border: 1px #eee solid !important">
+                            <img alt="" class="d-block w-100" src="{{url('')}}/storage/{{ $saksi->c1_images }}"
+                                data-bs-holder-rendered="true">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 px-0">
+                    <div class="card">
+                        <div class="card-header" style="background-color: #eee">
+                            <h4 class="mb-0 mx-auto text-black card-title">Surat Suara TPS</h4>
+                        </div>
+                        <div class="card-body p-0">
+                            <table class="table table-striped">
+                                <tr>
+                                    <td style="width: 33.3333333%">Total Surat Suara</td>
+                                    <td style="width: 33.3333333%">:</td>
+                                    <td style="width: 33.3333333%">(dummy)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.3333333%">Jumlah Pemilih</td>
+                                    <td style="width: 33.3333333%">:</td>
+                                    <td style="width: 33.3333333%">(dummy)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.3333333%">Jumlah Hak Pilih</td>
+                                    <td style="width: 33.3333333%">:</td>
+                                    <td style="width: 33.3333333%">(dummy)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.3333333%">Surat Suara Sah</td>
+                                    <td style="width: 33.3333333%">:</td>
+                                    <td style="width: 33.3333333%">(dummy)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.3333333%">Suara Tidak Sah</td>
+                                    <td style="width: 33.3333333%">:</td>
+                                    <td style="width: 33.3333333%">(dummy)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.3333333%">Total Suara</td>
+                                    <td style="width: 33.3333333%">:</td>
+                                    <td style="width: 33.3333333%">(dummy)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.3333333%">Sisa Surat Suara</td>
+                                    <td style="width: 33.3333333%">:</td>
+                                    <td style="width: 33.3333333%">(dummy)</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 py-3 mb-3" style="background: #eee; border-bottom: #000 1px solid;">
+                    <b>Progres Kinerja Saksi</b>
+                </div>
+
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col"> <strong>Saksi Mengirim Data TPS:</strong> <br>{{$saksi['created_at']}}
+                                </div>
+                                <div class="col"> <strong>Status:</strong> <br> @if ($saksi['verification'] == 1)
+                                    Selesai
+                                    @else
+                                    Proses
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="track">
+                                <div class="step active success"> <span class="icon"> <i class="fa fa-user"></i> </span>
+                                    <span class="text">Saksi Mendaftar/Register</span>
+                                </div>
+                                @if ($tps['setup'] == "terisi")
+                                <div class="step active  success"> <span class="icon"> <i class="fa fa-send"></i>
+                                    </span> <span class="text">Saksi Mengirimkan C1</span> </div>
+                                @if ($saksi['verification'] != NULL)
+                                <div class="step active success"> <span class="icon"> <i class="fa fa-check"></i>
+                                    </span> <span class="text">Terverifikasi</span> </div>
+                                @else
+                                <div class="step success"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
+                                        class="text">Terverifikasi</span> </div>
+                                @endif
+                                @else
+                                <div class="step  success"> <span class="icon"> <i class="fa fa-send"></i> </span> <span
+                                        class="text">Saksi
+                                        Mengirimkan C1</span> </div>
+                                <div class="step success"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
+                                        class="text">Selesai</span> </div>
+                                @endif
+                            </div>
+                            <hr>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
             @endif
             @endif
 
