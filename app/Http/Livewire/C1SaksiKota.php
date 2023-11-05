@@ -30,7 +30,7 @@ class C1SaksiKota extends Component
             ->where('saksi.overlimit', 0)
             ->where('name', 'like', '%'.$this->search.'%')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
-            ->paginate(18);
+            ->paginate(16);
         // $data = Saksi::whereNull('koreksi')
         //     ->where('batalkan', '=', 0)->get();
         $data['jumlah_verifikasi_c1'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')

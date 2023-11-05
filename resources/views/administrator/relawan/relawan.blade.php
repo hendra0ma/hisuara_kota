@@ -31,7 +31,7 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 
     
 
-    <div class="col-lg-8">
+    <div class="col-lg-4">
         <div class="row mt-2">
 
             {{-- <div class="col parent-link">

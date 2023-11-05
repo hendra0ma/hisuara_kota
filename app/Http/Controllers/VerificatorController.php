@@ -291,6 +291,7 @@ class VerificatorController extends Controller
                 "regency_id" => $saksi_data[$i]->regency_id,
                 "saksi_id" => $saksi_data[$i]->saksi_id,
                 "keterangan" => $req->keterangan,
+                "province_id" => $saksi_data[$i]->province_id
            
             ]);
         }
@@ -310,7 +311,7 @@ class VerificatorController extends Controller
         ]);
         // event(new NotifEvent($pesan));
         // return redirect()->route('verifikator.village', Crypt::encrypt($saksi_data[0]->village_id));
-        return redirect()->route('administrator.verifikasi-c1');
+        return redirect()->route('verifikator.verifikasiC1');
     }
     public function getRelawanData(Request $req)
     {

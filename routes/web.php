@@ -329,6 +329,8 @@ foreach ($kotas as $kota) {
                     Route::get('enumerator_hadir', 'EnumeratorHadir');
                     Route::get('enumerator_tidak_hadir', 'EnumeratorTidakHadir');
                     Route::get('enumerator_ditolak', 'EnumeratorDitolak');
+                    Route::get('verifikasi_crowd_c1', 'VerifikasiCrowdC1');
+                    Route::get('crowd_c1_terverifikasi', 'CrowdC1Terverifikasi');
                     Route::get('pembayaran_saksi', 'pembayaran_saksi');
                     Route::get('verifikasi_koreksi', 'verifikasi_koreksi');
                     Route::get('kick/{id}', 'kick');

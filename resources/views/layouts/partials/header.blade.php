@@ -522,7 +522,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="#"
+                                                <a href="{{url('')}}/administrator/verifikasi_crowd_c1"
                                                     class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                                     Crowd C1
@@ -1242,6 +1242,9 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                     <i class="dropdown-icon fe fe-user"></i> Upload C1
                                                 </a>
                                                 <a class="dropdown-item" href="{{url('')}}/upload_c1">
+                                                    <i class="dropdown-icon fe fe-user"></i> Upload Crowd C1
+                                                </a>
+                                                <a class="dropdown-item" href="#">
                                                     <i class="dropdown-icon fe fe-user"></i> Upload C1 Enumerator
                                                 </a>
                                                 <a class="dropdown-item" href="{{url('')}}/c1-relawan">

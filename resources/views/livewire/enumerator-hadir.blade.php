@@ -97,7 +97,7 @@
                         <div class="row mt-2">
                             <div class="col-12 px-0">
                                 <a class="btn btn-primary rounded-0 w-100 cekmodal" id="Cek" data-id="{{$ls['id']}}"
-                                    data-bs-toggle="modal" id="" data-bs-target="#cekmodal" onclick="cekModal(this,{{$ls['id']}})">Detail Data Saksi</a>
+                                    data-bs-toggle="modal" id="" data-bs-target="#cekmodal" onclick="cekModal(this,{{$ls['id']}})">Detail Data Enumerator</a>
                             </div>
                         </div>
                     </div>
