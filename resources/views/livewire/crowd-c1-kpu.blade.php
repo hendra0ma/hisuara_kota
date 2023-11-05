@@ -12,7 +12,7 @@
     </style>
     @foreach($all_c1 as $c1)
 
-    <img class="dalem-flex" src="{{asset('')}}storage/{{$c1->c1_images}}" alt="">
+    <img class="dalem-flex" src="{{asset('')}}storage/{{$c1->crowd_c1}}" alt="">
 
     @endforeach
     <div class="my-3">

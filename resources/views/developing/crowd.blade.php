@@ -49,6 +49,48 @@
     <!-- COLOR SKIN CSS -->
 
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{url('/')}}/assets/colors/color1.css" />
+    <style>
+        .picture___input {
+            display: none;
+        }
+
+        .picture {
+            width: 300px;
+            aspect-ratio: 16/9;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            border: 2px dashed currentcolor;
+            cursor: pointer;
+            font-family: sans-serif;
+            transition: color 300ms ease-in-out, background 300ms ease-in-out;
+            outline: none;
+            overflow: hidden;
+        }
+
+        .picture:hover {
+            color: #777;
+            background: #ccc;
+        }
+
+        .picture:active {
+            border-color: turquoise;
+            color: turquoise;
+            background: #eee;
+        }
+
+        .picture:focus {
+            color: #777;
+            background: #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .picture__img {
+            max-width: 100%;
+        }
+    </style>
 
 </head>
 
@@ -121,18 +163,26 @@
                         <div class="container-fluid">
                             <div class="row justify-content-center">
                                 <div class="col-lg-5">
-                                
+
                                     <h4 class="mt-3 header-title">Foto C1</h4>
                                     <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
-                                        <input type="file" class="dropify" data-height="300" name="c1_images" />
+                                    <div class="wrap-input100 validate-input" data-bs-validate="Password is required">
+                                        <label class="form-label mt-3">Upload Foto Profile</label>
+                                        <label class="picture" for="picture__input2" tabIndex="0">
+                                            <span class="picture__image2"></span>
+                                        </label>
+
+                                        <input type="file" name="c1_images" id="picture__input2" class="picture___input">
+                                    </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary" type="submit">Kirim C1</button>
                     </div>
                 </form>
             </div>
@@ -175,12 +225,35 @@
 
 
     <script>
-        $('.dropify').dropify({
-            messages: {
-                'default': 'Drag and drop a file here or click',
-                'replace': 'Drag and drop or click to replace',
-                'remove': 'Remove',
-                'error': 'Ooops, something wrong happended.'
+        
+        const inputFile2 = document.querySelector("#picture__input2");
+        
+        const pictureImage2 = document.querySelector(".picture__image2");
+        // const pictureImageTxt = "Choose an image";
+        
+        pictureImage2.innerHTML = "Pilih Foto C1";
+
+        inputFile2.addEventListener("change", function(e) {
+            const inputTarget = e.target;
+            const file = inputTarget.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.addEventListener("load", function(e) {
+                    const readerTarget = e.target;
+
+                    const img = document.createElement("img");
+                    img.src = readerTarget.result;
+                    img.classList.add("picture__img");
+
+                    pictureImage2.innerHTML = "";
+                    pictureImage2.appendChild(img);
+                });
+
+                reader.readAsDataURL(file);
+            } else {
+                pictureImage2.innerHTML = "Pilih Foto Profile";
             }
         });
     </script>

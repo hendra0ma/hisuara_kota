@@ -39,7 +39,7 @@ class DevelopingController extends Controller
     }
     
     function c1Crowd() {
-        return view('developing.index');
+        return view('developing.crowd');
     }
 
 
@@ -52,7 +52,7 @@ class DevelopingController extends Controller
             $image = $request->file('c1_images');
             $randomString = substr(str_shuffle($characters), 0, 13); // Menghasilkan string acak sepanjang 10 karakter
             $c1_images = time() . $randomString  .".".  $image->getClientOriginalExtension();
-            $image->move(public_path('storage/profile-photos'), $c1_images);
+            $image->move(public_path('storage/c1_plano'), $c1_images);
         } else {
             return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
         }
@@ -61,6 +61,9 @@ class DevelopingController extends Controller
                 'status'=>'0',
                 'user_id'=>Auth::user()->id,
                 'regency_id'=>Auth::user()->regency_id,
+                'district_id'=>Auth::user()->districts,
+                'village_id'=>Auth::user()->villages,
+                'tps_id'=>Auth::user()->tps_id,
             ]);
         return redirect()->back()->with('success','berhasil mengupload C1 Crowd');
     }

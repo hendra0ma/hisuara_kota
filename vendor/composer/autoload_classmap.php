@@ -85,6 +85,7 @@ return array(
     'App\\Http\\Livewire\\DataKecuranganDitolak' => $baseDir . '/app/Http/Livewire/DataKecuranganDitolak.php',
     'App\\Http\\Livewire\\DataKecuranganMasuk' => $baseDir . '/app/Http/Livewire/DataKecuranganMasuk.php',
     'App\\Http\\Livewire\\DataKecuranganTerverifikasi' => $baseDir . '/app/Http/Livewire/DataKecuranganTerverifikasi.php',
+    'App\\Http\\Livewire\\DptPemilihComponent' => $baseDir . '/app/Http/Livewire/DptPemilihComponent.php',
     'App\\Http\\Livewire\\Enumerator' => $baseDir . '/app/Http/Livewire/Enumerator.php',
     'App\\Http\\Livewire\\EnumeratorDitolak' => $baseDir . '/app/Http/Livewire/EnumeratorDitolak.php',
     'App\\Http\\Livewire\\EnumeratorHadir' => $baseDir . '/app/Http/Livewire/EnumeratorHadir.php',

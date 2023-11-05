@@ -10,6 +10,8 @@ use App\Models\TPS;
 
 use App\Models\Regency;
 use App\Models\Config;
+use App\Models\RegenciesDomain;
+use Illuminate\Support\Facades\Crypt;
 
 $data['config'] = Config::first();
 $config = Config::first();
@@ -59,6 +61,10 @@ $kota = Regency::where('id', $config['regencies_id'])->first();
 </div>
 
 <hr style="border: 1px solid">
+
+
+<!-- :wilayah_id="$id_wilayah" :tipe_wilayah="$tipe_wilayah" -->
+
 
 <livewire:crowd-c1-kpu />
 

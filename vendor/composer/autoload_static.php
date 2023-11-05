@@ -774,6 +774,7 @@ class ComposerStaticInite136a52bc2170717c48359cf1e4a8751
         'App\\Http\\Livewire\\DataKecuranganDitolak' => __DIR__ . '/../..' . '/app/Http/Livewire/DataKecuranganDitolak.php',
         'App\\Http\\Livewire\\DataKecuranganMasuk' => __DIR__ . '/../..' . '/app/Http/Livewire/DataKecuranganMasuk.php',
         'App\\Http\\Livewire\\DataKecuranganTerverifikasi' => __DIR__ . '/../..' . '/app/Http/Livewire/DataKecuranganTerverifikasi.php',
+        'App\\Http\\Livewire\\DptPemilihComponent' => __DIR__ . '/../..' . '/app/Http/Livewire/DptPemilihComponent.php',
         'App\\Http\\Livewire\\Enumerator' => __DIR__ . '/../..' . '/app/Http/Livewire/Enumerator.php',
         'App\\Http\\Livewire\\EnumeratorDitolak' => __DIR__ . '/../..' . '/app/Http/Livewire/EnumeratorDitolak.php',
         'App\\Http\\Livewire\\EnumeratorHadir' => __DIR__ . '/../..' . '/app/Http/Livewire/EnumeratorHadir.php',
