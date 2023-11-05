@@ -561,7 +561,7 @@
                 </div>
                 <div class="col-6">
                     <ul>
-                        <li><img src="{{asset('')}}images/logo/hisuara_new_white.png" class="mb-5" alt=""></li>
+                        <li><img src="{{asset('')}}images/logo/Hisuara_new_white.png" class="mb-5" alt=""></li>
                         <li class="text-danger fs-4">SECURITY SYSTEM</li>
                         <li>Admin Code Authentication</li>
                         <li>Malware Removal & Hack Repair</li>
