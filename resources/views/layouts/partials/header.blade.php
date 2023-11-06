@@ -1241,7 +1241,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 <a class="dropdown-item" href="{{url('')}}/saksi-dashboard">
                                                     <i class="dropdown-icon fe fe-user"></i> Upload C1
                                                 </a>
-                                                <a class="dropdown-item" href="{{url('')}}/upload_c1">
+                                                <a class="dropdown-item" href="{{route('crowd_c1')}}">
                                                     <i class="dropdown-icon fe fe-user"></i> Upload Crowd C1
                                                 </a>
                                                 <a class="dropdown-item" href="#">
