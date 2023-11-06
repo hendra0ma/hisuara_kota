@@ -1,8 +1,7 @@
 <?php
-    
+
 use App\Models\Config;
 use App\Models\District;
-use App\Models\RegenciesDomain;
 use App\Models\Regency;
 use App\Models\SaksiData;
 use App\Models\Tps;
@@ -10,11 +9,46 @@ use App\Models\Village;
 use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
-    
+
 $config = Config::all()->first();
-$regency = District::where('regency_id', $config['regencies_id'])->get();
-$kota = Regency::where('id', $config['regencies_id'])->first();
-$dpt = District::where('regency_id', $config['regencies_id'])->sum('dpt');
+
+use App\Models\Configs;
+use App\Models\RegenciesDomain;
+
+$configs = Config::all()->first();
+$currentDomain = request()->getHttpHost();
+if (isset(parse_url($currentDomain)['port'])) {
+    $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
+} else {
+    $url = $currentDomain;
+}
+$regency_id = RegenciesDomain::where('domain', "LIKE", "%" . $url . "%")->first();
+
+$config = new Configs;
+$config->regencies_id =  (string) $regency_id->regency_id;
+$config->provinces_id =  $configs->provinces_id;
+$config->setup =  $configs->setup;
+$config->darkmode =  $configs->darkmode;
+$config->updated_at =  $configs->updated_at;
+$config->created_at =  $configs->created_at;
+$config->partai_logo =  $configs->partai_logo;
+$config->date_overlimit =  $configs->date_overlimit;
+$config->show_public =  $configs->show_public;
+$config->show_terverifikasi =  $configs->show_terverifikasi;
+$config->lockdown =  $configs->lockdown;
+$config->multi_admin =  $configs->multi_admin;
+$config->otonom =  $configs->otonom;
+$config->dark_mode =  $configs->dark_mode;
+$config->jumlah_multi_admin =  $configs->jumlah_multi_admin;
+$config->jenis_pemilu =  $configs->jenis_pemilu;
+$config->tahun =  $configs->tahun;
+$config->quick_count =  $configs->quick_count;
+$config->default =  $configs->default;
+
+
+$regency = District::where('regency_id', $config->regencies_id)->get();
+$kota = Regency::where('id', $config->regencies_id)->first();
+$dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
 $tps = Tps::count();
 ?>
 
@@ -23,11 +57,53 @@ $tps = Tps::count();
 @section('content')
 
 <div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
+
+    <div class="col-lg-12">
+        <style>
+            ul.breadcrumb {
+                padding: 10px 16px;
+                list-style: none;
+                background-color: #0d6efd !important;
+            }
+
+            ul.breadcrumb li {
+                display: inline;
+                font-size: 18px;
+            }
+
+            ul.breadcrumb li+li:before {
+                padding: 8px;
+                color: white;
+                content: "/\00a0";
+            }
+
+            ul.breadcrumb li a {
+
+                text-decoration: none;
+            }
+
+            ul.breadcrumb li a:hover {
+                color: #01447e;
+                text-decoration: underline;
+            }
+        </style>
+
+        <ul class="breadcrumb">
+            <?php
+            $regency = Regency::where('id', $config->regencies_id)->select('name')->first();
+            $kcamatan = District::where('id', $id_kecamatan)->select('name')->first();
+            ?>
+            <li><a href="{{url('')}}/administrator/index" class="text-white">{{$regency->name}}</a></li>
+            <li><a href="{{url('')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($id_kecamatan)}}" class="text-white">{{$kcamatan->name}}</a></li>
+
+        </ul>
+    </div>
+
+
     <div class="col-lg-6" style="{{($config->quick_count == 'yes')?'':'display:none'}}">
         <div class="card" style="margin-bottom: 1rem">
             <div class="card-body" style="position: relative">
-                <img src="{{asset('')}}assets/icons/hisuara_new.png"
-                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
                     <div class="col-12">
                         <div class="container">
@@ -47,8 +123,7 @@ $tps = Tps::count();
                                     <div class="card-body p-3">
                                         <div class="row">
                                             <div class="col-12">
-                                                <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
-                                                    style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white " style="margin-bottom: 0; background-color: {{$pas->color}};">
                                                     {{$i++}}
                                                 </div>
                                             </div>
@@ -88,15 +163,14 @@ $tps = Tps::count();
 
                         @foreach($district as $dist)
                         <tr>
-                            <td><a
-                                    href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($dist['id'])}}">{{$dist->name}}</a>
+                            <td><a href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($dist['id'])}}">{{$dist->name}}</a>
                             </td>
                             <?php
-                                                            $voices = App\Models\Paslon::with(['saksi_data' => function ($query) use ($dist) {
-                                                                $query
-                                                                    ->where('saksi_data.village_id', (string)$dist->id);
-                                                            }])->get();
-                                                            ?>
+                            $voices = App\Models\Paslon::with(['saksi_data' => function ($query) use ($dist) {
+                                $query
+                                    ->where('saksi_data.village_id', (string)$dist->id);
+                            }])->get();
+                            ?>
                             @foreach($voices as $voc)
                             <?php $total_voices = 0;  ?>
                             @foreach($voc->saksi_data as $saksi)
@@ -121,8 +195,7 @@ $tps = Tps::count();
                 <h3 class="card-title text-white">Suara TPS Masuk</h3>
             </div> --}}
             <div class="card-body" style="position: relative;">
-                <img src="{{asset('')}}assets/icons/hisuara_new.png"
-                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
                     <div class="col-12">
                         <div class="container">
@@ -142,8 +215,7 @@ $tps = Tps::count();
                                     <div class="card-body p-3">
                                         <div class="row">
                                             <div class="col-12">
-                                                <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
-                                                    style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white " style="margin-bottom: 0; background-color: {{$pas->color}};">
                                                     {{$i++}}
                                                 </div>
                                             </div>
@@ -184,15 +256,14 @@ $tps = Tps::count();
 
                         @foreach($district as $dist)
                         <tr>
-                            <td><a
-                                    href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($dist['id'])}}">{{$dist->name}}</a>
+                            <td><a href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($dist['id'])}}">{{$dist->name}}</a>
                             </td>
                             <?php
-                                            $voices = App\Models\Paslon::with(['saksi_data' => function ($query) use ($dist) {
-                                                $query
-                                                    ->where('saksi_data.village_id', (string)$dist->id);
-                                            }])->get();
-                                            ?>
+                            $voices = App\Models\Paslon::with(['saksi_data' => function ($query) use ($dist) {
+                                $query
+                                    ->where('saksi_data.village_id', (string)$dist->id);
+                            }])->get();
+                            ?>
                             @foreach($voices as $voc)
                             <?php $total_voices = 0;  ?>
                             @foreach($voc->saksi_data as $saksi)
@@ -219,8 +290,7 @@ $tps = Tps::count();
                 <h3 class="card-title text-white">Suara TPS Terverifikasi</h3>
             </div> --}}
             <div class="card-body" style="position: relative">
-                <img src="{{asset('')}}assets/icons/hisuara_new.png"
-                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
                     <div class="col-6">
                         <div class="row">
@@ -229,9 +299,9 @@ $tps = Tps::count();
                                     <div class="text-center fs-3 mb-3 fw-bold">SUARA TERVERIFIKASI</div>
                                     <div class="text-center">Terverifikasi {{$saksi_terverifikasi}} TPS dari
                                         {{$saksi_masuk}}
-                                        TPS Masuk</div>
-                                    <div class="text-center mt-2 mb-2"><span
-                                            class="badge bg-success">{{$total_verification_voice}} / {{$dpt}}</span>
+                                        TPS Masuk
+                                    </div>
+                                    <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_verification_voice}} / {{$dpt}}</span>
                                     </div>
                                     <div id="chart-donut" class="chartsh h-100 w-100"></div>
                                 </div>
@@ -245,8 +315,7 @@ $tps = Tps::count();
                                             <div class="card-body p-3">
                                                 <div class="row me-auto">
                                                     <div class="col-12">
-                                                        <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white ms-auto"
-                                                            style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                        <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white ms-auto" style="margin-bottom: 0; background-color: {{$pas->color}};">
                                                             {{$i++}}
                                                         </div>
                                                     </div>
@@ -292,13 +361,13 @@ $tps = Tps::count();
                                 <tr>
                                     <td>{{$dist->name}}</td>
                                     <?php
-                                                    $voices = App\Models\Paslon::with(['saksi_data' => function ($query) use ($dist) {
-                                                        $query
-                                                            ->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
-                                                            ->where('saksi.verification', 1)
-                                                            ->where('saksi_data.village_id', (string)$dist->id);
-                                                    }])->get();
-                                                    ?>
+                                    $voices = App\Models\Paslon::with(['saksi_data' => function ($query) use ($dist) {
+                                        $query
+                                            ->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
+                                            ->where('saksi.verification', 1)
+                                            ->where('saksi_data.village_id', (string)$dist->id);
+                                    }])->get();
+                                    ?>
                                     @foreach($voices as $voc)
                                     <?php $total_voices = 0;  ?>
                                     @foreach($voc->saksi_data as $saksi)
@@ -326,8 +395,7 @@ $tps = Tps::count();
                 <h3 class="card-title text-white">Suara TPS Terverifikasi</h3>
             </div> --}}
             <div class="card-body" style="position: relative">
-                <img src="{{asset('')}}assets/icons/hisuara_new.png"
-                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
                     <div class="col-12">
                         <div class="row">
@@ -336,9 +404,9 @@ $tps = Tps::count();
                                     <div class="text-center fs-3 mb-3 fw-bold">SUARA TERVERIFIKASI</div>
                                     <div class="text-center">Terverifikasi {{$saksi_terverifikasi}} TPS dari
                                         {{$saksi_masuk}}
-                                        TPS Masuk</div>
-                                    <div class="text-center mt-2 mb-2"><span
-                                            class="badge bg-success">{{$total_verification_voice}} / {{$dpt}}</span>
+                                        TPS Masuk
+                                    </div>
+                                    <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_verification_voice}} / {{$dpt}}</span>
                                     </div>
                                     <div id="chart-donut" class="chartsh h-100 w-100"></div>
                                 </div>
@@ -352,8 +420,7 @@ $tps = Tps::count();
                                             <div class="card-body p-3">
                                                 <div class="row me-auto">
                                                     <div class="col-12">
-                                                        <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white ms-auto"
-                                                            style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                        <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white ms-auto" style="margin-bottom: 0; background-color: {{$pas->color}};">
                                                             {{$i++}}
                                                         </div>
                                                     </div>
@@ -398,13 +465,13 @@ $tps = Tps::count();
                         <tr>
                             <td>{{$dist->name}}</td>
                             <?php
-                                            $voices = App\Models\Paslon::with(['saksi_data' => function ($query) use ($dist) {
-                                                $query
-                                                    ->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
-                                                    ->where('saksi.verification', 1)
-                                                    ->where('saksi_data.village_id', (string)$dist->id);
-                                            }])->get();
-                                            ?>
+                            $voices = App\Models\Paslon::with(['saksi_data' => function ($query) use ($dist) {
+                                $query
+                                    ->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
+                                    ->where('saksi.verification', 1)
+                                    ->where('saksi_data.village_id', (string)$dist->id);
+                            }])->get();
+                            ?>
                             @foreach($voices as $voc)
                             <?php $total_voices = 0;  ?>
                             @foreach($voc->saksi_data as $saksi)
@@ -427,27 +494,26 @@ $tps = Tps::count();
 
 
     <?php
-    
+
     $currentDomain = request()->getHttpHost();
     if (isset(parse_url($currentDomain)['port'])) {
         $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
-    }else{
+    } else {
         $url = $currentDomain;
     }
-    $regency_id = RegenciesDomain::where('domain',"LIKE","%".$url."%")->first();
+    $regency_id = RegenciesDomain::where('domain', "LIKE", "%" . $url . "%")->first();
 
-    if(request()->segment(1) == "administrator" && request()->segment(2) == "perhitungan_kecamatan"){
+    if (request()->segment(1) == "administrator" && request()->segment(2) == "perhitungan_kecamatan") {
         $id_wilayah = Crypt::decrypt(request()->segment(3));
         $tipe_wilayah = "kecamatan";
-    }elseif(request()->segment(1) == "administrator" && request()->segment(2) == "index"){
+    } elseif (request()->segment(1) == "administrator" && request()->segment(2) == "index") {
         $id_wilayah = $regency_id->regency_id;
         $tipe_wilayah = "kota";
-        
-    }else{
+    } else {
         $id_wilayah = Crypt::decrypt(request()->segment(3));
         $tipe_wilayah = "kelurahan";
     }
-    
+
     ?>
     <livewire:dpt-pemilih-component :id_wilayah="$id_wilayah" :tipe_wilayah="$tipe_wilayah" />
 
@@ -465,37 +531,36 @@ $tps = Tps::count();
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Kecamatan</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{$kecamatan['name']}}
-                <!-- Kota -->
-            </li>
-        </ol>
-        <h4 class="fs-4 mt-2 fw-bold">Multi Administator</h4>
-    </div>
+<!-- Kota -->
+</li>
+</ol>
+<h4 class="fs-4 mt-2 fw-bold">Multi Administator</h4>
+</div>
 
-    <div class="col-lg-8 justify-content-end mt-2">
-        <div class="row">
-            <div class="col"></div>
-            <div class="col-lg-9 justify-content-end">
-                <div class="card" style="margin-bottom: 0px;">
-                    <div class="card-body">
-                        <div class="row mx-auto">
-                            <div class="col-5 ">
-                                <div class="counter-icon box-shadow-secondary brround candidate-name text-white bg-danger"
-                                    style="margin-bottom: 0;">
-                                    1
-                                </div>
+<div class="col-lg-8 justify-content-end mt-2">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-lg-9 justify-content-end">
+            <div class="card" style="margin-bottom: 0px;">
+                <div class="card-body">
+                    <div class="row mx-auto">
+                        <div class="col-5 ">
+                            <div class="counter-icon box-shadow-secondary brround candidate-name text-white bg-danger" style="margin-bottom: 0;">
+                                1
                             </div>
-                            <div class="col me-auto">
-                                <h6 class="">Suara Tertinggi</h6>
-                                <h3 class="mb-2 number-font">{{$paslon_tertinggi['candidate']}} /
-                                    {{$paslon_tertinggi['deputy_candidate']}}
-                                </h3>
-                            </div>
+                        </div>
+                        <div class="col me-auto">
+                            <h6 class="">Suara Tertinggi</h6>
+                            <h3 class="mb-2 number-font">{{$paslon_tertinggi['candidate']}} /
+                                {{$paslon_tertinggi['deputy_candidate']}}
+                            </h3>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 </div>
 
@@ -514,7 +579,7 @@ $tps = Tps::count();
                         </div>
                     </div>
                     <div class="col-xxl-6">
-                    
+
                         @foreach ($paslon as $pas)
                         <div class="row mt-2">
                             <div class="col-lg col-md col-sm col-xl mb-3">
@@ -522,8 +587,7 @@ $tps = Tps::count();
                                     <div class="card-body">
                                         <div class="row me-auto">
                                             <div class="col-4">
-                                                <div class="counter-icon box-shadow-secondary brround candidate-name text-white "
-                                                    style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                <div class="counter-icon box-shadow-secondary brround candidate-name text-white " style="margin-bottom: 0; background-color: {{$pas->color}};">
                                                     {{$i++}}
                                                 </div>
                                             </div>
@@ -575,8 +639,7 @@ $tps = Tps::count();
                                     <div class="card-body">
                                         <div class="row me-auto">
                                             <div class="col-4">
-                                                <div class="counter-icon box-shadow-secondary brround candidate-name text-white ms-auto"
-                                                    style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                <div class="counter-icon box-shadow-secondary brround candidate-name text-white ms-auto" style="margin-bottom: 0; background-color: {{$pas->color}};">
                                                     {{$i++}}
                                                 </div>
                                             </div>
@@ -629,8 +692,7 @@ $tps = Tps::count();
 
                         @foreach($district as $dist)
                         <tr>
-                            <td><a
-                                    href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($dist['id'])}}">{{$dist->name}}</a>
+                            <td><a href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($dist['id'])}}">{{$dist->name}}</a>
                             </td>
                             <?php
                             $voices = App\Models\Paslon::with(['saksi_data' => function ($query) use ($dist) {

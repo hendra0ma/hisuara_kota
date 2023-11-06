@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Config;
+use App\Models\Configs;
 use App\Models\District;
 use App\Models\DptModel;
 use App\Models\Paslon;
 use App\Models\Province;
+use App\Models\RegenciesDomain;
 use App\Models\Regency;
 use App\Models\Tps;
 use App\Models\User;
@@ -17,12 +19,41 @@ use Illuminate\Support\Facades\DB;
 
 class SetupController extends Controller
 {
+    public $config;
+    public $configs;
+  
 
     public function __construct()
     {
-        $config = Config::all()->first();
+        $currentDomain = request()->getHttpHost();
+        if (isset(parse_url($currentDomain)['port'])) {
+            $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
+        }else{
+            $url = $currentDomain;
+        }
+        $regency_id = RegenciesDomain::where('domain',"LIKE","%".$url."%")->first();
 
-        if ($config['setup'] == "no") {
+        $this->configs = Config::first();
+        $this->config = new Configs;
+        $this->config->regencies_id =  (string) $regency_id->regency_id;
+        $this->config->provinces_id =  $this->configs->provinces_id;
+        $this->config->setup =  $this->configs->setup;
+        $this->config->updated_at =  $this->configs->updated_at;
+        $this->config->created_at =  $this->configs->created_at;
+        $this->config->partai_logo =  $this->configs->partai_logo;
+        $this->config->date_overlimit =  $this->configs->date_overlimit;
+        $this->config->show_public =  $this->configs->show_public;
+        $this->config->show_terverifikasi =  $this->configs->show_terverifikasi;
+        $this->config->lockdown =  $this->configs->lockdown;
+        $this->config->multi_admin =  $this->configs->multi_admin;
+        $this->config->otonom =  $this->configs->otonom;
+        $this->config->dark_mode =  $this->configs->dark_mode;
+        $this->config->jumlah_multi_admin =  $this->configs->jumlah_multi_admin;
+        $this->config->jenis_pemilu =  $this->configs->jenis_pemilu;
+        $this->config->tahun =  $this->configs->tahun;
+        $this->config->quick_count =  $this->configs->quick_count;
+        $this->config->default =  $this->configs->default;
+        if ($this->config['setup'] == "no") {
             redirect('index');
         }
     }
@@ -225,7 +256,7 @@ class SetupController extends Controller
         ini_set('max_execution_time', 0);
 		ini_set('memory_limit', '4048M');
         $config = Config::first();
-        $total_tps = Tps::join('districts','tps.district_id','=','districts.id')->where('districts.regency_id',$config->regencies_id)->get();
+        $total_tps = Tps::join('districts','tps.district_id','=','districts.id')->where('districts.regency_id',$this->config->regencies_id)->get();
         $persen = 10 / 100 * count($total_tps);
 		$sampleTps = Tps::inRandomOrder()->limit($persen)->get();
 		foreach ($sampleTps as $tps) {

@@ -14,9 +14,9 @@ use App\Models\Province;
 use App\Models\ProvinceDomain;
 
 $config = Config::all()->first();
-$regency = District::where('regency_id', $config['regencies_id'])->get();
-$kota = Regency::where('id', $config['regencies_id'])->first();
-$dpt = District::where('regency_id', $config['regencies_id'])->sum('dpt');
+$regency = District::where('regency_id', $config->regencies_id)->get();
+$kota = Regency::where('id', $config->regencies_id)->first();
+$dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
 $tps = Tps::count();
 $marquee = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->get();
 $total_tps = Tps::where('setup', 'belum terisi')->count();;

@@ -31,6 +31,7 @@ $config->provinces_id =  $configs->provinces_id;
 $config->regencies_logo =  $configs->regencies_logo;
 
 $config->setup =  $configs->setup;
+$config->darkmode =  $configs->darkmode;
 $config->updated_at =  $configs->updated_at;
 $config->created_at =  $configs->created_at;
 $config->partai_logo =  $configs->partai_logo;

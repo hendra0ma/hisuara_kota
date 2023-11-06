@@ -1,10 +1,15 @@
 <?php
 
+use App\Models\Config;
+use App\Models\Configs;
 use App\Models\District;
 use App\Models\Village;
 use App\Models\Tps;
 use App\Models\SaksiData;
 use App\Models\Paslon;
+use App\Models\RegenciesDomain;
+
+
 ?>
 
 <!doctype html>
@@ -63,6 +68,38 @@ use App\Models\Paslon;
 
 <body data-bgimg="">
     <?php
+
+    $currentDomain = request()->getHttpHost();
+    if (isset(parse_url($currentDomain)['port'])) {
+        $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
+    } else {
+        $url = $currentDomain;
+    }
+    $regency_id = RegenciesDomain::where('domain', "LIKE", "%" . $url . "%")->first();
+
+    $configs = Config::first();
+    $config = new Configs;
+    $config->regencies_id =  (string) $regency_id->regency_id;
+    $config->provinces_id =  $configs->provinces_id;
+    $config->regencies_logo =  $configs->regencies_logo;
+
+    $config->setup =  $configs->setup;
+$config->darkmode =  $configs->darkmode;
+    $config->updated_at =  $configs->updated_at;
+    $config->created_at =  $configs->created_at;
+    $config->partai_logo =  $configs->partai_logo;
+    $config->date_overlimit =  $configs->date_overlimit;
+    $config->show_public =  $configs->show_public;
+    $config->show_terverifikasi =  $configs->show_terverifikasi;
+    $config->lockdown =  $configs->lockdown;
+    $config->multi_admin =  $configs->multi_admin;
+    $config->otonom =  $configs->otonom;
+    $config->dark_mode =  $configs->dark_mode;
+    $config->jumlah_multi_admin =  $configs->jumlah_multi_admin;
+    $config->jenis_pemilu =  $configs->jenis_pemilu;
+    $config->tahun =  $configs->tahun;
+    $config->quick_count =  $configs->quick_count;
+    $config->default =  $configs->default;
     $saksidatai = SaksiData::sum("voice");
     $dpt = District::where('regency_id', $config->regencies_id)->sum("dpt");
     $data_masuk = (int)$saksidatai / (int)$dpt * 100;
@@ -78,7 +115,7 @@ use App\Models\Paslon;
     <!-- PAGE -->
     <div class="page">
         <div class="page-main">
-            
+
             <div class="text-center">
                 <h1 class="fw-bolder display-4 pt-5 mb-0">Quick Count</h1>
             </div>
@@ -90,11 +127,11 @@ use App\Models\Paslon;
                     <div class="col-2">
                         <img style="width: 75px" src="{{url('/')}}/images/logo/rekapitung_gold.png" alt="">
                     </div>
-                    
+
                     <div class="col-8">
-                        <div class="fs-4 fw-bold mx-auto text-center"> {{$config['jenis_pemilu']}}  {{$config['tahun']}} / PROVINSI {{$provinsi->name}} / {{$kota->name}}</div>
+                        <div class="fs-4 fw-bold mx-auto text-center"> {{$config['jenis_pemilu']}} {{$config['tahun']}} / PROVINSI {{$provinsi->name}} / {{$kota->name}}</div>
                     </div>
-                    
+
                     <div class="col-2">
                         <div class="dropdown d-md-flex">
                             <a class="nav-link icon ms-auto m-0">
@@ -103,10 +140,9 @@ use App\Models\Paslon;
                         </div><!-- FULL-SCREEN -->
                     </div>
                 </div>
-                    
-                <div class="progress bg-white mt-3"style="height:25px">
-                    <div class="progress-bar bg-success" role="progressbar" aria-label="Example with label"
-                        style="width:  9.3%;height:25px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">9.3%</div>
+
+                <div class="progress bg-white mt-3" style="height:25px">
+                    <div class="progress-bar bg-success" role="progressbar" aria-label="Example with label" style="width:  9.3%;height:25px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">9.3%</div>
                 </div>
 
                 <div class="row mt-3">
@@ -114,8 +150,7 @@ use App\Models\Paslon;
                     <div class="col-md">
                         <div class="card">
                             <div class="card-body">
-                                <img src="{{asset('storage/'. $ps['picture'])}}"
-                                    width="500px" height="300px" style="object-fit: cover;" alt="">
+                                <img src="{{asset('storage/'. $ps['picture'])}}" width="500px" height="300px" style="object-fit: cover;" alt="">
                                 <hr>
                                 <div class="fs-3 mt-2 fw-bold " style="color:{{$ps->color}}">{{$ps->candidate}} <br> - {{$ps->deputy_candidate}}</div>
                                 <hr>
@@ -131,14 +166,12 @@ use App\Models\Paslon;
                                         foreach ($pasln as $pas) {
                                             $jumlah += $pas->voice;
                                         }
-                                        
-                                        $jumlah1 = number_format( $jumlah , 0 , ',' , '.' );
-                        
+
+                                        $jumlah1 = number_format($jumlah, 0, ',', '.');
+
                                         $persen = substr($jumlah / $dpt * 100, 0, 3);
                                         ?>
-                                        <div class="progress-bar" style="background-color:{{$ps->color}}" role="progressbar"
-                                            aria-label="Example with label" style="width:  {{$persen}}%;" aria-valuenow="25"
-                                            aria-valuemin="0" aria-valuemax="100">{{$jumlah1}}</div>
+                                        <div class="progress-bar" style="background-color:{{$ps->color}}" role="progressbar" aria-label="Example with label" style="width:  {{$persen}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{$jumlah1}}</div>
                                         <?php
                                         $jumlah = 0;
                                         $dpt = 0;
@@ -149,17 +182,17 @@ use App\Models\Paslon;
                         </div>
                     </div>
                     @endforeach
-                    
+
                 </div>
             </div>
-           <div class="container">
+            <div class="container">
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner text-center">
                         <?php $count = 1; ?>
                         @foreach ($kecamatan as $item)
                         <div class="carousel-item <?php if ($count++ == 1) : ?><?= 'active' ?><?php endif; ?>">
                             <div class="fw-bold fs-3 mb-3">
-                               KECAMATAN {{$item['name']}}
+                                KECAMATAN {{$item['name']}}
                             </div>
 
                             <div class="row">
@@ -183,8 +216,7 @@ use App\Models\Paslon;
                                         <div class="card-body" style="padding: 10px;">
                                             <div class="row">
                                                 <div class="col">
-                                                    <img src="{{asset('storage/'. $psl['picture'])}}"
-                                                        width="125px" height="125px" style="object-fit: cover;" alt="">
+                                                    <img src="{{asset('storage/'. $psl['picture'])}}" width="125px" height="125px" style="object-fit: cover;" alt="">
                                                 </div>
                                                 <div class="col text-center my-auto fs-1 fw-bold">
                                                     {{$persen}}%
@@ -193,25 +225,23 @@ use App\Models\Paslon;
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <?php
                                 $jumlah = 0;
                                 ?>
                                 @endforeach
                                 <?php $i = 1; ?>
-                                
+
                             </div>
                         </div>
-                        
+
                         @endforeach
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                        data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                        data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
@@ -222,7 +252,7 @@ use App\Models\Paslon;
 
                 <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner" role="listbox">
-                        
+
 
                         <div class="carousel-item  <?php if ($count++ == 1) : ?><?= 'active' ?><?php endif; ?>">
                             <div style="min-width:150px; min-height:100px; max-width:200px; max-height:100px; overflow:hidden;">
@@ -274,7 +304,7 @@ use App\Models\Paslon;
                                 </div>
                             </div>
                         </div>
-                        
+
 
                     </div>
                 </div>
