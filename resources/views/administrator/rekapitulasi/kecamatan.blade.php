@@ -57,7 +57,12 @@
                         </div>
                     </div>
                     <div class="col-md">
-                        <?php $i = 1; ?>
+                        <?php
+
+use App\Models\RegenciesDomain;
+use Illuminate\Support\Facades\Crypt;
+
+ $i = 1; ?>
                         @foreach ($paslon as $pas)
                         <div class="row mt-2">
                             <div class="col-lg col-md col-sm col-xl mb-3">
@@ -306,5 +311,7 @@
         <div class="ht-300" id="map" style="height:300px"></div>
     </div>
 </div>
+
+
 
 @endsection

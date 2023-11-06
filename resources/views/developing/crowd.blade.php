@@ -15,7 +15,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{url('/')}}/assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Upload C1 Relawan</title>
+    <title>Crowd C1</title>
     <!-- FILE UPLODE CSS -->
     <link href="{{url('/')}}/assets/plugins/fileuploads/css/fileupload.css" rel="stylesheet" type="text/css" />
 
@@ -164,7 +164,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-5">
 
-                                    <h4 class="mt-3 header-title">Foto C1</h4>
+                                    <h4 class="mt-3 header-title">Foto C1 Crowd</h4>
                                     <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
                                     <div class="wrap-input100 validate-input" data-bs-validate="Password is required">
                                         <label class="form-label mt-3">Upload Foto Profile</label>
@@ -174,6 +174,44 @@
 
                                         <input type="file" name="c1_images" id="picture__input2" class="picture___input">
                                     </div>
+                                    
+                                
+                                        <div class="form-group">
+                                            <select class="form-control select2-show-search form-select" name="provinsi" id="provinsi">
+                                                <?php
+                                                $provinsi = App\Models\Province::get();
+                                                ?>
+                                                <option disabled selected>Pilih Provinsi</option>
+                                                @foreach ($provinsi as $kc)
+                                                <option value="{{ $kc->id }}">{{ $kc->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <select class="form-control select2-show-search form-select" name="kota" id="kota">
+                                                <option disabled selected>Pilih Kota</option>
+                                            </select>
+                                        </div>
+                                
+                                
+                                        <div class="form-group">
+                                            <select class="form-control select2-show-search form-select" name="kecamatan" id="kecamatan">
+                                                <option disabled selected>Pilih Kecamatan</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <select class="form-control select2-show-search form-select" name="kelurahan" id="kelurahan">
+                                                <option disabled selected>Pilih Kelurahan</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <select class="form-control select2-show-search form-select" name="tps" id="tps">
+                                                <option disabled selected>Pilih Tps</option>
+                                            </select>
+                                        </div>
+
+                                
+
 
                                     </div>
                                 </div>
@@ -226,6 +264,101 @@
 
     <script>
         
+
+        $('#provinsi').on('change', function() {
+      let idProvinsi = $(this).val();
+      // console.log(idProvinsi)
+      $.ajax({
+        url: `{{url('')}}/getKota/${idProvinsi}`,
+        method: 'get',
+     
+        success: function(response) {
+          $('#kota').html("")
+          response.forEach((item, id) => {
+            var option = $(`<option value="${item.id}">${item.name}</option>`); // Membuat elemen baru
+            $('#kota').append(option)
+          })
+          // console.log(response)
+        }
+
+      });
+    })
+    $('#kota').on('change', function() {
+      let idKota = $(this).val();
+
+      $.ajax({
+        url: `{{url('')}}/api/public/get-district`,
+        method: 'get',
+        data: {
+          id: idKota
+        },
+        dataType: "json",
+        success: function(response) {
+          $('#kecamatan').html("")
+          response.forEach((item, id) => {
+            var option = $(`<option value="${item.id}">${item.name}</option>`); // Membuat elemen baru
+            $('#kecamatan').append(option)
+          })
+        }
+
+      });
+
+    })
+
+    $('#kecamatan').on('change', function() {
+
+      let idKec = $(this).val();
+
+      $.ajax({
+        url: `{{url('')}}/api/public/get-village`,
+        method: 'get',
+        data: {
+          id: idKec
+        },
+        dataType: "json",
+        success: function(response) {
+          $('#kelurahan').html("")
+          console.log(response)
+
+          response.forEach((item, id) => {
+            var option = $(`<option value="${item.id}">${item.name}</option>`); // Membuat elemen baru
+            $('#kelurahan').append(option)
+          })
+
+          // console.log(response)
+        }
+
+      });
+    })
+    $('#kelurahan').on('change', function() {
+
+      let idKel = $(this).val();
+
+      $.ajax({
+        url: `{{url('')}}/api/public/get-tps-by-village-id`,
+        method: 'get',
+        data: {
+          village_id: idKel
+        },
+        dataType: "json",
+        success: function(response) {
+          $('#tps').html("")
+          if (response.messages != null) {
+            var option = $(`<option disabled>Data Tps Kosong</option>`); // Membuat elemen baru
+            $('#tps').append(option)
+          }
+          $('#tps').html("<option disabled selected> Pilih TPS </option>")
+          response.forEach((item, id) => {
+            var option = $(`<option value="${item.id}">${item.number}</option>`); // Membuat elemen baru
+            $('#tps').append(option)
+          })
+          // console.log(response)
+        }
+
+      });
+    })
+
+
         const inputFile2 = document.querySelector("#picture__input2");
         
         const pictureImage2 = document.querySelector(".picture__image2");

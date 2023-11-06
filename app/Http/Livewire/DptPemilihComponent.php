@@ -48,5 +48,6 @@ class DptPemilihComponent extends Component
             ->where('district_name',$kec->name)->paginate(25);
         }
         return view('livewire.dpt-pemilih-component',$data);
+        // dd($reg);
     }
 }

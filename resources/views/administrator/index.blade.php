@@ -1364,7 +1364,7 @@ s    </div>
     }
     
     ?>
-<livewire:dpt-pemilih-component :id_wilayah="$id_wilayah" :tipe_wilayah="$tipe_wilayah" />
+    <livewire:dpt-pemilih-component :id_wilayah="$id_wilayah" :tipe_wilayah="$tipe_wilayah" />
 
 
 

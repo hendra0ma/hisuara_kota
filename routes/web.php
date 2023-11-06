@@ -659,7 +659,7 @@ foreach ($kotas as $kota) {
             Route::get('dev/index', 'index');
 
             Route::get('c1Crowd/index', 'c1Crowd')->name('crowd_c1');
-            Route::post('c1Crowd/upload', 'upploadC1Crowd');
+            Route::post('c1Crowd/upload', 'uploadC1Crowd');
 
 
             Route::post('dev/action_saksi', 'action_saksi');

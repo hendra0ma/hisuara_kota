@@ -43,7 +43,16 @@ class DevelopingController extends Controller
     }
 
 
-    function upploadC1Crowd(Request $request) {
+    function uploadC1Crowd(Request $request) {
+
+        $this->validate($request,[
+            'provinsi'=>'required',
+            'kota'=>'required',
+            'kecamatan'=>'required',
+            'kelurahan'=>'required',
+            'tps'=>'required',
+        ]);
+  
         if(!$request->file('c1_images')){
             return redirect()->back()->with('error','Foto c1 Crowd wajib di isi');
         }
@@ -60,11 +69,12 @@ class DevelopingController extends Controller
                 'crowd_c1' => $c1_images,
                 'status'=>'0',
                 'user_id'=>Auth::user()->id,
-                'regency_id'=>Auth::user()->regency_id,
-                'district_id'=>Auth::user()->districts,
-                'village_id'=>Auth::user()->villages,
-                'tps_id'=>Auth::user()->tps_id,
+                'regency_id'=>$request->input('kota'),
+                'district_id'=>$request->input('kecamatan'),
+                'village_id'=>$request->input('kelurahan'),
+                'tps_id'=>$request->input('tps'),
             ]);
+            
         return redirect()->back()->with('success','berhasil mengupload C1 Crowd');
     }
 
