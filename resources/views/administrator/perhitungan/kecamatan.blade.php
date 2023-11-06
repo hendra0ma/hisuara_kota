@@ -514,12 +514,7 @@ $tps = Tps::count();
                         </div>
                     </div>
                     <div class="col-xxl-6">
-                        <?php
-
-use App\Models\RegenciesDomain;
-use Illuminate\Support\Facades\Crypt;
-
- $i = 1; ?>
+                    
                         @foreach ($paslon as $pas)
                         <div class="row mt-2">
                             <div class="col-lg col-md col-sm col-xl mb-3">
