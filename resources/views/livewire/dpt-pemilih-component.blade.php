@@ -48,9 +48,9 @@ $config->default =  $configs->default;
     
                         <img src="{{asset('')}}storage/{{$config->regencies_logo}}" style="width: 100px" class="float-end">
                     </div>
-                    <div class="col-4">
-                        <h3 class="mx-auto text-center text-uppercase">
-                            Daftar Pemilih Tetap, <br> {{$wilayah->name}} tahun 2024
+                    <div class="col-4 d-flex">
+                        <h3 class="mx-auto text-center text-uppercase fw-bold my-auto">
+                            {!!$judul!!}
                         </h3>
                     </div>
                     <div class="col-2">
@@ -58,7 +58,7 @@ $config->default =  $configs->default;
                     </div>
                 </div>
                 <div class="col-12 mb-3 px-0">
-                    <input wire:model="search" type="search" class="form-control border-1 border-dark" placeholder="Search posts by nama...">
+                    <input wire:model="search" type="search" class="form-control border-1 border-dark" placeholder="Cari nama dalam DPT 2024...">
                 </div>
 
                 <table class="table table-striped">
