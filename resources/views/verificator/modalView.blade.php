@@ -116,7 +116,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header bg-success">
-                    <h4 class="mb-0 mx-auto text-white card-title">Sisa Surat Suara</h4>
+                    <h4 class="mb-0 mx-auto text-white card-title">Surat Suara TPS</h4>
                 </div>
                 <div class="card-body p-0">
                     <table class="table table-striped">
@@ -126,7 +126,12 @@
                             <td style="width: 33.3333333%">(dummy)</td>
                         </tr>
                         <tr>
-                            <td style="width: 33.3333333%">Surat Suara Terpakai</td>
+                            <td style="width: 33.3333333%">Jumlah Pemilih</td>
+                            <td style="width: 33.3333333%">:</td>
+                            <td style="width: 33.3333333%">(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 33.3333333%">Jumlah Hak Pilih</td>
                             <td style="width: 33.3333333%">:</td>
                             <td style="width: 33.3333333%">(dummy)</td>
                         </tr>
@@ -137,6 +142,11 @@
                         </tr>
                         <tr>
                             <td style="width: 33.3333333%">Suara Tidak Sah</td>
+                            <td style="width: 33.3333333%">:</td>
+                            <td style="width: 33.3333333%">(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 33.3333333%">Total Suara</td>
                             <td style="width: 33.3333333%">:</td>
                             <td style="width: 33.3333333%">(dummy)</td>
                         </tr>

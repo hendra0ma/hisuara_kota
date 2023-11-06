@@ -3,23 +3,23 @@
 @section('content')
 <?php
     
-    use App\Models\Config;
-    use App\Models\District;
+use App\Models\Config;
+use App\Models\District;
 use App\Models\RegenciesDomain;
 use App\Models\Regency;
-    use App\Models\SaksiData;
-    use App\Models\Tps;
-    use App\Models\Village;
-    use App\Models\User;
+use App\Models\SaksiData;
+use App\Models\Tps;
+use App\Models\Village;
+use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
     
-    $config = Config::all()->first();
-    $regency = District::where('regency_id', $config['regencies_id'])->get();
-    $kota = Regency::where('id', $config['regencies_id'])->first();
-    $dpt = District::where('regency_id', $config['regencies_id'])->sum('dpt');
-    $tps = Tps::count();
-    ?>
+$config = Config::all()->first();
+$regency = District::where('regency_id', $config['regencies_id'])->get();
+$kota = Regency::where('id', $config['regencies_id'])->first();
+$dpt = District::where('regency_id', $config['regencies_id'])->sum('dpt');
+$tps = Tps::count();
+?>
 
 <style>
     .open-desktop {
@@ -58,9 +58,8 @@ use Illuminate\Support\Facades\DB;
             flex: 0 0 100%;
             max-width: 100%;
         }
-        
-    }
 
+    }
 </style>
 
 <div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
@@ -92,30 +91,13 @@ use Illuminate\Support\Facades\DB;
                                 <i class="fe fe-user fs-4"></i>
                             </div>
                             <div class="card-footer text-center" style="color: black; padding: 0px;">
-                                @if ($jam > 8 && $jam < 21) 
-                                <div class="badge bg-success">Saksi : Aktif</div>
-                                @else
-                                <div class="badge bg-danger">Saksi : Nonaktif</div>
-                                @endif
-                            </div>
-                        </div>
-                        <h5 style="font-size:13px" class="text-center mt-3">09.00 - 21.00</h5>
-                    </div>
-                    <div class="col-auto mt-2">
-                        <div class="card" style="margin-bottom: 0px; background: transparent">
-                            <div class="card-body text-center" style="padding: 0px;">
-                                <i class="fe fe-user fs-4"></i>
-                            </div>
-                            <div class="card-footer text-center" style="color: black; padding: 0px;">
-
-                                @if ($jam > 14 && $jam < 21) <div class="badge bg-success">Relawan :
-                                    aktif</div>
+                                @if ($jam > 8 && $jam < 21) <div class="badge bg-success">Saksi : Aktif</div>
                             @else
-                            <div class="badge bg-danger">Relawan : Nonaktif</div>
+                            <div class="badge bg-danger">Saksi : Nonaktif</div>
                             @endif
                         </div>
                     </div>
-                    <h5 style="font-size:13px" class="text-center mt-3">14.00 - 21.00</h5>
+                    <h5 style="font-size:13px" class="text-center mt-3">09.00 - 21.00</h5>
                 </div>
                 <div class="col-auto mt-2">
                     <div class="card" style="margin-bottom: 0px; background: transparent">
@@ -123,62 +105,78 @@ use Illuminate\Support\Facades\DB;
                             <i class="fe fe-user fs-4"></i>
                         </div>
                         <div class="card-footer text-center" style="color: black; padding: 0px;">
-                            @if ($jam >= 21)
-                            <div class="badge bg-success">Overtime : Aktif</div>
-                            @else
-                            <div class="badge bg-danger">Overtime : Nonaktif</div>
-                            @endif
-                        </div>
+
+                            @if ($jam > 14 && $jam < 21) <div class="badge bg-success">Relawan :
+                                aktif</div>
+                        @else
+                        <div class="badge bg-danger">Relawan : Nonaktif</div>
+                        @endif
                     </div>
-                    <h5 style="font-size:13px" class="text-center mt-3">21.00 - dst</h5>
                 </div>
-                <div class="col-auto my-auto">
-                    <a href="https://time.is/Jakarta" id="time_is_link" rel="nofollow"
-                            style="font-size:25px">
-                    </a>
-                    <span id="Jakarta_z41c" style="font-size:27px"></span>
-                    <span style="font-size:27px; margin-left: 5px;">WIB</span>
-                    <script src="//widget.time.is/t.js"></script>
-                    <script>
-                        time_is_widget.init({
+                <h5 style="font-size:13px" class="text-center mt-3">14.00 - 21.00</h5>
+            </div>
+            <div class="col-auto mt-2">
+                <div class="card" style="margin-bottom: 0px; background: transparent">
+                    <div class="card-body text-center" style="padding: 0px;">
+                        <i class="fe fe-user fs-4"></i>
+                    </div>
+                    <div class="card-footer text-center" style="color: black; padding: 0px;">
+                        @if ($jam >= 21)
+                        <div class="badge bg-success">Overtime : Aktif</div>
+                        @else
+                        <div class="badge bg-danger">Overtime : Nonaktif</div>
+                        @endif
+                    </div>
+                </div>
+                <h5 style="font-size:13px" class="text-center mt-3">21.00 - dst</h5>
+            </div>
+            <div class="col-auto my-auto">
+                <a href="https://time.is/Jakarta" id="time_is_link" rel="nofollow" style="font-size:25px">
+                </a>
+                <span id="Jakarta_z41c" style="font-size:27px"></span>
+                <span style="font-size:27px; margin-left: 5px;">WIB</span>
+                <script src="//widget.time.is/t.js"></script>
+                <script>
+                    time_is_widget.init({
                             Jakarta_z41c: {}
                         });
-                    </script>
-                </div>
-            </div>
-                    
-
+                </script>
             </div>
         </div>
-    </div> --}}
 
-    <div class="col-lg col-md mt-4">
-        <div class="row g-0">
-            <div class="col-md">
 
-                {{-- <div class="row mt-3">
-    <div class="col-lg-3 col-md-6 break-point-1">
+    </div>
+</div>
+</div> --}}
+
+<div class="col-lg col-md">
     <div class="row g-0">
-        <div class="col-md-4">
-        
-            <img src="{{asset('assets/images/brand/logo_gold.png')}}"class="img-fluid">
-            </div>
-            <div class="col-md-8">
+        <div class="col-md">
 
-                <h1 class="page-title fs-3 mt-2">DASHBOARD HISUARA
-                </h1>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ $kota['name'] }}
-                        <!-- Kota -->
-                    </li>
-                </ol>
-            </div>
-        </div>
+            {{-- <div class="row mt-3">
+                <div class="col-lg-3 col-md-6 break-point-1">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+
+                            <img src="{{asset('assets/images/brand/logo_gold.png')}}" class="img-fluid">
+                        </div>
+                        <div class="col-md-8">
+
+                            <h1 class="page-title fs-3 mt-2">DASHBOARD HISUARA
+                            </h1>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ $kota['name'] }}
+                                    <!-- Kota -->
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
 
 
-        @if ($config->multi_admin == 'yes')
-        //<?php
+                    @if ($config->multi_admin == 'yes')
+                    //
+                    <?php
                 //$userOnline = User::where('role_id', 1)->count();
                 //$jumlahOrang = 0;
                 // foreach($userOnline as $user){
@@ -187,132 +185,138 @@ use Illuminate\Support\Facades\DB;
                 //     }
                 // }
                 //?>
-        <h4 class="fs-4 mt-2 fw-bold">Multi Administator ({{ $userOnline }}) </h4> <!-- This Dummy Data -->
-        @else
-        <h4 class="fs-4 mt-2 fw-bold">Multi Administator (1) </h4> <!-- This Dummy Data -->
-        @endif
-        <h5>
-            {{ Auth::user()->name }}
-        </h5>
-    </div>
+                    <h4 class="fs-4 mt-2 fw-bold">Multi Administator ({{ $userOnline }}) </h4> <!-- This Dummy Data -->
+                    @else
+                    <h4 class="fs-4 mt-2 fw-bold">Multi Administator (1) </h4> <!-- This Dummy Data -->
+                    @endif
+                    <h5>
+                        {{ Auth::user()->name }}
+                    </h5>
+                </div>
 
-    <div class="col-lg-9 col-xxl-0 justify-content-end mt-2 break-point-1">
-        <div class="row">
+                <div class="col-lg-9 col-xxl-0 justify-content-end mt-2 break-point-1">
+                    <div class="row">
 
 
-            <div class="col open-desktop">
+                        <div class="col open-desktop">
 
-                <div class="">
-                    <div class="card" style="margin-bottom: 0px;">
-                        <div class="card-body" style="padding: 5px; padding-bottom: 0px">
-                            <div class="card-header text-center" style="padding: 0px; padding-bottom: 10px">
-                                <div class="card-title mx-auto">
+                            <div class="">
+                                <div class="card" style="margin-bottom: 0px;">
+                                    <div class="card-body" style="padding: 5px; padding-bottom: 0px">
+                                        <div class="card-header text-center" style="padding: 0px; padding-bottom: 10px">
+                                            <div class="card-title mx-auto">
 
-                                    Mode Sistem <i class="fa fa-question-circle" data-bs-placement="top"
-                                        data-bs-toggle="tooltip" title=""
-                                        data-bs-original-title="Mode sistem adalah status sistem HISUARA yang dibagi menjadi tiga bagian, yaitu : mode saksi, mode relawan dan mode overtime (Antisipasi Hacker). Ketiga mode ini berjalan pada hari yang sama dengan pembagian waktu yang telah di tetapkan."></i>
-                                </div>
-                            </div>
-                            <div class="row mx-auto text-center">
-                                <div class="col-xxl-3 my-auto">
-                                    <a href="https://time.is/Jakarta" id="time_is_link" rel="nofollow"
-                                        style="font-size:25px"></a>
-                                    <span id="Jakarta_z41c" style="font-size:27px"></span>
-                                    <div style="font-size:27px">WIB</div>
-                                    <script src="//widget.time.is/t.js"></script>
-                                    <script>
-                                        time_is_widget.init({
+                                                Mode Sistem <i class="fa fa-question-circle" data-bs-placement="top"
+                                                    data-bs-toggle="tooltip" title=""
+                                                    data-bs-original-title="Mode sistem adalah status sistem HISUARA yang dibagi menjadi tiga bagian, yaitu : mode saksi, mode relawan dan mode overtime (Antisipasi Hacker). Ketiga mode ini berjalan pada hari yang sama dengan pembagian waktu yang telah di tetapkan."></i>
+                                            </div>
+                                        </div>
+                                        <div class="row mx-auto text-center">
+                                            <div class="col-xxl-3 my-auto">
+                                                <a href="https://time.is/Jakarta" id="time_is_link" rel="nofollow"
+                                                    style="font-size:25px"></a>
+                                                <span id="Jakarta_z41c" style="font-size:27px"></span>
+                                                <div style="font-size:27px">WIB</div>
+                                                <script src="//widget.time.is/t.js"></script>
+                                                <script>
+                                                    time_is_widget.init({
                                             Jakarta_z41c: {}
                                         });
 
-                                    </script>
-                                </div>
-                                <div class="col-md me-auto">
-                                    <div class="row">
+                                                </script>
+                                            </div>
+                                            <div class="col-md me-auto">
+                                                <div class="row">
 
-                                        <div class="col mt-2">
-                                            <div class="card" style="margin-bottom: 0px;">
-                                                <div class="card-body text-center" style="padding: 0px;">
-                                                    <i class="fe fe-user fs-4"></i>
+                                                    <div class="col mt-2">
+                                                        <div class="card" style="margin-bottom: 0px;">
+                                                            <div class="card-body text-center" style="padding: 0px;">
+                                                                <i class="fe fe-user fs-4"></i>
+                                                            </div>
+                                                            <div class="card-footer text-center"
+                                                                style="color: black; padding: 0px">
+                                                                @if ($jam > 8 && $jam < 21) <div
+                                                                    class="badge bg-success">Saksi :
+                                                                    Aktif</div>
+                                                            @else
+                                                            <div class="badge bg-danger">Saksi : Nonaktif</div>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <h5 style="font-size:13px" class="text-center mt-3">09.00 - 21.00
+                                                    </h5>
                                                 </div>
-                                                <div class="card-footer text-center" style="color: black; padding: 0px">
-                                                    @if ($jam > 8 && $jam < 21) <div class="badge bg-success">Saksi :
-                                                        Aktif</div>
-                                                @else
-                                                <div class="badge bg-danger">Saksi : Nonaktif</div>
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <h5 style="font-size:13px" class="text-center mt-3">09.00 - 21.00</h5>
-                                    </div>
-                                    <div class="col mt-2">
-                                        <div class="card" style="margin-bottom: 0px;">
-                                            <div class="card-body text-center" style="padding: 0px;">
-                                                <i class="fe fe-user fs-4"></i>
-                                            </div>
-                                            <div class="card-footer text-center" style="color: black; padding: 0px">
+                                                <div class="col mt-2">
+                                                    <div class="card" style="margin-bottom: 0px;">
+                                                        <div class="card-body text-center" style="padding: 0px;">
+                                                            <i class="fe fe-user fs-4"></i>
+                                                        </div>
+                                                        <div class="card-footer text-center"
+                                                            style="color: black; padding: 0px">
 
-                                                @if ($jam > 14 && $jam < 21) <div class="badge bg-success">Relawan :
-                                                    aktif</div>
-                                            @else
-                                            <div class="badge bg-danger">Relawan : Nonaktif</div>
-                                            @endif
+                                                            @if ($jam > 14 && $jam < 21) <div class="badge bg-success">
+                                                                Relawan :
+                                                                aktif</div>
+                                                        @else
+                                                        <div class="badge bg-danger">Relawan : Nonaktif</div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <h5 style="font-size:13px" class="text-center mt-3">14.00 - 21.00</h5>
+                                            </div>
+                                            <div class="col mt-2">
+                                                <div class="card" style="margin-bottom: 0px;">
+                                                    <div class="card-body text-center" style="padding: 0px;">
+                                                        <i class="fe fe-user fs-4"></i>
+                                                    </div>
+                                                    <div class="card-footer text-center"
+                                                        style="color: black; padding: 0px">
+                                                        @if ($jam >= 21)
+                                                        <div class="badge bg-success">Overtime : Aktif</div>
+                                                        @else
+                                                        <div class="badge bg-danger">Overtime : Nonaktif</div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <h5 style="font-size:13px" class="text-center mt-3">21.00 - dst</h5>
+                                            </div>
                                         </div>
+
+
                                     </div>
-                                    <h5 style="font-size:13px" class="text-center mt-3">14.00 - 21.00</h5>
-                                </div>
-                                <div class="col mt-2">
-                                    <div class="card" style="margin-bottom: 0px;">
-                                        <div class="card-body text-center" style="padding: 0px;">
-                                            <i class="fe fe-user fs-4"></i>
-                                        </div>
-                                        <div class="card-footer text-center" style="color: black; padding: 0px">
-                                            @if ($jam >= 21)
-                                            <div class="badge bg-success">Overtime : Aktif</div>
-                                            @else
-                                            <div class="badge bg-danger">Overtime : Nonaktif</div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <h5 style="font-size:13px" class="text-center mt-3">21.00 - dst</h5>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                </div>
 
 
+
+
+                <div class="col-lg-6 col-md-6 justify-content-end  break-point-2">
+                    <div class="card" style="margin-bottom: 0px;">
+                        <div class="card-body">
+                            <div class="row mx-auto">
+                                <div class="col-3 ">
+                                    <div class="counter-icon box-shadow-secondary brround candidate-name text-white bg-danger"
+                                        style="margin-bottom: 0;">
+                                        1
+                                    </div>
+                                </div>
+                                <div class="col me-auto">
+                                    <h6 class="">Suara Tertinggi</h6>
+                                    <h3 class="mb-2 number-font">{{ $paslon_tertinggi['candidate'] }} /
+                                        {{ $paslon_tertinggi['deputy_candidate'] }}
+                                    </h3>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-    </div>
-
-
-
-
-    <div class="col-lg-6 col-md-6 justify-content-end  break-point-2">
-        <div class="card" style="margin-bottom: 0px;">
-            <div class="card-body">
-                <div class="row mx-auto">
-                    <div class="col-3 ">
-                        <div class="counter-icon box-shadow-secondary brround candidate-name text-white bg-danger"
-                            style="margin-bottom: 0;">
-                            1
-                        </div>
-                    </div>
-                    <div class="col me-auto">
-                        <h6 class="">Suara Tertinggi</h6>
-                        <h3 class="mb-2 number-font">{{ $paslon_tertinggi['candidate'] }} /
-                            {{ $paslon_tertinggi['deputy_candidate'] }}
-                        </h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<!-- <div class="col-lg-8 justify-content-end mt-2">
+        <!-- <div class="col-lg-8 justify-content-end mt-2">
             <div class="row">
                 <div class="col-lg-4 justify-content-end">
                     <div class="card">
@@ -363,12 +367,13 @@ use Illuminate\Support\Facades\DB;
                 </div>
             </div>
         </div> -->
-</div>
+    </div>
 
 
 
-@if($config->multi_admin == "yes")
-// <?php
+    @if($config->multi_admin == "yes")
+    //
+    <?php
         // $userOnline = User::where('role_id',1)->count();
         // $jumlahOrang = 0;
         // foreach($userOnline as $user){
@@ -377,14 +382,14 @@ use Illuminate\Support\Facades\DB;
         //     }
         // }
         // ?>
-<h4 class="fs-4 mt-2 fw-bold">Multi Administator ({{$userOnline}}) </h4> <!-- This Dummy Data -->
-@else
-<h4 class="fs-4 mt-2 fw-bold">Multi Administator (1) </h4> <!-- This Dummy Data -->
+    <h4 class="fs-4 mt-2 fw-bold">Multi Administator ({{$userOnline}}) </h4> <!-- This Dummy Data -->
+    @else
+    <h4 class="fs-4 mt-2 fw-bold">Multi Administator (1) </h4> <!-- This Dummy Data -->
 
-@endif
-<h5>
-    {{Auth::user()->name}}
-</h5>
+    @endif
+    <h5>
+        {{Auth::user()->name}}
+    </h5>
 </div>
 
 <div class="col-lg-9 col-xxl-0 justify-content-end mt-2 break-point-1">
@@ -458,8 +463,8 @@ use Illuminate\Support\Facades\DB;
                             <div class="text-center fs-3 mb-3 fw-bold">SUARA TERVERIFIKASI</div>
                             <div class="text-center">Terverifikasi {{ $saksi_terverifikasi }} TPS dari
                                 {{ $saksi_masuk }} TPS Masuk</div>
-                            <div class="text-center mt-2 mb-2"><span
-                                    class="badge bg-success">{{ $total_verification_voice }} /
+                            <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{
+                                    $total_verification_voice }} /
                                     {{ $dpt }}</span></div>
                             <div id="chart-donut" class="chartsh h-100 w-100"></div>
                         </div>
@@ -530,7 +535,8 @@ use Illuminate\Support\Facades\DB;
                         @foreach ($kec as $item)
                         <tr onclick='check("{{ Crypt::encrypt($item->id) }}")'>
                             <td><a
-                                    href="{{ url('/') }}/administrator/perhitungan_kecamatan/{{ Crypt::encrypt($item['id']) }}">{{ $item['name'] }}</a>
+                                    href="{{ url('/') }}/administrator/perhitungan_kecamatan/{{ Crypt::encrypt($item['id']) }}">{{
+                                    $item['name'] }}</a>
                             </td>
                             @foreach ($paslon as $cd)
                             <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')
@@ -572,7 +578,8 @@ use Illuminate\Support\Facades\DB;
                         @foreach ($kec as $item)
                         <tr onclick='check("{{ Crypt::encrypt($item->id) }}")'>
                             <td><a
-                                    href="{{ url('/') }}/administrator/perhitungan_kecamatan/{{ Crypt::encrypt($item['id']) }}">{{ $item['name'] }}</a>
+                                    href="{{ url('/') }}/administrator/perhitungan_kecamatan/{{ Crypt::encrypt($item['id']) }}">{{
+                                    $item['name'] }}</a>
                             </td>
                             @foreach ($paslon as $cd)
                             <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')
@@ -672,20 +679,20 @@ use Illuminate\Support\Facades\DB;
 
     .custom-prev {
         position: absolute;
-        top:7.5px;
+        top: 7.5px;
         left: 0px;
     }
 
     .custom-next {
         position: absolute;
-        top:7.5px;
+        top: 7.5px;
         right: 0px;
     }
 
     .carousel-item {
         transition: -webkit-transform .6s ease;
         transition: transform .6s ease;
-        transition: transform .6s ease,-webkit-transform .6s ease;
+        transition: transform .6s ease, -webkit-transform .6s ease;
     }
 
     .urutan-suara {
@@ -710,7 +717,6 @@ use Illuminate\Support\Facades\DB;
         right: 0;
         top: 60px;
     }
-
 </style>
 <div class="row">
 
@@ -723,10 +729,11 @@ use Illuminate\Support\Facades\DB;
                 <div class="row justify-content-center px-5 my-auto">
                     <div class="col-auto mb-2">
                         <div class="mid">
-                        
+
                             <label class="switch">
-                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('multi_admin',this)"
-                                    {{($config->multi_admin == "no") ? "":"checked"; }}>
+                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode"
+                                onclick="settings('multi_admin',this)"
+                                {{($config->multi_admin == "no") ? "":"checked"; }}>
                                 <span class="slider round"></span>
                             </label>
                         </div>
@@ -734,10 +741,10 @@ use Illuminate\Support\Facades\DB;
                             Multi
                         </div>
                     </div>
-                
+
                     <div class="col-auto mb-2">
                         <div class="mid">
-                        
+
                             <label class="switch">
                                 <input type="checkbox" data-target="mode" onclick="settings('otonom',this)"
                                     {{($config->otonom == "no") ? "":"checked"; }}>
@@ -748,12 +755,13 @@ use Illuminate\Support\Facades\DB;
                             Otonom
                         </div>
                     </div>
-                
+
                     <div class="col-auto mb-2">
                         <div class="mid">
                             <label class="switch">
-                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('show_terverifikasi',this)"
-                                    {{($config->show_terverifikasi == "hide") ? "":"checked"; }}>
+                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode"
+                                onclick="settings('show_terverifikasi',this)"
+                                {{($config->show_terverifikasi == "hide") ? "":"checked"; }}>
                                 <span class="slider round"></span>
                             </label>
                         </div>
@@ -761,12 +769,13 @@ use Illuminate\Support\Facades\DB;
                             Verifikasi
                         </div>
                     </div>
-                
+
                     <div class="col-auto mb-2">
                         <div class="mid">
                             <label class="switch">
-                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('show_public',this)"
-                                    {{($config->show_public == "hide") ? "":"checked"; }}>
+                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode"
+                                onclick="settings('show_public',this)"
+                                {{($config->show_public == "hide") ? "":"checked"; }}>
                                 <span class="slider round"></span>
                             </label>
                         </div>
@@ -774,13 +783,14 @@ use Illuminate\Support\Facades\DB;
                             Publish C1
                         </div>
                     </div>
-                
+
                     <div class="col-auto mb-2">
                         <div class="mid">
-                        
+
                             <label class="switch">
-                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode" onclick="settings('lockdown',this)"
-                                    {{($config->lockdown == "no") ? "":"checked"; }}>
+                                <input type="checkbox" {{($config->default == "yes")?'disabled':''}} data-target="mode"
+                                onclick="settings('lockdown',this)"
+                                {{($config->lockdown == "no") ? "":"checked"; }}>
                                 <span class="slider round"></span>
                             </label>
                         </div>
@@ -807,17 +817,18 @@ use Illuminate\Support\Facades\DB;
             <div class="card-body" style="padding: 26px">
                 <div class="row">
                     @foreach ($urutan as $urutPaslon)
-                        <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
-                        <div class="col-md">
-                            <div class="card shadow text-center mb-0">
-                                <div class="card-header py-4 px-0" style="background: {{ $pasangan->color }}">
-                                    <h3 class="card-title text-white mx-auto">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} </h3>
-                                </div>
-                                <div class="card-body p-1">
-                                    <div class="fs-4">{{$urutPaslon->total}}</div>
-                                </div>
+                    <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
+                    <div class="col-md">
+                        <div class="card shadow text-center mb-0">
+                            <div class="card-header py-4 px-0" style="background: {{ $pasangan->color }}">
+                                <h3 class="card-title text-white mx-auto">{{ $pasangan->candidate }} || {{
+                                    $pasangan->deputy_candidate }} </h3>
+                            </div>
+                            <div class="card-body p-1">
+                                <div class="fs-4">{{$urutPaslon->total}}</div>
                             </div>
                         </div>
+                    </div>
                     @endforeach
                 </div>
             </div>
@@ -869,15 +880,16 @@ use Illuminate\Support\Facades\DB;
             </div>
         </div>
     </div> --}}
-    
-    
-    
+
+
+
 </div>
 
 {{-- <div class="card mb-0 mt-3">
     <div class="card-header">
         <div class="card-title">Tabulasi ({{ ucwords(strtolower($kota->name)) }})</div>
-s    </div>
+        s
+    </div>
     <div class="card-body">
         <div class="row">
             <div class="col-lg justify-content-end">
@@ -887,65 +899,66 @@ s    </div>
                     </div>
                     <div class="card-body">
                         <h3 class="">{{ $total_tps }}</h3>
-</div>
-</div>
-</div>
-<div class="col-lg">
-    <div class="card mb-0">
-        <div class="card-header bg-danger">
-            <div class="card-title text-white">TPS Masuk</div>
-        </div>
-        <div class="card-body">
-            <h3 class="">{{ $tps_masuk }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg">
+                <div class="card mb-0">
+                    <div class="card-header bg-danger">
+                        <div class="card-title text-white">TPS Masuk</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="">{{ $tps_masuk }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg">
+                <div class="card mb-0">
+                    <div class="card-header bg-primary">
+                        <div class="card-title text-white">TPS Kosong</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="">{{ $tps_kosong }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg">
+                <div class="card mb-0">
+                    <div class="card-header bg-cyan">
+                        <div class="card-title text-white">Suara Masuk</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="">{{ $suara_masuk }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg">
+                <div class="card mb-0">
+                    <div class="card-header bg-success">
+                        <div class="card-title text-white">Suara Terverifikasi</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="">{{$total_verification_voice}}</h3>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<div class="col-lg">
-    <div class="card mb-0">
-        <div class="card-header bg-primary">
-            <div class="card-title text-white">TPS Kosong</div>
-        </div>
-        <div class="card-body">
-            <h3 class="">{{ $tps_kosong }}</h3>
-        </div>
-    </div>
-</div>
-<div class="col-lg">
-    <div class="card mb-0">
-        <div class="card-header bg-cyan">
-            <div class="card-title text-white">Suara Masuk</div>
-        </div>
-        <div class="card-body">
-            <h3 class="">{{ $suara_masuk }}</h3>
-        </div>
-    </div>
-</div>
-<div class="col-lg">
-    <div class="card mb-0">
-        <div class="card-header bg-success">
-            <div class="card-title text-white">Suara Terverifikasi</div>
-        </div>
-        <div class="card-body">
-            <h3 class="">{{$total_verification_voice}}</h3>
-        </div>
-    </div>
-</div>
-</div>
-</div>
 </div> --}}
 
 <div class="row">
     <div class="col-lg-6" style="{{($config->quick_count == 'yes')?'':'display:none'}}">
         <div class="card" style="margin-bottom: 1rem">
             <div class="card-body" style="position: relative">
-                <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png"
+                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
                     <div class="col-12">
                         <div class="container">
                             <div class="text-center fs-3 mb-3 fw-bold">QUICK COUNT</div>
                             <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
-                            <div class="text-center mt-2 mb-2"><span
-                                    class="badge bg-success">{{$total_incoming_vote}} / {{$dpt}}</span></div>
+                            <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
+                                    {{$dpt}}</span></div>
                             <div id="chart-pie2" class="chartsh h-100 w-100"></div>
                         </div>
                     </div>
@@ -997,13 +1010,13 @@ s    </div>
                         <?php $count_tps = Tps::where('district_id',(string)$item['id'])->count(); ?>
                         <?php $count_tps_quick = Tps::where('district_id',(string)$item['id'])->where('quick_count', 1)->count(); ?>
                         <?php $kecc = District::where('id', $item['district_id'])->first(); ?>
-                        <tr @if ( $count_tps_quick  > 0)
-                            style="background-color: rgb(80,78, 78); color :white;" @else  @endif>
+                        <tr @if ( $count_tps_quick> 0)
+                            style="background-color: rgb(80,78, 78); color :white;" @else @endif>
                             <td class="align-middle text">
                                 {{$item['name']}}
                             </td>
                             <td class="align-middle">{{$count_tps}}</td>
-                            <td class="align-middle">@if ( $count_tps_quick  > 0)
+                            <td class="align-middle">@if ( $count_tps_quick > 0)
                                 {{$count_tps_quick}}
                                 @else
                                 0
@@ -1022,7 +1035,8 @@ s    </div>
                 <h3 class="card-title text-white">Suara TPS Masuk</h3>
             </div> --}}
             <div class="card-body" style="position: relative;">
-                <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png"
+                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
                     <div class="col-12">
                         <div class="container">
@@ -1035,8 +1049,8 @@ s    </div>
                     </div>
                     <div class="col-xxl">
                         <div class="row mt-2">
-                        <?php $i = 1; ?>
-                        @foreach ($paslon as $pas)
+                            <?php $i = 1; ?>
+                            @foreach ($paslon as $pas)
                             <div class="col-lg col-md col-sm col-xl mb-3">
                                 <div class="card" style="margin-bottom: 0px;">
                                     <div class="card-body p-3">
@@ -1174,24 +1188,27 @@ s    </div>
                 <h3 class="card-title text-white">Suara TPS Terverifikasi</h3>
             </div> --}}
             <div class="card-body" style="position: relative">
-                <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png"
+                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
                     <div class="col-6">
                         <div class="row">
                             <div class="col-12">
                                 <div class="container">
                                     <div class="text-center fs-3 mb-3 fw-bold">SUARA TERVERIFIKASI</div>
-                                    <div class="text-center">Terverifikasi {{$saksi_terverifikasi}} TPS dari {{$saksi_masuk}}
+                                    <div class="text-center">Terverifikasi {{$saksi_terverifikasi}} TPS dari
+                                        {{$saksi_masuk}}
                                         TPS Masuk</div>
                                     <div class="text-center mt-2 mb-2"><span
-                                            class="badge bg-success">{{$total_verification_voice}} / {{$dpt}}</span></div>
+                                            class="badge bg-success">{{$total_verification_voice}} / {{$dpt}}</span>
+                                    </div>
                                     <div id="chart-donut" class="chartsh h-100 w-100"></div>
                                 </div>
                             </div>
                             <div class="col-xxl">
                                 <?php $i = 1; ?>
                                 <div class="row mt-2">
-                                @foreach ($paslon_terverifikasi as $pas)
+                                    @foreach ($paslon_terverifikasi as $pas)
                                     <div class="col-lg col-md col-sm col-xl mb-3">
                                         <div class="card" style="margin-bottom: 0px;">
                                             <div class="card-body p-3">
@@ -1261,24 +1278,27 @@ s    </div>
                 <h3 class="card-title text-white">Suara TPS Terverifikasi</h3>
             </div> --}}
             <div class="card-body" style="position: relative">
-                <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png"
+                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
                     <div class="col-12">
                         <div class="row">
                             <div class="col-12">
                                 <div class="container">
                                     <div class="text-center fs-3 mb-3 fw-bold">SUARA TERVERIFIKASI</div>
-                                    <div class="text-center">Terverifikasi {{$saksi_terverifikasi}} TPS dari {{$saksi_masuk}}
+                                    <div class="text-center">Terverifikasi {{$saksi_terverifikasi}} TPS dari
+                                        {{$saksi_masuk}}
                                         TPS Masuk</div>
                                     <div class="text-center mt-2 mb-2"><span
-                                            class="badge bg-success">{{$total_verification_voice}} / {{$dpt}}</span></div>
+                                            class="badge bg-success">{{$total_verification_voice}} / {{$dpt}}</span>
+                                    </div>
                                     <div id="chart-donut" class="chartsh h-100 w-100"></div>
                                 </div>
                             </div>
                             <div class="col-xxl">
                                 <?php $i = 1; ?>
                                 <div class="row mt-2">
-                                @foreach ($paslon_terverifikasi as $pas)
+                                    @foreach ($paslon_terverifikasi as $pas)
                                     <div class="col-lg col-md col-sm col-xl mb-3">
                                         <div class="card" style="margin-bottom: 0px;">
                                             <div class="card-body p-3">

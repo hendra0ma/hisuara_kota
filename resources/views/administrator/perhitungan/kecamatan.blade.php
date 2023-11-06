@@ -1,8 +1,462 @@
+<?php
+    
+use App\Models\Config;
+use App\Models\District;
+use App\Models\RegenciesDomain;
+use App\Models\Regency;
+use App\Models\SaksiData;
+use App\Models\Tps;
+use App\Models\Village;
+use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
+    
+$config = Config::all()->first();
+$regency = District::where('regency_id', $config['regencies_id'])->get();
+$kota = Regency::where('id', $config['regencies_id'])->first();
+$dpt = District::where('regency_id', $config['regencies_id'])->sum('dpt');
+$tps = Tps::count();
+?>
+
 @extends('layouts.main-perhitungan')
 
 @section('content')
 
-<div class="row mt-3">
+<div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
+    <div class="col-lg-6" style="{{($config->quick_count == 'yes')?'':'display:none'}}">
+        <div class="card" style="margin-bottom: 1rem">
+            <div class="card-body" style="position: relative">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png"
+                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="container">
+                            <div class="text-center fs-3 mb-3 fw-bold">QUICK COUNT</div>
+                            <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
+                            <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
+                                    {{$dpt}}</span></div>
+                            <div id="chart-pie2" class="chartsh h-100 w-100"></div>
+                        </div>
+                    </div>
+                    <div class="col-xxl">
+                        <div class="row mt-2">
+                            <?php $i = 1; ?>
+                            @foreach ($paslon as $pas)
+                            <div class="col-lg col-md col-sm col-xl mb-3">
+                                <div class="card" style="margin-bottom: 0px;">
+                                    <div class="card-body p-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
+                                                    style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                    {{$i++}}
+                                                </div>
+                                            </div>
+                                            <div class="col text-center">
+                                                <h6 class="mt-4">{{$pas->candidate}} </h6>
+                                                <h6 class="">{{$pas->deputy_candidate}} </h6>
+                                                <?php
+                                                $voice = 0;
+                                                ?>
+                                                @foreach ($pas->quicksaksidata as $dataTps)
+                                                <?php
+                                                $voice += $dataTps->voice;
+                                                ?>
+                                                @endforeach
+                                                <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-hover">
+                    <thead class="bg-primary">
+                        <th class="text-white text-center align-middle">KELURAHAN</th>
+                        @foreach ($paslon as $item)
+                        <th class="text-white text-center align-middle">{{ $item['candidate']}} - <br> {{
+                            $item['deputy_candidate']}}
+                        </th>
+                        @endforeach
+
+                    </thead>
+                    <tbody>
+                        <!-- Foreach here -->
+
+                        @foreach($district as $dist)
+                        <tr>
+                            <td><a
+                                    href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($dist['id'])}}">{{$dist->name}}</a>
+                            </td>
+                            <?php
+                                                            $voices = App\Models\Paslon::with(['saksi_data' => function ($query) use ($dist) {
+                                                                $query
+                                                                    ->where('saksi_data.village_id', (string)$dist->id);
+                                                            }])->get();
+                                                            ?>
+                            @foreach($voices as $voc)
+                            <?php $total_voices = 0;  ?>
+                            @foreach($voc->saksi_data as $saksi)
+                            <?php $total_voices = $saksi->voice  ?>
+                            @endforeach
+                            <td> {{$total_voices}} </td>
+                            @endforeach
+                        </tr>
+                        @endforeach
+
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="{{($config->otonom == 'yes')?'col-lg-12 col-md-12':'col-lg-6 col-md-12'}}">
+        <div class="card">
+            {{-- <div class="card-header bg-info">
+                <h3 class="card-title text-white">Suara TPS Masuk</h3>
+            </div> --}}
+            <div class="card-body" style="position: relative;">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png"
+                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="container">
+                            <div class="text-center fs-3 mb-3 fw-bold">REAL COUNT</div>
+                            <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
+                            <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
+                                    {{$dpt}}</span></div>
+                            <div id="chart-pie" class="chartsh h-100 w-100"></div>
+                        </div>
+                    </div>
+                    <div class="col-xxl">
+                        <div class="row mt-2">
+                            <?php $i = 1; ?>
+                            @foreach ($paslon as $pas)
+                            <div class="col-lg col-md col-sm col-xl mb-3">
+                                <div class="card" style="margin-bottom: 0px;">
+                                    <div class="card-body p-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
+                                                    style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                    {{$i++}}
+                                                </div>
+                                            </div>
+                                            <div class="col text-center">
+                                                <h6 class="mt-4">{{$pas->candidate}} </h6>
+                                                <h6 class="">{{$pas->deputy_candidate}} </h6>
+                                                <?php
+                                                $voice = 0;
+                                                ?>
+                                                @foreach ($pas->saksi_data as $dataTps)
+                                                <?php
+                                                $voice += $dataTps->voice;
+                                                ?>
+                                                @endforeach
+                                                <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-hover">
+                    <thead class="bg-primary">
+                        <th class="text-white text-center align-middle">KELURAHAN</th>
+                        @foreach ($paslon as $item)
+                        <th class="text-white text-center align-middle">{{ $item['candidate']}} - <br> {{
+                            $item['deputy_candidate']}}
+                        </th>
+                        @endforeach
+
+                    </thead>
+                    <tbody>
+                        <!-- Foreach here -->
+
+                        @foreach($district as $dist)
+                        <tr>
+                            <td><a
+                                    href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($dist['id'])}}">{{$dist->name}}</a>
+                            </td>
+                            <?php
+                                            $voices = App\Models\Paslon::with(['saksi_data' => function ($query) use ($dist) {
+                                                $query
+                                                    ->where('saksi_data.village_id', (string)$dist->id);
+                                            }])->get();
+                                            ?>
+                            @foreach($voices as $voc)
+                            <?php $total_voices = 0;  ?>
+                            @foreach($voc->saksi_data as $saksi)
+                            <?php $total_voices = $saksi->voice  ?>
+                            @endforeach
+                            <td> {{$total_voices}} </td>
+                            @endforeach
+                        </tr>
+                        @endforeach
+
+
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    @if ($config->quick_count == 'yes')
+    <div class="col-lg-12 col-md" style="display:{{($config->otonom == 'yes')?'none':'block'}}">
+        <div class="card">
+            {{-- <div class="card-header bg-secondary">
+                <h3 class="card-title text-white">Suara TPS Terverifikasi</h3>
+            </div> --}}
+            <div class="card-body" style="position: relative">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png"
+                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="container">
+                                    <div class="text-center fs-3 mb-3 fw-bold">SUARA TERVERIFIKASI</div>
+                                    <div class="text-center">Terverifikasi {{$saksi_terverifikasi}} TPS dari
+                                        {{$saksi_masuk}}
+                                        TPS Masuk</div>
+                                    <div class="text-center mt-2 mb-2"><span
+                                            class="badge bg-success">{{$total_verification_voice}} / {{$dpt}}</span>
+                                    </div>
+                                    <div id="chart-donut" class="chartsh h-100 w-100"></div>
+                                </div>
+                            </div>
+                            <div class="col-xxl">
+                                <?php $i = 1; ?>
+                                <div class="row mt-2">
+                                    @foreach ($paslon_terverifikasi as $pas)
+                                    <div class="col-lg col-md col-sm col-xl mb-3">
+                                        <div class="card" style="margin-bottom: 0px;">
+                                            <div class="card-body p-3">
+                                                <div class="row me-auto">
+                                                    <div class="col-12">
+                                                        <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white ms-auto"
+                                                            style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                            {{$i++}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col text-center">
+                                                        <h6 class="mt-4">{{$pas->candidate}} </h6>
+                                                        <h6 class="">{{$pas->deputy_candidate}} </h6>
+                                                        <?php
+                                                        $voice = 0;
+                                                        ?>
+                                                        @foreach ($pas->saksi_data as $dataTps)
+                                                        <?php
+                                                        $voice += $dataTps->voice;
+                                                        ?>
+                                                        @endforeach
+                                                        <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <table class="table table-bordered table-hover">
+                            <thead class="bg-primary">
+                                <th class="text-white text-center align-middle">KELURAHAN</th>
+                                @foreach ($paslon as $item)
+                                <th class="text-white text-center align-middle">{{ $item['candidate']}} - <br> {{
+                                    $item['deputy_candidate']}}
+                                </th>
+                                @endforeach
+
+
+                            </thead>
+                            <tbody>
+                                <!-- Foreach here -->
+
+                                @foreach($district as $dist)
+                                <tr>
+                                    <td>{{$dist->name}}</td>
+                                    <?php
+                                                    $voices = App\Models\Paslon::with(['saksi_data' => function ($query) use ($dist) {
+                                                        $query
+                                                            ->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
+                                                            ->where('saksi.verification', 1)
+                                                            ->where('saksi_data.village_id', (string)$dist->id);
+                                                    }])->get();
+                                                    ?>
+                                    @foreach($voices as $voc)
+                                    <?php $total_voices = 0;  ?>
+                                    @foreach($voc->saksi_data as $saksi)
+                                    <?php $total_voices = $saksi->voice  ?>
+                                    @endforeach
+                                    <td> {{$total_voices}} </td>
+                                    @endforeach
+                                </tr>
+                                @endforeach
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @else
+    <div class="col-lg-6 col-md" style="display:{{($config->otonom == 'yes')?'none':'block'}}">
+        <div class="card">
+            {{-- <div class="card-header bg-secondary">
+                <h3 class="card-title text-white">Suara TPS Terverifikasi</h3>
+            </div> --}}
+            <div class="card-body" style="position: relative">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png"
+                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="container">
+                                    <div class="text-center fs-3 mb-3 fw-bold">SUARA TERVERIFIKASI</div>
+                                    <div class="text-center">Terverifikasi {{$saksi_terverifikasi}} TPS dari
+                                        {{$saksi_masuk}}
+                                        TPS Masuk</div>
+                                    <div class="text-center mt-2 mb-2"><span
+                                            class="badge bg-success">{{$total_verification_voice}} / {{$dpt}}</span>
+                                    </div>
+                                    <div id="chart-donut" class="chartsh h-100 w-100"></div>
+                                </div>
+                            </div>
+                            <div class="col-xxl">
+                                <?php $i = 1; ?>
+                                <div class="row mt-2">
+                                    @foreach ($paslon_terverifikasi as $pas)
+                                    <div class="col-lg col-md col-sm col-xl mb-3">
+                                        <div class="card" style="margin-bottom: 0px;">
+                                            <div class="card-body p-3">
+                                                <div class="row me-auto">
+                                                    <div class="col-12">
+                                                        <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white ms-auto"
+                                                            style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                            {{$i++}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col text-center">
+                                                        <h6 class="mt-4">{{$pas->candidate}} </h6>
+                                                        <h6 class="">{{$pas->deputy_candidate}} </h6>
+                                                        <?php
+                                                        $voice = 0;
+                                                        ?>
+                                                        @foreach ($pas->saksi_data as $dataTps)
+                                                        <?php
+                                                        $voice += $dataTps->voice;
+                                                        ?>
+                                                        @endforeach
+                                                        <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-hover">
+                    <thead class="bg-primary">
+                        <th class="text-white text-center align-middle">KELURAHAN</th>
+                        @foreach ($paslon as $item)
+                        <th class="text-white text-center align-middle">{{ $item['candidate']}} - <br> {{
+                            $item['deputy_candidate']}}
+                        </th>
+                        @endforeach
+
+
+                    </thead>
+                    <tbody>
+                        <!-- Foreach here -->
+
+                        @foreach($district as $dist)
+                        <tr>
+                            <td>{{$dist->name}}</td>
+                            <?php
+                                            $voices = App\Models\Paslon::with(['saksi_data' => function ($query) use ($dist) {
+                                                $query
+                                                    ->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
+                                                    ->where('saksi.verification', 1)
+                                                    ->where('saksi_data.village_id', (string)$dist->id);
+                                            }])->get();
+                                            ?>
+                            @foreach($voices as $voc)
+                            <?php $total_voices = 0;  ?>
+                            @foreach($voc->saksi_data as $saksi)
+                            <?php $total_voices = $saksi->voice  ?>
+                            @endforeach
+                            <td> {{$total_voices}} </td>
+                            @endforeach
+                        </tr>
+                        @endforeach
+
+
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    @endif
+
+
+    <?php
+    
+    $currentDomain = request()->getHttpHost();
+    if (isset(parse_url($currentDomain)['port'])) {
+        $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
+    }else{
+        $url = $currentDomain;
+    }
+    $regency_id = RegenciesDomain::where('domain',"LIKE","%".$url."%")->first();
+
+    if(request()->segment(1) == "administrator" && request()->segment(2) == "perhitungan_kecamatan"){
+        $id_wilayah = Crypt::decrypt(request()->segment(3));
+        $tipe_wilayah = "kecamatan";
+    }elseif(request()->segment(1) == "administrator" && request()->segment(2) == "index"){
+        $id_wilayah = $regency_id->regency_id;
+        $tipe_wilayah = "kota";
+        
+    }else{
+        $id_wilayah = Crypt::decrypt(request()->segment(3));
+        $tipe_wilayah = "kelurahan";
+    }
+    
+    ?>
+    <livewire:dpt-pemilih-component :id_wilayah="$id_wilayah" :tipe_wilayah="$tipe_wilayah" />
+
+
+
+
+</div>
+
+{{-- <div class="row mt-3">
     <!-- PAGE-HEADER -->
     <div class="col-lg-4">
         <h1 class="page-title fs-1 mt-2">Dashboard Rekapitung
@@ -25,7 +479,8 @@
                     <div class="card-body">
                         <div class="row mx-auto">
                             <div class="col-5 ">
-                                <div class="counter-icon box-shadow-secondary brround candidate-name text-white bg-danger" style="margin-bottom: 0;">
+                                <div class="counter-icon box-shadow-secondary brround candidate-name text-white bg-danger"
+                                    style="margin-bottom: 0;">
                                     1
                                 </div>
                             </div>
@@ -72,7 +527,8 @@ use Illuminate\Support\Facades\Crypt;
                                     <div class="card-body">
                                         <div class="row me-auto">
                                             <div class="col-4">
-                                                <div class="counter-icon box-shadow-secondary brround candidate-name text-white " style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                <div class="counter-icon box-shadow-secondary brround candidate-name text-white "
+                                                    style="margin-bottom: 0; background-color: {{$pas->color}};">
                                                     {{$i++}}
                                                 </div>
                                             </div>
@@ -124,7 +580,8 @@ use Illuminate\Support\Facades\Crypt;
                                     <div class="card-body">
                                         <div class="row me-auto">
                                             <div class="col-4">
-                                                <div class="counter-icon box-shadow-secondary brround candidate-name text-white ms-auto" style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                <div class="counter-icon box-shadow-secondary brround candidate-name text-white ms-auto"
+                                                    style="margin-bottom: 0; background-color: {{$pas->color}};">
                                                     {{$i++}}
                                                 </div>
                                             </div>
@@ -167,7 +624,8 @@ use Illuminate\Support\Facades\Crypt;
                     <thead class="bg-primary">
                         <th class="text-white text-center align-middle">KELURAHAN</th>
                         @foreach ($paslon as $item)
-                        <th class="text-white text-center align-middle">{{ $item['candidate']}} - <br> {{ $item['deputy_candidate']}}</th>
+                        <th class="text-white text-center align-middle">{{ $item['candidate']}} - <br> {{
+                            $item['deputy_candidate']}}</th>
                         @endforeach
 
                     </thead>
@@ -176,7 +634,9 @@ use Illuminate\Support\Facades\Crypt;
 
                         @foreach($district as $dist)
                         <tr>
-                            <td><a href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($dist['id'])}}">{{$dist->name}}</a></td>
+                            <td><a
+                                    href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($dist['id'])}}">{{$dist->name}}</a>
+                            </td>
                             <?php
                             $voices = App\Models\Paslon::with(['saksi_data' => function ($query) use ($dist) {
                                 $query
@@ -211,7 +671,8 @@ use Illuminate\Support\Facades\Crypt;
                     <thead class="bg-primary">
                         <th class="text-white text-center align-middle">KELURAHAN</th>
                         @foreach ($paslon as $item)
-                        <th class="text-white text-center align-middle">{{ $item['candidate']}} - <br> {{ $item['deputy_candidate']}}</th>
+                        <th class="text-white text-center align-middle">{{ $item['candidate']}} - <br> {{
+                            $item['deputy_candidate']}}</th>
                         @endforeach
 
 
@@ -301,29 +762,30 @@ use Illuminate\Support\Facades\Crypt;
         </div>
     </div>
 </div>
-<?php
-    
-    $currentDomain = request()->getHttpHost();
-    if (isset(parse_url($currentDomain)['port'])) {
-        $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
-    }else{
-        $url = $currentDomain;
-    }
-    $regency_id = RegenciesDomain::where('domain',"LIKE","%".$url."%")->first();
-
-    if(request()->segment(1) == "administrator" && request()->segment(2) == "perhitungan_kecamatan"){
-        $id_wilayah = Crypt::decrypt(request()->segment(3));
-        $tipe_wilayah = "kecamatan";
-    }elseif(request()->segment(1) == "administrator" && request()->segment(2) == "index"){
-        $id_wilayah = $regency_id->regency_id;
-        $tipe_wilayah = "kota";
+</div> --}}
+    <?php
         
-    }else{
-        $id_wilayah = Crypt::decrypt(request()->segment(3));
-        $tipe_wilayah = "kelurahan";
-    }
-    ?>
-    <livewire:dpt-pemilih-component :id_wilayah="$id_wilayah" :tipe_wilayah="$tipe_wilayah" />
-
+    
+        $currentDomain = request()->getHttpHost();
+        if (isset(parse_url($currentDomain)['port'])) {
+            $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
+        }else{
+            $url = $currentDomain;
+        }
+        $regency_id = RegenciesDomain::where('domain',"LIKE","%".$url."%")->first();
+    
+        if(request()->segment(1) == "administrator" && request()->segment(2) == "perhitungan_kecamatan"){
+            $id_wilayah = Crypt::decrypt(request()->segment(3));
+            $tipe_wilayah = "kecamatan";
+        }elseif(request()->segment(1) == "administrator" && request()->segment(2) == "index"){
+            $id_wilayah = $regency_id->regency_id;
+            $tipe_wilayah = "kota";
+            
+        }else{
+            $id_wilayah = Crypt::decrypt(request()->segment(3));
+            $tipe_wilayah = "kelurahan";
+        }
+        ?>
+        <livewire:dpt-pemilih-component :id_wilayah="$id_wilayah" :tipe_wilayah="$tipe_wilayah" />
 
 @endsection

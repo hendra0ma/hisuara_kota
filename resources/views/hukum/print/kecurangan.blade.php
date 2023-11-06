@@ -21,6 +21,10 @@
     <!-- BOOTSTRAP CSS -->
     <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <style>
         body {
             font-size: 18px
@@ -74,6 +78,13 @@
 </head>
 
 <body>
+    <?php
+    use App\Models\Tracking;
+    
+    
+    $track = Tracking::where('id_user',$user['id'])->first();
+    // dump($absensi);
+    ?>
 
 
     <div class="asdf" style="position: relative;width:100%;height:100%;">
@@ -118,8 +129,264 @@
 
     </div>
 
+    <div class="page-break" style="width: 100%; height: 100%;">
+        <div class="row">
+            <div class="col text-center mb-3">
+                @if ($user['profile_photo_path'] == NULL)
+                <img style="width: 175px; height: 175px; object-fit: cover; margin-right: 10px;"
+                    src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
+                @else
+                <img style="width: 175px; height: 175px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
+                @endif
+            </div>
+            <div class="col my-auto">
+                <div class="mb-0 fw-bold" style="font-size: 30px">{{ $user['name'] }}</div>
+                <div style="font-size: 20px">NIK : {{ $user['nik'] }}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md">
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <b>Detail Akun <i class="fa fa-info-circle"></i></b>
+                    </div>
+
+                    <hr class="mt-1 ms-3" style="margin-bottom: 0px; background: #000;; width: 300px">
+
+                    <div class="col-12">
+                        <table class="table table-stripped">
+                            <tr>
+                                <td class="ps-0 pe-2">Status</td>
+                                <td class="px-0">:</td>
+                                @if ($user['is_active'] == 2)
+                                <td class="ps-2">Belum Terverifikasi</td>
+                                @else
+                                @if ($tps['setup'] == 'terisi')
+                                <td class="ps-2">Terverifikasi (Sudah Mengirim C1)</td>
+                                @else
+                                <td class="ps-2">Terverifikasi (Belum Mengirim C1)</td>
+                                @endif
+                                @endif
+                            </tr>
+                            <tr>
+                                <td class="ps-0 pe-2">Email</td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{ $user['email'] }}</td>
+                            </tr>
+                            <tr>
+                                <td class="ps-0 pe-2">No.Hp</td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{ $user['no_hp'] }}</td>
+                            </tr>
+                            <tr>
+                                <td class="ps-0 pe-2">Alamat</td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{ $user['address'] }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <b>Lokasi <i class="fa fa-info-circle"></i></b>
+                    </div>
+
+                    <hr class="mt-1 ms-3" style="margin-bottom: 0px; background: #000;; width: 300px">
+
+                    <div class="col-12">
+                        <table class="table">
+                            <tr>
+                                <td class="ps-0 pe-2">Kecamatan</td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{$kecamatan['name'] }}</td>
+                            </tr>
+                            <tr>
+                                <td class="ps-0 pe-2">Kelurahan</td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{$kelurahan['name'] }}</td>
+                            </tr>
+                            <tr>
+                                <td class="ps-0 pe-2">TPS</td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{ $tps['number'] }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <b>Meta Data <i class="fa fa-info-circle"></i></b>
+                    </div>
+                    @if ($track == NULL)
+                    <hr class="mt-1 ms-3" style="margin-bottom: 0px; background: #000;; width: 300px">
+
+                    <div class="col-12">
+                        <table class="table">
+                            <tr>
+                                <td class="ps-0 pe-2">Lontitude</td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">Tidak Terdeteksi</td>
+                            </tr>
+                            <tr>
+                                <td class="ps-0 pe-2">Latitude</td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">Tidak Terdeteksi</td>
+                            </tr>
+                            <tr>
+                                <td class="ps-0 pe-2">Ip Address</td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2" Tidak Terdeteksi</td>
+                            </tr>
+                            <tr>
+                                <td class="ps-0 pe-2">Tanggal Teregistrasi</td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{ $user['created_at'] }}</td>
+                            </tr>
+                            {{-- @if($url == 'hadir') --}}
+                            <tr>
+                                <td class="ps-0 pe-2">Jam Absen</td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{ $user['created_at'] }}</td>
+                            </tr>
+                            {{-- @else
+                            @endif --}}
+                        </table>
+                    </div>
+
+                    @else
+                    <hr class="mt-1 ms-3" style="margin-bottom: 0px; background: #000;; width: 300px">
+
+                    <div class="col-12">
+                        <table class="table">
+                            <tr>
+                                <td class="ps-0 pe-2">Lontitude</td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{$track['longitude'] }}</td>
+                            </tr>
+                            <tr>
+                                <td class="ps-0 pe-2">Latitude</td>
+                                <td>:</td>
+                                <td class="ps-2">{{$track['latitude'] }}</td>
+                            </tr>
+                            <tr>
+                                <td class="ps-0 pe-2">Ip Address</td>
+                                <td>:</td>
+                                <td class="ps-2">{{ $track['ip_address'] }}</td>
+                            </tr>
+                            <tr>
+                                <td class="ps-0 pe-2">Tanggal Teregistrasi</td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{ $user['created_at'] }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
 
     <div style="width:100%;height:100%;" class="page-break">
+        <div class="col-12">
+            <div class="row mb-5">
+                {{-- <div class="col-12 mt-2">
+                    <b>Foto Potrait & KTP <i class="fa fa-info-circle"></i></b>
+                </div> --}}
+                <div class="col-12 mt-2 px-1">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0 fw-bold">
+                                Foto Saksi
+                            </h6>
+                        </div>
+                        <div class="card-body p-0 text-center">
+                            @if ($user['profile_photo_path'] == NULL)
+                            <img style="height: 415px; object-fit: cover;"
+                                src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
+                            @else
+                            <img style="height: 415px; object-fit: cover;" src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 mt-2 px-1">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0 fw-bold">
+                                Foto KTP
+                            </h6>
+                        </div>
+                        <div class="card-body p-0">
+                            @if ($user['foto_ktp'] != null)
+                            <img style="height: 415px; object-fit: cover; width: 100%" src="{{ $user['foto_ktp'] }}"
+                                alt="">
+                            @else
+                            <img style="height: 415px; object-fit: cover; width: 100%"
+                                src="https://t-2.tstatic.net/default-2.jpg" alt="">
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-12 mt-2 px-1">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0 fw-bold">
+                                Foto Saksi di Lokasi
+                            </h6>
+                        </div>
+                        <div class="card-body p-0">
+                            @if ($absensi['selfie_lokasi'] != null)
+                            <img style="height: 415px; width: 100%; object-fit: cover"
+                                src="{{ $absensi['selfie_lokasi'] }}" alt="">
+                            @else
+                            <img style="height: 415px; width: 100%; object-fit: cover"
+                                src="https://t-2.tstatic.net/default-2.jpg" alt="">
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 mt-2 px-1">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0 fw-bold">
+                                Foto TPS
+                            </h6>
+                        </div>
+                        <div class="card-body p-0">
+                            @if ($tps['foto_lokasi'] != null)
+                            <img style="height: 415px; width: 100%; object-fit: cover" src="{{ $tps['foto_lokasi'] }}"
+                                alt="">
+                            @else
+                            <img style="height: 415px; width: 100%; object-fit: cover"
+                                src="https://t-2.tstatic.net/default-2.jpg" alt="">
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div style="width:100%;height:100%;" class="page-break">
+        <div class="col-12 text-center mb-3">
+            <img src="{{asset('')}}images/logo/timbangan.png" style="width: 200px" alt="">
+        </div>
+        <div class="col-12 bg-danger text-white py-3 text-center mb-3">
+            <h4 class="fw-bold mb-0">
+                Laporan Kecurangan Saksi
+            </h4>
+        </div>
         <div class="col-12 px-0 py-0 mb-3">
             <div class="card">
                 <div class="card-header" style="border: 1px #eee solid !important; background-color: #eee">
@@ -273,136 +540,86 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                        <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
-                        <table class="table">
-                            <tr>
-                                <td>
-                                    <h3>Bukti Foto</h3>
-                                </td>
-                                <td>
-                                    <h3>Metadata</h3>
-                                </td>
-                            </tr>
-                            @foreach ($foto_kecurangan as $bf)
-                            <tr>
-                                <td>
-                                    <img class="w-100 image" src="{{asset('storage/' . $bf->url)}}" data-url="{{asset('storage/' . $bf->url)}}"
-                                        alt="">
-                                </td>
-                                <td class="exifResults">
-                        
-                                </td>
-                            </tr>
-                            @endforeach
-                        </table>
-                        <script>
-                            $(document).ready(function () {
-                                $(".image").each(function (index) {
-                                    var currentImage = this;
+                <div class="card-body p-0" style="border: 1px #eee solid !important">
+                    <table class="table table-bordered mb-0">
+                        <tr>
+                            <td class="fw-bold">Foto</td>
+                            <td class="fw-bold">Metadata</td>
+                        </tr>
+                        @foreach ($foto_kecurangan as $bf)
+                        <tr>
+                            <td class="text-center" style="width: 50%">
+                                <img class="image" style="height: 250px; object-fit: cover"
+                                    src="{{asset('storage/' . $bf->url)}}" data-url="{{asset('storage/' . $bf->url)}}"
+                                    alt="">
+                            </td>
+                            <td class="exifResultsPhoto" style="width: 50%">
 
+                            </td>
+                        </tr>
+                        @endforeach
+                    </table>
+                    <script>
+                        $(document).ready(function () {
+                            setTimeout(()=>{
+                                $(".image").each(function (index) {
+                                    
+                                    var currentImage = this;
                                     EXIF.getData(currentImage, function () {
-                                        var dateTaken = EXIF.getTag(this, "DateTimeOriginal");
-                                        var result = $("<p>").text(
-                                            " - Date taken: " + (dateTaken ? dateTaken : "Date taken not found")
-                                        );
-                                        $(currentImage).closest('tr').find('.exifResults').html(result);
+                                        var exifData = EXIF.getAllTags(this);
+                                        var locationInfo = "Image " + (index + 1) + " EXIF Data:<br>";
+                                        
+                                        if (exifData && (exifData.DateTimeOriginal || (exifData.GPSLatitude && exifData.GPSLongitude))) {
+                                            if (exifData.DateTimeOriginal) {
+                                            locationInfo += "<b>Date taken</b>: " + exifData.DateTimeOriginal + "<br>";
+                                            }
+                                            if (exifData.GPSLatitude && exifData.GPSLongitude) {
+                                                var latitude = exifData.GPSLatitude[0] + exifData.GPSLatitude[1] / 60 + exifData.GPSLatitude[2] / 3600;
+                                                var longitude = exifData.GPSLongitude[0] + exifData.GPSLongitude[1] / 60 + exifData.GPSLongitude[2] / 3600;
+                                                locationInfo += "<b>Location</b>: Latitude " + latitude + ", Longitude " + longitude + "<br>";
+                                            }
+                                            if (exifData.Make) {
+                                                locationInfo += "<b>Camera Make: </b>" + exifData.Make + "<br>";
+                                            }
+                                            if (exifData.Model) {
+                                                locationInfo += "<b>Camera Model: </b>" + exifData.Model + "<br>";
+                                            }
+                                            if (exifData.ApertureValue) {
+                                                locationInfo += "<b>Aperture: </b>f/" + exifData.ApertureValue + "<br>";
+                                            }
+                                            if (exifData.ExposureTime) {
+                                                locationInfo += "<b>Exposure Time: </b>" + exifData.ExposureTime + " sec<br>";
+                                            }
+                                            if (exifData.ISO) {
+                                                locationInfo += "<b>ISO: </b>" + exifData.ISO + "<br>";
+                                            }
+                                            if (exifData.FocalLength) {
+                                                locationInfo += "<b>Focal Length: </b>" + exifData.FocalLength + "mm<br>";
+                                            }
+                                            if (exifData.Flash) {
+                                                locationInfo += "<b>Flash: </b>" + exifData.Flash + "<br>";
+                                            }
+                                            if (exifData.ImageWidth && exifData.ImageHeight) {
+                                                locationInfo += "<b>Image Resolution: </b>" + exifData.ImageWidth + "x" + exifData.ImageHeight + "<br>";
+                                            }
+                                            // Include more EXIF tags as needed
+                                        } else {
+                                            locationInfo += "<b>EXIF data not found</b>";
+                                        }
+                                        
+                                        // Display the information in the console to ensure it's being correctly constructed
+                                        console.log(locationInfo);
+                                        
+                                        // Find the corresponding .exifResults element related to the current image and update its content
+                                        $(currentImage).closest('tr').find('.exifResultsPhoto').html(locationInfo);
                                     });
                                 });
-                            });
-                        </script>
-                    </div>
+                            },100)
+                        });
+                    </script>
                 </div>
-                {{-- <div class="row">
-                    <div class="col-6">
-
-                        <div class="card">
-                            <div class="card-header" style="border: 1px #eee solid !important">
-                                <h5 class="card-title">Bukti Foto</h5>
-                            </div>
-                            <div class="card-body" style="border: 1px #eee solid !important">
-                                <div class="row">
-                                    @foreach ($foto_kecurangan as $bf)
-                                    <div class="col-12 mt-1">
-                                        <center>
-                                            <img class="image my-1" style="width: 250px" src="{{asset('storage/' . $bf->url)}}"
-                                                data-url="{{asset('storage/' . $bf->url)}}" alt="">
-                                        </center>
-                                    </div>
-                                    @endforeach
-                                    <div id="metadataDisplay"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-6">
-                        <div class="card">
-                            <div class="card-header" style="border: 1px #eee solid !important">
-                                <h5 class="card-title">Metadata</h5>
-                            </div>
-                            <div class="card-body" style="border: 1px #eee solid !important">
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div> --}}
             </div>
         </div>
-        {{-- <table style="table-layout: fixed;" class="table text-center">
-            <thead>
-                <tr>
-                    <td width="350px">Bukti Foto</td>
-                    <td>Bukti Video</td>
-                </tr>
-            </thead>
-            <tbody>
-                @if ($databukti->bukti == "1")
-                <tr>
-                    <td>V</td>
-                    <td>X</td>
-                </tr>
-                <tr>
-                    <td>
-                        @foreach ($foto_kecurangan as $foto)
-                        <img style="width: 70%; height: auto" class="d-block w-100" alt=""
-                            src="{{url('')}}/storage/{{ $foto->url }}" data-bs-holder-rendered="true">
-                        @endforeach
-                    </td>
-                </tr>
-
-
-                @elseif($databukti->bukti == "2")
-                <tr>
-                    <td>X</td>
-                    <td>V</td>
-                </tr>
-                <tr>
-                    <td>Bukti Vidio</td>
-                    <td>{!! QrCode::size(200)->generate( $scan_url); !!}</td>
-                </tr>
-                @else
-                <tr>
-                    <td>V</td>
-                    <td>V</td>
-                </tr>
-                <tr>
-                    <td>@foreach ($foto_kecurangan as $foto)
-                        <img class="d-block w-100" alt="" src="{{url('')}}/storage/{{ $foto->url }}"
-                            data-bs-holder-rendered="true">
-                        @endforeach
-                    </td>
-                    <td>
-                        {!! QrCode::size(200)->generate( $scan_url); !!}
-                    </td>
-                </tr>
-                @endif
-            </tbody>
-        </table> --}}
     </div>
     <div class="page-content-wrapper page-break">
         <div class="row">
@@ -691,11 +908,59 @@
             <h1 class="fs-3 text-center"> Lampiran C1</h1>
         </div>
         <div class="col-md-12">
-            <img alt="" class="d-block mx-auto" style="width: 90%; height: 90%;" src="{{url('')}}/storage/{{ $saksi->c1_images }}"
-                data-bs-holder-rendered="true">
+            <img alt="" class="d-block mx-auto" style="width: 90%; height: 90%;"
+            src="{{url('')}}/storage/{{ $saksi->c1_images }}" data-bs-holder-rendered="true">
         </div>
     </div>
 
+    <div class="row page-content-wrapper page-break">
+        <div class="col-12 px-0">
+            <div class="card">
+                <div class="card-header" style="background-color: #eee">
+                    <h4 class="mb-0 mx-auto text-black card-title">Surat Suara TPS</h4>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-striped mx-auto" style="width: 500px">
+                        <tr>
+                            <td>Total Surat Suara</td>
+                            <td>:</td>
+                            <td>(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td>Jumlah Pemilih</td>
+                            <td>:</td>
+                            <td>(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td>Jumlah Hak Pilih</td>
+                            <td>:</td>
+                            <td>(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td>Surat Suara Sah</td>
+                            <td>:</td>
+                            <td>(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td>Suara Tidak Sah</td>
+                            <td>:</td>
+                            <td>(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td>Total Suara</td>
+                            <td>:</td>
+                            <td>(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td>Sisa Surat Suara</td>
+                            <td>:</td>
+                            <td>(dummy)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     {{-- <div class="divFooter" style="font-size: 18px">{{ $qrcode->nomor_berkas }} <br /> <small class="text-danger">
@@ -744,7 +1009,7 @@
                 window.close()
             }
 
-        }, 400)
+        }, 1000)
 
     </script>
 </body>

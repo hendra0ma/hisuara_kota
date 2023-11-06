@@ -771,6 +771,8 @@ class AdminController extends Controller
         $data['kecamatan'] = District::where('id', decrypt($id))->first();
         $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
         $data['title'] = "KECAMATAN " . $data['kecamatan']['name'] . "";
+        $data['saksi_masuk'] = Saksi::count();
+        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
         return view('administrator.perhitungan.kecamatan', $data);
     }
 
@@ -841,6 +843,8 @@ class AdminController extends Controller
             ->get();
         $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
         $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
+        $data['saksi_masuk'] = Saksi::count();
+        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
         return view('administrator.perhitungan.kelurahan', $data);
     }
     public function theme(Request $request)
@@ -1306,6 +1310,7 @@ class AdminController extends Controller
         $data['foto_kecurangan'] = Buktifoto::where('tps_id', Crypt::decrypt($request['id']))->get();
         $data['vidio_kecurangan'] = Buktividio::where('tps_id', Crypt::decrypt($request['id']))->first();
         $data['surat_pernyataan'] = SuratPernyataan::where('saksi_id', $data['saksi']['id'])->first();
+        $data['absensi'] = Absensi::where('user_id', $data['saksi']['id'])->first();
 
         $status =  Qrcode::where('tps_id', Crypt::decrypt($request['id']))->update([
             'print' => 1
