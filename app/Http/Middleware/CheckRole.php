@@ -59,7 +59,7 @@ class CheckRole
             abort(403);
         }
 
-        if ($role == 'crowd' && $role_id != 16 && $role_id != 1)  {
+        if ($role == 'crowd' && $role_id != 17 && $role_id != 1)  {
             abort(403);
         }
         if ($role == 'validator_hukum' && $role_id != 10) {

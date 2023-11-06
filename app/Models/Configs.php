@@ -9,7 +9,8 @@ class Configs
     public $regencies_id;
     public $provinces_id;
     public $regencies_logo;
-
+    public $darkmode;
+    
 
     public $setup;
     public $updated_at;

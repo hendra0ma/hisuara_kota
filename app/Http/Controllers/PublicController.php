@@ -76,7 +76,7 @@ class PublicController extends Controller
         $data['config'] = Config::first();
         $config = Config::first();
         $dpt = District::where('regency_id', $this->config->regencies_id)->sum("dpt");
-        $data['kota'] = Regency::find($data['config']['regencies_id']);
+        $data['kota'] = Regency::find($this->config->regencies_id);
         $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->get();
         $data['paslon'] = Paslon::with('saksi_data')->get();
         $data['paslon_terverifikasi']     = Paslon::with(['saksi_data' => function ($query) {
@@ -105,18 +105,18 @@ class PublicController extends Controller
         $data['tps_belum'] = Tps::count();
         $data['tps_selesai_quick'] = Tps::where('setup', 'terisi')->where('sample',1)->count();
         $data['tps_belum_quick'] = Tps::where('sample',1)->count();
-        $data['kec'] = District::where('regency_id', $data['config']['regencies_id'])->get();
+        $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
         $data['paslon_candidate'] = Paslon::get();
         $data['title'] = "";
         // $data['villages_quick'] = Tps::join('villages','villages.id','=','tps.villages_id')->where('sample',1)->get();
-        $data['district_quick'] = District::join('villages', 'villages.district_id', '=', 'districts.id')->where('regency_id', $data['config']['regencies_id'])->get();
+        $data['district_quick'] = District::join('villages', 'villages.district_id', '=', 'districts.id')->where('regency_id', $this->config->regencies_id)->get();
         return view('publik.index', $data);
     }
 
     public function kecamatan(Request $request, $id)
     {
         $data['config'] = Config::first();
-        $data['kota'] = Regency::find($data['config']['regencies_id']);
+        $data['kota'] = Regency::find($this->config->regencies_id);
         $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('district_id', Crypt::decrypt($id))->get();
         $data['paslon']  = Paslon::with(['saksi_data' => function ($query) use ($id) {
             $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id', 'district_id')->where('saksi.district_id', decrypt($id));
@@ -144,7 +144,7 @@ class PublicController extends Controller
     public function quick_kecamatan(Request $request, $id)
     {
         $data['config'] = Config::first();
-        $data['kota'] = Regency::find($data['config']['regencies_id']);
+        $data['kota'] = Regency::find($this->config->regencies_id);
         $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('district_id', Crypt::decrypt($id))->get();
         $data['paslon']  = Paslon::with(['saksi_data' => function ($query) use ($id) {
             $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id', 'district_id')->where('saksi.district_id', decrypt($id));
@@ -173,7 +173,7 @@ class PublicController extends Controller
     public function kelurahan(Request $request, $id)
     {
         $data['config'] = Config::first();
-        $data['kota'] = Regency::find($data['config']['regencies_id']);
+        $data['kota'] = Regency::find($this->config->regencies_id);
         $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('village_id', Crypt::decrypt($id))->get();
         $data['paslon']  = Paslon::with(['saksi_data' => function ($query) use ($id) {
             $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id', 'village_id')->where('saksi.village_id', (string)decrypt($id));
@@ -203,7 +203,7 @@ class PublicController extends Controller
     public function quick_kelurahan(Request $request, $id)
     {
         $data['config'] = Config::first();
-        $data['kota'] = Regency::find($data['config']['regencies_id']);
+        $data['kota'] = Regency::find($this->config->regencies_id);
         $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('village_id', Crypt::decrypt($id))->get();
         $data['paslon']  = Paslon::with(['saksi_data' => function ($query) use ($id) {
             $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id', 'village_id')->where('saksi.village_id', (string)decrypt($id));
