@@ -770,6 +770,8 @@ class AdminController extends Controller
         $data['kecamatan'] = District::where('id', decrypt($id))->first();
         $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
         $data['title'] = "KECAMATAN " . $data['kecamatan']['name'] . "";
+        $data['saksi_masuk'] = Saksi::count();
+        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
         return view('administrator.perhitungan.kecamatan', $data);
     }
 
@@ -840,6 +842,8 @@ class AdminController extends Controller
             ->get();
         $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
         $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
+        $data['saksi_masuk'] = Saksi::count();
+        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
         return view('administrator.perhitungan.kelurahan', $data);
     }
     public function theme(Request $request)
