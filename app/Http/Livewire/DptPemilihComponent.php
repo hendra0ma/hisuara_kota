@@ -58,7 +58,7 @@ class DptPemilihComponent extends Component
             $data['wilayah']= $vill;
             $data['dpt_i'] = DB::table('dpt_indonesia')
             ->where('village_name',$vill->name)
-            ->where('tps',"%".$tps->number."%")
+            ->where('tps','like',"%".$tps->number."%")
             ->where('nama_pemilih', 'like', '%' . $this->search . '%')
             ->where('district_name',$kec->name)->paginate(25);
             
