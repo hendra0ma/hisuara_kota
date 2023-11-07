@@ -360,7 +360,8 @@ class AdminController extends Controller
     public function VerifikasiCrowdC1()
     {
         $data['config'] = Config::first();
-        $data['jumlah_saksi'] = User::where('role_id', '=', 17)->where('is_active', '=', 0)->count();
+        // $data['jumlah_saksi'] = User::where('role_id', '=', 17)->where('is_active', '=', 0)->count();
+        $data['jumlah_saksi'] = User::where('role_id', '=', 8)->where('is_active', '=', 0)->count();
         return view('administrator.verifikasi.crowd-c1', $data);
     }
 
@@ -369,7 +370,8 @@ class AdminController extends Controller
         $data['config'] = Config::first();
         $config = Config::first();
         $data['kota']      = Regency::where('id', $this->config->regencies_id)->first();
-        $data['jumlah_saksi_teregistrasi'] = User::where('role_id', 17)->where('is_active', '=', 1)->count();
+        // $data['jumlah_saksi_teregistrasi'] = User::where('role_id', 17)->where('is_active', '=', 1)->count();
+        $data['jumlah_saksi_teregistrasi'] = User::where('role_id', 8)->where('is_active', '=', 1)->count();
 
         // $data['title'] = 'Saksi Teregistrasi (' . $data['jumlah'] . ')';
         $data['title'] = 'Saksi Teregistrasi';

@@ -121,7 +121,7 @@
         
             <h2>
                 {{$kota->name }}<br>
-                kec
+                Kec
                 {{$kecamatan->name}} / Kel
                 {{$kelurahan->name}} <br>
             </h2>

@@ -432,7 +432,7 @@
         <div class="row">
             <div class="col-12 bg-dark text-white py-3 text-center mb-3">
                 <h4 class="fw-bold mb-0">
-                    Validator
+                    Validasi
                 </h4>
             </div>
             
