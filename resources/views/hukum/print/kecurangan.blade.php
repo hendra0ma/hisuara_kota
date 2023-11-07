@@ -129,10 +129,13 @@
         
         </div>
 
-        <div class="col-12 text-center mt-5">
+        <div class="col-12 text-center mb-5 mt-5">
             <img src="{{asset('')}}assets/icons/hisuara_new.png" width="350px" alt="">
         </div>
 
+        <div class="col-12 text-center" style="position: absolute; bottom: -90px">
+            <h3>PILPRES 2024 {{$kota->name }}</h3>
+        </div>
         {{-- <img src="{{asset('')}}assets/stamp.png" class="img-flluid stamp"
             style="width:150px;height:auto; z-index: 2000;" alt="">
         <div class="row">

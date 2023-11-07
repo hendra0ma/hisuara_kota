@@ -55,18 +55,14 @@
         style="position: relative;width:100%;height:700px;page-break-before: auto;page-break-after: always;page-break-inside: avoid;">
 
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 mt-5">
                 <center>
-                    <h1 class="mt-2 text-danger text-uppercase" style="font-size: 40px;">bukti kecurangan rekapitung
+                    <h1 class="mt-2 text-danger text-uppercase" style="font-size: 40px;">Barkode Kecurangan
                     </h1>
-                    <h3 class="mt-1 mb-1">
-                        Election Fraud Barcode Report (EFBR)
-                    </h3>
 
-                    <img style="width: 350px; height: auto; margin-top:75px"
-                        src="{{url('')}}/assets/images/brand/logo.png" alt="">
+                    <img src="{{asset('')}}assets/icons/hisuara_new.png" width="350px" alt="">
 
-                    <center>
+                <center>
             </div>
         </div>
         <hr>
@@ -87,8 +83,8 @@
 
             <div class="col-12">
 
-                <img src="{{asset('')}}assets/stamp.png" class="img-flluid stamp" style="width:150px;height:auto"
-                    alt="">
+                {{-- <img src="{{asset('')}}assets/stamp.png" class="img-flluid stamp" style="width:150px;height:auto"
+                    alt=""> --}}
                 <center>
                     <h3 class="fixed-bottom text-uppercase">
                         {{$config['jenis_pemilu']}}  {{$config['tahun']}} {{$kota->name }}
@@ -101,29 +97,35 @@
 
     <div class="row">
         <div>
-            <h1 class="mt-2 text-danger text-center text-uppercase fs-3 " style="font-size: 40px;">bukti kecurangan
-                rekapitung
+            <h1 class="mt-2 mb-4 text-danger text-center text-uppercase fs-3 " style="font-size: 40px;">
+                Barkode Kecurangan
             </h1>
-            <h3 class="mt-1 mb-1 fs-4 text-center">
-                Election Fraud Barcode Report (EFBR)
-            </h3>
         </div>
 
         <?php $i  = 1;  ?>
         @foreach ($qrcode as $item)
         <?php $i++  ?>
-        <div class="col-4 qr">
-            <div class="card ml-1 mb-1 mr-1"
-                style="margin-top:{{($i % 14 == 0 || $i % 15 == 0||$i % 16 == 0)?'200px':'30px'}}">
-                <div class="card-body">
-                    <?php $scan_url = "" . url('') . "/scanning-secure/" . Crypt::encrypt($item->id) . ""; ?>
-                    {!! QrCode::size(150)->generate($scan_url); !!}
-                </div>
-            </div>
+        <div class="px-0 col-3 my-auto">
+            <?php $scan_url = "" . url('') . "/scanning-secure/" . Crypt::encrypt($item->id) . ""; ?>
+            {!! QrCode::size(125)->generate( $scan_url); !!}
         </div>
-     @if($i % 9 == 0)
+        <div class="px-0 col-3 text-center mb-3">
+            @if ($item['profile_photo_path'] == NULL)
+            <img style="width: 175px; height: 175px; object-fit: cover; margin-right: 10px;"
+                src="https://ui-avatars.com/api/?name={{ $item['name'] }}&color=7F9CF5&background=EBF4FF">
+            @else
+            <img style="width: 175px; height: 175px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".$item['profile_photo_path']) }}">
+            @endif
+        </div>
+        <div class="px-0 col-6 my-auto text-center">
+            <div class="mb-0 fw-bold" style="font-size: 30px">{{ $item['name'] }}</div>
+            <div style="font-size: 20px">NIK : {{ $item['nik'] }}</div>
+            <div style="font-size: 20px">SAKSI TPS {{ $item['number'] }}</div>
+            <div style="font-size: 20px">KELURAHAN {{ $item['village_name'] }}</div>
+        </div>
+        {{-- @if($i % 9 == 0)
         <div class="pages"></div>
-     @endif
+        @endif --}}
         @endforeach
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
