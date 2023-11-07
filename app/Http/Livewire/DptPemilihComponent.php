@@ -20,8 +20,8 @@ class DptPemilihComponent extends Component
     public function render()
     {
         if ($this->tipe_wilayah == "kota") {
-            $reg = Regency::where("id",$this->id_wilayah)->first();
-            $provinsi = Province::where("id",$reg->province_id)->first();
+            $reg = Regency::where("id",(string) $this->id_wilayah)->first();
+            $provinsi = Province::where("id",(string) $reg->province_id)->first();
             $data['judul'] = 'Daftar Pemilih Tetap (DPT) <br> '.$reg->name.' tahun 2024';
             $data['dpt_i'] = DB::table('dpt_indonesia')
             ->where('regency_name',$reg->name)
@@ -30,8 +30,8 @@ class DptPemilihComponent extends Component
             
             
         }elseif ($this->tipe_wilayah == "kecamatan") {
-            $kec = District::where("id",$this->id_wilayah)->first();
-            $reg = Regency::where("id",$kec->regency_id)->first();
+            $kec = District::where("id",(string) $this->id_wilayah)->first();
+            $reg = Regency::where("id",(string) $kec->regency_id)->first();
             $data['judul'] = 'Daftar Pemilih Tetap (DPT) <br> Kecamatan ' . $kec->name . ', '.$reg->name.' tahun 2024';
             $data['dpt_i'] = DB::table('dpt_indonesia')
             ->where('regency_name',$reg->name)
@@ -39,9 +39,9 @@ class DptPemilihComponent extends Component
             ->where('district_name',$kec->name)->paginate(25);
             
         }else{
-            $vill = Village::where("id",$this->id_wilayah)->first();
-            $kec = District::where("id",$vill->district_id)->first();
-            $reg = Regency::where("id", $kec->regency_id)->first();
+            $vill = Village::where("id",(string) $this->id_wilayah)->first();
+            $kec = District::where("id",(string) $vill->district_id)->first();
+            $reg = Regency::where("id", (string) $kec->regency_id)->first();
             $data['wilayah']= $vill;
             $data['judul'] = 'Daftar Pemilih Tetap (DPT) <br> Kelurahan ' . $vill->name . ', ' . $reg->name . ' tahun 2024';
             $data['dpt_i'] = DB::table('dpt_indonesia')
