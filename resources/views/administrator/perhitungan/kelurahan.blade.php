@@ -513,7 +513,7 @@ $tps = Tps::count();
 
 
                             <tr data-id="{{$item['id']}}" data-bs-toggle="modal" class="modal-id" data-bs-target="#modal-id">
-                                <td> <a href="#" class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS {{$item['number']}}</a>
+                                <td> <a href="{{url('')}}/administrator/perhitungan_tps/{{$item->id}}" class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS {{$item['number']}}</a>
                                     @foreach ($paslon_candidate as $cd)
 
                                     <?php
@@ -554,7 +554,7 @@ $tps = Tps::count();
 
 
                             <tr data-id="{{$item['id']}}" data-bs-toggle="modal" class="modal-id" data-bs-target="#modal-id">
-                                <td> <a href="#" class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS {{$item['number']}}</a>
+                                <td> <a href="{{url('')}}/administrator/perhitungan_tps/{{$item->id}}" class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS {{$item['number']}}</a>
                                     @foreach ($paslon_candidate as $cd)
 
                                     <?php
