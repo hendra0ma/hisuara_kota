@@ -90,7 +90,7 @@ $tps = Tps::count();
 
         <ul class="breadcrumb">
             <?php
-            $desa = Village::where('id', $id_kelurahan)->select('name')->first();
+            $desa = Village::where('id', (string) $id_kelurahan)->select('name')->first();
             dd($desa);
             $regency = Regency::where('id', $config->regencies_id)->select('name')->first();
             $kcamatan = District::where('id',(string) $desa->district_id)->select('name')->first();
