@@ -146,8 +146,9 @@ Route::domain('hisuara.id')->name('pusat.')->group(function () {
     Route::get('/',  function () {
         return redirect('login');
     });
-    Route::group(["middleware"=>'role:administrator'],function (){ 
+    
 
+    Route::group(["middleware"=>'role:administrator'],function (){ 
         Route::get('/dashboard-pusats', [PusatController::class, "home"])->name('home');
     });
 
@@ -608,7 +609,7 @@ foreach ($kotas as $kota) {
 
         Route::controller(PublicController::class)->group(function () {
             Route::get('scanning-secure/{id}', 'scanSecure');
-            // Route::get('index', 'index');
+            Route::get('index', 'index');
             Route::get('real_count', 'real_count_public');
             Route::get('quick_count', 'quick_count_public');
             Route::get('map_count', 'map_count_public');

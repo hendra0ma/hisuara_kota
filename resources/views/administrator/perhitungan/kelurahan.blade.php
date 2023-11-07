@@ -512,8 +512,9 @@ $tps = Tps::count();
 
 
                             <tr data-id="{{$item['id']}}" data-bs-toggle="modal" class="modal-id" data-bs-target="#modal-id">
-                                <td> <a href="{{$url('')/administrator/perhitungan_tps/encrypt($item->id)}}" class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS {{$item['number']}}</a>
+                                <td> <a href="{{url('')}}/administrator/perhitungan_tps/{{Crypt::encrypt($item->id)}}" class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS {{$item['number']}}</a>
                                     @foreach ($paslon_candidate as $cd)
+
                                     <?php
                                     $tpsass = \App\Models\Tps::where('number', (string)$item['number'])->where('villages_id', (string)$id)->first(); ?>
                                     <?php $saksi_data = \App\Models\SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('tps_id', $tpsass->id)->sum('voice'); ?>
@@ -552,7 +553,7 @@ $tps = Tps::count();
 
 
                             <tr data-id="{{$item['id']}}" data-bs-toggle="modal" class="modal-id" data-bs-target="#modal-id">
-                                <td> <a href="#" class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS {{$item['number']}}</a>
+                                <td> <a href="={{url('')}}/administrator/perhitungan_tps/{{Crypt::encrypt($item->id)}}" class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS {{$item['number']}}</a>
                                     @foreach ($paslon_candidate as $cd)
 
                                     <?php

@@ -90,13 +90,14 @@ $tps = Tps::count();
 
         <ul class="breadcrumb">
             <?php
-            $desa = Village::where('id', $id_kelurahan)->select('name')->first();
+            $desa = Village::where('id', $village->id)->select('name')->first();
             $regency = Regency::where('id', $config->regencies_id)->select('name')->first();
             $kcamatan = District::where('id', $desa->district_id)->select('name')->first();
             ?>
             <li><a href="{{url('')}}/administrator/index" class="text-white">{{$regency->name}}</a></li>
             <li><a href="{{url('')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($district->id)}}" class="text-white">{{$district->name}}</a></li>
-            <li><a href="{{url('')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($id_kelurahan)}}" class="text-white">{{$desa->name}}</a></li>
+            <li><a href="{{url('')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($village->id)}}" class="text-white">{{$desa->name}}</a></li>
+            <li><a href="{{url('')}}/administrator/perhitungan_tps/{{Crypt::encrypt($data_tps->id)}}" class="text-white">TPS {{$data_tps->number}}</a></li>
 
         </ul>
     </div>
@@ -153,7 +154,7 @@ $tps = Tps::count();
         </div>
     </div>
 
-    <div class="{{($config->otonom == 'yes')?'col-lg-12 col-md-12':'col-lg-6 col-md-12'}}">
+    <div class="col-md-12">
         <div class="card">
             {{-- <div class="card-header bg-info">
                 <h3 class="card-title text-white">Suara TPS Masuk</h3>
@@ -209,130 +210,7 @@ $tps = Tps::count();
         </div>
     </div>
 
-    @if ($config->quick_count == 'yes')
-    <div class="col-lg-12 col-md" style="display:{{($config->otonom == 'yes')?'none':'block'}}">
-        <div class="card">
-            {{-- <div class="card-header bg-secondary">
-                <h3 class="card-title text-white">Suara TPS Terverifikasi</h3>
-            </div> --}}
-            <div class="card-body" style="position: relative">
-                <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="container">
-                                    <div class="text-center fs-3 mb-3 fw-bold">SUARA TERVERIFIKASI</div>
-                                    <div class="text-center">Terverifikasi {{$saksi_terverifikasi}} TPS dari
-                                        {{$saksi_masuk}}
-                                        TPS Masuk
-                                    </div>
-                                    <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_verification_voice}} / {{$dpt}}</span>
-                                    </div>
-                                    <div id="chart-donut" style="height: 320px" class="chartsh h-100 w-100"></div>
-                                </div>
-                            </div>
-                            <div class="col-xxl">
-                                <?php $i = 1; ?>
-                                <div class="row mt-2">
-                                    @foreach ($paslon_terverifikasi as $pas)
-                                    <div class="col-lg col-md col-sm col-xl mb-3">
-                                        <div class="card" style="margin-bottom: 0px;">
-                                            <div class="card-body p-3">
-                                                <div class="row me-auto">
-                                                    <div class="col-12">
-                                                        <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white ms-auto" style="margin-bottom: 0; background-color: {{$pas->color}};">
-                                                            {{$i++}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="col text-center">
-                                                        <h6 class="mt-4">{{$pas->candidate}} </h6>
-                                                        <h6 class="">{{$pas->deputy_candidate}} </h6>
-                                                        <?php
-                                                        $voice = 0;
-                                                        ?>
-                                                        @foreach ($pas->saksi_data as $dataTps)
-                                                        <?php
-                                                        $voice += $dataTps->voice;
-                                                        ?>
-                                                        @endforeach
-                                                        <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    @else
-    <div class="col-lg-6 col-md" style="display:{{($config->otonom == 'yes')?'none':'block'}}">
-        <div class="card">
-            <div class="card-body" style="position: relative">
-                <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="container">
-                                    <div class="text-center fs-3 mb-3 fw-bold">SUARA TERVERIFIKASI</div>
-                                    <div class="text-center">Terverifikasi {{$saksi_terverifikasi}} TPS dari
-                                        {{$saksi_masuk}}
-                                        TPS Masuk
-                                    </div>
-                                    <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_verification_voice}} / {{$dpt}}</span>
-                                    </div>
-                                    <div id="chart-donut" style="height: 320px" class="chartsh h-100 w-100"></div>
-                                </div>
-                            </div>
-                            <div class="col-xxl">
-                                <?php $i = 1; ?>
-                                <div class="row mt-2">
-                                    @foreach ($paslon_terverifikasi as $pas)
-                                    <div class="col-lg col-md col-sm col-xl mb-3">
-                                        <div class="card" style="margin-bottom: 0px;">
-                                            <div class="card-body p-3">
-                                                <div class="row me-auto">
-                                                    <div class="col-12">
-                                                        <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white ms-auto" style="margin-bottom: 0; background-color: {{$pas->color}};">
-                                                            {{$i++}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="col text-center">
-                                                        <h6 class="mt-4">{{$pas->candidate}} </h6>
-                                                        <h6 class="">{{$pas->deputy_candidate}} </h6>
-                                                        <?php
-                                                        $voice = 0;
-                                                        ?>
-                                                        @foreach ($pas->saksi_data as $dataTps)
-                                                        <?php
-                                                        $voice += $dataTps->voice;
-                                                        ?>
-                                                        @endforeach
-                                                        <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    @endif
+   
 
 
     <?php
@@ -350,135 +228,6 @@ $tps = Tps::count();
 </div>
 
 
-<div class="row mt-3">
-
-    <div class="col-md-12">
-        <div class="container-fluid">
-            <div class="tab">
-                <div class="row">
-                    <div class="col-md">
-                        <button class="btn tablink w-100 rounded-0 text-dark" onclick="openPage('saksi-masuk', this, '#45aaf2')" id="defaultOpen">Suara TPS Masuk</button>
-                    </div>
-                    <div class="col-md">
-                        <button class="btn tablink w-100 rounded-0 text-dark" onclick="openPage('saksi-terverifikasi', this, '#f7b731')">Suara TPS Terverifikasi</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="saksi-masuk" class="tabcontent">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="cart-title mx-auto text-center fw-bold my-auto">Suara TPS Masuk (Kelurahan {{$district['name']}})</h5>
-                </div>
-                <div class="card-body">
-
-                    <!-- 1st card -->
-                    <table class="table table-bordered table-hover">
-                        <thead style="background-color: #45aaf2;">
-                            <tr>
-                                <th class="align-middle text-white text-center align-middle" rowspan="2">Tps</th>
-                                @foreach ($paslon_candidate as $item)
-                                <th class="text-white text-center align-middle">{{ $item['candidate']}} - {{ $item['deputy_candidate']}}</th>
-                                @endforeach
-
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach ($tps_kel as $item)
-
-
-                            <tr data-id="{{$item['id']}}" data-bs-toggle="modal" class="modal-id" data-bs-target="#modal-id">
-                                <td> <a href="#" class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS {{$item['number']}}</a>
-                                    @foreach ($paslon_candidate as $cd)
-
-                                    <?php
-                                    $tpsass = \App\Models\Tps::where('number', (string)$item['number'])->where('villages_id', (string)$id)->first(); ?>
-                                    <?php $saksi_data = \App\Models\SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('tps_id', $tpsass->id)->sum('voice'); ?>
-                                <td>{{$saksi_data}}</td>
-
-                                @endforeach
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div id="saksi-terverifikasi" class="tabcontent">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="cart-title mx-auto text-center fw-bold my-auto">Suara TPS Terverifikasi (Kelurahan {{$district['name']}})</h5>
-                </div>
-                <div class="card-body">
-
-                    <!-- 1st card -->
-                    <table class="table table-bordered table-hover">
-                        <thead style="background-color: #f7b731;">
-                            <tr>
-                                <th class="text-white text-center align-middle" rowspan="2">Tps</th>
-                                @foreach ($paslon_candidate as $item)
-                                <th class="text-white text-center align-middle">{{ $item['candidate']}} - {{ $item['deputy_candidate']}}</th>
-                                @endforeach
-
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach ($tps_kel as $item)
-
-
-                            <tr data-id="{{$item['id']}}" data-bs-toggle="modal" class="modal-id" data-bs-target="#modal-id">
-                                <td> <a href="#" class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS {{$item['number']}}</a>
-                                    @foreach ($paslon_candidate as $cd)
-
-                                    <?php
-                                    $tpsass = \App\Models\Tps::where('number', (string)$item['number'])->where('villages_id', (string)$id)->first(); ?>
-                                    <?php $saksi_data = \App\Models\SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('verification', 1)->where('paslon_id', $cd['id'])->where('tps_id', $tpsass->id)->sum('voice'); ?>
-                                <td>{{$saksi_data}}</td>
-
-                                @endforeach
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<script>
-    function openPage(pageName, elmnt, color) {
-        var i, tabcontent, tablinks;
-
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-
-        }
-        tablinks = document.getElementsByClassName("tablink");
-        let darkmode = document.body.className.split(' ');
-
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].style.backgroundColor = "";
-            (darkmode.length == 3) ? tablinks[i].style.color = "white": tablinks[i].style.color = "black";
-        }
-
-        document.getElementById(pageName).style.display = "block";
-
-
-
-
-        elmnt.style.backgroundColor = color;
-        elmnt.style.color = 'white';
-    }
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
-</script>
 
 <!-- SWEET-ALERT JS -->
 <script src="../../assets/plugins/sweet-alert/sweetalert.min.js"></script>

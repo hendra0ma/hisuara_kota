@@ -99,12 +99,10 @@ class PublicController extends Controller
         }])->get();
         $data['total_incoming_vote_quick']      = QuickSaksiData::sum('voice');
         $data['realcount']  = $data['total_incoming_vote_quick'] / $dpt * 100;
-
-        
-        $data['tps_selesai'] = Tps::where('setup', 'terisi')->count();
-        $data['tps_belum'] = Tps::count();
-        $data['tps_selesai_quick'] = Tps::where('setup', 'terisi')->where('sample',1)->count();
-        $data['tps_belum_quick'] = Tps::where('sample',1)->count();
+        $data['tps_selesai'] = Tps::where('regency_id',$this->config->regencies_id)->where('setup', 'terisi')->count();
+        $data['tps_belum'] = Tps::where('regency_id',$this->config->regencies_id)->count();
+        $data['tps_selesai_quick'] = Tps::where('regency_id',$this->config->regencies_id)->where('setup', 'terisi')->where('sample',1)->count();
+        $data['tps_belum_quick'] = Tps::where('regency_id',$this->config->regencies_id)->where('sample',1)->count();
         $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
         $data['paslon_candidate'] = Paslon::get();
         $data['title'] = "";
