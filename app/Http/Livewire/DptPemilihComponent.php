@@ -39,6 +39,16 @@ class DptPemilihComponent extends Component
             ->where('nama_pemilih', 'like', '%' . $this->search . '%')
             ->where('district_name',$kec->name)->paginate(25);
             
+        }elseif ($this->tipe_wilayah == "kelurahan"){
+            $vill = Village::where("id",(string) $this->id_wilayah)->first();
+            $kec = District::where("id",(string) $vill->district_id)->first();
+            $reg = Regency::where("id", (string) $kec->regency_id)->first();
+            $data['wilayah']= $vill;
+            $data['judul'] = 'Daftar Pemilih Tetap (DPT) <br> Kelurahan ' . $vill->name . ', ' . $reg->name . ' tahun 2024';
+            $data['dpt_i'] = DB::table('dpt_indonesia')
+            ->where('village_name',$vill->name)
+            ->where('nama_pemilih', 'like', '%' . $this->search . '%')
+            ->where('district_name',$kec->name)->paginate(25);
         }else{
 
             $tps = Tps::where("id",(string)$this->id_wilayah)->first();
@@ -48,7 +58,7 @@ class DptPemilihComponent extends Component
             $data['wilayah']= $vill;
             $data['dpt_i'] = DB::table('dpt_indonesia')
             ->where('village_name',$vill->name)
-            ->where('tps',"%".$tps->number."%")
+            ->where('village_name','tps',"%".$tps->number."%")
             ->where('nama_pemilih', 'like', '%' . $this->search . '%')
             ->where('district_name',$kec->name)->paginate(25);
             
