@@ -336,35 +336,6 @@ $tps = Tps::count();
     @endif
 
 
-    <?php
-
-    $currentDomain = request()->getHttpHost();
-    if (isset(parse_url($currentDomain)['port'])) {
-        $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
-    } else {
-        $url = $currentDomain;
-    }
-    $regency_id = RegenciesDomain::where('domain', "LIKE", "%" . $url . "%")->first();
-
-    if (request()->segment(1) == "administrator" && request()->segment(2) == "perhitungan_kecamatan") {
-        $id_wilayah = Crypt::decrypt(request()->segment(3));
-        $tipe_wilayah = "kecamatan";
-    } elseif (request()->segment(1) == "administrator" && request()->segment(2) == "index") {
-        $id_wilayah = $regency_id->regency_id;
-        $tipe_wilayah = "kota";
-    } else {
-        $id_wilayah = Crypt::decrypt(request()->segment(3));
-        $tipe_wilayah = "kelurahan";
-    }
-
-    ?>
-    <livewire:dpt-pemilih-component :id_wilayah="$id_wilayah" :tipe_wilayah="$tipe_wilayah" />
-
-
-
-
-</div>
-
 {{-- <div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
     <div class="col-lg-6 col-md-12">
         <div class="card">
