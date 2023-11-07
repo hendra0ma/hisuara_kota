@@ -21,7 +21,7 @@ class FraudDataPrint extends Component
             ->where('saksi.status_kecurangan', 'terverifikasi')
             ->where('name', 'like', '%' . $this->search . '%')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
-            ->paginate();
+            ->paginate(16);
         return view('livewire.fraud-data-print', $data);
     }
 }

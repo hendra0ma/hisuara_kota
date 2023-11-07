@@ -434,7 +434,7 @@
         }
 
         .parent-link .btn-fdp.active {
-            background: #f82649;
+            background: #000000;
         }
 
         .parent-link .btn-fdp.active:after {
@@ -445,16 +445,16 @@
             transform: translateX(-50%);
             right: 0;
             width: 40%;
-            border-top: 3px solid #f82649;
+            border-top: 3px solid #000000;
             z-index: -1;
         }
 
         .parent-link .btn-fdp {
-            background: rgba(248, 38, 73, 0.65);
+            background: rgba(0, 0, 0, 0.35);
         }
 
         .parent-link .btn-fdp:hover {
-            background: #f82649;
+            background: #000000;
         }
 
         .parent-link .btn-ver.active {

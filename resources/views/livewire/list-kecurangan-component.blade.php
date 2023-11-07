@@ -16,7 +16,7 @@
             <div class="card">
                 <div class="card-header text-white border-0" style="background-color: #404042">
                     <span class="mx-auto py-6 fs-6">
-                        DATA SAKSI
+                        LAPORAN KECURANGAN SAKSI
                     </span>
                 </div>
                 <div class="hiasan-1" >
