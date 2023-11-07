@@ -16,7 +16,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    {{-- <title>Laporan Kecurangan {{ $qrcode->nomor_berkas }}</title> --}}
+    <title>Laporan Kecurangan {{ $qrcode->nomor_berkas }}</title>
 
     <!-- BOOTSTRAP CSS -->
     <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -61,7 +61,7 @@
 
             }
 
-            @page {
+            /* @page {
                 size: auto;
                 margin: 25px;
                 counter-increment: page;
@@ -69,7 +69,7 @@
                 @bottom-center {
                     content: counter(page);
                 }
-            }
+            } */
         }
 
         @media print {
@@ -113,8 +113,8 @@
             <div style="font-size: 20px">NIK : {{ $user['nik'] }}</div>
         </div>
         <div class="col-12 py-3 text-center ">
-            <h1 class="fw-bold mb-0 text-danger">
-                Laporan Kecurangan Saksi
+            <h1 class="fw-bold mb-0 text-danger" style="font-size: 36px">
+                LAPORAN KECURANGAN SAKSI
             </h1>
         </div>
         <div class="col-9 text-center py-3 mb-5 " style="border: 1px black solid">
@@ -129,7 +129,7 @@
         
         </div>
 
-        <div class="col-12 text-center">
+        <div class="col-12 text-center mt-5">
             <img src="{{asset('')}}assets/icons/hisuara_new.png" width="350px" alt="">
         </div>
 
