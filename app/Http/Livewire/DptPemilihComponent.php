@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\District;
 use App\Models\Province;
 use App\Models\Regency;
+use App\Models\Tps;
 use App\Models\Village;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -38,7 +39,7 @@ class DptPemilihComponent extends Component
             ->where('nama_pemilih', 'like', '%' . $this->search . '%')
             ->where('district_name',$kec->name)->paginate(25);
             
-        }else{
+        }elseif($this->tipe_wilayah == "kelurahan"){
             $vill = Village::where("id",$this->id_wilayah)->first();
             $kec = District::where("id",$vill->district_id)->first();
             $data['wilayah']= $vill;
@@ -46,6 +47,18 @@ class DptPemilihComponent extends Component
             ->where('village_name',$vill->name)
             ->where('nama_pemilih', 'like', '%' . $this->search . '%')
             ->where('district_name',$kec->name)->paginate(25);
+        }else{
+
+            $tps = Tps::where("id",$this->id_wilayah)->first();
+            $vill = Village::where("id",$tps->villages_id)->first();
+            $kec = District::where("id",$vill->district_id)->first();
+
+            $data['wilayah']= $vill;
+            $data['dpt_i'] = DB::table('dpt_indonesia')
+            ->where('village_name',$vill->name)
+            ->where('nama_pemilih', 'like', '%' . $this->search . '%')
+            ->where('district_name',$kec->name)->paginate(25);
+            
         }
         return view('livewire.dpt-pemilih-component',$data);
         // dd($reg);

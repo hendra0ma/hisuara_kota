@@ -337,24 +337,9 @@ $tps = Tps::count();
 
     <?php
 
-    $currentDomain = request()->getHttpHost();
-    if (isset(parse_url($currentDomain)['port'])) {
-        $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
-    } else {
-        $url = $currentDomain;
-    }
-    $regency_id = RegenciesDomain::where('domain', "LIKE", "%" . $url . "%")->first();
-
-    if (request()->segment(1) == "administrator" && request()->segment(2) == "perhitungan_kecamatan") {
         $id_wilayah = Crypt::decrypt(request()->segment(3));
-        $tipe_wilayah = "kecamatan";
-    } elseif (request()->segment(1) == "administrator" && request()->segment(2) == "index") {
-        $id_wilayah = $regency_id->regency_id;
-        $tipe_wilayah = "kota";
-    } else {
-        $id_wilayah = Crypt::decrypt(request()->segment(3));
-        $tipe_wilayah = "kelurahan";
-    }
+        $tipe_wilayah = "tps";
+    
 
     ?>
     <livewire:dpt-pemilih-component :id_wilayah="$id_wilayah" :tipe_wilayah="$tipe_wilayah" />
@@ -364,113 +349,6 @@ $tps = Tps::count();
 
 </div>
 
-{{-- <div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
-    <div class="col-lg-6 col-md-12">
-        <div class="card">
-            <div class="card-header bg-info-gradient">
-                <h3 class="card-title text-white">Suara TPS Masuk</h3>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md">
-                        <div class="container" style="margin-left: 3%; margin-top: 10%;">
-                            <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
-<div id="chart-pie" style="height: 320px" class="chartsh h-100 w-100"></div>
-</div>
-</div>
-<div class="col-md">
-    <?php
-
-    $i = 1; ?>
-    @foreach ($paslon as $pas)
-    <div class="row mt-2">
-        <div class="col-lg col-md col-sm col-xl mb-3">
-            <div class="card" style="margin-bottom: 0px;">
-                <div class="card-body">
-                    <div class="row me-auto">
-                        <div class="col-4">
-                            <div class="counter-icon box-shadow-secondary brround candidate-name text-white " style="margin-bottom: 0; background-color: {{$pas->color}};">
-                                {{$i++}}
-                            </div>
-                        </div>
-                        <div class="col me-auto">
-                            <h6 class="">{{$pas->candidate}} </h6>
-                            <h6 class="">{{$pas->deputy_candidate}} </h6>
-                            <?php
-                            $voice = 0;
-                            ?>
-                            @foreach ($pas->saksi_data as $dataTps)
-                            <?php
-                            $voice += $dataTps->voice;
-                            ?>
-                            @endforeach
-                            <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endforeach
-</div>
-</div>
-
-</div>
-</div>
-</div>
-
-<div class="col-lg-6 col-md-12">
-    <div class="card">
-        <div class="card-header bg-secondary-gradient">
-            <h3 class="card-title text-white">Suara Terverifikasi</h3>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md">
-                    <div class="container" style="margin-left: 3%; margin-top: 10%;">
-                        <div class="text-center">Terverifikasi 6 TPS dari 1 TPS Masuk</div>
-                        <div id="chart-donut" style="height: 320px" class="chartsh h-100 w-100"></div>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <?php $i = 1; ?>
-                    @foreach ($paslon_terverifikasi as $pas)
-                    <div class="row mt-2">
-                        <div class="col-lg col-md col-sm col-xl mb-3">
-                            <div class="card" style="margin-bottom: 0px;">
-                                <div class="card-body">
-                                    <div class="row me-auto">
-                                        <div class="col-4">
-                                            <div class="counter-icon box-shadow-secondary brround candidate-name text-white ms-auto" style="margin-bottom: 0; background-color: {{$pas->color}};">
-                                                {{$i++}}
-                                            </div>
-                                        </div>
-                                        <div class="col me-auto">
-                                            <h6 class="">{{$pas->candidate}} </h6>
-                                            <h6 class="">{{$pas->deputy_candidate}} </h6>
-                                            <?php
-                                            $voice = 0;
-                                            ?>
-                                            @foreach ($pas->saksi_data as $dataTps)
-                                            <?php
-                                            $voice += $dataTps->voice;
-                                            ?>
-                                            @endforeach
-                                            <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-</div> --}}
 
 <div class="row mt-3">
 
@@ -512,8 +390,9 @@ $tps = Tps::count();
 
 
                             <tr data-id="{{$item['id']}}" data-bs-toggle="modal" class="modal-id" data-bs-target="#modal-id">
-                                <td> <a href="{{$url('')/administrator/perhitungan_tps/encrypt($item->id)}}" class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS {{$item['number']}}</a>
+                                <td> <a href="#" class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS {{$item['number']}}</a>
                                     @foreach ($paslon_candidate as $cd)
+
                                     <?php
                                     $tpsass = \App\Models\Tps::where('number', (string)$item['number'])->where('villages_id', (string)$id)->first(); ?>
                                     <?php $saksi_data = \App\Models\SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('tps_id', $tpsass->id)->sum('voice'); ?>

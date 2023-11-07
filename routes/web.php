@@ -140,12 +140,20 @@ Route::post("import-dpt-excel",[ExcelController::class,"importDptExcel"])->name(
 Route::get('/redirect', [LoginController::class, 'index']);
 
 //Hisuara Pusat
+
 Route::domain('hisuara.id')->name('pusat.')->group(function () {
+
     Route::get('/',  function () {
         return redirect('login');
     });
-    Route::get('/dashboard-pusats', [PusatController::class, "home"])->name('home');
+    Route::group(["middleware"=>'role:administrator'],function (){ 
+
+        Route::get('/dashboard-pusats', [PusatController::class, "home"])->name('home');
+    });
+
 });
+
+
 
 $provinsi = Province::get();
 foreach ($provinsi as $provinsis) {
@@ -219,15 +227,15 @@ foreach ($kotas as $kota) {
         });
 
 
-        Route::get('/mail', function () {
-            $user = User::create([
-                'name' => '12312',
-                'email' => 'adityasundawa.34@gmail.com',
-                'password' => Hash::make('23123123'),
-            ]);
-            $user->notify(new WelcomeEmailNotification());
-            return $user;
-        });
+        // Route::get('/mail', function () {
+        //     $user = User::create([
+        //         'name' => '12312',
+        //         'email' => 'adityasundawa.34@gmail.com',
+        //         'password' => Hash::make('23123123'),
+        //     ]);
+        //     $user->notify(new WelcomeEmailNotification());
+        //     return $user;
+        // });
 
         Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
             return view('dashboard');
@@ -313,6 +321,7 @@ foreach ($kotas as $kota) {
                     Route::get('laporan-bawaslu', 'laporanBapilu')->name('laporan_bapilu');
                     Route::get('real_count2', 'real_count2')->name('real_count2');
                     Route::get('rekapitulasi_kelurahan', 'rekapitulasiKelurahan')->name('rekapitulasiKelurahan');
+
                     Route::get('rekapitulasi_kecamatan', 'rekapitulasiKecamatan')->name('rekapitulasiKecamatan');
                     Route::get('quick_count2', 'quick_count2')->name('quick_count2');
                     Route::get('terverifikasi', 'terverifikasi')->name('terverifikasi');
@@ -370,6 +379,10 @@ foreach ($kotas as $kota) {
                     Route::get('tolak_koreksi/{id}', 'tolak_koreksi');
                     Route::get('perhitungan_kecamatan/{id}', 'perhitungan_kecamatan');
                     Route::get('perhitungan_kelurahan/{id}', 'perhitungan_kelurahan');
+
+                    Route::get('perhitungan_tps/{id}', 'perhitungan_tps');
+
+
                     Route::get('rekapitulator/index/{id}', 'admin_rekapitulator');
                     Route::get('rekapitulator/kota', 'rekapitulator_kota');
                     Route::get('rekapitulator-kota-print', 'rekapitulator_kota_print');
