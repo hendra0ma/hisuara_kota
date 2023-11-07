@@ -48,7 +48,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
 @include('layouts.partials.header')
 
 <div class="row mt-3">
-    <div class="col-lg-4">
+    <div class="col-lg">
         <h1 class="page-title fs-1 mt-2">Bukti Kecurangan
             <!-- Kota -->
         </h1>
@@ -60,7 +60,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
             </li>
         </ol>
     </div>
-    <div class="col-lg-8">
+    <div class="col-lg-4">
         <div class="row mt-2">
 
             {{-- <div class="col parent-link">

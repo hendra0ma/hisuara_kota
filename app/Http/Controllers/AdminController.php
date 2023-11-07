@@ -1343,10 +1343,16 @@ class AdminController extends Controller
 
     public function print_qr_code()
     {
-        $data['qrcode'] = QrCode::get();
+        $data['qrcode'] = QrCode::join('tps', 'tps.id', '=', 'qrcode_hukum.tps_id')
+                                ->join('users', 'users.tps_id', '=', 'qrcode_hukum.tps_id')
+                                ->join('villages', 'villages.id', '=', 'tps.villages_id')
+                                ->select('users.*', 'tps.*', 'villages.name as village_name')
+                                ->get();
+        // dd($data['qrcode']);
         $config = Config::first();
         $data['config'] = $config;
         $data['kota']      = Regency::where('id', $this->config->regencies_id)->first();
+        // $data['user'] = User::where('id', $data['tps']['user_id'])->first();
         return view('administrator.printQr', $data);
     }
 

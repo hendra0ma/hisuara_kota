@@ -23,7 +23,7 @@ class FraudDataPrintTercetak extends Component
             ->where('print', 1)
             ->where('name', 'like', '%' . $this->search . '%')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
-            ->get();
+            ->paginate(16);
         return view('livewire.fraud-data-print-tercetak', $data);
     }
 }

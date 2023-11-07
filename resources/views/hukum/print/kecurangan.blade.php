@@ -16,7 +16,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    {{-- <title>Laporan Kecurangan {{ $qrcode->nomor_berkas }}</title> --}}
+    <title>Laporan Kecurangan {{ $qrcode->nomor_berkas }}</title>
 
     <!-- BOOTSTRAP CSS -->
     <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -61,7 +61,7 @@
 
             }
 
-            @page {
+            /* @page {
                 size: auto;
                 margin: 25px;
                 counter-increment: page;
@@ -69,7 +69,7 @@
                 @bottom-center {
                     content: counter(page);
                 }
-            }
+            } */
         }
 
         @media print {
@@ -93,14 +93,51 @@
     
     
     $track = Tracking::where('id_user',$user['id'])->first();
+    $scan_url = url('') . "/scanning-secure/" . (string)Crypt::encrypt($qrcode->nomor_berkas);
     // dump($absensi);
     ?>
 
 
-    <div class="asdf" style="position: relative;width:100%;height:100%;">
+    <div class="asdf mt-5 row justify-content-center" style="position: relative;width:100%;height:100%;">
+        
+        <div class="col-12 text-center mb-3 mt-5">
+            @if ($user['profile_photo_path'] == NULL)
+            <img class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover; margin-right: 10px;"
+                src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
+            @else
+            <img class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
+            @endif
+        </div>
+        <div class="col-12 my-auto text-center mb-5">
+            <div class="mb-0 fw-bold" style="font-size: 30px">{{ $user['name'] }}</div>
+            <div style="font-size: 20px">NIK : {{ $user['nik'] }}</div>
+        </div>
+        <div class="col-12 py-3 text-center ">
+            <h1 class="fw-bold mb-0 text-danger" style="font-size: 36px">
+                LAPORAN KECURANGAN SAKSI
+            </h1>
+        </div>
+        <div class="col-9 text-center py-3 mb-5 " style="border: 1px black solid">
+        
+            <h2>
+                {{$kota->name }}<br>
+                kec
+                {{$kecamatan->name}} / Kel
+                {{$kelurahan->name}} <br>
+            </h2>
+            <h2 class="text-danger" style="font-size:40px">TPS {{ $tps->number }} <br></h2>
+        
+        </div>
 
+        <div class="col-12 text-center mb-5 mt-5">
+            <img src="{{asset('')}}assets/icons/hisuara_new.png" width="350px" alt="">
+        </div>
+
+        <div class="col-12 text-center" style="position: absolute; bottom: -90px">
+            <h3>PILPRES 2024 {{$kota->name }}</h3>
+        </div>
         {{-- <img src="{{asset('')}}assets/stamp.png" class="img-flluid stamp"
-            style="width:150px;height:auto; z-index: 2000;" alt=""> --}}
+            style="width:150px;height:auto; z-index: 2000;" alt="">
         <div class="row">
             <div class="col-12">
                 <center>
@@ -113,14 +150,14 @@
                     <img style="width: 350px; height: auto; margin-top:75px"
                         src="{{url('/')}}/images/logo/rekapitung_gold.png" alt="">
 
-                    <center>
+                <center>
             </div>
         </div>
 
 
         <div class="row justify-content-center border border-dark"
             style="align-items:center;height:100%;margin-top:75px">
-            <?php $scan_url = url('') . "/scanning-secure/" . (string)Crypt::encrypt($qrcode->nomor_berkas); ?>
+            
             <div class="col-6">
                 {!! QrCode::size(200)->generate( $scan_url); !!}
             </div>
@@ -135,7 +172,7 @@
                 <h2 class="text-danger" style="font-size:40px">TPS {{ $tps->number }} <br></h2>
 
             </div>
-        </div>
+        </div> --}}
 
     </div>
 
@@ -363,7 +400,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h6 class="mb-0 fw-bold">
-                                Foto Saksi di Lokasi
+                                Foto Saksi di Lokasi TPS
                             </h6>
                         </div>
                         <div class="card-body p-0">
@@ -708,7 +745,7 @@
         </div>
     </div>
 
-    <div class="row page-content-wrapper page-break">
+    {{-- <div class="row page-content-wrapper page-break">
         <div class="col-12 px-0">
             <div class="card">
                 <div class="card-header" style="background-color: #eee">
@@ -755,12 +792,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="page-content-wrapper page-break" style="width:100%;height:100%;">
         <div class="col-12">
     
-            <div class="row mt-2">
+            <div class="row mt-2 justify-align-center">
     
                 <div class="container">
                     <div class="col-lg-12">
@@ -894,10 +931,10 @@
                         </div>
                     </div>
                 </div>
-                <p class="mb-3 text-center mt-2" style="font-size: 14px">
+                <div class="mb-3 text-center mt-4 py-3 mx-auto" style="font-size: 14px; border: 1px #f82649 solid; width: 95%">
                     <i>Laporan Ini Dicetak Oleh Komputer Dan Tidak Memerlukan Tanda Tangan.
                         Berkas Terlampir</i>
-                </p>
+                </div>
             </div>
     
         </div>
