@@ -41,7 +41,7 @@ class DptPemilihComponent extends Component
             
         }else{
 
-            $tps = Tps::where("id",(string)$this->id_wilayah)->first();
+            $tps = Tps::where("id",$this->id_wilayah)->first();
             $vill = Village::where("id",(string)$tps->villages_id)->first();
             $kec = District::where("id",(string)$vill->district_id)->first();
             $data['judul'] = 'Daftar Pemilih Tetap (DPT) <br> Kelurahan ' . $vill->name . ', TPS ' . $tps->number . ' tahun 2024';
