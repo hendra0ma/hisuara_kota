@@ -90,9 +90,9 @@ $tps = Tps::count();
 
         <ul class="breadcrumb">
             <?php
-            $desa = Village::where('id', $village->id)->select('name')->first();
-            $regency = Regency::where('id', $config->regencies_id)->select('name')->first();
-            $kcamatan = District::where('id', $desa->district_id)->select('name')->first();
+            $desa = Village::where('id', (string)$village->id)->first();
+            $regency = Regency::where('id',(string) $config->regencies_id)->first();
+            $kcamatan = District::where('id', (string)$desa->district_id)->first();
             ?>
             <li><a href="{{url('')}}/administrator/index" class="text-white">{{$regency->name}}</a></li>
             <li><a href="{{url('')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($district->id)}}" class="text-white">{{$district->name}}</a></li>
