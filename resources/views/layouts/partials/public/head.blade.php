@@ -23,7 +23,7 @@ use App\Models\Paslon;
     <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title> &nbsp; {{$config['jenis_pemilu']}} &nbsp; - &nbsp; {{$kota['name']}} &nbsp; </title>
+    <title> &nbsp; {{$config->jenis_pemilu}} &nbsp; - &nbsp; {{$kota['name']}} &nbsp; </title>
 
     <!-- BOOTSTRAP CSS -->
     <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -96,14 +96,14 @@ use App\Models\Paslon;
             border-color: black transparent transparent transparent;
         }
     </style>
-<script>
-var documentTitle = document.title + " - ";
+    <script>
+        var documentTitle = document.title + " - ";
 
-(function titleMarquee() {
-    document.title = documentTitle = documentTitle.substring(1) + documentTitle.substring(0,1);
-    setTimeout(titleMarquee, 200);
-})();
-</script>
+        (function titleMarquee() {
+            document.title = documentTitle = documentTitle.substring(1) + documentTitle.substring(0, 1);
+            setTimeout(titleMarquee, 200);
+        })();
+    </script>
 </head>
 
 <body class="app sidebar-mini">
@@ -117,7 +117,9 @@ var documentTitle = document.title + " - ";
         <div class="row mt-5">
             <div class="col-md text-center mt-5 ">
                 <h4 class="text-uppercase fw-bold">
-                    <img style="width: 100px;" src="{{asset('')}}assets/images/brand/logo-2.png" alt="">
+                    <div style="display:inline-block"class="bg-dark p-2 rounded-2 shadow">
+                        <img style="width: 100px;" src="{{asset('')}}images/logo/hisuara.png" alt="">
+                    </div>
                 </h4>
             </div>
         </div>
@@ -125,7 +127,7 @@ var documentTitle = document.title + " - ";
         <div class="row">
             <div class="col-md text-center">
                 <h4 style="margin-bottom: 7.5px !important;" class="text-uppercase fw-bold">
-                    {{$config['jenis_pemilu']}}
+                    {{$config->jenis_pemilu}}
                 </h4>
             </div>
         </div>
@@ -139,15 +141,15 @@ var documentTitle = document.title + " - ";
         <div class="row">
             <div class="col-md text-center">
                 <h4 class="text-uppercase fw-bold">
-                    Tahun  {{$config['tahun']}}
+                    Tahun {{$config->tahun}}
                 </h4>
             </div>
         </div>
         <div class="row">
             <div class="col-md text-center">
                 <h6 class="text-uppercase fw-bold">
-                    {{$title}}  
-                    </h4>
+                    {{$title}}
+                </h6>
             </div>
         </div>
         <div class="row">

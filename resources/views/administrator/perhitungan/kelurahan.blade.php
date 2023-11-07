@@ -90,9 +90,10 @@ $tps = Tps::count();
 
         <ul class="breadcrumb">
             <?php
-            $desa = Village::where('id', $id_kelurahan)->select('name')->first();
-            $regency = Regency::where('id', $config->regencies_id)->select('name')->first();
-            $kcamatan = District::where('id', $desa->district_id)->select('name')->first();
+            $desa = Village::where('id', (string) $id_kelurahan)->first();
+        
+            $regency = Regency::where('id', $config->regencies_id)->first();
+            $kcamatan = District::where('id',(string) $desa->district_id)->first();
             ?>
             <li><a href="{{url('')}}/administrator/index" class="text-white">{{$regency->name}}</a></li>
             <li><a href="{{url('')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($district->id)}}" class="text-white">{{$district->name}}</a></li>
@@ -512,7 +513,7 @@ $tps = Tps::count();
 
 
                             <tr data-id="{{$item['id']}}" data-bs-toggle="modal" class="modal-id" data-bs-target="#modal-id">
-                                <td> <a href="#" class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS {{$item['number']}}</a>
+                                <td> <a href="{{url('')}}/administrator/perhitungan_tps/{{Crypt::encrypt($item->id)}}" class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS {{$item['number']}}</a>
                                     @foreach ($paslon_candidate as $cd)
 
                                     <?php
@@ -553,7 +554,7 @@ $tps = Tps::count();
 
 
                             <tr data-id="{{$item['id']}}" data-bs-toggle="modal" class="modal-id" data-bs-target="#modal-id">
-                                <td> <a href="#" class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS {{$item['number']}}</a>
+                                <td> <a href="{{url('')}}/administrator/perhitungan_tps/{{Crypt::encrypt($item->id)}}" class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS {{$item['number']}}</a>
                                     @foreach ($paslon_candidate as $cd)
 
                                     <?php
@@ -750,29 +751,7 @@ $tps = Tps::count();
         </div>
     </div>
 </div>
-<?php
 
-$currentDomain = request()->getHttpHost();
-if (isset(parse_url($currentDomain)['port'])) {
-    $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
-} else {
-    $url = $currentDomain;
-}
-$regency_id = RegenciesDomain::where('domain', "LIKE", "%" . $url . "%")->first();
-
-if (request()->segment(1) == "administrator" && request()->segment(2) == "perhitungan_kecamatan") {
-    $id_wilayah = Crypt::decrypt(request()->segment(3));
-    $tipe_wilayah = "kecamatan";
-} elseif (request()->segment(1) == "administrator" && request()->segment(2) == "index") {
-    $id_wilayah = $regency_id->regency_id;
-    $tipe_wilayah = "kota";
-} else {
-    $id_wilayah = Crypt::decrypt(request()->segment(3));
-    $tipe_wilayah = "kelurahan";
-}
-
-?>
-<livewire:dpt-pemilih-component :id_wilayah="$id_wilayah" :tipe_wilayah="$tipe_wilayah" />
 
 
 @endsection

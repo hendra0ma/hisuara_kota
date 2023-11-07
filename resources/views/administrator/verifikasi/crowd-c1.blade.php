@@ -11,8 +11,7 @@ use App\Models\Regency;
 use App\Models\Config;
 
 $data['config'] = Config::first();
-$config = 
-first();
+
 use App\Models\Configs;
 use App\Models\RegenciesDomain;
 $configs = Config::all()->first();

@@ -283,7 +283,11 @@ class DevelopingController extends Controller
             "surat_suara_tidak_sah"=>$request->input("surat_suara_tidak_sah"),
             "surat_suara_terpakai"=>$request->input("surat_suara_terpakai"),
             "sisa_surat_suara"=>$request->input("sisa_surat_suara"),
-            "foto_surat_suara"=>$namaFoto
+            "tps_id"=>Auth::user()->tps_id,
+            "village_id"=>Auth::user()->villages,
+            "district_id"=>Auth::user()->districts,
+            "regency_id"=>Auth::user()->regency_id,
+
         ]);
     
         return redirect()->back()->with('success', 'Surat Suara Berhasil di Upload');

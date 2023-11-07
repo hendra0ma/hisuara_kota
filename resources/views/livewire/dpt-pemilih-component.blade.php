@@ -38,7 +38,7 @@ $config->quick_count =  $configs->quick_count;
 $config->default =  $configs->default;
 ?>
 
-<div class="row justify-content-center">
+
     <div class="col-lg-12">
         <div class="card">
 
@@ -111,4 +111,3 @@ $config->default =  $configs->default;
             </div>
         </div>
     </div>
-</div>

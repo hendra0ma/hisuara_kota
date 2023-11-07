@@ -297,7 +297,7 @@ class AdminController extends Controller
     public function crowdC1()
     {
         $data['config'] = Config::first();
-        $data['jumlah_c1'] = CrowdC1::join('tps','crowd_c1.tps_id','=','tps.id')->where('regency_id', $this->config->regencies_id )->count();
+        $data['jumlah_c1'] = CrowdC1::join('tps','crowd_c1.tps_id','=','tps.id')->where('crowd_c1.regency_id', $this->config->regencies_id )->count();
         return view('administrator.c1.crowd-c1-kpu', $data);
     }
 
@@ -853,6 +853,82 @@ class AdminController extends Controller
       
         return view('administrator.perhitungan.kelurahan', $data);
     }
+    public function perhitungan_tps($id)
+    {
+
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->get();
+
+        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id, SUM(voice) as total FROM saksi_data GROUP by paslon_id ORDER by total DESC LIMIT 1'));
+
+        $data['paslon_tertinggi'] = Paslon::where('id', (string)$paslon_tertinggi['0']->paslon_id)->first();
+
+        $data['paslon'] = Paslon::with(['saksi_data' => function ($query) use ($id) {
+            $query
+                ->join('saksi', 'saksi_data.saksi_id', 'saksi.id', 'district_id')
+                
+                ->whereNull('saksi.pending')
+                ->where('saksi.tps_id', (string) Crypt::decrypt($id));
+        }])->get();
+        $data['paslon_terverifikasi']     = Paslon::with(['saksi_data' => function ($query) use ($id) {
+            $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
+                ->whereNull('saksi.pending')
+                ->where('saksi.verification', 1)
+                ->where('saksi.village_id', (string)Crypt::decrypt($id));
+        }])->get();
+
+        $dpt = District::where('regency_id', (string)$this->config->regencies_id)->sum("dpt");
+
+        $data['total_incoming_vote'] = 0;
+        $incoming_vote = SaksiData::join('saksi','saksi_data.saksi_id',"=",'saksi.id')->select('saksi_data.voice')->where('saksi.tps_id', (string)Crypt::decrypt($id))->get();
+        foreach ($incoming_vote as $key) {
+            $data['total_incoming_vote'] += $key->voice;
+        }
+        $verification = Saksi::where('verification', 1)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->get();
+        $data['total_incoming_vote'] = 0;
+        $data['total_verification_voice'] = 0;
+        foreach ($verification as $key) {
+            foreach ($key->saksi_data as $verif) {
+                $data['total_verification_voice'] += $verif->voice;
+            }
+        }
+        $data['realcount']   = (string)$data['total_incoming_vote'] / $dpt * 100;
+
+        $data['tps_masuk']   = Tps::where('id', (string)Crypt::decrypt($id))->where('setup', 'terisi')->count('number');
+        $data['tps_kosong']  = Tps::where('id', (string)Crypt::decrypt($id))->where('setup', 'belum_terisi')->count('number');
+        $data['suara_masuk'] =  SaksiData::join('saksi','saksi_data.saksi_id',"=",'saksi.id')->where('saksi.tps_id', (string)Crypt::decrypt($id))->sum('saksi_data.voice');
+        $data['saksi']       = Saksi::where('tps_id', (string)Crypt::decrypt($id))->get();
+
+        $id = Crypt::decrypt($id);
+        $config = Config::first();
+        $data['regency'] = Regency::where('id', (string)$this->config->regencies_id)->first();
+
+        $data_tps =     Tps::where('id', (string)$id)->first();   
+        $data['data_tps'] = $data_tps;
+        $data['village'] = Village::where('id', (string)$data_tps->villages_id)->first();
+        $data['district'] = District::where('id', (string)$data['village']->district_id)->first();
+        $data['kelurahan'] = Village::where('district_id', (string)$data['village']->district_id)->get();
+        $data['paslon_candidate'] = Paslon::get();
+        $data['config'] = Config::first();
+        $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', $id)->count();
+        $data['id'] = $id;
+        $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', (string)$id)->where('saksi.verification', (string)1)->count();
+        $data['list_suara']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
+        ->join('users', 'users.tps_id', '=', 'tps.id')
+        ->where('tps.id', (string) $id)
+        ->where('saksi.verification', '')
+        ->whereNull('saksi.pending')
+        ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
+        ->get();
+        $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+        $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
+        
+       
+      
+        return view('administrator.perhitungan.tps', $data);
+    }
+
+
+
     public function theme(Request $request)
     {
         DB::table('config')->update([
@@ -1011,7 +1087,7 @@ class AdminController extends Controller
     public function get_tps_kelurahan(Request $request)
     {
         $data['saksi'] =  Saksi::where('tps_id', $request['id'])->get();
-        $data['tps'] = Tps::where('id', $request['id'])->first();
+        $data[_id] = Tps::where('id', $request['id'])->first();
         $data['kecamatan'] = District::where('id',  $data['tps']['district_id'])->first();
         $data['kelurahan'] = Village::where('id',  $data['tps']['villages_id'])->first();
         $data['config'] = Config::first();

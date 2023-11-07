@@ -6,9 +6,11 @@
 
 <div class="container" style="margin-top: -25px;">
     <div class="card bg-primary rounded-0">
-     
+
         <div class="card-body text-center">
-            <h5 class="card-title"><img width="150px" src="../../assets/images/brand/logo.png" alt=""></h5>
+            <div style="display:inline-block" class="bg-dark p-2 rounded-2 shadow">
+                <img style="width: 100px;" src="{{asset('')}}images/logo/hisuara.png" alt="">
+            </div>
             <div class="row no-gutters mx-auto mt-5" style="width: 350px;">
                 <div class="col"><a href="https://facebook.com/" type="button" class="rounded-0 btn btn-facebook"><i class="fa fa-facebook me-2"></i>Facebook</a></div>
                 <div class="col"><a href="https://twitter.com/" type="button" class="rounded-0 btn btn-twitter"><i class="fa fa-twitter me-2"></i>Twitter</a></div>
@@ -18,16 +20,12 @@
                 <div class="col">
                     <a class="text-white fw-bold" href="{{url('')}}/login">Login</a> |
                     <a class="text-white fw-bold" href="{{url('')}}/relawan">Relawan</a> |
-                    <!-- <a class="text-white fw-bold" href="{{url('')}}/publik/history">History</a> | -->
-                    <a class="text-white fw-bold" href="https://disclaimer.rekapitung.id">Disclaimer</a> |
-                    <!-- <a class="text-white fw-bold" href="{{url('')}}/publik/fraud">Fraud</a> | -->
-                    <a class="text-white fw-bold" href="https://Info.rekapitung.id">Info</a>
                 </div>
             </div>
 
             <div class="row mt-5 text-white">
                 <div class="col">
-                    <b>© PT. Mahadaya Swara Semesta <br> All Rights Reserved 2022</b>
+                    <b>© PT. Hisuara.id <br> All Rights Reserved 2023</b>
                 </div>
             </div>
 
@@ -47,7 +45,7 @@
 <div class="modal fade" id="modaltpsQuick" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" id="container-tps-quick">
-     
+
         </div>
     </div>
 </div>
