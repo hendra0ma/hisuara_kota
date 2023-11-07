@@ -297,7 +297,7 @@ class AdminController extends Controller
     public function crowdC1()
     {
         $data['config'] = Config::first();
-        $data['jumlah_c1'] = CrowdC1::join('tps','crowd_c1.tps_id','=','tps.id')->where('regency_id', $this->config->regencies_id )->count();
+        $data['jumlah_c1'] = CrowdC1::join('tps','crowd_c1.tps_id','=','tps.id')->where('crowd_c1.regency_id', $this->config->regencies_id )->count();
         return view('administrator.c1.crowd-c1-kpu', $data);
     }
 
