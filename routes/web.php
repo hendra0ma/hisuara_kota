@@ -420,7 +420,6 @@ foreach ($kotas as $kota) {
                     Route::get('lacak_enumerator', 'lacakEnumerator');
                     Route::get('lacak_relawan', 'lacakRelawan');
                     Route::get('lacak_admin', 'lacakAdmin');
-                    Route::get('lacak_crowd_c1', 'lacakCrowdC1');
                 });
             });
             // End Setup Page
@@ -973,16 +972,15 @@ Route::get('dpt/kota', function () {
     foreach ($prv as $pr) {
         $rgy = Regency::where('province_id',$pr->id)->get();
         foreach ($rgy as $rg) {
-            $dpt_by_r = DB::table('dpt_indonesia')->where('regency_name',$pr->name)->count();
+            $dst = District::where('regency_id',$rg->id)->whereNotNull('dpt')->sum('dpt');  
             Regency::where('id',$rg->id)->update([
-                'dpt'=>$dpt_by_r
+                'dpt'=> (int) $dst
             ]);
         }
-        $dpt_by_p = DB::table('dpt_indonesia')->where('province_name',$pr->name)->count();
-        Province::where('id',$pr->id)->update([
-            'dpt'=>$dpt_by_p
-        ]);
         
-      
+        $dst = Regency::where('province_id',$pr->id)->where('dpt','!=',0)->sum('dpt');  
+        Province::where('id',$pr->id)->update([
+            'dpt'=> (int) $dst
+        ]);
     }
 });
