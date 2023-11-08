@@ -46,8 +46,11 @@ use App\Http\Controllers\Payrole;
 use App\Http\Controllers\ProvinsiController;
 use App\Http\Controllers\PusatController;
 use App\Models\MultiAdministrator;
+use App\Models\Paslon;
 use App\Models\RegenciesDomain;
 use App\Models\Saksi;
+use App\Models\SaksiData;
+use App\Models\SuaraC1Provinsi;
 use App\Models\Tracking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -94,14 +97,6 @@ Route::get("redirect-page",function (){
 
 
 
-Route::get("import-excel-pemilih",function (){
-    return view('excel.test');
-});
-
-Route::get("import-excel-dpt",function (){
-    return view('excel.dpt');
-});
-
 Route::get("update-dpt",function (){
     set_time_limit(999999999999);
     $dpt_indonesia = DB::table('dpt_indonesia')->limit(10000)->get();
@@ -130,10 +125,6 @@ Route::get("update-dpt",function (){
 
 
 
-Route::post("import-excel",[ExcelController::class,"importExcel"])->name("import-excel");
-Route::post("import-dpt-excel",[ExcelController::class,"importDptExcel"])->name("import-dpt-excel");
-
-
 
 
 
@@ -146,7 +137,9 @@ Route::domain('hisuara.id')->name('pusat.')->group(function () {
     Route::get('/',  function () {
         return redirect('login');
     });
+
     Route::get('public/pusat', [PublicController::class,'pusatIndex']);
+    
 
     Route::group(["middleware"=>'role:administrator'],function (){ 
         Route::get('/dashboard-pusats', [PusatController::class, "home"])->name('home');
@@ -161,11 +154,12 @@ foreach ($provinsi as $provinsis) {
     $domainProvinsi = ProvinceDomain::where('province_id', $provinsis->id)->first();
     Route::domain($domainProvinsi->domain)->group(function () use ($provinsis, $domainProvinsi) {
         Route::get('/dashboard-provinsi/{id}', [ProvinsiController::class, 'home'])->name('provinsi' . $provinsis->id . '.home');
+        Route::get('/public-provinsi/{id}', [ProvinsiController::class,'pusatProvinsi'])->name('provinsi' . $provinsis->id . '.public');;
     });
 }
 
 $config = Config::first();
-$kotas = RegenciesDomain::where('province_id', $config->provinces_id)->get();
+$kotas = RegenciesDomain::where('province_id', env('ID_PROVINSI'))->get();
 
 
 Route::get('/getKota/{id}', function ($id) {
@@ -968,8 +962,37 @@ Route::get('prov-users', function () {
 
 
 
-//SETUP DPT
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------
+//SETUP DPT & IMPORT EXCEL
+//----------------------------------------------------------------------------------------------------------------------------------------
+
+Route::get("import-excel-pemilih",function (){
+    return view('excel.test');
+});
+
+Route::get("import-excel-dpt",function (){
+    return view('excel.dpt');
+});
+
+Route::post("import-excel",[ExcelController::class,"importExcel"])->name("import-excel");
+Route::post("import-dpt-excel",[ExcelController::class,"importDptExcel"])->name("import-dpt-excel");
+
+Route::get('dpt/kecamatan/{id_kota}',function ($id){
+    //masukan id kota untuk setup dpt per kecamatan yang sudah di import
+    $rgc = Regency::where('id',$id)->first();
+    $dst = District::where('regency_id',$id)->get();
+    foreach ($dst as $ds) {
+        $count = DB::table('dpt_indonesia')->where('district_name',$ds->name)->where('regency_name',$rgc->name)->count();
+        District::where('id',$ds->id)->update([
+            'dpt'=>$count
+        ]);
+    }
+});
+
 Route::get('dpt/kota', function () {
+    // untuk setup dpt kota dan provinsi
     $prv = Province::get();
     foreach ($prv as $pr) {
         $rgy = Regency::where('province_id',$pr->id)->get();
@@ -986,14 +1009,22 @@ Route::get('dpt/kota', function () {
         ]);
     }
 });
+//----------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------
 
-Route::get('dpt/kecamatan/{id_kota}',function ($id){
-    $rgc = Regency::where('id',$id)->first();
-    $dst = District::where('regency_id',$id)->get();
-    foreach ($dst as $ds) {
-        $count = DB::table('dpt_indonesia')->where('district_name',$ds->name)->where('regency_name',$rgc->name)->count();
-        District::where('id',$ds->id)->update([
-            'dpt'=>$count
-        ]);
-    }
-});
+
+// !!!!MEMASUKAN DATA JUMLAH VOICE -> hanya untuk developing saat data belum masuk ke table suara_c1_provinsi
+// Route::get('update-suara-c1-provinsi',function (){
+//     $paslon = Paslon::get();
+//     $suaraP = [];
+//     foreach ($paslon as $j => $psl) {
+//         $suara = SaksiData::where('paslon_id',$psl->id)->sum("voice");
+//         $suaraP[] = $suara;
+//     }
+//         $c1Prov = SuaraC1Provinsi::find(36);
+//         $c1Prov->suara1 = $suaraP[0];
+//         $c1Prov->suara2 = $suaraP[1];
+//         $c1Prov->suara3 = $suaraP[2];
+//         $c1Prov->save();
+  
+// });

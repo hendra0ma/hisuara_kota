@@ -77,7 +77,7 @@ class PublicController extends Controller
         $config = Config::first();
         $dpt = District::where('regency_id', $this->config->regencies_id)->sum("dpt");
         $data['kota'] = Regency::find($this->config->regencies_id);
-        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->get();
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('users.regency_id', $this->config->regencies_id)->get();
         $data['paslon'] = Paslon::with('saksi_data')->get();
         $data['paslon_terverifikasi']     = Paslon::with(['saksi_data' => function ($query) {
             $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')->where('saksi.verification', 1);
@@ -110,14 +110,14 @@ class PublicController extends Controller
         $data['district_quick'] = District::join('villages', 'villages.district_id', '=', 'districts.id')->where('regency_id', $this->config->regencies_id)->get();
         return view('publik.index', $data);
     }
+    //halaman publik pusat
     public function pusatIndex()
     {
 
-        $data['config'] = Config::first();
-        $config = Config::first();
-        $dpt = District::sum("dpt");
+        
+        $dpt = Province::sum("dpt");
         $data['kota'] = Regency::find($this->config->regencies_id);
-        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->get();
+        // $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->get();
         $data['paslon'] = Paslon::with('saksi_data')->get();
         $data['paslon_terverifikasi']     = Paslon::with(['saksi_data' => function ($query) {
             $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')->where('saksi.verification', 1);
@@ -130,7 +130,7 @@ class PublicController extends Controller
         }])->get();
 
 
-        $data['kecamatan'] = Province::get();
+        $data['provinsi'] = Province::get();
         $data['paslon_quick'] = Paslon::with('quicksaksidata')->get();
         $data['paslon_terverifikasi_quick']     = Paslon::with(['quicksaksidata' => function ($query) {
             $query->join('quicksaksi', 'quicksaksidata.saksi_id', 'quicksaksi.id')
@@ -143,7 +143,6 @@ class PublicController extends Controller
         $data['tps_belum'] = Tps::count();
         $data['tps_selesai_quick'] = Tps::where('setup', 'terisi')->where('sample',1)->count();
         $data['tps_belum_quick'] = Tps::where('sample',1)->count();
-        $data['kec'] =  Province::get();
         $data['paslon_candidate'] = Paslon::get();
         $data['title'] = "";
         // $data['villages_quick'] = Tps::join('villages','villages.id','=','tps.villages_id')->where('sample',1)->get();
@@ -152,6 +151,8 @@ class PublicController extends Controller
 
 
     }
+
+
 
     public function kecamatan(Request $request, $id)
     {

@@ -1,5 +1,5 @@
-@include('layouts.partials.public.head')
+@include('layouts.partials.public.headPusat')
 @yield('content')
-@include('layouts.partials.public.footer')
+@include('layouts.partials.public.footerPusat')
 </body>
 </html>
