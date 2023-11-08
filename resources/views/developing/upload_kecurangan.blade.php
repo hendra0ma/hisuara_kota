@@ -16,7 +16,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{url('/')}}/assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Rekapitung</title>
+    <title>Hisuara</title>
     <!-- FILE UPLODE CSS -->
     <link href="{{url('/')}}/assets/plugins/fileuploads/css/fileupload.css" rel="stylesheet" type="text/css" />
 
@@ -99,9 +99,9 @@
                     <div class="col-12">
                         <div class="row justify-content-center">
                             <div class="col-12">
-                                <img src="{{url('/')}}/images/logo/rekapitung_gold.png" alt="Avatar"
+                                <img src="{{asset('')}}assets/icons/hisuara_new.png" alt="Avatar"
                                     class="hadow-4 mb-3" style="width: 157px;" />
-                                <h3 class="fw-bold mb-0">REKAPITUNG</h3>
+                                <h3 class="fw-bold mb-0">HISUARA</h3>
                                 <h3 class="fw-bold mb-0">Selamat Datang!</h3>
                             </div>
                         </div>
@@ -119,14 +119,14 @@
             <div class="container">
                 <p style="text-align: justify">Laporan Kecurangan Pemilu ini terintegrasi dengan sistem laporan kecurangan pada Bawaslu RI.
                     Dimana seluruh laporan yang Anda buat dapat dilihat oleh Bawaslu RI Melalui akun Bawaslu pada
-                    Rekapitung.</p>
+                    Hisuara.</p>
                 <p style="text-align: justify">Setiap saksi yang melaporkan kecurangan juga akan terintegrasi langsung dengan sidang online
-                    Mahkamah Konstitusi melalui sistem Rekapitung dan Anda dapat saja menjadi salah satu peserta
+                    Mahkamah Konstitusi melalui sistem Hisuara dan Anda dapat saja menjadi salah satu peserta
                     dari sidang online Mahkamah Konstitusi tersebut. <b>Berdasarkan peraturan Mahkamah Konstitusi
                         Republik Indonesia No.1 Tahun 2014 tentang pedoman beracara dalam perselisihan hasil
                         pemilihan umum,</b> bukti elektronik yang Anda kirimkan adalah alat bukti yang sah di mata
                     hukum.</p>
-                <p style="text-align: justify"><b>Berikut prosedur laporan kecurangan Rekapitung :</b></p>
+                <p style="text-align: justify"><b>Berikut prosedur laporan kecurangan Hisuara :</b></p>
                 <ol>
                     <li>
                         Saksi diwajibkan melakukan dokumentasi kecurangan pada TPS masing-masing jika menemukan
@@ -324,9 +324,9 @@
                         <div class="col-12">
                             <div class="row justify-content-center">
                                 <div class="col-3">
-                                    <img src="{{url('/')}}/images/logo/rekapitung_gold.png" alt="Avatar"
+                                    <img src="{{url('/')}}/images/logo/Hisuara_gold.png" alt="Avatar"
                                         class="hadow-4 mb-3" style="width: 157px;" />
-                                    <h3 class="fw-bold">REKAPITUNG</h3>
+                                    <h3 class="fw-bold">Hisuara</h3>
                                 </div>
                                 <div class="col-3">
                                     <img src="https://jombang.bawaslu.go.id/wp-content/uploads/2019/04/Logo-Bawaslu-2018-Icon-PNG-HD.png"
@@ -354,12 +354,12 @@
                 <div class="container">
                     <p>Laporan Kecurangan Pemilu ini terintegrasi dengan sistem laporan kecurangan pada Bawaslu RI.
                         Dimana seluruh laporan yang Anda buat dapat dilihat oleh Bawaslu RI Melalui akun Bawaslu pada
-                        Rekapitung.</p>
+                        Hisuara.</p>
                     <p><b>Berdasarkan peraturan Mahkamah Konstitusi
                             Republik Indonesia No.1 Tahun 2014 tentang pedoman beracara dalam perselisihan hasil
                             pemilihan umum,</b> bukti elektronik yang Anda kirimkan adalah alat bukti yang sah di mata
                         hukum.</p>
-                    <p><b>Berikut prosedur laporan kecurangan Rekapitung :</b></p>
+                    <p><b>Berikut prosedur laporan kecurangan Hisuara :</b></p>
 
                     <ol>
 

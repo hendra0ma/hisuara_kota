@@ -7,20 +7,21 @@
                     Foto dan Kirim Data C6
                 </div>
 
-                <form action="{{route('logout')}}" method="post" class="pe-2 ps-3">
+                {{-- <form action="{{route('logout')}}" method="post" class="pe-2 ps-3">
                     @csrf
                     <button class="btn btn-danger" style="position: absolute; top: 51px; left: 10px;" type="submit">
                         Sign out
                     </button>
-                </form>
+                </form> --}}
                 <div class="card-body">
                     
 
 
                     <h1 class="text-center mt-4">
-                        <img src="{{asset('')}}images/logo/hisuara.png" class="hadow-4 mb-3 mt-3 bg-dark rounded-2 mt-5" style="width: 150px;" alt="Avatar" />
+                        <img src="{{asset('')}}assets/icons/hisuara_new.png" class="hadow-4 mb-3 mt-5 rounded-2" style="width: 175px;"
+                            alt="Avatar" />
                     </h1>
-                    <h4> Halo, {{Auth::user()->name}}</h4>
+                    <h5> Halo, {{Auth::user()->name}}</h5>
                     <form action="dev/action_saksi" method="post" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="tps" value="{{$dev['number']}}" id="">
@@ -60,7 +61,7 @@
                                 <div class="col-lg-12 mt-2">
                                     <div class="card   ">
                                         <div class="card-header   ">
-                                            <h4 class="card-title">Upload Foto C1</h4>
+                                            <h5 class="card-title">Upload Foto C1</h5>
                                         </div>
                                         <div class="card-body text-center">
                                             <div class="row">
@@ -85,7 +86,13 @@
                             </div>
 
                         </div>
-
+                    </form>
+                    <form action="{{route('logout')}}" method="post">
+                        @csrf
+                        <a href="#" class="mt-3" onclick="this.closest('form').submit();">
+                            Sign out
+                        </a>
+                    </form
                 </div>
             </div>
         </div>

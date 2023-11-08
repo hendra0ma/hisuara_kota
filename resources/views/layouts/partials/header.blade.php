@@ -148,17 +148,17 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
     }
 
     /* ::-webkit-scrollbar-track {
-      background-color: transparent;
+        background-color: transparent;
     }
     
     ::-webkit-scrollbar-thumb {
-      background-color: #d6dee1;
-      border-radius: 20px;
-      background-clip: content-box;
+        background-color: #d6dee1;
+        border-radius: 20px;
+        background-clip: content-box;
     }
     
     ::-webkit-scrollbar-thumb:hover {
-      background-color: #a8bbbf;
+        background-color: #a8bbbf;
     }
 
     ::-webkit-scrollbar-corner {
@@ -240,10 +240,10 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
 
                                 $(function () {
-                                  
+                                
                                     setTimeout(()=>{
-                                      animateHeaderPojokan()
-                                      $('.col-hisuara').show()
+                                    animateHeaderPojokan()
+                                    $('.col-hisuara').show()
                                         $('.col-pilpres').hide()
                                         pilpresAnimate();
                                     },9000)
@@ -273,9 +273,9 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 opacity: 1
                                             }, 200);
                                     });
-                             
+                                    
                                         // animateHeaderPojokanText1()
-                           
+                                    
 
                                 }
 
@@ -318,17 +318,17 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                 // }
 
                             
-                              
+                            
                             </script>
 
 
                             <div class="col-md-auto my-auto">
                                 <div class="row h-100 justify-content-end" style="gap: 10px;">
                                     <div class="col-md-auto px-0">
-                                        <a class="w-100 mx-auto btn text-white"
+                                        <a class="w-100 mx-auto btn text-white d-flex"
                                             style="background-color: #528bff; width: 40px; height: 36px;"
                                             href="{{url('')}}/administrator/index">
-                                            <span class="dark-layout" data-bs-placement="bottom"
+                                            <span class="dark-layout my-auto" data-bs-placement="bottom"
                                                 data-bs-toggle="tooltip" title="Dashboard">
                                                 <i class="fa-solid fa-gauge-high"></i>
                                             </span>
@@ -622,7 +622,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 <a href="{{url('')}}/administrator/data-c1"
                                                     class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
-                                                    Data C1
+                                                    Data C1 Saksi
                                                 </a>
                                             </div>
                                             <!-- <div class="col-md" style="padding-left: 1px; padding-right: 1px">
@@ -636,10 +636,17 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                     Surat Suara
                                                 </a>
                                             </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                            {{-- <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{route('superadmin.analisa_dpt_kpu')}}" class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0;">
                                                     Realisasi DPT
+                                                </a>
+                                            </div> --}}
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href=""
+                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
+                                                    style="background-color: #528bff; border-radius: 0px;">
+                                                    Data Crowd C1 KPU
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
