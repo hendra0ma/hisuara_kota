@@ -478,9 +478,9 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             style="color: #e1af0a; font-size: 16px; display: none;">
                                             Support
                                         </h4>
-                                        <h4 class="mb-0 fw-bold setting tugel-content"
+                                        <h4 class="mb-0 fw-bold featured tugel-content"
                                             style="color: #e1af0a; font-size: 16px; display: none;">
-                                            Settings
+                                            Featured
                                         </h4>
                                         <h4 class="mb-0 fw-bold lacak tugel-content"
                                             style="color: #e1af0a; font-size: 16px; display: none;">
@@ -884,7 +884,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         </div>
                                     </div>
 
-                                    <div class="col-md setting tugel-content settings"
+                                    <div class="col-md featured tugel-content settings"
                                         style="display: none; top: 0; position: relative;">
                                         {{-- Settings --}}
                                         <div class="row px-5 my-auto" style="gap: 25px;">
@@ -982,7 +982,23 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 </div>
                                                 <div class="text-center"
                                                     style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                                    Quick Count
+                                                    QuickCount
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md">
+                                                <div class="mid">
+                                                    <label class="switch">
+                                                        <input type="checkbox" {{($config->default ==
+                                                        "yes")?'disabled':''}} data-target="mode"
+                                                        onclick="settings('quick_count',this)" {{($config->quick_count
+                                                        == "no") ? "":"checked"; }}>
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="text-center"
+                                                    style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
+                                                    Speech
                                                 </div>
                                             </div>
 
@@ -1271,9 +1287,9 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 <button class="dropdown-item security">
                                                     <i class="dropdown-icon fa-solid fa-shield"></i> Security System
                                                 </button>
-                                                <button class="dropdown-item tugel-kolaps" href="#" data-target="setting">
+                                                {{-- <button class="dropdown-item tugel-kolaps" href="#" data-target="setting">
                                                     <i class="dropdown-icon fa-solid fa-gear"></i> Settings
-                                                </button>
+                                                </button> --}}
 
                                                 <form action="{{ route('logout') }}" method="post">
                                                     @csrf

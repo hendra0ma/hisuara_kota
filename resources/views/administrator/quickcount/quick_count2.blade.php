@@ -345,4 +345,9 @@ $props = Province::where('id',$kota['province_id'])->first();
     </div>
 </div>
 
+{{-- <script>
+    setTimeout(() => {
+        window.location.href = "{{url('/')}}/administrator/redirect_quick_nasional"
+    }, 5000);
+</script> --}}
 @endsection

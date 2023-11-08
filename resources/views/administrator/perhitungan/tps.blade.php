@@ -51,7 +51,7 @@ $dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
 $tps = Tps::count();
 ?>
 
-@extends('layouts.main-perhitungan');
+@extends('layouts.main-perhitungan')
 @section('content')
 <!-- PAGE-HEADER -->
 <div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
