@@ -154,7 +154,7 @@ $tps = Tps::count();
         </div>
     </div>
 
-    <div class="col-md-12">
+    <div class="col-md-8">
         <div class="card">
             {{-- <div class="card-header bg-info">
                 <h3 class="card-title text-white">Suara TPS Masuk</h3>
@@ -162,31 +162,31 @@ $tps = Tps::count();
             <div class="card-body" style="position: relative;">
                 <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-8">
                         <div class="container">
                             <div class="text-center fs-3 mb-3 fw-bold">REAL COUNT</div>
                             <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
                             <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
                                     {{$dpt}}</span></div>
-                            <div id="chart-pie" style="height: 320px" class="chartsh h-100 w-100"></div>
+                            <div id="chart-pie" style="height: 450px" class="chartsh h-100 w-100"></div>
                         </div>
                     </div>
-                    <div class="col-xxl">
+                    <div class="col my-auto">
                         <div class="row mt-2">
                             <?php $i = 1; ?>
                             @foreach ($paslon as $pas)
-                            <div class="col-lg col-md col-sm col-xl mb-3">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 mb-3">
                                 <div class="card" style="margin-bottom: 0px;">
                                     <div class="card-body p-3">
                                         <div class="row">
-                                            <div class="col-12">
-                                                <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white " style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                            <div class="col-12 my-auto">
+                                                <div class="mx-auto mb-3 counter-icon box-shadow-secondary brround candidate-name text-white " style="margin-bottom: 0; background-color: {{$pas->color}};">
                                                     {{$i++}}
                                                 </div>
                                             </div>
                                             <div class="col text-center">
-                                                <h6 class="mt-4">{{$pas->candidate}} </h6>
-                                                <h6 class="">{{$pas->deputy_candidate}} </h6>
+                                                <h6>{{$pas->candidate}} </h6>
+                                                <h6>{{$pas->deputy_candidate}} </h6>
                                                 <?php
                                                 $voice = 0;
                                                 ?>
@@ -206,6 +206,14 @@ $tps = Tps::count();
                     </div>
                 </div>
 
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md">
+        <div class="card">
+            <div class="card-body text-center">
+               <img style="height: 594.92px" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}" alt="">
             </div>
         </div>
     </div>

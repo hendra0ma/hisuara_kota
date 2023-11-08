@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Video Metadata Extraction</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Deteksi Suara dengan Annyang.js</title>
 </head>
 <body>
 
-<video id="myVideo" src="C:\Users\Administrator\Videos\Overwolf\Outplayed\Valorant\Valorant_04-13-2023_21-34-5-277\Valorant_04-13-2023_22-10-18-676.mp4" controls></video>
+<h1>Deteksi Suara</h1>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
 <script>
-$(document).ready(function() {
-    $.ajax({
-        url: 'get_video_metadata.php',
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            console.log('Video Creation Date: ' + data.creationDate);
-            // Use the creation date data as needed
+if (annyang) {
+    var commands = {
+        'hello': function() {
+            alert('Hello there!');
         },
-        error: function(err) {
-            console.error('Error retrieving video metadata:', err);
+        'detect *term': function(term) {
+            console.log('Detected:', term);
+            // Lakukan sesuatu dengan hasil deteksi suara di sini
         }
-    });
-});
+    };
+
+    annyang.addCommands(commands);
+
+    // Memulai mendengarkan perintah suara
+    annyang.start();
+} else {
+    alert('Browser tidak mendukung pengenalan suara.');
+}
 </script>
 
 </body>

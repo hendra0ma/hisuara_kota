@@ -13,54 +13,26 @@
             </li>
         </ol> <!-- This Dummy Data -->
     </div>
-    {{-- <div class="col-lg-8">
-        <div class="row">
-            <div class="col">
-                <div class="card mb-3 bg-light text-dark">
-                    <div class="card-header py-3 bg-secondary text-white">
-                        <div> Total TPS </div>
-                    </div>
-                    <div class="card-body py-3" style="font-size:15px;font-weight:bolder">
-                        <div class="row no-gutters">
-                            <div class="col-12">
-                                {{$total_tps}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="col-md-8">
+        <div class="row mt-2">
+            <div class="col parent-link">
+                <a class="btn text-white w-100 py-3 c1saksi tablink" onclick="openPage('C1-Saksi', this, '#6259ca')"
+                    id="defaultOpen">Audit C1</a>
             </div>
-            <div class="col">
-                <div class="card mb-3 bg-light text-dark">
-                    <div class="card-header py-3 bg-danger text-white">
-                        <div> TPS Masuk </div>
-                    </div>
-                    <div class="card-body py-3" style="font-size:15px;font-weight:bolder">
-                        <div class="row no-gutters">
-                            <div class="col-12">
-                                {{$jumlah_tps_masuk}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="col parent-link">
+                <a class="btn text-white w-100 py-3 c1relawan tablink" onclick="openPage('C1-Relawan', this, '#6259ca')">
+                    C1 Lolos Audit</a>
             </div>
-            <div class="col">
-                <div class="card mb-3 bg-light text-dark">
-                    <div class="card-header py-3 bg-success text-white">
-                        <div> TPS Terverifikasi </div>
-                    </div>
-                    <div class="card-body py-3" style="font-size:15px;font-weight:bolder">
-                        <div class="row no-gutters">
-                            <div class="col-12">
-                                {{$jumlah_tps_terverifikai}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            {{-- <div class="col parent-link">
+                <a class="btn text-white w-100 py-3 c1teraudit tablink"
+                    onclick="openPage('C1-Dibatalkan', this, '#6259ca')">C1 Dibatalkan</a>
+            </div> --}}
+            <div class="col parent-link">
+                <a class="btn text-white w-100 py-3 c1koreksi tablink"
+                    onclick="openPage('C1-Koreksi', this, '#6259ca')">C1 Tidak Lolos Audit</a>
             </div>
-
-
         </div>
-    </div> --}}
+    </div>
 
 </div>
 
@@ -75,7 +47,15 @@
     }
 </style>
 
-<livewire:audit-c1>
+<div id="C1-Saksi" class="tabcontent mt-0 pt-0 px-0">
+    <livewire:audit-c1>
+</div>
+<div id="C1-Relawan" class="tabcontent mt-0 pt-0 px-0">
+    <livewire:c1-lolos-audit />
+</div>
+<div id="C1-Koreksi" class="tabcontent mt-0 pt-0 px-0">
+    <livewire:c1-tidak-lolos-audit />
+</div>
 
 <div class="modal fade" id="periksaC1Verifikator" tabindex="-1" aria-labelledby="periksaC1VerifikatorLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">

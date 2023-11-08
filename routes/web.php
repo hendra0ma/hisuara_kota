@@ -420,6 +420,7 @@ foreach ($kotas as $kota) {
                     Route::get('lacak_enumerator', 'lacakEnumerator');
                     Route::get('lacak_relawan', 'lacakRelawan');
                     Route::get('lacak_admin', 'lacakAdmin');
+                    Route::get('lacak_crowd_c1', 'lacakCrowdC1');
                 });
             });
             // End Setup Page
