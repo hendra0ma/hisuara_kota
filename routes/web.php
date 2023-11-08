@@ -146,7 +146,7 @@ Route::domain('hisuara.id')->name('pusat.')->group(function () {
     Route::get('/',  function () {
         return redirect('login');
     });
-    
+    Route::get('public/pusat', [PublicController::class,'pusatIndex']);
 
     Route::group(["middleware"=>'role:administrator'],function (){ 
         Route::get('/dashboard-pusats', [PusatController::class, "home"])->name('home');
@@ -610,6 +610,7 @@ foreach ($kotas as $kota) {
         Route::controller(PublicController::class)->group(function () {
             Route::get('scanning-secure/{id}', 'scanSecure');
             Route::get('index', 'index');
+           
             Route::get('real_count', 'real_count_public');
             Route::get('quick_count', 'quick_count_public');
             Route::get('map_count', 'map_count_public');
@@ -960,3 +961,27 @@ Route::get('prov-users', function () {
 //     return $metadata;
     
 // });
+
+
+
+
+
+
+Route::get('dpt/kota', function () {
+    $prv = Province::get();
+    foreach ($prv as $pr) {
+        $rgy = Regency::where('province_id',$pr->id)->get();
+        foreach ($rgy as $rg) {
+            $dpt_by_r = DB::table('dpt_indonesia')->where('regency_name',$pr->name)->count();
+            Regency::where('id',$rg->id)->update([
+                'dpt'=>$dpt_by_r
+            ]);
+        }
+        $dpt_by_p = DB::table('dpt_indonesia')->where('province_name',$pr->name)->count();
+        Province::where('id',$pr->id)->update([
+            'dpt'=>$dpt_by_p
+        ]);
+        
+      
+    }
+});
