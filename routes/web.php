@@ -146,7 +146,7 @@ Route::domain('hisuara.id')->name('pusat.')->group(function () {
     Route::get('/',  function () {
         return redirect('login');
     });
-    
+    Route::get('public/pusat', [PublicController::class,'pusatIndex']);
 
     Route::group(["middleware"=>'role:administrator'],function (){ 
         Route::get('/dashboard-pusats', [PusatController::class, "home"])->name('home');
@@ -420,7 +420,6 @@ foreach ($kotas as $kota) {
                     Route::get('lacak_enumerator', 'lacakEnumerator');
                     Route::get('lacak_relawan', 'lacakRelawan');
                     Route::get('lacak_admin', 'lacakAdmin');
-                    Route::get('lacak_crowd_c1', 'lacakCrowdC1');
                 });
             });
             // End Setup Page
@@ -611,6 +610,7 @@ foreach ($kotas as $kota) {
         Route::controller(PublicController::class)->group(function () {
             Route::get('scanning-secure/{id}', 'scanSecure');
             Route::get('index', 'index');
+           
             Route::get('real_count', 'real_count_public');
             Route::get('quick_count', 'quick_count_public');
             Route::get('map_count', 'map_count_public');
@@ -961,3 +961,39 @@ Route::get('prov-users', function () {
 //     return $metadata;
     
 // });
+
+
+
+
+
+
+
+//SETUP DPT
+Route::get('dpt/kota', function () {
+    $prv = Province::get();
+    foreach ($prv as $pr) {
+        $rgy = Regency::where('province_id',$pr->id)->get();
+        foreach ($rgy as $rg) {
+            $dst = District::where('regency_id',$rg->id)->whereNotNull('dpt')->sum('dpt');  
+            Regency::where('id',$rg->id)->update([
+                'dpt'=> (int) $dst
+            ]);
+        }
+        
+        $dst = Regency::where('province_id',$pr->id)->where('dpt','!=',0)->sum('dpt');  
+        Province::where('id',$pr->id)->update([
+            'dpt'=> (int) $dst
+        ]);
+    }
+});
+
+Route::get('dpt/kecamatan/{id_kota}',function ($id){
+    $rgc = Regency::where('id',$id)->first();
+    $dst = District::where('regency_id',$id)->get();
+    foreach ($dst as $ds) {
+        $count = DB::table('dpt_indonesia')->where('district_name',$ds->name)->where('regency_name',$rgc->name)->count();
+        District::where('id',$ds->id)->update([
+            'dpt'=>$count
+        ]);
+    }
+});

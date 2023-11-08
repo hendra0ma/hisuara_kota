@@ -5,28 +5,45 @@
 </head>
 <body>
 
-<h1>Deteksi Suara</h1>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+<!-- <video id="myVideo" src="C:\Users\Administrator\Videos\Overwolf\Outplayed\Valorant\Valorant_04-13-2023_21-34-5-277\Valorant_04-13-2023_22-10-18-676.mp4" controls></video> -->
+<button id="startSpeech">Mulai Mendengarkan</button>
+<button id="stopSpeech">Berhenti Mendengarkan</button>
+<div id="speechOutput"></div>
 <script>
-if (annyang) {
-    var commands = {
-        'hello': function() {
-            alert('Hello there!');
-        },
-        'detect *term': function(term) {
-            console.log('Detected:', term);
-            // Lakukan sesuatu dengan hasil deteksi suara di sini
-        }
-    };
-
-    annyang.addCommands(commands);
-
-    // Memulai mendengarkan perintah suara
-    annyang.start();
-} else {
-    alert('Browser tidak mendukung pengenalan suara.');
-}
+    $(document).ready(function() {
+        var recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+        recognition.lang = 'id-ID';
+        recognition.continuous = true;
+        recognition.interimResults = true;
+      
+        var speechOutput = $('#speechOutput');
+        var startButton = $('#startSpeech');
+        var stopButton = $('#stopSpeech');
+      
+        startButton.click(function() {
+          recognition.start();
+        });
+      
+        stopButton.click(function() {
+          recognition.stop();
+        });
+      
+        recognition.onresult = function(event) {
+          var interimTranscript = '';
+          for (var i = event.resultIndex; i < event.results.length; i++) {
+            if (event.results[i].isFinal) {
+              var finalTranscript = event.results[i][0].transcript;
+              speechOutput.text('Hasil Pengenalan: ' + finalTranscript.trim().toLowerCase());
+              
+              if( finalTranscript.trim().toLowerCase() === "buka halaman verifikasi"){
+                  location.href = "http://pilpres.banten.tangerang-selatan.hisuara.id:8000/verifikator/verifikasi-c1";
+                }
+            } else {
+              interimTranscript += event.results[i][0].transcript;
+            }
+          }
+        };
+      });
 </script>
 
 </body>

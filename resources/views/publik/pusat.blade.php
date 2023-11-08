@@ -11,6 +11,7 @@ use App\Models\Paslon;
 @section('content')
 <?php
 use App\Models\Configs;
+use App\Models\Province;
 use App\Models\RegenciesDomain;
 
 $configs = Config::all()->first();
@@ -43,7 +44,7 @@ $config->tahun =  $configs->tahun;
 $config->quick_count =  $configs->quick_count;
 $config->default =  $configs->default;
 $saksidatai = SaksiData::sum("voice");
-$dpt = District::sum("dpt");
+$dpt = Province::sum("dpt");
 $data_masuk = (int)$saksidatai / (int)$dpt * 100;
 
 ?>
