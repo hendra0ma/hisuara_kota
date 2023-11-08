@@ -633,7 +633,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="#" class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0;">
-                                                    Surat Suara
+                                                    C7 & Surat Suara
                                                 </a>
                                             </div>
                                             {{-- <div class="col-md" style="padding-left: 1px; padding-right: 1px">
@@ -1270,7 +1270,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                     <i class="dropdown-icon fe fe-user"></i> Profile
                                                 </a>
                                                 <a class="dropdown-item" href="{{url('')}}/saksi-dashboard">
-                                                    <i class="dropdown-icon fe fe-user"></i> Upload C1
+                                                    <i class="dropdown-icon fe fe-user"></i> Upload C1 Saksi
                                                 </a>
                                                 <a class="dropdown-item" href="{{route('crowd_c1')}}">
                                                     <i class="dropdown-icon fe fe-user"></i> Upload Crowd C1

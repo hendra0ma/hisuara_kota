@@ -37,17 +37,17 @@
                                     <div class="card-header">
                                         <h5 class="card-title">Upload Selfie Di Lokasi TPS</h5>
                                     </div>
-                                    <div class="card-body text-center">
-                                        <div class="row">
-                                            <div class="col-md-12 ">
+                                    <div class="card-body d-flex">
+                                        <div class="row my-auto mx-auto">
+                                            <div class="col-md-12 text-center">
                                                 <h1>
                                                     <label for="selfie_lokasi" type="button">
                                                         <i class="mdi mdi-camera"></i>
                                                     </label>
                                                 </h1>
                                             </div>
-                                            <div class="col-md-12">
-                                                <input type="file" name="selfie_lokasi" required id="selfie_lokasi">
+                                            <div class="col-md-12 text-center">
+                                                <input type="file" name="selfie_lokasi" style="width: 205px;" required id="selfie_lokasi">
                                             </div>
                                         </div>
                                     </div>

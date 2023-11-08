@@ -134,7 +134,7 @@
             <img style="display: block; margin-left: auto; margin-right: auto;"
                 src="{{asset('/')}}assets/images/acakey_new.png" width="250px" class="pt-5 mb-5">
             <div class="text-center pb-5" style="font-size: 13px;">
-                © PT.Mahadaya Swara Semesta <br />
+                © PT.Hisuara Smart Count <br />
                 All Right Reserved 2021
             </div>
         </div>

@@ -5,7 +5,7 @@ use App\Models\Koreksi;
 
 <div>
     <h4 class="fw-bold fs-4 mt-5 mb-0">
-    Jumlah Koreksi C1 : {{$jumlah_koreksi_c1}}
+    Jumlah Operator Koreksi C1 : {{$jumlah_koreksi_c1}}
     </h4>
     <hr style="border: 1px solid">
 
