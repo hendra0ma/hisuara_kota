@@ -1,22 +1,24 @@
-<div style="overflow:auto">
+<div style="overflow-y:auto; overflow-x: hidden">
     <div class="row justify-content-center">
-        <div class="col-lg-5" style="height:100vh">
-            <div class="card border-0">
-                <div class="card-header bg-primary text-light text-center fw-bold">
+        <div class="col-lg-12">
+            <div class="card border-0" style="position: relative">
+
+                <div class="card-header bg-primary text-light text-center fw-bold rounded-0">
                     Foto dan Kirim Data C1
                 </div>
-                <form action="{{route('logout')}}" method="post" class="py-2 pe-2 ps-3">
+
+                <form action="{{route('logout')}}" method="post">
                     @csrf
-                    <button class="btn btn-danger" type="submit">
+                    <button class="btn btn-danger" style="position: absolute; top: 51px; left: 10px;" type="submit">
                         Sign out
                     </button>
                 </form>
                 <div class="card-body">
 
 
-
-                    <h1 class="text-center">
-                        <img src="{{asset('')}}images/logo/hisuara.png" class="hadow-4 mb-3 mt-3 bg-dark rounded-2" style="width: 150px;" alt="Avatar" />
+                    
+                    <h1 class="text-center mt-4">
+                        <img src="{{asset('')}}images/logo/hisuara.png" class="hadow-4 mb-3 mt-5 bg-dark rounded-2" style="width: 150px;" alt="Avatar" />
                     </h1>
                     <h4> Halo, {{Auth::user()->name}}</h4>
                     <form action="dev/action_saksi" method="post" enctype="multipart/form-data">

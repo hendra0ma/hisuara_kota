@@ -53,8 +53,45 @@
 
     <div class="asdf"
         style="position: relative;width:100%;height:700px;page-break-before: auto;page-break-after: always;page-break-inside: avoid;">
+{{-- 
+        <div class="col-12 text-center mb-3 mt-5">
+            @if ($user['profile_photo_path'] == NULL)
+            <img class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover; margin-right: 10px;"
+                src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
+            @else
+            <img class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
+            @endif
+        </div>
+        <div class="col-12 my-auto text-center mb-5">
+            <div class="mb-0 fw-bold" style="font-size: 30px">{{ $user['name'] }}</div>
+            <div style="font-size: 20px">NIK : {{ $user['nik'] }}</div>
+        </div> --}}
+        <div class="col-12 py-3 text-center" style="margin-top: 300px;">
+            <h1 class="fw-bold mb-0 text-danger" style="font-size: 36px">
+                BARKODE KECURANGAN SAKSI
+            </h1>
+        </div>
+        <div class="col-9 text-center py-3 mb-5 mx-auto" style="border: 1px black solid">
+        
+            <h2>
+                {{$kota->name }}<br>
+                {{-- Kec
+                {{$kecamatan->name}} / Kel
+                {{$kelurahan->name}} <br> --}}
+            </h2>
+            {{-- <h2 class="text-danger" style="font-size:40px">TPS {{ $tps->number }} <br></h2> --}}
+        
+        </div>
+        
+        <div class="col-12 text-center mb-5 mt-5">
+            <img src="{{asset('')}}assets/icons/hisuara_new.png" width="350px" alt="">
+        </div>
+        
+        {{-- <div class="col-12 text-center" style="position: absolute; bottom: -90px">
+            <h3>PILPRES 2024 {{$kota->name }}</h3>
+        </div> --}}
 
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-12 mt-5">
                 <center>
                     <h1 class="mt-2 text-danger text-uppercase" style="font-size: 40px;">Barkode Kecurangan
@@ -83,15 +120,13 @@
 
             <div class="col-12">
 
-                {{-- <img src="{{asset('')}}assets/stamp.png" class="img-flluid stamp" style="width:150px;height:auto"
-                    alt=""> --}}
                 <center>
                     <h3 class="fixed-bottom text-uppercase">
                         {{$config['jenis_pemilu']}}  {{$config['tahun']}} {{$kota->name }}
                     </h3> 
                 </center>
             </div>
-        </div>
+        </div> --}}
 
     </div>
 
