@@ -967,6 +967,8 @@ Route::get('prov-users', function () {
 
 
 
+
+//SETUP DPT
 Route::get('dpt/kota', function () {
     $prv = Province::get();
     foreach ($prv as $pr) {
@@ -981,6 +983,17 @@ Route::get('dpt/kota', function () {
         $dst = Regency::where('province_id',$pr->id)->where('dpt','!=',0)->sum('dpt');  
         Province::where('id',$pr->id)->update([
             'dpt'=> (int) $dst
+        ]);
+    }
+});
+
+Route::get('dpt/kecamatan/{id_kota}',function ($id){
+    $rgc = Regency::where('id',$id)->first();
+    $dst = District::where('regency_id',$id)->get();
+    foreach ($dst as $ds) {
+        $count = DB::table('dpt_indonesia')->where('district_name',$ds->name)->where('regency_name',$rgc->name)->count();
+        District::where('id',$ds->id)->update([
+            'dpt'=>$count
         ]);
     }
 });
