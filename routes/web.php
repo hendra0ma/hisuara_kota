@@ -319,6 +319,10 @@ foreach ($kotas as $kota) {
 
                     Route::get('rekapitulasi_kecamatan', 'rekapitulasiKecamatan')->name('rekapitulasiKecamatan');
                     Route::get('quick_count2', 'quick_count2')->name('quick_count2');
+                    Route::get('quick_count_nasional', 'quick_count_nasional')->name('quick_count_nasional');
+                    Route::get('redirect_quick_nasional', function () {
+                        return view('administrator.quickcount.redirect');
+                    });
                     Route::get('terverifikasi', 'terverifikasi')->name('terverifikasi');
                     Route::get('rekapitulasi', 'Rekapitulasi')->name('Rekapitulasi');
                     Route::get('relawan', 'Relawan')->name('Relawan');
@@ -414,6 +418,7 @@ foreach ($kotas as $kota) {
                     Route::get('lacak_enumerator', 'lacakEnumerator');
                     Route::get('lacak_relawan', 'lacakRelawan');
                     Route::get('lacak_admin', 'lacakAdmin');
+                    Route::get('lacak_crowd_c1', 'lacakCrowdC1');
                 });
             });
             // End Setup Page

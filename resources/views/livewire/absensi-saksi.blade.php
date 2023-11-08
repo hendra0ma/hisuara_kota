@@ -7,21 +7,21 @@
                     Foto dan Kirim Absensi
                 </div>
 
-                <form action="{{route('logout')}}" method="post">
+                {{-- <form action="{{route('logout')}}" method="post">
                     @csrf
                     <button class="btn btn-danger" style="position: absolute; top: 51px; left: 10px;" type="submit">
                         Sign out
                     </button>
-                </form>
+                </form> --}}
                 <div class="card-body">
 
                     <!-- As a link -->
 
-                    <h1 class="text-center mt-4">
-                        <img src="{{asset('')}}images/logo/hisuara.png" class="mb-3 mt-5 bg-dark rounded-2 shadow-sm"
-                            style="width: 150px;" alt="Avatar" />
+                    <h1 class="text-center">
+                        <img src="{{asset('')}}assets/icons/hisuara_new.png" class="hadow-4 mb-3 mt-3 rounded-2" style="width: 175px;"
+                            alt="Avatar" />
                     </h1>
-                    <h4> Halo, {{Auth::user()->name}}</h4>
+                    <h5> Halo, {{Auth::user()->name}}</h5>
                     <form action="{{route('actionAbsensiSaksi')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @if(session()->has('error'))
@@ -35,7 +35,7 @@
                             <div class="col-lg-12 mt-2">
                                 <div class="card" style="height:30vh">
                                     <div class="card-header">
-                                        <h4 class="card-title">Upload Selfie Di Lokasi TPS</h4>
+                                        <h5 class="card-title">Upload Selfie Di Lokasi TPS</h5>
                                     </div>
                                     <div class="card-body text-center">
                                         <div class="row">
@@ -59,6 +59,12 @@
                                     value="Kirim Status Kehadiran" id="send">
                             </div>
                         </div>
+                    </form>
+                    <form action="{{route('logout')}}" method="post">
+                        @csrf
+                        <a href="#" class="mt-3" onclick="this.closest('form').submit();">
+                            Sign out
+                        </a>
                     </form>
 
                 </div>

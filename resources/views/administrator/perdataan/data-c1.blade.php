@@ -64,7 +64,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
 <div class="row">
     <div class="col">
         <h4 class="fw-bold fs-4 mt-5 mb-0">
-            Jumlah C1 : {{$jumlah_c1}}
+            Jumlah C1 Saksi : {{$jumlah_c1}}
         </h4>
         
     </div>

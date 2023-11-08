@@ -1727,6 +1727,42 @@ class AdminController extends Controller
 
     }
 
+    public function quick_count_nasional()
+    {
+
+        $data['config'] = Config::first();
+        $config = Config::first();
+        $dpt                              = District::where('regency_id', $this->config->regencies_id)->sum("dpt");
+        $data['paslon'] = Paslon::with('quicksaksidata')->get();
+        $data['paslon_terverifikasi']     = Paslon::with(['quicksaksidata' => function ($query) {
+            $query->join('quicksaksi', 'quicksaksidata.saksi_id', 'quicksaksi.id')
+                ->whereNull('quicksaksi.pending')
+                ->where('quicksaksi.verification', 1);
+        }])->get();
+        $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
+        $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
+        $data['tracking'] = ModelsTracking::get();
+
+        $data['realcount']  = $data['total_incoming_vote'] / $dpt * 100;
+        $data['village'] = Village::first();
+        $data['villages'] = Village::get();
+        $data['realcount'] = $data['total_incoming_vote'] / $dpt * 100;
+        $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
+        $data['kecamatan'] = District::where('regency_id', $this->config->regencies_id)->get();
+        $data['district'] = District::first();
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")
+            ->join('tps', 'tps.id', "=", "saksi.tps_id")
+            ->where('tps.sample', 5)
+            ->get();
+        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data GROUP by paslon_id ORDER by total DESC'));
+        $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        $data['urutan'] = $paslon_tertinggi;
+        $data['district_quick'] = District::join('villages', 'villages.district_id', '=', 'districts.id')->where('regency_id', $this->config->regencies_id)->get();
+        return view('administrator.quickcount.quick_count_nasional', $data);
+        // dd($data['paslon']);
+
+    }
+
     public function terverifikasi()
     {
 

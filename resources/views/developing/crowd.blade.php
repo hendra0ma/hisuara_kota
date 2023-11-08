@@ -103,33 +103,19 @@
     <!-- End GLOBAL-LOADER -->
 
     <!-- PAGE -->
-    <div class="container" id="card2">
-        <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+    <div class="container" id="card2" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">
         <div class="card mt-5">
             <div class="card-header text-center text-white bg-primary">
                 <h4>Upload C1 Crowd</h4>
 
             </div>
             <div class="card-body">
-                <div class="row justify-content-end">
-                    <div class="col-lg-2">
-
-
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn btn-danger">
-                                <span>
-                                    <i class="fa-solid fa-right-from-bracket"></i>
-                                </span> Logout
-                            </a>
-                        </form>
-
-                    </div>
-                </div>
-                <x-jet-validation-errors class="mb-4" />
+                {{-- <div class="row justify-content-end">
+                </div> --}}
+                
                 <div class="row justify-content-center">
 
-                    <img src="{{asset('images/logo/hisuara.png')}}" alt="Avatar" class="shadow-4 mb-3 bg-dark p-2 rounded-2" style="width: 130px;" />
+                    <img src="{{asset('assets/icons/hisuara_new.png')}}" alt="Avatar" class="shadow-4 mb-3 p-2 rounded-2" style="width: 175px;" />
 
                 </div>
                 <h5 class="text-center">Input C1 Crowd</h5>
@@ -144,14 +130,23 @@
                 </div>
             </div>
         </div>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn btn-danger">
+                <span>
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </span> Logout
+            </a>
+        </form>
+        <x-jet-validation-errors class="mb-4" />
     </div>
 
 
     <div class="modal fade" id="extralargemodal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-dialog " role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Input C1 Relawan</h5>
+                    <h5 class="modal-title">Input Crowd C1</h5>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -162,7 +157,7 @@
                     <div class="modal-body">
                         <div class="container-fluid">
                             <div class="row justify-content-center">
-                                <div class="col-lg-5">
+                                <div class="col-lg">
 
                                     <h4 class="mt-3 header-title">Foto C1 Crowd</h4>
                                     <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
