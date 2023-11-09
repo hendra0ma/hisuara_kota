@@ -505,7 +505,7 @@
 
         <div class="col-3">
             <div style="font-size:10px">
-                Copyright © 2024 Rekapitung - Mahadaya Swara Semesta
+                Copyright © 2024 Rekapitung - Hisuara Smart Count
             </div>
         </div>
 

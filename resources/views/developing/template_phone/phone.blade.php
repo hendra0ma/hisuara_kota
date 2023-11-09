@@ -230,7 +230,7 @@
         </div>
     </div>
 
-    <div class="phone content-for-mobile">
+    <div class="phone content-for-mobile" style="padding-bottom: 60px;">
 
         @if (Auth::user()->absen == "hadir")
         @else

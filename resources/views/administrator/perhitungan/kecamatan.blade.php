@@ -223,14 +223,10 @@ $tps = Tps::count();
                                                 <h6 class="mt-4">{{$pas->candidate}} </h6>
                                                 <h6 class="">{{$pas->deputy_candidate}} </h6>
                                                 <?php
-                                                $voice = 0;
+                                                    $total_saksi = SaksiData::where('paslon_id',$pas->id)->where('district_id',$id_kecamatan)->sum('voice');
                                                 ?>
-                                                @foreach ($pas->saksi_data as $dataTps)
-                                                <?php
-                                                $voice += $dataTps->voice;
-                                                ?>
-                                                @endforeach
-                                                <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                                
+                                                <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3>
                                             </div>
                                         </div>
                                     </div>

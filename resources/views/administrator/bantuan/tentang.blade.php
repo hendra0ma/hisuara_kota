@@ -69,7 +69,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-md">
-                        <b href="pusat_bantuan" class="fw-bold">PT. Mahadaya Swara Semesta.</b> 
+                        <b href="pusat_bantuan" class="fw-bold">PT. Hisuara Smart Count.</b> 
                         <br>
                         <br>
                         <a href="pusat_bantuan" class="fw-bold">Persyaratan Layanan</a> 

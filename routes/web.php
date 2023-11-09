@@ -320,6 +320,9 @@ foreach ($kotas as $kota) {
                     Route::get('solution/{id}', 'solution')->name('solution');
                     Route::get('laporan-bawaslu', 'laporanBapilu')->name('laporan_bapilu');
                     Route::get('real_count2', 'real_count2')->name('real_count2');
+                    Route::get('realcount_kecamatan/{id}', 'realcountKecamatan');
+                    Route::get('realcount_kelurahan/{id}', 'realcountKelurahan');
+                    Route::get('realcount_tps/{id}', 'realcountTPS');
                     Route::get('rekapitulasi_kelurahan', 'rekapitulasiKelurahan')->name('rekapitulasiKelurahan');
 
                     Route::get('rekapitulasi_kecamatan', 'rekapitulasiKecamatan')->name('rekapitulasiKecamatan');
@@ -1048,4 +1051,15 @@ Route::get('dpt/kota', function () {
 //         $c1Prov->suara3 = $suaraP[2];
 //         $c1Prov->save();
   
+// });
+// Route::get('cek-saksi-data',function () {
+//     $saksidata = SaksiData::get();
+//     foreach ($saksidata as $key => $value) {
+//         $saksi = Saksi::where('id',$value->saksi_id)->first();
+//         if ($saksi !=null) {
+//             continue;
+//         }
+//         SaksiData::where('id',$value->id)->delete();
+        
+//     }
 // });

@@ -1,6 +1,6 @@
 <div>
     <h4 class="fw-bold fs-4 mt-5 mb-0">
-    Jumlah C1 Dibatalkan Auditor : {{$jumlah_c1_dibatalkan}}
+    Jumlah Operator C1 Dibatalkan Auditor : {{$jumlah_c1_dibatalkan}}
     </h4>
     <hr style="border: 1px solid">
 
