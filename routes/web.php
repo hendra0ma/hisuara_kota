@@ -39,6 +39,8 @@ use Illuminate\Support\Facades\Cache;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Controllers\CheckingController;
 use App\Http\Controllers\CommanderController;
+use App\Http\Controllers\DownloadImage;
+use App\Http\Controllers\DownloadImages;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\HunterController;
@@ -278,6 +280,7 @@ foreach ($kotas as $kota) {
         // });
         Route::group(['middleware' => 'auth'], function () {
             //administrator
+            
             Route::get('security/login/{id}', [SecurityController::class, 'index'])->name('security.login');
             Route::get('security/register/{id}', [SecurityController::class, 'create'])->name('security.register');
             Route::get('security/logoutKelurahan/{id}', [SecurityController::class, 'logoutKelurahan'])->name('security.logoutKelurahan');
@@ -285,9 +288,6 @@ foreach ($kotas as $kota) {
             Route::post('security/loginAction/{id}', [SecurityController::class, 'loginAction'])->name('security.actionLog');
             Route::group(['middleware' => 'role:administrator', 'prefix' => 'administrator', 'as' => 'superadmin.'], function () {
                 Route::get('index', [AdminController::class, 'index'])->name('index');
-
-
-
                 Route::get('/all-c1-plano', function () {
                     return view('administrator.all_c1');
                 });
@@ -308,6 +308,11 @@ foreach ($kotas as $kota) {
                 });
                 Route::controller(AdminController::class)->group(function () {
                     //Administratorw
+                    Route::get('get-data-c1-crowd', 'CrowdC1Id');
+                    Route::get('/download-images/{status}', [DownloadImages::class,'downloadImages']);
+                    Route::post('simpan-suara-c1-crowd', 'simpanSuaraC1Crowd')->name('simpan_suara_crowd');
+
+
                     Route::get('data-c1', 'dataC1');
                     Route::get('r-data-record', 'rDataRecord');
                     Route::get('r-data', 'rdata')->name("rdata");
@@ -398,7 +403,8 @@ foreach ($kotas as $kota) {
                     Route::get('sidang_online_all', 'sidangOnlineAll');
                     Route::get('sidang_online_status/{role}', 'sidangOnlinestatus');
                     Route::get('crowd-c1-kpu', 'crowdC1');
-
+                    Route::get('data-crowd-c1-kpu', 'dataCrowdC1');
+                
 
                     Route::get('/dev-pass', function () {
                         return view('security.dev_pass');
@@ -976,6 +982,16 @@ Route::get('prov-users', function () {
 Route::get("import-excel-pemilih",function (){
     return view('excel.test');
 });
+
+Route::get("logout_v2",function (){
+
+    Auth::logout();
+    return redirect('login');
+
+});
+
+
+
 
 Route::get("import-excel-dpt",function (){
     return view('excel.dpt');

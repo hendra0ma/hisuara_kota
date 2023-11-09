@@ -41,6 +41,7 @@ Route::group(['prefix'=>'public'],function (){
     Route::get('get-village',[PublicController::class,'getVillageByDistrictId']);
     Route::get('get-fraud',[PublicController::class,'getFraud']);
     Route::get('get-tps-by-village-id',[PublicController::class,'tpsByVillage']);
+    Route::get('get-tps-by-village-id2',[PublicController::class,'tpsByVillageCrowd']);
     Route::middleware(['check-token'])->group(function ()
     {
     });

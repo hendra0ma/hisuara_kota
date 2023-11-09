@@ -213,7 +213,7 @@ $tps = Tps::count();
     <div class="col-md">
         <div class="card">
             <div class="card-body text-center">
-               <img style="height: 594.92px" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}" alt="">
+               <img style="height: 594.92px" src="{{asset('')}}storage/c1_plano/{{$saksi[0]->c1_images}}" alt="">
             </div>
         </div>
     </div>

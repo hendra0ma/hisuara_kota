@@ -110,9 +110,8 @@
 
             </div>
             <div class="card-body">
-                {{-- <div class="row justify-content-end">
-                </div> --}}
-                
+
+
                 <div class="row justify-content-center">
 
                     <img src="{{asset('assets/icons/hisuara_new.png')}}" alt="Avatar" class="shadow-4 mb-3 p-2 rounded-2" style="width: 175px;" />
@@ -161,16 +160,16 @@
 
                                     <h4 class="mt-3 header-title">Foto C1 Crowd</h4>
                                     <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
-                                    <div class="wrap-input100 validate-input" data-bs-validate="Password is required">
-                                        <label class="form-label mt-3">Upload Foto Profile</label>
-                                        <label class="picture" for="picture__input2" tabIndex="0">
-                                            <span class="picture__image2"></span>
-                                        </label>
+                                        <div class="wrap-input100 validate-input" data-bs-validate="Password is required">
+                                            <label class="form-label mt-3">Upload Foto Profile</label>
+                                            <label class="picture" for="picture__input2" tabIndex="0">
+                                                <span class="picture__image2"></span>
+                                            </label>
 
-                                        <input type="file" name="c1_images" id="picture__input2" class="picture___input">
-                                    </div>
-                                    
-                                
+                                            <input type="file" name="c1_images" id="picture__input2" class="picture___input">
+                                        </div>
+
+
                                         <div class="form-group">
                                             <select class="form-control select2-show-search form-select" name="provinsi" id="provinsi">
                                                 <?php
@@ -187,8 +186,8 @@
                                                 <option disabled selected>Pilih Kota</option>
                                             </select>
                                         </div>
-                                
-                                
+
+
                                         <div class="form-group">
                                             <select class="form-control select2-show-search form-select" name="kecamatan" id="kecamatan">
                                                 <option disabled selected>Pilih Kecamatan</option>
@@ -205,7 +204,7 @@
                                             </select>
                                         </div>
 
-                                
+
 
 
                                     </div>
@@ -220,6 +219,9 @@
                 </form>
             </div>
         </div>
+
+
+      
     </div>
 
     <!-- End PAGE -->
@@ -250,115 +252,126 @@
 
     <!-- INPUT MASK JS-->
     <script src="{{url('/')}}/assets/plugins/input-mask/jquery.mask.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- CUSTOM JS-->
     <script src="{{url('/')}}/assets/js/custom.js"></script>
 
-    <script src="{{url('/')}}/assets/js_custom.js"></script>
 
 
     <script>
+        @if(Session::has('success'))
+        Swal.fire({
+            title: 'SUCCESS!',
+            text: '{{ Session::get('success') }}',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        })
+        @if(Auth::user()->role_id == "1")
+            location.href = "logout_v2";
+        @endif
         
+        @endif
+
 
         $('#provinsi').on('change', function() {
-      let idProvinsi = $(this).val();
-      // console.log(idProvinsi)
-      $.ajax({
-        url: `{{url('')}}/getKota/${idProvinsi}`,
-        method: 'get',
-     
-        success: function(response) {
-          $('#kota').html("")
-          response.forEach((item, id) => {
-            var option = $(`<option value="${item.id}">${item.name}</option>`); // Membuat elemen baru
-            $('#kota').append(option)
-          })
-          // console.log(response)
-        }
+            let idProvinsi = $(this).val();
+            // console.log(idProvinsi)
+            $.ajax({
+                url: `{{url('')}}/getKota/${idProvinsi}`,
+                method: 'get',
 
-      });
-    })
-    $('#kota').on('change', function() {
-      let idKota = $(this).val();
+                success: function(response) {
+                    $('#kota').html("")
+                    response.forEach((item, id) => {
+                        var option = $(`<option value="${item.id}">${item.name}</option>`); // Membuat elemen baru
+                        $('#kota').append(option)
+                    })
+                    // console.log(response)
+                }
 
-      $.ajax({
-        url: `{{url('')}}/api/public/get-district`,
-        method: 'get',
-        data: {
-          id: idKota
-        },
-        dataType: "json",
-        success: function(response) {
-          $('#kecamatan').html("")
-          response.forEach((item, id) => {
-            var option = $(`<option value="${item.id}">${item.name}</option>`); // Membuat elemen baru
-            $('#kecamatan').append(option)
-          })
-        }
+            });
+        })
+        $('#kota').on('change', function() {
+            let idKota = $(this).val();
 
-      });
+            $.ajax({
+                url: `{{url('')}}/api/public/get-district`,
+                method: 'get',
+                data: {
+                    id: idKota
+                },
+                dataType: "json",
+                success: function(response) {
+                    $('#kecamatan').html("")
+                    response.forEach((item, id) => {
+                        var option = $(`<option value="${item.id}">${item.name}</option>`); // Membuat elemen baru
+                        $('#kecamatan').append(option)
+                    })
+                }
 
-    })
+            });
 
-    $('#kecamatan').on('change', function() {
+        })
 
-      let idKec = $(this).val();
+        $('#kecamatan').on('change', function() {
 
-      $.ajax({
-        url: `{{url('')}}/api/public/get-village`,
-        method: 'get',
-        data: {
-          id: idKec
-        },
-        dataType: "json",
-        success: function(response) {
-          $('#kelurahan').html("")
-          console.log(response)
+            let idKec = $(this).val();
 
-          response.forEach((item, id) => {
-            var option = $(`<option value="${item.id}">${item.name}</option>`); // Membuat elemen baru
-            $('#kelurahan').append(option)
-          })
+            $.ajax({
+                url: `{{url('')}}/api/public/get-village`,
+                method: 'get',
+                data: {
+                    id: idKec
+                },
+                dataType: "json",
+                success: function(response) {
+                    $('#kelurahan').html("")
+                    console.log(response)
 
-          // console.log(response)
-        }
+                    response.forEach((item, id) => {
+                        var option = $(`<option value="${item.id}">${item.name}</option>`); // Membuat elemen baru
+                        $('#kelurahan').append(option)
+                    })
 
-      });
-    })
-    $('#kelurahan').on('change', function() {
+                    // console.log(response)
+                }
 
-      let idKel = $(this).val();
+            });
+        })
+        $('#kelurahan').on('change', function() {
 
-      $.ajax({
-        url: `{{url('')}}/api/public/get-tps-by-village-id`,
-        method: 'get',
-        data: {
-          village_id: idKel
-        },
-        dataType: "json",
-        success: function(response) {
-          $('#tps').html("")
-          if (response.messages != null) {
-            var option = $(`<option disabled>Data Tps Kosong</option>`); // Membuat elemen baru
-            $('#tps').append(option)
-          }
-          $('#tps').html("<option disabled selected> Pilih TPS </option>")
-          response.forEach((item, id) => {
-            var option = $(`<option value="${item.id}">${item.number}</option>`); // Membuat elemen baru
-            $('#tps').append(option)
-          })
-          // console.log(response)
-        }
+            let idKel = $(this).val();
 
-      });
-    })
+            $.ajax({
+                url: `{{url('')}}/api/public/get-tps-by-village-id2`,
+                method: 'get',
+                data: {
+                    village_id: idKel
+                },
+                dataType: "json",
+                success: function(response) {
+                    $('#tps').html("")
+                    if (response.messages != null) {
+                        var option = $(`<option disabled>Data Tps Kosong</option>`); // Membuat elemen baru
+                        $('#tps').append(option)
+                    }
+                    $('#tps').html("<option disabled selected> Pilih TPS </option>")
+                    response.forEach((item, id) => {
+                        var option = $(`<option value="${item.id}">${item.number}</option>`); // Membuat elemen baru
+                        $('#tps').append(option)
+                    })
+                    // console.log(response)
+                }
+
+            });
+        })
 
 
         const inputFile2 = document.querySelector("#picture__input2");
-        
+
         const pictureImage2 = document.querySelector(".picture__image2");
         // const pictureImageTxt = "Choose an image";
-        
+
         pictureImage2.innerHTML = "Pilih Foto C1";
 
         inputFile2.addEventListener("change", function(e) {

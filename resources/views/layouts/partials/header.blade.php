@@ -643,7 +643,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 </a>
                                             </div> --}}
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href=""
+                                                <a href="{{url('')}}/administrator/data-crowd-c1-kpu"
                                                     class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0px;">
                                                     Data Crowd C1 KPU

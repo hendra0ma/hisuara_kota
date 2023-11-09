@@ -59,7 +59,7 @@ class DevelopingController extends Controller
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         if ($request->file('c1_images')) {
             $image = $request->file('c1_images');
-            $randomString = substr(str_shuffle($characters), 0, 13); // Menghasilkan string acak sepanjang 10 karakter
+            $randomString = substr(str_shuffle($characters), 0, 40); // Menghasilkan string acak sepanjang 10 karakter
             $c1_images = time() . $randomString  .".".  $image->getClientOriginalExtension();
             $image->move(public_path('storage/c1_plano'), $c1_images);
         } else {

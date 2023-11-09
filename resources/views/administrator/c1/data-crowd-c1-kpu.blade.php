@@ -64,7 +64,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
         </ol>
     </div>
     <div class="col-lg-6">
-        <div class="alert alert-danger" role="alert">
+        <!-- <div class="alert alert-danger" role="alert">
             <div class="row">
                 <div class="col-auto">
                     <i class="fa-solid fa-circle-exclamation" style="font-size: 50px"></i>
@@ -75,19 +75,19 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                     pada gambar C1. 
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 
 <div class="row">
     <div class="col">
         <h4 class="fw-bold fs-4 mt-5 mb-0">
-            Jumlah Crowd C1 KPU : {{$jumlah_c1}}
+            Jumlah Data Crowd C1 KPU : {{$jumlah_c1}}
         </h4>
 
     </div>
     <div class="col-auto mt-auto">
-    <a class="btn btn-success"href="{{url('')}}/administrator/download-images/0">
+        <a class="btn btn-success"href="{{url('')}}/administrator/download-images/1">
             <i class="fa-solid fa-download"></i>
             Unduh
         </a>
@@ -100,7 +100,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
 <!-- :wilayah_id="$id_wilayah" :tipe_wilayah="$tipe_wilayah" -->
 
 
-<livewire:crowd-c1-kpu />
+<livewire:data-crowd-c1-kpu />
 
 
     <!-- Modal -->

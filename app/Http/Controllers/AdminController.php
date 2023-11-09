@@ -287,6 +287,81 @@ class AdminController extends Controller
         return view('administrator.verifikasi.verifikasi_akun', $data);
     }
 
+    function CrowdC1Id(Request $request){
+        $crowd = CrowdC1::where('tps_id',$request->id)->first();
+        
+        $data['crowd'] = $crowd;
+        $data['user'] = User::where('id',$crowd->user_id)->first();
+        $data['regency']  = Regency::where("id",$crowd->regency_id)->first();
+        $data['district']  = District::where("id",$crowd->district_id)->first();
+        $data['village']  = Village::where("id",$crowd->village_id)->first();
+        $data['tps']  = Tps::where("id",$crowd->tps_id)->first();
+        $data['paslon']  = Paslon::get();
+
+        return view('administrator.ajax.get_verify_crowd',$data);
+        
+    }
+
+    function simpanSuaraC1Crowd(Request $request){
+        
+        $this->validate($request,[
+            'suara.*' => "required|numeric",
+        ]);
+        $error = false;
+        $jumlah = 0;
+        foreach ($request->suara as $suara) {
+            $jumlah += $suara;
+        }
+        if ((int)$jumlah > 300) {
+            $error = true;
+        }
+        if ($error) {
+            return redirect()->back()->with('error', 'data tidak boleh lebih dari 300');
+        }
+        
+        $crowd = CrowdC1::where('id',$request->crowd_id)->first();
+
+
+
+        $saksi = new Saksi;
+        $saksi->c1_images = $crowd->crowd_c1;
+        $saksi->verification = "";
+        $saksi->audit = "";
+        $saksi->district_id = $crowd->district_id;
+        $saksi->batalkan = "0";
+        $saksi->village_id =  $crowd->village_id;
+        $saksi->overlimit = 0;
+        $saksi->tps_id = $crowd->tps_id;
+        $saksi->regency_id = $crowd->regency_id;
+        $saksi->province_id = substr($crowd->regency_id,0,2);
+
+
+        $saksi->save();
+        $ide = $saksi->id;
+        $paslon = Paslon::get();
+            $i = 0;
+            foreach ($paslon as $item) {
+                SaksiData::create([
+                    'user_id' =>  $crowd->user_id,
+                    'paslon_id' =>  $item->id,
+                    'district_id' =>$crowd->district_id,
+                    'village_id' =>  $crowd->village_id,
+                    'regency_id' => $crowd->regency_id,
+                    'province_id' => substr($crowd->regency_id,0,2),
+                    'voice' =>  (int)$request->suara[$i++],
+                    'saksi_id' => $ide,
+                ]);
+
+               
+            }
+            CrowdC1::where('id',$request->crowd_id)->update([
+                "status"=>"1",
+                "petugas_id"=>Auth::user()->id
+            ]);
+        return redirect()->back()->with('success','Berhasil Menambah Data Realcount dari C1 Crowd');
+    }
+
+
     public function dataC1()
     {
         $data['config'] = Config::first();
@@ -297,8 +372,17 @@ class AdminController extends Controller
     public function crowdC1()
     {
         $data['config'] = Config::first();
-        $data['jumlah_c1'] = CrowdC1::join('tps','crowd_c1.tps_id','=','tps.id')->where('crowd_c1.regency_id', $this->config->regencies_id )->count();
+        $data['jumlah_c1'] = CrowdC1::join('tps','crowd_c1.tps_id','=','tps.id')->where('status','0')->where('crowd_c1.regency_id', $this->config->regencies_id )->count();
+
         return view('administrator.c1.crowd-c1-kpu', $data);
+    }
+
+    public function dataCrowdC1()
+    {
+        $data['config'] = Config::first();
+        $data['jumlah_c1'] = CrowdC1::join('tps','crowd_c1.tps_id','=','tps.id')->where('status','1')->where('crowd_c1.regency_id', $this->config->regencies_id )->count();
+
+        return view('administrator.c1.data-crowd-c1-kpu', $data);
     }
 
     public function admin_terverifikasi()
