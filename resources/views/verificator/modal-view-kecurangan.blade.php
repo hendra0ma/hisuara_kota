@@ -16,13 +16,15 @@
                             <div class="col mt-2">
                                 <div class="media">
                                     @if ($user['profile_photo_path'] == NULL)
-                                    <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                                    <img class="rounded-circle"
+                                        style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
                                         src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
                                     @else
-                                    <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                                    <img class="rounded-circle"
+                                        style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
                                         src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
                                     @endif
-                    
+
                                     <div class="media-body my-auto">
                                         <h5 class="mb-0">{{ $user['name'] }}</h5>
                                         NIK : {{ $user['nik'] }}
@@ -46,7 +48,8 @@
                                     <i class="fa-solid fa-circle-exclamation" style="font-size: 50px"></i>
                                 </div>
                                 <div class="col">
-                                    Verifikasi dan Validasi Kecurangan hanya bisa dilakukan oleh admin yang memiliki wawasan hukum atau sekurang
+                                    Verifikasi dan Validasi Kecurangan hanya bisa dilakukan oleh admin yang memiliki
+                                    wawasan hukum atau sekurang
                                     kurangnya berpendidikan sarjana hukum.
                                 </div>
                             </div>
@@ -58,7 +61,7 @@
     </div>
 
     <div class="col-6" style="border-right: 0.5px#eee solid;">
-        
+
         <div class="row">
             <div class="col-12 bg-danger text-white py-3 text-center mb-3">
                 <h4 class="fw-bold mb-0">
@@ -88,7 +91,7 @@
                         </div>
                         <div class="card-body" style="border: 1px #eee solid !important">
                             <ul class="list-group" id="appendDataSolution">
-            
+
                             </ul>
                         </div>
                     </div>
@@ -129,7 +132,7 @@
                         </div>
                     </div>
                 </div>
-            
+
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header" style="border: 1px #eee solid !important; background: #eee">
@@ -149,11 +152,12 @@
                                     @foreach ($bukti_foto as $bf)
                                     <tr>
                                         <td class="text-center" style="width: 50%">
-                                            <img class="image" style="height: 350px; object-fit: cover" src="{{asset('storage/' . $bf->url)}}"
+                                            <img class="image" style="height: 350px; object-fit: cover"
+                                                src="{{asset('storage/' . $bf->url)}}"
                                                 data-url="{{asset('storage/' . $bf->url)}}" alt="">
                                         </td>
                                         <td class="exifResultsPhoto" style="width: 50%">
-            
+
                                         </td>
                                     </tr>
                                     @endforeach
@@ -236,7 +240,7 @@
                                             </video>
                                         </td>
                                         <td class="exifResults" style="width: 50%">
-            
+
                                         </td>
                                     </tr>
                                     @endforeach
@@ -256,7 +260,7 @@
                         </div>
                     </div>
                     <div class="col-12 px-0">
-            
+
                         <div class="card">
                             <div class="card-header" style="border: 1px #eee solid !important; background-color: #eee">
                                 <h3 class="card-title">6. Surat Pernyataan</h3>
@@ -264,7 +268,7 @@
                             <div class="card-body" style="border: 1px #eee solid !important">
                                 <div class="page-content-wrapper" style="width:100%;height:100%;">
                                     <div class="row mt-2">
-            
+
                                         <div class="container">
                                             <div class="col-lg-12">
                                                 <div class="row">
@@ -274,7 +278,7 @@
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col-lg-12">
-            
+
                                                     </div>
                                                 </div>
                                                 <div class="row mt-1">
@@ -285,90 +289,113 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-lg-12">
-            
-                                                        <div class="col-lg-12 mb-2">
-                                                            <table class="w-100">
-                                                                <tr>
-                                                                    <td style="width: 85px">NIK</td>
-                                                                    <td>:</td>
-                                                                    <td> {{$user->nik}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 85px">Nama</td>
-                                                                    <td>:</td>
-                                                                    <td> {{$user->name}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 85px">Alamat</td>
-                                                                    <td>:</td>
-                                                                    <td> {{$user->address}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 85px">No Hp</td>
-                                                                    <td>:</td>
-                                                                    <td> {{$user->no_hp}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 85px">Email</td>
-                                                                    <td>:</td>
-                                                                    <td>{{$user->email}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 85px">Kecamatan</td>
-                                                                    <td>:</td>
-                                                                    <td>{{ $district['name'] }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 85px">Kelurahan</td>
-                                                                    <td>:</td>
-                                                                    <td>{{ $village['name'] }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 85px">TPS</td>
-                                                                    <td>:</td>
-                                                                    <td>{{ $tps->number }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 85px">Kota</td>
-                                                                    <td>:</td>
-                                                                    <td class="text-capitalize">{{ $kota->name }}
-                                                                    </td>
-            
-                                                                </tr>
-                                                            </table>
-            
+
+                                                    <div class="col-md">
+                                                        <div class="row mt-2">
+                                                            <div class="col-12">
+                                                                <b>Detail Akun <i class="fa fa-info-circle"></i></b>
+                                                            </div>
+
+                                                            <hr class="mt-1 ms-3"
+                                                                style="margin-bottom: 0px; background: #000; height: 2px; width: 300px">
+
+                                                            <div class="col-12">
+                                                                <table class="table table-stripped">
+                                                                    <tr>
+                                                                        <td class="ps-0 pe-2" style="width: 200px">NIK
+                                                                        </td>
+                                                                        <td class="px-0">:</td>
+                                                                        <td class="ps-2">{{$user->nik}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="ps-0 pe-2" style="width: 200px">Nama
+                                                                        </td>
+                                                                        <td class="px-0">:</td>
+                                                                        <td class="ps-2">{{$user->name}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="ps-0 pe-2" style="width: 200px">
+                                                                            Alamat</td>
+                                                                        <td class="px-0">:</td>
+                                                                        <td class="ps-2">{{$user->address}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="ps-0 pe-2" style="width: 200px">No Hp
+                                                                        </td>
+                                                                        <td class="px-0">:</td>
+                                                                        <td class="ps-2">{{$user->no_hp}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="ps-0 pe-2" style="width: 200px">Email
+                                                                        </td>
+                                                                        <td class="px-0">:</td>
+                                                                        <td class="ps-2">{{$user->email}}</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
                                                         </div>
                                                     </div>
-            
+
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <b>Lokasi <i class="fa fa-info-circle"></i></b>
+                                                            </div>
+
+                                                            <hr class="mt-1 ms-3"
+                                                                style="margin-bottom: 0px; background: #000; height: 2px; width: 300px">
+
+                                                            <div class="col-12">
+                                                                <table class="table">
+                                                                    <tr>
+                                                                        <td class="ps-0 pe-2" style="width: 200px">
+                                                                            Kecamatan</td>
+                                                                        <td class="px-0">:</td>
+                                                                        <td class="ps-0">{{$district->name }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="ps-0 pe-2" style="width: 200px">
+                                                                            Kelurahan</td>
+                                                                        <td class="px-0">:</td>
+                                                                        <td class="ps-0">{{$village->name }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="ps-0 pe-2" style="width: 200px">TPS
+                                                                        </td>
+                                                                        <td class="px-0">:</td>
+                                                                        <td class="ps-0">{{ $tps->number }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="ps-0 pe-2" style="width: 200px">Kota
+                                                                        </td>
+                                                                        <td class="px-0">:</td>
+                                                                        <td class="ps-0">{{$kota->name }}</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="col-lg-12 text-justify" style="line-height:1.8">
-                                                            {{$surat_pernyataan->deskripsi}}
-                                                            </p>
-                                                        </div>
+                                                    <div class="col-lg-12 text-justify" style="line-height:1.8">
+                                                        {{$surat_pernyataan->deskripsi}}
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <div class="row mt-5">
                                                     <div class="col-lg-12">
-                                                        <div class="col-lg-12">
-                                                            <b>Tanggal Kirim </b>
-                                                        </div>
+                                                        <b>Tanggal Kirim </b>
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-lg-11">
-                                                        <div class="col-lg-12 text-left">
-                                                            <p>Yang Membuat Pernyataan Ini:</p>
-                                                        </div>
+                                                    <div class="col-lg-12 text-left">
+                                                        <p>Yang Membuat Pernyataan Ini:</p>
                                                     </div>
                                                 </div>
                                                 <div class="row mt-3">
-                                                    <div class="col-lg-11">
-                                                        <div class="col-lg-12 text-left">
-                                                            <p class="mt-5"><u> {{$user->name}}</u></p>
-                                                        </div>
+                                                    <div class="col-lg-12 text-left">
+                                                        <p class="mt-5"><u> {{$user->name}}</u></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -381,9 +408,9 @@
                                 </div>
                             </div>
                         </div>
-            
+
                     </div>
-            
+
                     <div class="col-12 px-0">
                         <div class="card">
                             <div class="card-header" style="border: 1px #eee solid !important; background-color: #eee">
@@ -415,7 +442,8 @@
                         <div class="step active secondary"> <span class="icon"> <i class="fa fa-send"></i> </span> <span
                                 class="text">Terverifikasi/Selesai</span> </div>
                         @elseif($saksi['status_kecurangan'] == 'ditolak')
-                        <div class="step active danger"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">Saksi
+                        <div class="step active danger"> <span class="icon"> <i class="fa fa-user"></i> </span> <span
+                                class="text">Saksi
                                 Mengirim Kecurangan</span> </div>
                         <div class="step active danger"> <span class="icon"> <i class="fa fa-send"></i> </span> <span
                                 class="text">Ditolak</span> </div>
@@ -426,7 +454,7 @@
 
             </div>
         </div>
-        
+
     </div>
     <div class="col-6" style="border-left: 0.5px #eee solid;">
         <div class="row">
@@ -435,7 +463,7 @@
                     Validasi
                 </h4>
             </div>
-            
+
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header bg-dark">
@@ -473,8 +501,9 @@
                                 <tbody>
                                     @foreach ($list_kecurangan as $item)
                                     <tr>
-                                        <td><input type="checkbox" name="bukti_text[]" checked="" value="{{ $item['text'] }}"
-                                                data-id="{{ $item['list_kecurangan_id'] }}" onclick="ajaxGetSolution(this)"></td>
+                                        <td><input type="checkbox" name="bukti_text[]" checked=""
+                                                value="{{ $item['text'] }}" data-id="{{ $item['list_kecurangan_id'] }}"
+                                                onclick="ajaxGetSolution(this)"></td>
                                         <td>{{ $item['text'] }}</td>
                                     </tr>
                                     @endforeach
@@ -513,8 +542,8 @@
                                     </tr>
                                     @endforeach
                                 </thead>
-            
-            
+
+
                                 <tbody>
                                     <tr class="bg-primary text-light">
                                         <td></td>
@@ -522,18 +551,18 @@
                                     </tr>
                                 </tbody>
                                 <tbody id="container-rekomendasi">
-            
+
                                 </tbody>
-            
-            
+
+
                                 <tbody>
                                     <tr class="bg-primary text-light">
                                         <td></td>
                                         <td>BAP Admin Hukum</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2"><textarea name="kecurangan" placeholder="catatan hukum" class="form-control"
-                                                cols="30" rows="10"></textarea></td>
+                                        <td colspan="2"><textarea name="kecurangan" placeholder="catatan hukum"
+                                                class="form-control" cols="30" rows="10"></textarea></td>
                                     </tr>
                                     <tr>
                                         <td class="bg-dark text-light"></td>
@@ -576,21 +605,23 @@
                             <?php if ($saksi['status_kecurangan'] == "diproses") : ?>
                             <a href="action_verifikasi_kecurangan/{{ Crypt::encrypt($tps['id']); }}"
                                 class="btn mt-2 ml-3 btn-success">Validasi Kecurangan</a>
-                            {{-- <a href="print/{{ Crypt::encrypt($tps['id']); }}" class="btn mt-2 ml-3 btn-success">Print
+                            {{-- <a href="print/{{ Crypt::encrypt($tps['id']); }}"
+                                class="btn mt-2 ml-3 btn-success">Print
                                 Kecurangan</a> --}}
                             <?php else : ?>
                             <button type="submit" class="btn btn-success">Validasi Kecurangan</button>
-                            <a href="action_tolak_kecurangan/{{Crypt::encrypt($tps['id'])}}" class="btn btn-danger">Tolak
+                            <a href="action_tolak_kecurangan/{{Crypt::encrypt($tps['id'])}}"
+                                class="btn btn-danger">Tolak
                                 Kecurangan</a>
                             <?php endif; ?>
                         </div>
                     </form>
                 </div>
-            
-            </div>
+
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <script>

@@ -14,14 +14,35 @@
                     </button>
                 </form> --}}
                 <div class="card-body">
-                    
+
+                    <div class="row">
+                        <div class="px-0 col-12 text-center mb-3">
+                            @if (Auth::user()->profile_photo_path == NULL)
+                            <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                                src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF">
+                            @else
+                            <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}">
+                            @endif
+                        </div>
+                        <div class="px-0 col-12 my-auto text-center">
+                            <?php
+                                                    $tps = App\Models\Tps::where('tps.id', '=', Auth::user()->tps_id)->first();
+                                                    $kelurahan = App\Models\Village::where('villages.id', '=', Auth::user()->villages)->first();
+                                                ?>
+                            <div class="mb-0 fw-bold" style="font-size: 20px">{{ Auth::user()->name }}</div>
+                            <div style="font-size: 15px">NIK : {{ Auth::user()->nik }}</div>
+                            <div style="font-size: 15px">SAKSI TPS {{ $tps }}</div>
+                            <div style="font-size: 15px">KELURAHAN {{ $kelurahan }}</div>
+                        </div>
+                    </div>
+
 
 
                     <h1 class="text-center">
                         <img src="{{asset('')}}assets/icons/hisuara_new.png" class="hadow-4 mb-3 mt-3 rounded-2" style="width: 175px;"
                             alt="Avatar" />
                     </h1>
-                    <h5> Halo, {{Auth::user()->name}}</h5>
+                    {{-- <h5> Halo, {{Auth::user()->name}}</h5> --}}
                     <form action="dev/action_saksi" method="post" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="tps" value="{{$dev['number']}}" id="">

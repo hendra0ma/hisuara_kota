@@ -1114,14 +1114,10 @@ s
                                                 <h6 class="mt-4">{{$pas->candidate}} </h6>
                                                 <h6 class="">{{$pas->deputy_candidate}} </h6>
                                                 <?php
-                                                $voice = 0;
+                                                    $total_saksi = SaksiData::where('paslon_id',$pas->id)->sum('voice');
                                                 ?>
-                                                @foreach ($pas->saksi_data as $dataTps)
-                                                <?php
-                                                $voice += $dataTps->voice;
-                                                ?>
-                                                @endforeach
-                                                <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                            
+                                                <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -1207,7 +1203,7 @@ s
             <td><a href="{{url('/')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
             </td>
             @foreach ($paslon as $cd)
-            <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->sum('voice'); ?>
+            <?php $saksi_dataa = SaksiData::where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->sum('voice'); ?>
             <td>{{$saksi_dataa}}</td>
             @endforeach
         </tr>

@@ -819,7 +819,6 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-12">
     
                                 <div class="col-md">
                                     <div class="row mt-2">
@@ -898,36 +897,26 @@
                                     </div>
                                 </div>
     
-                            </div>
-    
                         </div>
                         <div class="row mt-2">
-                            <div class="col-lg-12">
                                 <div class="col-lg-12 text-justify" style="line-height:1.8; text-align: justify">
                                     {{$surat_pernyataan->deskripsi}}
                                 </div>
-                            </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-lg-12">
                                 <div class="col-lg-12">
                                     <b>Tanggal Kirim </b>
                                 </div>
-                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-11">
                                 <div class="col-lg-12 text-left">
                                     <p>Yang Membuat Pernyataan Ini:</p>
                                 </div>
-                            </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-lg-11">
                                 <div class="col-lg-12 text-left">
                                     <p class="mt-5"><u> {{$user->name}}</u></p>
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>

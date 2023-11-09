@@ -51,6 +51,10 @@
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{url('/')}}/assets/colors/color1.css" />
 
     <style>
+        .screen::-webkit-scrollbar {
+            display: none
+        }
+        
         .mobile-phone {
             margin: auto;
             margin-top: 170px;
@@ -117,175 +121,181 @@
     <!-- PAGE -->
     <div class='mobile-phone content-for-desktop' style="position: relative;">
         <div class='brove' style="z-index: 100"><span class='speaker'></span></div>
-        <div class='screen pt-5 px-3'>
-            <div class="container" id="card2" style="left: 50%; top: 50%; transform: translate(-50%, -50%); position: absolute;">
-                <div class="card mt-5">
-                    <div class="card-header text-center text-white bg-primary">
-                        <h4 class="mb-0">Upload C1 Relawan</h4>
-            
-                    </div>
-                    <div class="card-body">
-                        {{-- <div class="row justify-content-center">
-                            <div class="col-lg-2">
-            
-            
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <a href="#" onclick="event.preventDefault(); this.closest('form').submit();"
-                                        class="btn btn-danger">
-                                        <span>
-                                            <i class="fa-solid fa-right-from-bracket"></i>
-                                        </span> Logout
-                                    </a>
-                                </form>
-            
-                            </div>
-                        </div>
-                        <x-jet-validation-errors class="mb-4" /> --}}
-                        <div class="row justify-content-center">
-            
-                            <img src="{{asset('assets/icons/hisuara_new.png')}}" alt="Avatar" class="shadow-4 mb-3 p-2 rounded-2"
-                                style="width: 175px;" />
-            
-                        </div>
-                        <h5 class="text-center">Input C1 Relawan</h5>
-                        <hr>
-                        <div class="row">
-            
-                            <div class="col-md-12">
-                                <button class="btn btn-secondary mt-3 btn-block" data-bs-toggle="modal"
-                                    data-bs-target="#extralargemodal1">
-                                    Upload C1 Relawan
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+        <div class='screen pt-5 px-0'>
+            <div class="card">
+                <div class="card-header text-center text-white bg-primary">
+                    <h4 class="mb-0">Upload C1 Relawan</h4>
                 </div>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn btn-danger">
-                        <span>
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                        </span> Logout
-                    </a>
-                </form>
-                <x-jet-validation-errors />
+                <div class="card-body px-3">
                 
-            </div>
-            
-            
-            <div class="modal fade" style="position: absolute;" id="extralargemodal1" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Input C1 Relawan</h5>
-                            <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
+                    <div class="row">
+                        <div class="px-0 col-12 text-center mb-3">
+                            @if (Auth::user()->profile_photo_path == NULL)
+                            <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                                src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF">
+                            @else
+                            <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}">
+                            @endif
                         </div>
-            
-                        <form action="{{url('')}}/upload-relawan" method="post" enctype="multipart/form-data">
-                            @csrf
-                            <div class="modal-body">
-                                <div class="container-fluid">
-                                    <div class="row justify-content-center">
-                                            <?php $i=1; ?>
-                                            @foreach ($paslon as $item)
-                                            <div class="col-lg-12 mb-2">
-                                                Suara 0{{$i++}} - {{ $item['candidate']}}
-                                                <input type="number" class="form-control" id="suara[]" name="suara[]" required
-                                                    placeholder="Suara Paslon">
+                        <div class="px-0 col-12 my-auto text-center">
+                            <?php
+                                            $tps = App\Models\Tps::where('tps.id', '=', Auth::user()->tps_id)->first();
+                                            $kelurahan = App\Models\Village::where('villages.id', '=', Auth::user()->villages)->first();
+                                        ?>
+                            <div class="mb-0 fw-bold" style="font-size: 20px">{{ Auth::user()->name }}</div>
+                            <div style="font-size: 15px">NIK : {{ Auth::user()->nik }}</div>
+                            <div style="font-size: 15px">SAKSI TPS {{ $tps }}</div>
+                            <div style="font-size: 15px">KELURAHAN {{ $kelurahan }}</div>
+                        </div>
+                    </div>
+                
+                
+                
+                    <h1 class="text-center">
+                        <img src="{{asset('')}}assets/icons/hisuara_new.png" class="hadow-4 mb-3 mt-3 rounded-2" style="width: 175px;"
+                            alt="Avatar" />
+                    </h1>
+                    {{-- <h5> Halo, {{Auth::user()->name}}</h5> --}}
+                    <form action="{{url('')}}/upload-relawan" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row no-gutters">
+                            <?php $i=1; ?>
+                            @foreach ($paslon as $item)
+                            <div class="col-lg-12 mb-2">
+                                Suara 0{{$i++}} - {{ $item['candidate']}}
+                                <input type="number" class="form-control" id="suara[]" name="suara[]" required
+                                    placeholder="Suara Paslon">
+                            </div>
+                            @endforeach
+                            <h5 class="mt-3 header-title">Foto C1</h5>
+                            <div class="col-lg-12 mt-2">
+                                <div class="card ">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Upload Foto C1</h5>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h1>
+                                                    <a type="button ">
+                                                        <i class="mdi mdi-camera"></i>
+                                                    </a>
+                                                </h1>
                                             </div>
-                                            @endforeach
-                                            <h5 class="mt-3 header-title">Foto C1</h5>
-                                            <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
+                                            <div class="col-md-12">
                                                 <input type="file" class="dropify" data-height="300" name="c1_images" />
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button class="btn btn-primary" type="submit">Submit</button>
+                            <div class="d-grid gap-2 col-lg-12">
+                                <input type="submit" class="btn btn-block btn-primary mt-2">
                             </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="content-for-mobile">
-        <div class="container" id="card2" style="left: 50%; top: 50%; transform: translate(-50%, -50%); position: absolute;">
-            <div class="card mt-5">
-                <div class="card-header text-center text-white bg-primary">
-                    <h4>Upload C1 Relawan</h4>
-    
-                </div>
-                <div class="card-body">
-                    <div class="row justify-content-center">
-    
-                        <img src="{{asset('assets/icons/hisuara_new.png')}}" alt="Avatar" class="shadow-4 mb-3 p-2 rounded-2" style="width: 175px;" />
-    
-                    </div>
-                    <h5 class="text-center">Input C1 Relawan</h5>
-                    <hr>
-                    <div class="row">
-    
-                        <div class="col-md-12">
-                            <button class="btn btn-secondary mt-3 btn-block" data-bs-toggle="modal" data-bs-target="#extralargemodal">
-                                Upload C1 Relawan
-                            </button>
+                
                         </div>
-                    </div>
+                    </form>
+                    <form action="{{route('logout')}}" method="post">
+                        @csrf
+                        <a href="#" class="mt-3" onclick="this.closest('form').submit();">
+                            Sign out
+                        </a>
+                    </form>
                 </div>
             </div>
-            <form method="POST" action="{{ route('logout') }}">
+            {{-- <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn btn-danger">
                     <span>
                         <i class="fa-solid fa-right-from-bracket"></i>
                     </span> Logout
                 </a>
-            </form>
-            <x-jet-validation-errors />
+            </form> --}}
+            {{-- <x-jet-validation-errors /> --}}
+            
         </div>
-    
-        <div class="modal fade" id="extralargemodal" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Input C1 Relawan</h5>
-                        <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
+    </div>
+
+    <div class="content-for-mobile">
+        <div class="card">
+            <div class="card-header text-center text-white bg-primary">
+                <h4 class="mb-0">Upload C1 Relawan</h4>
+            </div>
+            <div class="card-body px-3">
+        
+                <div class="row">
+                    <div class="px-0 col-12 text-center mb-3">
+                        @if (Auth::user()->profile_photo_path == NULL)
+                        <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                            src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF">
+                        @else
+                        <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}">
+                        @endif
                     </div>
-    
-                    <form action="{{url('')}}/upload-relawan" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="container-fluid">
-                                <div class="row justify-content-center">
-                                    <?php $i=1; ?> 
-                                    @foreach ($paslon as $item)
-                                    <div class="col-lg-12 mb-2">
-                                        Suara 0{{$i++}} - {{ $item['candidate']}}
-                                        <input type="number" class="form-control" id="suara[]" name="suara[]" required placeholder="Suara Paslon">
-                                    </div>
-                                    @endforeach
-                                    <h5 class="mt-3 header-title">Foto C1</h5>
-                                    <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
-                                        <input type="file" class="dropify" data-height="300" name="c1_images" />
+                    <div class="px-0 col-12 my-auto text-center">
+                        <?php
+                                                    $tps = App\Models\Tps::where('tps.id', '=', Auth::user()->tps_id)->first();
+                                                    $kelurahan = App\Models\Village::where('villages.id', '=', Auth::user()->villages)->first();
+                                                ?>
+                        <div class="mb-0 fw-bold" style="font-size: 20px">{{ Auth::user()->name }}</div>
+                        <div style="font-size: 15px">NIK : {{ Auth::user()->nik }}</div>
+                        <div style="font-size: 15px">SAKSI TPS {{ $tps }}</div>
+                        <div style="font-size: 15px">KELURAHAN {{ $kelurahan }}</div>
+                    </div>
+                </div>
+        
+        
+        
+                <h1 class="text-center">
+                    <img src="{{asset('')}}assets/icons/hisuara_new.png" class="hadow-4 mb-3 mt-3 rounded-2"
+                        style="width: 175px;" alt="Avatar" />
+                </h1>
+                {{-- <h5> Halo, {{Auth::user()->name}}</h5> --}}
+                <form action="{{url('')}}/upload-relawan" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row no-gutters">
+                        <?php $i=1; ?>
+                        @foreach ($paslon as $item)
+                        <div class="col-lg-12 mb-2">
+                            Suara 0{{$i++}} - {{ $item['candidate']}}
+                            <input type="number" class="form-control" id="suara[]" name="suara[]" required
+                                placeholder="Suara Paslon">
+                        </div>
+                        @endforeach
+                        <h5 class="mt-3 header-title">Foto C1</h5>
+                        <div class="col-lg-12 mt-2">
+                            <div class="card ">
+                                <div class="card-header">
+                                    <h5 class="card-title">Upload Foto C1</h5>
+                                </div>
+                                <div class="card-body text-center">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h1>
+                                                <a type="button ">
+                                                    <i class="mdi mdi-camera"></i>
+                                                </a>
+                                            </h1>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input type="file" class="dropify" data-height="300" name="c1_images" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button class="btn btn-primary" type="submit">Submit</button>
+                        <div class="d-grid gap-2 col-lg-12">
+                            <input type="submit" class="btn btn-block btn-primary mt-2">
                         </div>
-                    </form>
-                </div>
+        
+                    </div>
+                </form>
+                <form action="{{route('logout')}}" method="post">
+                    @csrf
+                    <a href="#" class="mt-3" onclick="this.closest('form').submit();">
+                        Sign out
+                    </a>
+                </form>
             </div>
         </div>
     </div>

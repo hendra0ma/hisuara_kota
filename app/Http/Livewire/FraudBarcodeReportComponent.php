@@ -11,7 +11,12 @@ class FraudBarcodeReportComponent extends Component
     protected $paginationTheme = 'bootstrap';
     public function render()
     {
-        $data['qrcode'] = QrCode::join('surat_pernyataan','surat_pernyataan.qrcode_hukum_id','=','qrcode_hukum.id')->select('qrcode_hukum.*')->paginate(16);
+        $data['qrcode'] = QrCode::join('surat_pernyataan','surat_pernyataan.qrcode_hukum_id','=','qrcode_hukum.id')
+                                ->join('tps', 'tps.id', '=', 'qrcode_hukum.tps_id')
+                                ->join('users', 'users.tps_id', '=', 'qrcode_hukum.tps_id')
+                                ->join('villages', 'villages.id', '=', 'tps.villages_id')
+                                ->select('users.name as user_name', 'users.nik as user_nik', 'tps.*', 'villages.name as village_name', 'qrcode_hukum.*')
+                                ->paginate(16);
         return view('livewire.fraud-barcode-report-component',$data);
     }
 }

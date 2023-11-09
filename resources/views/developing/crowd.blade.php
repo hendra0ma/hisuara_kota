@@ -55,8 +55,9 @@
         }
 
         .picture {
-            width: 300px;
-            aspect-ratio: 16/9;
+            width: 100%;
+            height: 100%;
+            /* aspect-ratio: 16/9; */
             background: #ddd;
             display: flex;
             align-items: center;
@@ -104,122 +105,97 @@
 
     <!-- PAGE -->
     <div class="container" id="card2" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">
-        <div class="card mt-5">
-            <div class="card-header text-center text-white bg-primary">
-                <h4>Upload C1 Crowd</h4>
-
-            </div>
-            <div class="card-body">
-                {{-- <div class="row justify-content-end">
-                </div> --}}
-                
-                <div class="row justify-content-center">
-
-                    <img src="{{asset('assets/icons/hisuara_new.png')}}" alt="Avatar" class="shadow-4 mb-3 p-2 rounded-2" style="width: 175px;" />
-
-                </div>
-                <h5 class="text-center">Input C1 Crowd</h5>
-                <hr>
-                <div class="row">
-
-                    <div class="col-md-12">
-                        <button class="btn btn-secondary mt-3 btn-block" data-bs-toggle="modal" data-bs-target="#extralargemodal">
-                            Upload C1 Crowd
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <form method="POST" action="{{ route('logout') }}">
+        <form action="{{url('')}}/c1Crowd/upload" method="post" enctype="multipart/form-data">
             @csrf
-            <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn btn-danger">
-                <span>
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                </span> Logout
-            </a>
-        </form>
-        <x-jet-validation-errors class="mb-4" />
-    </div>
-
-
-    <div class="modal fade" id="extralargemodal" tabindex="-1" role="dialog">
-        <div class="modal-dialog " role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Input Crowd C1</h5>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-
-                <form action="{{url('')}}/c1Crowd/upload" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="row justify-content-center">
-                                <div class="col-lg">
-
-                                    <h4 class="mt-3 header-title">Foto C1 Crowd</h4>
-                                    <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
-                                    <div class="wrap-input100 validate-input" data-bs-validate="Password is required">
-                                        <label class="form-label mt-3">Upload Foto Profile</label>
-                                        <label class="picture" for="picture__input2" tabIndex="0">
-                                            <span class="picture__image2"></span>
-                                        </label>
-
-                                        <input type="file" name="c1_images" id="picture__input2" class="picture___input">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <h3 class=" fw-bold mt-3 header-title">Upload C1 Crowd</h3>
+                    <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="wrap-input100 validate-input" style="height: 100%" data-bs-validate="Password is required">
+                                    <label class="picture" for="picture__input2" tabIndex="0">
+                                        <span class="picture__image2"></span>
+                                    </label>
+                                
+                                    <input type="file" name="c1_images" id="picture__input2" class="picture___input">
+                                </div>
+                                <img id="previewImage" src="#" alt="Uploaded Image" style="display: none; max-width: 300px; max-height: 300px">
+                            </div>
+                            <script>
+                                document.getElementById('fileInput').addEventListener('change', function() {
+                                var file = this.files[0];
+                                if (file) {
+                                var reader = new FileReader();
+                                reader.onload = function(e) {
+                                var image = document.getElementById('previewImage');
+                                image.style.display = 'block';
+                                image.src = e.target.result;
+                                };
+                                reader.readAsDataURL(file);
+                                }
+                                });
+                            </script>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <select class="form-control select2-show-search form-select" name="provinsi" id="provinsi">
+                                        <?php
+                                            $provinsi = App\Models\Province::get();
+                                        ?>
+                                        <option disabled selected>Pilih Provinsi</option>
+                                        @foreach ($provinsi as $kc)
+                                        <option value="{{ $kc->id }}">{{ $kc->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control select2-show-search form-select" name="kota" id="kota">
+                                        <option disabled selected>Pilih Kota</option>
+                                    </select>
+                                </div>
+                            
+                            
+                                <div class="form-group">
+                                    <select class="form-control select2-show-search form-select" name="kecamatan" id="kecamatan">
+                                        <option disabled selected>Pilih Kecamatan</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control select2-show-search form-select" name="kelurahan" id="kelurahan">
+                                        <option disabled selected>Pilih Kelurahan</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control select2-show-search form-select" name="tps" id="tps">
+                                        <option disabled selected>Pilih Tps</option>
+                                    </select>
+                                </div>
+                                <div class="row justify-content-between">
+                                    <div class="col-auto">
+                                        <button class="btn btn-primary" type="submit">Kirim C1</button>
                                     </div>
-                                    
-                                
-                                        <div class="form-group">
-                                            <select class="form-control select2-show-search form-select" name="provinsi" id="provinsi">
-                                                <?php
-                                                $provinsi = App\Models\Province::get();
-                                                ?>
-                                                <option disabled selected>Pilih Provinsi</option>
-                                                @foreach ($provinsi as $kc)
-                                                <option value="{{ $kc->id }}">{{ $kc->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <select class="form-control select2-show-search form-select" name="kota" id="kota">
-                                                <option disabled selected>Pilih Kota</option>
-                                            </select>
-                                        </div>
-                                
-                                
-                                        <div class="form-group">
-                                            <select class="form-control select2-show-search form-select" name="kecamatan" id="kecamatan">
-                                                <option disabled selected>Pilih Kecamatan</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <select class="form-control select2-show-search form-select" name="kelurahan" id="kelurahan">
-                                                <option disabled selected>Pilih Kelurahan</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <select class="form-control select2-show-search form-select" name="tps" id="tps">
-                                                <option disabled selected>Pilih Tps</option>
-                                            </select>
-                                        </div>
-
-                                
-
-
+                                    <div class="col-auto">
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn btn-danger">
+                                                <span>
+                                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                                </span> Logout
+                                            </a>
+                                        </form>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <x-jet-validation-errors />
                                     </div>
                                 </div>
+                                
                             </div>
                         </div>
+                    
                     </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-                        <button class="btn btn-primary" type="submit">Kirim C1</button>
-                    </div>
-                </form>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 
     <!-- End PAGE -->
