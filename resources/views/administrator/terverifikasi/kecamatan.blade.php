@@ -187,7 +187,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                                             href="{{url('/')}}/administrator/terverifikasi_kelurahan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
                                     </td>
                                     @foreach ($paslon as $cd)
-                                    <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.village_id', $item['id'])->where('saksi.verification', 1)->sum('voice'); ?>
+                                    <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.village_id', (string)$item['id'])->where('saksi.verification', 1)->sum('voice'); ?>
                                     <td class="align-middle">{{$saksi_dataa}}</td>
                                     @endforeach
                                 </tr>
