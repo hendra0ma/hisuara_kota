@@ -2162,7 +2162,7 @@ class AdminController extends Controller
                                                 ORDER BY total DESC
                                             '), ['village_id' => decrypt($id)]);
 
-        $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        // $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
         $data['urutan'] = $paslon_tertinggi;
 
         $data['paslon_tertinggi'] = Paslon::where('id', (string)$paslon_tertinggi['0']->paslon_id)->first();
