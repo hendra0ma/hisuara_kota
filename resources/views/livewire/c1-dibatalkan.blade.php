@@ -69,7 +69,7 @@
     
                         <div class="row mt-2">
                             <div class="col-12 px-0">
-                                <button class="btn rounded-0 w-100 periksa-c1-plano text-white" id="Cek"
+                                <button class="btn rounded-0 w-100 c1-dibatalkan text-white" id="Cek"
                                     data-id="{{$ls->tps_id}}" data-bs-toggle="modal" id=""
                                     data-bs-target="#periksaC1Verifikator"
                                     style="background-color: rgb(248, 38, 73)">Koreksi Kiriman C1</button>

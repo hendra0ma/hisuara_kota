@@ -497,6 +497,7 @@ class AdminController extends Controller
     {
         $data['config'] = Config::first();
         $koreksi = Koreksi::where('saksi_id', Crypt::decrypt($id))->get();
+        return $koreksi;
         foreach ($koreksi as $psl) {
             SaksiData::where('saksi_id', Crypt::decrypt($id))->where('paslon_id', $psl['paslon_id'])->update([
                 'voice' => $psl['voice'],

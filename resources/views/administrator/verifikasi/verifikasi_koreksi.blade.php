@@ -268,7 +268,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-header bg-primary text-white">
             <div class="modal-title mx-auto">
-                <h4 class="mb-0 fw-bold">Otentifikasi Koreksi</h4>
+                <h4 class="mb-0 fw-bold">C1 Koreksi (Verifikator)</h4>
             </div>
         </div>
         <div class="modal-content">
@@ -282,43 +282,41 @@ $kota = Regency::where('id', $config->regencies_id)->first();
     </div>
 </div>
 
-<div class="modal fade" id="periksaC1Verifikator" tabindex="-1" aria-labelledby="periksaC1VerifikatorLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
+<div class="modal fade" id="periksaC1Verifikator" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-header bg-primary text-white">
+            <div class="modal-title mx-auto">
+                <h4 class="mb-0 fw-bold">C1 Koreksi (Auditor)</h4>
+            </div>
+        </div>
         <div class="modal-content">
-            <div class="modal-header" style="padding-right: 3rem">
-                <h3 class="modal-title fw-bold" id="periksaC1VerifikatorLabel">VERIFIKASI DATA C1 TPS</h3>
-                <button type="button" class="btn-close btn-danger text-white mr-5" style="width: 50px"
-                    data-bs-dismiss="modal" aria-label="Close">Close</button>
+            <div class="container" id="container-view-modal">
             </div>
-            <div class="modal-body">
-                <div class="row" id="container-view-modal">
-
-                </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
-            {{-- <div class="modal-footer">
-            </div> --}}
         </div>
     </div>
 </div>
 
 <script>
-    const buttonperiksaC1 = $(".periksa-c1-plano");
+    const buttonperiksaC1 = $(".c1-dibatalkan");
     buttonperiksaC1.on('click', function() {
-    const id = $(this).data('id');
-    $.ajax({
-    url: "{{route('auditor.getSaksiData')}}",
-    data: {
-    "_token": "{{ csrf_token() }}",
-    id
-    },
-    type: "post",
-    dataType: "html",
-    success: function(data) {
-    $('#container-view-modal').html(data)
-    }
+        const id = $(this).data('id');
+        $.ajax({
+            url: "{{ route('auditor.getSaksiDibatalkan') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                id
+            },
+            type: "GET",
+            dataType: "html",
+            success: function(data) {
+                $('#container-view-modal').html(data)
+            }
+        });
     });
-    })
 </script>
 
 @endsection

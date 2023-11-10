@@ -463,9 +463,9 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             style="color: #e1af0a; font-size: 16px; display: none;">
                                             Urutan
                                         </h4>
-                                        <h4 class="mb-0 fw-bold tabulasi tugel-content"
+                                        <h4 class="mb-0 fw-bold dpt tugel-content"
                                             style="color: #e1af0a; font-size: 16px; display: none;">
-                                            Tabulasi
+                                            DPT
                                         </h4>
                                         <!-- <h4 class="mb-0 fw-bold  tugel-content" style="color: #e1af0a; font-size: 16px">
                                          Hisuara
@@ -751,14 +751,14 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         </div>
                                     </div>
 
-                                    <div class="col-md text-white tabulasi tugel-content" style="display:none">
+                                    <div class="col-md text-white dpt tugel-content" style="display:none">
                                         <div class="row">
                                             <div class="col py-2 judul text-center bg-secondary text-white"
                                                 style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
-                                                <div class="text">Total TPS : <b>{{ $total_tps }}</b></div>
+                                                <div class="text">DPT Pria : <b>{{ $total_tps }}</b></div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-danger text-white">
-                                                <div class="text">TPS Masuk : <b>{{ $tps_masuk }}</b></div>
+                                                <div class="text">DPT Wanita : <b>{{ $tps_masuk }}</b></div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-primary text-white">
                                             <?php  
@@ -774,12 +774,15 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 <div class="text">Total DPT : <b>{{ $total_dpt }}</b></div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-info text-white">
-                                              
-                                                <div class="text">Suara Masuk : <b>{{ $suara_masuk }}</b></div>
+                                                <div class="text">Total TPS : <b>{{ $total_tps }}</b></div>
+                                            </div>
+                                            <div class="col py-2 judul text-center bg-warning text-white">
+                                                <div class="text">Total Kec : <b>{{$total_verification_voice}}</b>
+                                                </div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-success text-white"
                                                 style="border-top-right-radius: 25px; border-bottom-right-radius: 25px">
-                                                <div class="text">Terverifikasi : <b>{{$total_verification_voice}}</b>
+                                                <div class="text">Total Kel : <b>{{$total_verification_voice}}</b>
                                                 </div>
                                             </div>
                                         </div>
@@ -1163,9 +1166,9 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white active-button"
                                             style="background-color: #656064; width: 40px; height: 36px;"
-                                            data-target="tabulasi">
+                                            data-target="dpt">
                                             <span class="dark-layout" data-bs-placement="bottom"
-                                                data-bs-toggle="tooltip" title="Tabulasi">
+                                                data-bs-toggle="tooltip" title="DPT">
                                                 <i class="fa-solid fa-database"></i>
                                             </span>
                                         </button>

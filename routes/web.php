@@ -457,6 +457,7 @@ foreach ($kotas as $kota) {
         Route::group(['middleware' => 'role:auditor', 'prefix' => 'auditor', 'as' => 'auditor.'], function () {
             Route::get('index', [AuditorController::class, 'index'])->name('index');
             Route::post('getSaksiData', [AuditorController::class, 'getSaksiData'])->name('getSaksiData');
+            Route::get('getSaksiDibatalkan', [AuditorController::class, 'getSaksiDibatalkan'])->name('getSaksiDibatalkan');
             Route::get('auditData/{id}', [AuditorController::class, 'auditData'])->name('auditData');
             Route::get('batalkanData/{id}', [AuditorController::class, 'batalkanData'])->name('batalkanData');
             Route::get('tpsteraudit/{id}', [AuditorController::class, 'tpsteraudit'])->name('tpsteraudit');

@@ -17,8 +17,10 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Crypt;
 use App\Events\NotifEvent;
 use App\Models\Configs;
+use App\Models\Koreksi;
 use App\Models\QuickSaksiData;
 use App\Models\RegenciesDomain;
+use App\Models\SaksiData;
 use App\Models\Tracking as ModelsTracking;
 
 class AuditorController extends Controller
@@ -71,7 +73,7 @@ class AuditorController extends Controller
         return view('auditor.index', $data);
     }
 
-    public function auditData($id)
+    public function auditData($id) 
     {
         $id = Crypt::decrypt($id);
         $saksi = new Saksi;
@@ -118,6 +120,7 @@ class AuditorController extends Controller
         $data = [
             'batalkan' => 1,
             'verification' => "",
+            "kecurangan_id_users" =>  Auth::user()->id,
         ];
         $saksi->where('id', $id)->update($data);
         return redirect()->back()->with(['success-batal' => 'Berhasil Membatalkan data']);
@@ -171,6 +174,24 @@ class AuditorController extends Controller
 
         $data['village'] = Village::where('id', $data['paslon'][0]->saksi_data[0]->village_id)->first();
         return view('auditor.modalView', $data);
+    }
+
+    public function getSaksiDibatalkan(Request $request)
+    {
+        $data['config'] = Config::first();
+        $data['saksi']  =  Saksi::where('tps_id', $request['id'])->first();
+        // dd($data['saksi']);
+        $data['saksi_data'] = SaksiData::where('saksi_id', $data['saksi']['id'])->get();
+        // $data['saksi_data_baru'] = Koreksi::where('saksi_id', $data['saksi']['id'])->get();
+        $data['saksi_data_baru_deskripsi'] = Koreksi::where('saksi_id', $data['saksi']['id'])->first();
+        $data['admin_req'] = User::where('id', $data['saksi']['kecurangan_id_users'])->first();
+        // dd($data['admin_req']);
+        $data['saksi_koreksi'] = User::where('tps_id', $data['saksi']['tps_id'])->first();
+        $data['kelurahan'] = Village::where('id', $data['saksi']['village_id'])->first();
+        $data['kecamatan'] = District::where('id', $data['saksi']['district_id'])->first();
+        $data['tps'] = Tps::where('id', $data['saksi']['tps_id'])->first();
+
+        return view('auditor.modalViewDibatalkan', $data);
     }
 
     public function auditC1() {
