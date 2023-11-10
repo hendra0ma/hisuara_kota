@@ -244,6 +244,9 @@ class HukumController extends Controller
         //         ]);
         //     }
         // }
+
+    
+
         if ($request['kecurangan'] != null) {
             Bukticatatan::create([
                 'tps_id' => Crypt::decrypt($id),
@@ -258,19 +261,39 @@ class HukumController extends Controller
             ]);
         }
         $crypt = Crypt::encrypt(rand());
-        Saksi::where('tps_id', Crypt::decrypt($id))->update([
-            'status_kecurangan' => 'terverifikasi',
-        ]);
+        // Saksi::where('tps_id', Crypt::decrypt($id))->update([
+        //     'status_kecurangan' => 'terverifikasi',
+        // ]);
         $bulan = date('m');
         $tahun = date('y');
         $tps = Tps::where('id', Crypt::decrypt($id))->first();
         $no_berkas = Crypt::decrypt($id) . "/BK"  . "/PILPRES/" . $bulan . "/" . $tahun . "";
-        $save = Qrcode::where('tps_id',Crypt::decrypt($id))->update([
-            'token'  => $crypt,
+
+        $save = Qrcode::create([
+            'tps_id' => $id,
+            'verifikator_id' => Auth::user()->id,
+            'hukum_id' => Auth::user()->role_id,
+            'tanggal_masuk' => now(),
+            'token' => encrypt(rand()),
             'nomor_berkas' => $no_berkas,
             'hukum_id' => Auth::user()->id,
         ]);
+
+        // $save = Qrcode::where('tps_id',Crypt::decrypt($id))->update([
+        //     'token'  => $crypt,
+        //     'nomor_berkas' => $no_berkas,
+        //     'hukum_id' => Auth::user()->id,
+        // ]);
         
+        $data = [
+            'status_kecurangan' =>'terverifikasi',
+            'verifikator_id' => Auth::user()->id,
+        ];
+        Saksi::where('tps_id', $id)->update($data);
+
+
+
+
         $qr =  Qrcode::where('tps_id',Crypt::decrypt($id))->first();
         $saksi = Saksi::where('tps_id', Crypt::decrypt($id))->first();
         SuratPernyataan::create([

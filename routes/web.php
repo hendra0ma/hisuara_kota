@@ -683,8 +683,6 @@ foreach ($kotas as $kota) {
 
             Route::get('c1Crowd/index', 'c1Crowd')->name('crowd_c1');
             Route::post('c1Crowd/upload', 'uploadC1Crowd');
-
-
             Route::post('dev/action_saksi', 'action_saksi');
             Route::get('dev/tps_update', 'tps_update');
             Route::get('dev/saksi_update', 'saksi_update');
@@ -693,7 +691,7 @@ foreach ($kotas as $kota) {
             Route::get('upload_kecurangan_2', 'upload_kecurangan_2');
             Route::get('upload_c1', 'upload_c1')->name('upload_c1');
             Route::get('input-c1-quickcount', 'c1_quickcount');
-            Route::post('action_upload_kecurangan', 'action_upload_kecurangan');
+            Route::post('action_upload_kecurangan', 'action_upload_kecurangan')->name('action_upload_kecurangan');
             Route::get('dev/absen', 'absen');
             Route::get('dev/test_title', 'test_title');
             Route::get('dev/test_geo', 'test_geo');

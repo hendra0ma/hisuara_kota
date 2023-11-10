@@ -159,7 +159,7 @@
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
-                        <form action="#" method="post" enctype="multipart/form-data">
+                        <form action="{{route('action_upload_kecurangan')}}" method="post" enctype="multipart/form-data">
                             <div class="modal-body">
                             
                                 @csrf
@@ -175,7 +175,7 @@
                                             <div class="dropify-loader"></div>
                                             <div class="dropify-errors-container">
                                                 <ul></ul>
-                                            </div><input type="file" class="dropify" data-bs-height="180" name="foto"><button
+                                            </div><input type="file" class="dropify" data-bs-height="180" name="foto[]"multiple><button
                                                 type="button" class="dropify-clear">Remove</button>
                                             <div class="dropify-preview"><span class="dropify-render"></span>
                                                 <div class="dropify-infos">
@@ -200,7 +200,7 @@
                                             <div class="dropify-loader"></div>
                                             <div class="dropify-errors-container">
                                                 <ul></ul>
-                                            </div><input type="file" class="dropify" data-bs-height="180"><button type="button"
+                                            </div><input type="file" class="dropify"name="video[]"multiple data-bs-height="180"><button type="button"
                                                 class="dropify-clear">Remove</button>
                                             <div class="dropify-preview"><span class="dropify-render"></span>
                                                 <div class="dropify-infos">
@@ -214,6 +214,30 @@
                                         </div>
                                     </div>
                                     <p>*Pilih 1 Video</p>
+                                    <h4 class="mt-2 header-title">Video Pernyataan</h4>
+                                    <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
+                                        <div class="dropify-wrapper">
+                                            <div class="dropify-message"><span class="file-icon">
+                                                    <p>Drag and drop a file here or click</p>
+                                                </span>
+                                                <p class="dropify-error">Ooops, something wrong appended.</p>
+                                            </div>
+                                            <div class="dropify-loader"></div>
+                                            <div class="dropify-errors-container">
+                                                <ul></ul>
+                                            </div><input type="file" class="dropify"name="video_pernyataan" data-bs-height="180"><button type="button"
+                                                class="dropify-clear">Remove</button>
+                                            <div class="dropify-preview"><span class="dropify-render"></span>
+                                                <div class="dropify-infos">
+                                                    <div class="dropify-infos-inner">
+                                                        <p class="dropify-filename"><span class="dropify-filename-inner"></span>
+                                                        </p>
+                                                        <p class="dropify-infos-message">Drag and drop or click to replace</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <b>Panduan Laporan : </b>
                                     <p>Pilih salah satu kecurangan yang paling relevan, nyata, dan disaksikan sendiri.</p>
                                 </div>
@@ -228,7 +252,7 @@
                                         </tr>
                                         @foreach ($pelanggaran_umum as $item)
                                         <tr>
-                                            <td><input type="checkbox" name="curang[]" value=" {{ $item['kecurangan'] }}"
+                                            <td><input type="checkbox" name="curang[]" value=" {{ $item['kecurangan'] }}|{{$item['jenis']}}"
                                                     data-id="{{ $item['id'] }}" onclick="ajaxGetSolution(this)">
                                             </td>
                                             <td><label>{{ $item['kecurangan'] }} </label></td>
@@ -245,7 +269,7 @@
                                         </tr>
                                         @foreach ($pelanggaran_petugas as $item)
                                         <tr>
-                                            <td><input type="checkbox" name="curang[]" value=" {{ $item['kecurangan'] }}"
+                                            <td><input type="checkbox" name="curang[]" value=" {{ $item['kecurangan'] }}|{{$item['jenis']}}"
                                                     data-id="{{ $item['id'] }}" onclick="ajaxGetSolution(this)">
                                             </td>
                                             <td><label>{{ $item['kecurangan'] }} </label></td>
@@ -262,7 +286,7 @@
                                         </tr>
                                         @foreach ($pelanggaran_etik as $item)
                                         <tr>
-                                            <td><input type="checkbox" name="curang[]" value=" {{ $item['kecurangan'] }}"
+                                            <td><input type="checkbox" name="curang[]" value=" {{ $item['kecurangan'] }}|{{$item['jenis']}}"
                                                     data-id="{{ $item['id'] }}" onclick="ajaxGetSolution(this)">
                                             </td>
                                             <td><label>{{ $item['kecurangan'] }} </label></td>
