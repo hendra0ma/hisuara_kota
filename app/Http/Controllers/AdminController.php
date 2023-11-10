@@ -2160,7 +2160,7 @@ class AdminController extends Controller
                                                 WHERE saksi.verification = 1 AND saksi_data.village_id = :village_id
                                                 GROUP BY saksi_data.paslon_id
                                                 ORDER BY total DESC
-                                            '), ['village_id' => decrypt($id)]);
+                                            '), ['village_id' => (string)decrypt($id)]);
 
         // $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
         $data['urutan'] = $paslon_tertinggi;
