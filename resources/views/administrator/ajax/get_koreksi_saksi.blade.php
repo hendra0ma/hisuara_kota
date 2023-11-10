@@ -2,7 +2,7 @@
     <div class="col-md-6 mt-3">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">Admin Requestas</h5>
+                <h5 class="card-title">Admin Request</h5>
             </div>
             <div class="card-body">
                 <p class="card-text">
@@ -39,7 +39,7 @@
                         <div class="col">TPS {{$tps['number']}}</div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col">NIK : 1234567890123</div>
+                        <div class="col">NIK : {{$saksi_koreksi['nik']}}</div>
                         <div class="col">Kecamatan {{$kecamatan['name']}}/Kelurahan {{$kelurahan['name']}}</div>
                     </div>
                 </p>
@@ -58,11 +58,11 @@
                         <h5 class="card-title">Data Lama</h5>
                     </div>
                     <div class="card-body">
-                        <p class="card-text">
+                        {{-- <p class="card-text"> --}}
                             <div class="row">
                                 @foreach ($saksi_data as $ss)
                                 <div class="col-md-6">
-                                    <label for="suara01">Suara 0{{$ss['paslon_id']}}</label>
+                                    <label for="suara01">Suara 0{{$ss['paslon_id'] + 1}}</label>
                                     <input type="text" id="suara01" class="form-control" value="{{$ss['voice']}}"
                                         disabled>
                                 </div>
@@ -70,7 +70,7 @@
 
 
                             </div>
-                        </p>
+                        {{-- </p> --}}
                     </div>
                 </div>
             </div>
@@ -84,11 +84,11 @@
                     <form action="action_setujui/{{Crypt::encrypt($saksi['id'])}}" method="POST">
                         @csrf
                     <div class="card-body">
-                        <p class="card-text">
+                        {{-- <p class="card-text"> --}}
                             <div class="row">
                                 @foreach ($saksi_data_baru as $ss)
-                                <div class="col-md-6">
-                                    <label for="suara01">Suara 0{{$ss['paslon_id']}}</label>
+                                <div class="col-md-6 mb-2">
+                                    <label for="suara01">Suara 0{{$ss['paslon_id'] + 1}}</label>
                                     <input type="text" id="suara01" class="form-control" name="paslon{{$ss['paslon_id']}}" value="{{$ss['voice']}}">
                                 </div>
                                 @endforeach
@@ -98,7 +98,7 @@
                                         disabled>{{$saksi_data_baru_deskripsi['keterangan']}}</textarea>
                                 </div>
                             </div>
-                        </p>
+                        {{-- </p> --}}
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn bg-success text-light w-100">Setujui</button>
