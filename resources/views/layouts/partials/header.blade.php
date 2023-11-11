@@ -787,7 +787,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
                                                     }
                                                 ?>
-                                                <div class="text">Total DPT : <b>{{ $total_dpt }}</b></div>
+                                                <div class="text">Total : <b>{{ $total_dpt }}</b></div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-info text-white">
                                                 <div class="text">Total TPS : <b>{{ $total_tps }}</b></div>
