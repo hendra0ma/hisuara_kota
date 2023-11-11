@@ -111,13 +111,6 @@
 
         </script>
 
-        <script>
-            var mymap = L.map('map').setView([-6.2886, 106.717], 13); // Tangerang Selatan coordinates
-        
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 19,
-                }).addTo(mymap);
-        </script>
 
         <script>
     var cities = L.layerGroup();

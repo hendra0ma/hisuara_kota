@@ -336,6 +336,9 @@ foreach ($kotas as $kota) {
                     Route::get('terverifikasi_kelurahan/{id}', 'terverifikasiKelurahan')->name('terverifikasiKelurahan');
                     Route::get('terverifikasi_tps/{id}', 'terverifikasiTPS')->name('terverifikasiTPS');
                     Route::get('rekapitulasi', 'Rekapitulasi')->name('Rekapitulasi');
+                    Route::get('rekap_kecamatan/{id}', 'rekapKecamatan')->name('rekapKecamatan');
+                    Route::get('rekap_kelurahan/{id}', 'rekapKelurahan')->name('rekapKelurahan');
+                    Route::get('rekap_tps/{id}', 'rekapTPS')->name('rekapTPS');
                     Route::get('relawan', 'Relawan')->name('Relawan');
                     Route::get('relawan_dihapus', 'RelawanDihapus')->name('RelawanDihapus');
                     Route::get('data-gugatan', 'data_gugatan')->name('data_gugatan');

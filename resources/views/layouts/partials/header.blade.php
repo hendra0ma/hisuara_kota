@@ -416,7 +416,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white sirantap"
-                                            style="background-color: #f82649; width: 40px; height: 36px;"
+                                            style="background-color: #656064; width: 40px; height: 36px;"
                                             data-target="sirantap">
                                             <span class="dark-layout" data-bs-placement="bottom"
                                                 data-bs-toggle="tooltip" title="Sistem Laporan Data Pemilu">
@@ -633,7 +633,8 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="#" class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0;">
-                                                    C7 & Surat Suara
+                                                    {{-- C7 & Surat Suara --}}
+                                                    Dokumen Lain
                                                 </a>
                                             </div>
                                             {{-- <div class="col-md" style="padding-left: 1px; padding-right: 1px">

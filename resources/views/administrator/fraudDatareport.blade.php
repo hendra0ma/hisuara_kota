@@ -72,16 +72,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
 {{-- <h4 class="fs-4 mt-5 fw-bold">Election Fraud Barcode Report (EFBR) <div>Dilindungi Paten Rekapitung</div> --}}
 </h4>
 
-<h4 class="fw-bold fs-4 mt-5 mb-0">
-    Jumlah Barcode : {{$jumlah_barcode}}
-</h4>
-<hr style="border: 1px solid">
-
-<div class="card mt-5">
-    <div class="card-body">
-        <livewire:fraud-barcode-report-component />
-    </div>
-</div>
+<livewire:fraud-barcode-report-component />
 
 </div>
 @include('layouts.partials.footer')

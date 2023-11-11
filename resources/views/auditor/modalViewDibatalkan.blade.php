@@ -77,7 +77,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">Pengajuan Data Baru</h5>
+                        <h5 class="card-title">Isi Data Baru</h5>
                     </div>
                     <form action="action_setujui/{{Crypt::encrypt($saksi['id'])}}" method="POST">
                         @csrf
@@ -99,9 +99,9 @@
                             {{-- </p> --}}
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn bg-success text-light w-100">Setujui</button>
-                            <a href="tolak_koreksi/{{Crypt::encrypt($saksi['id'])}}"
-                                class="btn bg-danger mt-2 text-light w-100">Tolak</a>
+                            <button type="submit" class="btn bg-success text-light w-100">Terbitkan</button>
+                            {{-- <a href="tolak_koreksi/{{Crypt::encrypt($saksi['id'])}}"
+                                class="btn bg-danger mt-2 text-light w-100">Tolak</a> --}}
                         </div>
                     </form>
                 </div>

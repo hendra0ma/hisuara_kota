@@ -56,8 +56,6 @@ $tps = Tps::count();
 <!-- PAGE-HEADER -->
 <div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
 
-
-
     <div class="col-lg-12">
         <style>
             ul.breadcrumb {
@@ -92,7 +90,7 @@ $tps = Tps::count();
     <div class="col-lg-12">
         <center>
             <h2 class="page-title mt-1 mb-0" style="font-size: 60px">
-                TERVERIFIKASI
+                REKAPITULASi
             </h2>
             <h4 class="mt-2">
                 {{ $kota['name'] }} /
@@ -120,7 +118,7 @@ $tps = Tps::count();
                             <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
                             <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
                                     {{$dpt}}</span></div>
-                            <div id="chart-donut" style="height: 450px" class="chartsh h-100 w-100"></div>
+                            <div id="chart-pie" style="height: 450px" class="chartsh h-100 w-100"></div>
                         </div>
                     </div>
                     <div class="col my-auto">
@@ -171,7 +169,7 @@ $tps = Tps::count();
     
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
+
     <div class="col-md">
         <div class="card">
             <div class="card-body text-center">
@@ -190,9 +188,8 @@ $tps = Tps::count();
                 <div class="modal-body p-0">
                     <div class="col-lg-12" style="height: 100vh; overflow: scroll">
                         <center>
-                            <img width="100%" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}" data-magnify-speed="200"
-                                alt="" data-magnify-magnifiedwidth="2500" data-magnify-magnifiedheight="2500"
-                                class="img-fluid zoom"
+                            <img width="100%" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}" data-magnify-speed="200" alt=""
+                                data-magnify-magnifiedwidth="2500" data-magnify-magnifiedheight="2500" class="img-fluid zoom"
                                 data-magnify-src="{{asset('')}}storage/{{$saksi[0]->c1_images}}">
                         </center>
                     </div>
@@ -203,8 +200,8 @@ $tps = Tps::count();
     
     <script>
         $(document).ready(function () {
-            $('#imgBig').modal();
-        });
+                $('#imgBig').modal();
+            });
     </script>
 
 
@@ -217,5 +214,160 @@ $tps = Tps::count();
 <!-- SWEET-ALERT JS -->
 <script src="../../assets/plugins/sweet-alert/sweetalert.min.js"></script>
 <script src="../../assets/js/sweet-alert.js"></script>
+
+<script>
+    $('.c1saksi').click(function() {
+        $('body').removeClass('timer-alert');
+        swal({
+            title: "C1 Saksi",
+            text: "C1 Saksi adalah hasil perhitungan suara di TPS yang dikirimkan oleh saksi resmi partai.",
+            type: "warning",
+            confirmButtonText: 'Ok',
+        });
+    })
+</script>
+
+<script>
+    $('.c1relawan').click(function() {
+        $('body').removeClass('timer-alert');
+        swal({
+            title: "C1 Relawan",
+            text: "C1 Relawan adalah hasil perhitungan suara di TPS yang dikirimkan oleh relawan.",
+            type: "warning",
+            confirmButtonText: 'Ok',
+        });
+    })
+</script>
+
+<script>
+    $('.c1saksipend').click(function() {
+        $('body').removeClass('timer-alert');
+        swal({
+            title: "C1 Saksi (Pending)",
+            text: "C1 Saksi (Pending) adalah kiriman data TPS dari saksi yang tertahan karena adanya data C1 dari TPS yang sama telah dikirimkan oleh Relawan setempat. Hal ini biasanya terjadi karena C1 Saksi terlambat dikirimkan dan atau tidak adanya Saksi di TPS tersebut.",
+            type: "warning",
+            confirmButtonText: 'Ok',
+        });
+    })
+</script>
+
+<script>
+    $('.c1relawanband').click(function() {
+        $('body').removeClass('timer-alert');
+        swal({
+            title: "C1 Relawan (Banding)",
+            text: "C1 Banding adalah data C1 yang berbeda di TPS yang sama. Kiriman C1 Banding berasal dari masyarakat / relawan untuk dibandingkan dengan C1 Saksi.",
+            type: "warning",
+            confirmButtonText: 'Ok',
+        });
+    })
+</script>
 <!-- CONTAINER END -->
+</div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="periksaModal1" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Foto C1 Plano</h5>
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <a>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12"><img width="550px"
+                                src="https://demo.tangsel.pilwalkot.rekapitung.id/assets/upload/c1plano.jpg"
+                                class="zoom"
+                                data-magnify-src="https://demo.tangsel.pilwalkot.rekapitung.id/assets/upload/c1plano.jpg">
+                        </div>
+                    </div>
+                    <form>
+                        <div class="row justify-content-between mt-4 mb-4">
+                            <div class="col-md-3 text-center">
+                                <label for="suara01 w-100">Suara 01</label>
+                                <input class="form-control" type="text" value="12" size="10" disabled>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <label for="suara02">Suara 02</label>
+                                <input class="form-control" type="text" value="23" size="10" disabled>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <label for="suara03">Suara 03</label>
+                                <input class="form-control" type="text" value="0" size="10" disabled>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="jumlahsuarasah">Jumlah Suara Sah :</label>
+                                <input class="form-control" id="jumlahsuarasah" type="text" value="35" size="10"
+                                    disabled>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </a>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="periksaModal2" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Foto C2 Plano</h5>
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <a>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12"><img width="550px"
+                                src="https://demo.tangsel.pilwalkot.rekapitung.id/assets/upload/c1plano.jpg"
+                                class="zoom"
+                                data-magnify-src="https://demo.tangsel.pilwalkot.rekapitung.id/assets/upload/c1plano.jpg">
+                        </div>
+                    </div>
+                    <form>
+                        <div class="row justify-content-between mt-4 mb-4">
+                            <div class="col-md-3 text-center">
+                                <label for="suara01 w-100">Suara 01</label>
+                                <input class="form-control" type="text" value="12" size="10" disabled>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <label for="suara02">Suara 02</label>
+                                <input class="form-control" type="text" value="23" size="10" disabled>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <label for="suara03">Suara 03</label>
+                                <input class="form-control" type="text" value="0" size="10" disabled>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="jumlahsuarasah">Jumlah Suara Sah :</label>
+                                <input class="form-control" id="jumlahsuarasah" type="text" value="35" size="10"
+                                    disabled>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </a>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 @endsection

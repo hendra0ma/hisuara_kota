@@ -177,17 +177,18 @@
 
 <div class="modal fade" id="periksakecurangan" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-fullscreen" role="document">
-        <div class="modal-header bg-primary text-white">
+        <div class="modal-header bg-primary text-white" style="position: relative">
             <div class="modal-title mx-auto">
                 <h4 class="mb-0 fw-bold">Proses Verifikasi & Validasi Data Kecurangan</h4>
             </div>
+            <button class="btn text-white fs-4" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%)" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i></button>
         </div>
         <div class="modal-content h-auto">
             <div id="container-view-modal-kecurangan">
             </div>
-            <div class="modal-footer">
+            {{-- <div class="modal-footer">
                 <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

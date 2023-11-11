@@ -154,11 +154,11 @@ $tps = Tps::count();
         </div>
     </div>
 
-    <div class="col-md-8">
+    <div class="col-md-8 mt-4">
         <div class="card">
-            {{-- <div class="card-header bg-info">
-                <h3 class="card-title text-white">Suara TPS Masuk</h3>
-            </div> --}}
+            <div class="card-header bg-dark">
+                <h3 class="card-title text-white">Hasil Perhitungan Suara</h3>
+            </div>
             <div class="card-body" style="position: relative;">
                 <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
@@ -210,10 +210,87 @@ $tps = Tps::count();
         </div>
     </div>
 
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
+    <!-- Popper.js, required for Bootstrap 4 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
     <div class="col-md">
         <div class="card">
             <div class="card-body text-center">
-                <img style="height: 594.92px" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}" alt="">
+                <a href="#" data-toggle="modal" data-target="#imgBig">
+                    <img style="height: 594.92px" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" style="background: rgba(0, 0, 0, 0.65)" id="imgBig" tabindex="-1" aria-labelledby="imgBigLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="col-lg-12" style="height: 100vh; overflow: scroll">
+                        <center>
+                            <img width="100%" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}" data-magnify-speed="200"
+                                alt="" data-magnify-magnifiedwidth="2500" data-magnify-magnifiedheight="2500"
+                                class="img-fluid zoom"
+                                data-magnify-src="{{asset('')}}storage/{{$saksi[0]->c1_images}}">
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        $(document).ready(function () {
+            $('#imgBig').modal();
+        });
+    </script>
+    <?php $i = 1;?>
+
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Urutan Pemenang</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="bg-dark">
+                            <tr>
+                                <th scope="col" class="text-white">NO</th>
+                                <th scope="col" class="text-white">URAIAN</th>
+                                <th scope="col" class="text-white">JUMLAH SUARA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($urutan as $urutPaslon)
+                            <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
+                            <tr>
+                                <td>{{$i++}}</td>
+                                <td>{{$pasangan->candidate}} - {{$pasangan->deputy_candidate}}</td>
+                                <td>{{$urutPaslon->total}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h1>Keterangan Surat Suara : </h1>
+                <h1>(dummy)</h1>
             </div>
         </div>
     </div>
