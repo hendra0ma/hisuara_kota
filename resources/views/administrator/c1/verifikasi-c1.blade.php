@@ -36,10 +36,10 @@
                 <a class="btn text-white w-100 py-3 c1teraudit tablink"
                     onclick="openPage('C1-Dibatalkan', this, '#6259ca')">C1 Dibatalkan</a>
             </div> --}}
-            <div class="col parent-link">
+            <!-- <div class="col parent-link">
                 <a class="btn text-white w-100 py-3 c1koreksi tablink"
                     onclick="openPage('C1-Koreksi', this, '#6259ca')">Pengajuan Koreksi C1</a>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
@@ -86,9 +86,9 @@
     <livewire:c1-relawan-kota />
  
 </div>
-<div id="C1-Koreksi" class="tabcontent mt-0 pt-0 px-0">
+<!-- <div id="C1-Koreksi" class="tabcontent mt-0 pt-0 px-0">
     <livewire:c1-koreksi />
-</div>
+</div> -->
 
 <div class="modal fade" id="periksaC1Verifikator" tabindex="-1" aria-labelledby="periksaC1VerifikatorLabel"
     aria-hidden="true">
