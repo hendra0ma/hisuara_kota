@@ -87,7 +87,7 @@ use function GuzzleHttp\Promise\all;
 // });
 
 Route::get("redirect-page",function (){
-    $role = Auth::user()->role;
+    $role = Auth::user()->role_id;
     $regency_id = substr(Auth::user()->districts,0,4);
     $regency_domain = RegenciesDomain::where('regency_id',$regency_id)->first();
 
@@ -389,6 +389,9 @@ foreach ($kotas as $kota) {
                     Route::get('/ajax/get_koreksi_saksi', 'get_koreksi_saksi');
                     Route::post('kecamatan/rekapitulator/action_rekapitulator/{id}', 'action_rekapitulator');
                     Route::post('action_setujui/{id}', 'action_setujui');
+                    Route::post('action_setuju_koreksi_auditor/{id}', 'actionSetujuKoreksiAuditor')->name('actionSetujuKoreksiAuditor');
+
+
                     Route::get('tolak_koreksi/{id}', 'tolak_koreksi');
                     Route::get('perhitungan_kecamatan/{id}', 'perhitungan_kecamatan');
                     Route::get('perhitungan_kelurahan/{id}', 'perhitungan_kelurahan');
@@ -674,7 +677,7 @@ foreach ($kotas as $kota) {
         });
         Route::group(['middleware' => ['auth', 'role:relawan']], function () {
             Route::controller(RelawanController::class)->group(function () {
-                Route::get('c1-relawan', 'c1relawan');
+                Route::get('c1-relawan', 'c1relawan')->name('uploadC1Relawan');
                 Route::post('upload-relawan', 'uploadC1Relawan');
             });
         });
@@ -690,8 +693,6 @@ foreach ($kotas as $kota) {
 
             Route::get('c1Crowd/index', 'c1Crowd')->name('crowd_c1');
             Route::post('c1Crowd/upload', 'uploadC1Crowd');
-
-
             Route::post('dev/action_saksi', 'action_saksi');
             Route::get('dev/tps_update', 'tps_update');
             Route::get('dev/saksi_update', 'saksi_update');
@@ -700,17 +701,13 @@ foreach ($kotas as $kota) {
             Route::get('upload_kecurangan_2', 'upload_kecurangan_2');
             Route::get('upload_c1', 'upload_c1')->name('upload_c1');
             Route::get('input-c1-quickcount', 'c1_quickcount');
-            Route::post('action_upload_kecurangan', 'action_upload_kecurangan');
+            Route::post('action_upload_kecurangan', 'action_upload_kecurangan')->name('action_upload_kecurangan');
             Route::get('dev/absen', 'absen');
             Route::get('dev/test_title', 'test_title');
             Route::get('dev/test_geo', 'test_geo');
         });
 
-
-
-
         //config pages
-
         Route::group(['prefix' => "config", 'as' => "config."], function () {
             Route::get('lockdown', function () {
                 return view('config.lockdown');
@@ -986,7 +983,7 @@ Route::get('prov-users', function () {
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------
-//SETUP DPT & IMPORT EXCEL
+//SETUP DPT & IMPORT EXCEL                          !!HANYA PAKAI YANG TIDAK DIKOMENTARI!!
 //----------------------------------------------------------------------------------------------------------------------------------------
 
 Route::get("import-excel-pemilih",function (){
@@ -999,16 +996,22 @@ Route::get("logout_v2",function (){
     return redirect('login');
 
 });
-
-
-
-
 Route::get("import-excel-dpt",function (){
     return view('excel.dpt');
 });
 
+// Route::get("import-excel-dpt-gen",function (){
+//     return view('excel.dpt-gen');
+// });
+
+
+
+
 Route::post("import-excel",[ExcelController::class,"importExcel"])->name("import-excel");
-Route::post("import-dpt-excel",[ExcelController::class,"importDptExcel"])->name("import-dpt-excel");
+// Route::post("import-dpt-excel",[ExcelController::class,"importDptExcel"])->name("import-dpt-excel");
+Route::post("import-dpt-excel-gen",[ExcelController::class,"importDptExcelGen"])->name("import-dpt-excel-gen");
+
+
 
 Route::get('dpt/kecamatan/{id_kota}',function ($id){
     //masukan id kota untuk setup dpt per kecamatan yang sudah di import
@@ -1021,7 +1024,6 @@ Route::get('dpt/kecamatan/{id_kota}',function ($id){
         ]);
     }
 });
-
 Route::get('dpt/kota', function () {
     // untuk setup dpt kota dan provinsi
     $prv = Province::get();
@@ -1033,13 +1035,13 @@ Route::get('dpt/kota', function () {
                 'dpt'=> (int) $dst
             ]);
         }
-        
         $dst = Regency::where('province_id',$pr->id)->where('dpt','!=',0)->sum('dpt');  
         Province::where('id',$pr->id)->update([
             'dpt'=> (int) $dst
         ]);
     }
 });
+
 //----------------------------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------------
 

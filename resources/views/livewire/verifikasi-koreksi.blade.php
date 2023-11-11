@@ -17,6 +17,7 @@ use App\Models\Koreksi;
 
     <div class="row">
         @foreach ($saksi_data as $ls)
+       
         <?php $request_by = User::where('id',$ls['kecurangan_id_users'])->first(); ?>
         <?php $koreksi_by = Koreksi::where('user_id',(string)$ls['id'])->first(); ?>
         <div class="col-xl-3">
@@ -77,9 +78,9 @@ use App\Models\Koreksi;
                         <div class="row mt-2">
                             <div class="col-12 px-0">
                                 <button class="btn rounded-0 w-100 disetujuimodal text-white" id="Cek"
-                                    data-id="{{$koreksi_by['saksi_id']}}" data-bs-toggle="modal" id=""
+                                    data-id="{{$ls['saksi_id']}}" data-bs-toggle="modal" id=""
                                     data-bs-target="#disetujuimodal"
-                                    style="background-color: rgb(248, 38, 73)">Koreksi Kiriman C1</button>
+                                    style="background-color: rgb(248, 38, 73)">Periksa C1</button>
                             </div>
                         </div>
                     </div>

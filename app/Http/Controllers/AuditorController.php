@@ -125,6 +125,7 @@ class AuditorController extends Controller
         $saksi->where('id', $id)->update($data);
         return redirect()->back()->with(['success-batal' => 'Berhasil Membatalkan data']);
     }
+    
     public function village($id)
     {
         $id = Crypt::decrypt($id);

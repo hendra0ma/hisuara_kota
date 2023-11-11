@@ -178,6 +178,8 @@ class RelawanController extends Controller
     public function c1relawan()
     {
         $data['paslon'] = Paslon::get();
+        $data['data_relawan']  = Relawan::where('relawan_id',Auth::user()->id)->first();
+        
         return view('publik.relawan.uploadc1relawan',$data);
     }
     public function c1banding()
@@ -195,23 +197,36 @@ class RelawanController extends Controller
         $user  = Auth::user();
 
         $paslon = Paslon::select('id')->get();
-
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         if ($files = $request->file('c1_images')) {
-            $file =  $request->file('c1_images')->store('public/storage/c1_plano');
+
+            // $file =  $request->file('c1_images')->store('storage/c1_plano');
+            // $namafile =  $request->file('c1_images')->getClientOriginalName();
+
+            $image = $request->file('c1_images');
+            $randomString = substr(str_shuffle($characters), 0, 40); // Menghasilkan string acak sepanjang 10 karakter
+            $namafile = time() . $randomString  .".".  $image->getClientOriginalExtension();
+            $image->move(public_path('storage/c1_plano'), $namafile);
+
+
+
+
         }else{
             return redirect()->back()->with(['error'=>'error saat mengupload file']);
         }
         // $regency = Regency::where('id',Auth::user()->district_id)->first();
 
         $upload_relawan = new Relawan;
-        $upload_relawan->c1_images = $file;
+        $upload_relawan->c1_images = $namafile;
         $upload_relawan->regency_id = $this->config->regencies_id;
+
         $upload_relawan->district_id = $user->districts;
+        $upload_relawan->province_id = $user->province_id;
         $upload_relawan->village_id = $user->villages;
         $upload_relawan->tps_id = $user->tps_id;
         $upload_relawan->status = 1;
         $upload_relawan->relawan_id = $user->id;
-        $upload_relawan->jenis = 'relawan';
+        // $upload_relawan->jenis = 'relawan';
         $upload_relawan->save();
         $id = $upload_relawan->id;
 
@@ -220,10 +235,11 @@ class RelawanController extends Controller
             $relawan_data = new RelawanData;
             $relawan_data->relawan_id = $id;
             $relawan_data->c1_relawan_id = $id;
+            $relawan_data->village_id = $user->villages;
             $relawan_data->paslon_id = $pas->id;
-            $relawan_data->village_id = Auth::user()->village_id;
             $relawan_data->regency_id = $this->config->regencies_id;
-            $relawan_data->district_id = Auth::user()->district_id;
+            $relawan_data->district_id = $user->districts;
+            $relawan_data->province_id = $user->province_id;
             $relawan_data->voice = $request->suara[$i];
             $relawan_data->save();
             $i++;

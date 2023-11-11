@@ -74,13 +74,14 @@ class HumanVerificationController extends Controller
         $data['config'] = Config::first();
         $data['saksi']  =  Saksi::where('id', $request['id'])->first();
         $data['saksi_data'] = SaksiData::where('saksi_id', $request['id'])->get();
-        $data['saksi_data_baru'] = Koreksi::where('saksi_id', $request['id'])->get();
-        $data['saksi_data_baru_deskripsi'] = Koreksi::where('saksi_id', $request['id'])->first();
+        // $data['saksi_data_baru'] = Koreksi::where('saksi_id', $request['id'])->get();
+        // $data['saksi_data_baru_deskripsi'] = Koreksi::where('saksi_id', $request['id'])->first();
         $data['admin_req'] = User::where('id', $data['saksi']['kecurangan_id_users'])->first();
         $data['saksi_koreksi'] = User::where('tps_id', $data['saksi']['tps_id'])->first();
         $data['kelurahan'] = Village::where('id', $data['saksi']['village_id'])->first();
         $data['kecamatan'] = District::where('id', $data['saksi']['district_id'])->first();
         $data['tps'] = Tps::where('id', $data['saksi']['tps_id'])->first();
+        // return $data['saksi'];
         return view('administrator.ajax.get_koreksi_saksi', $data);
     }
 

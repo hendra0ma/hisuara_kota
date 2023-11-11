@@ -55,7 +55,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">Data Lama</h5>
+                        <h5 class="card-title">Perubahan Suara</h5>
                     </div>
                     <div class="card-body">
                         {{-- <p class="card-text"> --}}
@@ -75,7 +75,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -84,7 +84,7 @@
                     <form action="action_setujui/{{Crypt::encrypt($saksi['id'])}}" method="POST">
                         @csrf
                     <div class="card-body">
-                        {{-- <p class="card-text"> --}}
+
                             <div class="row">
                                 @foreach ($saksi_data_baru as $ss)
                                 <div class="col-md-6 mb-2">
@@ -98,7 +98,7 @@
                                         disabled>{{$saksi_data_baru_deskripsi['keterangan']}}</textarea>
                                 </div>
                             </div>
-                        {{-- </p> --}}
+                      
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn bg-success text-light w-100">Setujui</button>
@@ -107,6 +107,6 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>

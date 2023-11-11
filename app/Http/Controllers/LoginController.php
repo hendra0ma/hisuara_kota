@@ -53,7 +53,7 @@ class LoginController extends Controller
                 if ($role == "1") {
                     return redirect('dashboard-pusats');
                 }else{
-                    $regency_id = substr(Auth::user()->districts,0,4);
+                    $regency_id = Auth::user()->regency_id;
                     $regency_domain = RegenciesDomain::where('regency_id',$regency_id)->first();
              
                     return redirect(env("HTTP_SSL","").$regency_domain->domain.env("HTTP_PORT","")."/redirect-page");
@@ -76,6 +76,7 @@ class LoginController extends Controller
     
     public function storeAdmin(Request $request)
     {
+    
        $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'alamat' => ['required','string'],
@@ -105,7 +106,7 @@ class LoginController extends Controller
 
         if ($request->file('foto_ktp')) {
             $image = $request->file('foto_ktp');
-            $randomString = substr(str_shuffle($characters), 0, 13); // Menghasilkan string acak sepanjang 10 karakter
+            $randomString = substr(str_shuffle($characters), 0, 40); // Menghasilkan string acak sepanjang 10 karakter
             $foto_ktp = time() . $randomString  .".".  $image->getClientOriginalExtension();
             $image->move(public_path('storage/profile-photos'), $foto_ktp);
         } else {
@@ -114,14 +115,13 @@ class LoginController extends Controller
 
         if ($request->file('foto_profil')) {
             $image = $request->file('foto_profil');
-            $randomString = substr(str_shuffle($characters), 0, 13); // Menghasilkan string acak sepanjang 10 karakter
+            $randomString = substr(str_shuffle($characters), 0, 40); // Menghasilkan string acak sepanjang 10 karakter
             $foto_profil = time() . $randomString  .".".  $image->getClientOriginalExtension();
             $image->move(public_path('storage/profile-photos'), $foto_profil);
         } else {
             return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
         }
         $role = explode('|',$request->input('role_id'));
-
         $user = new User();
         $user->name = $request->input('name');
         $user->address = $request->input('address');
@@ -132,18 +132,21 @@ class LoginController extends Controller
         if ($role[0] == "tps") {
             $user->districts = $request->input('kecamatan');
             $user->villages = $request->input('kelurahan');
+            $user->regency_id = $request->input('kota');
         }else{
             $user->regency_id = $request->input('kota');
             $user->districts = "0";
-            
-
         }
 
         
         $user->tps_id = $request->input('tps');
 
         $user->role_id = $role[1];
-        $user->is_active = "0"  ;
+        if ((string) $role[1] == (string)14) {
+            $user->is_active = "1";
+        }else{
+            $user->is_active = "0" ;
+        }
         $user->email = $request->input('email');
         $user->address = $request->input('alamat');
         $user->password = bcrypt($request->input('password'));

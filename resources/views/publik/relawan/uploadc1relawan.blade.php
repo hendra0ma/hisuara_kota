@@ -54,7 +54,7 @@
         .screen::-webkit-scrollbar {
             display: none
         }
-        
+
         .mobile-phone {
             margin: auto;
             margin-top: 170px;
@@ -64,7 +64,7 @@
             box-shadow: 0 0 20px #000000;
             border-radius: 30px;
         }
-    
+
         .screen {
             width: 100%;
             height: 100%;
@@ -73,7 +73,7 @@
             overflow-y: auto;
             position: relative;
         }
-    
+
         .brove {
             width: 150px;
             height: 20px;
@@ -82,7 +82,7 @@
             margin: 0 100px;
             border-radius: 0 0 20px 20px;
         }
-    
+
         .speaker {
             width: 60px;
             height: 5px;
@@ -92,14 +92,16 @@
             margin-top: 5px;
             border-radius: 20px;
         }
+
         .content-for-mobile {
             display: none;
         }
-        
+
         /* Media query for mobile devices */
         @media screen and (max-width: 767px) {
             .content-for-mobile {
-                display: block; /* Show the content on mobile devices */
+                display: block;
+                /* Show the content on mobile devices */
             }
 
             .content-for-desktop {
@@ -127,21 +129,20 @@
                     <h4 class="mb-0">Upload C1 Relawan</h4>
                 </div>
                 <div class="card-body px-3">
-                
+
                     <div class="row">
                         <div class="px-0 col-12 text-center mb-3">
                             @if (Auth::user()->profile_photo_path == NULL)
-                            <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
-                                src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF">
+                            <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF">
                             @else
                             <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}">
                             @endif
                         </div>
                         <div class="px-0 col-12 my-auto text-center">
                             <?php
-                                            $tps = App\Models\Tps::where('tps.id', '=', Auth::user()->tps_id)->first();
-                                            $kelurahan = App\Models\Village::where('villages.id', '=', Auth::user()->villages)->first();
-                                        ?>
+                            $tps = App\Models\Tps::where('tps.id', '=', Auth::user()->tps_id)->first();
+                            $kelurahan = App\Models\Village::where('villages.id', '=', Auth::user()->villages)->first();
+                            ?>
                             <div class="mb-0 fw-bold" style="font-size: 20px">{{ Auth::user()->name }}</div>
                             <div style="font-size: 15px">NIK : {{ Auth::user()->nik }}</div>
                             @if($tps == null)
@@ -156,23 +157,21 @@
                             @endif
                         </div>
                     </div>
-                
-                
-                
+
+
+
                     <h1 class="text-center">
-                        <img src="{{asset('')}}assets/icons/hisuara_new.png" class="hadow-4 mb-3 mt-3 rounded-2" style="width: 175px;"
-                            alt="Avatar" />
+                        <img src="{{asset('')}}assets/icons/hisuara_new.png" class="hadow-4 mb-3 mt-3 rounded-2" style="width: 175px;" alt="Avatar" />
                     </h1>
                     {{-- <h5> Halo, {{Auth::user()->name}}</h5> --}}
                     <form action="{{url('')}}/upload-relawan" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row no-gutters">
-                            <?php $i=1; ?>
+                            <?php $i = 1; ?>
                             @foreach ($paslon as $item)
                             <div class="col-lg-12 mb-2">
                                 Suara 0{{$i++}} - {{ $item['candidate']}}
-                                <input type="number" class="form-control" id="suara[]" name="suara[]" required
-                                    placeholder="Suara Paslon">
+                                <input type="number" class="form-control" id="suara[]" name="suara[]" required placeholder="Suara Paslon">
                             </div>
                             @endforeach
                             <h5 class="mt-3 header-title">Foto C1</h5>
@@ -200,7 +199,7 @@
                             <div class="d-grid gap-2 col-lg-12">
                                 <input type="submit" class="btn btn-block btn-primary mt-2">
                             </div>
-                
+
                         </div>
                     </form>
                     <form action="{{route('logout')}}" method="post">
@@ -212,15 +211,15 @@
                 </div>
             </div>
             {{-- <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn btn-danger">
-                    <span>
-                        <i class="fa-solid fa-right-from-bracket"></i>
-                    </span> Logout
-                </a>
+            @csrf
+            <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn btn-danger">
+                <span>
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </span> Logout
+            </a>
             </form> --}}
             {{-- <x-jet-validation-errors /> --}}
-            
+
         </div>
     </div>
 
@@ -230,44 +229,41 @@
                 <h4 class="mb-0">Upload C1 Relawan</h4>
             </div>
             <div class="card-body px-3">
-        
+
                 <div class="row">
                     <div class="px-0 col-12 text-center mb-3">
                         @if (Auth::user()->profile_photo_path == NULL)
-                        <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
-                            src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF">
+                        <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF">
                         @else
                         <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}">
                         @endif
                     </div>
                     <div class="px-0 col-12 my-auto text-center">
                         <?php
-                                                    $tps = App\Models\Tps::where('tps.id', '=', Auth::user()->tps_id)->first();
-                                                    $kelurahan = App\Models\Village::where('villages.id', '=', Auth::user()->villages)->first();
-                                                ?>
+                        $tps = App\Models\Tps::where('tps.id', '=', Auth::user()->tps_id)->first();
+                        $kelurahan = App\Models\Village::where('villages.id', '=', Auth::user()->villages)->first();
+                        ?>
                         <div class="mb-0 fw-bold" style="font-size: 20px">{{ Auth::user()->name }}</div>
                         <div style="font-size: 15px">NIK : {{ Auth::user()->nik }}</div>
                         <div style="font-size: 15px">SAKSI TPS {{ $tps }}</div>
                         <div style="font-size: 15px">KELURAHAN {{ $kelurahan }}</div>
                     </div>
                 </div>
-        
-        
-        
+
+
+
                 <h1 class="text-center">
-                    <img src="{{asset('')}}assets/icons/hisuara_new.png" class="hadow-4 mb-3 mt-3 rounded-2"
-                        style="width: 175px;" alt="Avatar" />
+                    <img src="{{asset('')}}assets/icons/hisuara_new.png" class="hadow-4 mb-3 mt-3 rounded-2" style="width: 175px;" alt="Avatar" />
                 </h1>
                 {{-- <h5> Halo, {{Auth::user()->name}}</h5> --}}
                 <form action="{{url('')}}/upload-relawan" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row no-gutters">
-                        <?php $i=1; ?>
+                        <?php $i = 1; ?>
                         @foreach ($paslon as $item)
                         <div class="col-lg-12 mb-2">
                             Suara 0{{$i++}} - {{ $item['candidate']}}
-                            <input type="number" class="form-control" id="suara[]" name="suara[]" required
-                                placeholder="Suara Paslon">
+                            <input type="number" class="form-control" id="suara[]" name="suara[]" required placeholder="Suara Paslon">
                         </div>
                         @endforeach
                         <h5 class="mt-3 header-title">Foto C1</h5>
@@ -295,7 +291,7 @@
                         <div class="d-grid gap-2 col-lg-12">
                             <input type="submit" class="btn btn-block btn-primary mt-2">
                         </div>
-        
+
                     </div>
                 </form>
                 <form action="{{route('logout')}}" method="post">
@@ -307,7 +303,7 @@
             </div>
         </div>
     </div>
-    
+
 
     <!-- End PAGE -->
     <!-- FILE UPLOADES JS -->
@@ -343,18 +339,54 @@
 
     <script src="{{url('/')}}/assets/js_custom.js"></script>
 
-
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $('.dropify').dropify({
-            messages: {
-                'default': 'Drag and drop a file here or click',
-                'replace': 'Drag and drop or click to replace',
-                'remove': 'Remove',
-                'error': 'Ooops, something wrong happended.'
-            }
-        });
+        <?php if ($data_relawan != null) { ?>
+
+            $(document).ready(function() {
+
+                $('body').html("")
+
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Anda sudah memasukan data C1 Relawan',
+                    icon: 'error',
+                    confirmButtonText: "Okay",
+                }).then((result)=>{
+                    location.href = "{{(url(''))}}/logout_v2"
+                })
+            })
+
+            
+            
+            
+            <?php } ?>
+
+            @if(Session::has('success'))
+
+                $(document).ready(function() {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Terima Kasih telah memasukan data C1',
+                        icon: 'success',
+                        confirmButtonText: "Okay",
+                    }).then((result)=>{
+                        location.href = "{{(url(''))}}/logout_v2"
+                    })
+                })
+
+            @endif
+
+            $('.dropify').dropify({
+                messages: {
+                    'default': 'Drag and drop a file here or click',
+                    'replace': 'Drag and drop or click to replace',
+                    'remove': 'Remove',
+                    'error': 'Ooops, something wrong happended.'
+                }
+            });
     </script>
 
-</body>
 
 </html>

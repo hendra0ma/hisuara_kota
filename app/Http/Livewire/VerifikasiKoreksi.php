@@ -17,7 +17,7 @@ class VerifikasiKoreksi extends Component
 
     public function render()
     {
-        $data['saksi_data'] = Saksi::join('users', 'users.tps_id', '=', 'saksi.tps_id')->where('koreksi', 1)->where('saksi.verification', '!=', '1')->where('name', 'like', '%'.$this->search.'%')->paginate(18);
+        $data['saksi_data'] = Saksi::join('users', 'users.tps_id', '=', 'saksi.tps_id')->where('koreksi', 1)->where('saksi.verification', '!=', '1')->where('name', 'like', '%'.$this->search.'%')->select("saksi.*",'users.*','saksi.id as saksi_id')->paginate(18);
         $data['jumlah_koreksi_c1'] = Saksi::join('users', 'users.tps_id', '=', 'saksi.tps_id')->where('koreksi', 1)->where('saksi.verification', '!=', '1')->count();
 
         if (count($data['saksi_data']) > 0) {

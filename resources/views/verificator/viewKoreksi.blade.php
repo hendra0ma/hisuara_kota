@@ -46,14 +46,15 @@
                                     $voice = 0;
                                     ?>
                                     @foreach($saksi as $saksidata)
-                                    @foreach($saksidata->saksi_data as $saksi_data)
-                                    <?php $voice += $saksi_data->voice  ?>
-                                    <div class="form-group col-md-12">
-                                        <label>Suara 0{{$i++}}</label>
-                                        <input type="number" class="form-control" id="inputname1" readonly="" value="{{$saksi_data->voice}}" name="suara[]" placeholder="Suara 01">
-                                    </div>
+                                        @foreach($saksidata->saksi_data as $saksi_data)
+                                        <?php $voice += $saksi_data->voice  ?>
+                                        <div class="form-group col-md-12">
+                                            <label>Suara 0{{$i++}}</label>
+                                            <input type="number" class="form-control" id="inputname1" readonly="" value="{{$saksi_data->voice}}" name="suara[]" placeholder="Suara 01">
+                                        </div>
+                                        @endforeach
                                     @endforeach
-                                    @endforeach
+                              
                                 </div>
                         </div>
                         <div class="col-6">
@@ -61,7 +62,7 @@
                             <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label>Jumlah Suara Sah</label>
-                                        <textarea type="number" class="form-control" id="inputnom4" readonly="" value="{{$voice}}" name="suaraSah" placeholder="Suara Tidak Sah" rows="9"></textarea>
+                                        <textarea type="number" class="form-control" id="inputnom4" readonly="" name="suaraSah" placeholder="Jumlah suara" rows="9">{{$voice}}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -86,39 +87,28 @@
                                         <?php $i = 1;  ?>
                                         @foreach($saksi as $saksidata)
                                         @foreach($saksidata->saksi_data as $saksi_data)
-                                        <div class="form-group col-md-12">
-                                            <label>Suara 0{{$i++}}</label>
-                                            <input type="number" class="form-control" id="suara[]" name="suara[]" required placeholder="Total Suara">
+                                        <div class="form-group col-md-6">
+                                            <label>Suara 0{{$i}}</label>
+                                            <input type="number" class="form-control" id="suara[]" name="suara[]" required placeholder="Total Suara 0{{$i}}">
                                         </div>
+                                        <?php $i++ ?>
                                         @endforeach
                                         @endforeach
                                     
                                     </div>
                                 </div>
     
-                                <div class="col-6">
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12">
-                                            <label>Keterangan *</label>
-    
-                                            <textarea name="keterangan" class="form-control" rows="9" placeholder="Jelaskan kesalahan data "></textarea>
-                                            <small class="text-danger">
-                                                *Keterangan wajib diisi
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
+                              
                             </div>
 
                             <small>
-                                Perubahan data yang saya ajukan sesuai dengan data C1. Saya menyatakan tunduk dan patuh terhadap Undang-Undang Pemilu yang berlaku dan siap mempertanggung jawabkan perubahan data ini.
+                                Perubahan data yang saya lakukan sesuai dengan data C1. Saya menyatakan tunduk dan patuh terhadap Undang-Undang Pemilu yang berlaku dan siap mempertanggung jawabkan perubahan data ini.
                             </small>
-
                             <div class="custom-control custom-checkbox mt-2 mb-1">
                                 <input type="checkbox" required="" class="custom-control-input" id="customCheck2" name="persetujuan" data-parsley-multiple="groups" data-parsley-mincheck="2">
                                 <label class="custom-control-label" for="customCheck2">Setuju</label>
                             </div>
-                            <button class="btn btn-primary btn-block mt-2" id="send" type="submit">Ajukan Perubahan</button>
+                            <button class="btn btn-primary btn-block mt-2" id="send" type="submit">Koreksi Data</button>
                         </form>
                     </div>
                 </div>

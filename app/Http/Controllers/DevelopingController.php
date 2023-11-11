@@ -24,7 +24,9 @@ use App\Models\Regency;
 use App\Models\SaksiC;
 use App\Models\SuratSuara;
 use App\Models\Tracking;
+use App\Models\VideoPernyataan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class DevelopingController extends Controller
@@ -163,6 +165,18 @@ class DevelopingController extends Controller
         ]);
         $district = District::where('id',Auth::user()->districts)->first();
         $regency = Regency::where("id",$district->regency_id)->first();
+
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        if ($request->file('c1_plano')) {
+            $image = $request->file('c1_plano');
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $randomString = substr(str_shuffle($characters), 0, 20); // Menghasilkan string acak sepanjang 10 karakter
+            $c1_plano = time()  . $randomString  .".". $image->getClientOriginalExtension();
+            $image->move(public_path('storage/c1_plano'), $c1_plano);
+        } else {
+            return redirect()->back()->with("error", 'gagal mengupload data C1 Plano');
+        }
+
 
         $config =  Config::find(1);
 
@@ -392,10 +406,7 @@ class DevelopingController extends Controller
     }
     public function upload_kecurangan(Request $request)
     {
-
-
-
-        $villagee = 3674040006;
+        $villagee = Auth::user()->villages;
         $data['tps'] = Tps::where('villages_id', $villagee)->get();
         $data['list_kecurangan'] = Listkecurangan::get();
         $data['kelurahan'] = Village::where('id', $villagee)->first();
@@ -408,7 +419,7 @@ class DevelopingController extends Controller
         $data['pelanggaran_umum']    = Listkecurangan::where('jenis', 0)->get();
         $data['pelanggaran_petugas'] = Listkecurangan::where('jenis', 1)->get();
         $data['pelanggaran_etik'] = Listkecurangan::where('jenis', 2)->get();
-        $villagee = 3674040006;
+      
         $data['tps'] = Tps::where('villages_id', (string)$villagee)->get();
         return view('developing.upload_kecurangan', $data);
     }
@@ -434,32 +445,73 @@ class DevelopingController extends Controller
         $saksi = Saksi::where('tps_id', $request['tps'])->update([
             'status_kecurangan' => 'belum terverifikasi',
             'kecurangan' => 'yes',
+            'kecurangan' => 'yes',
         ]);
+        if ($request->hasFile('foto') && $request->hasFile('video')  && $request->hasFile('video_pernyataan') ) {
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            foreach ($request->file('foto') as  $file) {
+                $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $randomString = substr(str_shuffle($characters), 0, 40); // Menghasilkan string acak sepanjang 10 karakter
+                $foto = time()  . $randomString  .".". $file->getClientOriginalExtension();
+                $file->move(public_path('storage/hukum/bukti_foto'), $foto);
+                Buktifoto::create([
+                    'url' => "hukum/bukti_foto/".$foto,
+                    'user_id' => $tps['user_id'],
+                    'tps_id' => $request['tps'],
+                ]);
+            }  
+            foreach ($request->file('video') as  $file_video) {
+                $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $randomString = substr(str_shuffle($characters), 0, 40); // Menghasilkan string acak sepanjang 10 karakter
+                $video = time()  . $randomString  .".". $file_video->getClientOriginalExtension();
+                $file_video->move(public_path('storage/hukum/bukti_vidio'), $video);
+                Buktividio::create([
+                    'url' =>  "hukum/bukti_vidio/".$video,
+                    'user_id' => $tps['user_id'],
+                    'tps_id' => $request['tps'],
+                    'bukti_vidio' => 0,
+                ]);
+            }  
+    
+            $video_pernyataan = $request->file('video_pernyataan');
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $randomString = substr(str_shuffle($characters), 0, 41); // Menghasilkan string acak sepanjang 10 karakter
+            $video = time()  . $randomString  .".". $video_pernyataan->getClientOriginalExtension();
+            $video_pernyataan->move(public_path('storage/hukum/video_pernyataan'), $video);
+            VideoPernyataan::insert([
+                'video'=> "hukum/bukti_pernyataan.".$video,
+                'user_id' => $tps['user_id'],
+                    'tps_id' => $request['tps'],
+            ]);
+        }else{
+            return redirect()->back()->with('error','input file wajib di isi');
+        }
+
+
+
         $fromListKecurangan = $request['curang'];
         foreach ($fromListKecurangan as $data) {
+            $kecurangan = explode('|',$data)[0];
+            $jenis = explode('|',$data)[1];
             Bukti_deskripsi_curang::create([
                 'tps_id' => $request['tps'],
-                'text' => $data,
+                'text' => $kecurangan,
+                'jenis' => $jenis,
             ]);
         }
         Bukticatatan::create([
             'tps_id' => $request['tps'],
             'text' => $request['curang'],
         ]);
-        Buktifoto::create([
-            'url' => $request->file('foto')->store('hukum/bukti_foto'),
-            'user_id' => $tps['user_id'],
+        DB::table('deskripsi_kecurangan')->insert([
+            "deskripsi"=>$request->deskripsi,
             'tps_id' => $request['tps'],
-
+            'user_id' => Auth::user()->id,
         ]);
-        Buktividio::create([
-            'url' => 1,
-            'user_id' => $tps['user_id'],
-            'tps_id' => $request['tps'],
-            'bukti_vidio' => 0,
-        ]);
+       
+       
 
-        echo 'Oke sayang input lagi yaaa';
+        return redirect()->back()->with('success',"berhasil upload data kecurangan");
     }
     public function upload_kecurangansss(Request $request)
     {
