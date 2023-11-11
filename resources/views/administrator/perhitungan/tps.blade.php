@@ -219,8 +219,11 @@ $tps = Tps::count();
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     
-    <div class="col-md">
+    <div class="col-md mt-4">
         <div class="card">
+            <div class="card-header bg-dark">
+                <h3 class="card-title text-white">Salinan C1</h3>
+            </div>
             <div class="card-body text-center">
                 <a href="#" data-toggle="modal" data-target="#imgBig">
                     <img style="height: 594.92px" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}" alt="">
@@ -290,7 +293,39 @@ $tps = Tps::count();
         <div class="card">
             <div class="card-body text-center">
                 <h1>Keterangan Surat Suara : </h1>
-                <h1>(dummy)</h1>
+                <table class="table table-striped">
+                    <tr>
+                        <td style="width: 33.3333333%">Total Surat Suara</td>
+                        <td style="width: 33.3333333%">:</td>
+                        <td style="width: 33.3333333%">(dummy)</td>
+                    </tr>
+                
+                    <tr>
+                        <td style="width: 33.3333333%">Jumlah Hak Pilih (DPT)</td>
+                        <td style="width: 33.3333333%">:</td>
+                        <td style="width: 33.3333333%">(dummy)</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 33.3333333%">Surat Suara Sah</td>
+                        <td style="width: 33.3333333%">:</td>
+                        <td style="width: 33.3333333%">(dummy)</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 33.3333333%">Suara Tidak Sah</td>
+                        <td style="width: 33.3333333%">:</td>
+                        <td style="width: 33.3333333%">(dummy)</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 33.3333333%">Jumlah Suara Sah dan Suara Tidak Sah</td>
+                        <td style="width: 33.3333333%">:</td>
+                        <td style="width: 33.3333333%">(dummy)</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 33.3333333%">Sisa Surat Suara</td>
+                        <td style="width: 33.3333333%">:</td>
+                        <td style="width: 33.3333333%">(dummy)</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
