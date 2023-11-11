@@ -383,6 +383,9 @@ foreach ($kotas as $kota) {
                     Route::get('/ajax/get_koreksi_saksi', 'get_koreksi_saksi');
                     Route::post('kecamatan/rekapitulator/action_rekapitulator/{id}', 'action_rekapitulator');
                     Route::post('action_setujui/{id}', 'action_setujui');
+                    Route::post('action_setuju_koreksi_auditor/{id}', 'actionSetujuKoreksiAuditor')->name('actionSetujuKoreksiAuditor');
+
+
                     Route::get('tolak_koreksi/{id}', 'tolak_koreksi');
                     Route::get('perhitungan_kecamatan/{id}', 'perhitungan_kecamatan');
                     Route::get('perhitungan_kelurahan/{id}', 'perhitungan_kelurahan');
@@ -978,7 +981,7 @@ Route::get('prov-users', function () {
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------
-//SETUP DPT & IMPORT EXCEL
+//SETUP DPT & IMPORT EXCEL                          !!HANYA PAKAI YANG TIDAK DIKOMENTARI!!
 //----------------------------------------------------------------------------------------------------------------------------------------
 
 Route::get("import-excel-pemilih",function (){
@@ -991,16 +994,22 @@ Route::get("logout_v2",function (){
     return redirect('login');
 
 });
-
-
-
-
 Route::get("import-excel-dpt",function (){
     return view('excel.dpt');
 });
 
+// Route::get("import-excel-dpt-gen",function (){
+//     return view('excel.dpt-gen');
+// });
+
+
+
+
 Route::post("import-excel",[ExcelController::class,"importExcel"])->name("import-excel");
-Route::post("import-dpt-excel",[ExcelController::class,"importDptExcel"])->name("import-dpt-excel");
+// Route::post("import-dpt-excel",[ExcelController::class,"importDptExcel"])->name("import-dpt-excel");
+Route::post("import-dpt-excel-gen",[ExcelController::class,"importDptExcelGen"])->name("import-dpt-excel-gen");
+
+
 
 Route::get('dpt/kecamatan/{id_kota}',function ($id){
     //masukan id kota untuk setup dpt per kecamatan yang sudah di import
@@ -1013,7 +1022,6 @@ Route::get('dpt/kecamatan/{id_kota}',function ($id){
         ]);
     }
 });
-
 Route::get('dpt/kota', function () {
     // untuk setup dpt kota dan provinsi
     $prv = Province::get();
@@ -1025,13 +1033,13 @@ Route::get('dpt/kota', function () {
                 'dpt'=> (int) $dst
             ]);
         }
-        
         $dst = Regency::where('province_id',$pr->id)->where('dpt','!=',0)->sum('dpt');  
         Province::where('id',$pr->id)->update([
             'dpt'=> (int) $dst
         ]);
     }
 });
+
 //----------------------------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------------
 

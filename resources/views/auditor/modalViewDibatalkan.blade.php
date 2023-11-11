@@ -62,7 +62,7 @@
                             @foreach ($saksi_data as $ss)
                             <div class="col-md-6">
                                 <label for="suara01">Suara 0{{$ss['paslon_id'] + 1}}</label>
-                                <input type="text" id="suara01" class="form-control" value="{{$ss['voice']}}" disabled>
+                                <input type="text"  class="form-control" value="{{$ss['voice']}}" disabled>
                             </div>
                             @endforeach
 
@@ -79,7 +79,7 @@
                     <div class="card-header">
                         <h5 class="card-title">Pengajuan Data Baru</h5>
                     </div>
-                    <form action="action_setujui/{{Crypt::encrypt($saksi['id'])}}" method="POST">
+                    <form action="{{route('superadmin.actionSetujuKoreksiAuditor',Crypt::encrypt($saksi['id']))}}" method="POST">
                         @csrf
                         <div class="card-body">
                             {{-- <p class="card-text"> --}}
@@ -87,7 +87,7 @@
                                 @foreach ($saksi_data as $ss)
                                 <div class="col-md-6">
                                     <label for="suara01">Suara 0{{$ss['paslon_id'] + 1}}</label>
-                                    <input type="text" id="suara01" class="form-control" name="paslon{{$ss['paslon_id']}}">
+                                    <input type="text" id="suara" class="form-control" name="paslon{{$ss['paslon_id']}}">
                                 </div>
                                 @endforeach
                                 {{-- <div class="col-md-12">

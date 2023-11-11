@@ -496,6 +496,7 @@ class AdminController extends Controller
     public function action_setujui(Request $request, $id)
     {
         $data['config'] = Config::first();
+   
         $koreksi = Koreksi::where('saksi_id', Crypt::decrypt($id))->get();
         return $koreksi;
         foreach ($koreksi as $psl) {
@@ -510,6 +511,24 @@ class AdminController extends Controller
             'verification' => 1
         ]);
         return redirect('administrator/verifikasi_koreksi');
+    }
+    public function actionSetujuKoreksiAuditor(Request $request,$id)
+    {
+        $id = Crypt::decrypt($id);
+        $paslon = Paslon::get();
+        foreach ($paslon as $pas) {
+            // $saksi_data = SaksiData::where('paslon_id',$pas->id)->where('saksi_id',$id)->first();
+            SaksiData::where('paslon_id',$pas->id)->where('saksi_id',$id)->update(
+                [
+                    "voice"=> $request->input('paslon'.$pas->id),
+                ]
+            );
+        }
+        Saksi::where('id', $id)->update([
+            'verification' => "1",
+            'batalkan'=> 0
+        ]);
+        return redirect()->back()->with('success','berhasil memperbarui data koreksi c1');
     }
 
     public function tolak_koreksi(Request $request, $id)
