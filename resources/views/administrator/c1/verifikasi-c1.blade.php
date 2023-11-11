@@ -84,6 +84,7 @@
 </div>
 <div id="C1-Relawan" class="tabcontent mt-0 pt-0 px-0">
     <livewire:c1-relawan-kota />
+ 
 </div>
 <div id="C1-Koreksi" class="tabcontent mt-0 pt-0 px-0">
     <livewire:c1-koreksi />
@@ -112,7 +113,7 @@
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="periksaC1RelawanLabel">Data TPS</h3>
+                <h3 class="modal-title" id="periksaC1RelawanLabel">Data TPS Relawan</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Close</button>
             </div>
             <div class="modal-body">
@@ -125,6 +126,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="modalPeriksa" tabindex="-1" aria-labelledby="modalPeriksaLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -187,23 +189,10 @@
                 $('#container-view-modal-c1-pending').html(data)
             }
         });
+        // console.log(id)
     });
 
-    // buttonperiksaC1Relawan.on('click', function() {
-    //     const id = $(this).data('id');
-    //     $.ajax({
-    //         url: "{{ route('verifikator.getRelawanData') }}",
-    //         data: {
-    //             "_token": "{{ csrf_token() }}",
-    //             id
-    //         },
-    //         type: "post",
-    //         dataType: "html",
-    //         success: function(data) {
-    //             $('#container-view-modal-relawan').html(data)
-    //         }
-    //     });
-    // });
+  
 
     //   buttonkecurangan.on('click', function() {
     //     const id = $(this).data('id');

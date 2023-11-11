@@ -2,6 +2,26 @@
     <h4 class="fw-bold fs-4 mt-5 mb-0">
         Jumlah Operator C1 Relawan : {{$jumlah_c1_relawan}}
     </h4>
+
+    <script>
+        
+        function  periksac1Relawans(id) {
+        
+           $.ajax({
+               url: "{{ route('verifikator.getRelawanData') }}",
+               data: {
+                   "_token": "{{ csrf_token() }}",
+                   id:id
+               },
+               type: "post",
+               dataType: "html",
+               success: function(data) {
+                   $('#container-view-modal-relawan').html(data)
+               }
+           });
+        //    console.log(id)
+      }
+   </script>
     <hr style="border: 1px solid">
     
     <div class="row">
@@ -11,49 +31,86 @@
         </div>
     </div>
     <div class="row">
-        @foreach($list_suara as $ls)
-        <div class="col-md-6 col-xl-4">
-            <div class="card item-card" style="height: 450px">
-                <div class="product-grid6 card-body">
-                    <div class="product-image6">
-                        @if ($ls->profile_photo_path == NULL)
-                        <img class="img-fluid" style="width: 250px; height: 250px; object-fit:cover" src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF" alt="img">
+        @foreach ($list_suara as $ls)
+        <?php
+
+
+
+        $village = App\Models\Village::where('id',$ls->villages)->first();
+        $district = App\Models\District::where('id',$ls->districts)->first();
+        
+        ?>
+        <div class="col-xl-3">
+            <div class="card">
+                <div class="card-header text-white border-0" style="background-color: #404042">
+                    <span class="mx-auto py-6 fs-6">TPS
+                        @if ($ls['number'] == null)
                         @else
-                        <img class="img-fluid" style="width: 250px; height: 250px; object-fit:cover" src="{{url("/storage/profile-photos/".$ls->profile_photo_path) }}">
+                        {{$ls['number']}}
                         @endif
-
-                    </div>
-                    <div class="product-content text-center">
-
-                        <h4 class="mb-3 fw-bold"><a href="#">TPS {{$ls->number}}</a></h4>
-                        <h4 class="price">Data C1 Relawan Masuk</h4>
-                    </div>
-                    <ul class="icons z-index3 text-white" style="background: #6259ca;  height: 115%; transform: translateY(115px);">
-                        <div class="row mb-3 mt-8">
-                            <div class="col-md-12">NIK :</div>
-                            <div class="col-md">{{$ls->nik}}</div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-12">Nama :</div>
-                            <div class="col-md">{{$ls->name}}</div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-12">No Wa :</div>
-                            <div class="col-md">{{$ls->no_hp}}</div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col-md-12">Date :</div>
-                            <div class="col-md">{{$ls->date}}</div>
-                        </div>
-                        <button type="button" class="btn btn-primary w-75 mb-4 periksa-c1-relawan" data-bs-toggle="modal" data-bs-target="#periksaC1Relawan" data-id="{{$ls->tps_id}}">
-                            Periksa C1
-                            Relawan
-                        </button>
-                    </ul>
+                        / Kelurahan {{ $village->name }}
+                    </span>
                 </div>
+                <div class="hiasan-1" style="background-color: rgba(251, 107, 37, 0.8)">
+                    <div class="gambar-bulat">
+                        @if ($ls->profile_photo_path == NULL)
+                        <img class="rounded-circle" style="width: 125px; height: 125px; object-fit:cover;"
+                            src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF" alt="img">
+                        @else
+                        <img class="rounded-circle" style="width: 125px; height: 125px; object-fit:cover;" src="{{url("/storage/profile-photos/".$ls->profile_photo_path) }}">
+                        @endif
+                    </div>
+                </div>
+                <div class="card-body py-7">
+                    <div class="text-center fs-4 fw-bold mb-3">{{$ls->name}}</div>
+                    <div class="px-3">
+                        <table class="table">
+                            <tr>
+                                <td class="text-primary fw-bold ps-0">
+                                    NIK
+                                </td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{$ls->nik}}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary fw-bold ps-0">
+                                    Kecamatan
+                                </td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{ $district->name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary fw-bold ps-0">
+                                    Kelurahan
+                                </td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{ $village->name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary fw-bold ps-0">
+                                    Date
+                                </td>
+                                <td class="px-0">:</td>
+                                <td class="ps-2">{{$ls->date}}</td>
+                            </tr>
+                        </table>
+    
+                        <div class="row mt-2">
+                            <div class="col-12 px-0">
+                                <button class="btn text-white rounded-0 w-100 periksa-c1-relawan" style="background-color: rgb(251, 107, 37)" id="Cek" data-id="{{$ls->tps_id}}"
+                                    data-bs-toggle="modal" id="" data-bs-target="#periksaC1Relawan"onclick="periksac1Relawans(`{{$ls->tps_id}}`)">Verifikasi Kiriman C1</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hiasan-2" style="height: 30px"></div>
+                <div class="hiasan-1" style="height: 30px; background-color: rgba(251, 107, 37, 0.8)"></div>
             </div>
         </div>
         @endforeach
     </div>
+  
+    
+    
     {{$list_suara->links()}}
 </div>

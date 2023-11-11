@@ -482,14 +482,16 @@ class AdminController extends Controller
     {
         $data['config'] = Config::first();
         $data['saksi']  =  Saksi::where('id', $request['id'])->first();
+      
         $data['saksi_data'] = SaksiData::where('saksi_id', $request['id'])->get();
-        $data['saksi_data_baru'] = Koreksi::where('saksi_id', $request['id'])->get();
-        $data['saksi_data_baru_deskripsi'] = Koreksi::where('saksi_id', $request['id'])->first();
+        // $data['saksi_data_baru'] = Saksi::where('saksi_id', $request['id'])->get();
+        // $data['saksi_data_baru_deskripsi'] = Saksi::where('saksi_id', $request['id'])->first();
         $data['admin_req'] = User::where('id', $data['saksi']['kecurangan_id_users'])->first();
         $data['saksi_koreksi'] = User::where('tps_id', $data['saksi']['tps_id'])->first();
         $data['kelurahan'] = Village::where('id', $data['saksi']['village_id'])->first();
         $data['kecamatan'] = District::where('id', $data['saksi']['district_id'])->first();
         $data['tps'] = Tps::where('id', $data['saksi']['tps_id'])->first();
+    
         return view('administrator.ajax.get_koreksi_saksi', $data);
     }
 
@@ -2130,7 +2132,7 @@ class AdminController extends Controller
         $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
         $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
         $data['tracking'] = ModelsTracking::get();
-        $data['jumlah_relawan'] = User::where('role_id', '=', 14)->where('is_active', '=', '1')->count();
+        $data['jumlah_relawan'] = User::where('role_id', '=', (string)14)->where('is_active', '=', '1')->count();
         return view('administrator.relawan.relawan', $data);
     }
 
@@ -2147,7 +2149,7 @@ class AdminController extends Controller
         $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
         $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
         $data['tracking'] = ModelsTracking::get();
-        $data['jumlah_relawan_dihapus'] = User::where('role_id', '=', 14)->where('is_active', '=', '0')->count();
+        $data['jumlah_relawan_dihapus'] = User::where('role_id', '=', (string)14)->where('is_active', '=', '0')->count();
         return view('administrator.relawan.relawan_dihapus', $data);
     }
 
@@ -2160,8 +2162,8 @@ class AdminController extends Controller
 
     public function lacakRelawan() {
         $data['config'] = Config::first();
-        $data['jumlah_relawan'] = User::where('role_id', '=', 14)->count();
-        $data['relawan'] = User::where('role_id', '=', 14)->get();
+        $data['jumlah_relawan'] = User::where('role_id', '=', (string)14)->count();
+        $data['relawan'] = User::where('role_id', '=', (string)14)->get();
         return view('administrator.lacak.lacak_relawan', $data);
     }
 

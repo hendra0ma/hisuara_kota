@@ -138,9 +138,6 @@ class ExcelController extends Controller
                 }
             }
         }
-
-        
-        
         $filteredExcelData[5][1]; //dpt laki laki
         $filteredExcelData[6][1]; //dpt perempuan
 
@@ -151,9 +148,6 @@ class ExcelController extends Controller
         $district = District::where('name',$filteredExcelData[2][1])->where('regency_id',$regency->id)->first();
  
         // $districts = District::where('regency_id',$regency->id)->get();
- 
- 
- 
         //     foreach ($districts as $district) {
         //         District::where('id',$district->id)->update([
         //             'dpt' => null

@@ -107,7 +107,7 @@
             <a href="{{route('verifikator.verifikasiData',Crypt::encrypt($paslon[0]->saksi_data[0]->saksi_id))}}" class="btn btn-block btn-info">Verifikasi</a>
         </div>
         <div class="col-6">
-            <button type="submit" class="btn btn-primary btn-block openModalKoreksi" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modalPeriksa" data-id="{{Crypt::encrypt($paslon[0]->saksi_data[0]->saksi_id)}}">Koreksi</button>
+            <a href="{{url('verifikator/koreksidata')}}/{{Crypt::encrypt($paslon[0]->saksi_data[0]->saksi_id)}}" class="btn btn-primary btn-block openModalKoreksi"data-id="{{Crypt::encrypt($paslon[0]->saksi_data[0]->saksi_id)}}">Koreksi</a>
         </div>
         @endif
     </div>
@@ -116,7 +116,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header bg-success">
-                    <h4 class="mb-0 mx-auto text-white card-title">Surat Suara TPS</h4>
+                    <h4 class="mb-0 mx-auto text-white card-title">Data Pemlih Dan Penggunaan Hak Pilih</h4>
                 </div>
                 <div class="card-body p-0">
                     <table class="table table-striped">
@@ -125,13 +125,9 @@
                             <td style="width: 33.3333333%">:</td>
                             <td style="width: 33.3333333%">(dummy)</td>
                         </tr>
+                 
                         <tr>
-                            <td style="width: 33.3333333%">Jumlah Pemilih</td>
-                            <td style="width: 33.3333333%">:</td>
-                            <td style="width: 33.3333333%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 33.3333333%">Jumlah Hak Pilih</td>
+                            <td style="width: 33.3333333%">Jumlah Hak Pilih (DPT)</td>
                             <td style="width: 33.3333333%">:</td>
                             <td style="width: 33.3333333%">(dummy)</td>
                         </tr>
@@ -146,7 +142,7 @@
                             <td style="width: 33.3333333%">(dummy)</td>
                         </tr>
                         <tr>
-                            <td style="width: 33.3333333%">Total Suara</td>
+                            <td style="width: 33.3333333%">Jumlah Suara Sah dan Suara Tidak Sah</td>
                             <td style="width: 33.3333333%">:</td>
                             <td style="width: 33.3333333%">(dummy)</td>
                         </tr>

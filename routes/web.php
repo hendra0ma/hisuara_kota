@@ -87,7 +87,7 @@ use function GuzzleHttp\Promise\all;
 // });
 
 Route::get("redirect-page",function (){
-    $role = Auth::user()->role;
+    $role = Auth::user()->role_id;
     $regency_id = substr(Auth::user()->districts,0,4);
     $regency_domain = RegenciesDomain::where('regency_id',$regency_id)->first();
 
@@ -671,7 +671,7 @@ foreach ($kotas as $kota) {
         });
         Route::group(['middleware' => ['auth', 'role:relawan']], function () {
             Route::controller(RelawanController::class)->group(function () {
-                Route::get('c1-relawan', 'c1relawan');
+                Route::get('c1-relawan', 'c1relawan')->name('uploadC1Relawan');
                 Route::post('upload-relawan', 'uploadC1Relawan');
             });
         });
@@ -701,11 +701,7 @@ foreach ($kotas as $kota) {
             Route::get('dev/test_geo', 'test_geo');
         });
 
-
-
-
         //config pages
-
         Route::group(['prefix' => "config", 'as' => "config."], function () {
             Route::get('lockdown', function () {
                 return view('config.lockdown');

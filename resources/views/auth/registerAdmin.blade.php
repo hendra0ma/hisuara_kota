@@ -143,7 +143,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <select class="form-control select2-show-search form-select" name="tps" id="kelurahan">
+                                            <select class="form-control select2-show-search form-select" name="kelurahan" id="kelurahan">
                                                 <option disabled selected>Pilih Kelurahan</option>
                                             </select>
                                         </div>
@@ -157,7 +157,7 @@
 
                                     <label class="custom-control custom-checkbox mt-4">
                                         <input type="checkbox" class="custom-control-input">
-                                        <span class="custom-control-label">Agree the <a href="terms.html">terms and
+                                        <span class="custom-control-label">Agree the <a href="#">terms and
                                                 policy</a></span>
                                     </label>
                                     <div class="container-login100-form-btn">

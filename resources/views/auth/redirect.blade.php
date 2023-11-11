@@ -96,6 +96,8 @@
 
                 @elseif (auth()->user()->role_id == 17)
                     window.location.href = "{{ route('crowd_c1') }}"
+                @elseif (auth()->user()->role_id == 14)
+                    window.location.href = "{{ route('uploadC1Relawan') }}"
                 @endif
             }, 5000);
             getLocation();

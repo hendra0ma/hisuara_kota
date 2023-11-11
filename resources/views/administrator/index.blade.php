@@ -15,8 +15,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 
-
-
 $configs = Config::all()->first();
 $currentDomain = request()->getHttpHost();
 if (isset(parse_url($currentDomain)['port'])) {

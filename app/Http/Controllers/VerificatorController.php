@@ -275,36 +275,25 @@ class VerificatorController extends Controller
 
         $req->validate([
             'suara.*' => ['required'],
-            'keterangan' => ['required', 'string'],
             "persetujuan" => ['required']
         ]);
         $id = Crypt::decrypt($id);
         $saksi_data = SaksiData::where('saksi_id', $id)->get();
-        for ($i = 0; $i < count($saksi_data); $i++) {
+        foreach($saksi_data as $i=> $sd){
 
-            Koreksi::insert([
+            SaksiData::where('id',$sd->id)->update([
                 "voice" => (int)$req->suara[$i],
-                "user_id" => $saksi_data[$i]->user_id,
-                "paslon_id" => $saksi_data[$i]->paslon_id,
-                "district_id" => $saksi_data[$i]->district_id,
-                "village_id" => $saksi_data[$i]->village_id,
-                "regency_id" => $saksi_data[$i]->regency_id,
-                "saksi_id" => $saksi_data[$i]->saksi_id,
-                "keterangan" => $req->keterangan,
-                "province_id" => $saksi_data[$i]->province_id
-           
             ]);
         }
         Saksi::where('id', $id)->update([
-            "koreksi" => 1,
-             "kecurangan_id_users" =>  Auth::user()->id,
+              "koreksi" => 1,
+                "kecurangan_id_users" =>  Auth::user()->id,
         ]);
-
         $saksi = Saksi::where('id', $id)->first();
         $tps = Tps::where('id', $saksi['tps_id'])->first();
         $kecamatan = District::where('id', $saksi['district_id'])->first();
         $kelurahan = Village::where('id', $saksi['village_id'])->first();
-        $pesan = "" . Auth::user()->name . " Meminta Koreksi Di Tps " . $tps['number'] . " Kecamatan " . $kecamatan['name'] . " Kelurahan " . $kecamatan['name'] . "  ";
+        $pesan = "" . Auth::user()->name . " Melakukan Koreksi Di Tps " . $tps['number'] . " Kecamatan " . $kecamatan['name'] . " Kelurahan " . $kecamatan['name'] . "  ";
         $history = History::create([
             'user_id' => Auth::user()->id,
             'action' => $pesan,

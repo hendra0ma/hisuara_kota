@@ -754,11 +754,26 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     <div class="col-md text-white dpt tugel-content" style="display:none">
                                         <div class="row">
                                             <div class="col py-2 judul text-center bg-secondary text-white"
+                                            <?php  
+                                                    $dpt_l = 0;
+                                                    $dpt_p = 0;
+                                                    if (request()->segment(2) == 'index') {
+                                                        $dpt_l = District::where('regency_id',$config->regencies_id)->sum('dpt_l');
+                                                        $dpt_p = District::where('regency_id',$config->regencies_id)->sum('dpt_p');
+                                                    }elseif(request()->segment(2) == 'perhitungan_kecamatan'){
+                                                        $dpt_l = District::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt_l');
+                                                        $dpt_p = District::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt_p');
+                                                    }else{
+
+                                                    }
+                                                ?>
+
+
                                                 style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
-                                                <div class="text">DPT Pria : <b>{{ $total_tps }}</b></div>
+                                                <div class="text">DPT Pria : <b>{{ $dpt_l }}</b></div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-danger text-white">
-                                                <div class="text">DPT Wanita : <b>{{ $tps_masuk }}</b></div>
+                                                <div class="text">DPT Wanita : <b>{{ $dpt_p }}</b></div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-primary text-white">
                                             <?php  
