@@ -771,10 +771,10 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
 
                                                 style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
-                                                <div class="text">DPT Pria : <b>{{ $dpt_l }}</b></div>
+                                                <div class="text">Pria : <b>{{ $dpt_l }}</b></div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-danger text-white">
-                                                <div class="text">DPT Wanita : <b>{{ $dpt_p }}</b></div>
+                                                <div class="text">Wanita : <b>{{ $dpt_p }}</b></div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-primary text-white">
                                             <?php  
