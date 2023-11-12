@@ -22,7 +22,7 @@
         </ol>
     </div>
 
-    <div class="col-md-8">
+    <div class="col-md-4">
         <div class="row mt-2">
             <div class="col parent-link">
                 <a class="btn text-white w-100 py-3 c1saksi tablink" onclick="openPage('C1-Saksi', this, '#6259ca')"

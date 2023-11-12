@@ -143,7 +143,7 @@
         const url = window.location.href;
         if (url == '{{url('')}}/auditor/audit-c1') {
             $('.halamanAudit').show();
-        } else if (url == '{{url('')}}/administrator/verifikasi_koreksi') {
+        } else if (url == '{{url('')}}/administrator/dokumen_lain') {
             $('.halamanKoreksi').show();
         }
     })

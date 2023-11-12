@@ -121,12 +121,6 @@
                 <div class="card-body p-0">
                     <table class="table table-striped">
                         <tr>
-                            <td style="width: 33.3333333%">Total Surat Suara</td>
-                            <td style="width: 33.3333333%">:</td>
-                            <td style="width: 33.3333333%">(dummy)</td>
-                        </tr>
-                 
-                        <tr>
                             <td style="width: 33.3333333%">Jumlah Hak Pilih (DPT)</td>
                             <td style="width: 33.3333333%">:</td>
                             <td style="width: 33.3333333%">(dummy)</td>
@@ -143,6 +137,11 @@
                         </tr>
                         <tr>
                             <td style="width: 33.3333333%">Jumlah Suara Sah dan Suara Tidak Sah</td>
+                            <td style="width: 33.3333333%">:</td>
+                            <td style="width: 33.3333333%">(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 33.3333333%">Total Surat Suara</td>
                             <td style="width: 33.3333333%">:</td>
                             <td style="width: 33.3333333%">(dummy)</td>
                         </tr>

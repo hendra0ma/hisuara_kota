@@ -824,7 +824,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
             <div class="row">
                 <div class="col-12 bg-success text-white py-3 text-center mb-3">
                     <h4 class="fw-bold mb-0">
-                        Laporan C1
+                        Laporan C1 Saksi
                     </h4>
                 </div>
 
@@ -848,17 +848,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                         <div class="card-body p-0">
                             <table class="table table-striped">
                                 <tr>
-                                    <td style="width: 33.3333333%">Total Surat Suara</td>
-                                    <td style="width: 33.3333333%">:</td>
-                                    <td style="width: 33.3333333%">(dummy)</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 33.3333333%">Jumlah Pemilih</td>
-                                    <td style="width: 33.3333333%">:</td>
-                                    <td style="width: 33.3333333%">(dummy)</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 33.3333333%">Jumlah Hak Pilih</td>
+                                    <td style="width: 33.3333333%">Jumlah Hak Pilih (DPT)</td>
                                     <td style="width: 33.3333333%">:</td>
                                     <td style="width: 33.3333333%">(dummy)</td>
                                 </tr>
@@ -873,7 +863,12 @@ $track = Tracking::where('id_user',$user['id'])->first();
                                     <td style="width: 33.3333333%">(dummy)</td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 33.3333333%">Total Suara</td>
+                                    <td style="width: 33.3333333%">Jumlah Suara Sah dan Suara Tidak Sah</td>
+                                    <td style="width: 33.3333333%">:</td>
+                                    <td style="width: 33.3333333%">(dummy)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.3333333%">Total Surat Suara</td>
                                     <td style="width: 33.3333333%">:</td>
                                     <td style="width: 33.3333333%">(dummy)</td>
                                 </tr>
