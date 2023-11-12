@@ -91,65 +91,11 @@
 <!-- INTERNAL SELECT2 JS -->
 <script src="../../assets/plugins/select2/select2.full.min.js"></script>
 <script src="../../assets/plugins/sweet-alert/sweetalert.min.js"></script>
-<script>
-    $('a.modaltpsQuick').on('click', function() {
-        let id = $(this).data('id');
-        $.ajax({
-            url: '{{url("/")}}/ajax/get_tps_quick',
-            type: "GET",
-            data: {
-                id
-            },
-            success: function(response) {
-                if (response) {
-                    $('#container-tps-quick').html(response);
-                }
-            }
-        });
-    });
-</script>
+
 
 <script>
     $(document).ready(function() {
         $('[data-tooltip-toogle="tooltip"]').tooltip();
-    });
-</script>
-<script>
-    /*chart-pie*/
-    var chart = c3.generate({
-        bindto: '#chart-pie2', // id of chart wrapper
-        data: {
-            columns: [
-                // each columns data
-
-                <?php foreach ($paslon as $pas) :  ?>
-                    <?php $voice = 0;  ?>
-                    <?php foreach ($pas->quicksaksidata as $pak) :  ?>
-                        <?php
-                        $voice += $pak->voice;
-                        ?>
-                    <?php endforeach  ?>['data<?= $pas->id  ?>', <?= $voice ?>],
-                <?php endforeach  ?>
-            ],
-            type: 'pie', // default type of chart
-            colors: {
-                <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': "<?= $pas->color ?>",
-                <?php endforeach  ?>
-            },
-            names: {
-                // name of each serie
-                <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': " <?= $pas->candidate ?> - <?= $pas->deputy_candidate ?>",
-                <?php endforeach  ?>
-            }
-        },
-        axis: {},
-        legend: {
-            show: true, //hide legend
-        },
-        padding: {
-            bottom: 0,
-            top: 0
-        },
     });
 </script>
 <script>
@@ -160,14 +106,27 @@
             columns: [
                 // each columns data
 
-                <?php foreach ($paslon as $pas) :  ?>
-                    <?php $voice = 0;  ?>
-                    <?php foreach ($pas->saksi_data as $pak) :  ?>
-                        <?php
-                        $voice += $pak->voice;
-                        ?>
-                    <?php endforeach  ?>['data<?= $pas->id  ?>', <?= $voice ?>],
+                <?php
 
+
+
+                $i = 1;
+
+                $voice = 0;
+
+
+                foreach ($paslon as $pas) :  ?>
+                    <?php $voice = 0;  ?>
+
+
+                    <?php
+                    $regency = App\Models\Regency::get();
+                    foreach ($regency as $regen) {
+                        $voice += $regen['suara' . $i];
+                    }
+                    $i++;
+                    ?>['data<?= $pas->id  ?>', <?= $voice ?>],
+                    <?php $voice = 0; ?>
                 <?php endforeach  ?>
 
             ],
@@ -201,34 +160,41 @@
     });
 </script>
 
+
+@foreach($provinsi as $prv)
 <script>
     /*chart-pie*/
     var chart = c3.generate({
-        bindto: '#chart-donut', // id of chart wrapper
+        bindto: '#chart-provinsi{{$prv->id}}', // id of chart wrapper
         data: {
             columns: [
                 // each columns data
+                <?php
+                                    $i = 1;
+                                    ?>
+                                    @foreach ($paslon_candidate as $pas)
 
-                <?php foreach ($paslon_quick as $pas) :  ?>
-                    <?php $voice = 0;  ?>
-                    <?php foreach ($pas->saksi_data as $pak) :  ?>
-                        <?php
-                        $voice += $pak->voice;
-                        ?>
-                    <?php endforeach  ?>['data<?= $pas->id  ?>', <?= $voice ?>],
+                                    <?php
+                                    ${'suara' . $i} = App\Models\Regency::where('province_id', $prv->id)->sum('suara' . $i);
+                                    ?>
 
-                <?php endforeach  ?>
+                                    ['data<?= $pas->id  ?>',   {{ ${'suara'.$i} }}],
+                                    
+                            
+                                    <?php $i++; ?>
+                                    @endforeach
+                                <?php $i = 0 ?>
 
             ],
             type: 'pie', // default type of chart
             colors: {
-                <?php foreach ($paslon_quick as $pas) :  ?> 'data<?= $pas->id  ?>': "<?= $pas->color ?>",
+                <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': "<?= $pas->color ?>",
                 <?php endforeach  ?>
 
             },
             names: {
                 // name of each serie
-                <?php foreach ($paslon_quick as $pas) :  ?>
+                <?php foreach ($paslon as $pas) :  ?>
 
                     'data<?= $pas->id  ?>': " <?= $pas->candidate ?> | <?= $pas->deputy_candidate ?>",
 
@@ -239,64 +205,12 @@
         legend: {
             show: true, //hide legend
         },
-        padding: {
-            bottom: 0,
-            top: 0
-        },
-        size: {
-            height: 350,
-            width: 350
-        }
+       
     });
 </script>
-<script>
-    /*chart-pie*/
-    var chart = c3.generate({
-        bindto: '#chart-verif', // id of chart wrapper
-        data: {
-            columns: [
-                // each columns data
+@endforeach
 
-                <?php foreach ($paslon_terverifikasi as $pas) :  ?>
-                    <?php $voice = 0;  ?>
-                    <?php foreach ($pas->saksi_data as $pak) :  ?>
-                        <?php
-                        $voice += $pak->voice;
-                        ?>
-                    <?php endforeach  ?>['data<?= $pas->id  ?>', <?= $voice ?>],
 
-                <?php endforeach  ?>
-
-            ],
-            type: 'pie', // default type of chart
-            colors: {
-                <?php foreach ($paslon_terverifikasi as $pas) :  ?> 'data<?= $pas->id  ?>': "<?= $pas->color ?>",
-                <?php endforeach  ?>
-
-            },
-            names: {
-                // name of each serie
-                <?php foreach ($paslon_terverifikasi as $pas) :  ?>
-
-                    'data<?= $pas->id  ?>': " <?= $pas->candidate ?> | <?= $pas->deputy_candidate ?>",
-
-                <?php endforeach  ?>
-            }
-        },
-        axis: {},
-        legend: {
-            show: true, //hide legend
-        },
-        padding: {
-            bottom: 0,
-            top: 0
-        },
-        size: {
-            height: 350,
-            width: 350
-        }
-    });
-</script>
 
 <script>
     setTimeout(function() {
@@ -335,10 +249,6 @@
         marquee1.stop()
 
     });
-
-
-    
-
 </script>
 
 

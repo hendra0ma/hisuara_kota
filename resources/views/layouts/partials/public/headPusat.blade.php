@@ -118,7 +118,7 @@ use App\Models\Paslon;
             <div class="col-md text-center mt-5 ">
                 <h4 class="text-uppercase fw-bold">
                     <div style="display:inline-block"class="bg-dark p-2 rounded-2 shadow">
-                        <img style="width: 100px;" src="{{asset('')}}images/logo/hisuara.png" alt="">
+                        <img style="width: 200px;height:auto" src="{{asset('')}}images/logo/hisuara.png" alt="">
                     </div>
                 </h4>
             </div>
@@ -203,7 +203,7 @@ use App\Models\Paslon;
                         <!-- <li class="nav-item col" style="padding-right: 0; padding-left: 0;"> <button style="height: 24px;" class="btn nav-link w-100 rounded-0 border" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Sistem Quick Count</button> </li> -->
                         @endif
                         @if($config->show_terverifikasi == "show")
-                        <li class="nav-item col" style="padding-right: 0; padding-left: 0;"> <button style="height: 24px;" class="btn nav-link w-100 rounded-0 border" id="pills-terverifikasi-tab" data-toggle="pill" href="#pills-terverifikasi" role="tab" aria-controls="pills-terverifikasi" aria-selected="false">Terverifikasi</button> </li>
+                        <!-- <li class="nav-item col" style="padding-right: 0; padding-left: 0;"> <button style="height: 24px;" class="btn nav-link w-100 rounded-0 border" id="pills-terverifikasi-tab" data-toggle="pill" href="#pills-terverifikasi" role="tab" aria-controls="pills-terverifikasi" aria-selected="false">Terverifikasi</button> </li> -->
                         @endif
                     </ul>
                 </div>
