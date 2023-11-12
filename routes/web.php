@@ -331,6 +331,7 @@ foreach ($kotas as $kota) {
                     Route::get('redirect_quick_nasional', function () {
                         return view('administrator.quickcount.redirect');
                     });
+                    Route::get('dokumen_lain', 'dokumenLain')->name('dokumenLain');
                     Route::get('terverifikasi', 'terverifikasi')->name('terverifikasi');
                     Route::get('terverifikasi_kecamatan/{id}', 'terverifikasiKecamatan')->name('terverifikasiKecamatan');
                     Route::get('terverifikasi_kelurahan/{id}', 'terverifikasiKelurahan')->name('terverifikasiKelurahan');

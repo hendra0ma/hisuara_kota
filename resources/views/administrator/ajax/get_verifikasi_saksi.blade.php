@@ -745,7 +745,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                         <div class="col-12 px-0">
                             <div class="card">
                                 <div class="card-header" style="background-color: #eee">
-                                    <h4 class="mb-0 mx-auto text-black card-title">Surat Suara TPS</h4>
+                                    <h4 class="mb-0 mx-auto text-black card-title">Data Pemilih dan Hak Pilih</h4>
                                 </div>
                                 <div class="card-body p-0">
                                     <table class="table table-striped">
@@ -824,7 +824,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
             <div class="row">
                 <div class="col-12 bg-success text-white py-3 text-center mb-3">
                     <h4 class="fw-bold mb-0">
-                        Laporan Kecurangan Saksi
+                        Laporan C1
                     </h4>
                 </div>
 
@@ -843,7 +843,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                 <div class="col-12 px-0">
                     <div class="card">
                         <div class="card-header" style="background-color: #eee">
-                            <h4 class="mb-0 mx-auto text-black card-title">Surat Suara TPS</h4>
+                            <h4 class="mb-0 mx-auto text-black card-title">Data Pemilih dan Hak Pilih</h4>
                         </div>
                         <div class="card-body p-0">
                             <table class="table table-striped">

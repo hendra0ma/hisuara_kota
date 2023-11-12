@@ -66,7 +66,7 @@
             </div>
             <div class="modal-body">
                 <div class="row" id="container-view-modal">
-                      
+                    
                 </div>
             </div>
             <div class="modal-footer">
@@ -100,6 +100,24 @@
     </div>
 </div>
 
+<div class="modal fade" id="periksaC1Auditor" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-xl scrollable" role="document">
+        <div class="modal-header bg-primary text-white">
+            <div class="modal-title mx-auto">
+                <h4 class="mb-0 fw-bold">C1 Koreksi (Auditor)</h4>
+            </div>
+        </div>
+        <div class="modal-content">
+            <div class="container" id="container-view-dibatalkan">
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
     function openPage(pageName, elmnt, color) {
@@ -117,7 +135,11 @@
     }
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
+    
 </script>
+
+
+
 
 <!-- SWEET-ALERT JS -->
 <script src="../../assets/plugins/sweet-alert/sweetalert.min.js"></script>
