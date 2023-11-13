@@ -168,7 +168,6 @@ $data_masuk = (int)$saksidatai / (int)$dpt * 100;
                             </div>
                             <div class="card-body">
                                 <div id="chart-regency{{$reg->id}}"></div>
-                              
                                     <?php
                                     $i = 1;
                                     ?>

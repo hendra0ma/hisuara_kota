@@ -91,7 +91,7 @@ Route::get("redirect-page",function (){
     $regency_id = substr(Auth::user()->districts,0,4);
     $regency_domain = RegenciesDomain::where('regency_id',$regency_id)->first();
 
-    cookie("reg_id",$regency_domain->domain,60*240);
+    // cookie("reg_id",$regency_domain->domain,60*240);
      return view('auth.redirect', [
                     'role_id' => $role,
                 ]);
