@@ -386,11 +386,42 @@ $track = Tracking::where('id_user',$user['id'])->first();
             @if ($saksi != NULL)
             @if ($saksi['kecurangan'] == "yes")
 
-            <div class="row mt-5">
-                <div class="col-12 text-center mb-3">
-                    <img src="{{asset('')}}images/logo/timbangan.png" style="width: 200px" alt="">
+            <div class="row mt-3">
+                @if ($saksi['kecurangan'] == "yes" && $qrcode != null)
+                <?php $scan_url = url('') . "/scanning-secure/" . (string)Crypt::encrypt($qrcode->nomor_berkas); ?>
+                <div class="col-auto my-auto">
+                    {!! QrCode::size(100)->generate( $scan_url); !!}
                 </div>
-                <div class="col-12 bg-danger text-white py-3 text-center mb-3">
+                @else
+                @endif
+                <div class="col my-auto">
+                    <div class="media">
+                        @if ($user['profile_photo_path'] == NULL)
+                        <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                            src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
+                        @else
+                        <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                            src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
+                        @endif
+            
+                        <div class="media-body my-auto">
+                            <h5 class="mb-0">{{ $user['name'] }}</h5>
+                            NIK : {{ $user['nik'] }}
+                        </div>
+                    </div>
+                </div>
+                {{-- <div class="col text-center mb-3">
+                    <img src="{{asset('')}}images/logo/timbangan.png" style="width: 150px" alt="">
+                </div> --}}
+                <div class="col-md-auto pt-2 my-auto px-1">
+                    <a href="https://wa.me/{{$user->no_hp}}" class="btn btn-success text-white"><i class="fa-solid fa-phone"></i>
+                        Hubungi</a>
+                </div>
+                <div class="col-md-auto pt-2 my-auto px-1">
+                    <button class="btn btn-warning text-white" onclick="window.print()"><i class="fa-solid fa-print"></i>
+                        Print</button>
+                </div>
+                <div class="col-12 bg-danger text-white py-3 mt-4 text-center mb-3">
                     <h4 class="fw-bold mb-0">
                         Laporan Kecurangan Saksi
                     </h4>
@@ -547,7 +578,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                                 </script>
                             </div>
                         </div>
-                        <div class="col-12 px-0 mt-3">
+                        <div class="col-12 mt-3">
                             <div class="card">
                                 <div class="card-body p-0" style="border: 1px #eee solid !important">
                                     <table class="table table-bordered">
@@ -589,7 +620,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 px-0">
+                        <div class="col-12">
                             <div class="card">
                                 <div class="card-header"
                                     style="border: 1px #eee solid !important; background-color: #eee">
@@ -599,7 +630,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 px-0">
+                        <div class="col-12">
 
                             <div class="card">
                                 <div class="card-header"
@@ -729,7 +760,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
 
                         </div>
 
-                        <div class="col-12 px-0">
+                        <div class="col-12">
                             <div class="card">
                                 <div class="card-header"
                                     style="border: 1px #eee solid !important; background-color: #eee">
@@ -742,25 +773,15 @@ $track = Tracking::where('id_user',$user['id'])->first();
                             </div>
                         </div>
 
-                        <div class="col-12 px-0">
+                        <div class="col-12">
                             <div class="card">
                                 <div class="card-header" style="background-color: #eee">
-                                    <h4 class="mb-0 mx-auto text-black card-title">Data Pemilih dan Hak Pilih</h4>
+                                    <h4 class="mb-0 text-black card-title">Data Pemilih dan Hak Pilih (TPS {{$tps['number']}} / Kelurahan {{$village['name'] }})</h4>
                                 </div>
                                 <div class="card-body p-0">
                                     <table class="table table-striped">
                                         <tr>
-                                            <td style="width: 33.3333333%">Total Surat Suara</td>
-                                            <td style="width: 33.3333333%">:</td>
-                                            <td style="width: 33.3333333%">(dummy)</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 33.3333333%">Jumlah Pemilih</td>
-                                            <td style="width: 33.3333333%">:</td>
-                                            <td style="width: 33.3333333%">(dummy)</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 33.3333333%">Jumlah Hak Pilih</td>
+                                            <td style="width: 33.3333333%">Jumlah Hak Pilih (DPT)</td>
                                             <td style="width: 33.3333333%">:</td>
                                             <td style="width: 33.3333333%">(dummy)</td>
                                         </tr>
@@ -775,7 +796,12 @@ $track = Tracking::where('id_user',$user['id'])->first();
                                             <td style="width: 33.3333333%">(dummy)</td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 33.3333333%">Total Suara</td>
+                                            <td style="width: 33.3333333%">Jumlah Suara Sah dan Suara Tidak Sah</td>
+                                            <td style="width: 33.3333333%">:</td>
+                                            <td style="width: 33.3333333%">(dummy)</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 33.3333333%">Total Surat Suara</td>
                                             <td style="width: 33.3333333%">:</td>
                                             <td style="width: 33.3333333%">(dummy)</td>
                                         </tr>
@@ -843,7 +869,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                 <div class="col-12 px-0">
                     <div class="card">
                         <div class="card-header" style="background-color: #eee">
-                            <h4 class="mb-0 mx-auto text-black card-title">Data Pemilih dan Hak Pilih</h4>
+                            <h4 class="mb-0 text-black card-title">Data Pemilih dan Hak Pilih (TPS {{$tps['number']}} / Kelurahan {{$village['name'] }})</h4>
                         </div>
                         <div class="card-body p-0">
                             <table class="table table-striped">

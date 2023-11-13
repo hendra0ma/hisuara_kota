@@ -100,7 +100,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="periksaC1Auditor" tabindex="-1" role="dialog">
+<div class="modal fade" style="overflow: scroll" id="periksaC1Auditor" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-xl scrollable" role="document">
         <div class="modal-header bg-primary text-white">
             <div class="modal-title mx-auto">

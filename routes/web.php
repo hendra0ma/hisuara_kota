@@ -91,10 +91,10 @@ Route::get("redirect-page", function () {
     $regency_id = substr(Auth::user()->districts, 0, 4);
     $regency_domain = RegenciesDomain::where('regency_id', $regency_id)->first();
 
-    cookie("reg_id", $regency_domain->domain, 60 * 240);
-    return view('auth.redirect', [
-        'role_id' => $role,
-    ]);
+    // cookie("reg_id",$regency_domain->domain,60*240);
+     return view('auth.redirect', [
+                    'role_id' => $role,
+                ]);
 });
 
 
@@ -1047,6 +1047,21 @@ Route::get('dpt/kota', function () {
 
 
 // !!!!MEMASUKAN DATA JUMLAH VOICE -> hanya untuk developing saat data belum masuk ke table suara_c1_provinsi
+Route::get('update-suara-c1-kota',function (){
+    $paslon = Paslon::get();
+    $suaraP = [];
+    foreach ($paslon as $j => $psl) {
+        $suara = SaksiData::where('paslon_id',$psl->id)->where('regency_id',3674)->sum("voice");
+        $suaraP[] = $suara;
+    }
+        $c1Prov = Regency::find(3674);
+        $c1Prov->suara1 = $suaraP[0];
+        $c1Prov->suara2 = $suaraP[1];
+        $c1Prov->suara3 = $suaraP[2];
+        $c1Prov->save();
+  
+});
+
 // Route::get('update-suara-c1-provinsi',function (){
 //     $paslon = Paslon::get();
 //     $suaraP = [];

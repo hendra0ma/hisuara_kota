@@ -86,14 +86,36 @@
                     <div class="card-body">
                         {{-- <p class="card-text"> --}}
                         <div class="row">
-                            @foreach ($saksi_data as $ss)
                             <div class="col-md-6">
-                                <label for="suara01">Suara 0{{$ss['paslon_id'] + 1}}</label>
-                                <input type="text"  class="form-control" value="{{$ss['voice']}}" disabled>
+                                <div class="row">
+                                    @foreach ($saksi_data as $ss)
+                                    <div class="col-md-12">
+                                        <label for="suara01">Suara 0{{$ss['paslon_id'] + 1}}</label>
+                                        <input type="text" class="form-control" value="{{$ss['voice']}}" disabled>
+                                    </div>
+                                    @endforeach
+                                </div>
                             </div>
-                            @endforeach
 
-
+                            <div class="col-md-6 text-center">
+                                <div class="card h-100">
+                                    <div class="card-header py-1">
+                                        Total :
+                                    </div>
+                                    <div class="card-body d-flex display-2 fw-bold">
+                                        <div class="my-auto mx-auto">
+                                            <?php
+                                            // Mengonversi Collection ke array dan kemudian menghitung total suara
+                                            $saksi_data_array = $saksi_data->toArray();
+                                            $total_suara = array_reduce($saksi_data_array, function ($carry, $item) {
+                                                return $carry + $item['voice'];
+                                            }, 0);
+                                            ?>
+                                            {{ $total_suara }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         {{-- </p> --}}
                     </div>
@@ -111,17 +133,35 @@
                         <div class="card-body">
                             {{-- <p class="card-text"> --}}
                             <div class="row">
-                                @foreach ($saksi_data as $ss)
                                 <div class="col-md-6">
-                                    <label for="suara01">Suara 0{{$ss['paslon_id'] + 1}}</label>
-                                    <input type="text" id="suara" class="form-control" name="paslon{{$ss['paslon_id']}}">
+                                    <div class="row">
+                                        @foreach ($saksi_data as $ss)
+                                        <div class="col-md-12">
+                                            <label for="suara01">Suara 0{{$ss['paslon_id'] + 1}}</label>
+                                            <input type="text" id="suara" class="form-control suara-input" name="paslon{{$ss['paslon_id']}}">
+                                        </div>
+                                        @endforeach 
+                                    </div>
                                 </div>
-                                @endforeach
                                 {{-- <div class="col-md-12">
                                     <label for="keterangan">Keterangan</label>
                                     <textarea class="form-control" id="keterangan" cols="30" rows="10"
                                         disabled>{{$saksi_data_baru_deskripsi['keterangan']}}</textarea>
                                 </div> --}}
+                                <div class="col-md-6 text-center">
+                                    <div class="card h-100">
+                                        <div class="card-header py-1">
+                                            Total :
+                                        </div>
+                                        <div class="card-body d-flex display-2 fw-bold">
+                                            <div class="my-auto mx-auto" id="sumDisplay">
+                                                {{-- {{$total_suara }} --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- <div class="display-2 fw-bold">Total :</div>
+                                    <div class="display-2 fw-bold">{{$total_suara }}</div> --}}
+                                </div>
                             </div>
                             {{-- </p> --}}
                         </div>
@@ -147,4 +187,23 @@
             $('.halamanKoreksi').show();
         }
     })
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('.suara-input').on('input', function() {
+            // Get all input values with the class 'suara-input'
+            let allValues = $('.suara-input').map(function() {
+                return parseFloat($(this).val()) || 0;
+            }).get();
+
+            console.log(allValues);
+            // Calculate the sum of all input values
+            let sum = allValues.reduce(function(a, b) {
+                return a + b;
+            }, 0);
+            // Display the sum in the HTML document
+            $('#sumDisplay').html(sum);
+        });
+    });
 </script>

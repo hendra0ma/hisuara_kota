@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row mt-5">
-    <div class="col-lg-4">
+    <div class="col-lg">
         @if ($message = Session::get('success'))
 
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -84,7 +84,6 @@
 </div>
 <div id="C1-Relawan" class="tabcontent mt-0 pt-0 px-0">
     <livewire:c1-relawan-kota />
- 
 </div>
 <!-- <div id="C1-Koreksi" class="tabcontent mt-0 pt-0 px-0">
     <livewire:c1-koreksi />
