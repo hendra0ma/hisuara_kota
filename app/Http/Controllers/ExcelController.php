@@ -22,6 +22,17 @@ class filterKelurahan implements \PhpOffice\PhpSpreadsheet\Reader\IReadFilter
     }
 }
 
+class filterTps implements \PhpOffice\PhpSpreadsheet\Reader\IReadFilter
+{
+    public function readCell($columnAddress, $row, $worksheetName = '')
+    {
+        if ($columnAddress == 'E') {
+            return true;
+        }
+        return false;
+    }
+}
+
 class ExcelController extends Controller
 {
     // use IOFactory;
@@ -81,52 +92,52 @@ class ExcelController extends Controller
         $files = $request->file('excel_files');
 
 
-            $spreadsheet = IOFactory::load($files);
-            $worksheet = $spreadsheet->getActiveSheet();
-            $rows = $worksheet->toArray();
+        $spreadsheet = IOFactory::load($files);
+        $worksheet = $spreadsheet->getActiveSheet();
+        $rows = $worksheet->toArray();
 
-            $filteredExcelData = $rows;
+        $filteredExcelData = $rows;
 
-            foreach ($filteredExcelData as $j => $row) {
-                foreach ($row as $i => $cell) {
-                    if (trim($cell) == "") {
-                        unset($filteredExcelData[$j][$i]);
-                    }
-                    if (isset($row[2])) {
-                        unset($filteredExcelData[$j][$i]);
-                    }
+        foreach ($filteredExcelData as $j => $row) {
+            foreach ($row as $i => $cell) {
+                if (trim($cell) == "") {
+                    unset($filteredExcelData[$j][$i]);
+                }
+                if (isset($row[2])) {
+                    unset($filteredExcelData[$j][$i]);
                 }
             }
-            dd($filteredExcelData);
+        }
+        dd($filteredExcelData);
 
-            $filteredExcelData[2][1]; //kecamatan
-            $filteredExcelData[3][1]; //kelurahan
-            $filteredExcelData[7][1]; //dpt
-            $regency = Regency::where('name',$filteredExcelData[1][1])->first();
-            $district = District::where('name',$filteredExcelData[2][1])->where('regency_id',$regency->id)->first();
+        $filteredExcelData[2][1]; //kecamatan
+        $filteredExcelData[3][1]; //kelurahan
+        $filteredExcelData[7][1]; //dpt
+        $regency = Regency::where('name', $filteredExcelData[1][1])->first();
+        $district = District::where('name', $filteredExcelData[2][1])->where('regency_id', $regency->id)->first();
 
         // $districts = District::where('regency_id',$regency->id)->get();
 
 
 
-            //     foreach ($districts as $district) {
-            //         District::where('id',$district->id)->update([
-            //             'dpt' => null
-            //         ]);
-            //     }
+        //     foreach ($districts as $district) {
+        //         District::where('id',$district->id)->update([
+        //             'dpt' => null
+        //         ]);
+        //     }
 
 
-            if ($district->dpt  == null) {
-                District::where('id',$district->id)->update([
-                    'dpt' =>  (int) $filteredExcelData[7][1]
-                ]);
-            }else{
-                $dptBaru = $district->dpt + (int) $filteredExcelData[7][1];
-                District::where('id',$district->id)->update([
-                    'dpt' =>  (int) $dptBaru
-                ]);
-            }
-            return District::where('name',$filteredExcelData[2][1])->where('regency_id',$regency->id)->first();
+        if ($district->dpt  == null) {
+            District::where('id', $district->id)->update([
+                'dpt' =>  (int) $filteredExcelData[7][1]
+            ]);
+        } else {
+            $dptBaru = $district->dpt + (int) $filteredExcelData[7][1];
+            District::where('id', $district->id)->update([
+                'dpt' =>  (int) $dptBaru
+            ]);
+        }
+        return District::where('name', $filteredExcelData[2][1])->where('regency_id', $regency->id)->first();
 
         // Lakukan sesuatu dengan data yang dibaca, seperti menampilkan dalam view
         // return view('excel.display-excel-data', ['excelData' => $rows]);
@@ -152,15 +163,15 @@ class ExcelController extends Controller
             $totalDpt = (int) $worksheet[7][1];
 
             $village = Regency::where('regencies.name', $namaKabupatenKota)
-            ->join('districts', 'districts.regency_id', '=', 'regencies.id')
-            ->where('districts.name', $namaKecamatan)
-            ->join('villages', function ($join) use ($namaKelurahan) {
-                $lastThreeLettersNamaKelurahan = substr($namaKelurahan, -3);
-                $join->on('villages.district_id', '=', 'districts.id')
-                ->where('villages.name', 'like', '%' . $lastThreeLettersNamaKelurahan);
-            })
-            ->select('regencies.*', 'districts.*', 'villages.*')
-            ->first();
+                ->join('districts', 'districts.regency_id', '=', 'regencies.id')
+                ->where('districts.name', $namaKecamatan)
+                ->join('villages', function ($join) use ($namaKelurahan) {
+                    $lastThreeLettersNamaKelurahan = substr($namaKelurahan, -3);
+                    $join->on('villages.district_id', '=', 'districts.id')
+                        ->where('villages.name', 'like', '%' . $lastThreeLettersNamaKelurahan);
+                })
+                ->select('regencies.*', 'districts.*', 'villages.*')
+                ->first();
 
             $village = Village::where('id', (string) $village->id)->first();
             $village->update([
@@ -174,5 +185,78 @@ class ExcelController extends Controller
         }
 
         return $hasilUpload;
+    }
+
+
+    public function insertJumlahTps(Request $request)
+    {
+        $hasilUpload = [];
+        foreach ($request->file('excel_files') as $files) {
+            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+            $reader->setReadFilter(new filterTps());
+            $spreadsheet = $reader->load($files);
+            $worksheet = $spreadsheet->getActiveSheet();
+            $worksheet = $worksheet->toArray();
+
+            $filteredArray = $this->filterArrayTps($worksheet);
+            $result = $this->countArrayValuesTps($filteredArray);
+
+            dd($result);
+        }
+
+        return $hasilUpload;
+    }
+
+    /**
+     * Fungsi untuk meng-filter array dari $worksheet->toArray()
+     * @param array $worksheetAfterToArray
+     *
+     * @return array Contoh return
+     * [
+     *   "TPS 001",
+     *   "TPS 001",
+     *   "TPS 002",
+     *   "TPS 002",
+     *   "TPS 003",
+     *   "TPS 003",
+     *   "TPS 003",
+     *   "TPS 004",
+     *   "TPS 004"
+     * ]
+     */
+    private function filterArrayTps($worksheetAfterToArray)
+    {
+        $filteredArray = array_map(function ($subarray) {
+            return array_key_exists(4, $subarray) ? $subarray[4] : null;
+        }, $worksheetAfterToArray);
+        $filteredArray = array_filter($filteredArray, function ($value) {
+            return $value !== null && $value != 'NAMA TPS';
+        });
+        $filteredArray = array_values($filteredArray);
+
+        return $filteredArray;
+    }
+
+    /**
+     * Fungsi untuk menghitung berapa kali nilai array muncul dari hasil fungsi filterArrayTps
+     * @param array $filteredArray Return dari fungsi filterArrayTps
+     *
+     * @return array Contoh return
+     * [
+     *   "TPS 001" => 258,
+     *   "TPS 002" => 267,
+     *   "TPS 003" => 282,
+     *   "TPS 004" => 287
+     * ]
+     */
+    private function countArrayValuesTps($filteredArray)
+    {
+        $counts = array_count_values($filteredArray);
+        $result = array();
+        foreach ($counts as $key => $count) {
+            $result[$key] = $count;
+        }
+
+        return $result;
     }
 }

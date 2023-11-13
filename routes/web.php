@@ -1008,7 +1008,8 @@ Route::get("import-excel-dpt-gen", function () {
 
 Route::post("import-excel", [ExcelController::class, "importExcel"])->name("import-excel");
 // Route::post("import-dpt-excel",[ExcelController::class,"importDptExcel"])->name("import-dpt-excel");
-Route::post("import-dpt-excel-gen", [ExcelController::class, "importDptExcelGen"])->name("import-dpt-excel-gen");
+// Route::post("import-dpt-excel-gen", [ExcelController::class, "importDptExcelGen"])->name("import-dpt-excel-gen");
+Route::post("import-dpt-excel-gen", [ExcelController::class, "insertJumlahTps"])->name("import-dpt-excel-gen");
 
 
 
