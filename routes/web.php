@@ -1046,7 +1046,6 @@ Route::get('dpt/kota', function () {
 
 
 // !!!!MEMASUKAN DATA JUMLAH VOICE -> hanya untuk developing saat data belum masuk ke table suara_c1_provinsi
-<<<<<<< HEAD
 Route::get('update-suara-c1-kota',function (){
     $paslon = Paslon::get();
     $suaraP = [];
@@ -1062,7 +1061,6 @@ Route::get('update-suara-c1-kota',function (){
   
 });
 
-=======
 // Route::get('update-suara-c1-provinsi',function (){
 //     $paslon = Paslon::get();
 //     $suaraP = [];
@@ -1077,7 +1075,6 @@ Route::get('update-suara-c1-kota',function (){
 //         $c1Prov->save();
 
 // });
->>>>>>> 49296b5ae5d05b9ab53544167b277613de1bc2e4
 // Route::get('cek-saksi-data',function () {
 //     $saksidata = SaksiData::get();
 //     foreach ($saksidata as $key => $value) {
