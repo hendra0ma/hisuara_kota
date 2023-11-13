@@ -355,7 +355,7 @@ $tps = Tps::count();
 
                                 @foreach($district as $dist)
                                 <tr>
-                                    <td>{{$dist->name}}</td>
+                                    <td><a href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($dist['id'])}}">{{$dist->name}}</a></td>
                                     <?php
                                     $voices = App\Models\Paslon::with(['saksi_data' => function ($query) use ($dist) {
                                         $query

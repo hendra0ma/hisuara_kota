@@ -58,19 +58,38 @@
                         <h5 class="card-title">Perubahan Suara</h5>
                     </div>
                     <div class="card-body">
-                        {{-- <p class="card-text"> --}}
-                            <div class="row">
-                                @foreach ($saksi_data as $ss)
-                                <div class="col-md-6">
-                                    <label for="suara01">Suara 0{{$ss['paslon_id'] + 1}}</label>
-                                    <input type="text" id="suara01" class="form-control" value="{{$ss['voice']}}"
-                                        disabled>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @php
+                                    $totalSuara = 0;
+                                    @endphp
+                                    
+                                    @foreach ($saksi_data as $ss)
+                                    <div class="col-md-12">
+                                        <label for="suara01">Suara 0{{$ss['paslon_id'] + 1}}</label>
+                                        <input type="text" id="suara01" class="form-control" value="{{$ss['voice']}}" disabled>
+                                        @php
+                                        $totalSuara += $ss['voice'];
+                                        @endphp
+                                    </div>
+                                    @endforeach
                                 </div>
-                                @endforeach
-
-
                             </div>
-                        {{-- </p> --}}
+
+                            <div class="col-md-6 text-center">
+                                <div class="card h-100">
+                                    <div class="card-header py-1">
+                                        Total :
+                                    </div>
+                                    <div class="card-body d-flex display-2 fw-bold">
+                                        <div class="my-auto mx-auto">
+                                            {{$totalSuara}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

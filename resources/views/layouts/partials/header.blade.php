@@ -552,17 +552,17 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/crowd-c1-kpu" class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0px;">
+                                                    style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                                     Crowd C1 KPU
                                                 </a>
                                             </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                            {{-- <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/verifikasi_koreksi"
                                                     class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                                     Koreksi C1
                                                 </a>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
 
@@ -1030,7 +1030,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                         <div class="row">
                                             @foreach ($urutan as $urutPaslon)
                                             <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
-                                            <div class="col py-2 judul text-center text-white custom-urutan"
+                                            <div class="col py-2 judul text-center text-white"
                                                 style="background: {{ $pasangan->color }}">
                                                 <div class="text">{{ $pasangan->candidate }} ||
                                                     {{ $pasangan->deputy_candidate }} : {{$urutPaslon->total}}</b>

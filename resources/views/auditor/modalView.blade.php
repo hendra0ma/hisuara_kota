@@ -64,24 +64,46 @@
                     <h4 class="card-title mx-auto">TPS {{ $paslon[0]->saksi_data[0]->tps_id }} / Kelurahan {{ $village->name }}</h4>
                 </div>
                 <div class="card-body">
-                    <div class="form-row">
-                        <?php $i = 1; ?>
-                        @foreach ($paslon as $pas)
-                        <?php
-                        $voice = 0;
-    
-                        ?>
-                        @foreach ($pas->saksi_data as $dataTps)
-                        <?php
-                        $voice += $dataTps->voice;
-                        ?>
-                        @endforeach
-                        <div class="form-group col-md-12">
-                            <label>Suara 0{{ $i++ }}</label>
-                            <input type="number" class="form-control" readonly="" value="{{ $voice }}" name="suara[]" placeholder="Suara" readonly>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <?php $i = 1;  ?>
+                                @foreach($paslon as $pas)
+                                <?php
+                                $voice = 0;
+                                ?>
+                                @foreach ($pas->saksi_data as $dataTps)
+                    
+                                <?php
+                                $voice += $dataTps->voice;
+                                $total_suara = App\Models\SaksiData::where('saksi_id',$dataTps->saksi_id)->sum('voice');
+                                ?>
+                    
+                                @endforeach
+                                <div class="form-group col-md-12">
+                                    <label>Suara 0{{$i++}}</label>
+                                    <input type="number" class="form-control" readonly="" value="{{$voice}}" name="suara[]"
+                                        placeholder="Suara" readonly>
+                                </div>
+                                <?php $voice = 0;  ?>
+                    
+                                @endforeach
+                            </div>
                         </div>
-                        <?php $voice = 0; ?>
-                        @endforeach
+                        <div class="col-md-6 text-center">
+                            <div class="card h-100">
+                                <div class="card-header py-1">
+                                    Total :
+                                </div>
+                                <div class="card-body d-flex display-2 fw-bold">
+                                    <div class="my-auto mx-auto">
+                                        {{$total_suara }}
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- <div class="display-2 fw-bold">Total :</div>
+                            <div class="display-2 fw-bold">{{$total_suara }}</div> --}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -129,6 +151,22 @@
             success: function(data) {
                 $('#container-view-dibatalkan').html(data)
             }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('.suara-input-asd').on('input', function() {
+            // Calculate the sum of all input values
+            let sum = 0;
+            $('.suara-input-asd').each(function() {
+                let inputValue = parseFloat($(this).val()) || 0;
+                sum += inputValue;
+            });
+            console.log(inputValue);
+            // Display the sum in the 'Total' section
+            $('#sumDisplayasd').html(sum);
         });
     });
 </script>

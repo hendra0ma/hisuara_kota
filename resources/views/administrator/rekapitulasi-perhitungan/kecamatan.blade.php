@@ -155,12 +155,39 @@ $props = Province::where('id',$kota['province_id'])->first();
                         </div>
                     </div>
 
+                    <style>
+                        .row:has(> .custom-urutan) {
+                            margin-top: 75px
+                        }
+                    
+                        .custom-urutan::before {
+                            position: absolute;
+                            top: -80px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            font-size: 60px;
+                            color: black;
+                        }
+                    
+                        .custom-urutan:nth-child(1)::before {
+                            content: '1'
+                        }
+                    
+                        .custom-urutan:nth-child(2)::before {
+                            content: '2'
+                        }
+                    
+                        .custom-urutan:nth-child(3)::before {
+                            content: '3'
+                        }
+                    </style>
+
                     <div class="col-xxl-6">
                         <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Hasil Perhitungan Suara</div>
                         <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Pemilihan Presiden dan Wakil
                             Presiden</div>
-                        <div class="text-center title-atas-table fs-5 fw-bold">PROVINSI {{$props->name}}</div>
-                        <div class="row mt-3 mx-auto" style="width: 884.5px;">
+                        <div class="text-center title-atas-table fs-5 fw-bold">{{ $kota['name'] }}</div>
+                        <div class="row mx-auto" style="width: 884.5px;">
                             @foreach ($urutan as $urutPaslon)
                             <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
                             <div class="col py-2 judul text-center text-white custom-urutan"

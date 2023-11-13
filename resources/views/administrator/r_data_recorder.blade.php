@@ -1246,14 +1246,14 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                             <div class="row">
                                 <table class="table-bordered table table-hover">
                                     <tr>
-                                        <td>
+                                        <td colspan="2">
                                             <div class="fs-3 fw-bold">Data Relawan ({{$data_relawan}}) </div>
                                             <div class="text-muted">Data Masuk 30 Hari Terakhir</div>
                                         </td>
-                                        <td>
+                                        {{-- <td>
                                             <div class="fs-3 fw-bold">Data Overlimit ({{$data_overlimit}}) </div>
                                             <div class="text-muted">Data Masuk 30 Hari Terakhir</div>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                     <tr>
                                         <td>

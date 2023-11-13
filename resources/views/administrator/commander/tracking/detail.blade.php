@@ -22,8 +22,8 @@
     <div class="mt-3">
         <div class="main-body">
             <div class="row gutters-sm">
-                <div class="col-md-6 mb-3" style="height: 308px">
-                    <div class="card">
+                <div class="col-md-6 mb-3">
+                    <div class="card" style="height: 100%">
                         <div class="card-body">
                             <div class="row align-items-center text-center">
                                 <div class="col-md-7">
