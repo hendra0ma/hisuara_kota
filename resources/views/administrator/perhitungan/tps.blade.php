@@ -292,38 +292,39 @@ $tps = Tps::count();
     <div class="col-md-4">
         <div class="card">
             <div class="card-body text-center">
-                <h1>Keterangan Surat Suara : </h1>
+                <div class="card-header" style="background-color: #eee">
+                    <h4 class="mb-0 mx-auto text-black card-title">Data Pemilih dan Hak Pilih</h4>
+                </div>
                 <table class="table table-striped">
                     <tr>
-                        <td style="width: 33.3333333%">Total Surat Suara</td>
-                        <td style="width: 33.3333333%">:</td>
-                        <td style="width: 33.3333333%">(dummy)</td>
-                    </tr>
-                
-                    <tr>
-                        <td style="width: 33.3333333%">Jumlah Hak Pilih (DPT)</td>
-                        <td style="width: 33.3333333%">:</td>
-                        <td style="width: 33.3333333%">(dummy)</td>
+                        <td style="width: 50%">Jumlah Hak Pilih (DPT)</td>
+                        <td style="width: 10%">:</td>
+                        <td style="width: 40%">(dummy)</td>
                     </tr>
                     <tr>
-                        <td style="width: 33.3333333%">Surat Suara Sah</td>
-                        <td style="width: 33.3333333%">:</td>
-                        <td style="width: 33.3333333%">(dummy)</td>
+                        <td style="width: 50%">Surat Suara Sah</td>
+                        <td style="width: 10%">:</td>
+                        <td style="width: 40%">(dummy)</td>
                     </tr>
                     <tr>
-                        <td style="width: 33.3333333%">Suara Tidak Sah</td>
-                        <td style="width: 33.3333333%">:</td>
-                        <td style="width: 33.3333333%">(dummy)</td>
+                        <td style="width: 50%">Suara Tidak Sah</td>
+                        <td style="width: 10%">:</td>
+                        <td style="width: 40%">(dummy)</td>
                     </tr>
                     <tr>
-                        <td style="width: 33.3333333%">Jumlah Suara Sah dan Suara Tidak Sah</td>
-                        <td style="width: 33.3333333%">:</td>
-                        <td style="width: 33.3333333%">(dummy)</td>
+                        <td style="width: 50%">Jumlah Suara Sah dan Suara Tidak Sah</td>
+                        <td style="width: 10%">:</td>
+                        <td style="width: 40%">(dummy)</td>
                     </tr>
                     <tr>
-                        <td style="width: 33.3333333%">Sisa Surat Suara</td>
-                        <td style="width: 33.3333333%">:</td>
-                        <td style="width: 33.3333333%">(dummy)</td>
+                        <td style="width: 50%">Total Surat Suara</td>
+                        <td style="width: 10%">:</td>
+                        <td style="width: 40%">(dummy)</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%">Sisa Surat Suara</td>
+                        <td style="width: 10%">:</td>
+                        <td style="width: 40%">(dummy)</td>
                     </tr>
                 </table>
             </div>

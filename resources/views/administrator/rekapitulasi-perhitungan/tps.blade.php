@@ -90,7 +90,7 @@ $tps = Tps::count();
     <div class="col-lg-12">
         <center>
             <h2 class="page-title mt-1 mb-0" style="font-size: 60px">
-                REKAPITULASi
+                REKAPITULASI
             </h2>
             <h4 class="mt-2">
                 {{ $kota['name'] }} /

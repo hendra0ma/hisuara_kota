@@ -482,7 +482,7 @@ class AdminController extends Controller
     {
         $data['config'] = Config::first();
         $data['saksi']  =  Saksi::where('id', $request['id'])->first();
-      
+    
         $data['saksi_data'] = SaksiData::where('saksi_id', $request['id'])->get();
         // $data['saksi_data_baru'] = Saksi::where('saksi_id', $request['id'])->get();
         // $data['saksi_data_baru_deskripsi'] = Saksi::where('saksi_id', $request['id'])->first();
@@ -1449,6 +1449,10 @@ class AdminController extends Controller
         $data['jumlah_barcode'] = QrCode::join('surat_pernyataan', 'surat_pernyataan.qrcode_hukum_id', '=', 'qrcode_hukum.id')->select('qrcode_hukum.*')->count();
 
         return view('administrator.fraudDatareport', $data);
+    }
+
+    function dokumenLain() {
+        return view('administrator.perdataan.dokumen-lain');
     }
 
     public function print_qr_code()

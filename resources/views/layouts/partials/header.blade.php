@@ -68,6 +68,8 @@ $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FRO
 $urutan = $paslon_tertinggi;
 $props = Province::where('id', $kota['province_id'])->first();
 $cityProp = Regency::where('province_id', $kota['province_id'])->get();
+$jumlah_kecamatan = District::where('regency_id', $kota['id'])->count();
+$jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'%')->count();
 
 
 
@@ -631,7 +633,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 </a>
                                             </div> -->
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="#" class="py-1 btn fs-6 w-100 text-white glowy-menu"
+                                                <a href="{{url('')}}/administrator/dokumen_lain" class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0;">
                                                     {{-- C7 & Surat Suara --}}
                                                     Dokumen Lain
@@ -793,12 +795,12 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 <div class="text">Total TPS : <b>{{ $total_tps }}</b></div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-warning text-white">
-                                                <div class="text">Total Kec : <b>{{$total_verification_voice}}</b>
+                                                <div class="text">Total Kec : <b>{{$jumlah_kecamatan}}</b>
                                                 </div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-success text-white"
                                                 style="border-top-right-radius: 25px; border-bottom-right-radius: 25px">
-                                                <div class="text">Total Kel : <b>{{$total_verification_voice}}</b>
+                                                <div class="text">Total Kel : <b>{{$jumlah_kelurahan}}</b>
                                                 </div>
                                             </div>
                                         </div>

@@ -96,7 +96,8 @@
             <a href="{{ route('auditor.auditData', Crypt::encrypt($paslon[0]->saksi_data[0]->saksi_id)) }}" class="btn btn-block btn-info">Lolos Audit</a>
         </div>
         <div class="col-lg-6 mt-1">
-            <a href="{{ route('auditor.batalkanData', Crypt::encrypt($paslon[0]->saksi_data[0]->saksi_id)) }}" class="btn btn-block btn-danger">Batalkan</a>
+            <a class="btn btn-block btn-danger text-white modal-kelos c1-dikoreksi"
+            data-id="{{$user->tps_id}}" data-bs-toggle="modal" id="" data-bs-target="#periksaC1Auditor">Koreksi</a>
         </div>
         @endif
     </div>
@@ -105,5 +106,29 @@
 <script>
     $(document).ready(function() {
         $('.zoom').magnify();
+    });
+
+    $('.modal-kelos').on('click', function() {
+        $('#periksaC1Verifikator').modal('hide');
+    });
+</script>
+
+<script>
+    // const buttonC1Dibatalkan = 
+    $(".c1-dikoreksi").on('click', function() {
+        const id = $(this).data('id');
+        $.ajax({
+            url: "{{ route('auditor.getSaksiDibatalkan') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                // url: "<?= request()->segment(count(request()->segments())) ?>",
+                id
+            },
+            type: "GET",
+            dataType: "html",
+            success: function(data) {
+                $('#container-view-dibatalkan').html(data)
+            }
+        });
     });
 </script>
