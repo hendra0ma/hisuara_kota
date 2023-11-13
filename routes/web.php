@@ -86,40 +86,40 @@ use function GuzzleHttp\Promise\all;
 //     }
 // });
 
-Route::get("redirect-page",function (){
+Route::get("redirect-page", function () {
     $role = Auth::user()->role_id;
-    $regency_id = substr(Auth::user()->districts,0,4);
-    $regency_domain = RegenciesDomain::where('regency_id',$regency_id)->first();
+    $regency_id = substr(Auth::user()->districts, 0, 4);
+    $regency_domain = RegenciesDomain::where('regency_id', $regency_id)->first();
 
-    cookie("reg_id",$regency_domain->domain,60*240);
-     return view('auth.redirect', [
-                    'role_id' => $role,
-                ]);
+    cookie("reg_id", $regency_domain->domain, 60 * 240);
+    return view('auth.redirect', [
+        'role_id' => $role,
+    ]);
 });
 
 
 
-Route::get("update-dpt",function (){
+Route::get("update-dpt", function () {
     set_time_limit(999999999999);
     $dpt_indonesia = DB::table('dpt_indonesia')->limit(10000)->get();
-    // return $dpt_indonesia; 
+    // return $dpt_indonesia;
     foreach ($dpt_indonesia as $dpt) {
-        $province = Province::where('name',$dpt->province_name)->first();
-        $regency = Regency::where('province_id',$province->id)->where('name',$dpt->regency_name)->first();
-     
-        $district = District::where('regency_id',$regency->id)->where('name',$dpt->district_name)->first();
-        $village = Village::where('district_id',$district->id)->where('name',$dpt->village_name)->first();
-        
+        $province = Province::where('name', $dpt->province_name)->first();
+        $regency = Regency::where('province_id', $province->id)->where('name', $dpt->regency_name)->first();
+
+        $district = District::where('regency_id', $regency->id)->where('name', $dpt->district_name)->first();
+        $village = Village::where('district_id', $district->id)->where('name', $dpt->village_name)->first();
+
         DB::table('dpt_indonesia')
-            ->where('province_name',$province->name)
-            ->where('regency_name',$regency->name)
-            ->where('district_name',$district->name)
-            ->where('village_name',$village->name)
+            ->where('province_name', $province->name)
+            ->where('regency_name', $regency->name)
+            ->where('district_name', $district->name)
+            ->where('village_name', $village->name)
             ->update([
-                "province_id"=>$province->id,
-                "regency_id"=>$regency->id,
-                "district_id"=>$district->id,
-                "village_id"=>$village->id,
+                "province_id" => $province->id,
+                "regency_id" => $regency->id,
+                "district_id" => $district->id,
+                "village_id" => $village->id,
             ]);
     }
 });
@@ -140,13 +140,12 @@ Route::domain('hisuara.id')->name('pusat.')->group(function () {
         return redirect('login');
     });
 
-    Route::get('public/pusat', [PublicController::class,'pusatIndex']);
-    
+    Route::get('public/pusat', [PublicController::class, 'pusatIndex']);
 
-    Route::group(["middleware"=>'role:administrator'],function (){ 
+
+    Route::group(["middleware" => 'role:administrator'], function () {
         Route::get('/dashboard-pusats', [PusatController::class, "home"])->name('home');
     });
-
 });
 
 
@@ -156,7 +155,7 @@ foreach ($provinsi as $provinsis) {
     $domainProvinsi = ProvinceDomain::where('province_id', $provinsis->id)->first();
     Route::domain($domainProvinsi->domain)->group(function () use ($provinsis, $domainProvinsi) {
         Route::get('/dashboard-provinsi/{id}', [ProvinsiController::class, 'home'])->name('provinsi' . $provinsis->id . '.home');
-        Route::get('/public-provinsi/{id}', [ProvinsiController::class,'pusatProvinsi'])->name('provinsi' . $provinsis->id . '.public');;
+        Route::get('/public-provinsi/{id}', [ProvinsiController::class, 'pusatProvinsi'])->name('provinsi' . $provinsis->id . '.public');;
     });
 }
 
@@ -183,7 +182,7 @@ foreach ($kotas as $kota) {
     Route::domain($kota->domain)->group(function () {
 
 
-    
+
 
         Route::get('/ceksetup', function () {
             $config = Config::first();
@@ -280,7 +279,7 @@ foreach ($kotas as $kota) {
         // });
         Route::group(['middleware' => 'auth'], function () {
             //administrator
-            
+
             Route::get('security/login/{id}', [SecurityController::class, 'index'])->name('security.login');
             Route::get('security/register/{id}', [SecurityController::class, 'create'])->name('security.register');
             Route::get('security/logoutKelurahan/{id}', [SecurityController::class, 'logoutKelurahan'])->name('security.logoutKelurahan');
@@ -309,7 +308,7 @@ foreach ($kotas as $kota) {
                 Route::controller(AdminController::class)->group(function () {
                     //Administratorw
                     Route::get('get-data-c1-crowd', 'CrowdC1Id');
-                    Route::get('/download-images/{status}', [DownloadImages::class,'downloadImages']);
+                    Route::get('/download-images/{status}', [DownloadImages::class, 'downloadImages']);
                     Route::post('simpan-suara-c1-crowd', 'simpanSuaraC1Crowd')->name('simpan_suara_crowd');
 
 
@@ -416,7 +415,7 @@ foreach ($kotas as $kota) {
                     Route::get('sidang_online_status/{role}', 'sidangOnlinestatus');
                     Route::get('crowd-c1-kpu', 'crowdC1');
                     Route::get('data-crowd-c1-kpu', 'dataCrowdC1');
-                
+
 
                     Route::get('/dev-pass', function () {
                         return view('security.dev_pass');
@@ -628,7 +627,7 @@ foreach ($kotas as $kota) {
         Route::controller(PublicController::class)->group(function () {
             Route::get('scanning-secure/{id}', 'scanSecure');
             Route::get('index', 'index');
-           
+
             Route::get('real_count', 'real_count_public');
             Route::get('quick_count', 'quick_count_public');
             Route::get('map_count', 'map_count_public');
@@ -659,8 +658,8 @@ foreach ($kotas as $kota) {
         Route::post("action_absen_saksi", [DevelopingController::class, 'actionAbsensiSaksi'])->middleware(['auth', 'role:saksi'])->name('actionAbsensiSaksi');
 
         Route::post("action-surat-suara", [DevelopingController::class, 'actionSuratSuara'])->middleware(['auth', 'role:saksi'])->name('actionSuratSuara');
-        
-        
+
+
         Route::get('/saksi-dashboard', function () {
 
             return view('developing.template_phone.phone');
@@ -971,7 +970,7 @@ Route::get('prov-users', function () {
 //     ->open(asset('images/card-logo.png'));
 //     $metadata = $image->metadata();
 //     return $metadata;
-    
+
 // });
 
 
@@ -986,41 +985,40 @@ Route::get('prov-users', function () {
 //SETUP DPT & IMPORT EXCEL                          !!HANYA PAKAI YANG TIDAK DIKOMENTARI!!
 //----------------------------------------------------------------------------------------------------------------------------------------
 
-Route::get("import-excel-pemilih",function (){
+Route::get("import-excel-pemilih", function () {
     return view('excel.test');
 });
 
-Route::get("logout_v2",function (){
+Route::get("logout_v2", function () {
 
     Auth::logout();
     return redirect('login');
-
 });
-Route::get("import-excel-dpt",function (){
+Route::get("import-excel-dpt", function () {
     return view('excel.dpt');
 });
 
-// Route::get("import-excel-dpt-gen",function (){
-//     return view('excel.dpt-gen');
-// });
+Route::get("import-excel-dpt-gen", function () {
+    return view('excel.dpt-gen');
+});
 
 
 
 
-Route::post("import-excel",[ExcelController::class,"importExcel"])->name("import-excel");
+Route::post("import-excel", [ExcelController::class, "importExcel"])->name("import-excel");
 // Route::post("import-dpt-excel",[ExcelController::class,"importDptExcel"])->name("import-dpt-excel");
-Route::post("import-dpt-excel-gen",[ExcelController::class,"importDptExcelGen"])->name("import-dpt-excel-gen");
+Route::post("import-dpt-excel-gen", [ExcelController::class, "importDptExcelGen"])->name("import-dpt-excel-gen");
 
 
 
-Route::get('dpt/kecamatan/{id_kota}',function ($id){
+Route::get('dpt/kecamatan/{id_kota}', function ($id) {
     //masukan id kota untuk setup dpt per kecamatan yang sudah di import
-    $rgc = Regency::where('id',$id)->first();
-    $dst = District::where('regency_id',$id)->get();
+    $rgc = Regency::where('id', $id)->first();
+    $dst = District::where('regency_id', $id)->get();
     foreach ($dst as $ds) {
-        $count = DB::table('dpt_indonesia')->where('district_name',$ds->name)->where('regency_name',$rgc->name)->count();
-        District::where('id',$ds->id)->update([
-            'dpt'=>$count
+        $count = DB::table('dpt_indonesia')->where('district_name', $ds->name)->where('regency_name', $rgc->name)->count();
+        District::where('id', $ds->id)->update([
+            'dpt' => $count
         ]);
     }
 });
@@ -1028,16 +1026,16 @@ Route::get('dpt/kota', function () {
     // untuk setup dpt kota dan provinsi
     $prv = Province::get();
     foreach ($prv as $pr) {
-        $rgy = Regency::where('province_id',$pr->id)->get();
+        $rgy = Regency::where('province_id', $pr->id)->get();
         foreach ($rgy as $rg) {
-            $dst = District::where('regency_id',$rg->id)->whereNotNull('dpt')->sum('dpt');  
-            Regency::where('id',$rg->id)->update([
-                'dpt'=> (int) $dst
+            $dst = District::where('regency_id', $rg->id)->whereNotNull('dpt')->sum('dpt');
+            Regency::where('id', $rg->id)->update([
+                'dpt' => (int) $dst
             ]);
         }
-        $dst = Regency::where('province_id',$pr->id)->where('dpt','!=',0)->sum('dpt');  
-        Province::where('id',$pr->id)->update([
-            'dpt'=> (int) $dst
+        $dst = Regency::where('province_id', $pr->id)->where('dpt', '!=', 0)->sum('dpt');
+        Province::where('id', $pr->id)->update([
+            'dpt' => (int) $dst
         ]);
     }
 });
@@ -1059,7 +1057,7 @@ Route::get('dpt/kota', function () {
 //         $c1Prov->suara2 = $suaraP[1];
 //         $c1Prov->suara3 = $suaraP[2];
 //         $c1Prov->save();
-  
+
 // });
 // Route::get('cek-saksi-data',function () {
 //     $saksidata = SaksiData::get();
@@ -1069,6 +1067,6 @@ Route::get('dpt/kota', function () {
 //             continue;
 //         }
 //         SaksiData::where('id',$value->id)->delete();
-        
+
 //     }
 // });
