@@ -229,7 +229,10 @@ class VerificatorController extends Controller
             'status' => 1,
         ]);
         // event(new NotifEvent($pesan));
-        return redirect()->back()->with(['sukses_verif' => "ok"]);
+        // Set pesan sukses dalam session flash
+        session()->flash('sukses_verif', 'Verifikasi berhasil dilakukan.');
+
+        return redirect()->back();
     }
     public function verifikasiDataPending($id)
     {

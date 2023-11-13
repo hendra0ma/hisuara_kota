@@ -113,19 +113,42 @@
         
     </div>
 
+    
+
     <!-- <button type="submit" class="btn btn-primary btn-block">Simpan</button> -->
     <div class="row" id="buttons">
 
         @if($paslon[0]->saksi_data[0]->koreksi == 1)
         @else
         <div class="col-6">
-            <a href="{{route('verifikator.verifikasiData',Crypt::encrypt($paslon[0]->saksi_data[0]->saksi_id))}}" class="btn btn-block btn-info">Verifikasi</a>
+            <a onclick="konfirmasiVerifikasi('{{ route('verifikator.verifikasiData', Crypt::encrypt($paslon[0]->saksi_data[0]->saksi_id)) }}')"
+                class="btn btn-block btn-info text-white">Verifikasi</a>
         </div>
         <div class="col-6">
             <a href="{{url('verifikator/koreksidata')}}/{{Crypt::encrypt($paslon[0]->saksi_data[0]->saksi_id)}}" class="btn btn-primary btn-block openModalKoreksi"data-id="{{Crypt::encrypt($paslon[0]->saksi_data[0]->saksi_id)}}">Koreksi</a>
         </div>
         @endif
     </div>
+    
+    <script>
+        function konfirmasiVerifikasi(url) {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Anda tidak akan dapat mengembalikan tindakan ini!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, saya yakin!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Jika pengguna mengkonfirmasi, lakukan pengalihan ke URL verifikasi
+                    window.location.href = url;
+                }
+            });
+        }
+        
+    </script>
 
     <div class="row mt-5">
         <div class="col-12">

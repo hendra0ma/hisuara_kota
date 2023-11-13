@@ -666,6 +666,11 @@ foreach ($kotas as $kota) {
             return view('developing.template_phone.phone');
         })->middleware(['auth', 'role:saksi'])->name('dashboard.saksi2');
 
+        Route::get('/enumerator-dashboard', function () {
+
+            return view('developing.template_phone.phone_2');
+        })->middleware(['auth', 'role:enumerator'])->name('dashboard.enumerator2');
+
         Route::controller(RelawanController::class)->group(function () {
             Route::get('relawan', 'index');
             Route::get('relawan-banding', 'relawanBanding');

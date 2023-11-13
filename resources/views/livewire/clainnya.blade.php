@@ -3,8 +3,8 @@
         <div class="col-lg-12">
             <div class="card border-0" style="position: relative">
 
-                <div class="card-header bg-primary text-light text-center fw-bold rounded-0">
-                    Foto dan Kirim Data C6
+                <div style="position: relative" class="card-header bg-primary text-light text-center fw-bold rounded-0">
+                    <span style="position: absolute; left: 15px" class="fw-normal">4/4</span> Daftar Hadir Pemilih di TPS (C7)
                 </div>
 
                 {{-- <form action="{{route('logout')}}" method="post" class="pe-2 ps-3">
@@ -18,10 +18,10 @@
                     <div class="row">
                         <div class="px-0 col-12 text-center mb-3">
                             @if (Auth::user()->profile_photo_path == NULL)
-                            <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                            <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
                                 src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF">
                             @else
-                            <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}">
+                            <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}">
                             @endif
                         </div>
                         <div class="px-0 col-12 my-auto text-center">
@@ -46,10 +46,10 @@
 
 
 
-                    <h1 class="text-center">
+                    {{-- <h1 class="text-center">
                         <img src="{{asset('')}}assets/icons/hisuara_new.png" class="hadow-4 mb-3 mt-3 rounded-2" style="width: 175px;"
                             alt="Avatar" />
-                    </h1>
+                    </h1> --}}
                     {{-- <h5> Halo, {{Auth::user()->name}}</h5> --}}
                     <form action="dev/action_saksi" method="post" enctype="multipart/form-data">
                         @csrf
@@ -81,44 +81,51 @@
                                 </div> -->
                                 <input type="hidden" name="dokumen"value="c6">
 
+                                {{-- <?php
+                                    $i = 1
+                                ?>
                                 @foreach ($paslon as $item)
-                                <div class="col-lg-12">
-                                    Suara 0{{$item['id']}} - {{ $item['candidate']}}
+                                <div class="col-lg-12 mb-2">
+                                    Suara 0{{$i++}} - {{ $item['candidate']}} - {{ $item['deputy_candidate'] }}
                                     <input type="number" class="form-control" id="suara[]" name="suara[]" required placeholder="Suara Paslon">
                                 </div>
-                                @endforeach
-                                <div class="col-lg-12 mt-2">
-                                    <div class="card   ">
-                                        <div class="card-header   ">
-                                            <h5 class="card-title">Upload Foto C1</h5>
-                                        </div>
-                                        <div class="card-body text-center">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <h1>
-                                                        <a type="button ">
-                                                            <i class="mdi mdi-camera"></i>
-                                                        </a>
-                                                    </h1>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <input type="file" name="c1_plano" required id="c1_plano">
+                                @endforeach --}}
+
+                                <div class="row no-gutters">
+                                    <div class="col-lg-12 mt-2 mb-2">
+                                        <div class="card" style="height:30vh">
+                                            <div class="card-header text-center">
+                                                <span class="card-title">Upload Foto Formulir</span>
+                                            </div>
+                                            <div class="card-body d-flex">
+                                                <div class="row my-auto mx-auto">
+                                                    <div class="col-md-12 text-center">
+                                                        <h1>
+                                                            <label for="selfie_lokasi" type="button">
+                                                                <i class="mdi mdi-camera"></i>
+                                                            </label>
+                                                        </h1>
+                                                    </div>
+                                                    <div class="col-md-12 text-center">
+                                                        <input type="file" name="c1_plano" style="width: 205px;" required id="c1_plano">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="d-grid gap-2">
-                                    <input type="submit" class="btn btn-block btn-primary mt-2" value="Kirim" id="send">
+                                
+                                    <div class="d-grid gap-2">
+                                        <input type="submit" name="" class="btn btn-block btn-primary mt-2" value="Kirim" id="send">
+                                    </div>
                                 </div>
 
                             </div>
 
                         </div>
                     </form>
-                    <form action="{{route('logout')}}" method="post">
+                    <form class="mt-2" action="{{route('logout')}}" method="post">
                         @csrf
-                        <a href="#" class="mt-3" onclick="this.closest('form').submit();">
+                        <a href="#" onclick="this.closest('form').submit();">
                             Sign out
                         </a>
                     </form>

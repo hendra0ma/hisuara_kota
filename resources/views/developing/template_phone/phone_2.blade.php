@@ -158,7 +158,7 @@
                 @if (Auth::user()->absen == "hadir")
                 @else
                 <div alt="home" class="content show">
-                    <livewire:absensi-saksi>
+                    <livewire:absensi-enumerator>
                 </div>
                 @endif
                 <div alt="work" class="content {{Auth::user()->absen == 'hadir'?'show':''}}">
@@ -167,7 +167,7 @@
                         $cekSaksi = App\Models\Saksi::where('tps_id', Auth::user()->tps_id)->count('id'); ?>
                     @if( $cekSaksi == null)
 
-                    <livewire:upload-c1>
+                    <livewire:upload-c1-enumerator>
 
                     @else
                     <div class="container mt-3">
@@ -193,14 +193,6 @@
                     </div>
                     @endif
                 </div>
-                <div alt="blog" class="content ">
-
-                    <livewire:surat-suara>
-                </div>
-                <div alt="blog" class="content ">
-
-                    <livewire:clainnya>
-                </div>
 
                 <nav class="nav-on-desktop">
                     <ul>
@@ -215,14 +207,6 @@
                             <i class="fas fa-box"></i>
                             <p>Upload C1</p>
                         </li>
-                        <li>
-                            <i class="fas fa-book"></i>
-                            <p>Surat Suara</p>
-                        </li>
-                        <li>
-                            <i class="fas fa-book-open"></i>
-                            <p>Upload C7</p>
-                        </li>
 
                     </ul>
                 </nav>
@@ -235,7 +219,7 @@
         @if (Auth::user()->absen == "hadir")
         @else
         <div alt="home" class="content show">
-            <livewire:absensi-saksi>
+            <livewire:absensi-enumerator>
         </div>
         @endif
         <div alt="work" class="content {{Auth::user()->absen == 'hadir'?'show':''}}">
@@ -244,7 +228,7 @@
             $cekSaksi = App\Models\Saksi::where('tps_id', Auth::user()->tps_id)->count('id'); ?>
             @if( $cekSaksi == null)
 
-            <livewire:upload-c1>
+            <livewire:upload-c1-enumerator>
 
                 @else
                 <div class="container mt-3">
@@ -270,14 +254,6 @@
                 </div>
                 @endif
         </div>
-        <div alt="blog" class="content ">
-
-            <livewire:surat-suara>
-        </div>
-        <div alt="blog" class="content ">
-
-            <livewire:clainnya>
-        </div>
 
         <nav class="position-fixed">
             <ul>
@@ -291,14 +267,6 @@
                 <li>
                     <i class="fas fa-box"></i>
                     <p>Upload C1</p>
-                </li>
-                <li>
-                    <i class="fas fa-book"></i>
-                    <p>Surat Suara</p>
-                </li>
-                <li>
-                    <i class="fas fa-book-open"></i>
-                    <p>Upload C7</p>
                 </li>
 
             </ul>
