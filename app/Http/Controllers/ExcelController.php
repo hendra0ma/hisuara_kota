@@ -162,7 +162,7 @@ class ExcelController extends Controller
             ->select('regencies.*', 'districts.*', 'villages.*')
             ->first();
 
-            $village = Village::where('id', $village->id)->first();
+            $village = Village::where('id', (string) $village->id)->first();
             $village->update([
                 'tps' => $jumlahTps,
                 'dpt' => $totalDpt,
