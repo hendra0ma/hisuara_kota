@@ -131,7 +131,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header bg-success">
-                    <h4 class="mb-0 mx-auto text-white card-title">Data Pemlih Dan Penggunaan Hak Pilih</h4>
+                    <h4 class="mb-0 mx-auto text-white card-title">Data Pemlih Dan Penggunaan Hak Pilih (TPS {{$paslon[0]->saksi_data[0]->number}})</h4>
                 </div>
                 <div class="card-body p-0">
                     <table class="table table-striped">

@@ -293,7 +293,7 @@ $tps = Tps::count();
         <div class="card">
             <div class="card-body text-center" style="padding: 21.5px">
                 <div class="card-header py-2 text-white bg-dark">
-                    <h4 class="mb-0 mx-auto text-black card-title">Data Pemilih dan Hak Pilih</h4>
+                    <h4 class="mb-0 mx-auto text-black card-title">Data Pemilih dan Hak Pilih (TPS {{$data_tps->number}} / Kelurahan {{$desa->name}})</h4>
                 </div>
                 <table class="table table-striped">
                     <tr>

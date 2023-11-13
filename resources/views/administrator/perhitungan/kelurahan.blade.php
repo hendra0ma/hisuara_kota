@@ -156,7 +156,7 @@ $tps = Tps::count();
         </div>
     </div>
 
-    <div class="{{($config->otonom == 'yes')?'col-lg-12 col-md-12':'col-lg-6 col-md-12'}}">
+    <div class="{{($config->otonom == 'yes')?'col-lg-6 col-md-6':'col-lg-6 col-md-12'}}">
         <div class="card">
             {{-- <div class="card-header bg-info">
                 <h3 class="card-title text-white">Suara TPS Masuk</h3>
@@ -345,7 +345,7 @@ $tps = Tps::count();
     </div>
     @endif
     
-    <div class="col-md-12">
+    <div class="col-md">
         <div class="container-fluid">
             <div class="tab">
                 <div class="row">
@@ -367,7 +367,8 @@ $tps = Tps::count();
                     <h5 class="cart-title mx-auto text-center fw-bold my-auto">Suara TPS Masuk (Kelurahan
                         {{$district['name']}})</h5>
                 </div>
-                <div class="card-body">
+                {{-- <div class="card-body"> --}}
+                <div class="card-body" style="{{($config->otonom == 'yes')?'height: 549px; overflow: scroll':''}}">
 
                     <!-- 1st card -->
                     <table class="table table-bordered table-hover">
