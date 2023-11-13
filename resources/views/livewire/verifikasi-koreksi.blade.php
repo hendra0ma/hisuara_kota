@@ -71,18 +71,39 @@ use App\Models\Koreksi;
                                     Date
                                 </td>
                                 <td class="px-0">:</td>
-                                <td class="ps-2">{{$ls->date}}</td>
+                                <td class="ps-2">{{$ls->created_at}}</td>
                             </tr>
                         </table>
-    
+                        {{-- koreksi:{{$ls->koreksi}}
+                        dibatalkan:{{$ls->batalkan}} --}}
+                        @if ($ls->koreksi == 1 && $ls->batalkan != 1)
                         <div class="row mt-2">
                             <div class="col-12 px-0">
                                 <button class="btn rounded-0 w-100 disetujuimodal text-white" id="Cek"
                                     data-id="{{$ls['saksi_id']}}" data-bs-toggle="modal" id=""
                                     data-bs-target="#disetujuimodal"
-                                    style="background-color: rgb(248, 38, 73)">Periksa C1</button>
+                                    style="background-color: rgb(248, 38, 73)">Periksa Koreksi C1</button>
                             </div>
                         </div>
+                        @endif
+                        @if ($ls->batalkan == 1 && $ls->koreksi != 1)
+                        <div class="row mt-2">
+                            <div class="col-12 px-0">
+                                <button class="btn rounded-0 w-100 c1-dibatalkan text-white" id="Cek" data-id="{{$ls->tps_id}}"
+                                    data-bs-toggle="modal" id="" data-bs-target="#periksaC1Verifikator"
+                                    style="background-color: rgb(248, 38, 73)">Periksa Koreksi C1</button>
+                            </div>
+                        </div>
+                        @endif
+                        @if ($ls->koreksi == 1 && $ls->batalkan == 1)
+                        <div class="row mt-2">
+                            <div class="col-12 px-0">
+                                <button class="btn rounded-0 w-100 disetujuimodal text-white" id="Cek" data-id="{{$ls['saksi_id']}}"
+                                    data-bs-toggle="modal" id="" data-bs-target="#disetujuimodal"
+                                    style="background-color: rgb(248, 38, 73)">Periksa Koreksi C1</button>
+                            </div>
+                        </div>
+                        @endif
                     </div>
                 </div>
                 <div class="hiasan-2" style="height: 30px"></div>

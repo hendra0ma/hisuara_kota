@@ -26,13 +26,21 @@
                         </div>
                         <div class="px-0 col-12 my-auto text-center">
                             <?php
-                                                    $tps = App\Models\Tps::where('tps.id', '=', Auth::user()->tps_id)->first();
-                                                    $kelurahan = App\Models\Village::where('villages.id', '=', Auth::user()->villages)->first();
-                                                ?>
+                                $tps = App\Models\Tps::where('tps.id', '=', Auth::user()->tps_id)->first();
+                                $kelurahan = App\Models\Village::where('villages.id', '=', Auth::user()->villages)->first();
+                            ?>
                             <div class="mb-0 fw-bold" style="font-size: 20px">{{ Auth::user()->name }}</div>
                             <div style="font-size: 15px">NIK : {{ Auth::user()->nik }}</div>
-                            <div style="font-size: 15px">SAKSI TPS {{ $tps }}</div>
-                            <div style="font-size: 15px">KELURAHAN {{ $kelurahan }}</div>
+                            @if($tps == null)
+                            <div style="font-size: 15px">SAKSI TPS 1</div>
+                            @else
+                            <div style="font-size: 15px">SAKSI TPS {{ $tps->number }}</div>
+                            @endif
+                            @if ($kelurahan == null)
+                            <div style="font-size: 15px">KELURAHAN CIPUTAT</div>
+                            @else
+                            <div style="font-size: 15px">KELURAHAN {{ $kelurahan->name }}</div>
+                            @endif
                         </div>
                     </div>
 

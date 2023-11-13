@@ -172,6 +172,7 @@ class AuditorController extends Controller
                 ->where('tps.id', '=', $req->id);
         }])->get();
         $data['user'] = User::where('tps_id', $req->id)->first();
+        // $data['tps']  = Tps::where("id", $data['user']['tps']); s
 
         $data['village'] = Village::where('id', $data['paslon'][0]->saksi_data[0]->village_id)->first();
         return view('auditor.modalView', $data);
@@ -191,6 +192,8 @@ class AuditorController extends Controller
         $data['kelurahan'] = Village::where('id', $data['saksi']['village_id'])->first();
         $data['kecamatan'] = District::where('id', $data['saksi']['district_id'])->first();
         $data['tps'] = Tps::where('id', $data['saksi']['tps_id'])->first();
+        $data['url'] = $request->url;
+        // return $data['url'];
 
         return view('auditor.modalViewDibatalkan', $data);
     }

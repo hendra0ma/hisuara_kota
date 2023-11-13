@@ -80,8 +80,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                                     <h1 class="mb-2 number-font">{{$visitor}}</h1>
                                 </div>
                                 <div class="col col-auto">
-                                    <div
-                                        class="counter-icon bg-primary-gradient box-shadow-primary brround ms-auto">
+                                    <div class="counter-icon bg-primary-gradient box-shadow-primary brround ms-auto">
                                         <i class="mdi mdi-eye text-white mb-5 "></i>
                                     </div>
                                 </div>
@@ -98,8 +97,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                                         <h1 class="mb-2 number-font">{{$user_baru}}</h1>
                                 </div>
                                 <div class="col col-auto">
-                                    <div
-                                        class="counter-icon bg-danger-gradient box-shadow-danger brround ms-auto">
+                                    <div class="counter-icon bg-danger-gradient box-shadow-danger brround ms-auto">
                                         <i class="mdi mdi-account-multiple-plus text-white mb-5 "></i>
                                     </div>
                                 </div>
@@ -227,7 +225,395 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                     </div>
                 </div>
             </div>
-            
+
+            <h3 class="fw-bold">Relawan Tracking</h3>
+            <hr style="border: 1px solid;">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body" style="padding:10px">
+                            <div class="row">
+                                <div class="col">
+                                    <h1 class="my-auto display-4" style="margin-bottom: 0;">
+                                        <center>
+                                            <i class="mdi mdi-account-multiple"></i>
+                                        </center>
+                                    </h1>
+                                </div>
+                                <div class="col text-center">
+                                    <div class="row">
+                                        <div class="col fs-5 fw-bold">{{$saksi_teregistrasi}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-muted" style="font-size: 13px;">Relawan Terdaftar</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body" style="padding:10px">
+                            <div class="row">
+                                <div class="col">
+                                    <h1 class="my-auto display-4" style="margin-bottom: 0;">
+                                        <center>
+                                            <i class="mdi mdi-account-multiple"></i>
+                                        </center>
+                                    </h1>
+                                </div>
+                                <div class="col text-center">
+                                    <div class="row">
+                                        <div class="col fs-5 fw-bold">{{$saksi_teregistrasi}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-muted" style="font-size: 13px;">Relawan Registrasi</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body" style="padding:10px">
+                            <div class="row">
+                                <div class="col">
+                                    <h1 class="my-auto display-4" style="margin-bottom: 0;">
+                                        <center>
+                                            <i class="mdi mdi-account-multiple"></i>
+                                        </center>
+                                    </h1>
+                                </div>
+                                <div class="col text-center">
+                                    <div class="row">
+                                        <div class="col fs-5 fw-bold">{{$saksi_terblokir}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-muted" style="font-size: 13px;">Relawan Ilegal</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body" style="padding:10px">
+                            <div class="row">
+                                <div class="col">
+                                    <h1 class="my-auto display-4" style="margin-bottom: 0;">
+                                        <center>
+                                            <i class="mdi mdi-account-multiple"></i>
+                                        </center>
+                                    </h1>
+                                </div>
+                                <div class="col text-center">
+                                    <div class="row">
+                                        <div class="col fs-5 fw-bold">{{$saksi_terblokir}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-muted" style="font-size: 13px;">Relawan Terblokir</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="fw-bold">Enumerator Tracking</h3>
+            <hr style="border: 1px solid;">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body" style="padding:10px">
+                            <div class="row">
+                                <div class="col">
+                                    <h1 class="my-auto display-4" style="margin-bottom: 0;">
+                                        <center>
+                                            <i class="mdi mdi-account-multiple"></i>
+                                        </center>
+                                    </h1>
+                                </div>
+                                <div class="col text-center">
+                                    <div class="row">
+                                        <div class="col fs-5 fw-bold">{{$saksi_teregistrasi}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-muted" style="font-size: 13px;">Enumerator Terdaftar</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body" style="padding:10px">
+                            <div class="row">
+                                <div class="col">
+                                    <h1 class="my-auto display-4" style="margin-bottom: 0;">
+                                        <center>
+                                            <i class="mdi mdi-account-multiple"></i>
+                                        </center>
+                                    </h1>
+                                </div>
+                                <div class="col text-center">
+                                    <div class="row">
+                                        <div class="col fs-5 fw-bold">{{$saksi_teregistrasi}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-muted" style="font-size: 13px;">Enumerator Registrasi</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body" style="padding:10px">
+                            <div class="row">
+                                <div class="col">
+                                    <h1 class="my-auto display-4" style="margin-bottom: 0;">
+                                        <center>
+                                            <i class="mdi mdi-account-multiple"></i>
+                                        </center>
+                                    </h1>
+                                </div>
+                                <div class="col text-center">
+                                    <div class="row">
+                                        <div class="col fs-5 fw-bold">{{$saksi_terblokir}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-muted" style="font-size: 13px;">Enumerator Ilegal</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body" style="padding:10px">
+                            <div class="row">
+                                <div class="col">
+                                    <h1 class="my-auto display-4" style="margin-bottom: 0;">
+                                        <center>
+                                            <i class="mdi mdi-account-multiple"></i>
+                                        </center>
+                                    </h1>
+                                </div>
+                                <div class="col text-center">
+                                    <div class="row">
+                                        <div class="col fs-5 fw-bold">{{$saksi_terblokir}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-muted" style="font-size: 13px;">Enumerator Terblokir</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="fw-bold">Admin Tracking</h3>
+            <hr style="border: 1px solid;">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body" style="padding:10px">
+                            <div class="row">
+                                <div class="col">
+                                    <h1 class="my-auto display-4" style="margin-bottom: 0;">
+                                        <center>
+                                            <i class="mdi mdi-account-multiple"></i>
+                                        </center>
+                                    </h1>
+                                </div>
+                                <div class="col text-center">
+                                    <div class="row">
+                                        <div class="col fs-5 fw-bold">{{$saksi_teregistrasi}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-muted" style="font-size: 13px;">Admin Terdaftar</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body" style="padding:10px">
+                            <div class="row">
+                                <div class="col">
+                                    <h1 class="my-auto display-4" style="margin-bottom: 0;">
+                                        <center>
+                                            <i class="mdi mdi-account-multiple"></i>
+                                        </center>
+                                    </h1>
+                                </div>
+                                <div class="col text-center">
+                                    <div class="row">
+                                        <div class="col fs-5 fw-bold">{{$saksi_teregistrasi}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-muted" style="font-size: 13px;">Admin Registrasi</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body" style="padding:10px">
+                            <div class="row">
+                                <div class="col">
+                                    <h1 class="my-auto display-4" style="margin-bottom: 0;">
+                                        <center>
+                                            <i class="mdi mdi-account-multiple"></i>
+                                        </center>
+                                    </h1>
+                                </div>
+                                <div class="col text-center">
+                                    <div class="row">
+                                        <div class="col fs-5 fw-bold">{{$saksi_terblokir}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-muted" style="font-size: 13px;">Admin Ilegal</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body" style="padding:10px">
+                            <div class="row">
+                                <div class="col">
+                                    <h1 class="my-auto display-4" style="margin-bottom: 0;">
+                                        <center>
+                                            <i class="mdi mdi-account-multiple"></i>
+                                        </center>
+                                    </h1>
+                                </div>
+                                <div class="col text-center">
+                                    <div class="row">
+                                        <div class="col fs-5 fw-bold">{{$saksi_terblokir}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-muted" style="font-size: 13px;">Admin Terblokir</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="fw-bold">Crowd C1 Tracking</h3>
+            <hr style="border: 1px solid;">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body" style="padding:10px">
+                            <div class="row">
+                                <div class="col">
+                                    <h1 class="my-auto display-4" style="margin-bottom: 0;">
+                                        <center>
+                                            <i class="mdi mdi-account-multiple"></i>
+                                        </center>
+                                    </h1>
+                                </div>
+                                <div class="col text-center">
+                                    <div class="row">
+                                        <div class="col fs-5 fw-bold">{{$saksi_teregistrasi}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-muted" style="font-size: 13px;">Crowd C1 Terdaftar</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body" style="padding:10px">
+                            <div class="row">
+                                <div class="col">
+                                    <h1 class="my-auto display-4" style="margin-bottom: 0;">
+                                        <center>
+                                            <i class="mdi mdi-account-multiple"></i>
+                                        </center>
+                                    </h1>
+                                </div>
+                                <div class="col text-center">
+                                    <div class="row">
+                                        <div class="col fs-5 fw-bold">{{$saksi_teregistrasi}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-muted" style="font-size: 13px;">Crowd C1 Registrasi</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body" style="padding:10px">
+                            <div class="row">
+                                <div class="col">
+                                    <h1 class="my-auto display-4" style="margin-bottom: 0;">
+                                        <center>
+                                            <i class="mdi mdi-account-multiple"></i>
+                                        </center>
+                                    </h1>
+                                </div>
+                                <div class="col text-center">
+                                    <div class="row">
+                                        <div class="col fs-5 fw-bold">{{$saksi_terblokir}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-muted" style="font-size: 13px;">Crowd C1 Ilegal</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body" style="padding:10px">
+                            <div class="row">
+                                <div class="col">
+                                    <h1 class="my-auto display-4" style="margin-bottom: 0;">
+                                        <center>
+                                            <i class="mdi mdi-account-multiple"></i>
+                                        </center>
+                                    </h1>
+                                </div>
+                                <div class="col text-center">
+                                    <div class="row">
+                                        <div class="col fs-5 fw-bold">{{$saksi_terblokir}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-muted" style="font-size: 13px;">Crowd C1 Terblokir</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <h3 class="fw-bold">Verifikator Tracking</h3>
             <hr style="border: 1px solid;">
             <div class="row">
@@ -270,7 +656,8 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                                         <div class="col fs-5 fw-bold">{{$verifikator_teregistrasi}}</div>
                                     </div>
                                     <div class="row">
-                                        <div class="col text-muted" style="font-size: 13px;">Verifikator Registrasi</div>
+                                        <div class="col text-muted" style="font-size: 13px;">Verifikator Registrasi
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -324,7 +711,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                     </div>
                 </div>
             </div>
-            
+
             <h3 class="fw-bold">Auditor Tracking</h3>
             <hr style="border: 1px solid;">
             <div class="row">
@@ -421,8 +808,8 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                     </div>
                 </div>
             </div>
-            
-            <h3 class="fw-bold">Overtime Tracking</h3>
+
+            {{-- <h3 class="fw-bold">Overtime Tracking</h3>
             <hr style="border: 1px solid;">
             <div class="row">
                 <div class="col">
@@ -517,9 +904,9 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <h3 class="fw-bold">Voulunteer Tracking</h3>
+            </div> --}}
+
+            {{-- <h3 class="fw-bold">Voulunteer Tracking</h3>
             <hr style="border: 1px solid;">
             <div class="row">
                 <div class="col">
@@ -614,9 +1001,9 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <h3 class="fw-bold">Fraud Validation Tracking</h3>
+            </div> --}}
+
+            {{-- <h3 class="fw-bold">Fraud Validation Tracking</h3>
             <hr style="border: 1px solid;">
             <div class="row">
                 <div class="col">
@@ -635,7 +1022,8 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                                         <div class="col fs-5 fw-bold">{{$hukum_teregistrasi}}</div>
                                     </div>
                                     <div class="row">
-                                        <div class="col text-muted" style="font-size: 13px;">Fraud Validation Terdaftar</div>
+                                        <div class="col text-muted" style="font-size: 13px;">Fraud Validation Terdaftar
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -658,7 +1046,8 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                                         <div class="col fs-5 fw-bold">{{$hukum_teregistrasi}}</div>
                                     </div>
                                     <div class="row">
-                                        <div class="col text-muted" style="font-size: 13px;">Fraud Validation Registrasi</div>
+                                        <div class="col text-muted" style="font-size: 13px;">Fraud Validation Registrasi
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -681,7 +1070,8 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                                         <div class="col fs-5 fw-bold">{{$hukum_terblokir}}</div>
                                     </div>
                                     <div class="row">
-                                        <div class="col text-muted" style="font-size: 13px;">Fraud Validation Ilegal</div>
+                                        <div class="col text-muted" style="font-size: 13px;">Fraud Validation Ilegal
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -704,16 +1094,17 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                                         <div class="col fs-5 fw-bold">{{$hukum_terblokir}}</div>
                                     </div>
                                     <div class="row">
-                                        <div class="col text-muted" style="font-size: 13px;">Fraud Validation Terblokir</div>
+                                        <div class="col text-muted" style="font-size: 13px;">Fraud Validation Terblokir
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <h3 class="fw-bold">Otentifikasi Tracking</h3>
+            </div> --}}
+
+            {{-- <h3 class="fw-bold">Otentifikasi Tracking</h3>
             <hr style="border: 1px solid;">
             <div class="row">
                 <div class="col">
@@ -732,7 +1123,8 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                                         <div class="col fs-5 fw-bold">{{$huver_teregistrasi}}</div>
                                     </div>
                                     <div class="row">
-                                        <div class="col text-muted" style="font-size: 13px;">Otentifikasi Terdaftar</div>
+                                        <div class="col text-muted" style="font-size: 13px;">Otentifikasi Terdaftar
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -755,7 +1147,8 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                                         <div class="col fs-5 fw-bold">{{$huver_teregistrasi}}</div>
                                     </div>
                                     <div class="row">
-                                        <div class="col text-muted" style="font-size: 13px;">Otentifikasi Registrasi</div>
+                                        <div class="col text-muted" style="font-size: 13px;">Otentifikasi Registrasi
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -801,15 +1194,16 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                                         <div class="col fs-5 fw-bold">{{$huver_terblokir}}</div>
                                     </div>
                                     <div class="row">
-                                        <div class="col text-muted" style="font-size: 13px;">Otentifikasi Terblokir</div>
+                                        <div class="col text-muted" style="font-size: 13px;">Otentifikasi Terblokir
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
+            </div> --}}
+
         </div>
 
         <div class="col-md">
@@ -852,27 +1246,29 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                             <div class="row">
                                 <table class="table-bordered table table-hover">
                                     <tr>
-                                        <td>
+                                        <td colspan="2">
                                             <div class="fs-3 fw-bold">Data Relawan ({{$data_relawan}}) </div>
-									        <div class="text-muted">Data Masuk 30 Hari Terakhir</div>
-									   </td>
-                                        <td>
+                                            <div class="text-muted">Data Masuk 30 Hari Terakhir</div>
+                                        </td>
+                                        {{-- <td>
                                             <div class="fs-3 fw-bold">Data Overlimit ({{$data_overlimit}}) </div>
-									        <div class="text-muted">Data Masuk 30 Hari Terakhir</div>
-									   </td>
+                                            <div class="text-muted">Data Masuk 30 Hari Terakhir</div>
+                                        </td> --}}
                                     </tr>
                                     <tr>
                                         <td>
-                                            <div class="fs-3 fw-bold">Bukti Foto Kecurangan ({{$bukti_foto_kecurangan}}) </div>
-									        <div class="text-muted">Data Masuk 30 Hari Terakhir</div>
-									   </td>
+                                            <div class="fs-3 fw-bold">Bukti Foto Kecurangan ({{$bukti_foto_kecurangan}})
+                                            </div>
+                                            <div class="text-muted">Data Masuk 30 Hari Terakhir</div>
+                                        </td>
                                         <td>
-                                            <div class="fs-3 fw-bold">Bukti Video Kecurangan ({{$bukti_video_kecurangan}})</div>
-									        <div class="text-muted">Data Masuk 30 Hari Terakhir</div>
-									   </td>
+                                            <div class="fs-3 fw-bold">Bukti Video Kecurangan
+                                                ({{$bukti_video_kecurangan}})</div>
+                                            <div class="text-muted">Data Masuk 30 Hari Terakhir</div>
+                                        </td>
                                     </tr>
                                 </table>
-							</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -880,7 +1276,8 @@ $kota = Regency::where('id', $config->regencies_id)->first();
 
             <div class="row">
                 <div class="col-md">
-                    <a href="{{url('/')}}/administrator/r-data-record" class="btn btn-primary w-100">Lihat Log Histori</a>
+                    <a href="{{url('/')}}/administrator/r-data-record" class="btn btn-primary w-100">Lihat Log
+                        Histori</a>
                 </div>
             </div>
 
@@ -911,14 +1308,16 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                                 <tr>
                                     <td class="text-center">
                                         @if ($sabar->profile_photo_path == NULL)
-                                        <img class="avatar avatar-xl brround cover-image" src="https://ui-avatars.com/api/?name={{ $sabar->name }}&color=7F9CF5&background=EBF4FF" alt="img">
+                                        <img class="avatar avatar-xl brround cover-image"
+                                            src="https://ui-avatars.com/api/?name={{ $sabar->name }}&color=7F9CF5&background=EBF4FF"
+                                            alt="img">
                                         @else
                                         <img class="avatar avatar-xl brround cover-image" src="{{url("/storage/profile-photos/".$sabar->profile_photo_path) }}">
                                         @endif
                                     </td>
                                     <td class="align-middle">{{$sabar->name}}</td>
                                     <td class="align-middle">{{$sabar->email}}</td>
-                                    
+
                                     <?php 
                                     $district = \App\Models\District::where('id',$sabar->districts)->first(); 
                                     $village = \App\Models\Village::where('id',$sabar->villages)->first(); 
@@ -941,8 +1340,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered text-nowrap border-bottom"
-                            id="basic-datatable-2">
+                        <table class="table table-bordered text-nowrap border-bottom" id="basic-datatable-2">
                             <thead class="bg-primary">
                                 <tr>
                                     <th class="text-white">Foto</th>
@@ -957,7 +1355,9 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                                 <tr>
                                     <td class="text-center">
                                         @if ($adbar->profile_photo_path == NULL)
-                                        <img class="avatar avatar-xl brround cover-image" src="https://ui-avatars.com/api/?name={{ $adbar->name }}&color=7F9CF5&background=EBF4FF" alt="img">
+                                        <img class="avatar avatar-xl brround cover-image"
+                                            src="https://ui-avatars.com/api/?name={{ $adbar->name }}&color=7F9CF5&background=EBF4FF"
+                                            alt="img">
                                         @else
                                         <img class="avatar avatar-xl brround cover-image" src="{{url("/storage/profile-photos/".$adbar->profile_photo_path) }}">
                                         @endif
@@ -996,7 +1396,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                                         <span class="badge bg-success  me-1 mb-1 mt-1">Terblokir</span>
                                         @else
                                         {{$tim['role_id']}}
-                                        @endif    
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach

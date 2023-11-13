@@ -68,6 +68,8 @@ $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FRO
 $urutan = $paslon_tertinggi;
 $props = Province::where('id', $kota['province_id'])->first();
 $cityProp = Regency::where('province_id', $kota['province_id'])->get();
+$jumlah_kecamatan = District::where('regency_id', $kota['id'])->count();
+$jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'%')->count();
 
 
 
@@ -416,7 +418,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
                                     <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white sirantap"
-                                            style="background-color: #f82649; width: 40px; height: 36px;"
+                                            style="background-color: #656064; width: 40px; height: 36px;"
                                             data-target="sirantap">
                                             <span class="dark-layout" data-bs-placement="bottom"
                                                 data-bs-toggle="tooltip" title="Sistem Laporan Data Pemilu">
@@ -550,17 +552,17 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/crowd-c1-kpu" class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0px;">
+                                                    style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                                     Crowd C1 KPU
                                                 </a>
                                             </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                            {{-- <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/verifikasi_koreksi"
                                                     class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                                     Koreksi C1
                                                 </a>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
 
@@ -631,9 +633,10 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 </a>
                                             </div> -->
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="#" class="py-1 btn fs-6 w-100 text-white glowy-menu"
+                                                <a href="{{url('')}}/administrator/dokumen_lain" class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0;">
-                                                    C7 & Surat Suara
+                                                    {{-- C7 & Surat Suara --}}
+                                                    Dokumen Lain
                                                 </a>
                                             </div>
                                             {{-- <div class="col-md" style="padding-left: 1px; padding-right: 1px">
@@ -770,10 +773,10 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
 
                                                 style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
-                                                <div class="text">DPT Pria : <b>{{ $dpt_l }}</b></div>
+                                                <div class="text">Pria : <b>{{ $dpt_l }}</b></div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-danger text-white">
-                                                <div class="text">DPT Wanita : <b>{{ $dpt_p }}</b></div>
+                                                <div class="text">Wanita : <b>{{ $dpt_p }}</b></div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-primary text-white">
                                             <?php  
@@ -786,18 +789,18 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
                                                     }
                                                 ?>
-                                                <div class="text">Total DPT : <b>{{ $total_dpt }}</b></div>
+                                                <div class="text">Total : <b>{{ $total_dpt }}</b></div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-info text-white">
                                                 <div class="text">Total TPS : <b>{{ $total_tps }}</b></div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-warning text-white">
-                                                <div class="text">Total Kec : <b>{{$total_verification_voice}}</b>
+                                                <div class="text">Total Kec : <b>{{$jumlah_kecamatan}}</b>
                                                 </div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-success text-white"
                                                 style="border-top-right-radius: 25px; border-bottom-right-radius: 25px">
-                                                <div class="text">Total Kel : <b>{{$total_verification_voice}}</b>
+                                                <div class="text">Total Kel : <b>{{$jumlah_kelurahan}}</b>
                                                 </div>
                                             </div>
                                         </div>
@@ -1027,7 +1030,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         <div class="row">
                                             @foreach ($urutan as $urutPaslon)
                                             <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
-                                            <div class="col py-2 judul text-center text-white custom-urutan"
+                                            <div class="col py-2 judul text-center text-white"
                                                 style="background: {{ $pasangan->color }}">
                                                 <div class="text">{{ $pasangan->candidate }} ||
                                                     {{ $pasangan->deputy_candidate }} : {{$urutPaslon->total}}</b>

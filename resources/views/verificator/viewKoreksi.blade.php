@@ -82,20 +82,35 @@
 
                             <div class="row">
 
-                                <div class="col">
-                                    <div class="form-row">
+                                <div class="col-6">
+                                    <div class="row">
                                         <?php $i = 1;  ?>
                                         @foreach($saksi as $saksidata)
                                         @foreach($saksidata->saksi_data as $saksi_data)
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-12">
                                             <label>Suara 0{{$i}}</label>
-                                            <input type="number" class="form-control" id="suara[]" name="suara[]" required placeholder="Total Suara 0{{$i}}">
+                                            <input type="number" class="form-control suara-input" id="suara[]" name="suara[]" required placeholder="Total Suara 0{{$i}}">
                                         </div>
                                         <?php $i++ ?>
                                         @endforeach
                                         @endforeach
                                     
                                     </div>
+                                </div>
+
+                                <div class="col-md-6 text-center">
+                                    <div class="card h-100">
+                                        <div class="card-header py-1">
+                                            Total :
+                                        </div>
+                                        <div class="card-body d-flex display-2 fw-bold">
+                                            <div class="my-auto mx-auto" id="sumDisplay">
+                                                {{-- {{$total_suara }} --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- <div class="display-2 fw-bold">Total :</div>
+                                    <div class="display-2 fw-bold">{{$total_suara }}</div> --}}
                                 </div>
     
                               
@@ -117,5 +132,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('.suara-input').on('input', function() {
+            // Get all input values with the class 'suara-input'
+            let allValues = $('.suara-input').map(function() {
+                return parseFloat($(this).val()) || 0;
+            }).get();
+
+            console.log(allValues);
+            // Calculate the sum of all input values
+            let sum = allValues.reduce(function(a, b) {
+                return a + b;
+            }, 0);
+            // Display the sum in the HTML document
+            $('#sumDisplay').html(sum);
+        });
+    });
+</script>
 
 @endsection

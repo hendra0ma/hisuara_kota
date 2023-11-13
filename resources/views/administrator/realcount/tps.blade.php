@@ -163,13 +163,49 @@ $tps = Tps::count();
         </div>
     </div>
 
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
+    <!-- Popper.js, required for Bootstrap 4 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
     <div class="col-md">
         <div class="card">
             <div class="card-body text-center">
-                <img style="height: 594.92px" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}" alt="">
+                <a href="#" data-toggle="modal" data-target="#imgBig">
+                    <img style="height: 594.92px" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}" alt="">
+                </a>
             </div>
         </div>
     </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" style="background: rgba(0, 0, 0, 0.65)" id="imgBig" tabindex="-1" aria-labelledby="imgBigLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="col-lg-12" style="height: 100vh; overflow: scroll">
+                        <center>
+                            <img width="100%" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}" data-magnify-speed="200"
+                                alt="" data-magnify-magnifiedwidth="2500" data-magnify-magnifiedheight="2500"
+                                class="img-fluid zoom"
+                                data-magnify-src="{{asset('')}}storage/{{$saksi[0]->c1_images}}">
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        $(document).ready(function () {
+                    $('#imgBig').modal();
+                });
+    </script>
 
 
 

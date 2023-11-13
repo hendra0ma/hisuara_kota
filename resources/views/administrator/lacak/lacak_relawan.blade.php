@@ -1,4 +1,4 @@
-@extends('layouts.main-verifikasi-akun')
+@extends('layouts.main-perlacakan')
 
 @section('content')
 
@@ -89,7 +89,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
     <div class="col-12">
         <div class="card mg-b-20" style="display:{{($config->otonom == 'yes')?' none':'block'}}">
             <div class="card-body">
-                <div class="ht-300" id="map" style="height:600px; z-index: 2"></div>
+                <div class="ht-300" id="lacak_map" style="height:600px; z-index: 2"></div>
             </div>
         </div>
     </div>

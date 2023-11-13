@@ -99,7 +99,7 @@ $props = Province::where('id',$kota['province_id'])->first();
     <div class="col-lg-12">
         <center>
             <h2 class="page-title mt-1 mb-0" style="font-size: 60px">
-                TERVERIFIKASI
+                REKAPITULASI
             </h2>
             <h4 class="mt-2">
                 {{ $kota['name'] }} / KECAMATAN {{ $kecamatan['name'] }}
@@ -115,11 +115,11 @@ $props = Province::where('id',$kota['province_id'])->first();
                 <div class="row">
                     <div class="col-xxl-6">
                         <div class="container">
-                            <div class="text-center fs-3 mb-3 fw-bold">Suara Masuk</div>
+                            <div class="text-center fs-3 mb-3 fw-bold">Rekapitulasi</div>
                             <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
                             <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
                                     {{$dpt}}</span></div>
-                            <div id="chart-donut" class="chartsh h-100 w-100"></div>
+                            <div id="chart-pie" class="chartsh h-100 w-100"></div>
                         </div>
                         <div class="row mt-2">
                             <?php $i = 1; ?>
@@ -208,21 +208,37 @@ $props = Province::where('id',$kota['province_id'])->first();
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $totalSaksiDataa = [];  ?>
+                                @foreach ($paslon as $cd)
+                                <?php $totalSaksiDataa[$cd['id']] = 0; ?>
+                                @endforeach
                                 @foreach ($kel as $item)
                                 <tr onclick='check("{{Crypt::encrypt($item->id)}}")'>
                                     <td class="align-middle"><a
-                                            href="{{url('/')}}/administrator/terverifikasi_kelurahan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
+                                            href="{{url('/')}}/administrator/rekap_kelurahan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
                                     </td>
                                     @foreach ($paslon as $cd)
-                                    <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.village_id', (string)$item['id'])->where('saksi.verification', 1)->sum('voice'); ?>
-                                    <td class="align-middle">{{$saksi_dataa}}</td>
+                                    <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.village_id', (string)$item['id'])->sum('voice'); ?>
+                                    <td class="align-middle">
+                                        {{$saksi_dataa}}</td>
+                                    <?php     
+                                        $totalSaksiDataa[$cd['id']] += $saksi_dataa; ?>
                                     @endforeach
                                 </tr>
                                 @endforeach
+                                <tr style="background-color: #cccccc">
+                                    <td class="align-middle">
+                                        <div class="fw-bold">Total</div>
+                                    </td>
+                                
+                                    @foreach ($paslon as $cd)
+                                    <td class="align-middle">{{$totalSaksiDataa[$cd['id']]}}</td>
+                                    @endforeach
+                                </tr>
                             </tbody>
                             <script>
                                 let check = function (id) {
-                                    window.location = `{{url('/')}}/administrator/terverifikasi_kelurahan/${id}`;
+                                    window.location = `{{url('/')}}/administrator/rekap_kelurahan/${id}`;
                                 }
                             </script>
                         </table>

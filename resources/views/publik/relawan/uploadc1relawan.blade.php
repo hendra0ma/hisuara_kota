@@ -145,8 +145,16 @@
                             ?>
                             <div class="mb-0 fw-bold" style="font-size: 20px">{{ Auth::user()->name }}</div>
                             <div style="font-size: 15px">NIK : {{ Auth::user()->nik }}</div>
-                            <div style="font-size: 15px">SAKSI TPS {{ $tps }}</div>
-                            <div style="font-size: 15px">KELURAHAN {{ $kelurahan }}</div>
+                            @if($tps == null)
+                            <div style="font-size: 15px">RELAWAN TPS 1</div>
+                            @else
+                            <div style="font-size: 15px">RELAWAN TPS {{ $tps->number }}</div>
+                            @endif
+                            @if ($kelurahan == null)
+                            <div style="font-size: 15px">KELURAHAN CIPUTAT</div>
+                            @else
+                            <div style="font-size: 15px">KELURAHAN {{ $kelurahan->name }}</div>
+                            @endif
                         </div>
                     </div>
 

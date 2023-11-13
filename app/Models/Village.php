@@ -26,7 +26,7 @@ class Village extends Model
      * @var string
      */
     protected $table = 'villages';
-
+    protected $fillable = ['dpt', 'tps', 'dpt_p', 'dpt_l'];
     /**
      * The attributes that should be hidden for arrays.
      *

@@ -172,7 +172,7 @@
                     @else
                     <div class="container mt-3">
                         <div class="row">
-                            <div class="col-lg-5">
+                            <div class="col-lg">
                                 <div class="card border-0 shadow">
                                     <div class="card-body text-center">
                                         <h3>

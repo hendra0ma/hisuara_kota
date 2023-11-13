@@ -189,14 +189,15 @@ $kota = Regency::where('id', $config->regencies_id)->first();
 </div>
 <!-- CONTAINER END -->
 <div class="modal fade" id="cekmodal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-header bg-primary text-white">
-            <div class="modal-title mx-auto">
-                <h4 class="mb-0 fw-bold">Verifikasi Saksi</h4>
-            </div>
-        </div>
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        
         <div class="modal-content">
-            <div class="container">
+            <div class="modal-header bg-primary text-white">
+                <div class="modal-title mx-auto">
+                    <h4 class="mb-0 fw-bold">Foto E-KTP</h4>
+                </div>
+            </div>
+            <div class="container modal-body">
                 <div id="container-verifikasi">
 
                 </div>
@@ -205,6 +206,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                 <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
+
     </div>
 </div>
 

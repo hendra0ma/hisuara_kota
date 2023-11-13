@@ -157,11 +157,38 @@ $props = Province::where('id',$kota['province_id'])->first();
                         </div>
                     </div>
 
+                    <style>
+                        .row:has(> .custom-urutan) {
+                            margin-top: 75px
+                        }
+                    
+                        .custom-urutan::before {
+                            position: absolute;
+                            top: -80px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            font-size: 60px;
+                            color: black;
+                        }
+                    
+                        .custom-urutan:nth-child(1)::before {
+                            content: '1'
+                        }
+                    
+                        .custom-urutan:nth-child(2)::before {
+                            content: '2'
+                        }
+                    
+                        .custom-urutan:nth-child(3)::before {
+                            content: '3'
+                        }
+                    </style>
+
                     <div class="col-xxl-6">
                         <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Hasil Rekapitulasi Suara</div>
                         <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Pemilihan Presiden dan Wakil Presiden</div>
-                        <div class="text-center title-atas-table fs-5 fw-bold">PROVINSI {{$props->name}}</div>
-                        <div class="row mt-3 mx-auto" style="width: 884.5px;">
+                        <div class="text-center title-atas-table fs-5 fw-bold">{{ $kota['name'] }}</div>
+                        <div class="row mx-auto" style="width: 884.5px;">
                             @foreach ($urutan as $urutPaslon)
                             <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
                             <div class="col judul text-center text-white custom-urutan"
@@ -181,20 +208,20 @@ $props = Province::where('id',$kota['province_id'])->first();
                                 </tr>
                             </thead>
                             <tbody>
-                                   <?php $totalSaksiDataa = [];  ?>
+                                    <?php $totalSaksiDataa = [];  ?>
                                     @foreach ($paslon as $cd)
                                         <?php $totalSaksiDataa[$cd['id']] = 0; ?>
                                     @endforeach
                                 @foreach ($kec as $item)
                                 <tr onclick='check("{{Crypt::encrypt($item->id)}}")'>
                                     <td class="align-middle"><a
-                                            href="{{url('/')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
+                                            href="{{url('/')}}/administrator/rekap_kecamatan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
                                     </td>
                                         
                                     @foreach ($paslon as $cd)
                                     <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->sum('voice'); ?>
                                     <td class="align-middle">{{$saksi_dataa}}</td>
-                                               <?php     
+                                    <?php     
                                     $totalSaksiDataa[$cd['id']] += $saksi_dataa; ?>
                                     @endforeach
                                 </tr>
@@ -203,7 +230,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                                     <td class="align-middle">
                                         <div class="fw-bold">Total</div>
                                     </td>
-                             
+                                    
                                     @foreach ($paslon as $cd)
                                         <td class="align-middle">{{$totalSaksiDataa[$cd['id']]}}</td>
                                     @endforeach
@@ -211,147 +238,17 @@ $props = Province::where('id',$kota['province_id'])->first();
                             </tbody>
                             <script>
                                 let check = function (id) {
-                                    window.location = `{{url('/')}}/administrator/perhitungan_kecamatan/${id}`;
+                                    window.location = `{{url('/')}}/administrator/rekap_kecamatan/${id}`;
                                 }
                             </script>
                         </table>
                     </div>
-                    {{-- <div class="col-md">
-                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner text-center custom">
-                                <?php $count = 1; ?>
-                                @foreach ($kec as $item)
-                                <div class="carousel-item <?php if ($count++ == 1) : ?><?= 'active' ?><?php endif; ?>">
-                                    <div class="fw-bold fs-3 mb-3">
-                                        KECAMATAN {{$item['name']}}
-                                    </div>
-                                    <div class="row">
-                                        <?php $i = 1; ?>
-                                        @foreach ($paslon as $psl)
-                                        <?php
-                                        $pasln = SaksiData::join('districts', 'districts.id', '=', 'saksi_data.district_id')->where('saksi_data.district_id', $item['id'])->where('saksi_data.paslon_id', $psl->id)->get();
-                                        $jumlah = 0;
-                                        foreach ($pasln as $pas) {
-                                            $jumlah += $pas->voice;
-                                        }
-                                        $persen = substr($jumlah / $item->dpt * 100, 0, 3);
-                                        ?>
-                                        <div class="col-md">
-                                            <div class="card mb-4">
-                                                <div class="card-header justify-content-center"
-                                                    style="background-color:{{$psl->color}}">
-                                                    <h5 style="margin-bottom: 0;" class="text-white">{{$psl->candidate}}
-                                                        || {{$psl->deputy_candidate}}</h5>
-                                                </div>
-                                                <div class="card-body" style="padding: 10px;">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <img src="{{asset('storage/'. $psl['picture'])}}" width="100px"
-                                                                height="100px" style="object-fit: cover;" alt="">
-                                                        </div>
-                                                        <div class="col text-center my-auto fs-1 fw-bold">
-                                                            {{$persen}}%
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <?php
-                                        $jumlah = 0;
-                                        ?>
-                                        @endforeach
-                                        <?php $i = 1; ?>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                            <button class="arrow-nav custom-prev" type="button" data-bs-target="#carouselExampleControls"
-                                data-bs-slide="prev">
-                                <i class="fa-solid fa-chevron-left" style="color: rgba(0, 0, 0, 0.5);font-size: 25px"></i>
-                            </button>
-                            <button class="arrow-nav custom-next" type="button" data-bs-target="#carouselExampleControls"
-                                data-bs-slide="next">
-                                <i class="fa-solid fa-chevron-right" style="color: rgba(0, 0, 0, 0.5);font-size: 25px"></i>
-                            </button>
-                        </div>
-                    </div>  --}}
-                </div>
-                </div>
 
-                {{-- <div class="col-md">
-                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner text-center custom">
-                            <?php $count = 1; ?>
-                            @foreach ($kec as $item)
-                            <div class="carousel-item <?php if ($count++ == 1) : ?><?= 'active' ?><?php endif; ?>">
-                                <div class="fw-bold fs-3 mb-3">
-                                    KECAMATAN {{$item['name']}}
-                                </div>
-                                <div class="row">
-                                    <?php $i = 1; ?>
-                                    @foreach ($paslon as $psl)
-                                    <?php
-                                    $pasln = SaksiData::join('districts', 'districts.id', '=', 'saksi_data.district_id')->where('saksi_data.district_id', $item['id'])->where('saksi_data.paslon_id', $psl->id)->get();
-                                    $jumlah = 0;
-                                    foreach ($pasln as $pas) {
-                                        $jumlah += $pas->voice;
-                                    }
-                                    $persen = substr($jumlah / $item->dpt * 100, 0, 3);
-                                    ?>
-                                    <div class="col-md">
-                                        <div class="card mb-4">
-                                            <div class="card-header justify-content-center"
-                                                style="background-color:{{$psl->color}}">
-                                                <h5 style="margin-bottom: 0;" class="text-white">{{$psl->candidate}}
-                                                    || {{$psl->deputy_candidate}}</h5>
-                                            </div>
-                                            <div class="card-body" style="padding: 10px;">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <img src="{{asset('storage/'. $psl['picture'])}}" width="100px"
-                                                            height="100px" style="object-fit: cover;" alt="">
-                                                    </div>
-                                                    <div class="col text-center my-auto fs-1 fw-bold">
-                                                        {{$persen}}%
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php
-                                    $jumlah = 0;
-                                    ?>
-                                    @endforeach
-                                    <?php $i = 1; ?>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                        <button class="arrow-nav custom-prev" type="button" data-bs-target="#carouselExampleControls"
-                            data-bs-slide="prev">
-                            <i class="fa-solid fa-chevron-left" style="color: rgba(0, 0, 0, 0.5);font-size: 25px"></i>
-                        </button>
-                        <button class="arrow-nav custom-next" type="button" data-bs-target="#carouselExampleControls"
-                            data-bs-slide="next">
-                            <i class="fa-solid fa-chevron-right" style="color: rgba(0, 0, 0, 0.5);font-size: 25px"></i>
-                        </button>
-                    </div>
-                </div> --}}
+                </div>
             </div>
         </div>
     </div>
 
     
 </div>
-
-<script>
-    // $('.mode-1').on('click', function() {
-    //     $('.tampilan-1').show();
-    //     $('.tampilan-2').hide();
-    // })
-    // $('.mode-2').on('click', function() {
-    //     $('.tampilan-1').hide();
-    //     $('.tampilan-2').show();
-    // })
-</script>
 @endsection
