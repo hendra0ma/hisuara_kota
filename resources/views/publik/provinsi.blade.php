@@ -14,6 +14,7 @@ use App\Models\Paslon;
 use App\Models\Configs;
 use App\Models\Province;
 use App\Models\RegenciesDomain;
+use App\Models\Regency;
 use App\Models\SuaraC1Provinsi;
 
 $configs = Config::all()->first();
@@ -74,6 +75,8 @@ $data_masuk = (int)$saksidatai / (int)$dpt * 100;
 
                 <div class="row mt-5">
                     <?php $i = 1; ?>
+                    <?php $voice = 0; ?>
+
                     @foreach ($paslon as $pas)
                     <div class="col-lg col-md col-sm col-xl mb-3    ">
                         <div class="card overflow-hidden" style="margin-bottom: 0px;">
@@ -81,33 +84,34 @@ $data_masuk = (int)$saksidatai / (int)$dpt * 100;
                                 <div class="row">
                                     <div class="col col-auto">
                                         <div class="counter-icon box-shadow-secondary brround ms-auto candidate-name text-white" style="margin-bottom: 0; background-color: {{$pas->color}};">
-                                            {{$i++}}
+                                            {{$i}}
                                         </div>
                                     </div>
                                     <div class="col">
                                         <h6 class="">{{$pas->candidate}} </h6>
                                         <h6 class="">{{$pas->deputy_candidate}} </h6>
-                                        <?php
-                                        $voice = 0;
+                                        <?php 
+                                        $regency = Regency::where('province_id',$id_prov)->get();
+                                        foreach ($regency as $regen) {
+                                            $voice += $regen['suara'.$i];
+                                        }   
+                                        $i++;
                                         ?>
-                                        @foreach ($pas->saksi_data as $dataTps)
-                                        <?php
-                                        $voice += $dataTps->voice;
-                                        ?>
-                                        @endforeach <br>
+
                                         <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <?php $voice=0; ?>
                     @endforeach
                 </div>
 
                 <div class="row mt-5">
                     <div class="col-md-12 mt-3">
                         <h5 class="text-uppercase">HITUNG SUARA PEMILIHAN Umum
-                         Indonesia
+                            Indonesia
                         </h5>
                     </div>
                     <div class="col-md-12 mt-3">
@@ -116,10 +120,10 @@ $data_masuk = (int)$saksidatai / (int)$dpt * 100;
                         </h5>
                     </div>
                 </div>
-                
+
                 <div class="row mt-5">
                     <div class="col-md-12 mt-5">
-                    
+
 
                         <table class="table table-bordered table-hover">
                             <thead class="bg-primary">
@@ -131,134 +135,156 @@ $data_masuk = (int)$saksidatai / (int)$dpt * 100;
                                 </tr>
                             </thead>
                             <tbody>
-            
-                                @foreach ($provinsi as $prv)
-                                    <tr>
-                                         <td>
-                                         
-                                         {{$prv->name}}
-                                         </td>
-                                          
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        
-                                    </tr>
-                                    @endforeach
+                            @foreach ($provinsi as $kota)
+                            <tr>
+                                <td>
+                                    <?php $regDomain = RegenciesDomain::where('regency_id',$kota->id)->select('domain')->first(); ?>
+                                    <a href="{{env('HTTP_SSL').$regDomain->domain.env('HTTP_PORT','')}}/index">{{$kota->name}}</a>
+                                </td>
+                                <?php $j = 1; ?>
+                                @foreach ($paslon_candidate as $item)
+                                <td>{{ $kota['suara'.$j++]}}</td>
+                                @endforeach
+                            </tr>
+                            @endforeach
+
                             </tbody>
 
-                        
+
                         </table>
                     </div>
-                    
-                    {{-- @foreach ($provinsi as $prv)
+                    <hr>
+                    <div class="mt-2"></div>
+                    @foreach ($provinsi as $reg)
                     <div class="col-4">
                         <div class="card border-0 shadow-sm">
-                            <div class="card-body">
-                                <div id="chart-provinsi{{$prv->id}}"></div>
-                                <?php //$suara = SuaraC1Provinsi::where('id',$prv->id)->first(); ?>
-                                <div> {{$paslon_candidate[0]->candidate}} & {{$paslon_candidate[0]->deputy_candidate}} - {{$suara->suara1}}</div>
-                                <div> {{$paslon_candidate[1]->candidate}} & {{$paslon_candidate[1]->deputy_candidate}} - {{$suara->suara2}}</div>
-                                <div> {{$paslon_candidate[2]->candidate}} & {{$paslon_candidate[2]->deputy_candidate}} - {{$suara->suara3}}</div>
+                            <div class="card-header bg-dark">
+                            <?php $regDomain = RegenciesDomain::where('regency_id',$reg->id)->select('domain')->first(); ?>
+                                <h4 class="fw-bold text-light text-center mx-auto">
+                                    <a href="{{env('HTTP_SSL').$regDomain->domain.env('HTTP_PORT','')}}/index">
+                                    {{$reg->name}}
+                                </a>
+                                </h4>
                             </div>
-                        </div>
-                    </div>
-                    @endforeach --}}
-                </div>
-
-            </div>
-
-
-
-        </div>
-
-    </div>
-
-    <div class="tab-pane fade show" id="pills-terverifikasi" role="tabpanel" aria-labelledby="pills-terverifikasi-tab">
-        <div class="card rounded-0">
-            <div class="card-body">
-                <!-- nav options -->
-
-
-                <div class="row mt-5">
-                    <div class="col-md-12">
-                        <div id="chart-verif" class="chartsh h-100"></div>
-                    </div>
-                </div>
-
-                <div class="row mt-5">
-                    <?php $i = 1; ?>
-                    @foreach ($paslon_terverifikasi as $pas)
-                    <div class="col-lg col-md col-sm col-xl mb-3    ">
-                        <div class="card overflow-hidden" style="margin-bottom: 0px;">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col col-auto">
-                                        <div class="counter-icon box-shadow-secondary brround ms-auto candidate-name text-white" style="margin-bottom: 0;  background-color: {{$pas->color}};">
-                                            {{$i++}}
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <h6 class="">{{$pas->candidate}} </h6>
-                                        <?php
-                                        $voice = 0;
-                                        ?>
-                                        @foreach ($pas->saksi_data as $dataTps)
-                                        <?php
-                                        $voice += $dataTps->voice;
-                                        ?>
-                                        @endforeach <br>
-                                        <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
-                                    </div>
-                                </div>
+                                <div id="chart-regency{{$reg->id}}"></div>
+                                    <?php
+                                    $i = 1;
+                                    ?>
+                                    @foreach ($paslon_candidate as $pas)
+                                   
+                                        {{$pas->candidate}} & {{$pas->deputy_candidate}} | {{ $reg['suara'.$i] }} <br>
+                                  
+                                    <?php $i++; ?>
+                                    @endforeach
+                                <?php $i = 0 ?>
                             </div>
                         </div>
                     </div>
                     @endforeach
+</div>
+
+</div>
+
+
+
+</div>
+
+</div>
+
+<div class="tab-pane fade show" id="pills-terverifikasi" role="tabpanel" aria-labelledby="pills-terverifikasi-tab">
+    <div class="card rounded-0">
+        <div class="card-body">
+            <!-- nav options -->
+
+
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <div id="chart-verif" class="chartsh h-100"></div>
                 </div>
-
-                <div class="row mt-5">
-                    <div class="col-md-12 mt-3"> 
-                        <h5 class="text-uppercase">HITUNG SUARA PEMILIHAN umum
-                         Indonesia
-                        </h5>
-                    </div>
-                    <div class="col-md-12 mt-3">
-                        <h5 class="text-uppercase">
-                            <span class="badge bg-primary">Progress : {{$tps_selesai}} TPS Dari {{$tps_belum}} TPS</span>
-                        </h5>
-                    </div>
-                </div>
-
-                <div class="row mt-5">
-                    <div class="col-md-12 mt-5">
-                        <table class="table table-bordered table-hover">
-                            <thead class="bg-primary">
-                                <tr>
-                                    <th class="align-middle text-white">Provinsi</th>
-                                    @foreach ($paslon_candidate as $item)
-                                    <th class="text-white">{{ $item['candidate']}}</th>
-                                    @endforeach
-
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                              
-                            </tbody>
-
-                        
-                        </table>
-                    </div>
-                </div>
-
             </div>
 
+            <div class="row mt-5">
+                <?php $i = 1; ?>
+                @foreach ($paslon_terverifikasi as $pas)
+                <div class="col-lg col-md col-sm col-xl mb-3    ">
+                    <div class="card overflow-hidden" style="margin-bottom: 0px;">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col col-auto">
+                                    <div class="counter-icon box-shadow-secondary brround ms-auto candidate-name text-white" style="margin-bottom: 0;  background-color: {{$pas->color}};">
+                                        {{$i++}}
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <h6 class="">{{$pas->candidate}} </h6>
+                                    <?php
+                                    $voice = 0;
+                                    ?>
+                                    @foreach ($pas->saksi_data as $dataTps)
+                                    <?php
+                                    $voice += $dataTps->voice;
+                                    ?>
+                                    @endforeach <br>
+                                    <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
 
+            <div class="row mt-5">
+                <div class="col-md-12 mt-3">
+                    <h5 class="text-uppercase">HITUNG SUARA PEMILIHAN umum
+                        Indonesia
+                    </h5>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <h5 class="text-uppercase">
+                        <span class="badge bg-primary">Progress : {{$tps_selesai}} TPS Dari {{$tps_belum}} TPS</span>
+                    </h5>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-12 mt-5">
+                    <table class="table table-bordered table-hover">
+                        <thead class="bg-primary">
+                            <tr>
+                                <th class="align-middle text-white">Kota</th>
+                                @foreach ($paslon_candidate as $item)
+                                <th class="text-white">{{ $item['candidate']}}</th>
+                                @endforeach
+                            </tr>
+                        </thead>
+                        @foreach ($provinsi as $kota)
+                        <tr>
+                            <td>{{$kota->name}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                        @endforeach
+                        <tbody>
+
+                            <tr>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
         </div>
 
+
+
     </div>
+
+</div>
 </div>
 </div>
 </div>

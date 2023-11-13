@@ -134,24 +134,33 @@ class DevelopingController extends Controller
         $saksi->overlimit = 0;
         $saksi->tps_id = Auth::user()->tps_id;
         $saksi->regency_id = $regency->id;
-
         $saksi->save();
         $ide = $saksi->id;
         $paslon = Paslon::get();
         // for ($i = 0; $i < $count; $i++) {
             $i = 0;
+            $updtSuara = [];
             foreach ($paslon as $item) {
-                
                 SaksiData::create([
                     'user_id' =>  $userrss['id'],
                     'paslon_id' =>  $item->id,
                     'district_id' => Auth::user()->districts,
                     'village_id' =>  $villagee,
                     'regency_id' => $regency->id,
-                    'voice' =>  (int)$request->suara[$i++],
+                    'voice' =>  (int)$request->suara[$i],
                     'saksi_id' => $ide,
                 ]);
+                $updtSuara[] = (int)$request->suara[$i];
+
             }
+            $suara1 = $regency->suara1 + $updtSuara[0];
+            $suara2 = $regency->suara2 + $updtSuara[1];
+            $suara3 = $regency->suara3 + $updtSuara[2];
+            Regency::where('id',$regency->id)->update([
+               'suara1' =>$suara1,
+               'suara2' =>$suara2,
+               'suara3' =>$suara3,
+            ]);
         // }
         return redirect()->route('dashboard.saksi2');
     }

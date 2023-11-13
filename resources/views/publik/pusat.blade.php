@@ -14,6 +14,7 @@ use App\Models\Paslon;
 use App\Models\Configs;
 use App\Models\Province;
 use App\Models\RegenciesDomain;
+use App\Models\Regency;
 use App\Models\SuaraC1Provinsi;
 
 $configs = Config::all()->first();
@@ -57,7 +58,6 @@ $data_masuk = (int)$saksidatai / (int)$dpt * 100;
     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
         <div class="card rounded-0">
             <div class="card-body">
-
                 <div class="row">
                     <div class="col-md">
                         <p class="text-center">
@@ -73,7 +73,13 @@ $data_masuk = (int)$saksidatai / (int)$dpt * 100;
                 </div>
 
                 <div class="row mt-5">
-                    <?php $i = 1; ?>
+                    <?php
+
+                    $i = 1;
+
+                    $voice = 0;
+                    ?>
+
                     @foreach ($paslon as $pas)
                     <div class="col-lg col-md col-sm col-xl mb-3    ">
                         <div class="card overflow-hidden" style="margin-bottom: 0px;">
@@ -81,33 +87,35 @@ $data_masuk = (int)$saksidatai / (int)$dpt * 100;
                                 <div class="row">
                                     <div class="col col-auto">
                                         <div class="counter-icon box-shadow-secondary brround ms-auto candidate-name text-white" style="margin-bottom: 0; background-color: {{$pas->color}};">
-                                            {{$i++}}
+                                            {{$i}}
                                         </div>
                                     </div>
                                     <div class="col">
                                         <h6 class="">{{$pas->candidate}} </h6>
                                         <h6 class="">{{$pas->deputy_candidate}} </h6>
                                         <?php
-                                        $voice = 0;
+                                        $regency = Regency::get();
+                                        foreach ($regency as $regen) {
+                                            $voice += $regen['suara' . $i];
+                                        }
+                                        $i++;
                                         ?>
-                                        @foreach ($pas->saksi_data as $dataTps)
-                                        <?php
-                                        $voice += $dataTps->voice;
-                                        ?>
-                                        @endforeach <br>
+
                                         <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
+                    <?php $voice = 0; ?>
                     @endforeach
                 </div>
 
                 <div class="row mt-5">
                     <div class="col-md-12 mt-3">
                         <h5 class="text-uppercase">HITUNG SUARA PEMILIHAN Umum
-                         Indonesia
+                            Indonesia
                         </h5>
                     </div>
                     <div class="col-md-12 mt-3">
@@ -116,10 +124,10 @@ $data_masuk = (int)$saksidatai / (int)$dpt * 100;
                         </h5>
                     </div>
                 </div>
-                
+
                 <div class="row mt-5">
                     <div class="col-md-12 mt-5">
-                    
+
 
                         <table class="table table-bordered table-hover">
                             <thead class="bg-primary">
@@ -131,41 +139,69 @@ $data_masuk = (int)$saksidatai / (int)$dpt * 100;
                                 </tr>
                             </thead>
                             <tbody>
-            
+
                                 @foreach ($provinsi as $prv)
-                                    <tr>
-                                         <td>
+                                <tr>
+                                    <td>
                                         <a href="{{route('provinsi'.$prv->id.'.public',Crypt::encrypt($prv->id))}}">
 
                                             {{$prv->name}}
                                         </a>
-                                         </td>
-                                            <?php $suara = SuaraC1Provinsi::where('id',$prv->id)->first(); ?>
-                                            <td>{{$suara->suara1}}</td>
-                                            <td>{{$suara->suara2}}</td>
-                                            <td>{{$suara->suara3}}</td>
-                                        
-                                    </tr>
+                                    </td>
+                                    <?php
+                                    $i = 1;
+                                    ?>
+                                    @foreach ($paslon as $pas)
+                                    <?php
+                                    ${'suara' . $i} = Regency::where('province_id', $prv->id)->sum('suara' . $i);
+                                    ?>
+                                    <td>{{ ${'suara'.$i} }}</td>
+                                    <?php $i++; ?>
                                     @endforeach
+                                    <?php $i = 0 ?>
+
+                                </tr>
+                                @endforeach
                             </tbody>
 
-                        
+
                         </table>
                     </div>
-                    
-                    {{-- @foreach ($provinsi as $prv)
+
+                    @foreach ($provinsi as $prv)
                     <div class="col-4">
                         <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-dark">
+                            <h4 class="fw-bold text-light text-center mx-auto">
+                                    {{$prv->name}}
+                                </h4>
+                            </div>
                             <div class="card-body">
                                 <div id="chart-provinsi{{$prv->id}}"></div>
-                                <?php //$suara = SuaraC1Provinsi::where('id',$prv->id)->first(); ?>
-                                <div> {{$paslon_candidate[0]->candidate}} & {{$paslon_candidate[0]->deputy_candidate}} - {{$suara->suara1}}</div>
-                                <div> {{$paslon_candidate[1]->candidate}} & {{$paslon_candidate[1]->deputy_candidate}} - {{$suara->suara2}}</div>
-                                <div> {{$paslon_candidate[2]->candidate}} & {{$paslon_candidate[2]->deputy_candidate}} - {{$suara->suara3}}</div>
+                              
+                                    <?php
+                                    $i = 1;
+                                    ?>
+                                    @foreach ($paslon_candidate as $pas)
+
+                                    <?php
+                                    ${'suara' . $i} = Regency::where('province_id', $prv->id)->sum('suara' . $i);
+                                    ?>
+
+                                   
+                                        {{$pas->candidate}} & {{$pas->deputy_candidate}} | {{ ${'suara'.$i} }} <br>
+                                  
+                                    <?php $i++; ?>
+                                    @endforeach
+                              
+                                <?php $i = 0 ?>
+
                             </div>
                         </div>
                     </div>
-                    @endforeach --}}
+                    @endforeach
+
+
                 </div>
 
             </div>
@@ -220,9 +256,9 @@ $data_masuk = (int)$saksidatai / (int)$dpt * 100;
                 </div>
 
                 <div class="row mt-5">
-                    <div class="col-md-12 mt-3"> 
+                    <div class="col-md-12 mt-3">
                         <h5 class="text-uppercase">HITUNG SUARA PEMILIHAN umum
-                         Indonesia
+                            Indonesia
                         </h5>
                     </div>
                     <div class="col-md-12 mt-3">
@@ -246,10 +282,10 @@ $data_masuk = (int)$saksidatai / (int)$dpt * 100;
                             </thead>
 
                             <tbody>
-                              
+
                             </tbody>
 
-                        
+
                         </table>
                     </div>
                 </div>
