@@ -240,9 +240,9 @@
             icon: 'success',
             confirmButtonText: 'OK'
         })
-        @if(Auth::user() -> role_id == "1")
+        
         location.href = "logout_v2";
-        @endif
+   
 
         @endif
 
