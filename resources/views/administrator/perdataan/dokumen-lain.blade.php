@@ -117,7 +117,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
         <div class="col-3">
             <div class="card">
                 <div class="card-header bg-success">
-                    <h4 class="mb-0 mx-auto text-white card-title">Data Pemlih Dan Penggunaan Hak Pilih (TPS 1 / Kelurahan CIPUTAT)</h4>
+                    <h4 class="mb-0 mx-auto text-white card-title text-center">Data Pemlih Dan Penggunaan Hak Pilih <br> (TPS 1 / Kelurahan CIPUTAT)</h4>
                 </div>
                 <div class="card-body p-0">
                     <table class="table table-striped">
@@ -158,7 +158,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
         <div class="col-3">
             <div class="card">
                 <div class="card-header bg-success">
-                    <h4 class="mb-0 mx-auto text-white card-title">Data Pemlih Dan Penggunaan Hak Pilih (TPS 2 / Kelurahan CIPUTAT)</h4>
+                    <h4 class="mb-0 mx-auto text-white card-title text-center">Data Pemlih Dan Penggunaan Hak Pilih <br> (TPS 2 / Kelurahan CIPUTAT)</h4>
                 </div>
                 <div class="card-body p-0">
                     <table class="table table-striped">
@@ -199,7 +199,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
         <div class="col-3">
             <div class="card">
                 <div class="card-header bg-success">
-                    <h4 class="mb-0 mx-auto text-white card-title">Data Pemlih Dan Penggunaan Hak Pilih (TPS 3 / Kelurahan CIPUTAT)</h4>
+                    <h4 class="mb-0 mx-auto text-white card-title text-center">Data Pemlih Dan Penggunaan Hak Pilih <br> (TPS 3 / Kelurahan CIPUTAT)</h4>
                 </div>
                 <div class="card-body p-0">
                     <table class="table table-striped">
@@ -240,7 +240,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
         <div class="col-3">
             <div class="card">
                 <div class="card-header bg-success">
-                    <h4 class="mb-0 mx-auto text-white card-title">Data Pemlih Dan Penggunaan Hak Pilih (TPS 4 / Kelurahan CIPUTAT)</h4>
+                    <h4 class="mb-0 mx-auto text-white card-title text-center">Data Pemlih Dan Penggunaan Hak Pilih <br> (TPS 4 / Kelurahan CIPUTAT)</h4>
                 </div>
                 <div class="card-body p-0">
                     <table class="table table-striped">
