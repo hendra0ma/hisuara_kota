@@ -665,6 +665,11 @@ foreach ($kotas as $kota) {
             return view('developing.template_phone.phone');
         })->middleware(['auth', 'role:saksi'])->name('dashboard.saksi2');
 
+        Route::get('/enumerator-dashboard', function () {
+
+            return view('developing.template_phone.phone_2');
+        })->middleware(['auth', 'role:enumerator'])->name('dashboard.enumerator2');
+
         Route::controller(RelawanController::class)->group(function () {
             Route::get('relawan', 'index');
             Route::get('relawan-banding', 'relawanBanding');
@@ -1007,7 +1012,8 @@ Route::get("import-excel-dpt-gen", function () {
 
 Route::post("import-excel", [ExcelController::class, "importExcel"])->name("import-excel");
 // Route::post("import-dpt-excel",[ExcelController::class,"importDptExcel"])->name("import-dpt-excel");
-Route::post("import-dpt-excel-gen", [ExcelController::class, "importDptExcelGen"])->name("import-dpt-excel-gen");
+// Route::post("import-dpt-excel-gen", [ExcelController::class, "importDptExcelGen"])->name("import-dpt-excel-gen");
+Route::post("import-dpt-excel-gen", [ExcelController::class, "insertJumlahTps"])->name("import-dpt-excel-gen");
 
 
 

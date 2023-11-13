@@ -95,7 +95,7 @@
 
 </head>
 
-<body class="">
+<body class="" style="padding-top: 600px; padding-bottom: 600px">
 
     <!-- GLOBAL-LOADER -->
     <div id="global-loader">
@@ -105,11 +105,14 @@
 
     <!-- PAGE -->
     <div class="container" id="card2" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">
+        <div class="text-center mb-7">
+            <img style="height: 100px;" class="mb-3" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/KPU_Logo.svg/531px-KPU_Logo.svg.png" alt="">
+            <h1>UPLOAD C1 KPU</h1>
+        </div>
         <form action="{{url('')}}/c1Crowd/upload" method="post" enctype="multipart/form-data">
             @csrf
             <div class="container-fluid">
                 <div class="row justify-content-center">
-                    <h3 class=" fw-bold mt-3 header-title">Upload C1 Crowd</h3>
                     <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
                         <div class="row">
                             <div class="col-6">

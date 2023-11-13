@@ -54,20 +54,24 @@
                                         </div>
                                         @endforeach
                                     @endforeach
-                              
                                 </div>
                         </div>
-                        <div class="col-6">
-                            
-                            <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <label>Jumlah Suara Sah</label>
-                                        <textarea type="number" class="form-control" id="inputnom4" readonly="" name="suaraSah" placeholder="Jumlah suara" rows="9">{{$voice}}</textarea>
+
+                        <div class="col-md-6 text-center">
+                            <div class="card h-100">
+                                <div class="card-header py-1">
+                                    Jumlah Suara Sah :
+                                </div>
+                                <div class="card-body d-flex display-2 fw-bold">
+                                    <div class="my-auto mx-auto">
+                                        {{$voice}}
                                     </div>
                                 </div>
                             </div>
-
+                            {{-- <div class="display-2 fw-bold">Total :</div>
+                            <div class="display-2 fw-bold">{{$total_suara }}</div> --}}
                         </div>
+
                     </div>
                 </div>
                 <div class="card">
@@ -101,11 +105,11 @@
                                 <div class="col-md-6 text-center">
                                     <div class="card h-100">
                                         <div class="card-header py-1">
-                                            Total :
+                                            Jumlah Suara Sah :
                                         </div>
                                         <div class="card-body d-flex display-2 fw-bold">
                                             <div class="my-auto mx-auto" id="sumDisplay">
-                                                {{-- {{$total_suara }} --}}
+                                                0
                                             </div>
                                         </div>
                                     </div>
@@ -113,7 +117,6 @@
                                     <div class="display-2 fw-bold">{{$total_suara }}</div> --}}
                                 </div>
     
-                              
                             </div>
 
                             <small>

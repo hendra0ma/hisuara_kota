@@ -1,6 +1,7 @@
 @extends('layouts.mainlayout')
 
 @section('content')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
 
 <div class="row mt-5">
     <div class="col-lg">
@@ -85,6 +86,20 @@
 <div id="C1-Relawan" class="tabcontent mt-0 pt-0 px-0">
     <livewire:c1-relawan-kota />
 </div>
+
+<script>
+  // Script SweetAlert2 yang langsung muncul saat halaman dimuat
+    @if(Session::has('sukses_verif'))
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                icon: 'success',
+                title: 'Verifikasi Berhasil!',
+                text: 'Verifikasi berhasil dilakukan. Data telah dipindah ke Auditor',
+            });
+        });
+    @endif
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <!-- <div id="C1-Koreksi" class="tabcontent mt-0 pt-0 px-0">
     <livewire:c1-koreksi />
 </div> -->
@@ -191,7 +206,7 @@
         // console.log(id)
     });
 
-  
+
 
     //   buttonkecurangan.on('click', function() {
     //     const id = $(this).data('id');
