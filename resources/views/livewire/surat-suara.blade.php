@@ -4,7 +4,7 @@
             <div class="card border-0" style="position: relative">
 
                 <div style="position: relative" class="card-header bg-primary text-light text-center fw-bold rounded-0">
-                    <span style="position: absolute; left: 15px" class="fw-normal">3/4</span> Surat Suara
+                    <span style="position: absolute; left: 15px" class="fw-normal">3/4</span> Data Pemilih dan Hak Pilih
                 </div>
                 
                 {{-- <form action="{{route('logout')}}" method="post">
