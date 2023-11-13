@@ -109,6 +109,78 @@ use App\Models\User;
 <script src="https://raw.githack.com/thdoan/magnify/master/dist/js/jquery.magnify.js"></script>
 <script src="https://raw.githack.com/thdoan/magnify/master/dist/js/jquery.magnify-mobile.js"></script>
 
+
+<script>
+           const redirect = function(page) {
+                $.ajax({
+                    url: `{{url('')}}/administrator/commander-redirect`,
+                    data: {
+                        '_token': '{{csrf_token()}}',
+                        page,
+                        user_id: '{{Auth::user()->id}}'
+                    },
+                    type: "post",
+                    success: function(res) {
+
+                    }
+                });
+            }
+            const scrollCommand = function(dist) {
+                $.ajax({
+                    url: `{{url('')}}/administrator/commander-scroll`,
+                    data: {
+                        '_token': '{{csrf_token()}}',
+                        dist,
+                        user_id: '{{Auth::user()->id}}'
+                    },
+                    type: "post",
+                    success: function(res) {
+
+                    }
+                });
+            }
+
+            const settings = function(set, ini) {
+
+                $.ajax({
+                    url: `{{url('')}}/administrator/commander-settings`,
+                    data: {
+                        '_token': '{{csrf_token()}}',
+                        set,
+                        itu: ini.checked,
+                        user_id: '{{Auth::user()->id}}'
+                    },
+                    type: "post",
+                    success: function(res) {
+                        location.reload();
+                    }
+                });
+            }
+            const defaults = function(ini) {
+
+                $.ajax({
+                    url: `{{url('')}}/administrator/commander-defaults`,
+                    data: {
+                        '_token': '{{csrf_token()}}',
+             
+                        itu: ini.checked,
+                        user_id: '{{Auth::user()->id}}'
+                    },
+                    type: "get",
+                    dataType : "json",
+                    success: function(res) {
+                        
+                            window.location.reload()
+                     
+                    }
+                });
+            }
+
+        </script>
+
+
+
+
 <script>
     $(".modal").each(function(l){$(this).on("show.bs.modal",function(l){var o=$(this).attr("data-easein");"shake"==o?$(".modal-dialog").velocity("callout."+o):"pulse"==o?$(".modal-dialog").velocity("callout."+o):"tada"==o?$(".modal-dialog").velocity("callout."+o):"flash"==o?$(".modal-dialog").velocity("callout."+o):"bounce"==o?$(".modal-dialog").velocity("callout."+o):"swing"==o?$(".modal-dialog").velocity("callout."+o):$(".modal-dialog").velocity("transition."+o)})});
 </script>
