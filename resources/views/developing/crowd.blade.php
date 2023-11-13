@@ -241,7 +241,7 @@
             confirmButtonText: 'OK'
         })
         
-        location.href = "logout_v2";
+        location.href = "{{url('')}}/logout_v2";
    
 
         @endif
