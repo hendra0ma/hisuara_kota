@@ -297,14 +297,13 @@ foreach ($kotas as $kota) {
 
                 Route::post('settings-theme', [AdminController::class, 'theme'])->name('theme');
                 //commander
-                Route::group(['middleware' => "commander"], function () {
-                    Route::get('commander-index', [CommanderController::class, 'index'])->name('commander-index');
-                    Route::post('commander-redirect',  [CommanderController::class, 'redirect']);
-                    Route::post('commander-scroll',  [CommanderController::class, 'scroll']);
-                    Route::post('commander-settings', [CommanderController::class, 'settings']);
-                    Route::get('notif-delete', [CommanderController::class, 'notifDel']);
-                    Route::get('commander-defaults', [CommanderController::class, 'defaults']);
-                });
+                Route::get('commander-index', [CommanderController::class, 'index'])->name('commander-index');
+                Route::post('commander-redirect',  [CommanderController::class, 'redirect']);
+                Route::post('commander-scroll',  [CommanderController::class, 'scroll']);
+                Route::post('commander-settings', [CommanderController::class, 'settings']);
+                Route::get('notif-delete', [CommanderController::class, 'notifDel']);
+                Route::get('commander-defaults', [CommanderController::class, 'defaults']);
+               
                 Route::controller(AdminController::class)->group(function () {
                     //Administratorw
                     Route::get('get-data-c1-crowd', 'CrowdC1Id');

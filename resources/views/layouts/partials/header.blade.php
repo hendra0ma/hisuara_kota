@@ -952,9 +952,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                             <div class="col-md">
                                                 <div class="mid">
                                                     <label class="switch">
-                                                        <input type="checkbox" {{($config->default ==
-                                                        "yes")?'disabled':''}} data-target="mode"
-                                                        onclick="settings('show_terverifikasi',this)"
+                                                        <input type="checkbox" {{($config->default =="yes")?'disabled':''}} data-target="mode" onclick="settings('show_terverifikasi',this)"
                                                         {{($config->show_terverifikasi == "hide") ? "":"checked"; }}>
                                                         <span class="slider round"></span>
                                                     </label>
