@@ -285,6 +285,9 @@ $props = Province::where('id',$kota['province_id'])->first();
                                 </tr>
                             </tbody>
                         </table>
+                        <button class="btn btn-success w-100">
+                            Unduh
+                        </button>
                     </div>
                 </div>
             </div>

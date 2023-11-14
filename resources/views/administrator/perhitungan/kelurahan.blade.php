@@ -346,7 +346,7 @@ $tps = Tps::count();
     @endif
     
     <div class="col-md">
-        <div class="container-fluid">
+        {{-- <div class="container-fluid">
             <div class="tab">
                 <div class="row">
                     <div class="col-md">
@@ -360,101 +360,103 @@ $tps = Tps::count();
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         {{-- {{$_GET['from']}} --}}
 
-        <div id="saksi-masuk" class="tabcontent">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="cart-title mx-auto text-center fw-bold my-auto">Suara TPS Masuk (Kelurahan
-                        {{$district['name']}})</h5>
+        <div class="row">
+            <div id="saksi-masuk" class="col-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="cart-title mx-auto text-center fw-bold my-auto">Suara TPS Masuk (Kelurahan
+                            {{$district['name']}})</h5>
+                    </div>
+                    {{-- <div class="card-body"> --}}
+                        <div class="card-body" style="{{($config->otonom == 'yes')?'height: 549px; overflow: scroll':''}}">
+            
+                            <!-- 1st card -->
+                            <table class="table table-bordered table-hover">
+                                <thead style="background-color: #45aaf2;">
+                                    <tr>
+                                        <th class="align-middle text-white text-center align-middle" rowspan="2">Tps</th>
+                                        @foreach ($paslon_candidate as $item)
+                                        <th class="text-white text-center align-middle">{{ $item['candidate']}} - {{
+                                            $item['deputy_candidate']}}</th>
+                                        @endforeach
+            
+                                    </tr>
+                                </thead>
+            
+                                <tbody>
+                                    @foreach ($tps_kel as $item)
+            
+            
+                                    <tr data-id="{{$item['id']}}" data-bs-toggle="modal" class="modal-id"
+                                        data-bs-target="#modal-id">
+                                        <td> <a href="{{url('')}}/administrator/perhitungan_tps/{{Crypt::encrypt($item->id)}}"
+                                                class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS
+                                                {{$item['number']}}</a>
+                                            @foreach ($paslon_candidate as $cd)
+            
+                                            <?php
+                                                    $tpsass = \App\Models\Tps::where('number', (string)$item['number'])->where('villages_id', (string)$id)->first(); ?>
+                                            <?php $saksi_data = \App\Models\SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('tps_id', $tpsass->id)->sum('voice'); ?>
+                                        <td>{{$saksi_data}}</td>
+            
+                                        @endforeach
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                {{-- <div class="card-body"> --}}
-                <div class="card-body" style="{{($config->otonom == 'yes')?'height: 549px; overflow: scroll':''}}">
-
-                    <!-- 1st card -->
-                    <table class="table table-bordered table-hover">
-                        <thead style="background-color: #45aaf2;">
-                            <tr>
-                                <th class="align-middle text-white text-center align-middle" rowspan="2">Tps</th>
-                                @foreach ($paslon_candidate as $item)
-                                <th class="text-white text-center align-middle">{{ $item['candidate']}} - {{
-                                    $item['deputy_candidate']}}</th>
-                                @endforeach
-
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach ($tps_kel as $item)
-
-
-                            <tr data-id="{{$item['id']}}" data-bs-toggle="modal" class="modal-id"
-                                data-bs-target="#modal-id">
-                                <td> <a href="{{url('')}}/administrator/perhitungan_tps/{{Crypt::encrypt($item->id)}}"
-                                        class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS
-                                        {{$item['number']}}</a>
-                                    @foreach ($paslon_candidate as $cd)
-
-                                    <?php
-                                        $tpsass = \App\Models\Tps::where('number', (string)$item['number'])->where('villages_id', (string)$id)->first(); ?>
-                                    <?php $saksi_data = \App\Models\SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('tps_id', $tpsass->id)->sum('voice'); ?>
-                                <td>{{$saksi_data}}</td>
-
-                                @endforeach
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+            
+                <div id="saksi-terverifikasi" class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="cart-title mx-auto text-center fw-bold my-auto">Suara TPS Terverifikasi (Kelurahan
+                                {{$district['name']}})</h5>
+                        </div>
+                        <div class="card-body">
+            
+                            <!-- 1st card -->
+                            <table class="table table-bordered table-hover">
+                                <thead style="background-color: #f7b731;">
+                                    <tr>
+                                        <th class="text-white text-center align-middle" rowspan="2">Tps</th>
+                                        @foreach ($paslon_candidate as $item)
+                                        <th class="text-white text-center align-middle">{{ $item['candidate']}} - {{
+                                            $item['deputy_candidate']}}</th>
+                                        @endforeach
+            
+                                    </tr>
+                                </thead>
+            
+                                <tbody>
+                                    @foreach ($tps_kel as $item)
+            
+            
+                                    <tr data-id="{{$item['id']}}" data-bs-toggle="modal" class="modal-id"
+                                        data-bs-target="#modal-id">
+                                        <td> <a href="{{url('')}}/administrator/perhitungan_tps/{{Crypt::encrypt($item->id)}}"
+                                                class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS
+                                                {{$item['number']}}</a>
+                                            @foreach ($paslon_candidate as $cd)
+            
+                                            <?php
+                                                    $tpsass = \App\Models\Tps::where('number', (string)$item['number'])->where('villages_id', (string)$id)->first(); ?>
+                                            <?php $saksi_data = \App\Models\SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('verification', 1)->where('paslon_id', $cd['id'])->where('tps_id', $tpsass->id)->sum('voice'); ?>
+                                        <td>{{$saksi_data}}</td>
+            
+                                        @endforeach
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <div id="saksi-terverifikasi" class="tabcontent">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="cart-title mx-auto text-center fw-bold my-auto">Suara TPS Terverifikasi (Kelurahan
-                        {{$district['name']}})</h5>
-                </div>
-                <div class="card-body">
-
-                    <!-- 1st card -->
-                    <table class="table table-bordered table-hover">
-                        <thead style="background-color: #f7b731;">
-                            <tr>
-                                <th class="text-white text-center align-middle" rowspan="2">Tps</th>
-                                @foreach ($paslon_candidate as $item)
-                                <th class="text-white text-center align-middle">{{ $item['candidate']}} - {{
-                                    $item['deputy_candidate']}}</th>
-                                @endforeach
-
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach ($tps_kel as $item)
-
-
-                            <tr data-id="{{$item['id']}}" data-bs-toggle="modal" class="modal-id"
-                                data-bs-target="#modal-id">
-                                <td> <a href="{{url('')}}/administrator/perhitungan_tps/{{Crypt::encrypt($item->id)}}"
-                                        class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS
-                                        {{$item['number']}}</a>
-                                    @foreach ($paslon_candidate as $cd)
-
-                                    <?php
-                                        $tpsass = \App\Models\Tps::where('number', (string)$item['number'])->where('villages_id', (string)$id)->first(); ?>
-                                    <?php $saksi_data = \App\Models\SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('verification', 1)->where('paslon_id', $cd['id'])->where('tps_id', $tpsass->id)->sum('voice'); ?>
-                                <td>{{$saksi_data}}</td>
-
-                                @endforeach
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </div>
 
     </div>

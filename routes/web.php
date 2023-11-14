@@ -369,6 +369,8 @@ foreach ($kotas as $kota) {
                     Route::get('koordinator_saksi', 'koordinator_saksi');
                     Route::get('koordinator_kecamatan', 'koordinator_kecamatan');
                     Route::get('koordinator_kelurahan', 'koordinator_kelurahan');
+                    Route::get('koordinator_rw', 'koordinator_rw');
+                    Route::get('koordinator_rt', 'koordinator_rt');
                     Route::get('saksi_ditolak', 'saksi_ditolak');
                     Route::get('enumerator', 'Enumerator');
                     Route::get('enumerator_teregistrasi', 'EnumeratorTeregistrasi');

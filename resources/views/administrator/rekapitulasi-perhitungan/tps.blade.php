@@ -226,8 +226,24 @@ $tps = Tps::count();
     <div class="modal fade" style="background: rgba(0, 0, 0, 0.65)" id="imgBig" tabindex="-1"
         aria-labelledby="imgBigLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content" style="background: transparent; border: 0px">
                 <div class="modal-body p-0">
+                    <ul class="breadcrumb">
+                        <?php
+                        $desa = Village::where('id', (string)$village->id)->first();
+                        $regency = Regency::where('id',(string) $config->regencies_id)->first();
+                        $kcamatan = District::where('id', (string)$desa->district_id)->first();
+                        ?>
+                        <li><a href="{{url('')}}/administrator/rekapitulasi" class="text-white">{{$regency->name}}</a></li>
+                        <li><a href="{{url('')}}/administrator/rekap_kecamatan/{{Crypt::encrypt($district->id)}}"
+                                class="text-white">{{$district->name}}</a></li>
+                        <li><a href="{{url('')}}/administrator/rekap_kelurahan/{{Crypt::encrypt($village->id)}}"
+                                class="text-white">{{$desa->name}}</a></li>
+                        <li><a href="{{url('')}}/administrator/rekap_tps/{{Crypt::encrypt($data_tps->id)}}"
+                                class="text-white">TPS
+                                {{$data_tps->number}}</a></li>
+            
+                    </ul>
                     <div class="col-lg-12" style="height: 100vh; overflow: scroll">
                         <center>
                             <img width="100%" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}"
@@ -250,7 +266,7 @@ $tps = Tps::count();
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Urutan Pemenang</h3>
+                <h3 class="card-title">Urutan Suara Terbanyak</h3>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

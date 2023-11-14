@@ -82,15 +82,28 @@ $kota = Regency::where('id', $config->regencies_id)->first();
             </div> --}}
             <div class="col parent-link">
                 <a href="{{url('')}}/administrator/koordinator_saksi"
-                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_saksi')?'active' : '' }}">Koordinator Kota</a>
+                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_saksi')?'active' : '' }}">Koordinator
+                    Kota</a>
             </div>
             <div class="col parent-link">
                 <a href="{{url('')}}/administrator/koordinator_kecamatan"
-                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_kecamatan')?'active' : '' }}">Koordinator Kecamatan</a>
+                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_kecamatan')?'active' : '' }}">Koordinator
+                    Kecamatan</a>
             </div>
             <div class="col parent-link">
                 <a href="{{url('')}}/administrator/koordinator_kelurahan"
-                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_kelurahan')?'active' : '' }}">Koordinator Kelurahan</a>
+                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_kelurahan')?'active' : '' }}">Koordinator
+                    Kelurahan</a>
+            </div>
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/koordinator_rw"
+                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_rw')?'active' : '' }}">Koordinator
+                    RT</a>
+            </div>
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/koordinator_rt"
+                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_rt')?'active' : '' }}">Koordinator
+                    RW</a>
             </div>
 
         </div>

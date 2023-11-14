@@ -237,7 +237,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                         //  pilpresAnimate();
                                         // },5000)
 
-                                    },5000)
+                                    },3000)
                                 }
 
 
@@ -248,7 +248,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                     $('.col-hisuara').show()
                                         $('.col-pilpres').hide()
                                         pilpresAnimate();
-                                    },9000)
+                                    },5000)
                                 })
 
                                 function animateHeaderPojokan() {
@@ -1102,14 +1102,14 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                 if (dataTarget != "") {
                                                     $(`[data-target='${dataTarget}']`).click();
                                                 } else {
-                                                  $('.active-button').click()
+                                                    $('.active-button').click()
                                                 }
 
                                                 // setTimeout(() => {
                                                 //     $('#img-effect').fadeOut(200)
                                                 // }, 5000);
 
-                                            }, 5000)
+                                            }, 3000)
 
                                         }
 
@@ -1163,7 +1163,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                 setTimeout(() => {
                                                     $('#img-effect').fadeOut(200)
                                                     animate();
-                                                }, 4000);
+                                                }, 2000);
                                             @else
                                                 $('#img-effect').fadeOut()
                                                 $("#text-effect").hide();

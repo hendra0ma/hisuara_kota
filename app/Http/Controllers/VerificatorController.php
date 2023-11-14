@@ -268,8 +268,11 @@ class VerificatorController extends Controller
         $id = Crypt::decrypt($id);
         $data['id'] = $id;
         $data['saksi'] = Saksi::with('saksi_data')->where('id',(string)$id)->get();
+        $data['saksis'] = Saksi::with('saksi_data')->where('id',(string)$id)->first();
         $data['title2'] = "-";
         $data['title'] = "";
+        // dd($data['saksi']);
+        $data['user'] = User::where('tps_id', $data['saksis']['tps_id'])->first();
 
         return view('verificator.viewKoreksi', $data);
     }

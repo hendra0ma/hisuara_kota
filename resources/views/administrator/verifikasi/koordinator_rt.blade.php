@@ -50,7 +50,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
 <!-- PAGE-HEADER -->
 <div class="row mt-5">
     <div class="col-lg">
-        <h1 class="page-title fs-1 mt-2">Koordinator Kota
+        <h1 class="page-title fs-1 mt-2">Koordinator RT
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">

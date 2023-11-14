@@ -420,6 +420,20 @@ class AdminController extends Controller
         return view('administrator.verifikasi.koordinator_kelurahan', $data);
     }
 
+    public function koordinator_rw()
+    {
+        $data['config'] = Config::first();
+        $data['jumlah_saksi'] = User::where('role_id', '=', 8)->where('is_active', '=', 0)->count();
+        return view('administrator.verifikasi.koordinator_rw', $data);
+    }
+
+    public function koordinator_rt()
+    {
+        $data['config'] = Config::first();
+        $data['jumlah_saksi'] = User::where('role_id', '=', 8)->where('is_active', '=', 0)->count();
+        return view('administrator.verifikasi.koordinator_rt', $data);
+    }
+
     public function saksi_ditolak()
     {
         $data['config'] = Config::first();
