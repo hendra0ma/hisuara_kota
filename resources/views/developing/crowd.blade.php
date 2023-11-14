@@ -140,6 +140,57 @@
                                 });
                             </script>
                             <div class="col-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Isi Data Baru</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        {{-- <p class="card-text"> --}}
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    {{-- @foreach ($saksi_data as $ss) --}}
+                                                    <div class="col-md-12">
+                                                        <label for="suara01">Suara 01</label>
+                                                        <input type="text" id="suara" class="form-control suara-input"
+                                                            name="paslon">
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label for="suara01">Suara 02</label>
+                                                        <input type="text" id="suara" class="form-control suara-input"
+                                                            name="paslon">
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label for="suara01">Suara 03</label>
+                                                        <input type="text" id="suara" class="form-control suara-input"
+                                                            name="paslon">
+                                                    </div>
+                                                    {{-- @endforeach --}}
+                                                </div>
+                                            </div>
+                                            {{-- <div class="col-md-12">
+                                                <label for="keterangan">Keterangan</label>
+                                                <textarea class="form-control" id="keterangan" cols="30" rows="10"
+                                                    disabled>{{$saksi_data_baru_deskripsi['keterangan']}}</textarea>
+                                            </div> --}}
+                                            <div class="col-md-6 text-center">
+                                                <div class="card h-100">
+                                                    <div class="card-header py-1">
+                                                        Total :
+                                                    </div>
+                                                    <div class="card-body d-flex display-2 fw-bold">
+                                                        <div class="my-auto mx-auto" id="sumDisplay">
+                                                            {{-- {{$total_suara }} --}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {{-- <div class="display-2 fw-bold">Total :</div>
+                                                <div class="display-2 fw-bold">{{$total_suara }}</div> --}}
+                                            </div>
+                                        </div>
+                                        {{-- </p> --}}
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <select class="form-control select2-show-search form-select" name="provinsi" id="provinsi">
                                         <?php
@@ -373,6 +424,25 @@
             } else {
                 pictureImage2.innerHTML = "Pilih Foto Profile";
             }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.suara-input').on('input', function() {
+                // Get all input values with the class 'suara-input'
+                let allValues = $('.suara-input').map(function() {
+                    return parseFloat($(this).val()) || 0;
+                }).get();
+    
+                console.log(allValues);
+                // Calculate the sum of all input values
+                let sum = allValues.reduce(function(a, b) {
+                    return a + b;
+                }, 0);
+                // Display the sum in the HTML document
+                $('#sumDisplay').html(sum);
+            });
         });
     </script>
 

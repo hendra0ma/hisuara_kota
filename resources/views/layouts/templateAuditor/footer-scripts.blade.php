@@ -81,8 +81,13 @@ Swal.fire({
 
 <script>
   const buttonperiksaC1 = $(".periksa-c1-plano");
+  
   buttonperiksaC1.on('click', function() {
+    const urlCurrent = $('input.urlCurrent');
     const id = $(this).data('id');
+    urlCurrent.val($(this).data('url'));
+
+
     $.ajax({
       url: "{{route('auditor.getSaksiData')}}",
       data: {

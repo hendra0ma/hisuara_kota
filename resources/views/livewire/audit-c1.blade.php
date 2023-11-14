@@ -72,7 +72,9 @@
                                 <button class="btn rounded-0 w-100 periksa-c1-plano text-white" id="Cek"
                                     data-id="{{$ls->tps_id}}" data-bs-toggle="modal" id=""
                                     data-bs-target="#periksaC1Verifikator"
-                                    style="background-color: rgba(69, 170, 242)">Audit Kiriman C1</button>
+                                    style="background-color: rgba(69, 170, 242)"
+                                    data-url="{{url()->current()}}"
+                                    >Audit Kiriman C1</button>
                             </div>
                         </div>
                     </div>

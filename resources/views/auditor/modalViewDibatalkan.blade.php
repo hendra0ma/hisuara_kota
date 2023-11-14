@@ -9,19 +9,23 @@
                     <div class="card-body">
                         <p class="card-text">
                         <div class="media">
+                            @if($url == url('')."/auditor/audit-c1")
+                            @else
                             @if ($admin_req['profile_photo_path'] == NULL)
                             <img class="rounded-circle" style="width: 70px; height: 70px; object-fit: cover; margin-right: 10px;"
-                                src="https://ui-avatars.com/api/?name={{ $admin_req['name'] }}&color=7F9CF5&background=EBF4FF">
+                            src="https://ui-avatars.com/api/?name={{ $admin_req['name'] }}&color=7F9CF5&background=EBF4FF">
                             @else
                             <img class="rounded-circle" style="width: 70px; height: 70px; object-fit: cover; margin-right: 10px;"
-                                src="{{url("/storage/profile-photos/".$admin_req['profile_photo_path']) }}">
+                            src="{{url("/storage/profile-photos/".$admin_req['profile_photo_path']) }}">
                             @endif
-            
-            
                             <div class="media-body">
                                 <h5 class="mt-0">{{$admin_req['name']}}</h5>
                                 NIK : {{$admin_req['nik']}}
                             </div>
+                            @endif
+                            
+                            
+            
                         </div>
                         </p>
                     </div>

@@ -504,6 +504,13 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/koordinator_saksi"
+                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
+                                                    style="background-color: #528bff; border-radius: 0px;">
+                                                    Koordinator Saksi
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/relawan"
                                                     class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0;">
@@ -1302,9 +1309,9 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                 <a class="dropdown-item" href="{{url('')}}/c1-relawan">
                                                     <i class="dropdown-icon fe fe-user"></i> Upload C1 Relawan
                                                 </a>
-                                                <a class="dropdown-item" href="{{url('')}}/upload_kecurangan">
+                                                {{-- <a class="dropdown-item" href="{{url('')}}/upload_kecurangan">
                                                     <i class="dropdown-icon fe fe-user"></i> Upload Kecurangan
-                                                </a>
+                                                </a> --}}
                                                 <button class="dropdown-item security">
                                                     <i class="dropdown-icon fa-solid fa-shield"></i> Security System
                                                 </button>

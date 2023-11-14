@@ -4,7 +4,7 @@
             <div class="card border-0" style="position: relative">
 
                 <div style="position: relative" class="card-header bg-primary text-light text-center fw-bold rounded-0">
-                    <span style="position: absolute; left: 15px" class="fw-normal">2/4</span> Foto dan Kirim Data C1
+                    <span style="position: absolute; left: 15px" class="fw-normal">2/2</span> Foto dan Kirim Data C1
                 </div>
 
                 {{-- <form action="{{route('logout')}}" method="post">
@@ -32,9 +32,9 @@
                             <div class="mb-0 fw-bold" style="font-size: 20px">{{ Auth::user()->name }}</div>
                             <div style="font-size: 15px">NIK : {{ Auth::user()->nik }}</div>
                             @if($tps == null)
-                            <div style="font-size: 15px">SAKSI TPS 1</div>
+                            <div style="font-size: 15px">ENUMERATOR TPS 1</div>
                             @else
-                            <div style="font-size: 15px">SAKSI TPS {{ $tps->number }}</div>
+                            <div style="font-size: 15px">ENUMERATOR TPS {{ $tps->number }}</div>
                             @endif
                             @if ($kelurahan == null)
                             <div style="font-size: 15px">KELURAHAN CIPUTAT</div>
