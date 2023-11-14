@@ -3,7 +3,7 @@
 @section('content')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
 
-<div class="row mt-5">
+<div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
     <div class="col-lg">
         @if ($message = Session::get('success'))
 

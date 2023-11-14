@@ -350,16 +350,19 @@ $tps = Tps::count();
             <div class="tab">
                 <div class="row">
                     <div class="col-md">
-                        <button class="btn tablink w-100 rounded-0 text-dark"
-                            onclick="openPage('saksi-masuk', this, '#45aaf2')" id="defaultOpen">Suara TPS Masuk</button>
+                        <button class="btn tablink w-100 rounded-0 text-dark" onclick="openPage('saksi-masuk', this, '#45aaf2')"
+                            @if($_GET['from']=='realcount' ) id="defaultOpen" @endif>Suara TPS Masuk</button>
                     </div>
+                    
                     <div class="col-md">
-                        <button class="btn tablink w-100 rounded-0 text-dark"
-                            onclick="openPage('saksi-terverifikasi', this, '#f7b731')">Suara TPS Terverifikasi</button>
+                        <button class="btn tablink w-100 rounded-0 text-dark" onclick="openPage('saksi-terverifikasi', this, '#f7b731')"
+                            @if($_GET['from']=='terverifikasi' ) id="defaultOpen" @endif>Suara TPS Terverifikasi</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        {{-- {{$_GET['from']}} --}}
 
         <div id="saksi-masuk" class="tabcontent">
             <div class="card">
@@ -780,6 +783,25 @@ $tps = Tps::count();
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+        const createChartContainer = (style) => {
+            return `<div style="${style}"></div>`;
+        };
 
+        const chartStyle = `
+            height: 320px;
+            width: 260px;
+            background: transparent;
+            position: absolute;
+            z-index: 1;
+        `;
+
+        const chartContainer1 = createChartContainer(chartStyle);
+        const chartContainer2 = createChartContainer(`${chartStyle} right: 25px;`);
+
+        $('.chartsh').prepend(chartContainer1, chartContainer2);
+    });
+</script>
 
 @endsection

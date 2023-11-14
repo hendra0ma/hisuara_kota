@@ -163,7 +163,7 @@ $tps = Tps::count();
 
                         @foreach($district as $dist)
                         <tr>
-                            <td><a href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($dist['id'])}}">{{$dist->name}}</a>
+                            <td><a href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($dist['id'])}}?from=realcount">{{$dist->name}}</a>
                             </td>
                             <?php
                             $voices = App\Models\Paslon::with(['saksi_data' => function ($query) use ($dist) {
@@ -258,7 +258,7 @@ $tps = Tps::count();
                             
                                 @foreach($district as $dist)
                                 <tr>
-                                    <td class="align-middle"><a href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($dist['id'])}}">{{$dist->name}}</a>
+                                    <td class="align-middle"><a href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($dist['id'])}}?from=realcount">{{$dist->name}}</a>
                                     </td>
                                     <?php
                                     $voices = App\Models\Paslon::with(['saksi_data' => function ($query) use ($dist) {
@@ -363,7 +363,7 @@ $tps = Tps::count();
 
                                 @foreach($district as $dist)
                                 <tr>
-                                    <td><a href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($dist['id'])}}">{{$dist->name}}</a></td>
+                                    <td><a href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($dist['id'])}}?from=terverifikasi">{{$dist->name}}</a></td>
                                     <?php
                                     $voices = App\Models\Paslon::with(['saksi_data' => function ($query) use ($dist) {
                                         $query
@@ -467,7 +467,7 @@ $tps = Tps::count();
 
                         @foreach($district as $dist)
                         <tr>
-                            <td><a href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($dist['id'])}}">{{$dist->name}}</a></td>
+                            <td><a href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($dist['id'])}}?from=terverifikasi">{{$dist->name}}</a></td>
                             <?php
                             $voices = App\Models\Paslon::with(['saksi_data' => function ($query) use ($dist) {
                                 $query
@@ -825,5 +825,25 @@ $tps = Tps::count();
 </div>
 </div> --}}
 
+<script>
+    $(document).ready(function() {
+        const createChartContainer = (style) => {
+            return `<div style="${style}"></div>`;
+        };
+
+        const chartStyle = `
+            height: 320px;
+            width: 260px;
+            background: transparent;
+            position: absolute;
+            z-index: 1;
+        `;
+
+        const chartContainer1 = createChartContainer(chartStyle);
+        const chartContainer2 = createChartContainer(`${chartStyle} right: 25px;`);
+
+        $('.chartsh').prepend(chartContainer1, chartContainer2);
+    });
+</script>
 
 @endsection

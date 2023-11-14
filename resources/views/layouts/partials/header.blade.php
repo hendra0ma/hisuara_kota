@@ -525,17 +525,16 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/verifikasi_akun"
+                                                <a href="{{url('')}}/administrator/verifikasi_crowd_c1"
                                                     class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0px;">
-                                                    Admin
+                                                    Crowd C1
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/verifikasi_crowd_c1"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
+                                                <a href="{{url('')}}/administrator/verifikasi_akun" class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
-                                                    Crowd C1
+                                                    Admin
                                                 </a>
                                             </div>
                                         </div>
