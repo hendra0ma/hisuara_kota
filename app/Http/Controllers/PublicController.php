@@ -27,9 +27,11 @@ use BuktiFoto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 class PublicController extends Controller
 {
-  
+
     public $config;
     public $configs;
     public function __construct()
@@ -38,10 +40,10 @@ class PublicController extends Controller
         $currentDomain = request()->getHttpHost();
         if (isset(parse_url($currentDomain)['port'])) {
             $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
-        }else{
+        } else {
             $url = $currentDomain;
         }
-        $regency_id = RegenciesDomain::where('domain',"LIKE","%".$url."%")->first();
+        $regency_id = RegenciesDomain::where('domain', "LIKE", "%" . $url . "%")->first();
 
         $this->configs = Config::first();
         $this->config = new Configs;
@@ -64,7 +66,7 @@ class PublicController extends Controller
         $this->config->quick_count =  $this->configs->quick_count;
         $this->config->default =  $this->configs->default;
     }
-    
+
     public function getsolution(Request $request)
     {
         $data = Listkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->where('list_kecurangan.id', $request->id_list)->first();
@@ -77,20 +79,25 @@ class PublicController extends Controller
         $config = Config::first();
         $dpt = District::where('regency_id', $this->config->regencies_id)->sum("dpt");
         $data['kota'] = Regency::find($this->config->regencies_id);
-        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('users.regency_id', $this->config->regencies_id)->get();
-        $data['paslon'] = Paslon::with('saksi_data')->get();
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
+        $data['paslon']  = Paslon::with(['saksi_data' => function ($query) {
+            $query
+                ->where('saksi_data.regency_id', $this->config->regencies_id);
+        }])->get();
         $data['paslon_terverifikasi']     = Paslon::with(['saksi_data' => function ($query) {
-            $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')->where('saksi.verification', 1);
+            $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
+                ->whereNull('saksi.pending')
+                ->where('saksi_data.regency_id', $this->config->regencies_id)
+                ->where('saksi.verification', 1);
         }])->get();
         $data['paslon_quick']     = Paslon::with(['saksi_data' => function ($query) {
             $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
                 ->join('tps', 'tps.id', 'saksi.tps_id')
                 ->where('tps.sample', '1');
-
         }])->get();
 
 
-        $data['kecamatan'] = District::where('regency_id',$this->config->regencies_id)->get();
+        $data['kecamatan'] = District::where('regency_id', $this->config->regencies_id)->get();
         $data['paslon_quick'] = Paslon::with('quicksaksidata')->get();
         $data['paslon_terverifikasi_quick']     = Paslon::with(['quicksaksidata' => function ($query) {
             $query->join('quicksaksi', 'quicksaksidata.saksi_id', 'quicksaksi.id')
@@ -99,10 +106,10 @@ class PublicController extends Controller
         }])->get();
         $data['total_incoming_vote_quick']      = QuickSaksiData::sum('voice');
         $data['realcount']  = $data['total_incoming_vote_quick'] / $dpt * 100;
-        $data['tps_selesai'] = Tps::where('regency_id',$this->config->regencies_id)->where('setup', 'terisi')->count();
-        $data['tps_belum'] = Tps::where('regency_id',$this->config->regencies_id)->count();
-        $data['tps_selesai_quick'] = Tps::where('regency_id',$this->config->regencies_id)->where('setup', 'terisi')->where('sample',1)->count();
-        $data['tps_belum_quick'] = Tps::where('regency_id',$this->config->regencies_id)->where('sample',1)->count();
+        $data['tps_selesai'] = Tps::where('regency_id', $this->config->regencies_id)->where('setup', 'terisi')->count();
+        $data['tps_belum'] = Tps::where('regency_id', $this->config->regencies_id)->count();
+        $data['tps_selesai_quick'] = Tps::where('regency_id', $this->config->regencies_id)->where('setup', 'terisi')->where('sample', 1)->count();
+        $data['tps_belum_quick'] = Tps::where('regency_id', $this->config->regencies_id)->where('sample', 1)->count();
         $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
         $data['paslon_candidate'] = Paslon::get();
         $data['title'] = "";
@@ -114,42 +121,29 @@ class PublicController extends Controller
     public function pusatIndex()
     {
 
-        
+
         $dpt = Province::sum("dpt");
         $data['kota'] = Regency::find($this->config->regencies_id);
         // $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->get();
         $data['paslon'] = Paslon::with('saksi_data')->get();
-        $data['paslon_terverifikasi']     = Paslon::with(['saksi_data' => function ($query) {
-            $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')->where('saksi.verification', 1);
-        }])->get();
-        $data['paslon_quick']     = Paslon::with(['saksi_data' => function ($query) {
-            $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
-                ->join('tps', 'tps.id', 'saksi.tps_id')
-                ->where('tps.sample', '1');
+        $data['paslon_terverifikasi'] =$data['paslon'];
 
-        }])->get();
 
 
         $data['provinsi'] = Province::get();
-        $data['paslon_quick'] = Paslon::with('quicksaksidata')->get();
-        $data['paslon_terverifikasi_quick']     = Paslon::with(['quicksaksidata' => function ($query) {
-            $query->join('quicksaksi', 'quicksaksidata.saksi_id', 'quicksaksi.id')
-                ->whereNull('quicksaksi.pending')
-                ->where('quicksaksi.verification', 1);
-        }])->get();
-        $data['total_incoming_vote_quick']      = QuickSaksiData::sum('voice');
-        $data['realcount']  = $data['total_incoming_vote_quick'] / $dpt * 100;
+        $data['total_incoming_vote']  =  DB::table('regencies')
+            ->selectRaw('SUM(suara1 + suara2 + suara3) as total_suara')
+            ->value('total_suara');
+        $data['realcount']  =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
         $data['tps_selesai'] = Tps::where('setup', 'terisi')->count();
         $data['tps_belum'] = Tps::count();
-        $data['tps_selesai_quick'] = Tps::where('setup', 'terisi')->where('sample',1)->count();
-        $data['tps_belum_quick'] = Tps::where('sample',1)->count();
+        $data['tps_selesai_quick'] = Tps::where('setup', 'terisi')->where('sample', 1)->count();
+        $data['tps_belum_quick'] = Tps::where('sample', 1)->count();
         $data['paslon_candidate'] = Paslon::get();
         $data['title'] = "";
         // $data['villages_quick'] = Tps::join('villages','villages.id','=','tps.villages_id')->where('sample',1)->get();
         $data['district_quick'] = District::join('villages', 'villages.district_id', '=', 'districts.id')->where('regency_id', $this->config->regencies_id)->get();
         return view('publik.pusat', $data);
-
-
     }
 
 
@@ -158,7 +152,7 @@ class PublicController extends Controller
     {
         $data['config'] = Config::first();
         $data['kota'] = Regency::find($this->config->regencies_id);
-        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('district_id', Crypt::decrypt($id))->get();
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
         $data['paslon']  = Paslon::with(['saksi_data' => function ($query) use ($id) {
             $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id', 'district_id')->where('saksi.district_id', decrypt($id));
         }])->get();
@@ -167,11 +161,11 @@ class PublicController extends Controller
         }])->get();
         $data['paslon_quick']     = Paslon::with(['saksi_data' => function ($query) use ($id) {
             $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')->where('saksi.district_id', decrypt($id))
-            ->join('tps', 'tps.id', 'saksi.tps_id')
-            ->where('tps.sample', '1');
+                ->join('tps', 'tps.id', 'saksi.tps_id')
+                ->where('tps.sample', '1');
         }])->get();
-        $data['tps_selesai_quick'] = Tps::where('setup', 'terisi')->where('sample',1)->count();
-        $data['tps_belum_quick'] = Tps::where('sample',1)->count();
+        $data['tps_selesai_quick'] = Tps::where('setup', 'terisi')->where('sample', 1)->count();
+        $data['tps_belum_quick'] = Tps::where('sample', 1)->count();
         $data['tps_selesai'] = Tps::where('setup', 'terisi')->where('district_id', Crypt::decrypt($id))->count();
         $data['tps_belum'] = Tps::where('setup', 'belum terisi')->where('district_id', Crypt::decrypt($id))->count();
         $data['kel'] = Village::where('district_id', Crypt::decrypt($id))->get();
@@ -186,7 +180,7 @@ class PublicController extends Controller
     {
         $data['config'] = Config::first();
         $data['kota'] = Regency::find($this->config->regencies_id);
-        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('district_id', Crypt::decrypt($id))->get();
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
         $data['paslon']  = Paslon::with(['saksi_data' => function ($query) use ($id) {
             $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id', 'district_id')->where('saksi.district_id', decrypt($id));
         }])->get();
@@ -195,11 +189,11 @@ class PublicController extends Controller
         }])->get();
         $data['paslon_quick']     = Paslon::with(['saksi_data' => function ($query) use ($id) {
             $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')->where('saksi.district_id', decrypt($id))
-            ->join('tps', 'tps.id', 'saksi.tps_id')
-            ->where('tps.sample', '1');
+                ->join('tps', 'tps.id', 'saksi.tps_id')
+                ->where('tps.sample', '1');
         }])->get();
-        $data['tps_selesai_quick'] = Tps::where('setup', 'terisi')->where('sample',1)->count();
-        $data['tps_belum_quick'] = Tps::where('sample',1)->count();
+        $data['tps_selesai_quick'] = Tps::where('setup', 'terisi')->where('sample', 1)->count();
+        $data['tps_belum_quick'] = Tps::where('sample', 1)->count();
         $data['tps_selesai'] = Tps::where('setup', 'terisi')->where('district_id', Crypt::decrypt($id))->count();
         $data['tps_belum'] = Tps::where('setup', 'belum terisi')->where('district_id', Crypt::decrypt($id))->count();
         $data['kel'] = Village::where('district_id', Crypt::decrypt($id))->get();
@@ -215,7 +209,7 @@ class PublicController extends Controller
     {
         $data['config'] = Config::first();
         $data['kota'] = Regency::find($this->config->regencies_id);
-        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('village_id', Crypt::decrypt($id))->get();
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
         $data['paslon']  = Paslon::with(['saksi_data' => function ($query) use ($id) {
             $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id', 'village_id')->where('saksi.village_id', (string)decrypt($id));
         }])->get();
@@ -224,18 +218,18 @@ class PublicController extends Controller
         }])->get();
         $data['paslon_quick']     = Paslon::with(['saksi_data' => function ($query) use ($id) {
             $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')->where('saksi.village_id', (string)decrypt($id))
-            ->join('tps', 'tps.id', 'saksi.tps_id')
-            ->where('tps.sample', '1');
+                ->join('tps', 'tps.id', 'saksi.tps_id')
+                ->where('tps.sample', '1');
         }])->get();
-        $data['tps_selesai_quick'] = Tps::where('setup', 'terisi')->where('sample',1)->count();
-        $data['tps_belum_quick'] = Tps::where('sample',1)->count();
+        $data['tps_selesai_quick'] = Tps::where('setup', 'terisi')->where('sample', 1)->count();
+        $data['tps_belum_quick'] = Tps::where('sample', 1)->count();
         $data['tps_selesai'] = Tps::where('setup', 'terisi')->where('villages_id', Crypt::decrypt($id))->count();
         $data['tps_belum'] = Tps::where('setup', 'belum terisi')->where('villages_id', Crypt::decrypt($id))->count();
-        $data['kel'] = Tps::where('villages_id',(string)Crypt::decrypt($id))->get();
-        $data['tps_ver'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('villages_id',(string)Crypt::decrypt($id))->where('verification', 1)->get();
+        $data['kel'] = Tps::where('villages_id', (string)Crypt::decrypt($id))->get();
+        $data['tps_ver'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('villages_id', (string)Crypt::decrypt($id))->where('verification', 1)->get();
         $data['paslon_candidate'] = Paslon::get();
         $data['id'] = decrypt($id);
-        $data['kelurahan_name'] = Village::where('id', ''.Crypt::decrypt($id))->first();
+        $data['kelurahan_name'] = Village::where('id', '' . Crypt::decrypt($id))->first();
         $data['kecamatan'] = District::where('id', $data['kelurahan_name']->district_id)->first();
         $data['title'] = "Kecamatan " . $data['kecamatan']['name'] . "/Kelurahan " . $data['kelurahan_name']['name'] . "";
         return view('publik.kelurahan', $data);
@@ -245,7 +239,7 @@ class PublicController extends Controller
     {
         $data['config'] = Config::first();
         $data['kota'] = Regency::find($this->config->regencies_id);
-        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('village_id', Crypt::decrypt($id))->get();
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
         $data['paslon']  = Paslon::with(['saksi_data' => function ($query) use ($id) {
             $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id', 'village_id')->where('saksi.village_id', (string)decrypt($id));
         }])->get();
@@ -254,18 +248,18 @@ class PublicController extends Controller
         }])->get();
         $data['paslon_quick']     = Paslon::with(['saksi_data' => function ($query) use ($id) {
             $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')->where('saksi.village_id', (string)decrypt($id))
-            ->join('tps', 'tps.id', 'saksi.tps_id')
-            ->where('tps.sample', '1');
+                ->join('tps', 'tps.id', 'saksi.tps_id')
+                ->where('tps.sample', '1');
         }])->get();
-        $data['tps_selesai_quick'] = Tps::where('setup', 'terisi')->where('sample',1)->count();
-        $data['tps_belum_quick'] = Tps::where('sample',1)->count();
+        $data['tps_selesai_quick'] = Tps::where('setup', 'terisi')->where('sample', 1)->count();
+        $data['tps_belum_quick'] = Tps::where('sample', 1)->count();
         $data['tps_selesai'] = Tps::where('setup', 'terisi')->where('villages_id', Crypt::decrypt($id))->count();
         $data['tps_belum'] = Tps::where('setup', 'belum terisi')->where('villages_id', Crypt::decrypt($id))->count();
-        $data['kel'] = Tps::where('villages_id',(string)Crypt::decrypt($id))->where('sample',1)->get();
-        $data['tps_ver'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('villages_id',(string)Crypt::decrypt($id))->where('verification', 1)->get();
+        $data['kel'] = Tps::where('villages_id', (string)Crypt::decrypt($id))->where('sample', 1)->get();
+        $data['tps_ver'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('villages_id', (string)Crypt::decrypt($id))->where('verification', 1)->get();
         $data['paslon_candidate'] = Paslon::get();
         $data['id'] = decrypt($id);
-        $data['kelurahan_name'] = Village::where('id', ''.Crypt::decrypt($id))->first();
+        $data['kelurahan_name'] = Village::where('id', '' . Crypt::decrypt($id))->first();
         $data['kecamatan'] = District::where('id', $data['kelurahan_name']->district_id)->first();
         $data['title'] = "Kecamatan " . $data['kecamatan']['name'] . "/Kelurahan " . $data['kelurahan_name']['name'] . "";
         return view('publik.quick_kelurahan', $data);
@@ -276,7 +270,7 @@ class PublicController extends Controller
 
         $data['tps'] = Tps::where('id', $request['id'])->first();
         $data['kecamatan'] = District::where('id',  $data['tps']['district_id'])->first();
-        $data['kelurahan'] = Village::where('id',  ''.$data['tps']['villages_id'])->first();
+        $data['kelurahan'] = Village::where('id',  '' . $data['tps']['villages_id'])->first();
         $data['config'] = Config::first();
         if (count($data['saksi']) == 0) {
             return view('publik.ajax.result_eror');
@@ -287,19 +281,18 @@ class PublicController extends Controller
     public function scanning(Request $request, $id)
     {
 
-      
-        if($request->password == null || $request->password != "123"){
-            return redirect()->back()->with('error','password yang anda masukan salah');
+
+        if ($request->password == null || $request->password != "123") {
+            return redirect()->back()->with('error', 'password yang anda masukan salah');
         }
 
         $data['config'] = Config::first();
         $config = $data['config'];
         $data['qrcode_hukum'] = Qrcode::join('surat_pernyataan', 'surat_pernyataan.qrcode_hukum_id', '=', 'qrcode_hukum.id')
-            ->join('users', 'users.tps_id', '=', 'qrcode_hukum.tps_id')->where('qrcode_hukum.nomor_berkas',Crypt::decrypt($id))->first();
-        if($data['qrcode_hukum'] == null)
-        {
+            ->join('users', 'users.tps_id', '=', 'qrcode_hukum.tps_id')->where('qrcode_hukum.nomor_berkas', Crypt::decrypt($id))->first();
+        if ($data['qrcode_hukum'] == null) {
             $data['qrcode_hukum'] = Qrcode::join('surat_pernyataan', 'surat_pernyataan.qrcode_hukum_id', '=', 'qrcode_hukum.id')
-            ->join('users', 'users.tps_id', '=', 'qrcode_hukum.tps_id')->where('qrcode_hukum.id',  Crypt::decrypt($id))->first();
+                ->join('users', 'users.tps_id', '=', 'qrcode_hukum.tps_id')->where('qrcode_hukum.id',  Crypt::decrypt($id))->first();
         }
 
         $data['verifikator_id'] = User::where('id', $data['qrcode_hukum']['verifikator_id'])->first();
@@ -307,10 +300,10 @@ class PublicController extends Controller
         $data['bukti_foto'] = ModelsBuktifoto::where('tps_id', $data['qrcode_hukum']['tps_id'])->get();
         $data['bukti_vidio'] = Buktividio::where('tps_id', $data['qrcode_hukum']['tps_id'])->get();
         $data['list'] = Bukti_deskripsi_curang::where('tps_id', $data['qrcode_hukum']['tps_id'])->get();
-        $data['data_tps'] = Tps::where('id','' . $data['qrcode_hukum']->tps_id)->first();
-        $data['kelurahan'] = Village::where('id', ''.$data['qrcode_hukum']['villages'])->first();
+        $data['data_tps'] = Tps::where('id', '' . $data['qrcode_hukum']->tps_id)->first();
+        $data['kelurahan'] = Village::where('id', '' . $data['qrcode_hukum']['villages'])->first();
         $data['kecamatan'] = District::where('id', $data['qrcode_hukum']['districts'])->first();
-        $data['kota'] = Regency::where('id',$this->config->regencies_id)->first();
+        $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
         $data['tps']       = Tps::where('id', $data['qrcode_hukum']['tps_id'])->first();
         $data['user'] = User::where('id', $data['tps']['user_id'])->first();
         // dd($data['user']);
@@ -332,9 +325,9 @@ class PublicController extends Controller
     {
         $data['config'] = Config::first();
         $config = $data['config'];
-        $data['kota'] = Regency::where('id',$this->config->regencies_id)->first();
+        $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
         $data['paslon'] = Paslon::get();
-        $data['kecamatan'] = District::where('regency_id',$this->config->regencies_id)->get();
+        $data['kecamatan'] = District::where('regency_id', $this->config->regencies_id)->get();
         foreach ($data['paslon'] as $ps) {
             $data['total' . $ps['id'] . ''] = SaksiData::where('paslon_id', $ps['id'])->sum('voice');
         }
@@ -356,14 +349,14 @@ class PublicController extends Controller
     {
         $data['tps'] = Tps::where('villages_id', $request['id'])->where('sample', 1)->get();
         $data['candidate'] = Paslon::get();
-        $data['kelurahan'] = Village::where('id', ''.$request['id'])->first();
+        $data['kelurahan'] = Village::where('id', '' . $request['id'])->first();
         return view('publik.ajax.public_tps_quick', $data);
     }
     public function get_tps_quick2(Request $request)
     {
         $data['tps'] = Tps::where('villages_id', $request['id'])->where('quick_count', 1)->get();
         $data['candidate'] = Paslon::get();
-        $data['kelurahan'] = Village::where('id', ''.$request['id'])->first();
+        $data['kelurahan'] = Village::where('id', '' . $request['id'])->first();
         return view('publik.ajax.public_tps_quick', $data);
     }
 
@@ -392,10 +385,10 @@ class PublicController extends Controller
     {
         $data['config'] = Config::first();
         $config = $data['config'];
-        $data['kota'] = Regency::where('id',$this->config->regencies_id)->first();
+        $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
         $data['provinsi'] = Province::where('id', $data['kota']['province_id'])->first();
         $data['paslon'] = Paslon::get();
-        $data['kecamatan'] = District::where('regency_id',$this->config->regencies_id)->get();
+        $data['kecamatan'] = District::where('regency_id', $this->config->regencies_id)->get();
         foreach ($data['paslon'] as $ps) {
             $data['total' . $ps['id'] . ''] = SaksiData::where('paslon_id', $ps['id'])->sum('voice');
         }
@@ -407,10 +400,10 @@ class PublicController extends Controller
     {
         $data['config'] = Config::first();
         $config = $data['config'];
-        $data['kota'] = Regency::where('id',$this->config->regencies_id)->first();
+        $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
         $data['provinsi'] = Province::where('id', $data['kota']['province_id'])->first();
         $data['paslon'] = Paslon::get();
-        $data['kecamatan'] = District::where('regency_id',$this->config->regencies_id)->get();
+        $data['kecamatan'] = District::where('regency_id', $this->config->regencies_id)->get();
         foreach ($data['paslon'] as $ps) {
             $data['total' . $ps['id'] . ''] = SaksiData::where('paslon_id', $ps['id'])->sum('voice');
         }
@@ -422,18 +415,18 @@ class PublicController extends Controller
     {
         $data['config'] = Config::first();
         $config = $data['config'];
-        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->get();
-        $data['kota'] = Regency::where('id',$this->config->regencies_id)->first();
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
+        $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
         $data['provinsi'] = Province::where('id', $data['kota']['province_id'])->first();
         $data['paslon'] = Paslon::get();
-        $data['kecamatan'] = District::where('regency_id',$this->config->regencies_id)->get();
+        $data['kecamatan'] = District::where('regency_id', $this->config->regencies_id)->get();
         foreach ($data['paslon'] as $ps) {
             $data['total' . $ps['id'] . ''] = SaksiData::where('paslon_id', $ps['id'])->sum('voice');
         }
 
         return view('administrator.count.maps_count', $data);
     }
-     public function get_tps_kelurahan(Request $request)
+    public function get_tps_kelurahan(Request $request)
     {
         $data['saksi'] =  Saksi::where('tps_id', $request['id'])->get();
         $data['tps'] = Tps::where('id', $request['id'])->first();
@@ -446,16 +439,16 @@ class PublicController extends Controller
             return view('administrator.ajax.tps', $data);
         }
     }
-      public function kicked()
+    public function kicked()
     {
-        $data['track'] = Tracking::where('id_user',Auth::user()->id)->first();
-        return view('publik.ajax.kicked',$data);
+        $data['track'] = Tracking::where('id_user', Auth::user()->id)->first();
+        return view('publik.ajax.kicked', $data);
     }
     public function scanSecure($id)
     {
         $data['title'] = "ini";
         $data['nomor_berkas'] = $id;
-    
-        return view('auth.scan_secure',$data);
+
+        return view('auth.scan_secure', $data);
     }
 }

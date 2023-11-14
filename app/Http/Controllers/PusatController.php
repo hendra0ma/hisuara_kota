@@ -19,11 +19,8 @@ class PusatController extends Controller
     function home() {
         date_default_timezone_set("Asia/Jakarta");
         $data['jam'] = date("H");
-        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->get();
-        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data GROUP by paslon_id ORDER by total DESC'));
-
-        $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
-        $data['urutan'] = $paslon_tertinggi;
+        
+        
         // dd($data['urutan']);
 
 

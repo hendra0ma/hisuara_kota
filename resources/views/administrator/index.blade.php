@@ -1142,7 +1142,7 @@ $tps = Tps::count();
                                                         <h6 class="mt-4">{{$pas->candidate}} </h6>
                                                         <h6 class="">{{$pas->deputy_candidate}} </h6>
                                                         <?php
-                                                    $total_saksi = SaksiData::where('paslon_id',$pas->id)->sum('voice');
+                                                    $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->sum('voice');
                                                 ?>
 
                                                         <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3>
@@ -1177,7 +1177,7 @@ $tps = Tps::count();
                                             href="{{url('/')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
                                     </td>
                                     @foreach ($paslon as $cd)
-                                    <?php $saksi_dataa = SaksiData::where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->sum('voice'); ?>
+                                    <?php $saksi_dataa = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->sum('voice'); ?>
                                     <td class="align-middle">{{$saksi_dataa}}</td>
                                     @endforeach
                                 </tr>

@@ -32,7 +32,7 @@ foreach ($verification as $key) {
         $total_verification_voice += $verif->voice;
     }
 }
-$paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data GROUP by paslon_id ORDER by total DESC'));
+$paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
 $urutan = $paslon_tertinggi;
 $props = Province::where('id', $kota['province_id'])->first();
 $cityProp = Regency::where('province_id', $kota['province_id'])->get();

@@ -48,6 +48,8 @@ $config->quick_count =  $configs->quick_count;
 $config->default =  $configs->default;
 
 $regency = District::where('regency_id', $config->regencies_id)->get();
+$paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
+$urutan = $paslon_tertinggi;
 $kota = Regency::where('id', $config->regencies_id)->first();
 $dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
 $tps = Tps::count();
