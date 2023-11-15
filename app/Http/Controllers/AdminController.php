@@ -2310,7 +2310,7 @@ class AdminController extends Controller
         $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
         $data['kecamatan'] = District::where('regency_id', $this->config->regencies_id)->get();
         $data['district'] = District::first();
-      $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
+      $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)
             ->join('tps', 'tps.id', "=", "saksi.tps_id")
             ->where('tps.sample', 5)
             ->get();
@@ -2346,7 +2346,7 @@ class AdminController extends Controller
         $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
         $data['kecamatan'] = District::where('regency_id', $this->config->regencies_id)->get();
         $data['district'] = District::first();
-      $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
+      $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)
             ->join('tps', 'tps.id', "=", "saksi.tps_id")
             ->where('tps.sample', 5)
             ->get();
@@ -2405,7 +2405,7 @@ class AdminController extends Controller
         $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
         $data['kecamatan'] = District::where('regency_id', $this->config->regencies_id)->get();
         $data['district'] = District::first();
-      $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
+      $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)
             ->join('tps', 'tps.id', "=", "saksi.tps_id")
             ->where('tps.sample', 5)
             ->get();
