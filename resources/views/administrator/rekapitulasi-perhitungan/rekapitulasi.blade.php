@@ -100,13 +100,47 @@ $props = Province::where('id',$kota['province_id'])->first();
 
     <div class="col-lg-12">
        <center>
-        <h2 class="page-title mt-1 mb-0" style="font-size: 60px">
+        <h2 class="page-title mt-1 mb-3" style="font-size: 60px">
             REKAPITULASI
         </h2>
-        <h4 class="mt-2">
-            {{ $kota['name'] }}
-        </h4>
        </center>
+    </div>
+
+    <div class="col-lg-12">
+        <style>
+            ul.breadcrumb {
+                padding: 10px 16px;
+                list-style: none;
+                background-color: #0d6efd !important;
+            }
+    
+            ul.breadcrumb li {
+                display: inline;
+                font-size: 18px;
+            }
+    
+            ul.breadcrumb li+li:before {
+                padding: 8px;
+                color: white;
+                content: "/\00a0";
+            }
+    
+            ul.breadcrumb li a {
+    
+                text-decoration: none;
+            }
+    
+            ul.breadcrumb li a:hover {
+                color: #01447e;
+                text-decoration: underline;
+            }
+        </style>
+    
+        <ul class="breadcrumb">
+            <?php $regency =Regency::where('id',$config->regencies_id)->select('name')->first(); ?>
+            <li><a href="" class="text-white">{{$regency->name}}</a></li>
+    
+        </ul>
     </div>
 
     <div class="col-12 mt-1">

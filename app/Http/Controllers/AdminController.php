@@ -454,6 +454,20 @@ class AdminController extends Controller
         return view('administrator.verifikasi.koordinator_kelurahan', $data);
     }
 
+    public function koordinator_rw()
+    {
+        $data['config'] = Config::first();
+        $data['jumlah_saksi'] = User::where('role_id', '=', 8)->where('is_active', '=', 0)->count();
+        return view('administrator.verifikasi.koordinator_rw', $data);
+    }
+
+    public function koordinator_rt()
+    {
+        $data['config'] = Config::first();
+        $data['jumlah_saksi'] = User::where('role_id', '=', 8)->where('is_active', '=', 0)->count();
+        return view('administrator.verifikasi.koordinator_rt', $data);
+    }
+
     public function saksi_ditolak()
     {
         $data['config'] = Config::first();
@@ -1972,9 +1986,10 @@ class AdminController extends Controller
     {
       $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
 
-        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id, SUM(voice) as total FROM saksi_data GROUP by paslon_id ORDER by total DESC LIMIT 1'));
-
-        $data['paslon_tertinggi'] = Paslon::where('id', (string)$paslon_tertinggi['0']->paslon_id)->first();
+        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data GROUP by paslon_id ORDER by total DESC'));
+        // return DB::table('saksi_data')->where('paslon_id',0)->sum('voice');
+        $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        $data['urutan'] = $paslon_tertinggi;
 
         $data['paslon'] = Paslon::with(['saksi_data' => function ($query) use ($id) {
             $query
@@ -2544,9 +2559,9 @@ class AdminController extends Controller
     {
       $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
 
-        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id, SUM(voice) as total FROM saksi_data GROUP by paslon_id ORDER by total DESC LIMIT 1'));
-
-        $data['paslon_tertinggi'] = Paslon::where('id', (string)$paslon_tertinggi['0']->paslon_id)->first();
+        $paslon_tertinggi = DB::select(DB::raw('SELECT saksi_data.paslon_id, SUM(saksi_data.voice) as total FROM saksi_data JOIN saksi ON saksi.id = saksi_data.saksi_id WHERE saksi.verification = 1 GROUP BY saksi_data.paslon_id ORDER BY total DESC'));
+        $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        $data['urutan'] = $paslon_tertinggi;
 
         $data['paslon'] = Paslon::with(['saksi_data' => function ($query) use ($id) {
             $query

@@ -52,25 +52,58 @@
             </div>
         </div>
     </div>
-    
     <div class="halamanAudit" style="display: none">
         <div class="row">
-            <div class="col-md mt-3">
+            <div class="col-12 " >
                 <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">Saksi</h5>
+                    <div class="card-header bg-dark text-white">
+                        <h4 class="card-title mx-auto">DATA SAKSI</h4>
                     </div>
-                    <div class="card-body  text-center">
-                        <p class="card-text">
-                        <div class="row fw-bolder">
-                            <div class="col">{{$saksi_koreksi['name']}}</div>
-                            <div class="col">TPS {{$tps['number']}}</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-auto">
+                                @if ($saksi_koreksi['profile_photo_path'] == NULL)
+                                <img style="width: 108px; height: 108px; object-fit: cover; margin-right: 10px;"
+                                    src="https://ui-avatars.com/api/?name={{ $saksi_koreksi['name'] }}&color=7F9CF5&background=EBF4FF">
+                                @else
+                                <img style="width: 108px; height: 108px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".$saksi_koreksi['profile_photo_path']) }}">
+                                @endif
+                            </div>
+                            <div class="col-md">
+                                <div class="row mb-2">
+                                    <div class="col-md-3 fw-bold">NIK</div>
+                                    <div class="col-auto">:</div>
+                                    <div class="col-md-auto">{{$saksi_koreksi->nik}}</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-3 fw-bold">Nama</div>
+                                    <div class="col-auto">:</div>
+                                    <div class="col-md-auto">{{$saksi_koreksi->name}}</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-3 fw-bold">No Wa</div>
+                                    <div class="col-auto">:</div>
+                                    <div class="col-md-auto">{{$saksi_koreksi->no_hp}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 fw-bold">Date</div>
+                                    <div class="col-auto">:</div>
+                                    <div class="col-md-auto">{{$saksi_koreksi->created_at}}</div>
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <a href="https://wa.me/{{$saksi_koreksi->no_hp}}" class="btn btn-success h-100 w-100 d-flex">
+                                    <div class="row mx-auto my-auto">
+                                        <div class="col-md-12">
+                                            <i class="fa-brands fa-whatsapp fs-1"></i>
+                                        </div>
+                                        <div class="col-md fs-5">
+                                            Hubungi
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                        <div class="row mt-3">
-                            <div class="col">NIK : {{$saksi_koreksi['nik']}}</div>
-                            <div class="col">Kecamatan {{$kecamatan['name']}}/Kelurahan {{$kelurahan['name']}}</div>
-                        </div>
-                        </p>
                     </div>
                 </div>
             </div>
@@ -82,6 +115,7 @@
     </div>
     <div class="col-md">
         <div class="row">
+            
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -170,7 +204,7 @@
                             {{-- </p> --}}
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn bg-success text-light w-100">Terbitkan</button>
+                            <button type="submit" class="btn bg-success text-light w-100">Koreksi Data</button>
                             {{-- {{$url}} --}}
                             {{-- <a href="tolak_koreksi/{{Crypt::encrypt($saksi['id'])}}"
                                 class="btn bg-danger mt-2 text-light w-100">Tolak</a> --}}

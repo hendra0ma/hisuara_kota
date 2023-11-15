@@ -50,7 +50,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
 <!-- PAGE-HEADER -->
 <div class="row mt-5">
     <div class="col-lg">
-        <h1 class="page-title fs-1 mt-2">Koordinator Kelurahan
+        <h1 class="page-title fs-1 mt-2">Koordinator RW
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">
@@ -91,6 +91,15 @@ $kota = Regency::where('id', $config->regencies_id)->first();
             <div class="col parent-link">
                 <a href="{{url('')}}/administrator/koordinator_kelurahan"
                     class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_kelurahan')?'active' : '' }}">Koordinator Kelurahan</a>
+            </div>
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/koordinator_rw"
+                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_rw')?'active' : '' }}">Koordinator
+                    RT</a>
+            </div>
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/koordinator_rt"
+                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_rt')?'active' : '' }}">Koordinator RW</a>
             </div>
 
         </div>

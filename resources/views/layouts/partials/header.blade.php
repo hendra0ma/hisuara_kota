@@ -237,7 +237,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                         //  pilpresAnimate();
                                         // },5000)
 
-                                    },5000)
+                                    },3000)
                                 }
 
 
@@ -248,7 +248,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                     $('.col-hisuara').show()
                                         $('.col-pilpres').hide()
                                         pilpresAnimate();
-                                    },9000)
+                                    },5000)
                                 })
 
                                 function animateHeaderPojokan() {
@@ -525,17 +525,16 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/verifikasi_akun"
+                                                <a href="{{url('')}}/administrator/verifikasi_crowd_c1"
                                                     class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0px;">
-                                                    Admin
+                                                    Crowd C1
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/verifikasi_crowd_c1"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
+                                                <a href="{{url('')}}/administrator/verifikasi_akun" class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
-                                                    Crowd C1
+                                                    Admin
                                                 </a>
                                             </div>
                                         </div>
@@ -1103,14 +1102,14 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                 if (dataTarget != "") {
                                                     $(`[data-target='${dataTarget}']`).click();
                                                 } else {
-                                                  $('.active-button').click()
+                                                    $('.active-button').click()
                                                 }
 
                                                 // setTimeout(() => {
                                                 //     $('#img-effect').fadeOut(200)
                                                 // }, 5000);
 
-                                            }, 5000)
+                                            }, 3000)
 
                                         }
 
@@ -1164,7 +1163,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                 setTimeout(() => {
                                                     $('#img-effect').fadeOut(200)
                                                     animate();
-                                                }, 4000);
+                                                }, 2000);
                                             @else
                                                 $('#img-effect').fadeOut()
                                                 $("#text-effect").hide();

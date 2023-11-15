@@ -100,13 +100,55 @@ $props = Province::where('id',$kota['province_id'])->first();
 
     <div class="col-lg-12">
         <center>
-            <h2 class="page-title mt-1 mb-0" style="font-size: 60px">
+            <h2 class="page-title mt-1 mb-3" style="font-size: 60px">
                 REKAPITULASI
             </h2>
-            <h4 class="mt-2">
-                {{ $kota['name'] }} / KECAMATAN {{ $district['name'] }} / KELURAHAN {{$village['name']}}
-            </h4>
         </center>
+    </div>
+
+    <div class="col-lg-12">
+        <style>
+            ul.breadcrumb {
+                padding: 10px 16px;
+                list-style: none;
+                background-color: #0d6efd !important;
+            }
+    
+            ul.breadcrumb li {
+                display: inline;
+                font-size: 18px;
+            }
+    
+            ul.breadcrumb li+li:before {
+                padding: 8px;
+                color: white;
+                content: "/\00a0";
+            }
+    
+            ul.breadcrumb li a {
+                text-decoration: none;
+            }
+    
+            ul.breadcrumb li a:hover {
+                color: #01447e;
+                text-decoration: underline;
+            }
+        </style>
+    
+        <ul class="breadcrumb">
+            <?php
+                        $desa = Village::where('id', (string) $id_kelurahan)->first();
+                    
+                        $regency = Regency::where('id', $config->regencies_id)->first();
+                        $kcamatan = District::where('id',(string) $desa->district_id)->first();
+                        ?>
+            <li><a href="{{url('')}}/administrator/rekapitulasi" class="text-white">{{$regency->name}}</a></li>
+            <li><a href="{{url('')}}/administrator/rekap_kecamatan/{{Crypt::encrypt($district->id)}}"
+                    class="text-white">{{$district->name}}</a></li>
+            <li><a href="{{url('')}}/administrator/rekap_kelurahan/{{Crypt::encrypt($id_kelurahan)}}"
+                    class="text-white">{{$desa->name}}</a></li>
+    
+        </ul>
     </div>
 
     <div class="col-12 mt-1">
@@ -245,6 +287,9 @@ $props = Province::where('id',$kota['province_id'])->first();
                                 </tr>
                             </tbody>
                         </table>
+                        <button class="btn btn-success w-100">
+                            Unduh
+                        </button>
                     </div>
                 </div>
             </div>

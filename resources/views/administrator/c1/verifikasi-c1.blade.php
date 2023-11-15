@@ -3,7 +3,7 @@
 @section('content')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
 
-<div class="row mt-5">
+<div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
     <div class="col-lg">
         @if ($message = Session::get('success'))
 
@@ -23,7 +23,7 @@
         </ol>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-8">
         <div class="row mt-2">
             <div class="col parent-link">
                 <a class="btn text-white w-100 py-3 c1saksi tablink" onclick="openPage('C1-Saksi', this, '#6259ca')"
@@ -33,14 +33,10 @@
                 <a class="btn text-white w-100 py-3 c1relawan tablink"
                     onclick="openPage('C1-Relawan', this, '#6259ca')">C1 Relawan TPS</a>
             </div>
-            {{-- <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 c1teraudit tablink"
-                    onclick="openPage('C1-Dibatalkan', this, '#6259ca')">C1 Dibatalkan</a>
-            </div> --}}
-            <!-- <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 c1koreksi tablink"
-                    onclick="openPage('C1-Koreksi', this, '#6259ca')">Pengajuan Koreksi C1</a>
-            </div> -->
+            <div class="col parent-link">
+                <a class="btn text-white w-100 py-3 c1relawan tablink"
+                    onclick="openPage('C1-Crowd', this, '#6259ca')">C1 Crowd KPU</a>
+            </div>
         </div>
     </div>
 </div>
@@ -86,6 +82,9 @@
 <div id="C1-Relawan" class="tabcontent mt-0 pt-0 px-0">
     <livewire:c1-relawan-kota />
 </div>
+<div id="C1-Crowd" class="tabcontent mt-0 pt-0 px-0">
+    {{-- <livewire:c1-relawan-kota /> --}}
+</div>
 
 <script>
   // Script SweetAlert2 yang langsung muncul saat halaman dimuat
@@ -100,9 +99,6 @@
     @endif
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<!-- <div id="C1-Koreksi" class="tabcontent mt-0 pt-0 px-0">
-    <livewire:c1-koreksi />
-</div> -->
 
 <div class="modal fade" id="periksaC1Verifikator" tabindex="-1" aria-labelledby="periksaC1VerifikatorLabel"
     aria-hidden="true">
