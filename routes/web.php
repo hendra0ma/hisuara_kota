@@ -420,6 +420,7 @@ foreach ($kotas as $kota) {
                     Route::get('sidang_online_status/{role}', 'sidangOnlinestatus');
                     Route::get('crowd-c1-kpu', 'crowdC1');
                     Route::get('data-crowd-c1-kpu', 'dataCrowdC1');
+                    Route::get('get-moda-cek-1', 'getModaCek1');
 
 
                     Route::get('/dev-pass', function () {

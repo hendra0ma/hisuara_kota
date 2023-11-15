@@ -258,7 +258,7 @@ $tps = Tps::count();
                                     <div class="col mt-2">
                                         <div class="media">
                                             <?php
-                                                                                                                                $user = User::where('tps_id')->first();  
+                                                                                                                                $user = User::where('tps_id', '=',$saksi[0]['tps_id'])->first();
                                                                                                                             ?>
                                             @if ($user['profile_photo_path'] == NULL)
                                             <img class="rounded-circle"
