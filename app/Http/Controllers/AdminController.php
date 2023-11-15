@@ -1064,9 +1064,15 @@ class AdminController extends Controller
         ->get();
         $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
         $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
+        $data['qrcode'] = Qrcode::where('tps_id', $data['saksi'][0]['tps_id'])->first();
+        if ($data['qrcode'] != null) {
+            $data['verifikator'] = User::where('id', $data['qrcode']['verifikator_id'])->first();
+            $data['hukum'] = User::where('id', $data['qrcode']['hukum_id'])->first();
+        } else {
+            $data['verifikator'] = null;
+            $data['hukum'] = null;
+        }
         
-       
-      
         return view('administrator.perhitungan.tps', $data);
     }
 
@@ -1997,6 +2003,14 @@ class AdminController extends Controller
         ->get();
         $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
         $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
+        $data['qrcode'] = Qrcode::where('tps_id', $data['saksi'][0]['tps_id'])->first();
+        if ($data['qrcode'] != null) {
+            $data['verifikator'] = User::where('id', $data['qrcode']['verifikator_id'])->first();
+            $data['hukum'] = User::where('id', $data['qrcode']['hukum_id'])->first();
+        } else {
+            $data['verifikator'] = null;
+            $data['hukum'] = null;
+        }
 
         return view('administrator.realcount.tps', $data);
     }
@@ -2220,6 +2234,14 @@ class AdminController extends Controller
         ->get();
         $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
         $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
+        $data['qrcode'] = Qrcode::where('tps_id', $data['saksi'][0]['tps_id'])->first();
+        if ($data['qrcode'] != null) {
+            $data['verifikator'] = User::where('id', $data['qrcode']['verifikator_id'])->first();
+            $data['hukum'] = User::where('id', $data['qrcode']['hukum_id'])->first();
+        } else {
+            $data['verifikator'] = null;
+            $data['hukum'] = null;
+        }
 
         return view('administrator.rekapitulasi-perhitungan.tps', $data);
     }
@@ -2558,6 +2580,14 @@ class AdminController extends Controller
         ->get();
         $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
         $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
+        $data['qrcode'] = Qrcode::where('tps_id', $data['saksi'][0]['tps_id'])->first();
+        if ($data['qrcode'] != null) {
+            $data['verifikator'] = User::where('id', $data['qrcode']['verifikator_id'])->first();
+            $data['hukum'] = User::where('id', $data['qrcode']['hukum_id'])->first();
+        } else {
+            $data['verifikator'] = null;
+            $data['hukum'] = null;
+        }
 
         return view('administrator.terverifikasi.tps', $data);
     }

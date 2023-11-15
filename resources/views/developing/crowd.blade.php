@@ -221,7 +221,7 @@
                                 </div>
                                 <div class="form-group">
                                     <select class="form-control select2-show-search form-select" name="tps" id="tps">
-                                        <option disabled selected>Pilih Tps</option>
+                                        <option disabled selected>Pilih TPS</option>
                                     </select>
                                 </div>
                                 <div class="row justify-content-between">

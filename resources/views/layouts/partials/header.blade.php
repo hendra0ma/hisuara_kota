@@ -507,7 +507,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                 <a href="{{url('')}}/administrator/koordinator_saksi"
                                                     class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0px;">
-                                                    Koordinator Saksi
+                                                    Kordinator Saksi
                                                 </a>
                                             </div>
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
