@@ -91,6 +91,34 @@
         .picture__img {
             max-width: 100%;
         }
+        
+        .parent-link a.active {
+            background: #6259ca;
+        }
+        
+        .parent-link a.active:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            right: 0;
+            width: 40%;
+            border-top: 3px solid #6259ca;
+            z-index: -1;
+        }
+
+        .parent-link a.active-tab {
+            background: #6259ca;
+        }
+
+        .parent-link a {
+            background: rgba(98, 88, 202, 0.65);
+        }
+        
+        .parent-link a:hover {
+            background: #6259ca;
+        }
     </style>
 
 </head>
@@ -105,151 +133,267 @@
 
     <!-- PAGE -->
     <div class="container" id="card2" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">
-        <div class="text-center mb-7">
+        <div class="text-center mb-6">
             <img style="height: 100px;" class="mb-3" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/KPU_Logo.svg/531px-KPU_Logo.svg.png" alt="">
-            <h1>UPLOAD C1 KPU</h1>
+            <h1 class="fw-bold">UPLOAD C1 KPU</h1>
         </div>
-        <form action="{{url('')}}/c1Crowd/upload" method="post" enctype="multipart/form-data">
-            @csrf
-            <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="wrap-input100 validate-input" style="height: 100%" data-bs-validate="Password is required">
-                                    <label class="picture" for="picture__input2" tabIndex="0">
-                                        <span class="picture__image2"></span>
-                                    </label>
 
-                                    <input type="file" name="c1_images" id="picture__input2" class="picture___input">
-                                </div>
-                                <img id="previewImage" src="#" alt="Uploaded Image" style="display: none; max-width: 300px; max-height: 300px">
-                            </div>
-                            <script>
-                                document.getElementById('fileInput').addEventListener('change', function() {
-                                    var file = this.files[0];
-                                    if (file) {
-                                        var reader = new FileReader();
-                                        reader.onload = function(e) {
-                                            var image = document.getElementById('previewImage');
-                                            image.style.display = 'block';
-                                            image.src = e.target.result;
-                                        };
-                                        reader.readAsDataURL(file);
-                                    }
-                                });
-                            </script>
-                            <div class="col-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5 class="card-title">Isi Data Baru</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        {{-- <p class="card-text"> --}}
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="row">
-                                                    {{-- @foreach ($saksi_data as $ss) --}}
-                                                    <div class="col-md-12">
-                                                        <label for="suara01">Suara 01</label>
-                                                        <input type="text" id="suara" class="form-control suara-input"
-                                                            name="paslon">
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label for="suara01">Suara 02</label>
-                                                        <input type="text" id="suara" class="form-control suara-input"
-                                                            name="paslon">
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label for="suara01">Suara 03</label>
-                                                        <input type="text" id="suara" class="form-control suara-input"
-                                                            name="paslon">
-                                                    </div>
-                                                    {{-- @endforeach --}}
-                                                </div>
-                                            </div>
-                                            {{-- <div class="col-md-12">
-                                                <label for="keterangan">Keterangan</label>
-                                                <textarea class="form-control" id="keterangan" cols="30" rows="10"
-                                                    disabled>{{$saksi_data_baru_deskripsi['keterangan']}}</textarea>
-                                            </div> --}}
-                                            <div class="col-md-6 text-center">
-                                                <div class="card h-100">
-                                                    <div class="card-header py-1">
-                                                        Total :
-                                                    </div>
-                                                    <div class="card-body d-flex display-2 fw-bold">
-                                                        <div class="my-auto mx-auto" id="sumDisplay">
-                                                            {{-- {{$total_suara }} --}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                {{-- <div class="display-2 fw-bold">Total :</div>
-                                                <div class="display-2 fw-bold">{{$total_suara }}</div> --}}
-                                            </div>
-                                        </div>
-                                        {{-- </p> --}}
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <select class="form-control select2-show-search form-select" name="provinsi" id="provinsi">
-                                        <?php
-                                        $provinsi = App\Models\Province::get();
-                                        ?>
-                                        <option disabled selected>Pilih Provinsi</option>
-                                        @foreach ($provinsi as $kc)
-                                        <option value="{{ $kc->id }}">{{ $kc->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <select class="form-control select2-show-search form-select" name="kota" id="kota">
-                                        <option disabled selected>Pilih Kota</option>
-                                    </select>
-                                </div>
-
-
-                                <div class="form-group">
-                                    <select class="form-control select2-show-search form-select" name="kecamatan" id="kecamatan">
-                                        <option disabled selected>Pilih Kecamatan</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <select class="form-control select2-show-search form-select" name="kelurahan" id="kelurahan">
-                                        <option disabled selected>Pilih Kelurahan</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <select class="form-control select2-show-search form-select" name="tps" id="tps">
-                                        <option disabled selected>Pilih TPS</option>
-                                    </select>
-                                </div>
-                                <div class="row justify-content-between">
-                                    <div class="col-auto">
-                                        <button class="btn btn-primary" type="submit">Kirim C1</button>
-                                    </div>
-                                    <div class="col-auto">
-                                        <form method="POST" action="{{ route('logout') }}">
-                                            @csrf
-                                            <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn btn-danger">
-                                                <span>
-                                                    <i class="fa-solid fa-right-from-bracket"></i>
-                                                </span> Logout
-                                            </a>
-                                        </form>
-                                    </div>
-                                    <div class="col-12 mt-3">
-                                        <x-jet-validation-errors />
-                                    </div>
-                                </div>
-
-                            </div>
+            <div class="row" style="position: absolute; right: 24px; z-index: 10;">
+                <div class="col-12" style="width: 558px">
+                    <div class="row">
+                        <div class="col parent-link">
+                            <a class="btn text-white w-100 py-3 c1saksi tablink" onclick="openPage('C1-Saksi', this, '#6259ca')"
+                                id="defaultOpen">Kirim Data TPS</a>
                         </div>
-
+                        <div class="col parent-link">
+                            <a class="btn text-white w-100 py-3 c1relawan tablink" onclick="openPage('C1-Relawan', this, '#6259ca')">Kirim
+                                Gambar C1 TPS</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </form>
+
+        <script>
+            function openPage(pageName, elmnt, color) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablink");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].style.backgroundColor = "";
+                    // Remove the "active-tab" class from all tab links
+                    tablinks[i].classList.remove("active-tab");
+                }
+                document.getElementById(pageName).style.display = "block";
+                elmnt.style.backgroundColor = color;
+                // Add the "active-tab" class to the selected tab link
+                elmnt.classList.add("active-tab");
+            }
+            // Wrap this part in a DOMContentLoaded event listener
+            document.addEventListener("DOMContentLoaded", function () {
+                document.getElementById("defaultOpen").click();
+            });
+        </script>
+        
+        <style>
+            /* Define a CSS class for the active tab text */
+            .active-tab {
+                color: white;
+            }
+        
+            .active-tab:hover {
+                color: white;
+            }
+        </style>
+
+        <div id="C1-Saksi" class="tabcontent mt-0 pt-0 px-0">
+            <form action="{{url('')}}/c1Crowd/upload" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="container-fluid mt-5">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="wrap-input100 validate-input" style="height: 100%"
+                                        data-bs-validate="Password is required">
+                                        <label class="picture" for="picture__input2" tabIndex="0">
+                                            <span class="picture__image2"></span>
+                                        </label>
+            
+                                        <input type="file" name="c1_images" id="picture__input2" class="picture___input">
+                                    </div>
+                                    <img id="previewImage" src="#" alt="Uploaded Image"
+                                        style="display: none; max-width: 300px; max-height: 300px">
+                                </div>
+                                <script>
+                                    document.getElementById('fileInput').addEventListener('change', function() {
+                                                var file = this.files[0];
+                                                if (file) {
+                                                    var reader = new FileReader();
+                                                    reader.onload = function(e) {
+                                                        var image = document.getElementById('previewImage');
+                                                        image.style.display = 'block';
+                                                        image.src = e.target.result;
+                                                    };
+                                                    reader.readAsDataURL(file);
+                                                }
+                                            });
+                                </script>
+                                <div class="col-6" style="margin-top: 65px; position: relative">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Isi Data Baru</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            {{-- <p class="card-text"> --}}
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        {{-- @foreach ($saksi_data as $ss) --}}
+                                                        <div class="col-md-12">
+                                                            <label for="suara01">Suara 01</label>
+                                                            <input type="text" id="suara" class="form-control suara-input"
+                                                                name="paslon">
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <label for="suara01">Suara 02</label>
+                                                            <input type="text" id="suara" class="form-control suara-input"
+                                                                name="paslon">
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <label for="suara01">Suara 03</label>
+                                                            <input type="text" id="suara" class="form-control suara-input"
+                                                                name="paslon">
+                                                        </div>
+                                                        {{-- @endforeach --}}
+                                                    </div>
+                                                </div>
+                                                {{-- <div class="col-md-12">
+                                                    <label for="keterangan">Keterangan</label>
+                                                    <textarea class="form-control" id="keterangan" cols="30" rows="10"
+                                                        disabled>{{$saksi_data_baru_deskripsi['keterangan']}}</textarea>
+                                                </div> --}}
+                                                <div class="col-md-6 text-center">
+                                                    <div class="card h-100">
+                                                        <div class="card-header py-1">
+                                                            Total :
+                                                        </div>
+                                                        <div class="card-body d-flex display-2 fw-bold">
+                                                            <div class="my-auto mx-auto" id="sumDisplay">
+                                                                {{-- {{$total_suara }} --}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {{-- <div class="display-2 fw-bold">Total :</div>
+                                                    <div class="display-2 fw-bold">{{$total_suara }}</div> --}}
+                                                </div>
+                                            </div>
+                                            {{-- </p> --}}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control select2-show-search form-select" name="provinsi" id="provinsi">
+                                            <?php
+                                                    $provinsi = App\Models\Province::get();
+                                                    ?>
+                                            <option disabled selected>Pilih Provinsi</option>
+                                            @foreach ($provinsi as $kc)
+                                            <option value="{{ $kc->id }}">{{ $kc->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control select2-show-search form-select" name="kota" id="kota">
+                                            <option disabled selected>Pilih Kota</option>
+                                        </select>
+                                    </div>
+            
+            
+                                    <div class="form-group">
+                                        <select class="form-control select2-show-search form-select" name="kecamatan"
+                                            id="kecamatan">
+                                            <option disabled selected>Pilih Kecamatan</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control select2-show-search form-select" name="kelurahan"
+                                            id="kelurahan">
+                                            <option disabled selected>Pilih Kelurahan</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control select2-show-search form-select" name="tps" id="tps">
+                                            <option disabled selected>Pilih TPS</option>
+                                        </select>
+                                    </div>
+                                    <div class="row justify-content-between">
+                                        <div class="col-auto">
+                                            <button class="btn btn-primary" type="submit">Kirim C1</button>
+                                        </div>
+                                        <div class="col-auto">
+                                            <form method="POST" action="{{ route('logout') }}">
+                                                @csrf
+                                                <a href="#" onclick="event.preventDefault(); this.closest('form').submit();"
+                                                    class="btn btn-danger">
+                                                    <span>
+                                                        <i class="fa-solid fa-right-from-bracket"></i>
+                                                    </span> Logout
+                                                </a>
+                                            </form>
+                                        </div>
+                                        <div class="col-12 mt-3">
+                                            <x-jet-validation-errors />
+                                        </div>
+                                    </div>
+            
+                                </div>
+                            </div>
+            
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="C1-Relawan" class="tabcontent mt-0 pt-0 px-0">
+            <form action="{{url('')}}/c1Crowd/upload" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="container-fluid mt-5">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="wrap-input100 validate-input" style="height:500px !important" data-bs-validate="Password is required">
+                                        <label class="picture" for="picture__input3" tabIndex="0">
+                                            <span class="picture__image3"></span>
+                                        </label>
+                                    
+                                        <input type="file" name="c1_images" id="picture__input3" class="picture___input">
+                                    </div>
+                                    <img id="previewImage" src="#" alt="Uploaded Image" style="display: none; max-width: 300px; max-height: 300px">
+                                </div>
+                                <script>
+                                    document.getElementById('fileInput').addEventListener('change', function() {
+                                        var file = this.files[0];
+                                        if (file) {
+                                            var reader = new FileReader();
+                                            reader.onload = function(e) {
+                                                var image = document.getElementById('previewImage');
+                                                image.style.display = 'block';
+                                                image.src = e.target.result;
+                                            };
+                                            reader.readAsDataURL(file);
+                                        }
+                                    });
+                                </script>
+                                <div class="col-6" style="margin-top: 65px; position: relative">
+                                    <div class="form-group">
+                                        <select class="form-control select2-show-search form-select" name="provinsi" id="provinsi">
+                                            <?php
+                                            $provinsi = App\Models\Province::get();
+                                            ?>
+                                            <option disabled selected>Pilih Provinsi</option>
+                                            @foreach ($provinsi as $kc)
+                                            <option value="{{ $kc->id }}">{{ $kc->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control select2-show-search form-select" name="kota" id="kota">
+                                            <option disabled selected>Pilih Kota</option>
+                                        </select>
+                                    </div>
+            
+                                </div>
+                            </div>
+            
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
     </div>
 
     <!-- End PAGE -->
@@ -423,6 +567,37 @@
                 reader.readAsDataURL(file);
             } else {
                 pictureImage2.innerHTML = "Pilih Foto Profile";
+            }
+        });
+        
+        const inputFile3 = document.querySelector("#picture__input3");
+
+        const pictureImage3 = document.querySelector(".picture__image3");
+        // const pictureImageTxt = "Choose an image";
+
+        pictureImage3.innerHTML = "Pilih Foto C1";
+
+        inputFile3.addEventListener("change", function(e) {
+            const inputTarget = e.target;
+            const file = inputTarget.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.addEventListener("load", function(e) {
+                    const readerTarget = e.target;
+
+                    const img = document.createElement("img");
+                    img.src = readerTarget.result;
+                    img.classList.add("picture__img");
+
+                    pictureImage3.innerHTML = "";
+                    pictureImage3.appendChild(img);
+                });
+
+                reader.readAsDataURL(file);
+            } else {
+                pictureImage3.innerHTML = "Pilih Foto Profile";
             }
         });
     </script>

@@ -744,6 +744,52 @@
             src="{{url('')}}/storage/{{ $saksi->c1_images }}" data-bs-holder-rendered="true">
         </div>
     </div>
+    
+    <div class="row page-content-wrapper page-break">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body text-center" style="padding: 21.5px">
+                    <div class="card-header py-2 text-white bg-dark">
+                        <h4 class="mb-0 mx-auto text-black card-title">Data Pemilih dan Hak Pilih (TPS {{$tps->number}}
+                            /
+                            Kelurahan {{$kelurahan->name}})</h4>
+                    </div>
+                    <table class="table table-striped">
+                        <tr>
+                            <td class="py-2 text-start" style="width: 50%">Jumlah Hak Pilih (DPT)</td>
+                            <td class="py-2" style="width: 5%">:</td>
+                            <td class="py-2" style="width: 40%">(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 text-start" style="width: 50%">Surat Suara Sah</td>
+                            <td class="py-2" style="width: 5%">:</td>
+                            <td class="py-2" style="width: 40%">(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 text-start" style="width: 50%">Suara Tidak Sah</td>
+                            <td class="py-2" style="width: 5%">:</td>
+                            <td class="py-2" style="width: 40%">(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 text-start" style="width: 50%">Jumlah Suara Sah dan Suara Tidak Sah</td>
+                            <td class="py-2" style="width: 5%">:</td>
+                            <td class="py-2" style="width: 40%">(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 text-start" style="width: 50%">Total Surat Suara</td>
+                            <td class="py-2" style="width: 5%">:</td>
+                            <td class="py-2" style="width: 40%">(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 text-start" style="width: 50%">Sisa Surat Suara</td>
+                            <td class="py-2" style="width: 5%">:</td>
+                            <td class="py-2" style="width: 40%">(dummy)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{-- <div class="row page-content-wrapper page-break">
         <div class="col-12 px-0">
