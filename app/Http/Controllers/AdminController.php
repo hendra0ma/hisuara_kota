@@ -38,9 +38,12 @@ use App\Models\Configs;
 use App\Models\CrowdC1;
 use App\Models\RegenciesDomain;
 use App\Models\SuratPernyataan;
+use Exception;
 use Facade\FlareClient\Http\Response;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Log;
 use Rekapitulator;
 use Rekening;
 use Tracking;
@@ -833,6 +836,51 @@ class AdminController extends Controller
         }
     }
 
+    function getModaCek1(Request $request)
+    {
+        try {
+            // Decrypt the TPS ID from the request
+            // $encryptedTpsId = $request->segment(3);
+            $decryptedTpsId = Crypt::decrypt($request->id);
+
+            // dd($decryptedTpsId);
+
+            // Retrieve Saksi data based on the decrypted TPS ID
+            $saksi = Saksi::join('tps', 'tps.id', 'saksi.tps_id')->where('tps_id', (string)$decryptedTpsId)->first();
+            // $data['saksi'] = Saksi::where('tps_id', (string)$decryptedTpsId)->first();
+
+            // Prepare data array with default values
+            $data = [
+                'saksi' => $saksi,
+                'qrcode' => null,
+                'verifikator' => null,
+                'hukum' => null,
+            ];
+
+            // Check if there's a QR code associated with the TPS
+            $qrcode = Qrcode::where('tps_id', $saksi['tps_id'])->first();
+
+            if ($qrcode) {
+                // If QR code exists, retrieve additional data
+                $data['qrcode'] = $qrcode;
+                $data['verifikator'] = User::find($qrcode->verifikator_id);
+                $data['hukum'] = User::find($qrcode->hukum_id);
+            }
+
+            $data['user'] = User::where('tps_id', $saksi['tps_id'])->first();
+            // dd($data['user']);
+            // dd($data['saksi']);
+
+            // Return the view with the data
+            return view('administrator.ajax.get-moda-cek-1', $data);
+        } catch (Exception $e) {
+            // Handle decryption exception
+            // Log::error('Invalid payload: ' . );
+            // dd($e);
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
     public function rekapitulator(Request $request)
     {
         $data['config'] = Config::first();
@@ -1117,9 +1165,15 @@ class AdminController extends Controller
             ->get();
         $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
         $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
-
-
-
+        $data['qrcode'] = Qrcode::where('tps_id', $data['saksi'][0]['tps_id'])->first();
+        if ($data['qrcode'] != null) {
+            $data['verifikator'] = User::where('id', $data['qrcode']['verifikator_id'])->first();
+            $data['hukum'] = User::where('id', $data['qrcode']['hukum_id'])->first();
+        } else {
+            $data['verifikator'] = null;
+            $data['hukum'] = null;
+        }
+        
         return view('administrator.perhitungan.tps', $data);
     }
 
@@ -2051,6 +2105,14 @@ class AdminController extends Controller
             ->get();
         $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
         $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
+        $data['qrcode'] = Qrcode::where('tps_id', $data['saksi'][0]['tps_id'])->first();
+        if ($data['qrcode'] != null) {
+            $data['verifikator'] = User::where('id', $data['qrcode']['verifikator_id'])->first();
+            $data['hukum'] = User::where('id', $data['qrcode']['hukum_id'])->first();
+        } else {
+            $data['verifikator'] = null;
+            $data['hukum'] = null;
+        }
 
         return view('administrator.realcount.tps', $data);
     }
@@ -2282,6 +2344,14 @@ class AdminController extends Controller
             ->get();
         $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
         $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
+        $data['qrcode'] = Qrcode::where('tps_id', $data['saksi'][0]['tps_id'])->first();
+        if ($data['qrcode'] != null) {
+            $data['verifikator'] = User::where('id', $data['qrcode']['verifikator_id'])->first();
+            $data['hukum'] = User::where('id', $data['qrcode']['hukum_id'])->first();
+        } else {
+            $data['verifikator'] = null;
+            $data['hukum'] = null;
+        }
 
         return view('administrator.rekapitulasi-perhitungan.tps', $data);
     }
@@ -2624,6 +2694,14 @@ class AdminController extends Controller
             ->get();
         $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
         $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
+        $data['qrcode'] = Qrcode::where('tps_id', $data['saksi'][0]['tps_id'])->first();
+        if ($data['qrcode'] != null) {
+            $data['verifikator'] = User::where('id', $data['qrcode']['verifikator_id'])->first();
+            $data['hukum'] = User::where('id', $data['qrcode']['hukum_id'])->first();
+        } else {
+            $data['verifikator'] = null;
+            $data['hukum'] = null;
+        }
 
         return view('administrator.terverifikasi.tps', $data);
     }

@@ -752,6 +752,11 @@ $tps = Tps::count();
         right: 0;
         top: 60px;
     }
+
+    .chart-teks {
+        color: white;
+        z-index: 19;
+    }
 </style>
 <div class="row">
 
@@ -1121,7 +1126,11 @@ $tps = Tps::count();
                                     <div class="text-center mt-2 mb-2"><span
                                             class="badge bg-success">{{$total_incoming_vote}} /
                                             {{$dpt}}</span></div>
-                                    <div id="chart-pie" class="chartsh h-100 w-100"></div>
+                                    <div class="chart-teks">
+                                        Prabowo
+                                    </div>   
+                                    <div id="chart-pie" class="chartsh h-100 w-100">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-xxl">

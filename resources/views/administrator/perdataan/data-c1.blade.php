@@ -78,6 +78,113 @@ $kota = Regency::where('id', $config->regencies_id)->first();
 
 <hr style="border: 1px solid">
 
-<livewire:all-c1-plano />
+<livewire:all-c1-plano />s
+
+<!-- Modal -->
+<div class="modal fade" style="background: rgba(0, 0, 0, 0.65)" id="modaCek1" tabindex="-1" aria-labelledby="modaCek1Label"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="background: transparent; border: 0px">
+            <div class="modal-body p-0" id="modalContent">
+                {{-- <ul class="breadcrumb">
+                    <?php
+                        $desa = Village::where('id', (string)$village->id)->first();
+                        $regency = Regency::where('id',(string) $config->regencies_id)->first();
+                        $kcamatan = District::where('id', (string)$desa->district_id)->first();
+                        ?>
+                    <li><a href="{{url('')}}/administrator/terverifikasi" class="text-white">{{$regency->name}}</a></li>
+                    <li><a href="{{url('')}}/administrator/terverifikasi_kecamatan/{{Crypt::encrypt($district->id)}}"
+                            class="text-white">{{$district->name}}</a></li>
+                    <li><a href="{{url('')}}/administrator/terverifikasi_kelurahan/{{Crypt::encrypt($village->id)}}"
+                            class="text-white">{{$desa->name}}</a></li>
+                    <li><a href="{{url('')}}/administrator/terverifikasi_tps/{{Crypt::encrypt($data_tps->id)}}"
+                            class="text-white">TPS
+                            {{$data_tps->number}}</a></li>
+
+                </ul>
+                <div class="col-12">
+                    <div class="card rounded-0 mb-0">
+                        <div class="card-body">
+                            <div class="row">
+                                @if ($saksi[0]['kecurangan'] == "yes" && $qrcode != null)
+                                <?php $scan_url = url('') . "/scanning-secure/" . (string)Crypt::encrypt($qrcode->nomor_berkas); ?>
+                                <div class="col-auto my-auto">
+                                    {!! QrCode::size(100)->generate( $scan_url); !!}
+                                </div>
+                                @else
+                                @endif
+                                <div class="col mt-2">
+                                    <div class="media">
+                                        <?php
+                                                                                                            $user = User::where('tps_id')->first();  
+                                                                                                        ?>
+                                        @if ($user['profile_photo_path'] == NULL)
+                                        <img class="rounded-circle"
+                                            style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                                            src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
+                                        @else
+                                        <img class="rounded-circle"
+                                            style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                                            src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
+                                        @endif
+
+                                        <div class="media-body my-auto">
+                                            <h5 class="mb-0">{{ $user['name'] }}</h5>
+                                            NIK : {{ $user['nik'] }}
+                                            <div>TPS {{$data_tps->number}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-auto pt-2 my-auto px-1">
+                                    <a href="https://wa.me/{{$user->no_hp}}" class="btn btn-success text-white"><i
+                                            class="fa-solid fa-phone"></i>
+                                        Hubungi</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12" style="height: 100vh; overflow: scroll">
+                    <center>
+                        <img width="100%" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}" data-magnify-speed="200"
+                            alt="" data-magnify-magnifiedwidth="2500" data-magnify-magnifiedheight="2500"
+                            class="img-fluid zoom" data-magnify-src="{{asset('')}}storage/{{$saksi[0]->c1_images}}">
+                    </center>
+                </div> --}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Function to load content dynamically using AJAX
+    $('.moda-cek-1').on('click', function(event) {
+        // Extract the ID from the clicked element or any other relevant source
+        var id = $(this).data('id');
+        
+        // Call the function to load modal content
+        loadModalContent(id);
+    });
+    
+    function loadModalContent(id) {
+        $.ajax({
+            url: '{{url('')}}/administrator/get-moda-cek-1/', // Replace with the actual URL and include the id parameter
+            type: 'GET',
+            data:{
+                id:id
+            },
+            success: function(data) {
+                $('#modalContent').html(data);
+            },
+            error: function() {
+                $('#modalContent').html('<p>Error loading content.</p>');
+            }
+        });
+        console.log(id);
+    };
+
+</script>
+
+
 
 @endsection

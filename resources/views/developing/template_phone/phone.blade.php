@@ -69,7 +69,7 @@
             color: #777;
             cursor: pointer;
             flex: 1;
-            padding: 10px;
+            padding: 7px;
             text-align: center;
         }
 
