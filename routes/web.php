@@ -269,6 +269,7 @@ foreach ($kotas as $kota) {
         //auth
         //register Admin
         Route::get('register-admin', [LoginController::class, 'createAdmin'])->name('formRegister.admin');
+        Route::get('get-koordinator',[LoginController::class,'getKoordinator'])->name('getKoordinator');
         Route::get('login/tracking', [LoginController::class, 'track_rec']);
         Route::post('store-admin', [LoginController::class, 'storeAdmin'])->name('storeRegister.admin');
         Route::get('request', [Controller::class, 'request']);
