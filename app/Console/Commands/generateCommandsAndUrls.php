@@ -42,42 +42,42 @@ class generateCommandsAndUrls extends Command
         $prefixAdmin = 'administrator/';
         $prefixVerifikator = 'verifikator/';
         $commandsAndUrls = [
-            'dashboard' => $prefixAdmin . 'index',
+            'buka dashboard' => $prefixAdmin . 'index',
 
-            'perhitungan real count' => $prefixAdmin . 'real_count2',
-            'perhitungan quick count' => $prefixAdmin . 'quick_count2',
-            'perhitungan terverifikasi' => $prefixAdmin . 'terverifikasi',
-            'perhitungan rekapitulasi' => $prefixAdmin . 'rekapitulasi',
+            'buka perhitungan real count' => $prefixAdmin . 'real_count2',
+            'buka perhitungan quick count' => $prefixAdmin . 'quick_count2',
+            'buka perhitungan terverifikasi' => $prefixAdmin . 'terverifikasi',
+            'buka perhitungan rekapitulasi' => $prefixAdmin . 'rekapitulasi',
 
-            'petugas saksi' => $prefixAdmin . 'verifikasi_saksi',
-            'petugas koordinator saksi' => $prefixAdmin . 'koordinator_saksi',
-            'petugas relawan' => $prefixAdmin . 'relawan',
-            'petugas enumerator' => $prefixAdmin . 'enumerator',
-            'petugas crowd c1' => $prefixAdmin . 'verifikasi_crowd_c1',
-            'petugas admin' => $prefixAdmin . 'verifikasi_akun',
+            'buka petugas saksi' => $prefixAdmin . 'verifikasi_saksi',
+            'buka petugas koordinator saksi' => $prefixAdmin . 'koordinator_saksi',
+            'buka petugas relawan' => $prefixAdmin . 'relawan',
+            'buka petugas enumerator' => $prefixAdmin . 'enumerator',
+            'buka petugas crowd c1' => $prefixAdmin . 'verifikasi_crowd_c1',
+            'buka petugas admin' => $prefixAdmin . 'verifikasi_akun',
 
-            'operator verifikasi c1' => $prefixVerifikator . 'verifikasi-c1',
-            'operator audit c1' => $prefixVerifikator . 'audit-c1',
-            'operator crowd c1 KPU' => $prefixVerifikator . 'crowd-c1-kpu',
+            'buka operator verifikasi c1' => $prefixVerifikator . 'verifikasi-c1',
+            'buka operator audit c1' => $prefixVerifikator . 'audit-c1',
+            'buka operator crowd c1 KPU' => $prefixVerifikator . 'crowd-c1-kpu',
 
-            'pelacakan saksi' => $prefixAdmin . 'lacak_saksi',
-            'pelacakan relawan' => $prefixAdmin . 'lacak_relawan',
-            'pelacakan enumerator' => $prefixAdmin . 'lacak_enumerator',
-            'pelacakan admin' => $prefixAdmin . 'lacak_admin',
-            'pelacakan crowd c1' => $prefixAdmin . 'lacak_crowd_c1',
+            'buka pelacakan saksi' => $prefixAdmin . 'lacak_saksi',
+            'buka pelacakan relawan' => $prefixAdmin . 'lacak_relawan',
+            'buka pelacakan enumerator' => $prefixAdmin . 'lacak_enumerator',
+            'buka pelacakan admin' => $prefixAdmin . 'lacak_admin',
+            'buka pelacakan crowd c1' => $prefixAdmin . 'lacak_crowd_c1',
 
-            'dokumentasi data c1 saksi' => $prefixAdmin . 'data-c1',
-            'dokumentasi dokumen lain' => $prefixAdmin . 'dokumen_lain',
-            'dokumentasi crowd' => $prefixAdmin . 'data-crowd-c1-kpu',
-            'dokumentasi riwayat' => $prefixAdmin . 'r-data',
+            'buka dokumentasi data c1 saksi' => $prefixAdmin . 'data-c1',
+            'buka dokumentasi dokumen lain' => $prefixAdmin . 'dokumen_lain',
+            'buka dokumentasi crowd' => $prefixAdmin . 'data-crowd-c1-kpu',
+            'buka dokumentasi riwayat' => $prefixAdmin . 'r-data',
 
-            'sirantap verifikasi kecurangan' => $prefixVerifikator . 'verifikator_kecurangan',
-            'sirantap bukti kecurangan' => $prefixVerifikator . 'fraud-data-print',
-            'sirantap barcode kecurangan' => $prefixVerifikator . 'fraud-data-report',
-            'sirantap jenis kecurangan' => $prefixAdmin . 'index-tsm',
+            'buka sirantap verifikasi kecurangan' => $prefixVerifikator . 'verifikator_kecurangan',
+            'buka sirantap bukti kecurangan' => $prefixVerifikator . 'fraud-data-print',
+            'buka sirantap barcode kecurangan' => $prefixVerifikator . 'fraud-data-report',
+            'buka sirantap jenis kecurangan' => $prefixAdmin . 'index-tsm',
 
-            'dpt' => 'klik nav dpt',
-            'urutan' => 'klik nav urutan',
+            'buka dpt' => 'klik nav dpt',
+            'buka urutan' => 'klik nav urutan',
         ];
 
         $jumlahCommandsAndUrls = count($commandsAndUrls);
