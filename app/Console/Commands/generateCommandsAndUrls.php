@@ -102,18 +102,13 @@ class generateCommandsAndUrls extends Command
         ];
 
         $jumlahCommandsAndUrls = count($commandsAndUrls);
-        $hostname = request()->secure() ? 'https' : 'http' . '://' . request()->getHost();
         for ($i = 0; $i < $jumlahCommandsAndUrls; $i++) {
             $keysOfArray = array_keys($commandsAndUrls);
             $namaHalaman = $keysOfArray[$i];
             $route = $commandsAndUrls[$namaHalaman];
 
             $isRouteHasSlash = strpos($route, '/'); // jika route tidak mempunyai slash, itu berarti command tersebut berupa aksi, bukan untuk di redirect.
-            if ($isRouteHasSlash) {
-                $commandsAndUrls[$namaHalaman] = "$hostname/$route";
-            } else {
-                $commandsAndUrls[$namaHalaman] = $route;
-            }
+            $commandsAndUrls[$namaHalaman] = $route;
         }
 
         $jsonFilePath = storage_path('commandsAndUrls.json');;
