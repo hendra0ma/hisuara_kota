@@ -108,7 +108,9 @@ $kota = Regency::where('id', $config->regencies_id)->first();
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="verify-crowd-c1Label">Verifikasi Crowd Modal</h5>
+                    <h5 class="modal-title" id="verify-crowd-c1Label"><img style="height: 50px;" class="mb-3 me-3"
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/KPU_Logo.svg/531px-KPU_Logo.svg.png" alt="">
+                        Verifikasi Crowd C1 KPU</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body"id="modal-crowd">
@@ -116,7 +118,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                 
+        
                 </div>
             </div>
         </div>
@@ -133,7 +135,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                 },
                 type:"get",
                 success:function(res){
-                   $('#modal-crowd').html(res)
+                    $('#modal-crowd').html(res)
                 }
             })
         }

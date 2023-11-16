@@ -14,7 +14,7 @@
         @foreach($all_c1 as $c1)
         <div class="col-3 px-2 my-2">
             <a type="button" class="moda-cek-1" data-bs-toggle="modal" data-bs-target="#modaCek1" data-id="{{Crypt::encrypt($c1->tps_id)}}">
-                <img class="dalem-flex w-100" src="{{asset('')}}storage/{{$c1->c1_images}}" alt="">
+                <img class="dalem-flex" style="height: 600px; width: 450px; object-fit: cover" src="{{asset('')}}storage/{{$c1->c1_images}}" alt="">
             </a>
         </div>
         @endforeach
