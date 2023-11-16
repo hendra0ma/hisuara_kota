@@ -78,7 +78,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
 
 <hr style="border: 1px solid">
 
-<livewire:all-c1-plano />s
+<livewire:all-c1-plano />
 
 <!-- Modal -->
 <div class="modal fade" style="background: rgba(0, 0, 0, 0.65)" id="modaCek1" tabindex="-1" aria-labelledby="modaCek1Label"

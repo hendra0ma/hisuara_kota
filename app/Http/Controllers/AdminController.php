@@ -857,6 +857,8 @@ class AdminController extends Controller
                 'hukum' => null,
             ];
 
+            $data['tps'] = Tps::where('id', $data['saksi']['tps_id'])->first();
+
             // Check if there's a QR code associated with the TPS
             $qrcode = Qrcode::where('tps_id', $saksi['tps_id'])->first();
 

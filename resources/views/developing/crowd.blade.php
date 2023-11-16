@@ -384,6 +384,25 @@
                                             <option disabled selected>Pilih Kota</option>
                                         </select>
                                     </div>
+
+                                    <div class="row justify-content-between">
+                                        <div class="col-auto">
+                                            <button class="btn btn-primary" type="submit">Kirim C1</button>
+                                        </div>
+                                        <div class="col-auto">
+                                            <form method="POST" action="{{ route('logout') }}">
+                                                @csrf
+                                                <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn btn-danger">
+                                                    <span>
+                                                        <i class="fa-solid fa-right-from-bracket"></i>
+                                                    </span> Logout
+                                                </a>
+                                            </form>
+                                        </div>
+                                        <div class="col-12 mt-3">
+                                            <x-jet-validation-errors />
+                                        </div>
+                                    </div>
             
                                 </div>
                             </div>
