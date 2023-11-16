@@ -76,3 +76,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 Route::post('/logout', [App\Http\Controllers\API\AuthController::class, 'logout']);
 // Route::post('/upload-image', [App\Http\Controllers\API\AuthController::class, 'testUpload']);
+
+Route::get('/findUrlByVoiceText', [App\Http\Controllers\API\CommandUrlFinder::class, 'findUrlByCommand']);

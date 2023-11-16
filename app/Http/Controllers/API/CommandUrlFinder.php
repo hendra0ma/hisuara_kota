@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-class CommandUrlFinder
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class CommandUrlFinder extends Controller
 {
     private $commandsAndUrls;
 
@@ -15,8 +18,9 @@ class CommandUrlFinder
         $this->commandsAndUrls = $commandsAndUrlsArray;
     }
 
-    public function findUrlByCommand($command)
+    public function findUrlByCommand(Request $request)
     {
+        $command = $request->input('text', 'default');
         $keys = array_keys($this->commandsAndUrls);
         $result = null;
         foreach ($keys as $key) {
