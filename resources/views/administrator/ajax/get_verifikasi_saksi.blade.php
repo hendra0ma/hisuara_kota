@@ -775,7 +775,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
 
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-header" style="background-color: #eee">
+                                <div class="card-header px-3" style="background-color: #eee">
                                     <h4 class="mb-0 text-black card-title">Data Pemilih dan Hak Pilih (TPS {{$tps['number']}} / Kelurahan {{$village['name'] }})</h4>
                                 </div>
                                 <div class="card-body p-0">
@@ -868,7 +868,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
 
                 <div class="col-12 px-0">
                     <div class="card">
-                        <div class="card-header" style="background-color: #eee">
+                        <div class="card-header px-3" style="background-color: #eee">
                             <h4 class="mb-0 text-black card-title">Data Pemilih dan Hak Pilih (TPS {{$tps['number']}} / Kelurahan {{$village['name'] }})</h4>
                         </div>
                         <div class="card-body p-0">

@@ -1,6 +1,29 @@
-<div class="col-lg-6" style="height: 100vh; overflow: scroll">
+<style>
+    /* width */
+    .w-cus-sb::-webkit-scrollbar {
+        width: 25px;
+    }
+
+    /* Track */
+    .w-cus-sb::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Handle */
+    .w-cus-sb::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+    .w-cus-sb::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+</style>
+
+<div class="col-lg-6 w-cus-sb" style="height: 100vh; overflow: scroll">
     <center>
-        <img src="{{ asset('storage/' . '/' . $paslon[0]->saksi_data[0]->c1_images) }}" alt="" class="img-fluid zoom" data-magnify-src="{{ asset('storage/' . '/' . $paslon[0]->saksi_data[0]->c1_images) }}">
+        <img src="{{ asset('storage/' . '/' . $paslon[0]->saksi_data[0]->c1_images) }}" data-magnify-speed="200" alt="" data-magnify-magnifiedwidth="2500"data-magnify-magnifiedheight="2500" class="img-fluid
+        zoom" data-magnify-src="{{asset('storage'.'/'.$paslon[0]->saksi_data[0]->c1_images)}}">
     </center>
 </div>
 
@@ -122,6 +145,51 @@
             data-id="{{$user->tps_id}}" data-bs-toggle="modal" id="" data-bs-target="#periksaC1Auditor">Koreksi</a>
         </div>
         @endif
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-success">
+                    <h4 class="mb-0 mx-auto text-white card-title">Data Pemlih Dan Penggunaan Hak Pilih (TPS
+                        {{$paslon[0]->saksi_data[0]->number}})</h4>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-striped">
+                        <tr>
+                            <td style="width: 33.3333333%">Jumlah Hak Pilih (DPT)</td>
+                            <td style="width: 33.3333333%">:</td>
+                            <td style="width: 33.3333333%">(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 33.3333333%">Surat Suara Sah</td>
+                            <td style="width: 33.3333333%">:</td>
+                            <td style="width: 33.3333333%">(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 33.3333333%">Suara Tidak Sah</td>
+                            <td style="width: 33.3333333%">:</td>
+                            <td style="width: 33.3333333%">(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 33.3333333%">Jumlah Suara Sah dan Suara Tidak Sah</td>
+                            <td style="width: 33.3333333%">:</td>
+                            <td style="width: 33.3333333%">(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 33.3333333%">Total Surat Suara</td>
+                            <td style="width: 33.3333333%">:</td>
+                            <td style="width: 33.3333333%">(dummy)</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 33.3333333%">Sisa Surat Suara</td>
+                            <td style="width: 33.3333333%">:</td>
+                            <td style="width: 33.3333333%">(dummy)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
