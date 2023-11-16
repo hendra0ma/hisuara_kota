@@ -463,7 +463,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                         </h4>
                                         <h4 class="mb-0 fw-bold suara tugel-content"
                                             style="color: #e1af0a; font-size: 16px; display: none;">
-                                            Urutan
+                                            Suara Terbanyak
                                         </h4>
                                         <h4 class="mb-0 fw-bold dpt tugel-content"
                                             style="color: #e1af0a; font-size: 16px; display: none;">
@@ -598,8 +598,15 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/rekapitulasi"
                                                     class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                                    style="background-color: #528bff; border-radius: 0px;">
                                                     Rekapitulasi
+                                                </a>
+                                            </div>
+                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                                <a href="{{url('')}}/administrator/rekapitulasi"
+                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
+                                                    style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                                    Hitung Ulang KPU
                                                 </a>
                                             </div>
                                         </div>

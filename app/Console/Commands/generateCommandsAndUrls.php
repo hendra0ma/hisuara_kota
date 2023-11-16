@@ -78,7 +78,12 @@ class generateCommandsAndUrls extends Command
             'buka admin terverifikasi' => 'klik tab admin terverifikasi(nav petugas admin)',
 
             'buka operator verifikasi c1' => $prefixVerifikator . 'verifikasi-c1',
+            'buka c1 saksi' => 'klik tab c1 saksi(nav operator verifikasi c1)',
+            'buka c1 relawan tps' => 'klik tab c1 relawan tps(nav operator verifikasi c1)',
+            'buka c1 crowd kpu' => 'klik tab c1 crowd kpu(nav operator verifikasi c1)',
             'buka operator audit c1' => $prefixVerifikator . 'audit-c1',
+            'buka audit c1' => 'klik tab audit c1(nav operator audit c1)',
+            'buka c1 lolos audit' => 'klik tab c1 lolos audit(nav operator audit c1)',
             'buka operator crowd c1 KPU' => $prefixVerifikator . 'crowd-c1-kpu',
 
             'buka pelacakan saksi' => $prefixAdmin . 'lacak_saksi',
@@ -89,11 +94,16 @@ class generateCommandsAndUrls extends Command
 
             'buka dokumentasi data c1 saksi' => $prefixAdmin . 'data-c1',
             'buka dokumentasi dokumen lain' => $prefixAdmin . 'dokumen_lain',
+            'buka data pemilih' => 'klik tab data pemilih(dokumentasi dokumen lain)',
+            'buka c7' => 'klik tab c7(dokumentasi dokumen lain)',
+            'buka koreksi c1' => 'klik tab koreksi c1(dokumentasi dokumen lain)',
             'buka dokumentasi crowd' => $prefixAdmin . 'data-crowd-c1-kpu',
             'buka dokumentasi riwayat' => $prefixAdmin . 'r-data',
 
             'buka sirantap verifikasi kecurangan' => $prefixVerifikator . 'verifikator_kecurangan',
             'buka sirantap bukti kecurangan' => $prefixVerifikator . 'fraud-data-print',
+            'buka data kecurangan masuk' => 'klik tab data kecurangan masuk(sirantap bukti kecurangan)',
+            'buka data tercetak' => 'klik tab data tercetak(sirantap bukti kecurangan)',
             'buka sirantap barcode kecurangan' => $prefixVerifikator . 'fraud-data-report',
             'buka sirantap jenis kecurangan' => $prefixAdmin . 'index-tsm',
 
@@ -102,18 +112,13 @@ class generateCommandsAndUrls extends Command
         ];
 
         $jumlahCommandsAndUrls = count($commandsAndUrls);
-        $hostname = request()->secure() ? 'https' : 'http' . '://' . request()->getHost();
         for ($i = 0; $i < $jumlahCommandsAndUrls; $i++) {
             $keysOfArray = array_keys($commandsAndUrls);
             $namaHalaman = $keysOfArray[$i];
             $route = $commandsAndUrls[$namaHalaman];
 
             $isRouteHasSlash = strpos($route, '/'); // jika route tidak mempunyai slash, itu berarti command tersebut berupa aksi, bukan untuk di redirect.
-            if ($isRouteHasSlash) {
-                $commandsAndUrls[$namaHalaman] = "$hostname/$route";
-            } else {
-                $commandsAndUrls[$namaHalaman] = $route;
-            }
+            $commandsAndUrls[$namaHalaman] = $route;
         }
 
         $jsonFilePath = storage_path('commandsAndUrls.json');;

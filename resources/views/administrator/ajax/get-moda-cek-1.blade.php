@@ -81,10 +81,10 @@ $tps = Tps::count();
 
 <ul class="breadcrumb">
     <?php
-                $desa = Village::where('id', $saksi->village_id)->first();
-                $regency = Regency::where('id',(string) $config->regencies_id)->first();
-                $kcamatan = District::where('id', (string)$desa->district_id)->first();
-                ?>
+        $desa = Village::where('id', $saksi->village_id)->first();
+        $regency = Regency::where('id',(string) $config->regencies_id)->first();
+        $kcamatan = District::where('id', (string)$desa->district_id)->first();
+        ?>
     <li>{{$regency->name}}</li>
     <li>{{$kcamatan->name}}</li>
     <li>{{$desa->name}}</li>

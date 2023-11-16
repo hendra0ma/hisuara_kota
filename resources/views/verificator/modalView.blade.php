@@ -1,6 +1,28 @@
-<div class="col-lg-6" style="height: 100vh; overflow: scroll">
+<style>
+    /* width */
+    .w-cus-sb::-webkit-scrollbar {
+        width: 25px;
+    }
+    
+    /* Track */
+    .w-cus-sb::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    
+    /* Handle */
+    .w-cus-sb::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+    
+    /* Handle on hover */
+    .w-cus-sb::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+</style>
+
+<div class="col-lg-6 w-cus-sb" style="height: 100vh; overflow: scroll">
     <center>
-        <img src="{{asset('storage'.'/'.$paslon[0]->saksi_data[0]->c1_images)}}"data-magnify-speed="200" alt="" data-magnify-magnifiedwidth="2500"data-magnify-magnifiedheight="2500"    class="img-fluid zoom" data-magnify-src="{{asset('storage'.'/'.$paslon[0]->saksi_data[0]->c1_images)}}">
+        <img src="{{asset('storage'.'/'.$paslon[0]->saksi_data[0]->c1_images)}}" data-magnify-speed="200" alt="" data-magnify-magnifiedwidth="2500"data-magnify-magnifiedheight="2500"    class="img-fluid zoom" data-magnify-src="{{asset('storage'.'/'.$paslon[0]->saksi_data[0]->c1_images)}}">
     </center>
 </div>
 
