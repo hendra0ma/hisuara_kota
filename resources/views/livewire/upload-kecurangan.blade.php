@@ -11,8 +11,8 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-<div style="position: relative" class="card-header bg-primary text-light text-center fw-bold rounded-0 col-12">
-    Laporan Kecurangan Pemilu
+<div style="position: relative" class="card-header bg-danger text-light text-center fw-bold rounded-0 col-12">
+    Laporan Kecurangan Pemilu 2024
 </div>
 <div style="overflow-y:auto; overflow-x: hidden">
     <div class="row halaman-1 px-3">
@@ -23,31 +23,54 @@
                         <div class="col-12">
                             <img src="{{asset('')}}assets/icons/hisuara_new.png" alt="Avatar" class="hadow-4 mb-3"
                                 style="width: 157px;" />
-                            <h3 class="fw-bold mb-0">HISUARA</h3>
-                            <h3 class="fw-bold mb-0">Selamat Datang!</h3>
                         </div>
                     </div>
                 </div>
             </div>
         </center>
         <hr style="border: 1px solid">
-        <h5 class="text-center fw-bold text-danger">Prosedur Laporan Kecurangan Pemilu</h5>
+        <h5 class="text-center fw-bold text-danger">Prosedur Laporan Kecurangan Pemilu 2024</h5>
         <hr style="border: 1px solid">
         <center>
-            <h4 class="text-center fw-bold">ELECTION WITNESS FRAUD TAGGING (EWFT)</h4>
-            <h5 class="text-center fw-bold">36 Jenis Pelanggaran Pemilu</h5>
+            <h5 class="text-center fw-bold">59 Jenis Pelanggaran Pemilu</h5>
         </center>
         <hr>
         <div class="container">
-            <p style="text-align: justify">Laporan Kecurangan Pemilu ini terintegrasi dengan sistem laporan kecurangan pada
-                Bawaslu RI.
-                Dimana seluruh laporan yang Anda buat dapat dilihat oleh Bawaslu RI Melalui akun Bawaslu pada
-                Hisuara.</p>
-            <p style="text-align: justify">Setiap saksi yang melaporkan kecurangan juga akan terintegrasi langsung dengan
-                sidang
-                online
-                Mahkamah Konstitusi melalui sistem Hisuara dan Anda dapat saja menjadi salah satu peserta
-                dari sidang online Mahkamah Konstitusi tersebut. <b>Berdasarkan peraturan Mahkamah Konstitusi
+            <p style="text-align: justify">
+                <b>Jenis-jenis pelanggaran pemilu</b>
+                <ol>
+                    <li>
+                        <b>
+                            Pelanggaran administrasi
+                        </b><br>
+                        Pelanggaran Administrasi Pemilu adalah pelanggaran yang meliputi tata cara, prosedur, dan mekanisme yang berkaitan
+                        dengan administrasi pelaksanaan Pemilu dalam setiap tahapan Penyelenggaraan Pemilu.
+                    </li>
+                    <li>
+                        <b>
+                            Pelanggaran Tindak pidana pemilu
+                        </b><br>
+                        Tindak Pidana Pemilu adalah tindak pidana pelanggaran dan/atau kejahatan terhadap ketentuan tindak pidana Pemilu
+                        sebagaimana diatur dalam Undang-Undang tentang Pemilihan umum dan Undang- Undang tentang Pemilihan Gubernur, Bupati, dan
+                        Walikota
+                    </li>
+                    <li>
+                        <b>
+                            Pelanggran kode etik pemilu
+                        </b><br>
+                        Pelanggaran Kode Etik adalah pelanggaran terhadap etika Penyelenggara Pemilu yang berpedoman pada sumpah dan/atau janji
+                        sebelum menjalankan tugas sebagai Penyelenggara Pemilu.
+                    </li>
+                    <li>
+                        <b>
+                            Pelanggran Aparatur Sipil Negara (ASN)
+                        </b><br>
+                        Pasal 2 UU No 5 Tahun 2014 “Setiap pegawai ASN harus patuh pada asas netralitas dengan tidak berpihak dari segala bentuk
+                        pengaruh manapun dan tidak memihak kepada kepentingan tertentu”.
+                    </li>
+                </ol>
+            </p>
+            <p><b>Berdasarkan peraturan Mahkamah Konstitusi
                     Republik Indonesia No.1 Tahun 2014 tentang pedoman beracara dalam perselisihan hasil
                     pemilihan umum,</b> bukti elektronik yang Anda kirimkan adalah alat bukti yang sah di mata
                 hukum.</p>

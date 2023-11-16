@@ -556,7 +556,7 @@
                                     <tr>
                                         <td class="bg-dark text-light"></td>
                                         <th class="bg-dark text-light">
-                                            TAMBAHKAN JENIS PELANGGARAN UMUM (+)
+                                            PELANGGARAN ADMINISTRASI PEMILU (+)
                                         </th>
                                     </tr>
                                     @foreach ($pelanggaran_umum as $item)
@@ -573,10 +573,44 @@
                                     <tr>
                                         <td class="bg-dark text-light"></td>
                                         <th class="bg-dark text-light">
-                                            TAMBAHKAN JENIS PELANGGARAN PETUGAS (+)
+                                            PELANGGARAN TINDAK PIDANA (+)
                                         </th>
                                     </tr>
                                     @foreach ($pelanggaran_petugas as $item)
+                                    <tr>
+                                        <td><input type="checkbox" name="curang[]" value=" {{ $item['kecurangan'] }}"
+                                                data-id="{{ $item['id'] }}" onclick="ajaxGetSolution(this)">
+                                        </td>
+                                        <td><label>{{ $item['kecurangan'] }} </label></td>
+                                    </tr>
+                                    @endforeach
+                                </thead>
+                                <thead>
+                                    <input type="hidden" name="id_relawan">
+                                    <tr>
+                                        <td class="bg-dark text-light"></td>
+                                        <th class="bg-dark text-light">
+                                            PELANGGARAN KODE ETIK (+)
+                                        </th>
+                                    </tr>
+                                    @foreach ($pelanggaran_etik as $item)
+                                    <tr>
+                                        <td><input type="checkbox" name="curang[]" value=" {{ $item['kecurangan'] }}"
+                                                data-id="{{ $item['id'] }}" onclick="ajaxGetSolution(this)">
+                                        </td>
+                                        <td><label>{{ $item['kecurangan'] }} </label></td>
+                                    </tr>
+                                    @endforeach
+                                </thead>
+                                <thead>
+                                    <input type="hidden" name="id_relawan">
+                                    <tr>
+                                        <td class="bg-dark text-light"></td>
+                                        <th class="bg-dark text-light">
+                                            PELANGGARAN APARATUR SIPIL NEGARA (ASN) (+)
+                                        </th>
+                                    </tr>
+                                    @foreach ($pelanggaran_aparatur as $item)
                                     <tr>
                                         <td><input type="checkbox" name="curang[]" value=" {{ $item['kecurangan'] }}"
                                                 data-id="{{ $item['id'] }}" onclick="ajaxGetSolution(this)">
