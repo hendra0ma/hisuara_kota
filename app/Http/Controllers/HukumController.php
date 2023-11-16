@@ -186,7 +186,7 @@ class HukumController extends Controller
     }
     public function getsolution(Request $request)
     {
-        $data= ModelsListkecurangan::join('solution_frauds','solution_frauds.id','=','list_kecurangan.solution_fraud_id')->where('list_kecurangan.id',$request->id_list)->first();
+        $data = ModelsListkecurangan::join('solution_frauds','solution_frauds.id','=','list_kecurangan.solution_fraud_id')->where('list_kecurangan.id',$request->id_list)->first();
         return response()->json($data,200);
     }
 
