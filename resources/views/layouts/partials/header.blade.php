@@ -606,7 +606,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                 <a href="{{url('')}}/administrator/rekapitulasi"
                                                     class="py-1 btn fs-6 w-100 text-white glowy-menu"
                                                     style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
-                                                    Perhitungan KPU
+                                                    Hitung Ulang KPU
                                                 </a>
                                             </div>
                                         </div>
