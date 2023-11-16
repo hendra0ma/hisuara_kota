@@ -27,6 +27,7 @@ class UploadKecurangan extends Component
         $data['pelanggaran_umum']    = Listkecurangan::where('jenis', 0)->get();
         $data['pelanggaran_petugas'] = Listkecurangan::where('jenis', 1)->get();
         $data['pelanggaran_etik'] = Listkecurangan::where('jenis', 2)->get();
+        $data['pelanggaran_apartur'] = Listkecurangan::where('jenis', 3)->get();
 
         $data['tps'] = Tps::where('villages_id', (string)$villagee)->get();
 
