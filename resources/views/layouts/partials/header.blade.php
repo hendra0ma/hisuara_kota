@@ -463,7 +463,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                         </h4>
                                         <h4 class="mb-0 fw-bold suara tugel-content"
                                             style="color: #e1af0a; font-size: 16px; display: none;">
-                                            Urutan
+                                            Suara Terbanyak
                                         </h4>
                                         <h4 class="mb-0 fw-bold dpt tugel-content"
                                             style="color: #e1af0a; font-size: 16px; display: none;">
