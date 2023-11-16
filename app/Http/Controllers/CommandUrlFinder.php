@@ -17,6 +17,15 @@ class CommandUrlFinder
 
     public function findUrlByCommand($command)
     {
-        return isset($this->commandsAndUrls[$command]) ? $this->commandsAndUrls[$command] : null;
+        $keys = array_keys($this->commandsAndUrls);
+        $result = null;
+        foreach ($keys as $key) {
+            if (stripos($command, $key) !== false) {
+                $result = $this->commandsAndUrls[$key];
+                break;
+            }
+        }
+
+        return $result;
     }
 }
