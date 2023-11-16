@@ -163,24 +163,29 @@
   <script src="../../assets/plugins/multipleselect/multi-select.js"></script>
 
   <script>
-   
+    $('#koor_id').on('change', function() {
+      const korId = $(this).val();
+      $.ajax({
+        url: "{{route('getKoordinator')}}",
+        type: "get",
+        data: {
+          id: korId
+        },
+        success: function(res) {
+          $('#container-koordinator').html(res);
+        }
+      })
+    });
+
+
     $('#role').on('change', function() {
       let cekTps = $(this).val().split("|");
-      if (cekTps[0] == "tps") {
-        // console.log("hai")
-        $('#role-admin').show(100);
-        $('#role-saksi').show(100);
-      } else if (cekTps[0] == "tdk") {
-        $('#role-admin').show(100);
-        $('#role-saksi').hide(100);
 
-        // console.log("halo")
-      } else {
-        $('#role-admin').hide(100);
-        $('#role-saksi').hide(100);
-
-      }
+      $('#role-admin').toggle(cekTps[0] !== "kor").show(100);
+      $('#koor-form').toggle(cekTps[0] === "kor").show(100);
+      $('#role-saksi').toggle(cekTps[0] !== "tdk").show(100);
     });
+
 
     $('#provinsi').on('change', function() {
       let idProvinsi = $(this).val();
@@ -188,7 +193,7 @@
       $.ajax({
         url: `{{url('')}}/getKota/${idProvinsi}`,
         method: 'get',
-     
+
         success: function(response) {
           $('#kota').html("")
           response.forEach((item, id) => {

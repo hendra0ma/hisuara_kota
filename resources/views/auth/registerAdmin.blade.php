@@ -42,13 +42,24 @@
                                             <option disabled selected>Pilih Role</option>
                                             <option value="tps|8">Saksi</option>
                                             <option value="tps|16">Enumerator</option>
+                                            <option value="kor|18|koordinator">Koordinator</option>
                                             <option value="tdk|17">Crowd C1</option>
                                             <option value="tdk|9">Rekapitulator</option>
                                             <option value="tps|14">Relawan Tps</option>
                                             <option value="tdk|1">Admin</option>
                                         </select>
-
                                     </div>
+
+                                    <div class="form-group"id="koor-form"style="display:none">
+                                        <select class="form-control select2-show-search form-select" name="koor_id" id="koor_id">
+                                            <option disabled selected>Pilih Role Koordinator</option>
+                                            <?php $kors = Illuminate\Support\Facades\DB::table('koordinator')->get(); ?>
+                                            @foreach ($kors as $kor)
+                                             <option value="{{$kor->id}}">{{$kor->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
                                     <div class="wrap-input100 validate-input">
                                         <input class="input100" type="text" name="nik" placeholder="Masukkan Nomor Induk Kependudukan (No. KTP)" maxlength="16" autocomplete="nik">
                                         <span class="focus-input100"></span>
@@ -117,6 +128,7 @@
                                         <input type="file" name="foto_profil" id="picture__input2" class="picture___input">
                                     </div>
 
+
                                     <div id="role-admin" style="display:none">
                                         <div class="form-group">
                                             <select class="form-control select2-show-search form-select" name="provinsi" id="provinsi">
@@ -152,8 +164,17 @@
                                                 <option disabled selected>Pilih Tps</option>
                                             </select>
                                         </div>
-
                                     </div>
+
+                                    <div id="container-koordinator">
+                                        
+                                    </div>
+
+
+
+
+
+                                
 
                                     <label class="custom-control custom-checkbox mt-4">
                                         <input type="checkbox" class="custom-control-input">

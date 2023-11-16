@@ -1060,7 +1060,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                 <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; color: #fff; "
                                                         class="display-3" id="text-effect"></h1>
                                                 </div>
-                                                <img id="img-effect" src="{{asset('')}}images/logo/hisuara_header.png"class="img-fluid" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width:500px;">
+                                                <!-- <img id="img-effect" src="{{asset('')}}images/logo/hisuara_header.png"class="img-fluid" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width:500px;"> -->
                                             </div>
 
 
@@ -1167,10 +1167,9 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                 $("#text-effect").hide();
                                                 $("#text-effect").html("");
                                                 
-                                                setTimeout(() => {
-                                                    $('#img-effect').fadeOut(200)
+                                             
                                                     animate();
-                                                }, 2000);
+                                             
                                             @else
                                                 $('#img-effect').fadeOut()
                                                 $("#text-effect").hide();

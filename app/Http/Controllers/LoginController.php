@@ -68,9 +68,7 @@ class LoginController extends Controller
     }
     public function createAdmin()
     {
-        return view('auth.registerAdmin', [
-            'kec' => District::where('regency_id', 3674)->get()
-        ]);
+        return view('auth.registerAdmin');
     }
 
     
@@ -181,4 +179,14 @@ class LoginController extends Controller
         $track->id_user = $user;
         $track->save();
     }
+
+    function getKoordinator(Request $request)
+    {
+        $koor =  DB::table('koordinator')->where('id',$request->id)->first();
+        $koor_id = explode(',',$koor->have_kor);
+        $data['koorId'] = $koor;
+        $data['koordinator'] = DB::table('koordinator')->whereNotIn('id',$koor_id)->get();
+        return view('publik.ajax.ajax_koordinator',$data);
+    }
+
 }

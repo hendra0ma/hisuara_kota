@@ -111,13 +111,13 @@ class generateCommandsAndUrls extends Command
             'buka urutan' => 'klik nav urutan',
         ];
 
+        // jika route tidak mempunyai slash, itu berarti command tersebut berupa aksi, bukan untuk di redirect.
         $jumlahCommandsAndUrls = count($commandsAndUrls);
         for ($i = 0; $i < $jumlahCommandsAndUrls; $i++) {
             $keysOfArray = array_keys($commandsAndUrls);
             $namaHalaman = $keysOfArray[$i];
             $route = $commandsAndUrls[$namaHalaman];
 
-            $isRouteHasSlash = strpos($route, '/'); // jika route tidak mempunyai slash, itu berarti command tersebut berupa aksi, bukan untuk di redirect.
             $commandsAndUrls[$namaHalaman] = $route;
         }
 
