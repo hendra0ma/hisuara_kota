@@ -30,6 +30,6 @@ class CommandUrlFinder extends Controller
             }
         }
 
-        return $result;
+        return response()->json(["result"=>$result],200);
     }
 }
