@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 <div style="position: relative" class="card-header bg-primary text-light text-center fw-bold rounded-0 col-12">
-    Kecurangan
+    Laporan Kecurangan Pemilu
 </div>
 <div style="overflow-y:auto; overflow-x: hidden">
     <div class="row halaman-1 px-3">
