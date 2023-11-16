@@ -3,8 +3,8 @@
         <div class="col-lg-12">
             <div class="card border-0" style="position: relative">
 
-                <div class="card-header bg-primary text-light text-center fw-bold rounded-0">
-                    Surat Suara
+                <div style="position: relative" class="card-header bg-primary text-light text-center fw-bold rounded-0">
+                    <span style="position: absolute; left: 15px" class="fw-normal">3/4</span> Data Pemilih dan Hak Pilih
                 </div>
                 
                 {{-- <form action="{{route('logout')}}" method="post">
@@ -18,10 +18,10 @@
                     <div class="row">
                         <div class="px-0 col-12 text-center mb-3">
                             @if (Auth::user()->profile_photo_path == NULL)
-                            <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                            <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
                                 src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF">
                             @else
-                            <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}">
+                            <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}">
                             @endif
                         </div>
                         <div class="px-0 col-12 my-auto text-center">
@@ -46,10 +46,10 @@
 
 
                     
-                    <h1 class="text-center">
+                    {{-- <h1 class="text-center">
                         <img src="{{asset('')}}assets/icons/hisuara_new.png" class="hadow-4 mb-3 mt-3 rounded-2" style="width: 175px;"
                             alt="Avatar" />
-                    </h1>
+                    </h1> --}}
                     {{-- <h5> Halo, {{Auth::user()->name}}</h5> --}}
                     <form action="{{route('actionSuratSuara')}}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -69,33 +69,40 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                         @endif
-                        <div class="row no-gutters">
-                            <div class="col-lg-12">
+                        <div class="row no-gutters mt-3">
+                            <div class="col-lg-12 mb-2">
+                                <label for="total_surat_suara">Jumlah Hak Pilih (DPT)</label>
+                                <input type="number" class="form-control" id="" value="" name="" required>
+                            </div>
+                            <div class="col-lg-12 mb-2">
+                                <label for="surat_suara_tidak_sah">Surat Suara Sah</label>
+                                <input type="number" class="form-control" id="" value="" name="" required>
+                            </div>
+                            <div class="col-lg-12 mb-2">
+                                <label for="surat_suara_tidak_sah">Suara Tidak Sah</label>
+                                <input type="number" class="form-control" id="surat_suara_tidak_sah" value="{{old('surat_suara_tidak_sah')}}" name="surat_suara_tidak_sah" required>
+                            </div>
+                            <div class="col-lg-12 mb-2">
+                                <label for="surat_suara_terpakai">Jumlah Suara Sah dan Suara Tidak Sah</label>
+                                <input type="number" class="form-control" id="" value="" name="" required>
+                            </div>
+                            <div class="col-lg-12 mb-2">
                                 <label for="total_surat_suara">Total Surat Suara</label>
                                 <input type="number" class="form-control" id="total_surat_suara" value="{{old('total_surat_suara')}}" name="total_surat_suara" required>
                             </div>
-                            <div class="col-lg-12">
-                                <label for="surat_suara_tidak_sah">Surat Suara Tidak Sah</label>
-                                <input type="number" class="form-control" id="surat_suara_tidak_sah" value="{{old('surat_suara_tidak_sah')}}" name="surat_suara_tidak_sah" required>
-                            </div>
-                            <div class="col-lg-12">
-                                <label for="surat_suara_terpakai">Surat Suara Terpakai</label>
-
-                                <input type="number" class="form-control" id="surat_suara_terpakai" value="{{old('surat_suara_terpakai')}}" name="surat_suara_terpakai" required>
-                            </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-12 mb-2">
                                 <label for="sisa_surat_suara">Sisa Surat Suara</label>
 
                                 <input type="number" class="form-control" id="sisa_surat_suara" value="{{old('sisa_surat_suara')}}" name="sisa_surat_suara" required>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-12 mb-2">
                                 <div class="card mt-2">
                                     <div class="card-header">
                                         <h5 class="card-title">Foto Surat Suara</h5>
                                     </div>
                                     <div class="card-body text-center">
                                         <div class="row">
-                                            <div class="col-md-12 ">
+                                            <div class="col-md-12">
                                                 <h1>
                                                     <label for="Surat Suara" type="button">
                                                         <i class="mdi mdi-camera"></i>
@@ -115,9 +122,9 @@
                             </div>
                         </div>
                     </form>
-                    <form action="{{route('logout')}}" method="post">
+                    <form class="mt-2" action="{{route('logout')}}" method="post">
                         @csrf
-                        <a href="#" class="mt-3" onclick="this.closest('form').submit();">
+                        <a href="#" onclick="this.closest('form').submit();">
                             Sign out
                         </a>
                     </form>

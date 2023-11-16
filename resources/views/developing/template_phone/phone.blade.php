@@ -18,6 +18,11 @@
 
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{url('/')}}/assets/colors/color1.css" />
+    <link href="{{url('/')}}/assets/plugins/fileuploads/css/fileupload.css" rel="stylesheet" type="text/css" />
+        
+        <!-- SELECT2 CSS -->
+        <!-- BOOTSTRAP CSS -->
+        <link href="{{url('/')}}/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
@@ -64,7 +69,7 @@
             color: #777;
             cursor: pointer;
             flex: 1;
-            padding: 10px;
+            padding: 7px;
             text-align: center;
         }
 
@@ -83,8 +88,8 @@
             margin-top: 120px;
             margin-bottom: 120px;
             padding: 10px 10px 30px;
-            width: 350px;
-            height: 650px;
+            width: 375px;
+            height: 750px;
             box-shadow: 0 0 20px #000000;
             border-radius: 30px;
             position: relative;
@@ -201,6 +206,11 @@
 
                     <livewire:clainnya>
                 </div>
+                
+                <div alt="blog" class="content ">
+
+                    <livewire:upload-kecurangan>
+                </div>
 
                 <nav class="nav-on-desktop">
                     <ul>
@@ -221,7 +231,11 @@
                         </li>
                         <li>
                             <i class="fas fa-book-open"></i>
-                            <p>Upload C6</p>
+                            <p>Upload C7</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-book-open"></i>
+                            <p>Kecurangan</p>
                         </li>
 
                     </ul>
@@ -278,6 +292,10 @@
 
             <livewire:clainnya>
         </div>
+        <div alt="blog" class="content ">
+
+            <livewire:clainnya>
+        </div>
 
         <nav class="position-fixed">
             <ul>
@@ -298,7 +316,11 @@
                 </li>
                 <li>
                     <i class="fas fa-book-open"></i>
-                    <p>Upload C6</p>
+                    <p>Upload C7</p>
+                </li>
+                <li>
+                    <i class="fas fa-book-open"></i>
+                    <p>Kecurangan</p>
                 </li>
 
             </ul>

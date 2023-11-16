@@ -139,11 +139,13 @@
     // const buttonC1Dibatalkan = 
     $(".c1-dikoreksi").on('click', function() {
         const id = $(this).data('id');
+        const urlCurrent = $('input.urlCurrent');
+
         $.ajax({
             url: "{{ route('auditor.getSaksiDibatalkan') }}",
             data: {
                 "_token": "{{ csrf_token() }}",
-                // url: "<?= request()->segment(count(request()->segments())) ?>",
+                url: urlCurrent.val(),
                 id
             },
             type: "GET",

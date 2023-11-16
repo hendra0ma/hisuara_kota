@@ -51,38 +51,67 @@
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{url('/')}}/assets/colors/color1.css" />
 
     <style>
-        .screen::-webkit-scrollbar {
-            display: none
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+    
+    
+        /* .phone {
+                border-radius: 15px;
+                height: 600px;
+                width: 340px;
+            } */
+    
+        .phone .content {
+            display: none;
+            object-fit: cover;
+            /* position: absolute; */
+            /* top: 0; */
+            /* left: 0; */
+            /* height: calc(100% - 60px); */
+            /* width: 100%; */
+            transition: opacity 0.4s ease;
+        }
+    
+        .phone .content.show {
+            display: block;
         }
 
         .mobile-phone {
             margin: auto;
-            margin-top: 170px;
+            margin-top: 120px;
+            margin-bottom: 120px;
             padding: 10px 10px 30px;
-            width: 350px;
-            height: 650px;
+            width: 375px;
+            height: 750px;
             box-shadow: 0 0 20px #000000;
             border-radius: 30px;
+            position: relative;
+            background: white
         }
-
+    
         .screen {
+            padding-top: 20px;
             width: 100%;
             height: 100%;
             background: #f2f2f2;
             border-radius: 30px;
             overflow-y: auto;
-            position: relative;
+            /* padding-bottom: 60px; */
         }
-
+    
+        .screen::-webkit-scrollbar {
+            display: none
+        }
+    
         .brove {
             width: 150px;
             height: 20px;
             background: white;
             position: absolute;
-            margin: 0 100px;
+            left: 50%;
+            transform: translateX(-50%);
             border-radius: 0 0 20px 20px;
         }
-
+    
         .speaker {
             width: 60px;
             height: 5px;
@@ -92,18 +121,25 @@
             margin-top: 5px;
             border-radius: 20px;
         }
-
+    
+        .nav-on-desktop {
+            position: absolute;
+            /* width: 100%; */
+            bottom: 30px;
+        }
+    
+        /* Default style: hide the content for desktop */
         .content-for-mobile {
             display: none;
         }
-
+    
         /* Media query for mobile devices */
         @media screen and (max-width: 767px) {
             .content-for-mobile {
                 display: block;
                 /* Show the content on mobile devices */
             }
-
+    
             .content-for-desktop {
                 display: none;
             }
@@ -124,7 +160,7 @@
     <div class='mobile-phone content-for-desktop' style="position: relative;">
         <div class='brove' style="z-index: 100"><span class='speaker'></span></div>
         <div class='screen pt-5 px-0'>
-            <div class="card">
+            <div class="card mb-0">
                 <div class="card-header text-center text-white bg-primary">
                     <h4 class="mb-0">Upload C1 Relawan</h4>
                 </div>
@@ -133,9 +169,9 @@
                     <div class="row">
                         <div class="px-0 col-12 text-center mb-3">
                             @if (Auth::user()->profile_photo_path == NULL)
-                            <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF">
+                            <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" class="rounded-circle" src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF">
                             @else
-                            <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}">
+                            <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" class="rounded-circle" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}">
                             @endif
                         </div>
                         <div class="px-0 col-12 my-auto text-center">
@@ -160,17 +196,17 @@
 
 
 
-                    <h1 class="text-center">
+                    {{-- <h1 class="text-center">
                         <img src="{{asset('')}}assets/icons/hisuara_new.png" class="hadow-4 mb-3 mt-3 rounded-2" style="width: 175px;" alt="Avatar" />
-                    </h1>
+                    </h1> --}}
                     {{-- <h5> Halo, {{Auth::user()->name}}</h5> --}}
                     <form action="{{url('')}}/upload-relawan" method="post" enctype="multipart/form-data">
                         @csrf
-                        <div class="row no-gutters">
+                        <div class="row no-gutters mt-3">
                             <?php $i = 1; ?>
                             @foreach ($paslon as $item)
                             <div class="col-lg-12 mb-2">
-                                Suara 0{{$i++}} - {{ $item['candidate']}}
+                                Suara 0{{$i++}} - {{ $item['candidate']}} - {{ $item['deputy_candidate'] }}
                                 <input type="number" class="form-control" id="suara[]" name="suara[]" required placeholder="Suara Paslon">
                             </div>
                             @endforeach
@@ -202,9 +238,9 @@
 
                         </div>
                     </form>
-                    <form action="{{route('logout')}}" method="post">
+                    <form class="mt-2" action="{{route('logout')}}" method="post">
                         @csrf
-                        <a href="#" class="mt-3" onclick="this.closest('form').submit();">
+                        <a href="#" onclick="this.closest('form').submit();">
                             Sign out
                         </a>
                     </form>

@@ -49,6 +49,8 @@ $config->default =  $configs->default;
 
 $regency = District::where('regency_id', $config->regencies_id)->get();
 $kota = Regency::where('id', $config->regencies_id)->first();
+$paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
+$urutan = $paslon_tertinggi;
 $dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
 $tps = Tps::count();
 $props = Province::where('id',$kota['province_id'])->first();
@@ -98,13 +100,52 @@ $props = Province::where('id',$kota['province_id'])->first();
 
     <div class="col-lg-12">
         <center>
-            <h2 class="page-title mt-1 mb-0" style="font-size: 60px">
+            <h2 class="page-title mt-1 mb-3 mb-0" style="font-size: 60px">
                 TERVERIFIKASI
             </h2>
-            <h4 class="mt-2">
-                {{ $kota['name'] }} / KECAMATAN {{ $kecamatan['name'] }}
-            </h4>
         </center>
+    </div>
+
+    <div class="col-lg-12">
+        <style>
+            ul.breadcrumb {
+                padding: 10px 16px;
+                list-style: none;
+                background-color: #0d6efd !important;
+            }
+    
+            ul.breadcrumb li {
+                display: inline;
+                font-size: 18px;
+            }
+    
+            ul.breadcrumb li+li:before {
+                padding: 8px;
+                color: white;
+                content: "/\00a0";
+            }
+    
+            ul.breadcrumb li a {
+    
+                text-decoration: none;
+            }
+    
+            ul.breadcrumb li a:hover {
+                color: #01447e;
+                text-decoration: underline;
+            }
+        </style>
+    
+        <ul class="breadcrumb">
+            <?php
+                    $regency = Regency::where('id', $config->regencies_id)->select('name')->first();
+                    $kcamatan = District::where('id', $id_kecamatan)->select('name')->first();
+                    ?>
+            <li><a href="{{url('')}}/administrator/terverifikasi" class="text-white">{{$regency->name}}</a></li>
+            <li><a href="{{url('')}}/administrator/terverifikasi_kecamatan/{{Crypt::encrypt($id_kecamatan)}}"
+                    class="text-white">{{$kcamatan->name}}</a></li>
+    
+        </ul>
     </div>
 
     <div class="col-12 mt-1">

@@ -181,6 +181,7 @@ class AuditorController extends Controller
     public function getSaksiDibatalkan(Request $request)
     {
         $data['config'] = Config::first();
+    
         $data['saksi']  =  Saksi::where('tps_id', $request['id'])->first();
         // dd($data['saksi']);
         $data['saksi_data'] = SaksiData::where('saksi_id', $data['saksi']['id'])->get();

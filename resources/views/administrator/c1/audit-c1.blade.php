@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row mt-5 mb-5">
-    <div class="col-lg-4">
+    <div class="col-lg">
         <h1 class="page-title fs-1 mt-2">Audit C1
             <!-- Kota -->
         </h1>
@@ -13,7 +13,7 @@
             </li>
         </ol> <!-- This Dummy Data -->
     </div>
-    <div class="col-md-8">
+    <div class="col-md-4">
         <div class="row mt-2">
             <div class="col parent-link">
                 <a class="btn text-white w-100 py-3 c1saksi tablink" onclick="openPage('C1-Saksi', this, '#6259ca')"
@@ -27,10 +27,10 @@
                 <a class="btn text-white w-100 py-3 c1teraudit tablink"
                     onclick="openPage('C1-Dibatalkan', this, '#6259ca')">C1 Dibatalkan</a>
             </div> --}}
-            <div class="col parent-link">
+            {{-- <div class="col parent-link">
                 <a class="btn text-white w-100 py-3 c1koreksi tablink"
                     onclick="openPage('C1-Koreksi', this, '#6259ca')">C1 Tidak Lolos Audit</a>
-            </div>
+            </div> --}}
         </div>
     </div>
 
@@ -70,6 +70,9 @@
                 </div>
             </div>
             <div class="modal-footer">
+
+                <input type="hidden" class="urlCurrent">
+
             </div>
         </div>
     </div>

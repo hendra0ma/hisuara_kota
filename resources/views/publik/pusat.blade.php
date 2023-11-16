@@ -16,6 +16,7 @@ use App\Models\Province;
 use App\Models\RegenciesDomain;
 use App\Models\Regency;
 use App\Models\SuaraC1Provinsi;
+use Illuminate\Support\Facades\DB;
 
 $configs = Config::all()->first();
 $currentDomain = request()->getHttpHost();
@@ -46,7 +47,9 @@ $config->jenis_pemilu =  $configs->jenis_pemilu;
 $config->tahun =  $configs->tahun;
 $config->quick_count =  $configs->quick_count;
 $config->default =  $configs->default;
-$saksidatai = SaksiData::sum("voice");
+$saksidatai =  DB::table('regencies')
+->selectRaw('SUM(suara1 + suara2 + suara3) as total_suara')
+->value('total_suara');
 $dpt = Province::sum("dpt");
 $data_masuk = (int)$saksidatai / (int)$dpt * 100;
 

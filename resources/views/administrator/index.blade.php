@@ -752,6 +752,11 @@ $tps = Tps::count();
         right: 0;
         top: 60px;
     }
+
+    /* .chart-teks {
+        color: white;
+        z-index: 19;
+    } */
 </style>
 <div class="row">
 
@@ -1121,7 +1126,11 @@ $tps = Tps::count();
                                     <div class="text-center mt-2 mb-2"><span
                                             class="badge bg-success">{{$total_incoming_vote}} /
                                             {{$dpt}}</span></div>
-                                    <div id="chart-pie" class="chartsh h-100 w-100"></div>
+                                    {{-- <div class="chart-teks">
+                                        Prabowo
+                                    </div>    --}}
+                                    <div id="chart-pie" class="chartsh h-100 w-100">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-xxl">
@@ -1142,7 +1151,7 @@ $tps = Tps::count();
                                                         <h6 class="mt-4">{{$pas->candidate}} </h6>
                                                         <h6 class="">{{$pas->deputy_candidate}} </h6>
                                                         <?php
-                                                    $total_saksi = SaksiData::where('paslon_id',$pas->id)->sum('voice');
+                                                    $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->sum('voice');
                                                 ?>
 
                                                         <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3>
@@ -1177,7 +1186,7 @@ $tps = Tps::count();
                                             href="{{url('/')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
                                     </td>
                                     @foreach ($paslon as $cd)
-                                    <?php $saksi_dataa = SaksiData::where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->sum('voice'); ?>
+                                    <?php $saksi_dataa = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->sum('voice'); ?>
                                     <td class="align-middle">{{$saksi_dataa}}</td>
                                     @endforeach
                                 </tr>
@@ -1429,5 +1438,40 @@ if (request()->segment(1) == "administrator" && request()->segment(2) == "perhit
     </div>
 </div> -->
 
+{{-- <div style="
+                                height: 320px;
+                                width: 260px;
+                                background: transparent;
+                                position: absolute;
+                                z-index: 1;
+                            "></div>
+<div style="
+                                height: 320px;
+                                width: 260px;
+                                background: transparent;
+                                position: absolute;
+                                right: 25px;
+                                z-index: 1;
+                            "></div> --}}
+<script>
+    $(document).ready(function() {
+        const createChartContainer = (style) => {
+            return `<div style="${style}"></div>`;
+        };
+
+        const chartStyle = `
+            height: 320px;
+            width: 260px;
+            background: transparent;
+            position: absolute;
+            z-index: 1;
+        `;
+
+        const chartContainer1 = createChartContainer(chartStyle);
+        const chartContainer2 = createChartContainer(`${chartStyle} right: 25px;`);
+
+        $('.chartsh').prepend(chartContainer1, chartContainer2);
+    });
+</script>
 
 @endsection

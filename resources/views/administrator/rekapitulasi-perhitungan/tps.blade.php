@@ -89,25 +89,64 @@ $tps = Tps::count();
 
     <div class="col-lg-12">
         <center>
-            <h2 class="page-title mt-1 mb-0" style="font-size: 60px">
+            <h2 class="page-title mt-1 mb-3" style="font-size: 60px">
                 REKAPITULASI
             </h2>
-            <h4 class="mt-2">
-                {{ $kota['name'] }} /
-                KECAMATAN {{ $district['name'] }} /
-                KELURAHAN {{$village['name']}} /
-                <a href="{{url('')}}/administrator/perhitungan_tps/{{Crypt::encrypt($data_tps->id)}}">
-                    TPS {{$data_tps->number}}
-                </a>
-            </h4>
         </center>
     </div>
 
-    <div class="col-md-8">
+    <div class="col-lg-12">
+        <style>
+            ul.breadcrumb {
+                padding: 10px 16px;
+                list-style: none;
+                background-color: #0d6efd !important;
+            }
+
+            ul.breadcrumb li {
+                display: inline;
+                font-size: 18px;
+            }
+
+            ul.breadcrumb li+li:before {
+                padding: 8px;
+                color: white;
+                content: "/\00a0";
+            }
+
+            ul.breadcrumb li a {
+
+                text-decoration: none;
+            }
+
+            ul.breadcrumb li a:hover {
+                color: #01447e;
+                text-decoration: underline;
+            }
+        </style>
+
+        <ul class="breadcrumb">
+            <?php
+                        $desa = Village::where('id', (string)$village->id)->first();
+                        $regency = Regency::where('id',(string) $config->regencies_id)->first();
+                        $kcamatan = District::where('id', (string)$desa->district_id)->first();
+                        ?>
+            <li><a href="{{url('')}}/administrator/rekapitulasi" class="text-white">{{$regency->name}}</a></li>
+            <li><a href="{{url('')}}/administrator/rekap_kecamatan/{{Crypt::encrypt($district->id)}}"
+                    class="text-white">{{$district->name}}</a></li>
+            <li><a href="{{url('')}}/administrator/rekap_kelurahan/{{Crypt::encrypt($village->id)}}"
+                    class="text-white">{{$desa->name}}</a></li>
+            <li><a href="{{url('')}}/administrator/rekap_tps/{{Crypt::encrypt($data_tps->id)}}" class="text-white">TPS
+                    {{$data_tps->number}}</a></li>
+
+        </ul>
+    </div>
+
+    <div class="col-md-8 mt-4">
         <div class="card">
-            {{-- <div class="card-header bg-info">
-                <h3 class="card-title text-white">Suara TPS Masuk</h3>
-            </div> --}}
+            <div class="card-header bg-dark">
+                <h3 class="card-title text-white">Hasil Perhitungan Suara</h3>
+            </div>
             <div class="card-body" style="position: relative;">
                 <img src="{{asset('')}}assets/icons/hisuara_new.png"
                     style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
@@ -163,15 +202,18 @@ $tps = Tps::count();
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    
+
     <!-- Popper.js, required for Bootstrap 4 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
-    
+
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <div class="col-md">
+    <div class="col-md mt-4">
         <div class="card">
+            <div class="card-header bg-dark">
+                <h3 class="card-title text-white">Salinan C1</h3>
+            </div>
             <div class="card-body text-center">
                 <a href="#" data-toggle="modal" data-target="#imgBig">
                     <img style="height: 594.92px" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}" alt="">
@@ -179,17 +221,75 @@ $tps = Tps::count();
             </div>
         </div>
     </div>
-    
+
     <!-- Modal -->
-    <div class="modal fade" style="background: rgba(0, 0, 0, 0.65)" id="imgBig" tabindex="-1" aria-labelledby="imgBigLabel"
-        aria-hidden="true">
+    <div class="modal fade" style="background: rgba(0, 0, 0, 0.65)" id="imgBig" tabindex="-1"
+        aria-labelledby="imgBigLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content" style="background: transparent; border: 0px">
                 <div class="modal-body p-0">
+                    <ul class="breadcrumb">
+                        <?php
+                        $desa = Village::where('id', (string)$village->id)->first();
+                        $regency = Regency::where('id',(string) $config->regencies_id)->first();
+                        $kcamatan = District::where('id', (string)$desa->district_id)->first();
+                        ?>
+                        <li><a href="{{url('')}}/administrator/rekapitulasi" class="text-white">{{$regency->name}}</a></li>
+                        <li><a href="{{url('')}}/administrator/rekap_kecamatan/{{Crypt::encrypt($district->id)}}"
+                                class="text-white">{{$district->name}}</a></li>
+                        <li><a href="{{url('')}}/administrator/rekap_kelurahan/{{Crypt::encrypt($village->id)}}"
+                                class="text-white">{{$desa->name}}</a></li>
+                        <li><a href="{{url('')}}/administrator/rekap_tps/{{Crypt::encrypt($data_tps->id)}}"
+                                class="text-white">TPS
+                                {{$data_tps->number}}</a></li>
+            
+                    </ul>
+                    <div class="col-12">
+                        <div class="card rounded-0 mb-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    @if ($saksi[0]['kecurangan'] == "yes" && $qrcode != null)
+                                    <?php $scan_url = url('') . "/scanning-secure/" . (string)Crypt::encrypt($qrcode->nomor_berkas); ?>
+                                    <div class="col-auto my-auto">
+                                        {!! QrCode::size(100)->generate( $scan_url); !!}
+                                    </div>
+                                    @else
+                                    @endif
+                                    <div class="col mt-2">
+                                        <div class="media">
+                                            <?php
+                                                                                                                                $user = User::where('tps_id', '=',$saksi[0]['tps_id'])->first();
+                                                                                                                            ?>
+                                            @if ($user['profile_photo_path'] == NULL)
+                                            <img class="rounded-circle"
+                                                style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                                                src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
+                                            @else
+                                            <img class="rounded-circle"
+                                                style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
+                                            @endif
+                    
+                                            <div class="media-body my-auto">
+                                                <h5 class="mb-0">{{ $user['name'] }}</h5>
+                                                NIK : {{ $user['nik'] }}
+                                                <div>TPS {{$data_tps->number}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto pt-2 my-auto px-1">
+                                        <a href="https://wa.me/{{$user->no_hp}}" class="btn btn-success text-white"><i
+                                                class="fa-solid fa-phone"></i>
+                                            Hubungi</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-lg-12" style="height: 100vh; overflow: scroll">
                         <center>
-                            <img width="100%" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}" data-magnify-speed="200" alt=""
-                                data-magnify-magnifiedwidth="2500" data-magnify-magnifiedheight="2500" class="img-fluid zoom"
+                            <img width="100%" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}"
+                                data-magnify-speed="200" alt="" data-magnify-magnifiedwidth="2500"
+                                data-magnify-magnifiedheight="2500" class="img-fluid zoom"
                                 data-magnify-src="{{asset('')}}storage/{{$saksi[0]->c1_images}}">
                         </center>
                     </div>
@@ -197,12 +297,101 @@ $tps = Tps::count();
             </div>
         </div>
     </div>
-    
+
     <script>
         $(document).ready(function () {
                 $('#imgBig').modal();
             });
     </script>
+
+    <?php 
+        $no_u = 1
+    ?>
+
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Urutan Suara Terbanyak</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="bg-dark">
+                            <tr>
+                                <th scope="col" class="text-white">NO</th>
+                                <th scope="col" class="text-white">URAIAN</th>
+                                <th scope="col" class="text-white">JUMLAH SUARA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($urutan as $urutPaslon)
+                            <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
+                            <tr>
+                                <td>{{$no_u++}}</td>
+                                <td>{{$pasangan->candidate}} - {{$pasangan->deputy_candidate}}</td>
+                                <td>{{$urutPaslon->total}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center" style="padding: 21.5px">
+                <div class="card-header py-2 text-white bg-dark">
+                    <h4 class="mb-0 mx-auto text-black card-title">Data Pemilih dan Hak Pilih (TPS {{$data_tps->number}}
+                        /
+                        Kelurahan {{$desa->name}})</h4>
+                </div>
+                <table class="table table-striped">
+                    <tr>
+                        <td class="py-2 text-start" style="width: 50%">Jumlah Hak Pilih (DPT)</td>
+                        <td class="py-2" style="width: 5%">:</td>
+                        <td class="py-2" style="width: 40%">(dummy)</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 text-start" style="width: 50%">Surat Suara Sah</td>
+                        <td class="py-2" style="width: 5%">:</td>
+                        <td class="py-2" style="width: 40%">(dummy)</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 text-start" style="width: 50%">Suara Tidak Sah</td>
+                        <td class="py-2" style="width: 5%">:</td>
+                        <td class="py-2" style="width: 40%">(dummy)</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 text-start" style="width: 50%">Jumlah Suara Sah dan Suara Tidak Sah</td>
+                        <td class="py-2" style="width: 5%">:</td>
+                        <td class="py-2" style="width: 40%">(dummy)</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 text-start" style="width: 50%">Total Surat Suara</td>
+                        <td class="py-2" style="width: 5%">:</td>
+                        <td class="py-2" style="width: 40%">(dummy)</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 text-start" style="width: 50%">Sisa Surat Suara</td>
+                        <td class="py-2" style="width: 5%">:</td>
+                        <td class="py-2" style="width: 40%">(dummy)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <?php
+
+        $id_wilayah = Crypt::decrypt(request()->segment(3));
+        $tipe_wilayah = "tps";
+    
+
+    ?>
+    <livewire:dpt-pemilih-component :id_wilayah="$id_wilayah" :tipe_wilayah="$tipe_wilayah" />
 
 
 

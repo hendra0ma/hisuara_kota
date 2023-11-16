@@ -297,14 +297,13 @@ foreach ($kotas as $kota) {
 
                 Route::post('settings-theme', [AdminController::class, 'theme'])->name('theme');
                 //commander
-                Route::group(['middleware' => "commander"], function () {
-                    Route::get('commander-index', [CommanderController::class, 'index'])->name('commander-index');
-                    Route::post('commander-redirect',  [CommanderController::class, 'redirect']);
-                    Route::post('commander-scroll',  [CommanderController::class, 'scroll']);
-                    Route::post('commander-settings', [CommanderController::class, 'settings']);
-                    Route::get('notif-delete', [CommanderController::class, 'notifDel']);
-                    Route::get('commander-defaults', [CommanderController::class, 'defaults']);
-                });
+                Route::get('commander-index', [CommanderController::class, 'index'])->name('commander-index');
+                Route::post('commander-redirect',  [CommanderController::class, 'redirect']);
+                Route::post('commander-scroll',  [CommanderController::class, 'scroll']);
+                Route::post('commander-settings', [CommanderController::class, 'settings']);
+                Route::get('notif-delete', [CommanderController::class, 'notifDel']);
+                Route::get('commander-defaults', [CommanderController::class, 'defaults']);
+               
                 Route::controller(AdminController::class)->group(function () {
                     //Administratorw
                     Route::get('get-data-c1-crowd', 'CrowdC1Id');
@@ -367,6 +366,11 @@ foreach ($kotas as $kota) {
                     Route::get('verifikasi_akun', 'verifikasi_akun');
                     Route::get('admin_terverifikasi', 'admin_terverifikasi');
                     Route::get('verifikasi_saksi', 'verifikasi_saksi');
+                    Route::get('koordinator_saksi', 'koordinator_saksi');
+                    Route::get('koordinator_kecamatan', 'koordinator_kecamatan');
+                    Route::get('koordinator_kelurahan', 'koordinator_kelurahan');
+                    Route::get('koordinator_rw', 'koordinator_rw');
+                    Route::get('koordinator_rt', 'koordinator_rt');
                     Route::get('saksi_ditolak', 'saksi_ditolak');
                     Route::get('enumerator', 'Enumerator');
                     Route::get('enumerator_teregistrasi', 'EnumeratorTeregistrasi');
@@ -416,6 +420,7 @@ foreach ($kotas as $kota) {
                     Route::get('sidang_online_status/{role}', 'sidangOnlinestatus');
                     Route::get('crowd-c1-kpu', 'crowdC1');
                     Route::get('data-crowd-c1-kpu', 'dataCrowdC1');
+                    Route::get('get-moda-cek-1', 'getModaCek1');
 
 
                     Route::get('/dev-pass', function () {
@@ -665,6 +670,11 @@ foreach ($kotas as $kota) {
 
             return view('developing.template_phone.phone');
         })->middleware(['auth', 'role:saksi'])->name('dashboard.saksi2');
+
+        Route::get('/enumerator-dashboard', function () {
+
+            return view('developing.template_phone.phone_2');
+        })->middleware(['auth', 'role:enumerator'])->name('dashboard.enumerator2');
 
         Route::controller(RelawanController::class)->group(function () {
             Route::get('relawan', 'index');

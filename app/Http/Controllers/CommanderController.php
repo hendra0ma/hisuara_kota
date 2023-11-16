@@ -38,7 +38,7 @@ class CommanderController extends Controller
                 'order' => $request->order
             ];
         if ($request->order != null) {
-            event(new CommanderEvent($page));
+            // event(new CommanderEvent($page));
             NotificationCommander::where('order', $request->order)->delete();
             return response()->json(['success' => 'success redirect Admin' . $request->order], 200);
         }
@@ -57,7 +57,7 @@ class CommanderController extends Controller
                 'dist' => $request->dist,
                 'order' => $request->order
             ];
-        event(new CommanderEvent($dist));
+        // event(new CommanderEvent($dist));
     }
     public function settings(Request $request)
     {
@@ -73,7 +73,7 @@ class CommanderController extends Controller
                 'order' => $request->order
             ];
         if ($request->order != null) {
-            event(new CommanderEvent($set));
+            // event(new CommanderEvent($set));
             NotificationCommander::where('order', $request->order)->delete();
         }
 
@@ -89,7 +89,7 @@ class CommanderController extends Controller
                 ]);
             }
 
-            event(new CommanderEvent($set));
+            // event(new CommanderEvent($set));
             return 'berhasil';
         }
 
@@ -104,7 +104,7 @@ class CommanderController extends Controller
             ]);
         }
 
-        event(new CommanderEvent($set));
+        // event(new CommanderEvent($set));
         return 'berhasil';
     }
     public function defaults(Request $request)

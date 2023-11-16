@@ -3,8 +3,8 @@
         <div class="col-lg-12">
             <div class="card border-0" style="position: relative">
 
-                <div class="card-header bg-primary text-light text-center fw-bold rounded-0">
-                    Foto dan Kirim Data C1
+                <div style="position: relative" class="card-header bg-primary text-light text-center fw-bold rounded-0">
+                    <span style="position: absolute; left: 15px" class="fw-normal">2/4</span> Foto dan Kirim Data C1
                 </div>
 
                 {{-- <form action="{{route('logout')}}" method="post">
@@ -18,10 +18,10 @@
                     <div class="row">
                         <div class="px-0 col-12 text-center mb-3">
                             @if (Auth::user()->profile_photo_path == NULL)
-                            <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                            <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
                                 src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF">
                             @else
-                            <img style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}">
+                            <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}">
                             @endif
                         </div>
                         <div class="px-0 col-12 my-auto text-center">
@@ -46,10 +46,10 @@
 
 
                     
-                    <h1 class="text-center">
+                    {{-- <h1 class="text-center">
                         <img src="{{asset('')}}assets/icons/hisuara_new.png" class="hadow-4 mb-3 mt-3 rounded-2" style="width: 175px;"
                             alt="Avatar" />
-                    </h1>
+                    </h1> --}}
                     {{-- <h5> Halo, {{Auth::user()->name}}</h5> --}}
                     <form action="dev/action_saksi" method="post" enctype="multipart/form-data">
                         @csrf
@@ -65,15 +65,18 @@
 
                         <div class="row no-gutters">
                             <div class="col-lg-12 mt-2">
+                                <?php 
+                                    $i = 1
+                                ?>
                                 @foreach ($paslon as $item)
-                                <div class="col-lg-12">
-                                    Suara 0{{$item['id']}} - {{ $item['candidate']}}
-                                    <input type="number" class="form-control" id="suara[]" name="suara[]" required placeholder="Suara Paslon">
+                                <div class="col-lg-12 mb-2">
+                                    Suara 0{{$i++}} - {{ $item['candidate'] }} - {{ $item['deputy_candidate'] }}
+                                    <input type="number" class="form-control mt-1" id="suara[]" name="suara[]" required placeholder="Suara Paslon">
                                 </div>
                                 @endforeach
-                                <div class="col-lg-12 mt-2">
-                                    <div class="card   ">
-                                        <div class="card-header   ">
+                                <div class="col-lg-12 mt-3 mb-2">
+                                    <div class="card">
+                                        <div class="card-header">
                                             <h5 class="card-title">Upload Foto C1</h5>
                                         </div>
                                         <div class="card-body text-center">
@@ -100,9 +103,9 @@
 
                         </div>
                     </form>
-                    <form action="{{route('logout')}}" method="post">
+                    <form class="mt-2" action="{{route('logout')}}" method="post">
                         @csrf
-                        <a href="#" class="mt-3" onclick="this.closest('form').submit();">
+                        <a href="#" onclick="this.closest('form').submit();">
                             Sign out
                         </a>
                     </form>
