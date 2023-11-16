@@ -199,6 +199,8 @@ class VerificatorController extends Controller
         $data['surat_pernyataan'] = SuratPernyataan::where('saksi_id', $data['saksi']['id'])->first();
         $data['pelanggaran_umum']    = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->where('list_kecurangan.jenis', 0)->get();
         $data['pelanggaran_petugas'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->where('list_kecurangan.jenis', 1)->get();
+        $data['pelanggaran_etik'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->where('list_kecurangan.jenis', 2)->get();
+        $data['pelanggaran_aparatur'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->where('list_kecurangan.jenis', 3)->get();
 
         return view('verificator.modal-view-kecurangan', $data);
     }

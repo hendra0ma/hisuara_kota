@@ -70,6 +70,8 @@
             cursor: pointer;
             flex: 1;
             padding: 7px;
+            padding-left: 4px;
+            padding-right: 4px;
             text-align: center;
         }
 
@@ -217,24 +219,24 @@
                         @if (Auth::user()->absen == "hadir")
                         @else
                         <li class="active">
-                            <i class="fas fa-home"></i>
+                            <i class="fa-solid fa-user"></i>
                             <p>Absensi</p>
                         </li>
                         @endif
                         <li>
-                            <i class="fas fa-box"></i>
-                            <p>Upload C1</p>
+                            <i class="fa-regular fa-file-lines"></i>
+                            <p>C1</p>
                         </li>
                         <li>
-                            <i class="fas fa-book"></i>
-                            <p>Surat Suara</p>
+                            <i class="fa-solid fa-people-group"></i>
+                            <p>Data Pemilih</p>
                         </li>
                         <li>
-                            <i class="fas fa-book-open"></i>
-                            <p>Upload C7</p>
+                            <i class="fa-solid fa-file"></i>
+                            <p>C7</p>
                         </li>
                         <li>
-                            <i class="fas fa-book-open"></i>
+                            <i class="fa-solid fa-file-shield"></i>
                             <p>Kecurangan</p>
                         </li>
 
@@ -294,7 +296,7 @@
         </div>
         <div alt="blog" class="content ">
 
-            <livewire:clainnya>
+            <livewire:upload-kecurangan>
         </div>
 
         <nav class="position-fixed">
@@ -302,24 +304,24 @@
                 @if (Auth::user()->absen == "hadir")
                 @else
                 <li class="active">
-                    <i class="fas fa-home"></i>
+                    <i class="fa-solid fa-user"></i>
                     <p>Absensi</p>
                 </li>
                 @endif
                 <li>
-                    <i class="fas fa-box"></i>
-                    <p>Upload C1</p>
+                    <i class="fa-regular fa-file-lines"></i>
+                    <p>C1</p>
                 </li>
                 <li>
-                    <i class="fas fa-book"></i>
-                    <p>Surat Suara</p>
+                    <i class="fa-solid fa-people-group"></i>
+                    <p>Data Pemilih</p>
                 </li>
                 <li>
-                    <i class="fas fa-book-open"></i>
-                    <p>Upload C7</p>
+                    <i class="fa-solid fa-file"></i>
+                    <p>C7</p>
                 </li>
                 <li>
-                    <i class="fas fa-book-open"></i>
+                    <i class="fa-solid fa-file-shield"></i>
                     <p>Kecurangan</p>
                 </li>
 
