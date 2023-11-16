@@ -1,5 +1,21 @@
+<style>
+    td:has(input[type=checkbox]) {
+        position: relative;
+    }
+
+    td > input[type=checkbox] {
+        position: absolute;
+        top: 14px
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<div style="position: relative" class="card-header bg-primary text-light text-center fw-bold rounded-0 col-12">
+    Kecurangan
+</div>
 <div style="overflow-y:auto; overflow-x: hidden">
-    <div class="row halaman-1">
+    <div class="row halaman-1 px-3">
         <center>
             <div class="row mt-3">
                 <div class="col-12">
@@ -53,22 +69,54 @@
                     hanya untuk keperluan hukum dan proses persidangan.
                 </li>
             </ol>
-        </div>
-        <div class="row">
-            <button class="btn btn-secondary mt-3 btn-halaman" data-bs-toggle="modal" data-bs-target="#extralargemodal">
-                Upload Bukti Kecurangan</button>
+            <div class="row">
+                <div class="col-12">
+                    <button class="btn btn-secondary btn-halaman w-100" data-bs-toggle="modal" data-bs-target="#extralargemodal">
+                        Upload Bukti Kecurangan</button>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="row halaman-2" style="display: none">
-        <div class="modal-header">
-            <h5 class="modal-title">Laporan Kecurangan</h5>
+        <div class="col-12 mt-3">
+            <div class="row">
+                <div class="px-0 col-12 text-center mb-3">
+                    @if (Auth::user()->profile_photo_path == NULL)
+                    <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                        src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF">
+                    @else
+                    <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                        src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}">
+                    @endif
+                </div>
+                <div class="px-0 col-12 my-auto text-center">
+                    <?php
+                                            $tps = App\Models\Tps::where('tps.id', '=', Auth::user()->tps_id)->first();
+                                            $kelurahan = App\Models\Village::where('villages.id', '=', Auth::user()->villages)->first();
+                                        ?>
+                    <div class="mb-0 fw-bold" style="font-size: 20px">{{ Auth::user()->name }}</div>
+                    <div style="font-size: 15px">NIK : {{ Auth::user()->nik }}</div>
+                    @if($tps == null)
+                    <div style="font-size: 15px">SAKSI TPS 1</div>
+                    @else
+                    <div style="font-size: 15px">SAKSI TPS {{ $tps->number }}</div>
+                    @endif
+                    @if ($kelurahan == null)
+                    <div style="font-size: 15px">KELURAHAN CIPUTAT</div>
+                    @else
+                    <div style="font-size: 15px">KELURAHAN {{ $kelurahan->name }}</div>
+                    @endif
+                </div>
+            </div>
         </div>
         <form action="{{route('action_upload_kecurangan')}}" method="post" enctype="multipart/form-data">
             <div class="modal-body">
 
                 @csrf
-                <h4 class="mt-3 header-title">Foto Kecurangan</h4>
+                <div class="col-lg-12 text-white p-2" style="background: #6a9cce!important">
+                    <h5 class="mb-0 header-title">Foto Kecurangan</h5>
+                </div>
                 <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
                     <div class="dropify-wrapper">
                         <div class="dropify-message"><span class="file-icon">
@@ -92,8 +140,10 @@
                         </div>
                     </div>
                 </div>
-                <p>*Pilih Beberapa Foto</p>
-                <h4 class="mt-2 header-title">Video Kecurangan</h4>
+                {{-- <p>*Pilih Beberapa Foto</p> --}}
+                <div class="col-lg-12 text-white p-2 mt-3" style="background: #6a9cce!important">
+                    <h5 class="mb-0 header-title">Video Kecurangan</h5>
+                </div>
                 <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
                     <div class="dropify-wrapper">
                         <div class="dropify-message"><span class="file-icon">
@@ -117,8 +167,10 @@
                         </div>
                     </div>
                 </div>
-                <p>*Pilih 1 Video</p>
-                <h4 class="mt-2 header-title">Video Pernyataan</h4>
+                {{-- <p>*Pilih 1 Video</p> --}}
+                <div class="col-lg-12 text-white p-2 mt-3" style="background: #6a9cce!important">
+                    <h5 class="mb-0 header-title">Video Pernyataan Saksi</h5>
+                </div>
                 <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
                     <div class="dropify-wrapper">
                         <div class="dropify-message"><span class="file-icon">
@@ -142,15 +194,20 @@
                         </div>
                     </div>
                 </div>
-                <b>Panduan Laporan : </b>
-                <p>Pilih salah satu kecurangan yang paling relevan, nyata, dan disaksikan sendiri.</p>
-                <table class="table mt-5">
+                <div class="mt-3">
+                    <b>Panduan Laporan : </b>
+                    <p>Centang deskripsi kecurangan yang paling relevan dengan kejadian dan disaksikan sendiri.</p>
+                    <div class="col-12 bg-danger mt-3 text-white p-2 text-center fw-bold">
+                        TAMBAHKAN JENIS PELANGGARAN
+                    </div>
+                </div>
+                <table class="table mt-2">
                     <thead>
                         <input type="hidden" name="id_relawan">
                         <tr>
                             <td class="bg-dark text-light"></td>
                             <th class="bg-dark text-light">
-                                TAMBAHKAN JENIS PELANGGARAN ADMINISTRASI PEMILU (+)
+                                PELANGGARAN ADMINISTRASI PEMILU (+)
                             </th>
                         </tr>
                         @foreach ($pelanggaran_umum as $item)
@@ -168,7 +225,7 @@
                         <tr>
                             <td class="bg-dark text-light"></td>
                             <th class="bg-dark text-light">
-                                TAMBAHKAN JENIS PELANGGARAN TINDAK PIDANA (+)
+                                PELANGGARAN TINDAK PIDANA (+)
                             </th>
                         </tr>
                         @foreach ($pelanggaran_petugas as $item)
@@ -186,7 +243,7 @@
                         <tr>
                             <td class="bg-dark text-light"></td>
                             <th class="bg-dark text-light">
-                                TAMBAHKAN JENIS PELANGGARAN KODE ETIK (+)
+                                PELANGGARAN KODE ETIK (+)
                             </th>
                         </tr>
                         @foreach ($pelanggaran_etik as $item)
@@ -204,7 +261,7 @@
                         <tr>
                             <td class="bg-dark text-light"></td>
                             <th class="bg-dark text-light">
-                                TAMBAHKAN JENIS PELANGGARAN APARATUR SIPIL NEGARA (ASN) (+)
+                                PELANGGARAN APARATUR SIPIL NEGARA (ASN) (+)
                             </th>
                         </tr>
                         @foreach ($pelanggaran_apartur as $item)
@@ -220,7 +277,7 @@
 
 
                     <tbody>
-                        <tr class="bg-primary text-light">
+                        <tr class="bg-success text-light">
                             <td></td>
                             <td>Rekomendasi Tindakan</td>
                         </tr>
@@ -228,19 +285,26 @@
                     <tbody id="container-rekomendasi">
 
                     </tbody>
-                    <tr>
-                        <th>
-                            <label for="LainnyaPetugas">lainnya</label>
-                        </th>
-                        <td>
-                            <textarea class="form-control" name="deskripsi" id="LainnyaPetugas" rows="3"></textarea>
-                        </td>
-                    </tr>
+                        <tr>
+                            <th>
+                                <label for="LainnyaPetugas">lainnya</label>
+                            </th>
+                            <td>
+                                <textarea class="form-control" name="deskripsi" id="LainnyaPetugas" rows="3"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="fw-bold">Tambahkan Pesan Suara</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-end"><button class="btn btn-info text-white"><i class="fa-solid fa-microphone"></i> Rekam</button></td>
+                        </tr>
 
+                    
                     </thead>
                 </table>
 
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-secondary">Simpan</button>
             </div>
         </form>
     </div>
