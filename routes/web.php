@@ -322,6 +322,10 @@ foreach ($kotas as $kota) {
                     Route::get('realcount_kecamatan/{id}', 'realcountKecamatan');
                     Route::get('realcount_kelurahan/{id}', 'realcountKelurahan');
                     Route::get('realcount_tps/{id}', 'realcountTPS');
+                    Route::get('hitung_kpu', 'hitung_kpu')->name('hitung_kpu');
+                    Route::get('kpu_kecamatan/{id}', 'kpuKecamatan');
+                    Route::get('kpu_kelurahan/{id}', 'kpuKelurahan');
+                    Route::get('kpu_tps/{id}', 'kpuTPS');
                     Route::get('rekapitulasi_kelurahan', 'rekapitulasiKelurahan')->name('rekapitulasiKelurahan');
 
                     Route::get('rekapitulasi_kecamatan', 'rekapitulasiKecamatan')->name('rekapitulasiKecamatan');

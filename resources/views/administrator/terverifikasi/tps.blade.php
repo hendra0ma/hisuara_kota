@@ -171,24 +171,31 @@ $tps = Tps::count();
                                 <div class="card" style="margin-bottom: 0px;">
                                     <div class="card-body p-3">
                                         <div class="row">
-                                            <div class="col-12 my-auto">
-                                                <div class="mx-auto mb-3 counter-icon box-shadow-secondary brround candidate-name text-white "
-                                                    style="margin-bottom: 0; background-color: {{$pas->color}};">
-                                                    {{$i++}}
-                                                </div>
+                                            <div class="col-6">
+                                                <img src="{{asset('')}}storage/{{$pas->picture}}" alt="">
                                             </div>
-                                            <div class="col text-center">
-                                                <h6>{{$pas->candidate}} </h6>
-                                                <h6>{{$pas->deputy_candidate}} </h6>
-                                                <?php
-                                                $voice = 0;
-                                                ?>
-                                                @foreach ($pas->saksi_data as $dataTps)
-                                                <?php
-                                                $voice += $dataTps->voice;
-                                                ?>
-                                                @endforeach
-                                                <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                            <div class="col-6">
+                                                <div class="row">
+                                                    <div class="col-12 my-auto">
+                                                        <div class="mx-auto mb-3 counter-icon box-shadow-secondary brround candidate-name text-white "
+                                                            style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                            {{$i++}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col text-center">
+                                                        <h6>{{$pas->candidate}} </h6>
+                                                        <h6>{{$pas->deputy_candidate}} </h6>
+                                                        <?php
+                                                        $voice = 0;
+                                                        ?>
+                                                        @foreach ($pas->saksi_data as $dataTps)
+                                                        <?php
+                                                        $voice += $dataTps->voice;
+                                                        ?>
+                                                        @endforeach
+                                                        <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
