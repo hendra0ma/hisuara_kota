@@ -1,4 +1,4 @@
-<div>
+<div style="margin-top: 143px;">
 
     <style>
         td {
@@ -11,7 +11,7 @@
             background: rgba(0, 0, 0, 0.25);
             width: 100%;
             height: 100%;
-            z-index: 10;
+            z-index: 7;
         }
 
         .police-line {
@@ -20,7 +20,7 @@
             width: 100%;
             background: repeating-linear-gradient(45deg, #f9cd1a, #f9cd1a 10px, #404042 10px, #404042 20px);
             position: absolute;
-            z-index: 11;
+            z-index: 8;
             text-align: center;
             font-weight: bold;
             padding-top: 5px;
@@ -33,13 +33,13 @@
         }
     </style>
     
-    <div class="row">
+    <div class="row" style="position: fixed; width: 98.1%; z-index: 10; background: #f2f3f9">
         <div class="col-12 mb-3">
             <input wire:model="search" type="search" class="form-control border-1 border-dark" placeholder="Search posts by title...">
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="margin-top: 50px;">
         @foreach ($saksi_data as $ls)
         <?php $kecamatan = \App\Models\District::where('id',(string)$ls['districts'])->first(); ?>
         <?php $kelurahan = \App\Models\Village::where('id',(string)3674040006)->first(); ?>
