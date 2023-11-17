@@ -224,6 +224,7 @@ class ExcelController extends Controller
             $result = $this->countArrayValuesTps($filteredArray);
 
             foreach ($result as $namaTps => $jumlahTps) {
+                $jumlahTps = (string) $jumlahTps;
                 $nomorTps = (string) intval(substr($namaTps, 3));
                 $villageId = $village->id;
                 $provinceId = substr($villageId, 0, 2);
@@ -231,13 +232,13 @@ class ExcelController extends Controller
                 $districtId = substr($villageId, 0, 7);
                 $isTpsExist = Tps::where('villages_id', $villageId)
                     ->where('number', $nomorTps)
-                    ->exists();;
+                    ->exists();
 
                 if ($isTpsExist) {
                     Tps::where('villages_id', $villageId)
-                    ->where('number', $nomorTps)->update([
-                        'dpt' => $jumlahTps
-                    ]);
+                        ->where('number', $nomorTps)->update([
+                            'dpt' => $jumlahTps
+                        ]);
                     array_push($hasilUpload, "$villageId dengan tps nomor $nomorTps berhasil di update.");
                 } else {
                     Tps::insert([
