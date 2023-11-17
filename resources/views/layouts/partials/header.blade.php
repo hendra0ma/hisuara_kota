@@ -1036,7 +1036,6 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
 
                                         </div>
                                     </div>
-
                                     <div class="col-md suara tugel-content" style="display: none">
                                         <div class="row">
                                             @foreach ($urutan as $urutPaslon)

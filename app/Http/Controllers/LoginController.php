@@ -188,5 +188,6 @@ class LoginController extends Controller
         $data['koordinator'] = DB::table('koordinator')->whereNotIn('id',$koor_id)->get();
         return view('publik.ajax.ajax_koordinator',$data);
     }
+ 
 
 }
