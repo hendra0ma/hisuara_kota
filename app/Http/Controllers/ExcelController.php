@@ -224,9 +224,8 @@ class ExcelController extends Controller
             $result = $this->countArrayValuesTps($filteredArray);
 
             foreach ($result as $namaTps => $jumlahTps) {
-                $jumlahTps = (string) $jumlahTps;
                 $nomorTps = (string) intval(substr($namaTps, 3));
-                $villageId = $village->id;
+                $villageId = (string) $village->id;
                 $provinceId = substr($villageId, 0, 2);
                 $regencyId = substr($villageId, 0, 4);
                 $districtId = substr($villageId, 0, 7);
