@@ -191,6 +191,7 @@
         <div id="C1-Saksi" class="tabcontent mt-0 pt-0 px-0">
             <form action="{{url('')}}/c1Crowd/upload" method="post" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden"value="suara"name="tipe">
                 <div class="container-fluid mt-5">
                     <div class="row justify-content-center">
                         <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
@@ -231,23 +232,15 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        {{-- @foreach ($saksi_data as $ss) --}}
+                                                        <?php $i= 1; ?>
+                                                       @foreach ($paslon as $ss)
                                                         <div class="col-md-12">
-                                                            <label for="suara01">Suara 01</label>
-                                                            <input type="text" id="suara" class="form-control suara-input"
+                                                            <label for="suara0{{$i}}">Suara 0{{$i}}</label>
+                                                            <input type="text"name="suara[]" class="form-control suara-input"
                                                                 name="paslon">
                                                         </div>
-                                                        <div class="col-md-12">
-                                                            <label for="suara01">Suara 02</label>
-                                                            <input type="text" id="suara" class="form-control suara-input"
-                                                                name="paslon">
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <label for="suara01">Suara 03</label>
-                                                            <input type="text" id="suara" class="form-control suara-input"
-                                                                name="paslon">
-                                                        </div>
-                                                        {{-- @endforeach --}}
+                                                        <?php $i++; ?>
+                                                       @endforeach
                                                     </div>
                                                 </div>
                                                 {{-- <div class="col-md-12">
@@ -339,6 +332,7 @@
         <div id="C1-Relawan" class="tabcontent mt-0 pt-0 px-0">
             <form action="{{url('')}}/c1Crowd/upload" method="post" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden"value="nosuara"name="tipe">
                 <div class="container-fluid mt-5">
                     <div class="row justify-content-center">
                         <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
@@ -351,7 +345,7 @@
                                     
                                         <input type="file" name="c1_images" id="picture__input3" class="picture___input">
                                     </div>
-                                    <img id="previewImage" src="#" alt="Uploaded Image" style="display: none; max-width: 300px; max-height: 300px">
+                                    <img id="previewImage2" src="#" alt="Uploaded Image" style="display: none; max-width: 300px; max-height: 300px">
                                 </div>
                                 <script>
                                     document.getElementById('fileInput').addEventListener('change', function() {
@@ -359,7 +353,7 @@
                                         if (file) {
                                             var reader = new FileReader();
                                             reader.onload = function(e) {
-                                                var image = document.getElementById('previewImage');
+                                                var image = document.getElementById('previewImage2');
                                                 image.style.display = 'block';
                                                 image.src = e.target.result;
                                             };
@@ -369,7 +363,7 @@
                                 </script>
                                 <div class="col-6" style="margin-top: 65px; position: relative">
                                     <div class="form-group">
-                                        <select class="form-control select2-show-search form-select" name="provinsi" id="provinsi">
+                                        <select class="form-control select2-show-search form-select" name="provinsi" id="provinsi_2">
                                             <?php
                                             $provinsi = App\Models\Province::get();
                                             ?>
@@ -380,7 +374,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <select class="form-control select2-show-search form-select" name="kota" id="kota">
+                                        <select class="form-control select2-show-search form-select" name="kota" id="kota_2">
                                             <option disabled selected>Pilih Kota</option>
                                         </select>
                                     </div>
@@ -482,6 +476,30 @@
 
             });
         })
+        $('#provinsi_2').on('change', function() {
+            let idProvinsi = $(this).val();
+            // console.log(idProvinsi)
+            $.ajax({
+                url: `{{url('')}}/getKota/${idProvinsi}`,
+                method: 'get',
+
+                success: function(response) {
+                    $('#kota').html("")
+                    response.forEach((item, id) => {
+                        var option = $(`<option value="${item.id}">${item.name}</option>`); // Membuat elemen baru
+                        $('#kota_2').append(option)
+                    })
+                    // console.log(response)
+                }
+
+            });
+        })
+
+
+
+
+
+
         $('#kota').on('change', function() {
             let idKota = $(this).val();
 
