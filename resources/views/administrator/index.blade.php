@@ -96,6 +96,8 @@ $tps = Tps::count();
 
 <div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
 
+
+
     {{-- <div class="col-md-auto pe-0 my-auto">
         <img src="{{asset('')}}storage/{{$config->regencies_logo}}" style="width: 80px" alt="">
     </div>
@@ -1416,6 +1418,7 @@ if (request()->segment(1) == "administrator" && request()->segment(2) == "perhit
 
 ?>
     <livewire:dpt-pemilih-component :id_wilayah="$id_wilayah" :tipe_wilayah="$tipe_wilayah" />
+
 
 
 

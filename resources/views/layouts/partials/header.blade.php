@@ -1440,6 +1440,11 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
         </div>
     </div>
 </div>
+
+
+
+
+
 <div class="mb-1 navbar navbar-expand-lg  responsive-navbar navbar-dark d-md-none bg-white">
     <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
         <div class="d-flex order-lg-2 ms-auto">
@@ -1536,4 +1541,8 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
 
 <!--app-content open-->
 <div class="app-content for-kolapse-kurangin" style="margin-top: 40px; margin-left: 0px !important">
+
+
+
+
     <div class="side-app">
