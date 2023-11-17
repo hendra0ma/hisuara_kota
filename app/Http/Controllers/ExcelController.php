@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\District;
 use App\Models\Regency;
+use App\Models\Tps;
 use App\Models\Village;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -198,13 +200,61 @@ class ExcelController extends Controller
             $worksheet = $spreadsheet->getActiveSheet();
             $worksheet = $worksheet->toArray();
 
+            $worksheetForGetLocation = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+            $worksheetForGetLocation->setReadFilter(new filterKelurahan());
+            $spreadsheetForGetLocation = $worksheetForGetLocation->load($files);
+            $worksheetForGetLocation = $spreadsheetForGetLocation->getActiveSheet();
+            $worksheetForGetLocation = $worksheetForGetLocation->toArray();
+
+            $namaKabupatenKota = $worksheetForGetLocation[1][1];
+            $namaKecamatan = $worksheetForGetLocation[2][1];
+            $namaKelurahan = $worksheetForGetLocation[3][1];
+            $village = Regency::where('regencies.name', $namaKabupatenKota)
+                ->join('districts', 'districts.regency_id', '=', 'regencies.id')
+                ->where('districts.name', $namaKecamatan)
+                ->join('villages', function ($join) use ($namaKelurahan) {
+                    $lastThreeLettersNamaKelurahan = substr($namaKelurahan, -3);
+                    $join->on('villages.district_id', '=', 'districts.id')
+                        ->where('villages.name', 'like', '%' . $lastThreeLettersNamaKelurahan);
+                })
+                ->select('regencies.*', 'districts.*', 'villages.*')
+                ->first();
+
             $filteredArray = $this->filterArrayTps($worksheet);
             $result = $this->countArrayValuesTps($filteredArray);
 
-            dd($result);
+            foreach ($result as $namaTps => $jumlahTps) {
+                $nomorTps = (string) intval(substr($namaTps, 3));
+                $villageId = (string) $village->id;
+                $provinceId = substr($villageId, 0, 2);
+                $regencyId = substr($villageId, 0, 4);
+                $districtId = substr($villageId, 0, 7);
+                $isTpsExist = Tps::where('villages_id', $villageId)
+                    ->where('number', $nomorTps)
+                    ->exists();
+
+                if ($isTpsExist) {
+                    Tps::where('villages_id', $villageId)
+                        ->where('number', $nomorTps)->update([
+                            'dpt' => $jumlahTps
+                        ]);
+                    array_push($hasilUpload, "$villageId dengan tps nomor $nomorTps berhasil di update.");
+                } else {
+                    Tps::insert([
+                        'created_at' => Carbon::now(),
+                        'province_id' => $provinceId,
+                        'regency_id' => $regencyId,
+                        'district_id' => $districtId,
+                        'villages_id' => $villageId,
+                        'number' => $nomorTps,
+                        'dpt' => $jumlahTps
+                    ]);
+                    array_push($hasilUpload, "$villageId dengan tps nomor $nomorTps berhasil di insert.");
+                }
+            }
         }
 
-        return $hasilUpload;
+        return response()->json($hasilUpload);
     }
 
     /**
