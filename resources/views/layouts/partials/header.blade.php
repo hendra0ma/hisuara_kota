@@ -1,8 +1,6 @@
 <?php
 
 
-echo decrypt(request()->segment(3));
-die;
 use App\Models\Config;
 use App\Models\Configs;
 use App\Models\District;
@@ -791,6 +789,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                         $dpt_p = 145;
 
                                                     }
+                                                    dd( $dpt_l, $dpt_p);
                                                 ?>
 
 
