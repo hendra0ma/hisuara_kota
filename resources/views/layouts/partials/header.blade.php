@@ -789,7 +789,9 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                         $dpt_p = 145;
 
                                                     }
-                                                    dd( $dpt_l, $dpt_p);
+                                               echo  $dpt_l ;
+                                               echo  $dpt_p ;
+                                               die;
                                                 ?>
 
 
