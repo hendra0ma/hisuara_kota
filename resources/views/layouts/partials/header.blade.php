@@ -248,7 +248,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                     $('.col-hisuara').show()
                                         $('.col-pilpres').hide()
                                         pilpresAnimate();
-                                    },5000)
+                                    },3000)
                                 })
 
                                 function animateHeaderPojokan() {
