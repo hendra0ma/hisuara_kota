@@ -36,8 +36,10 @@ use App\Models\Province;
 use App\Models\QuickSaksiData;
 use App\Models\Configs;
 use App\Models\CrowdC1;
+use App\Models\DataCrowdC1;
 use App\Models\RegenciesDomain;
 use App\Models\SuratPernyataan;
+use Carbon\Carbon;
 use Exception;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Contracts\Encryption\DecryptException;
@@ -387,9 +389,22 @@ class AdminController extends Controller
                 'village_id' =>  $crowd->village_id,
                 'regency_id' => $crowd->regency_id,
                 'province_id' => substr($crowd->regency_id, 0, 2),
-                'voice' =>  (int)$request->suara[$i++],
+                'voice' =>  (int)$request->suara[$i],
                 'saksi_id' => $ide,
             ]);
+            DataCrowdC1::insert([
+                'user_id' => $crowd->user_id,
+                'paslon_id' =>  $item->id,
+                'village_id' =>  $crowd->village_id,
+                'tps_id' => $crowd->tps_id,
+                'district_id' =>  $crowd->district_id,
+                'regency_id' => $crowd->regency_id,
+                'created_at' => Carbon::now(),
+                'crowd_c1_id' =>$request->crowd_id,
+                'voice' => $request->suara[$i]
+
+            ]);
+            $i++;
         }
         CrowdC1::where('id', $request->crowd_id)->update([
             "status" => "1",

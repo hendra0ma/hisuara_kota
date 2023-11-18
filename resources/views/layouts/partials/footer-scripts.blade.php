@@ -110,6 +110,9 @@ use App\Models\User;
 <script src="https://raw.githack.com/thdoan/magnify/master/dist/js/jquery.magnify-mobile.js"></script>
 
 
+
+
+
 <script>
            const redirect = function(page) {
                 $.ajax({

@@ -163,27 +163,108 @@
   <script src="../../assets/plugins/multipleselect/multi-select.js"></script>
 
   <script>
-    $('#koor_id').on('change', function() {
-      const korId = $(this).val();
-      $.ajax({
-        url: "{{route('getKoordinator')}}",
-        type: "get",
-        data: {
-          id: korId
-        },
-        success: function(res) {
-          $('#container-koordinator').html(res);
-        }
-      })
-    });
+    // $('#koor_id').on('change', function() {
+    //   const korId = $(this).val();
+    //   $.ajax({
+    //     url: "{{route('getKoordinator')}}",
+    //     type: "get",
+    //     data: {
+    //       id: korId
+    //     },
+    //     success: function(res) {
+    //       $('#container-koordinator').html(res);
+    //     }
+    //   })
+    // });
 
 
     $('#role').on('change', function() {
-      let cekTps = $(this).val().split("|");
 
-      $('#role-admin').toggle(cekTps[0] !== "kor").show(100);
-      $('#koor-form').toggle(cekTps[0] === "kor").show(100);
-      $('#role-saksi').toggle(cekTps[0] !== "tdk").show(100);
+      let cekTps = $(this).val().split("|");
+      
+      
+      if (cekTps[0] == "tdk") {
+        $('.prov-con').show();
+        $('.kota-con').show();
+        $('.kec-con').hide();
+        $('.kel-con').hide();
+        $('.rw-con').hide();
+        $('.rt-con').hide();
+        $('.tps-con').hide();
+        $('#koor-form').hide();
+        $('#cek_koor').val("")
+        
+    
+      } else if (cekTps[0] == "tps") {
+        $('.prov-con').show();
+        $('.kota-con').show();
+        $('.kec-con').show();
+        $('.kel-con').show();
+        $('.rw-con').hide();
+        $('.rt-con').hide();
+        $('#tps-con').show();
+
+       $('#koor-form').hide();
+       $('#cek_koor').val("")
+      } else if (cekTps[0] == "kor") {
+        $('.prov-con').hide();
+        $('.kota-con').hide();
+        $('.kec-con').hide();
+        $('.kel-con').hide();
+        $('.rw-con').hide();
+        $('.rt-con').hide();
+        $('.tps-con').hide();
+        $('#koor-form').show();
+        $('#cek_koor').val("yes")
+
+      }
+    });
+
+    $("#koor_id").on('change', function() {
+      let dataKoor = parseInt($(this).val());
+
+      if (dataKoor == 1) {
+        $('.prov-con').show();
+        $('.kota-con').show();
+        $('.kec-con').hide();
+        $('.kel-con').hide();
+        $('.rw-con').hide();
+        $('.rt-con').hide();
+        $('.tps-con').hide();
+
+      } else if (dataKoor == 2) {
+        $('.prov-con').show();
+        $('.kota-con').show();
+        $('.kec-con').show();
+        $('.kel-con').hide();
+        $('.rw-con').hide();
+        $('.rt-con').hide();
+        $('.tps-con').hide();
+      } else if (dataKoor == 3) {
+        $('.prov-con').show();
+        $('.kota-con').show();
+        $('.kec-con').show();
+        $('.kel-con').show();
+        $('.rw-con').hide();
+        $('.rt-con').hide();
+        $('.tps-con').hide();
+      } else if (dataKoor == 4) {
+        $('.prov-con').show();
+        $('.kota-con').show();
+        $('.kec-con').show();
+        $('.kel-con').show();
+        $('.rw-con').show();
+        $('.rt-con').hide();
+        $('.tps-con').hide();
+      } else if (dataKoor == 5) {
+        $('.prov-con').show();
+        $('.kota-con').show();
+        $('.kec-con').show();
+        $('.kel-con').show();
+        $('.rw-con').show();
+        $('.rt-con').show();
+        $('.tps-con').hide();
+      }
     });
 
 

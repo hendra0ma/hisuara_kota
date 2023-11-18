@@ -450,11 +450,7 @@
             text: `{{ Session::get('success') }}`,
             icon: 'success',
             confirmButtonText: 'OK'
-        })
-        
-        location.href = "{{url('')}}/logout_v2";
-   
-
+        }) 
         @endif
 
 

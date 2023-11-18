@@ -28,6 +28,7 @@ use SebastianBergmann\Environment\Console;
 use App\Models\Buktifoto as ModelsBuktifoto;
 use App\Models\Buktividio as ModelsBuktividio;
 use App\Models\Configs;
+use App\Models\CrowdC1;
 use App\Models\Databukti;
 use App\Models\Listkecurangan as ModelsListkecurangan;
 use App\Models\Relawan;
@@ -316,6 +317,12 @@ class VerificatorController extends Controller
 
         return view('verificator.modal-view-relawan', $data);
     }
+    public function getCrowdData(Request $req)
+    {
+        $data['relawan'] = CrowdC1::with('crowd_data')->where('id', $req->id)->first();
+    //    return $data;
+        return view('verificator.modal-view-crowd', $data);
+    }
     public function verifikasiDataC1Relawan($id)
     {
         $id = Crypt::decrypt($id);
@@ -373,11 +380,11 @@ class VerificatorController extends Controller
         $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
         $data['kota'] = Regency::where('id',$this->config->regencies_id)->first();
         $data['tracking'] = ModelsTracking::get();
-        $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->count();
-        $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
-        $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
+        // $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->count();
+        // $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
+        // $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
         $data['total_tps']   =  Tps::where('setup','belum terisi')->count();
-        $data['jumlah_kosong']  =  $data['total_tps'] - $data['jumlah_tps_masuk'];
+        // $data['jumlah_kosong']  =  $data['total_tps'] - $data['jumlah_tps_masuk'];
         return view('administrator.c1.verifikasi-c1', $data);
     }
 

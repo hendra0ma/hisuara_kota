@@ -74,7 +74,7 @@ class LoginController extends Controller
     
     public function storeAdmin(Request $request)
     {
-    
+        return $this->insertKoordinator($request);
        $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'alamat' => ['required','string'],
@@ -82,10 +82,13 @@ class LoginController extends Controller
             'no_hp' => ['required','string','unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' =>  ['required', 'string', 'confirmed'],
-            'nik' => 'required|string',
+            'nik' => ['required','numeric'],
           
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ]);
+
+
+
         if (!$request->file('foto_ktp')) {
             return redirect()->back()->with('error','foto ktp wajib di isi');
           }
@@ -159,6 +162,9 @@ class LoginController extends Controller
 
         return redirect()->route('login');
     }
+    private function insertKoordinator(Request $rey){
+        return $rey;
+    }
 
 
 
@@ -188,5 +194,7 @@ class LoginController extends Controller
         $data['koordinator'] = DB::table('koordinator')->whereNotIn('id',$koor_id)->get();
         return view('publik.ajax.ajax_koordinator',$data);
     }
+
+ 
 
 }

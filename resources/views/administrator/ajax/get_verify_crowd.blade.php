@@ -165,51 +165,8 @@ $config->default =  $configs->default;
 </div>
 
 <script>
-    @if(Session::has('success'))
-    Swal.fire({
-        title: 'SUCCESS!',
-        text: `{{ Session::get('success') }}`,
-        icon: 'success',
-        confirmButtonText: 'OK'
-    })
-    
-    location.href = "{{url('')}}/logout_v2";
-
-    @endif
-    $('#provinsi').on('change', function() {
-        let idProvinsi = $(this).val();
-        // console.log(idProvinsi)
-        $.ajax({
-            url: `{{url('')}}/getKota/${idProvinsi}`,
-            method: 'get',
-            success: function(response) {
-                $('#kota').html("")
-                response.forEach((item, id) => {
-                    var option = $(`<option value="${item.id}">${item.name}</option>`); // Membuat elemen baru
-                    $('#kota').append(option)
-                })
-                // console.log(response)
-            }
-        });
-    })
-    $('#kota').on('change', function() {
-        let idKota = $(this).val();
-        $.ajax({
-            url: `{{url('')}}/api/public/get-district`,
-            method: 'get',
-            data: {
-                id: idKota
-            },
-            dataType: "json",
-            success: function(response) {
-                $('#kecamatan').html("")
-                response.forEach((item, id) => {
-                    var option = $(`<option value="${item.id}">${item.name}</option>`); // Membuat elemen baru
-                    $('#kecamatan').append(option)
-                })
-            }
-        });
-    })
+   
+  
     $('#kecamatan').on('change', function() {
         let idKec = $(this).val();
         $.ajax({

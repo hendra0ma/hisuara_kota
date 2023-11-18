@@ -248,7 +248,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                     $('.col-hisuara').show()
                                         $('.col-pilpres').hide()
                                         pilpresAnimate();
-                                    },5000)
+                                    },3000)
                                 })
 
                                 function animateHeaderPojokan() {
@@ -779,7 +779,13 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                     }elseif(request()->segment(2) == 'perhitungan_kecamatan'){
                                                         $dpt_l = District::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt_l');
                                                         $dpt_p = District::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt_p');
-                                                    }else{
+                                                    }elseif(request()->segment(2) == 'perhitungan_kelurahan'){
+                                                        $dpt_l = Village::where('id',decrypt(request()->segment(3)))->sum('dpt_l');
+                                                        $dpt_p = Village::where('id',decrypt(request()->segment(3)))->sum('dpt_p');
+                                                        
+                                                    }elseif(request()->segment(2) == 'perhitungan_tps'){
+                                                        $dpt_l = 128;
+                                                        $dpt_p = 145;
 
                                                     }
                                                 ?>
@@ -798,8 +804,10 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                         $total_dpt = District::where('regency_id',$config->regencies_id)->sum('dpt');
                                                     }elseif(request()->segment(2) == 'perhitungan_kecamatan'){
                                                         $total_dpt = District::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt');
-                                                    }else{
-
+                                                    }elseif(request()->segment(2) == 'perhitungan_kelurahan'){
+                                                        $total_dpt = (int) $dpt_l + (int) $dpt_p;
+                                                    }elseif(request()->segment(2) == 'perhitungan_tps'){
+                                                        $total_dpt = TPS::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt');
                                                     }
                                                 ?>
                                                 <div class="text">Total : <b>{{ $total_dpt }}</b></div>
@@ -1036,7 +1044,6 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
 
                                         </div>
                                     </div>
-
                                     <div class="col-md suara tugel-content" style="display: none">
                                         <div class="row">
                                             @foreach ($urutan as $urutPaslon)
@@ -1050,7 +1057,6 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                             @endforeach
                                         </div>
                                     </div>
-
                                     <div class="col-md-12 text-white judul-pertama">
                                         <div class="row">
 
@@ -1441,6 +1447,11 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
         </div>
     </div>
 </div>
+
+
+
+
+
 <div class="mb-1 navbar navbar-expand-lg  responsive-navbar navbar-dark d-md-none bg-white">
     <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
         <div class="d-flex order-lg-2 ms-auto">
@@ -1537,4 +1548,8 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
 
 <!--app-content open-->
 <div class="app-content for-kolapse-kurangin" style="margin-top: 40px; margin-left: 0px !important">
+
+
+
+
     <div class="side-app">

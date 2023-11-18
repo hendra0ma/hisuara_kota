@@ -24,12 +24,13 @@
                         <div class="wrap-login100 p-0">
 
                             <div class="card-body">
-                                <form class="justify-content-center  validate-form" method="POST" action="{{ route('storeRegister.admin') }}"enctype="multipart/form-data">
+                                <form class="justify-content-center  validate-form" method="POST" action="{{ route('storeRegister.admin') }}" enctype="multipart/form-data">
                                     @csrf
                                     <span class="login100-form-title">
                                         Registration
                                     </span>
                                     <x-jet-validation-errors class="mb-4" />
+                                    <input type="hidden" name="cek_koor"id="cek_koor">
 
                                     @if(Session::flash("error"))
                                     <div class="alert alert-danger" role="alert">
@@ -50,12 +51,12 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group"id="koor-form"style="display:none">
+                                    <div class="form-group" id="koor-form" style="display:none">
                                         <select class="form-control select2-show-search form-select" name="koor_id" id="koor_id">
                                             <option disabled selected>Pilih Role Koordinator</option>
                                             <?php $kors = Illuminate\Support\Facades\DB::table('koordinator')->get(); ?>
                                             @foreach ($kors as $kor)
-                                             <option value="{{$kor->id}}">{{$kor->name}}</option>
+                                            <option value="{{$kor->id}}">{{$kor->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -128,8 +129,7 @@
                                         <input type="file" name="foto_profil" id="picture__input2" class="picture___input">
                                     </div>
 
-
-                                    <div id="role-admin" style="display:none">
+                                    <div class="prov-con"style="display:none">
                                         <div class="form-group">
                                             <select class="form-control select2-show-search form-select" name="provinsi" id="provinsi">
                                                 <?php
@@ -141,40 +141,58 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                    </div>
 
+                                    <div class="kota-con"style="display:none">
                                         <div class="form-group">
                                             <select class="form-control select2-show-search form-select" name="kota" id="kota">
                                                 <option disabled selected>Pilih Kota</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div id="role-saksi" style="display:none">
+                                    <div class="kec-con"style="display:none">
                                         <div class="form-group">
                                             <select class="form-control select2-show-search form-select" name="kecamatan" id="kecamatan">
                                                 <option disabled selected>Pilih Kecamatan</option>
                                             </select>
                                         </div>
+                                    </div>
+                                    <div class="kel-con"style="display:none">
                                         <div class="form-group">
                                             <select class="form-control select2-show-search form-select" name="kelurahan" id="kelurahan">
                                                 <option disabled selected>Pilih Kelurahan</option>
                                             </select>
                                         </div>
+                                    </div>
+
+                                    <div class="rw-con" style="display:none">
+                                        <div class="wrap-input100 validate-input">
+                                            <input class="input100" type="number" name="rw" placeholder="Masukkan Nomor RW">
+                                            <span class="focus-input100"></span>
+                                            <span class="symbol-input100">
+                                                <i class="zmdi zmdi-lock" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="rt-con" style="display:none">
+                                        <div class="wrap-input100 validate-input">
+                                            <input class="input100" type="number" name="rt" placeholder="Masukkan Nomor RT">
+                                            <span class="focus-input100"></span>
+                                            <span class="symbol-input100">
+                                                <i class="zmdi zmdi-lock" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="tps-con"style="display:none">
                                         <div class="form-group">
                                             <select class="form-control select2-show-search form-select" name="tps" id="tps">
                                                 <option disabled selected>Pilih Tps</option>
                                             </select>
                                         </div>
                                     </div>
-
-                                    <div id="container-koordinator">
-                                        
-                                    </div>
-
-
-
-
-
-                                
 
                                     <label class="custom-control custom-checkbox mt-4">
                                         <input type="checkbox" class="custom-control-input">
