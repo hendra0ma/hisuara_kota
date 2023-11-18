@@ -101,7 +101,7 @@ $props = Province::where('id',$kota['province_id'])->first();
     <div class="col-lg-12">
         <center>
             <h2 class="page-title mt-1 mb-3" style="font-size: 60px">
-                REAL COUNT
+                HITUNG ULANG KPU
             </h2>
         </center>
     </div>
@@ -258,7 +258,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                                 @foreach ($kel as $item)
                                 <tr onclick='check("{{Crypt::encrypt($item->id)}}")'>
                                     <td class="align-middle"><a
-                                            href="{{url('/')}}/administrator/realcount_kelurahan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
+                                            href="{{url('/')}}/administrator/kpu_kelurahan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
                                     </td>
                                     @foreach ($paslon as $cd)
                                     <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.village_id', (string)$item['id'])->sum('voice'); ?>
@@ -269,7 +269,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                             </tbody>
                             <script>
                                 let check = function (id) {
-                                    window.location = `{{url('/')}}/administrator/realcount_kelurahan/${id}`;
+                                    window.location = `{{url('/')}}/administrator/kpu_kelurahan/${id}`;
                                 }
                             </script>
                         </table>

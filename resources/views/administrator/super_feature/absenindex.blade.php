@@ -3,7 +3,7 @@
 
 
 <div class="row mt-5">
-    <div class="col-lg-4">
+    <div class="col-lg" style="position: fixed; z-index: 10; background: #f2f3f9">
         <h1 class="page-title fs-1 mt-2">Saksi Teregristrasi
             <!-- Kota -->
         </h1>
@@ -14,7 +14,7 @@
         </ol>
     </div>
 
-    <div class="col-lg-8">
+    <div class="col-lg-8" style="position: fixed; right: 18px; width: 1244.66px; z-index: 10; background: #f2f3f9">
         <div class="row mt-2">
 
             {{-- <div class="col parent-link">
@@ -103,27 +103,25 @@
     }
 </style>
 
-<div class="row">
-    <div class="col-md">
-        <h4 class="fw-bold fs-4 mt-5 mb-0">
-    
-            Jumlah Saksi Teregistrasi : {{$jumlah_saksi_teregistrasi}}
-
-        </h4>
-
-    </div>
-    <div class="col-md-auto mt-auto">
-        <div class="ms-auto">
-            <div class="btn btn-success my-auto">
-                <i class="fa-solid fa-download"></i>
-                Unduh
+<div style="position: fixed; width: 97%; margin-top: 76px; z-index: 10; background: #f2f3f9">
+    <div class="row">
+        <div class="col-md">
+            <h4 class="fw-bold fs-4 mt-5 mb-0">
+                Jumlah Saksi Teregistrasi : {{$jumlah_saksi_teregistrasi}}
+            </h4>
+        </div>
+        <div class="col-md-auto mt-auto">
+            <div class="ms-auto">
+                <button style="width: 82.22px; height: 38px; margin-right: 3px;" class="btn btn-success my-auto">
+                    <i class="fa-solid fa-download"></i>
+                    Unduh
+                </button>
             </div>
         </div>
     </div>
+    <hr style="border: 1px solid; width: 1841px">
 </div>
-<hr style="border: 1px solid">
-
-<div>
+<div class="row mt-3">
     <!-- Search Input and Results -->
     <livewire:absensiindex>
     
@@ -180,6 +178,8 @@
     </div> --}}
     
 </div>
+
+<div style="background: #f2f3f9; position: fixed; width: 100%; height: 70px; top: 90px; left: 0; z-index: 8;"></div>
 
 <div class="modal fade" id="cekmodal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-xl" role="document">

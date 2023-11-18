@@ -1,4 +1,4 @@
-<div>
+<div style="margin-top: 143px;">
     <style>
         td {
             padding-top: 7.5px !important;
@@ -10,7 +10,7 @@
             background: rgba(0, 0, 0, 0.25);
             width: 100%;
             height: 100%;
-            z-index: 10;
+            z-index: 7;
         }
 
         .police-line {
@@ -19,7 +19,7 @@
             width: 100%;
             background: repeating-linear-gradient(45deg, #f82649, #f82649 10px, #404042 10px, #404042 20px);
             position: absolute;
-            z-index: 11;
+            z-index: 8;
             text-align: center;
             font-weight: bold;
             padding-top: 5px;
@@ -32,13 +32,13 @@
         }
     </style>
     
-    <div class="row">
+    <div class="row" style="position: fixed; width: 98.1%; z-index: 10; background: #f2f3f9">
         <div class="col-12 mb-3">
             <input wire:model="search" type="search" class="form-control border-1 border-dark" placeholder="Search posts by title...">
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="margin-top: 50px;">
         @foreach ($absen as $ls)
         <?php $district = App\Models\District::where('id',$ls['districts'])->first(); ?>
         <?php $villages = App\Models\Village::where('id',$ls['villages'])->first(); ?>

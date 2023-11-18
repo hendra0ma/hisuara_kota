@@ -101,7 +101,7 @@ $props = Province::where('id',$kota['province_id'])->first();
     <div class="col-lg-12">
         <center>
             <h2 class="page-title mt-1 mb-3" style="font-size: 60px">
-                REAL COUNT
+                HITUNG ULANG KPU
             </h2>
         </center>
     </div>
@@ -138,12 +138,16 @@ $props = Province::where('id',$kota['province_id'])->first();
     
         <ul class="breadcrumb">
             <?php
-                $regency = Regency::where('id', $config->regencies_id)->select('name')->first();
-                $kcamatan = District::where('id', $id_kecamatan)->select('name')->first();
+                $desa = Village::where('id', (string) $id_kelurahan)->first();
+            
+                $regency = Regency::where('id', $config->regencies_id)->first();
+                $kcamatan = District::where('id',(string) $desa->district_id)->first();
                 ?>
             <li><a href="{{url('')}}/administrator/real_count2" class="text-white">{{$regency->name}}</a></li>
-            <li><a href="{{url('')}}/administrator/realcount_kecamatan/{{Crypt::encrypt($id_kecamatan)}}"
-                    class="text-white">{{$kcamatan->name}}</a></li>
+            <li><a href="{{url('')}}/administrator/realcount_kecamatan/{{Crypt::encrypt($district->id)}}"
+                    class="text-white">{{$district->name}}</a></li>
+            <li><a href="{{url('')}}/administrator/realcount_kelurahan/{{Crypt::encrypt($id_kelurahan)}}"
+                    class="text-white">{{$desa->name}}</a></li>
     
         </ul>
     </div>
@@ -223,7 +227,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                         }
                     </style>
 
-                    <div class="col-xxl-6">
+                    <div class="col-xxl-6" style="height: 640px; overflow-y: scroll; overflow-x: hidden">
                         <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Hasil Perhitungan Suara</div>
                         <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Pemilihan Presiden dan Wakil
                             Presiden</div>
@@ -238,11 +242,11 @@ $props = Province::where('id',$kota['province_id'])->first();
                             </div>
                             @endforeach
                         </div>
-                        <table class="table table-bordered table-hover mt-3">
-                            <thead class="bg-primary">
+                        <table class="table table-bordered table-hover mt-3 display">
+                            <thead style="background-color: #45aaf2;">
                                 <tr>
-                                    <th class="text-white text-center align-middle">KELURAHAN</th>
-                                    @foreach ($paslon as $item)
+                                    <th class="align-middle text-white text-center align-middle" rowspan="2">TPS</th>
+                                    @foreach ($paslon_candidate as $item)
                                     <th class="text-white text-center align-middle" style="background: {{$item->color}}; position:relative">
                                         <img style="width: 60px; position: absolute; left: 0; bottom: 0" src="{{asset('')}}storage/{{$item->picture}}"
                                             alt="">
@@ -252,26 +256,29 @@ $props = Province::where('id',$kota['province_id'])->first();
                                         </div>
                                     </th>
                                     @endforeach
+                        
                                 </tr>
                             </thead>
+                        
                             <tbody>
-                                @foreach ($kel as $item)
-                                <tr onclick='check("{{Crypt::encrypt($item->id)}}")'>
-                                    <td class="align-middle"><a
-                                            href="{{url('/')}}/administrator/realcount_kelurahan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
-                                    </td>
-                                    @foreach ($paslon as $cd)
-                                    <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.village_id', (string)$item['id'])->sum('voice'); ?>
-                                    <td class="align-middle">{{$saksi_dataa}}</td>
+                                @foreach ($tps_kel as $item)
+                        
+                        
+                                <tr data-id="{{$item['id']}}" data-bs-toggle="modal" class="modal-id" data-bs-target="#modal-id">
+                                    <td> <a href="{{url('')}}/administrator/kpu_tps/{{Crypt::encrypt($item->id)}}"
+                                            class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS
+                                            {{$item['number']}}</a>
+                                    @foreach ($paslon_candidate as $cd)
+                        
+                                    <?php
+                                        $tpsass = \App\Models\Tps::where('number', (string)$item['number'])->where('villages_id', (string)$id)->first(); ?>
+                                    <?php $saksi_data = \App\Models\SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('tps_id', $tpsass->id)->sum('voice'); ?>
+                                    <td>{{$saksi_data}}</td>
+                        
                                     @endforeach
                                 </tr>
                                 @endforeach
                             </tbody>
-                            <script>
-                                let check = function (id) {
-                                    window.location = `{{url('/')}}/administrator/realcount_kelurahan/${id}`;
-                                }
-                            </script>
                         </table>
                     </div>
                 </div>
@@ -279,15 +286,4 @@ $props = Province::where('id',$kota['province_id'])->first();
         </div>
     </div>
 </div>
-
-<script>
-    // $('.mode-1').on('click', function() {
-    //     $('.tampilan-1').show();
-    //     $('.tampilan-2').hide();
-    // })
-    // $('.mode-2').on('click', function() {
-    //     $('.tampilan-1').hide();
-    //     $('.tampilan-2').show();
-    // })
-</script>
 @endsection

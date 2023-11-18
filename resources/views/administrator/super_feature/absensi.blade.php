@@ -2,106 +2,76 @@
 @section('content')
 
 
-<div class="row mt-5">
-    <div class="col-lg-4">
+<div class="row">
+    <div class="col-lg" style="position: fixed; z-index: 10; background: #f2f3f9">
         <h1 class="page-title fs-1 mt-2">Saksi Hadir
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">{{$kota->name}}
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ $kota->name }}
                 <!-- Kota -->
             </li>
         </ol>
     </div>
 
-    <div class="col-lg-8">
+
+
+    <div class="col-lg-8" style="position: fixed; right: 18px; width: 1244.66px; z-index: 10; background: #f2f3f9">
         <div class="row mt-2">
-
-            {{-- <div class="col parent-link">
-                <a href="{{url('')}}/administrator/verifikasi_saksi" class="btn text-white w-100 py-3">Verifikasi Saksi</a>
+            
+            <div class="col parent-link">
+                <a href="{{url('')}}/administrator/verifikasi_saksi"
+                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/verifikasi_saksi')?'active' : '' }}">Verifikasi
+                    Saksi</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi" class="btn text-white w-100 py-3">Saksi Teregristrasi</a>
+                <a href="{{url('')}}/administrator/absensi"
+                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi')?'active' : '' }}">Saksi
+                    Teregistrasi</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi/hadir" class="btn text-white w-100 py-3">Saksi Hadir</a>
+                <a href="{{url('')}}/administrator/absensi/hadir"
+                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/hadir')?'active' : '' }}">Saksi
+                    Hadir</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi/tidak_hadir" class="btn text-white w-100 py-3">Saksi Tidak Hadir</a>
-            </div> --}}
-            <div class="col parent-link">
-                <a href="{{url('')}}/administrator/verifikasi_saksi" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/verifikasi_saksi')?'active' : '' }}">Verifikasi Saksi</a>
+                <a href="{{url('')}}/administrator/absensi/tidak_hadir"
+                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/tidak_hadir')?'active' : '' }}">Saksi
+                    Tidak Hadir</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi')?'active' : '' }}">Saksi Teregristrasi</a>
-            </div>
-            <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi/hadir" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/hadir')?'active' : '' }}">Saksi Hadir</a>
-            </div>
-            <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi/tidak_hadir" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/tidak_hadir')?'active' : '' }}">Saksi Tidak Hadir</a>
-            </div>
-            <div class="col parent-link">
-                <a href="{{url('')}}/administrator/saksi_ditolak" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/saksi_ditolak')?'active' : '' }}">Saksi Ditolak</a>
+                <a href="{{url('')}}/administrator/saksi_ditolak"
+                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/absensi/saksi_ditolak')?'active' : '' }}">Saksi
+                    Ditolak</a>
             </div>
 
-        </div>
-    </div>
-    {{-- <div class="col-lg-8 mt-2">
-        <div class="row">
-            <div class="col-lg-4 justify-content-end">
-                <div class="card">
-                    <div class="card-header bg-secondary">
-                        <div class="card-title text-white">Total Saksi Terdaftar</div>
-                    </div>
-                    <div class="card-body">
-                        <p class="">{{$user}}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="card">
-                    <div class="card-header bg-success">
-                        <div class="card-title text-white">Total Saksi Hadir</div>
-                    </div>
-                    <div class="card-body">
-                        <p class="">{{count($absen)}}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="card">
-                    <div class="card-header bg-primary">
-                        <div class="card-title text-white">Total Saksi Absen</div>
-                    </div>
-                    <div class="card-body">
-                        <p class="">{{$user - count($absen)}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-</div>
-
-
-<div class="row">
-    <div class="col-md">
-        <h4 class="fw-bold fs-4 mt-5 mb-0">
-            Jumlah Saksi Hadir : {{$jumlah_hadir}}
-        </h4>
-    </div>
-    <div class="col-md-auto mt-auto">
-        <div class="ms-auto">
-            <div class="btn btn-success my-auto">
-                <i class="fa-solid fa-download"></i>
-                Unduh
-            </div>
         </div>
     </div>
 </div>
-<hr style="border: 1px solid">
+<!-- PAGE-HEADER END -->
 
-<livewire:absensi>
+<div style="position: fixed; width: 97%; margin-top: 76px; z-index: 10; background: #f2f3f9">
+    <div class="row">
+        <div class="col-md">
+            <h4 class="fw-bold fs-4 mt-5 mb-0">
+                Jumlah Saksi Hadir : {{$jumlah_hadir}}
+            </h4>
+        </div>
+        <div class="col-md-auto mt-auto">
+            <div class="ms-auto">
+                <button style="width: 82.22px; height: 38px; margin-right: 3px;" class="btn btn-success my-auto">
+                    <i class="fa-solid fa-download"></i>
+                    Unduh
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr style="border: 1px solid; width: 1841px">
+</div>
+<div class="row mt-3">
+
+    <livewire:absensi>
 {{-- <div class="row mt-5">
     <div class="col-md">
 
@@ -159,7 +129,9 @@
         </div>
     </div>
 </div> --}}
-
+</div>
+<div style="background: #f2f3f9; position: fixed; width: 100%; height: 70px; top: 90px; left: 0; z-index: 8;"></div>
+<!-- CONTAINER END -->
 <div class="modal fade" id="cekmodal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-header bg-primary text-white">

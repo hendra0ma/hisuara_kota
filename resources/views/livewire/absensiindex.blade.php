@@ -1,17 +1,17 @@
-<div>
+<div style="margin-top: 143px;">
     <style>
         td {
             padding-top: 7.5px !important;
             padding-bottom: 7.5px !important;
         }
     </style>
-    <div class="row">
+    <div class="row" style="position: fixed; width: 98.1%; z-index: 10; background: #f2f3f9">
         <div class="col-12 mb-3">
             <input wire:model="search" type="search" class="form-control border-1 border-dark" placeholder="Search posts by title...">
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="margin-top: 50px;">
         @foreach ($absen as $ls)
         <?php $district = App\Models\District::where('id',$ls['districts'])->first(); ?>
         <?php $villages = App\Models\Village::where('id',$ls['villages'])->first(); ?>

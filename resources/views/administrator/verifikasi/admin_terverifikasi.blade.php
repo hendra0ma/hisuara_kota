@@ -51,7 +51,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
 @section('content')
 <!-- PAGE-HEADER -->
 <div class="row mt-5">
-    <div class="col-lg">
+    <div class="col-lg" style="position: fixed; z-index: 10; background: #f2f3f9">
         <h1 class="page-title fs-1 mt-2">Verifikasi Admin
             <!-- Kota -->
         </h1>
@@ -63,21 +63,8 @@ $kota = Regency::where('id', $config->regencies_id)->first();
         </ol>
     </div>
 
-    <div class="col-lg-4">
+    <div class="col-lg-4" style="position: fixed; right: 18px; width: 1244.66px; z-index: 10; background: #f2f3f9">
         <div class="row mt-2">
-
-            {{-- <div class="col parent-link">
-                <a href="{{url('')}}/administrator/verifikasi_saksi" class="btn text-white w-100 py-3">Verifikasi Saksi</a>
-            </div>
-            <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi" class="btn text-white w-100 py-3">Saksi Teregristrasi</a>
-            </div>
-            <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi/hadir" class="btn text-white w-100 py-3">Saksi Hadir</a>
-            </div>
-            <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi/tidak_hadir" class="btn text-white w-100 py-3">Saksi Tidak Hadir</a>
-            </div> --}}
             <div class="col parent-link">
                 <a href="{{url('')}}/administrator/verifikasi_akun" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/verifikasi_akun')?'active' : '' }}">Verifikasi Admin</a>
             </div>
@@ -90,11 +77,16 @@ $kota = Regency::where('id', $config->regencies_id)->first();
 </div>
 <!-- PAGE-HEADER END -->
 
-<h4 class="fw-bold fs-4 mt-5 mb-0">
-    Jumlah Admin Terverifikasi : {{$jumlah_admin_terverifikasi}}
-</h4>
-<hr style="border: 1px solid">
-
+<div style="position: fixed; width: 97%; margin-top: 76px; z-index: 10; background: #f2f3f9">
+    <div class="row">
+        <div class="col-md">
+            <h4 class="fw-bold fs-4 mt-5 mb-0">
+                Jumlah Admin Terverifikasi : {{$jumlah_admin_terverifikasi}}
+            </h4>
+        </div>
+    </div>
+    <hr style="border: 1px solid; width: 1841px">
+</div>
 <div class="row mt-3">
 
     <livewire:admin-terverifikasi>
@@ -183,6 +175,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
     </div> --}}
 
 </div>
+<div style="background: #f2f3f9; position: fixed; width: 100%; height: 70px; top: 90px; left: 0; z-index: 8;"></div>
 <!-- CONTAINER END -->
 <div class="modal fade" id="cekmodalakun" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
