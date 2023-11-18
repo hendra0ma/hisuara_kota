@@ -281,4 +281,86 @@ $props = Province::where('id',$kota['province_id'])->first();
     </div>
     
 </div>
+
+<?php 
+    $a = 1; 
+    $b = 1; 
+    $c = 1; 
+    $d = 1; 
+    $e = 1; 
+?>
+
+<div class="col-12">
+    <div class="row">
+        @foreach ($kec as $item)
+        <div class="col-3">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <div class="card-title">
+                        <a href="{{url('/')}}/administrator/realcount_kecamatan/{{Crypt::encrypt($item['id'])}}">
+                            {{$item['name']}}
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="charture-{{$a++}}" class="chartsh h-100 w-100"></div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
+
+@foreach($kec as $item)
+<script>
+    // Sample data
+    $(document).ready(function() {
+        var chartData = {
+        columns: [
+            @foreach($paslon as $pas)
+            <?php $saksi_dataaa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $pas['id'])->where('saksi_data.district_id', $item['id'])->where('saksi.verification',1)->sum('voice'); ?>
+            ['data{{$d++}}', {{$saksi_dataaa}}],
+            @endforeach
+        ],
+        type: 'pie', // Type of chart (line chart in this case)
+        colors: {
+            @foreach($paslon as $pas)
+            data{{$c++}}: '{{$pas->color}}', // Color for the third data series
+            @endforeach
+        },
+        names: {
+            // name of each serie
+            @foreach($paslon as $pas)
+            data{{$e++}}: " {{ $pas['candidate']}} - {{ $pas['deputy_candidate']}}",
+            @endforeach
+        },
+        legend: {
+            show: true, //hide legend
+        },
+        axis: {
+            rotated: true,
+        },
+    };
+
+    // Chart configuration
+    var chartConfig = {
+        bindto: '#charture-{{$b++}}', // ID of the chart container
+        data: chartData,
+        pie: {
+            label: {
+                format: function (value, ratio, id) {
+                    return d3.format('.1%')(ratio); // Show percentage on the labels
+                }
+            }
+        }
+    };
+
+    // Generate the chart
+    var chart = c3.generate(chartConfig);
+    })
+</script>
+<?php $c = 1;?>
+<?php $d = 1;?>
+<?php $e = 1;?>
+@endforeach
 @endsection

@@ -1024,89 +1024,6 @@ $tps = Tps::count();
         </ul>
     </div>
 
-    <div class="col-lg-6" style="{{($config->quick_count == 'yes')?'':'display:none'}}">
-        <div class="card" style="margin-bottom: 1rem">
-            <div class="card-body" style="position: relative">
-                <img src="{{asset('')}}assets/icons/hisuara_new.png"
-                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="container">
-                            <div class="text-center fs-3 mb-3 fw-bold">QUICK COUNT</div>
-                            <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
-                            <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
-                                    {{$dpt}}</span></div>
-                            <div id="chart-pie2" class="chartsh h-100 w-100"></div>
-                        </div>
-                    </div>
-                    <div class="col-xxl">
-                        <div class="row mt-2">
-                            <?php $i = 1; ?>
-                            @foreach ($paslon as $pas)
-                            <div class="col-lg col-md col-sm col-xl mb-3">
-                                <div class="card" style="margin-bottom: 0px;">
-                                    <div class="card-body p-3">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
-                                                    style="margin-bottom: 0; background-color: {{$pas->color}};">
-                                                    {{$i++}}
-                                                </div>
-                                            </div>
-                                            <div class="col text-center">
-                                                <h6 class="mt-4">{{$pas->candidate}} </h6>
-                                                <h6 class="">{{$pas->deputy_candidate}} </h6>
-                                                <?php
-                                                $voice = 0;
-                                                ?>
-                                                @foreach ($pas->quicksaksidata as $dataTps)
-                                                <?php
-                                                $voice += $dataTps->voice;
-                                                ?>
-                                                @endforeach
-                                                <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-                <table class="table table-bordered table-hover mb-0">
-                    <thead class="bg-primary">
-                        <tr>
-                            <th class="text-white text-center align-middle">Kecamatan</th>
-                            <th class="text-white text-center align-middle">Jumlah <br> TPS Quick Count</th>
-                            <th class="text-white text-center align-middle">Quick <br> Count</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($district_quick as $item)
-                        <?php $count_tps = Tps::where('district_id', (string)$item['id'])->count(); ?>
-                        <?php $count_tps_quick = Tps::where('district_id', (string)$item['id'])->where('quick_count', 1)->count(); ?>
-                        <?php $kecc = District::where('id', $item['district_id'])->first(); ?>
-                        <tr @if ( $count_tps_quick> 0)
-                            style="background-color: rgb(80,78, 78); color :white;" @else @endif>
-                            <td class="align-middle text">
-                                {{$item['name']}}
-                            </td>
-                            <td class="align-middle">{{$count_tps}}</td>
-                            <td class="align-middle">@if ( $count_tps_quick > 0)
-                                {{$count_tps_quick}}
-                                @else
-                                0
-                                @endif
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
     <div class="{{($config->otonom == 'yes')?'col-lg-12 col-md-12':'col-lg-6 col-md-12'}}">
         <div class="card">
             {{-- <div class="card-header bg-info">
@@ -1214,8 +1131,91 @@ $tps = Tps::count();
         </div>
     </div>
 
+    <div class="col-lg-6" style="{{($config->quick_count == 'yes')?'':'display:none'}}">
+        <div class="card" style="margin-bottom: 1rem">
+            <div class="card-body" style="position: relative">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png"
+                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="container">
+                            <div class="text-center fs-3 mb-3 fw-bold">QUICK COUNT</div>
+                            <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
+                            <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
+                                    {{$dpt}}</span></div>
+                            <div id="chart-pie2" class="chartsh h-100 w-100"></div>
+                        </div>
+                    </div>
+                    <div class="col-xxl">
+                        <div class="row mt-2">
+                            <?php $i = 1; ?>
+                            @foreach ($paslon as $pas)
+                            <div class="col-lg col-md col-sm col-xl mb-3">
+                                <div class="card" style="margin-bottom: 0px;">
+                                    <div class="card-body p-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
+                                                    style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                    {{$i++}}
+                                                </div>
+                                            </div>
+                                            <div class="col text-center">
+                                                <h6 class="mt-4">{{$pas->candidate}} </h6>
+                                                <h6 class="">{{$pas->deputy_candidate}} </h6>
+                                                <?php
+                                                    $voice = 0;
+                                                    ?>
+                                                @foreach ($pas->quicksaksidata as $dataTps)
+                                                <?php
+                                                    $voice += $dataTps->voice;
+                                                    ?>
+                                                @endforeach
+                                                <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-hover mb-0">
+                    <thead class="bg-primary">
+                        <tr>
+                            <th class="text-white text-center align-middle">Kecamatan</th>
+                            <th class="text-white text-center align-middle">Jumlah <br> TPS Quick Count</th>
+                            <th class="text-white text-center align-middle">Quick <br> Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($district_quick as $item)
+                        <?php $count_tps = Tps::where('district_id', (string)$item['id'])->count(); ?>
+                        <?php $count_tps_quick = Tps::where('district_id', (string)$item['id'])->where('quick_count', 1)->count(); ?>
+                        <?php $kecc = District::where('id', $item['district_id'])->first(); ?>
+                        <tr @if ( $count_tps_quick> 0)
+                            style="background-color: rgb(80,78, 78); color :white;" @else @endif>
+                            <td class="align-middle text">
+                                <a href="{{url('/')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
+                            </td>
+                            <td class="align-middle">{{$count_tps}}</td>
+                            <td class="align-middle">@if ( $count_tps_quick > 0)
+                                {{$count_tps_quick}}
+                                @else
+                                0
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
     @if ($config->quick_count == 'yes')
-    <div class="col-lg-12 col-md" style="display:{{($config->otonom == 'yes')?'none':'block'}}">
+    <div class="col-lg-6 col-md" style="display:{{($config->otonom == 'yes')?'none':'block'}}">
         <div class="card">
             {{-- <div class="card-header bg-secondary">
                 <h3 class="card-title text-white">Suara TPS Terverifikasi</h3>
@@ -1224,7 +1224,7 @@ $tps = Tps::count();
                 <img src="{{asset('')}}assets/icons/hisuara_new.png"
                     style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-12">
                         <div class="row">
                             <div class="col-12">
                                 <div class="container">
@@ -1275,39 +1275,267 @@ $tps = Tps::count();
                             </div>
                         </div>
                     </div>
+                </div>
+                <table class="table table-bordered table-hover h-100">
+                    <thead class="bg-primary">
+                        <td class="text-white text-center align-middle">KECAMATAN</td>
+                        @foreach ($paslon as $item)
+                        <th class="text-white text-center align-middle" style="background: {{$item->color}}; position:relative">
+                            <img style="width: 60px; position: absolute; left: 0; bottom: 0" src="{{asset('')}}storage/{{$item->picture}}"
+                                alt="">
+                            <div class="ms-7">
+                                {{ $item['candidate']}} - <br>
+                                {{ $item['deputy_candidate']}}
+                            </div>
+                        </th>
+                        @endforeach
+                    </thead>
+                    <tbody>
+                        @foreach ($kec as $item)
+                        <tr onclick='check("{{Crypt::encrypt($item->id)}}")'>
+                            <td class="align-middle"><a
+                                    href="{{url('/')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
+                            </td>
+                            @foreach ($paslon as $cd)
+                            <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->where('saksi.verification', 1)->sum('voice'); ?>
+                            <td class="align-middle">{{$saksi_dataa}}</td>
+                            @endforeach
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
 
-                    <div class="col-6">
-                        <table class="table table-bordered table-hover h-100">
-                            <thead class="bg-primary">
-                                <td class="text-white text-center align-middle">KECAMATAN</td>
-                                @foreach ($paslon as $item)
-                                <th class="text-white text-center align-middle" style="background: {{$item->color}}; position:relative">
-                                    <img style="width: 60px; position: absolute; left: 0; bottom: 0" src="{{asset('')}}storage/{{$item->picture}}"
-                                        alt="">
-                                    <div class="ms-7">
-                                        {{ $item['candidate']}} - <br>
-                                        {{ $item['deputy_candidate']}}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            {{-- <div class="card-header bg-info">
+                <h3 class="card-title text-white">Suara TPS Masuk</h3>
+            </div> --}}
+            <div class="card-body" style="position: relative;">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png"
+                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+    
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="container">
+                                    <div class="text-center fs-3 mb-3 fw-bold">REKAPITULASI</div>
+                                    <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
+                                    <div class="text-center mt-2 mb-2"><span
+                                            class="badge bg-success">{{$total_incoming_vote}} /
+                                            {{$dpt}}</span></div>
+                                    {{-- <div class="chart-teks">
+                                        Prabowo
+                                    </div> --}}
+                                    <div id="chart-rekapitulasi" class="chartsh h-100 w-100">
                                     </div>
-                                </th>
-                                @endforeach
+                                </div>
+                            </div>
+                            <div class="col-xxl">
+                                <div class="row mt-2">
+                                    <?php $i = 1; ?>
+                                    @foreach ($paslon as $pas)
+                                    <div class="col-lg col-md col-sm col-xl mb-3">
+                                        <div class="card" style="margin-bottom: 0px;">
+                                            <div class="card-body p-3">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
+                                                            style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                            {{$i++}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col text-center">
+                                                        <h6 class="mt-4">{{$pas->candidate}} </h6>
+                                                        <h6 class="">{{$pas->deputy_candidate}} </h6>
+                                                        <?php
+                                                        $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->sum('voice');
+                                                    ?>
+    
+                                                        <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <table class="table table-bordered table-hover mb-0">
+                            <thead class="bg-primary">
+                                <tr>
+                                    <th class="text-white text-center align-middle">KECAMATAN</th>
+                                    @foreach ($paslon as $item)
+                                    <th class="text-white text-center align-middle" style="background: {{$item->color}}; position:relative">
+                                        <img style="width: 60px; position: absolute; left: 0; bottom: 0"
+                                            src="{{asset('')}}storage/{{$item->picture}}" alt="">
+                                        <div class="ms-7">
+                                            {{ $item['candidate']}} - <br>
+                                            {{ $item['deputy_candidate']}}
+                                        </div>
+                                    </th>
+                                    @endforeach
+                                </tr>
                             </thead>
                             <tbody>
+                                <?php $totalSaksiDataa = [];  ?>
+                                @foreach ($paslon as $cd)
+                                <?php $totalSaksiDataa[$cd['id']] = 0; ?>
+                                @endforeach
                                 @foreach ($kec as $item)
                                 <tr onclick='check("{{Crypt::encrypt($item->id)}}")'>
                                     <td class="align-middle"><a
-                                            href="{{url('/')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
+                                            href="{{url('/')}}/administrator/rekap_kecamatan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
                                     </td>
+                        
                                     @foreach ($paslon as $cd)
-                                    <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->where('saksi.verification', 1)->sum('voice'); ?>
+                                    <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->sum('voice'); ?>
                                     <td class="align-middle">{{$saksi_dataa}}</td>
+                                    <?php     
+                                                            $totalSaksiDataa[$cd['id']] += $saksi_dataa; ?>
+                                    @endforeach
+                                </tr>
+                                @endforeach
+                                <tr style="background-color: #cccccc">
+                                    <td class="align-middle">
+                                        <div class="fw-bold">Total</div>
+                                    </td>
+                        
+                                    @foreach ($paslon as $cd)
+                                    <td class="align-middle">{{$totalSaksiDataa[$cd['id']]}}</td>
+                                    @endforeach
+                                </tr>
+                            </tbody>
+                            <script>
+                                let check = function (id) {
+                                                            window.location = `{{url('/')}}/administrator/rekap_kecamatan/${id}`;
+                                                        }
+                            </script>
+                        </table>
+                    </div>
+                </div>
+    
+    
+    
+    
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="card">
+            {{-- <div class="card-header bg-info">
+                <h3 class="card-title text-white">Suara TPS Masuk</h3>
+            </div> --}}
+            <div class="card-body" style="position: relative;">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png"
+                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+    
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="container">
+                                    <div class="text-center fs-3 mb-3 fw-bold">HITUNG ULANG KPU</div>
+                                    <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
+                                    <div class="text-center mt-2 mb-2"><span
+                                            class="badge bg-success">{{$total_incoming_vote}} /
+                                            {{$dpt}}</span></div>
+                                    {{-- <div class="chart-teks">
+                                        Prabowo
+                                    </div> --}}
+                                    <div id="chart-kpu" class="chartsh h-100 w-100">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xxl">
+                                <div class="row mt-2">
+                                    <?php $i = 1; ?>
+                                    @foreach ($paslon as $pas)
+                                    <div class="col-lg col-md col-sm col-xl mb-3">
+                                        <div class="card" style="margin-bottom: 0px;">
+                                            <div class="card-body p-3">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
+                                                            style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                            {{$i++}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col text-center">
+                                                        <h6 class="mt-4">{{$pas->candidate}} </h6>
+                                                        <h6 class="">{{$pas->deputy_candidate}} </h6>
+                                                        <?php
+                                                        $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->sum('voice');
+                                                    ?>
+    
+                                                        <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <table class="table table-bordered table-hover mb-0 h-100">
+                            <thead class="bg-primary">
+                                <tr>
+                                    <th class="text-white text-center align-middle">KECAMATAN</th>
+                                    @foreach ($paslon as $item)
+                                    <th class="text-white text-center align-middle" style="background: {{$item->color}}; position:relative">
+                                        <img style="width: 60px; position: absolute; left: 0; bottom: 0"
+                                            src="{{asset('')}}storage/{{$item->picture}}" alt="">
+                                        <div class="ms-7">
+                                            {{ $item['candidate']}} - <br>
+                                            {{ $item['deputy_candidate']}}
+                                        </div>
+                                    </th>
+                                    @endforeach
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $totalSaksiDataa = [];  ?>
+                                @foreach ($paslon as $cd)
+                                <?php $totalSaksiDataa[$cd['id']] = 0; ?>
+                                @endforeach
+                                @foreach ($kec as $item)
+                                <tr onclick='check("{{Crypt::encrypt($item->id)}}")'>
+                                    <td class="align-middle"><a
+                                            href="{{url('/')}}/administrator/rekap_kecamatan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
+                                    </td>
+                        
+                                    @foreach ($paslon as $cd)
+                                    <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->sum('voice'); ?>
+                                    <td class="align-middle">{{$saksi_dataa}}</td>
+                                    <?php     
+                                                            $totalSaksiDataa[$cd['id']] += $saksi_dataa; ?>
                                     @endforeach
                                 </tr>
                                 @endforeach
                             </tbody>
+                            <script>
+                                let check = function (id) {
+                                                            window.location = `{{url('/')}}/administrator/rekap_kecamatan/${id}`;
+                                                        }
+                            </script>
                         </table>
                     </div>
                 </div>
-
+    
+    
+    
+    
             </div>
         </div>
     </div>
@@ -1402,6 +1630,239 @@ $tps = Tps::count();
                     </tbody>
                 </table>
 
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            {{-- <div class="card-header bg-info">
+                <h3 class="card-title text-white">Suara TPS Masuk</h3>
+            </div> --}}
+            <div class="card-body" style="position: relative;">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png"
+                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+    
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="container">
+                                    <div class="text-center fs-3 mb-3 fw-bold">REKAPITULASI</div>
+                                    <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
+                                    <div class="text-center mt-2 mb-2"><span
+                                            class="badge bg-success">{{$total_incoming_vote}} /
+                                            {{$dpt}}</span></div>
+                                    {{-- <div class="chart-teks">
+                                        Prabowo
+                                    </div> --}}
+                                    <div id="chart-rekapitulasi" class="chartsh h-100 w-100">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xxl">
+                                <div class="row mt-2">
+                                    <?php $i = 1; ?>
+                                    @foreach ($paslon as $pas)
+                                    <div class="col-lg col-md col-sm col-xl mb-3">
+                                        <div class="card" style="margin-bottom: 0px;">
+                                            <div class="card-body p-3">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
+                                                            style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                            {{$i++}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col text-center">
+                                                        <h6 class="mt-4">{{$pas->candidate}} </h6>
+                                                        <h6 class="">{{$pas->deputy_candidate}} </h6>
+                                                        <?php
+                                                            $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->sum('voice');
+                                                        ?>
+    
+                                                        <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <table class="table table-bordered table-hover mb-0">
+                            <thead class="bg-primary">
+                                <tr>
+                                    <th class="text-white text-center align-middle">KECAMATAN</th>
+                                    @foreach ($paslon as $item)
+                                    <th class="text-white text-center align-middle"
+                                        style="background: {{$item->color}}; position:relative">
+                                        <img style="width: 60px; position: absolute; left: 0; bottom: 0"
+                                            src="{{asset('')}}storage/{{$item->picture}}" alt="">
+                                        <div class="ms-7">
+                                            {{ $item['candidate']}} - <br>
+                                            {{ $item['deputy_candidate']}}
+                                        </div>
+                                    </th>
+                                    @endforeach
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $totalSaksiDataa = [];  ?>
+                                @foreach ($paslon as $cd)
+                                <?php $totalSaksiDataa[$cd['id']] = 0; ?>
+                                @endforeach
+                                @foreach ($kec as $item)
+                                <tr onclick='check("{{Crypt::encrypt($item->id)}}")'>
+                                    <td class="align-middle"><a
+                                            href="{{url('/')}}/administrator/rekap_kecamatan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
+                                    </td>
+    
+                                    @foreach ($paslon as $cd)
+                                    <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->sum('voice'); ?>
+                                    <td class="align-middle">{{$saksi_dataa}}</td>
+                                    <?php     
+                                                                $totalSaksiDataa[$cd['id']] += $saksi_dataa; ?>
+                                    @endforeach
+                                </tr>
+                                @endforeach
+                                <tr style="background-color: #cccccc">
+                                    <td class="align-middle">
+                                        <div class="fw-bold">Total</div>
+                                    </td>
+    
+                                    @foreach ($paslon as $cd)
+                                    <td class="align-middle">{{$totalSaksiDataa[$cd['id']]}}</td>
+                                    @endforeach
+                                </tr>
+                            </tbody>
+                            <script>
+                                let check = function (id) {
+                                                                window.location = `{{url('/')}}/administrator/rekap_kecamatan/${id}`;
+                                                            }
+                            </script>
+                        </table>
+                    </div>
+                </div>
+    
+    
+    
+    
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            {{-- <div class="card-header bg-info">
+                <h3 class="card-title text-white">Suara TPS Masuk</h3>
+            </div> --}}
+            <div class="card-body" style="position: relative;">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png"
+                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+    
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="container">
+                                    <div class="text-center fs-3 mb-3 fw-bold">HITUNG ULANG KPU</div>
+                                    <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
+                                    <div class="text-center mt-2 mb-2"><span
+                                            class="badge bg-success">{{$total_incoming_vote}} /
+                                            {{$dpt}}</span></div>
+                                    {{-- <div class="chart-teks">
+                                        Prabowo
+                                    </div> --}}
+                                    <div id="chart-kpu" class="chartsh h-100 w-100">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xxl">
+                                <div class="row mt-2">
+                                    <?php $i = 1; ?>
+                                    @foreach ($paslon as $pas)
+                                    <div class="col-lg col-md col-sm col-xl mb-3">
+                                        <div class="card" style="margin-bottom: 0px;">
+                                            <div class="card-body p-3">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
+                                                            style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                            {{$i++}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col text-center">
+                                                        <h6 class="mt-4">{{$pas->candidate}} </h6>
+                                                        <h6 class="">{{$pas->deputy_candidate}} </h6>
+                                                        <?php
+                                                            $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->sum('voice');
+                                                        ?>
+    
+                                                        <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <table class="table table-bordered table-hover mb-0">
+                            <thead class="bg-primary">
+                                <tr>
+                                    <th class="text-white text-center align-middle">KECAMATAN</th>
+                                    @foreach ($paslon as $item)
+                                    <th class="text-white text-center align-middle"
+                                        style="background: {{$item->color}}; position:relative">
+                                        <img style="width: 60px; position: absolute; left: 0; bottom: 0"
+                                            src="{{asset('')}}storage/{{$item->picture}}" alt="">
+                                        <div class="ms-7">
+                                            {{ $item['candidate']}} - <br>
+                                            {{ $item['deputy_candidate']}}
+                                        </div>
+                                    </th>
+                                    @endforeach
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $totalSaksiDataa = [];  ?>
+                                @foreach ($paslon as $cd)
+                                <?php $totalSaksiDataa[$cd['id']] = 0; ?>
+                                @endforeach
+                                @foreach ($kec as $item)
+                                <tr onclick='check("{{Crypt::encrypt($item->id)}}")'>
+                                    <td class="align-middle"><a
+                                            href="{{url('/')}}/administrator/rekap_kecamatan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
+                                    </td>
+    
+                                    @foreach ($paslon as $cd)
+                                    <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->sum('voice'); ?>
+                                    <td class="align-middle">{{$saksi_dataa}}</td>
+                                    <?php     
+                                                                $totalSaksiDataa[$cd['id']] += $saksi_dataa; ?>
+                                    @endforeach
+                                </tr>
+                                @endforeach
+                            </tbody>
+                            <script>
+                                let check = function (id) {
+                                                                window.location = `{{url('/')}}/administrator/rekap_kecamatan/${id}`;
+                                                            }
+                            </script>
+                        </table>
+                    </div>
+                </div>
+    
+    
+    
+    
             </div>
         </div>
     </div>
