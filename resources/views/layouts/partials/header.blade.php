@@ -781,17 +781,15 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                         $dpt_l = District::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt_l');
                                                         $dpt_p = District::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt_p');
                                                     }elseif(request()->segment(2) == 'perhitungan_kelurahan'){
-                                                        $dpt_l = Village::where('id',decrypt(request()->segment(3)))->sum('dpt_l');
-                                                        $dpt_p = Village::where('id',decrypt(request()->segment(3)))->sum('dpt_p');
+                                                        $dpt_l = Village::where('id',(string) decrypt(request()->segment(3)))->sum('dpt_l');
+                                                        $dpt_p = Village::where('id',(string) decrypt(request()->segment(3)))->sum('dpt_p');
                                                         
                                                     }elseif(request()->segment(2) == 'perhitungan_tps'){
                                                         $dpt_l = 128;
                                                         $dpt_p = 145;
 
                                                     }
-                                               echo  $dpt_l ;
-                                               echo  $dpt_p ;
-                                               die;
+                                             
                                                 ?>
 
 
