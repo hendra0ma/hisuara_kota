@@ -280,6 +280,10 @@ $props = Province::where('id',$kota['province_id'])->first();
     </div>
 </div>
 
+<div class="col-12 bg-danger text-white p-2 fs-5 fw-bold mb-3">
+    PERHITUNGAN TINGKAT KECAMATAN
+</div>
+
 <?php 
     $a = 1; 
     $b = 1; 
