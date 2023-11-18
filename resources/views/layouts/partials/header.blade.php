@@ -1,5 +1,8 @@
 <?php
 
+
+echo decrypt(request()->segment(3));
+die;
 use App\Models\Config;
 use App\Models\Configs;
 use App\Models\District;
