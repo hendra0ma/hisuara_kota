@@ -21,6 +21,16 @@ class CommandUrlFinder extends Controller
     public function findUrlByCommand(Request $request)
     {
         $command = $request->input('text', 'default');
+        $isCommandHasWordDari = strpos($command, 'dari');
+        if ($isCommandHasWordDari) {
+            $name = $this->getTextAfterWordDari($command);
+            $data = [
+                'action' => 'click',
+                'target' => $name,
+                'hint' => "klik tombol verifikasi kiriman c1 dari $name(nav operator verifikasi c1)"
+            ];
+            return response()->json($data, 200);
+        }
         $keys = array_keys($this->commandsAndUrls);
         $result = null;
         foreach ($keys as $key) {
@@ -30,6 +40,24 @@ class CommandUrlFinder extends Controller
             }
         }
 
-        return response()->json(["result"=>$result],200);
+        $data = [
+            'action' => 'redirect',
+            'target' => $result,
+            'hint' => '',
+        ];
+        return response()->json($data, 200);
+    }
+
+    private function getTextAfterWordDari($text)
+    {
+        $pattern = '/\b(?:dari)\s+(.*)\b/';
+        preg_match($pattern, $text, $matches);
+
+        if (isset($matches[1])) {
+            $wordsAfterDari = $matches[1];
+            return $wordsAfterDari;
+        } else {
+            echo "Nama tidak terdeteksi";
+        }
     }
 }
