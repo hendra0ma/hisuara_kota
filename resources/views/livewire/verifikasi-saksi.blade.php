@@ -1,4 +1,4 @@
-<div>
+<div style="margin-top: 143px;">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <style>
@@ -39,13 +39,13 @@
         }
     </style>
     
-    <div class="row">
+    <div class="row" style="position: fixed; width: 98.1%; z-index: 10; background: #f2f3f9">
         <div class="col-12 mb-3">
             <input wire:model="search" type="search" class="form-control border-1 border-dark" placeholder="Search posts by title...">
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="margin-top: 50px;">
         @foreach ($saksi_data as $ls)
         <?php $kecamatan = \App\Models\District::where('id',(string)$ls['districts'])->first(); ?>
         <?php $kelurahan = \App\Models\Village::where('id',(string)3674040006)->first(); ?>

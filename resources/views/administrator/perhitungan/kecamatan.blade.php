@@ -152,8 +152,13 @@ $tps = Tps::count();
                     <thead class="bg-primary">
                         <th class="text-white text-center align-middle">KELURAHAN</th>
                         @foreach ($paslon as $item)
-                        <th class="text-white text-center align-middle">{{ $item['candidate']}} - <br> {{
-                            $item['deputy_candidate']}}
+                        <th class="text-white text-center align-middle" style="background: {{$item->color}}; position:relative">
+                            <img style="width: 60px; position: absolute; left: 0; bottom: 0" src="{{asset('')}}storage/{{$item->picture}}"
+                                alt="">
+                            <div class="ms-7">
+                                {{ $item['candidate']}} - <br>
+                                {{ $item['deputy_candidate']}}
+                            </div>
                         </th>
                         @endforeach
 
@@ -247,8 +252,13 @@ $tps = Tps::count();
                             <thead class="bg-primary">
                                 <th class="text-white text-center align-middle">KELURAHAN</th>
                                 @foreach ($paslon as $item)
-                                <th class="text-white text-center align-middle">{{ $item['candidate']}} - <br> {{
-                                    $item['deputy_candidate']}}
+                                <th class="text-white text-center align-middle" style="background: {{$item->color}}; position:relative">
+                                    <img style="width: 60px; position: absolute; left: 0; bottom: 0" src="{{asset('')}}storage/{{$item->picture}}"
+                                        alt="">
+                                    <div class="ms-7">
+                                        {{ $item['candidate']}} - <br>
+                                        {{ $item['deputy_candidate']}}
+                                    </div>
                                 </th>
                                 @endforeach
                             
@@ -351,8 +361,13 @@ $tps = Tps::count();
                             <thead class="bg-primary">
                                 <th class="text-white text-center align-middle">KELURAHAN</th>
                                 @foreach ($paslon as $item)
-                                <th class="text-white text-center align-middle">{{ $item['candidate']}} - <br> {{
-                                    $item['deputy_candidate']}}
+                                <th class="text-white text-center align-middle" style="background: {{$item->color}}; position:relative">
+                                    <img style="width: 60px; position: absolute; left: 0; bottom: 0" src="{{asset('')}}storage/{{$item->picture}}"
+                                        alt="">
+                                    <div class="ms-7">
+                                        {{ $item['candidate']}} - <br>
+                                        {{ $item['deputy_candidate']}}
+                                    </div>
                                 </th>
                                 @endforeach
 
@@ -455,8 +470,13 @@ $tps = Tps::count();
                     <thead class="bg-primary">
                         <th class="text-white text-center align-middle">KELURAHAN</th>
                         @foreach ($paslon as $item)
-                        <th class="text-white text-center align-middle">{{ $item['candidate']}} - <br> {{
-                            $item['deputy_candidate']}}
+                        <th class="text-white text-center align-middle" style="background: {{$item->color}}; position:relative">
+                            <img style="width: 60px; position: absolute; left: 0; bottom: 0" src="{{asset('')}}storage/{{$item->picture}}"
+                                alt="">
+                            <div class="ms-7">
+                                {{ $item['candidate']}} - <br>
+                                {{ $item['deputy_candidate']}}
+                            </div>
                         </th>
                         @endforeach
 

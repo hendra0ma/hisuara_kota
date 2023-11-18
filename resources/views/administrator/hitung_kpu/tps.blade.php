@@ -47,8 +47,6 @@ $config->default =  $configs->default;
 
 $regency = District::where('regency_id', $config->regencies_id)->get();
 $kota = Regency::where('id', $config->regencies_id)->first();
-$paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
-$urutan = $paslon_tertinggi;
 $dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
 $tps = Tps::count();
 ?>
@@ -89,71 +87,62 @@ $tps = Tps::count();
                 text-decoration: underline;
             }
         </style>
+    </div>
+
+    <div class="col-lg-12">
+        <center>
+            <h2 class="page-title mt-1 mb-3" style="font-size: 60px">
+                HITUNG ULANG KPU
+            </h2>
+        </center>
+    </div>
+
+    <div class="col-lg-12">
+        <style>
+            ul.breadcrumb {
+                padding: 10px 16px;
+                list-style: none;
+                background-color: #0d6efd !important;
+            }
+
+            ul.breadcrumb li {
+                display: inline;
+                font-size: 18px;
+            }
+
+            ul.breadcrumb li+li:before {
+                padding: 8px;
+                color: white;
+                content: "/\00a0";
+            }
+
+            ul.breadcrumb li a {
+
+                text-decoration: none;
+            }
+
+            ul.breadcrumb li a:hover {
+                color: #01447e;
+                text-decoration: underline;
+            }
+        </style>
 
         <ul class="breadcrumb">
             <?php
-            $desa = Village::where('id', (string)$village->id)->first();
-            $regency = Regency::where('id',(string) $config->regencies_id)->first();
-            $kcamatan = District::where('id', (string)$desa->district_id)->first();
-            ?>
+                $desa = Village::where('id', (string)$village->id)->first();
+                $regency = Regency::where('id',(string) $config->regencies_id)->first();
+                $kcamatan = District::where('id', (string)$desa->district_id)->first();
+                ?>
             <li><a href="{{url('')}}/administrator/index" class="text-white">{{$regency->name}}</a></li>
-            <li><a href="{{url('')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($district->id)}}" class="text-white">{{$district->name}}</a></li>
-            <li><a href="{{url('')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($village->id)}}" class="text-white">{{$desa->name}}</a></li>
-            <li><a href="{{url('')}}/administrator/perhitungan_tps/{{Crypt::encrypt($data_tps->id)}}" class="text-white">TPS {{$data_tps->number}}</a></li>
+            <li><a href="{{url('')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($district->id)}}"
+                    class="text-white">{{$district->name}}</a></li>
+            <li><a href="{{url('')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($village->id)}}"
+                    class="text-white">{{$desa->name}}</a></li>
+            <li><a href="{{url('')}}/administrator/perhitungan_tps/{{Crypt::encrypt($data_tps->id)}}"
+                    class="text-white">TPS
+                    {{$data_tps->number}}</a></li>
 
         </ul>
-    </div>
-
-    <div class="col-lg-6" style="{{($config->quick_count == 'yes')?'':'display:none'}}">
-        <div class="card" style="margin-bottom: 1rem">
-            <div class="card-body" style="position: relative">
-                <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="container">
-                            <div class="text-center fs-3 mb-3 fw-bold">QUICK COUNT</div>
-                            <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
-                            <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
-                                    {{$dpt}}</span></div>
-                            <div id="chart-pie2" style="height: 320px" class="chartsh h-100 w-100"></div>
-                        </div>
-                    </div>
-                    <div class="col-xxl">
-                        <div class="row mt-2">
-                            <?php $i = 1; ?>
-                            @foreach ($paslon as $pas)
-                            <div class="col-lg col-md col-sm col-xl mb-3">
-                                <div class="card" style="margin-bottom: 0px;">
-                                    <div class="card-body p-3">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white " style="margin-bottom: 0; background-color: {{$pas->color}};">
-                                                    {{$i++}}
-                                                </div>
-                                            </div>
-                                            <div class="col text-center">
-                                                <h6 class="mt-4">{{$pas->candidate}} </h6>
-                                                <h6 class="">{{$pas->deputy_candidate}} </h6>
-                                                <?php
-                                                $voice = 0;
-                                                ?>
-                                                @foreach ($pas->quicksaksidata as $dataTps)
-                                                <?php
-                                                $voice += $dataTps->voice;
-                                                ?>
-                                                @endforeach
-                                                <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <div class="col-md-8 mt-4">
@@ -162,11 +151,12 @@ $tps = Tps::count();
                 <h3 class="card-title text-white">Hasil Perhitungan Suara</h3>
             </div>
             <div class="card-body" style="position: relative;">
-                <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png"
+                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
                     <div class="col-8">
                         <div class="container">
-                            <div class="text-center fs-3 mb-3 fw-bold">REAL COUNT</div>
+                            <div class="text-center fs-3 mb-3 fw-bold">Suara Masuk</div>
                             <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
                             <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
                                     {{$dpt}}</span></div>
@@ -222,13 +212,13 @@ $tps = Tps::count();
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    
+
     <!-- Popper.js, required for Bootstrap 4 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
-    
+
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
+
     <div class="col-md mt-4">
         <div class="card">
             <div class="card-header bg-dark">
@@ -241,10 +231,10 @@ $tps = Tps::count();
             </div>
         </div>
     </div>
-    
+
     <!-- Modal -->
-    <div class="modal fade" style="background: rgba(0, 0, 0, 0.65)" id="imgBig" tabindex="-1" aria-labelledby="imgBigLabel"
-        aria-hidden="true">
+    <div class="modal fade" style="background: rgba(0, 0, 0, 0.65)" id="imgBig" tabindex="-1"
+        aria-labelledby="imgBigLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content" style="background: transparent; border: 0px">
                 <div class="modal-body p-0">
@@ -254,14 +244,15 @@ $tps = Tps::count();
                         $regency = Regency::where('id',(string) $config->regencies_id)->first();
                         $kcamatan = District::where('id', (string)$desa->district_id)->first();
                         ?>
-                        <li><a href="{{url('')}}/administrator/index" class="text-white">{{$regency->name}}</a></li>
-                        <li><a href="{{url('')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($district->id)}}"
+                        <li><a href="{{url('')}}/administrator/real_count2" class="text-white">{{$regency->name}}</a></li>
+                        <li><a href="{{url('')}}/administrator/realcount_kecamatan/{{Crypt::encrypt($district->id)}}"
                                 class="text-white">{{$district->name}}</a></li>
-                        <li><a href="{{url('')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($village->id)}}"
+                        <li><a href="{{url('')}}/administrator/realcount_kelurahan/{{Crypt::encrypt($village->id)}}"
                                 class="text-white">{{$desa->name}}</a></li>
-                        <li><a href="{{url('')}}/administrator/perhitungan_tps/{{Crypt::encrypt($data_tps->id)}}" class="text-white">TPS
+                        <li><a href="{{url('')}}/administrator/realcount_tps/{{Crypt::encrypt($data_tps->id)}}"
+                                class="text-white">TPS
                                 {{$data_tps->number}}</a></li>
-                    
+            
                     </ul>
                     <div class="col-12">
                         <div class="card rounded-0 mb-0">
@@ -277,26 +268,27 @@ $tps = Tps::count();
                                     <div class="col mt-2">
                                         <div class="media">
                                             <?php
-                                                                    $user = User::where('tps_id', '=',$saksi[0]['tps_id'])->first();
-                                                                ?>
+                                                                                        $user = User::where('tps_id', '=',$saksi[0]['tps_id'])->first();
+                                                                                    ?>
                                             @if ($user['profile_photo_path'] == NULL)
-                                            <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                                            <img class="rounded-circle"
+                                                style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
                                                 src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
                                             @else
-                                            <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
-                                                src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
+                                            <img class="rounded-circle"
+                                                style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
                                             @endif
-                                    
+                    
                                             <div class="media-body my-auto">
                                                 <h5 class="mb-0">{{ $user['name'] }}</h5>
                                                 NIK : {{ $user['nik'] }}
                                                 <div>TPS {{$data_tps->number}}</div>
-                                                
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-auto pt-2 my-auto px-1">
-                                        <a href="https://wa.me/{{$user->no_hp}}" class="btn btn-success text-white"><i class="fa-solid fa-phone"></i>
+                                        <a href="https://wa.me/{{$user->no_hp}}" class="btn btn-success text-white"><i
+                                                class="fa-solid fa-phone"></i>
                                             Hubungi</a>
                                     </div>
                                 </div>
@@ -305,9 +297,9 @@ $tps = Tps::count();
                     </div>
                     <div class="col-lg-12" style="height: 100vh; overflow: scroll">
                         <center>
-                            <img width="100%" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}" data-magnify-speed="200"
-                                alt="" data-magnify-magnifiedwidth="2500" data-magnify-magnifiedheight="2500"
-                                class="img-fluid zoom"
+                            <img width="100%" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}"
+                                data-magnify-speed="200" alt="" data-magnify-magnifiedwidth="2500"
+                                data-magnify-magnifiedheight="2500" class="img-fluid zoom"
                                 data-magnify-src="{{asset('')}}storage/{{$saksi[0]->c1_images}}">
                         </center>
                     </div>
@@ -315,14 +307,18 @@ $tps = Tps::count();
             </div>
         </div>
     </div>
-    
+
     <script>
         $(document).ready(function () {
-            $('#imgBig').modal();
-        });
+                    $('#imgBig').modal();
+                });
     </script>
-    <?php $no_u = 1;?>
 
+
+
+    <?php
+        $no_u = 1;
+    ?>
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">
@@ -358,7 +354,9 @@ $tps = Tps::count();
         <div class="card">
             <div class="card-body text-center" style="padding: 21.5px">
                 <div class="card-header py-2 text-white bg-dark">
-                    <h4 class="mb-0 mx-auto text-black card-title">Data Pemilih dan Hak Pilih (TPS {{$data_tps->number}} / Kelurahan {{$desa->name}})</h4>
+                    <h4 class="mb-0 mx-auto text-black card-title">Data Pemilih dan Hak Pilih (TPS {{$data_tps->number}}
+                        /
+                        Kelurahan {{$desa->name}})</h4>
                 </div>
                 <table class="table table-striped">
                     <tr>
@@ -482,7 +480,10 @@ $tps = Tps::count();
             <a>
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12"><img width="550px" src="https://demo.tangsel.pilwalkot.rekapitung.id/assets/upload/c1plano.jpg" class="zoom" data-magnify-src="https://demo.tangsel.pilwalkot.rekapitung.id/assets/upload/c1plano.jpg">
+                        <div class="col-md-12"><img width="550px"
+                                src="https://demo.tangsel.pilwalkot.rekapitung.id/assets/upload/c1plano.jpg"
+                                class="zoom"
+                                data-magnify-src="https://demo.tangsel.pilwalkot.rekapitung.id/assets/upload/c1plano.jpg">
                         </div>
                     </div>
                     <form>
@@ -503,7 +504,8 @@ $tps = Tps::count();
                         <div class="row">
                             <div class="col-md-12">
                                 <label for="jumlahsuarasah">Jumlah Suara Sah :</label>
-                                <input class="form-control" id="jumlahsuarasah" type="text" value="35" size="10" disabled>
+                                <input class="form-control" id="jumlahsuarasah" type="text" value="35" size="10"
+                                    disabled>
                             </div>
                         </div>
                     </form>
@@ -528,7 +530,10 @@ $tps = Tps::count();
             <a>
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12"><img width="550px" src="https://demo.tangsel.pilwalkot.rekapitung.id/assets/upload/c1plano.jpg" class="zoom" data-magnify-src="https://demo.tangsel.pilwalkot.rekapitung.id/assets/upload/c1plano.jpg">
+                        <div class="col-md-12"><img width="550px"
+                                src="https://demo.tangsel.pilwalkot.rekapitung.id/assets/upload/c1plano.jpg"
+                                class="zoom"
+                                data-magnify-src="https://demo.tangsel.pilwalkot.rekapitung.id/assets/upload/c1plano.jpg">
                         </div>
                     </div>
                     <form>
@@ -549,7 +554,8 @@ $tps = Tps::count();
                         <div class="row">
                             <div class="col-md-12">
                                 <label for="jumlahsuarasah">Jumlah Suara Sah :</label>
-                                <input class="form-control" id="jumlahsuarasah" type="text" value="35" size="10" disabled>
+                                <input class="form-control" id="jumlahsuarasah" type="text" value="35" size="10"
+                                    disabled>
                             </div>
                         </div>
                     </form>

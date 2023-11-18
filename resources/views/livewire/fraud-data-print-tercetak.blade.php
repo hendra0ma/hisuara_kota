@@ -53,10 +53,16 @@
     
                         <div class="row mt-2">
                             <div class="col-12 px-0">
-                                <a href="print/{{ Crypt::encrypt($ls->tps_id)}}"
+                                <a onclick="openNewPage()"
                                     class="btn w-100 fotoKecuranganterverifikasi mt-2 rounded-0 text-white" id="Cek"
                                     style="background: #ff4f4e">
                                     Cetak Bukti Kecurangan</a>
+                                
+                                <script>
+                                    function openNewPage() {
+                                        window.open('print/{{ Crypt::encrypt($ls->tps_id)}}', '_blank');
+                                    }
+                                </script>
                             </div>
                         </div>
                     </div>

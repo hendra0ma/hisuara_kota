@@ -60,9 +60,10 @@
 <div class="modal fade" id="periksaC1Verifikator" tabindex="-1" aria-labelledby="periksaC1VerifikatorLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title fw-bold" id="periksaC1VerifikatorLabel">AUDIT DATA C1</h3>
-                <button type="button" class="btn-close btn-danger text-white mr-5" style="width: 50px" data-bs-dismiss="modal" aria-label="Close">Close</button>
+            <div class="modal-header" style="padding-right: 3rem">
+                <h3 class="modal-title fw-bold" id="periksaC1VerifikatorLabel">AUDIT DATA C1 TPS</h3>
+                <button type="button" class="btn-close btn-danger text-white mr-5" style="width: 50px" data-bs-dismiss="modal"
+                    aria-label="Close">Close</button>
             </div>
             <div class="modal-body">
                 <div class="row" id="container-view-modal">

@@ -247,8 +247,14 @@ $props = Province::where('id',$kota['province_id'])->first();
                                 <tr>
                                     <th class="align-middle text-white text-center align-middle" rowspan="2">TPS</th>
                                     @foreach ($paslon_candidate as $item)
-                                    <th class="text-white text-center align-middle">{{ $item['candidate']}} - {{
-                                        $item['deputy_candidate']}}</th>
+                                    <th class="text-white text-center align-middle" style="background: {{$item->color}}; position:relative">
+                                        <img style="width: 60px; position: absolute; left: 0; bottom: 0" src="{{asset('')}}storage/{{$item->picture}}"
+                                            alt="">
+                                        <div class="ms-7">
+                                            {{ $item['candidate']}} - <br>
+                                            {{ $item['deputy_candidate']}}
+                                        </div>
+                                    </th>
                                     @endforeach
 
                                 </tr>
