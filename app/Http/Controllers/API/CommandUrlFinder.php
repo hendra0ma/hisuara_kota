@@ -21,16 +21,22 @@ class CommandUrlFinder extends Controller
     public function findUrlByCommand(Request $request)
     {
         $command = $request->input('text', 'default');
+        $data = [
+            'action' => '',
+            'target' => '',
+            'hint' => '',
+        ];
+        
         $isCommandHasWordDari = strpos($command, 'dari');
         if ($isCommandHasWordDari) {
             $name = $this->getTextAfterWordDari($command);
-            $data = [
-                'action' => 'click',
-                'target' => $name,
-                'hint' => "klik tombol verifikasi kiriman c1 dari $name(nav operator verifikasi c1)"
-            ];
+            $data['action'] = 'click';
+            $data['target'] = $name;
+            $data['hint'] = "klik tombol verifikasi kiriman c1 dari $name(nav operator verifikasi c1)";
+
             return response()->json($data, 200);
         }
+
         $keys = array_keys($this->commandsAndUrls);
         $result = null;
         foreach ($keys as $key) {
@@ -39,12 +45,12 @@ class CommandUrlFinder extends Controller
                 break;
             }
         }
+        if ($result !== null) {
+            $data['action'] = 'redirect';
+            $data['target'] = $result;
+            return response()->json($data, 200);
+        }
 
-        $data = [
-            'action' => 'redirect',
-            'target' => $result,
-            'hint' => '',
-        ];
         return response()->json($data, 200);
     }
 
