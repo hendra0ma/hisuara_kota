@@ -337,20 +337,84 @@
                                     <li>{{$item['text']}}</li>
                                     @endforeach
                                 </ul>
+                                <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                                    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
 
                                 <h1 class="mt-5 mb-0">Bukti Foto dan Video</h1>
                                 <hr style="border: 1px solid black">
                                 
-                                <div class="row">
-                                    @foreach ($bukti_foto as $item)
-                                    <div class="col-12 mb-2">
-                                        <img class="d-block w-100" alt=""
+                                @foreach ($bukti_foto as $item)
+                                <div class="row mb-2">
+                                    <div class="col-12">
+                                        <img class="d-block w-100 image" alt=""
                                             src="{{asset('storage')}}/{{ $item->url }}"
                                             data-bs-holder-rendered="true">
                                     </div>
-                                    @endforeach
+                                    <div class="col-12 exifResultsPhoto">
+
+                                    </div>
                                 </div>
+                                @endforeach
+                                
+                                <script>
+                                    $(document).ready(function () {
+                                        setTimeout(()=>{
+                                            $(".image").each(function (index) {
+                                                
+                                                var currentImage = this;
+                                                EXIF.getData(currentImage, function () {
+                                                    var exifData = EXIF.getAllTags(this);
+                                                    var locationInfo = "<b>Image " + (index + 1) + " EXIF Data:</b><br>";
+                                                    
+                                                    if (exifData && (exifData.DateTimeOriginal || (exifData.GPSLatitude && exifData.GPSLongitude))) {
+                                                        if (exifData.DateTimeOriginal) {
+                                                        locationInfo += "Date taken: " + exifData.DateTimeOriginal + "<br>";
+                                                        }
+                                                        if (exifData.GPSLatitude && exifData.GPSLongitude) {
+                                                            var latitude = exifData.GPSLatitude[0] + exifData.GPSLatitude[1] / 60 + exifData.GPSLatitude[2] / 3600;
+                                                            var longitude = exifData.GPSLongitude[0] + exifData.GPSLongitude[1] / 60 + exifData.GPSLongitude[2] / 3600;
+                                                            locationInfo += "Location: Latitude " + latitude + ", Longitude " + longitude + "<br>";
+                                                        }
+                                                        if (exifData.Make) {
+                                                            locationInfo += "Camera Make: " + exifData.Make + "<br>";
+                                                        }
+                                                        if (exifData.Model) {
+                                                            locationInfo += "Camera Model: " + exifData.Model + "<br>";
+                                                        }
+                                                        if (exifData.ApertureValue) {
+                                                            locationInfo += "Aperture: f/" + exifData.ApertureValue + "<br>";
+                                                        }
+                                                        if (exifData.ExposureTime) {
+                                                            locationInfo += "Exposure Time: " + exifData.ExposureTime + " sec<br>";
+                                                        }
+                                                        if (exifData.ISO) {
+                                                            locationInfo += "ISO: " + exifData.ISO + "<br>";
+                                                        }
+                                                        if (exifData.FocalLength) {
+                                                            locationInfo += "Focal Length: " + exifData.FocalLength + "mm<br>";
+                                                        }
+                                                        if (exifData.Flash) {
+                                                            locationInfo += "Flash: " + exifData.Flash + "<br>";
+                                                        }
+                                                        if (exifData.ImageWidth && exifData.ImageHeight) {
+                                                            locationInfo += "Image Resolution: " + exifData.ImageWidth + "x" + exifData.ImageHeight + "<br>";
+                                                        }
+                                                        // Include more EXIF tags as needed
+                                                    } else {
+                                                        locationInfo += "EXIF data not found";
+                                                    }
+                                                    
+                                                    // Display the information in the console to ensure it's being correctly constructed
+                                                    console.log(locationInfo);
+                                                    
+                                                    // Find the corresponding .exifResults element related to the current image and update its content
+                                                    $(currentImage).closest('div.row').find('.exifResultsPhoto').html(locationInfo);
+                                                });
+                                            });
+                                        },100)
+                                    });
+                                </script>
 
 
 
@@ -460,7 +524,7 @@
         </div>
 
         <!-- JQUERY JS -->
-        <script src="../../assets/js/jquery.min.js"></script>
+        <script src="{{asset('')}}assets/js/jquery.min.js"></script>
 
         <!-- BOOTSTRAP JS -->
         <script src="../../assets/plugins/bootstrap/js/popper.min.js"></script>
@@ -491,6 +555,7 @@
         <!--- TABS JS -->
         <script src="../../assets/plugins/tabs/jquery.multipurpose_tabcontent.js"></script>
         <script src="../../assets/plugins/tabs/tab-content.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
 
 </body>
 

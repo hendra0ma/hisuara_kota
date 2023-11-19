@@ -37,7 +37,7 @@
         <script src="../../assets/plugins/datatable/dataTables.responsive.min.js"></script>
         <script src="../../assets/plugins/datatable/responsive.bootstrap5.min.js"></script>
         <script src="../../assets/js/table-data.js"></script>
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- ECHART JS-->
         <script src="../../assets/plugins/echarts/echarts.js"></script>
 
@@ -113,6 +113,24 @@
 
 
         <script>
+
+@if(Session::has('success'))
+    Swal.fire({
+        title: 'SUCCESS!',
+        text: `{{ Session::get('success') }}`,
+        icon: 'success',
+        confirmButtonText: 'OK'
+    })
+    @endif
+    @if(Session::has('error'))
+    Swal.fire({
+        title: 'SUCCESS!',
+        text: `{{ Session::get('error') }}`,
+        icon: 'error',
+        confirmButtonText: 'OK'
+    })
+    @endif
+
     var cities = L.layerGroup();
     <?php   $tracking = App\Models\Tracking::where('id_user', '!=', 2)->get(); ?>
 

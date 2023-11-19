@@ -102,6 +102,64 @@ $tps = Tps::count();
         </ul>
     </div>
 
+    <div class="{{($config->otonom == 'yes')?'col-lg-6 col-md-6':'col-lg-6 col-md-12'}}">
+        <div class="card">
+            {{-- <div class="card-header bg-info">
+                <h3 class="card-title text-white">Suara TPS Masuk</h3>
+            </div> --}}
+            <div class="card-body" style="position: relative;">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png"
+                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="container">
+                            <div class="text-center fs-3 mb-3 fw-bold">REAL COUNT</div>
+                            <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
+                            <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
+                                    {{$dpt}}</span></div>
+                            <div id="chart-pie" style="height: 320px" class="chartsh h-100 w-100"></div>
+                        </div>
+                    </div>
+                    <div class="col-xxl">
+                        <div class="row mt-2">
+                            <?php $i = 1; ?>
+                            @foreach ($paslon as $pas)
+                            <div class="col-lg col-md col-sm col-xl mb-3">
+                                <div class="card" style="margin-bottom: 0px;">
+                                    <div class="card-body p-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
+                                                    style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                    {{$i++}}
+                                                </div>
+                                            </div>
+                                            <div class="col text-center">
+                                                <h6 class="mt-4">{{$pas->candidate}} </h6>
+                                                <h6 class="">{{$pas->deputy_candidate}} </h6>
+                                                <?php
+                                                    $voice = 0;
+                                                    ?>
+                                                @foreach ($pas->saksi_data as $dataTps)
+                                                <?php
+                                                    $voice += $dataTps->voice;
+                                                    ?>
+                                                @endforeach
+                                                <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
     <div class="col-lg-6" style="{{($config->quick_count == 'yes')?'':'display:none'}}">
         <div class="card" style="margin-bottom: 1rem">
             <div class="card-body" style="position: relative">
@@ -156,66 +214,8 @@ $tps = Tps::count();
         </div>
     </div>
 
-    <div class="{{($config->otonom == 'yes')?'col-lg-6 col-md-6':'col-lg-6 col-md-12'}}">
-        <div class="card">
-            {{-- <div class="card-header bg-info">
-                <h3 class="card-title text-white">Suara TPS Masuk</h3>
-            </div> --}}
-            <div class="card-body" style="position: relative;">
-                <img src="{{asset('')}}assets/icons/hisuara_new.png"
-                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="container">
-                            <div class="text-center fs-3 mb-3 fw-bold">REAL COUNT</div>
-                            <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
-                            <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
-                                    {{$dpt}}</span></div>
-                            <div id="chart-pie" style="height: 320px" class="chartsh h-100 w-100"></div>
-                        </div>
-                    </div>
-                    <div class="col-xxl">
-                        <div class="row mt-2">
-                            <?php $i = 1; ?>
-                            @foreach ($paslon as $pas)
-                            <div class="col-lg col-md col-sm col-xl mb-3">
-                                <div class="card" style="margin-bottom: 0px;">
-                                    <div class="card-body p-3">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
-                                                    style="margin-bottom: 0; background-color: {{$pas->color}};">
-                                                    {{$i++}}
-                                                </div>
-                                            </div>
-                                            <div class="col text-center">
-                                                <h6 class="mt-4">{{$pas->candidate}} </h6>
-                                                <h6 class="">{{$pas->deputy_candidate}} </h6>
-                                                <?php
-                                                $voice = 0;
-                                                ?>
-                                                @foreach ($pas->saksi_data as $dataTps)
-                                                <?php
-                                                $voice += $dataTps->voice;
-                                                ?>
-                                                @endforeach
-                                                <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
     @if ($config->quick_count == 'yes')
-    <div class="col-lg-12 col-md" style="display:{{($config->otonom == 'yes')?'none':'block'}}">
+    <div class="col-lg-6 col-md" style="display:{{($config->otonom == 'yes')?'none':'block'}}">
         <div class="card">
             {{-- <div class="card-header bg-secondary">
                 <h3 class="card-title text-white">Suara TPS Terverifikasi</h3>
@@ -224,7 +224,7 @@ $tps = Tps::count();
                 <img src="{{asset('')}}assets/icons/hisuara_new.png"
                     style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-12">
                         <div class="row">
                             <div class="col-12">
                                 <div class="container">
@@ -277,6 +277,122 @@ $tps = Tps::count();
                     </div>
                 </div>
 
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6">
+        <div class="card">
+            {{-- <div class="card-header bg-info">
+                <h3 class="card-title text-white">Suara TPS Masuk</h3>
+            </div> --}}
+            <div class="card-body" style="position: relative;">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png"
+                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="container">
+                            <div class="text-center fs-3 mb-3 fw-bold">REKAPITULASI</div>
+                            <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
+                            <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
+                                    {{$dpt}}</span></div>
+                            <div id="chart-rekapitulasi" style="height: 320px" class="chartsh h-100 w-100"></div>
+                        </div>
+                    </div>
+                    <div class="col-xxl">
+                        <div class="row mt-2">
+                            <?php $i = 1; ?>
+                            @foreach ($paslon as $pas)
+                            <div class="col-lg col-md col-sm col-xl mb-3">
+                                <div class="card" style="margin-bottom: 0px;">
+                                    <div class="card-body p-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
+                                                    style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                    {{$i++}}
+                                                </div>
+                                            </div>
+                                            <div class="col text-center">
+                                                <h6 class="mt-4">{{$pas->candidate}} </h6>
+                                                <h6 class="">{{$pas->deputy_candidate}} </h6>
+                                                <?php
+                                                        $voice = 0;
+                                                        ?>
+                                                @foreach ($pas->saksi_data as $dataTps)
+                                                <?php
+                                                        $voice += $dataTps->voice;
+                                                        ?>
+                                                @endforeach
+                                                <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="card">
+            {{-- <div class="card-header bg-info">
+                <h3 class="card-title text-white">Suara TPS Masuk</h3>
+            </div> --}}
+            <div class="card-body" style="position: relative;">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png"
+                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="container">
+                            <div class="text-center fs-3 mb-3 fw-bold">HITUNG ULANG KPU</div>
+                            <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
+                            <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
+                                    {{$dpt}}</span></div>
+                            <div id="chart-kpu" style="height: 320px" class="chartsh h-100 w-100"></div>
+                        </div>
+                    </div>
+                    <div class="col-xxl">
+                        <div class="row mt-2">
+                            <?php $i = 1; ?>
+                            @foreach ($paslon as $pas)
+                            <div class="col-lg col-md col-sm col-xl mb-3">
+                                <div class="card" style="margin-bottom: 0px;">
+                                    <div class="card-body p-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
+                                                    style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                    {{$i++}}
+                                                </div>
+                                            </div>
+                                            <div class="col text-center">
+                                                <h6 class="mt-4">{{$pas->candidate}} </h6>
+                                                <h6 class="">{{$pas->deputy_candidate}} </h6>
+                                                <?php
+                                                        $voice = 0;
+                                                        ?>
+                                                @foreach ($pas->saksi_data as $dataTps)
+                                                <?php
+                                                        $voice += $dataTps->voice;
+                                                        ?>
+                                                @endforeach
+                                                <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+    
             </div>
         </div>
     </div>
@@ -340,6 +456,122 @@ $tps = Tps::count();
                     </div>
                 </div>
 
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6">
+        <div class="card">
+            {{-- <div class="card-header bg-info">
+                <h3 class="card-title text-white">Suara TPS Masuk</h3>
+            </div> --}}
+            <div class="card-body" style="position: relative;">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png"
+                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="container">
+                            <div class="text-center fs-3 mb-3 fw-bold">REKAPITULASI</div>
+                            <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
+                            <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
+                                    {{$dpt}}</span></div>
+                            <div id="chart-rekapitulasi" style="height: 320px" class="chartsh h-100 w-100"></div>
+                        </div>
+                    </div>
+                    <div class="col-xxl">
+                        <div class="row mt-2">
+                            <?php $i = 1; ?>
+                            @foreach ($paslon as $pas)
+                            <div class="col-lg col-md col-sm col-xl mb-3">
+                                <div class="card" style="margin-bottom: 0px;">
+                                    <div class="card-body p-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
+                                                    style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                    {{$i++}}
+                                                </div>
+                                            </div>
+                                            <div class="col text-center">
+                                                <h6 class="mt-4">{{$pas->candidate}} </h6>
+                                                <h6 class="">{{$pas->deputy_candidate}} </h6>
+                                                <?php
+                                                            $voice = 0;
+                                                            ?>
+                                                @foreach ($pas->saksi_data as $dataTps)
+                                                <?php
+                                                            $voice += $dataTps->voice;
+                                                            ?>
+                                                @endforeach
+                                                <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-6">
+        <div class="card">
+            {{-- <div class="card-header bg-info">
+                <h3 class="card-title text-white">Suara TPS Masuk</h3>
+            </div> --}}
+            <div class="card-body" style="position: relative;">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png"
+                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="container">
+                            <div class="text-center fs-3 mb-3 fw-bold">HITUNG ULANG KPU</div>
+                            <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
+                            <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
+                                    {{$dpt}}</span></div>
+                            <div id="chart-kpu" style="height: 320px" class="chartsh h-100 w-100"></div>
+                        </div>
+                    </div>
+                    <div class="col-xxl">
+                        <div class="row mt-2">
+                            <?php $i = 1; ?>
+                            @foreach ($paslon as $pas)
+                            <div class="col-lg col-md col-sm col-xl mb-3">
+                                <div class="card" style="margin-bottom: 0px;">
+                                    <div class="card-body p-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
+                                                    style="margin-bottom: 0; background-color: {{$pas->color}};">
+                                                    {{$i++}}
+                                                </div>
+                                            </div>
+                                            <div class="col text-center">
+                                                <h6 class="mt-4">{{$pas->candidate}} </h6>
+                                                <h6 class="">{{$pas->deputy_candidate}} </h6>
+                                                <?php
+                                                            $voice = 0;
+                                                            ?>
+                                                @foreach ($pas->saksi_data as $dataTps)
+                                                <?php
+                                                            $voice += $dataTps->voice;
+                                                            ?>
+                                                @endforeach
+                                                <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+    
             </div>
         </div>
     </div>

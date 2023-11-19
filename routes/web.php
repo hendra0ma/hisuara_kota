@@ -461,6 +461,7 @@ foreach ($kotas as $kota) {
             Route::get('getKecuranganSaksi', [VerificatorController::class, 'getKecuranganSaksi'])->name('getKecuranganSaksi');
             Route::get('get-saksi-pending', [VerificatorController::class, 'getSaksiPending'])->name('getSaksiPending');
             Route::post('get-relawan-data', [VerificatorController::class, 'getRelawanData'])->name('getRelawanData');
+            Route::post('get-crowd-data', [VerificatorController::class, 'getCrowdData'])->name('getCrowdData');
             Route::get('verifikasiData/{id}', [VerificatorController::class, 'verifikasiData'])->name('verifikasiData');
             Route::get('verifikasi-data-pending/{id}', [VerificatorController::class, 'verifikasiDataPending'])->name('verifikasiDataPending');
             Route::get('verifikasi-data-c1-relawan/{id}', [VerificatorController::class, 'verifikasiDataC1Relawan'])->name('verifikasiDataC1Relawan');

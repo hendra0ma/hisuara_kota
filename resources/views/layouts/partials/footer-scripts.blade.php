@@ -110,6 +110,9 @@ use App\Models\User;
 <script src="https://raw.githack.com/thdoan/magnify/master/dist/js/jquery.magnify-mobile.js"></script>
 
 
+
+
+
 <script>
            const redirect = function(page) {
                 $.ajax({
@@ -254,6 +257,78 @@ let myModal = new bootstrap.Modal(document.getElementById('modallockdown'), {
     /*chart-pie*/
     var chartmode1 = c3.generate({
         bindto: '#chart-pie', // id of chart wrapper
+        data: {
+            columns: [
+                // each columns data
+
+                <?php foreach ($paslon as $pas) :  ?>
+                    <?php $voice = 0;  ?>
+                    <?php foreach ($pas->saksi_data as $pak) :  ?>
+                        <?php
+                        $voice += $pak->voice;
+                        ?>
+                    <?php endforeach  ?>['data<?= $pas->id  ?>', <?= $voice ?>],
+                <?php endforeach  ?>
+            ],
+            type: 'pie', // default type of chart
+            colors: {
+                <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': "<?= $pas->color ?>",
+                <?php endforeach  ?>
+            },
+            names: {
+                // name of each serie
+                <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': " <?= $pas->candidate ?> - <?= $pas->deputy_candidate ?>",
+                <?php endforeach  ?>
+            }
+        },
+        axis: {},
+        legend: {
+            show: true, //hide legend
+        },
+        padding: {
+            bottom: 0,
+            top: 0
+        },
+    });
+
+    var chartmode1 = c3.generate({
+        bindto: '#chart-rekapitulasi', // id of chart wrapper
+        data: {
+            columns: [
+                // each columns data
+
+                <?php foreach ($paslon as $pas) :  ?>
+                    <?php $voice = 0;  ?>
+                    <?php foreach ($pas->saksi_data as $pak) :  ?>
+                        <?php
+                        $voice += $pak->voice;
+                        ?>
+                    <?php endforeach  ?>['data<?= $pas->id  ?>', <?= $voice ?>],
+                <?php endforeach  ?>
+            ],
+            type: 'pie', // default type of chart
+            colors: {
+                <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': "<?= $pas->color ?>",
+                <?php endforeach  ?>
+            },
+            names: {
+                // name of each serie
+                <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': " <?= $pas->candidate ?> - <?= $pas->deputy_candidate ?>",
+                <?php endforeach  ?>
+            }
+        },
+        axis: {},
+        legend: {
+            show: true, //hide legend
+        },
+        padding: {
+            bottom: 0,
+            top: 0
+        },
+    });
+
+    var chartmode1 = c3.generate({
+        bindto: '#chart-kpu', // id of chart wrapper
         data: {
             columns: [
                 // each columns data
