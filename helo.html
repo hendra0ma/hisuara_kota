@@ -1,51 +1,233 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Deteksi Suara dengan Annyang.js</title>
+  <title>Deteksi Suara dengan Annyang.js</title>
 </head>
+
 <body>
+  <div class="row">
+    <div class="col-xl-3">
+      <div class="card">
+        <div class="card-header text-white border-0" style="background-color: #404042">
+          <span class="mx-auto py-6 fs-6">TPS
+            8
+            / Kelurahan CIPAYUNG
+          </span>
+        </div>
+        <div class="hiasan-1" style="background-color: rgba(251, 107, 37, 0.8)">
+          <div class="gambar-bulat">
+            <img class="rounded-circle" style="width: 125px; height: 125px; object-fit:cover;"
+              src="https://ui-avatars.com/api/?name=Juli Yulianti&amp;color=7F9CF5&amp;background=EBF4FF" alt="img">
+          </div>
+        </div>
+        <div class="card-body py-7">
+          <div class="nama-saksi text-center fs-4 fw-bold mb-3" data-id="1589">Juli Yulianti</div>
+          <div class="px-3">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td class="text-primary fw-bold ps-0">
+                    NIK
+                  </td>
+                  <td class="px-0">:</td>
+                  <td class="ps-2">4689857204134012</td>
+                </tr>
+                <tr>
+                  <td class="text-primary fw-bold ps-0">
+                    Kecamatan
+                  </td>
+                  <td class="px-0">:</td>
+                  <td class="ps-2">CIPUTAT</td>
+                </tr>
+                <tr>
+                  <td class="text-primary fw-bold ps-0">
+                    Kelurahan
+                  </td>
+                  <td class="px-0">:</td>
+                  <td class="ps-2">CIPAYUNG</td>
+                </tr>
+                <tr>
+                  <td class="text-primary fw-bold ps-0">
+                    Date
+                  </td>
+                  <td class="px-0">:</td>
+                  <td class="ps-2">2022-03-23 10:42:34</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="row mt-2">
+              <div class="col-12 px-0">
+                <button class="btn text-white rounded-0 w-100 periksa-c1-plano"
+                  style="background-color: rgb(251, 107, 37)" id="Cek" data-id="1589" data-bs-toggle="modal"
+                  data-bs-target="#periksaC1Verifikator">Verifikasi Kiriman C1</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hiasan-2" style="height: 30px"></div>
+        <div class="hiasan-1" style="height: 30px; background-color: rgba(251, 107, 37, 0.8)"></div>
+      </div>
+    </div>
+    <div class="col-xl-3">
+      <div class="card">
+        <div class="card-header text-white border-0" style="background-color: #404042">
+          <span class="mx-auto py-6 fs-6">TPS
+            24
+            / Kelurahan CIPAYUNG
+          </span>
+        </div>
+        <div class="hiasan-1" style="background-color: rgba(251, 107, 37, 0.8)">
+          <div class="gambar-bulat">
+            <img class="rounded-circle" style="width: 125px; height: 125px; object-fit:cover;"
+              src="https://ui-avatars.com/api/?name=Lalita Fathonah Rahimah&amp;color=7F9CF5&amp;background=EBF4FF"
+              alt="img">
+          </div>
+        </div>
+        <div class="card-body py-7">
+          <div class="nama-saksi text-center fs-4 fw-bold mb-3" data-id="1605">Lalita Fathonah Rahimah</div>
+          <div class="px-3">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td class="text-primary fw-bold ps-0">
+                    NIK
+                  </td>
+                  <td class="px-0">:</td>
+                  <td class="ps-2">2408432731371604</td>
+                </tr>
+                <tr>
+                  <td class="text-primary fw-bold ps-0">
+                    Kecamatan
+                  </td>
+                  <td class="px-0">:</td>
+                  <td class="ps-2">CIPUTAT</td>
+                </tr>
+                <tr>
+                  <td class="text-primary fw-bold ps-0">
+                    Kelurahan
+                  </td>
+                  <td class="px-0">:</td>
+                  <td class="ps-2">CIPAYUNG</td>
+                </tr>
+                <tr>
+                  <td class="text-primary fw-bold ps-0">
+                    Date
+                  </td>
+                  <td class="px-0">:</td>
+                  <td class="ps-2">2022-03-23 10:53:11</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="row mt-2">
+              <div class="col-12 px-0">
+                <button class="btn text-white rounded-0 w-100 periksa-c1-plano"
+                  style="background-color: rgb(251, 107, 37)" id="Cek" data-id="1605" data-bs-toggle="modal"
+                  data-bs-target="#periksaC1Verifikator">Verifikasi Kiriman C1</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hiasan-2" style="height: 30px"></div>
+        <div class="hiasan-1" style="height: 30px; background-color: rgba(251, 107, 37, 0.8)"></div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</body>
 
 <!-- <video id="myVideo" src="C:\Users\Administrator\Videos\Overwolf\Outplayed\Valorant\Valorant_04-13-2023_21-34-5-277\Valorant_04-13-2023_22-10-18-676.mp4" controls></video> -->
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
 <button id="startSpeech">Mulai Mendengarkan</button>
 <button id="stopSpeech">Berhenti Mendengarkan</button>
 <div id="speechOutput"></div>
 <script>
-    $(document).ready(function() {
-        var recognition = new webkitSpeechRecognition() || new SpeechRecognition();
-        recognition.lang = 'id-ID';
-        recognition.continuous = true;
-        recognition.interimResults = true;
-      
-        var speechOutput = $('#speechOutput');
-        var startButton = $('#startSpeech');
-        var stopButton = $('#stopSpeech');
-      
-        startButton.click(function() {
-          recognition.start();
-        });
-      
-        stopButton.click(function() {
-          recognition.stop();
-        });
-      
-        recognition.onresult = function(event) {
-          var interimTranscript = '';
-          for (var i = event.resultIndex; i < event.results.length; i++) {
-            if (event.results[i].isFinal) {
-              var finalTranscript = event.results[i][0].transcript;
-              speechOutput.text('Hasil Pengenalan: ' + finalTranscript.trim().toLowerCase());
-              
-              if( finalTranscript.trim().toLowerCase() === "buka halaman verifikasi"){
-                  location.href = "http://pilpres.banten.tangerang-selatan.hisuara.id:8000/verifikator/verifikasi-c1";
+  $(document).ready(function () {
+    var recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+    recognition.lang = 'id-ID';
+    recognition.continuous = true;
+    recognition.interimResults = true;
+
+    var speechOutput = $('#speechOutput');
+    var startButton = $('#startSpeech');
+    var stopButton = $('#stopSpeech');
+
+    startButton.click(function () {
+      recognition.start();
+    });
+
+    stopButton.click(function () {
+      recognition.stop();
+    });
+
+    recognition.onresult = function (event) {
+      var interimTranscript = '';
+      for (var i = event.resultIndex; i < event.results.length; i++) {
+        if (event.results[i].isFinal) {
+          var finalTranscript = event.results[i][0].transcript;
+          speechOutput.text('Hasil Pengenalan: ' + finalTranscript.trim().toLowerCase());
+          $.ajax({
+            url: "http://hisuara.id:8000/api/findUrlByVoiceText",
+            type: "get",
+            data: {
+              text: finalTranscript.toLowerCase()
+            },
+            success: function (res) {
+              console.log(res);
+              const { action, target, hint } = res
+              if (action == 'redirect') {
+                window.location = target;
+              }
+              if (action == 'click') {
+                // alert('klik target')
+                const namaSaksi = '';
+                const regex = /dari\s*([^()]+)(?:\([^)]+\))?/i;
+                const match = target.match(regex);
+                if (match) {
+                  // Extract the captured word after 'dari' and remove words in parentheses
+                  namaSaksi = match[1].trim();
+                } else {
+                  alert('No match found');
                 }
-            } else {
-              interimTranscript += event.results[i][0].transcript;
+                const h1Elements = document.querySelectorAll('.nama-saksi');
+
+                for (const i = 0; i < h1Elements.length; i++) {
+                  const element = h1Elements[i];
+                  const elementText = element.textContent.toLowerCase();
+
+                  console.log(elementText, namaSaksi.toLowerCase());
+
+                  if (elementText.includes(namaSaksi.toLowerCase())) {
+                    // Found a matching element
+                    console.log('Found: ' + elementText);
+
+                    const idSaksi = element.getAttribute('data-id');
+                    console.log(idSaksi);
+
+                    const buttonVerifikasi = document.querySelector(`button[data-id="${idSaksi}"]`);
+                    console.log(buttonVerifikasi.textContent);
+                    break;
+                  }
+                }
+              }
+
             }
+          })
+          if (finalTranscript.trim().toLowerCase() === "buka halaman verifikasi") {
+            location.href = "http://pilpres.banten.tangerang-selatan.hisuara.id:8000/verifikator/verifikasi-c1";
           }
-        };
-      });
+        } else {
+          interimTranscript += event.results[i][0].transcript;
+        }
+      }
+    };
+  });
 </script>
 
 </body>
+
 </html>
