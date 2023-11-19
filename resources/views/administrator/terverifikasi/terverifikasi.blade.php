@@ -295,7 +295,7 @@ $props = Province::where('id',$kota['province_id'])->first();
 ?>
 
 <div class="col-12">
-    <div class="row">
+    <div class="row justify-content-center">
         @foreach ($kec as $item)
         <div class="col-3">
             <div class="card">
