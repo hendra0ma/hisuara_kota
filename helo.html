@@ -184,12 +184,12 @@
               }
               if (action == 'click') {
                 // alert('klik target')
-                const name = '';
+                const namaSaksi = '';
                 const regex = /dari\s*([^()]+)(?:\([^)]+\))?/i;
                 const match = target.match(regex);
                 if (match) {
                   // Extract the captured word after 'dari' and remove words in parentheses
-                  name = match[1].trim();
+                  namaSaksi = match[1].trim();
                 } else {
                   alert('No match found');
                 }
@@ -199,9 +199,9 @@
                   const element = h1Elements[i];
                   const elementText = element.textContent.toLowerCase();
 
-                  console.log(elementText, name.toLowerCase());
+                  console.log(elementText, namaSaksi.toLowerCase());
 
-                  if (elementText.includes(name.toLowerCase())) {
+                  if (elementText.includes(namaSaksi.toLowerCase())) {
                     // Found a matching element
                     console.log('Found: ' + elementText);
 
