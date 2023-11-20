@@ -39,7 +39,8 @@ $(document).ready(function () {
           const dataTargetValue = getTextAfterSpecificWord(keywordRedirect, finalTranscript).trim()
           alert(dataTargetValue)
           var selectedElement = $('[data-target="' + dataTargetValue + '"]');
-          selectedElement.click()
+          console.log(selectedElement);
+          return selectedElement.click()
         }
 
         console.log('speech', finalTranscript.toLowerCase())
