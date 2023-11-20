@@ -25,25 +25,26 @@ $(document).ready(function () {
     var interimTranscript = '';
     for (var i = event.resultIndex; i < event.results.length; i++) {
       if (event.results[i].isFinal) {
-        var finalTranscript = event.results[i][0].transcript;
-        speechOutput.text('Hasil Pengenalan: ' + finalTranscript.trim().toLowerCase());
+        var finalTranscript = event.results[i][0].transcript.trim().toLowerCase();
+        speechOutput.text('Hasil Pengenalan: ' + finalTranscript);
 
         const isCommandHasKeywordClickBagian = finalTranscript.includes(keywordClickBagian);
         const isCommandHasKeywordClickTab = finalTranscript.includes(keywordClickTab);
         const isCommandHasKeywordRedirect =
-          finalTranscript.includes(keywordRedirect)
-          && isCommandHasKeywordClickBagian == false
-          && isCommandHasKeywordClickTab == false
+        finalTranscript.includes(keywordRedirect)
+        && isCommandHasKeywordClickBagian == false
+        && isCommandHasKeywordClickTab == false
 
         if (isCommandHasKeywordRedirect) {
-          const dataTargetValue = getTextAfterSpecificWord(keywordRedirect, finalTranscript).trim()
-          alert(dataTargetValue)
-          var selectedElement = document.querySelector('[data-target="' + dataTargetValue + '"]')
+          const dataTargetValue = getTextAfterSpecificWord(keywordRedirect, finalTranscript)
+          const formattedFinalTranscript = formatFinalTranscriptToCommandTargetFormat(dataTargetValue)
+          alert(dataTargetValue, formattedFinalTranscript)
+          var selectedElement = document.querySelector('[data-command-target="' + formattedFinalTranscript + '"]')
           console.log(selectedElement);
           return selectedElement.click()
         }
 
-        console.log('speech', finalTranscript.toLowerCase())
+        console.log('speech', finalTranscript)
         if (type == 'redirect') {
           window.location = `${completeHostname}/${target}`;
         }
@@ -87,8 +88,12 @@ function getTextAfterSpecificWord(specificWord, text) {
 
   if (matches && matches[1] !== undefined) {
     var wordsAfterSpecificWord = matches[1];
-    return wordsAfterSpecificWord;
+    return wordsAfterSpecificWord.trim();
   } else {
     console.log("Nama tidak terdeteksi");
   }
+}
+
+function formatFinalTranscriptToCommandTargetFormat(string) {
+  return string.replace(/\s+/g, '-')
 }
