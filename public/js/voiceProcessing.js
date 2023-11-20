@@ -40,7 +40,10 @@ $(document).ready(function () {
           const formattedFinalTranscript = formatFinalTranscriptToCommandTargetFormat(dataTargetValue)
           alert(dataTargetValue, formattedFinalTranscript)
           var selectedElement = document.querySelector('[data-command-target="' + formattedFinalTranscript + '"]')
+          var commandTargetMenuName = selectedElement.getAttribute('data-command-target-menu');
+          var commandTargetMenuElement = document.querySelector('[data-command-target="' + commandTargetMenuName + '"]')
           console.log(selectedElement);
+          commandTargetMenuElement.click()
           return selectedElement.click()
         }
 
