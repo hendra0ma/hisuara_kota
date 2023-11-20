@@ -1436,7 +1436,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                                 const namaSaksi = target;
                                 const h1Elements = document.querySelectorAll('.nama-saksi');
 
-                                for (const i = 0; i < h1Elements.length; i++) {
+                                for (let i = 0; i < h1Elements.length; i++) {
                                     const element = h1Elements[i];
                                     const elementText = element.textContent.toLowerCase();
 
