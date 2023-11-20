@@ -1424,14 +1424,14 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                         success: function(res) {
                             console.log(res);
                             const {
-                                action,
+                                type,
                                 target,
                                 hint
                             } = res
-                            if (action == 'redirect') {
+                            if (type == 'redirect') {
                                 window.location = `${completeHostname}/target`;
                             }
-                            if (action == 'action') {
+                            if (type == 'action') {
                                 // alert('klik target')
                                 const namaSaksi = target;
                                 const h1Elements = document.querySelectorAll('.nama-saksi');
