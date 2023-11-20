@@ -324,14 +324,14 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                 <div class="col-md-auto my-auto">
                     <div class="row h-100 justify-content-end" style="gap: 10px;">
                         <div class="col-md-auto px-0">
-                            <a class="w-100 mx-auto btn text-white d-flex" style="background-color: #528bff; width: 40px; height: 36px;" href="{{url('')}}/administrator/index" data-target="dashboard">
+                            <button class="w-100 mx-auto btn text-white d-flex" style="background-color: #528bff; width: 40px; height: 36px;" href="{{url('')}}/administrator/index" data-target="dashboard" data-command-target="dpt">
                                 <span class="dark-layout my-auto" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Dashboard">
                                     <i class="fa-solid fa-gauge-high"></i>
                                 </span>
-                            </a>
+                            </button>
                         </div>
                         <div class="col-md-auto px-0">
-                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="perhitungan">
+                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="perhitungan" data-command-target="perhitungan">
                                 <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Perhitungan">
                                     <i class="fa-solid fa-chart-simple"></i>
                                 </span>
@@ -339,7 +339,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                         </div>
 
                         <div class="col-md-auto px-0">
-                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="petugas">
+                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="petugas" data-command-target="petugas">
                                 <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Petugas">
                                     <i class="fa-solid fa-user-tie"></i>
                                 </span>
@@ -347,7 +347,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                         </div>
 
                         <div class="col-md-auto px-0">
-                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="operator">
+                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="operator" data-command-target="operator">
                                 <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Operator">
                                     <i class="fa-solid fa-computer"></i>
                                 </span>
@@ -355,7 +355,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                         </div>
 
                         <div class="col-md-auto px-0">
-                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="pelacakan">
+                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="pelacakan" data-command-target="pelacakan">
                                 <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Pelacakan">
                                     <i class="fa-solid fa-location-dot"></i>
                                 </span>
@@ -363,7 +363,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                         </div>
 
                         <div class="col-md-auto px-0">
-                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="dokumentasi">
+                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="dokumentasi" data-command-target="dokumentasi">
                                 <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Dokumentasi">
                                     <i class="fa-solid fa-book"></i>
                                 </span>
@@ -400,7 +400,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                                     </div> -->
 
                         <div class="col-md-auto px-0">
-                            <button class="w-100 mx-auto btn tugel-kolaps text-white sirantap" style="background-color: #656064; width: 40px; height: 36px;" data-target="sirantap">
+                            <button class="w-100 mx-auto btn tugel-kolaps text-white sirantap" style="background-color: #656064; width: 40px; height: 36px;" data-target="sirantap" data-command-target="sirantap">
                                 <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Sistem Laporan Data Pemilu">
                                     <i class="fa-solid fa-s"></i>
                                 </span>
@@ -1070,14 +1070,14 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
         <div class="col-md-auto my-auto">
             <div class="row h-100 justify-content-end" style="gap: 10px;">
                 <div class="col-md-auto px-0">
-                    <button class="w-100 mx-auto btn tugel-kolaps text-white active-button" style="background-color: #656064; width: 40px; height: 36px;" data-target="dpt">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white active-button" style="background-color: #656064; width: 40px; height: 36px;" data-target="dpt" data-command-target="dpt">
                         <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="DPT">
                             <i class="fa-solid fa-database"></i>
                         </span>
                     </button>
                 </div>
                 <div class="col-md-auto px-0">
-                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="suara">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="suara" data-command-target="suara">
                         <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Urutan Suara">
                             <i class="fa-solid fa-ranking-star"></i>
                         </span>
@@ -1085,7 +1085,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                 </div>
 
                 <div class="col-md-auto px-0">
-                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="kota">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="kota" data-command-target="kota">
                         <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Kota">
                             <i class="fa-solid fa-city"></i>
                         </span>
@@ -1119,14 +1119,14 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                 </script>
 
                 <div class="col-md-auto px-0">
-                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="support">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="support" data-command-target="support">
                         <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Support">
                             <i class="fa-solid fa-headset"></i>
                         </span>
                     </button>
                 </div>
                 <div class="col-md-auto px-0">
-                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="featured">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="featured" data-command-target="featured">
                         <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Featured">
                             <i class="fa-solid fa-star"></i>
                         </span>
@@ -1174,7 +1174,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                             <button class="dropdown-item security">
                                 <i class="dropdown-icon fa-solid fa-shield"></i> Security System
                             </button>
-                            {{-- <button class="dropdown-item tugel-kolaps" href="#" data-target="setting">
+                            {{-- <button class="dropdown-item tugel-kolaps" href="#" data-target="setting" data-command-target="setting">
                                                     <i class="dropdown-icon fa-solid fa-gear"></i> Settings
                                                 </button> --}}
 
