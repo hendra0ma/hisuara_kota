@@ -324,14 +324,14 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                 <div class="col-md-auto my-auto">
                     <div class="row h-100 justify-content-end" style="gap: 10px;">
                         <div class="col-md-auto px-0">
-                            <a class="w-100 mx-auto btn text-white d-flex" style="background-color: #528bff; width: 40px; height: 36px;" href="{{url('')}}/administrator/index">
+                            <a class="w-100 mx-auto btn text-white d-flex" style="background-color: #528bff; width: 40px; height: 36px;" href="{{url('')}}/administrator/index" data-target="dashboard" data-command-target="dashboard">
                                 <span class="dark-layout my-auto" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Dashboard">
                                     <i class="fa-solid fa-gauge-high"></i>
                                 </span>
                             </a>
                         </div>
                         <div class="col-md-auto px-0">
-                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="perhitungan">
+                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="perhitungan" data-command-target="perhitungan">
                                 <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Perhitungan">
                                     <i class="fa-solid fa-chart-simple"></i>
                                 </span>
@@ -339,7 +339,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                         </div>
 
                         <div class="col-md-auto px-0">
-                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="petugas">
+                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="petugas" data-command-target="petugas">
                                 <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Petugas">
                                     <i class="fa-solid fa-user-tie"></i>
                                 </span>
@@ -347,7 +347,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                         </div>
 
                         <div class="col-md-auto px-0">
-                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="operator">
+                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="operator" data-command-target="operator">
                                 <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Operator">
                                     <i class="fa-solid fa-computer"></i>
                                 </span>
@@ -355,7 +355,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                         </div>
 
                         <div class="col-md-auto px-0">
-                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="lacak">
+                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="pelacakan" data-command-target="pelacakan">
                                 <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Pelacakan">
                                     <i class="fa-solid fa-location-dot"></i>
                                 </span>
@@ -363,7 +363,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                         </div>
 
                         <div class="col-md-auto px-0">
-                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="dokumentasi">
+                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="dokumentasi" data-command-target="dokumentasi">
                                 <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Dokumentasi">
                                     <i class="fa-solid fa-book"></i>
                                 </span>
@@ -400,7 +400,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                                     </div> -->
 
                         <div class="col-md-auto px-0">
-                            <button class="w-100 mx-auto btn tugel-kolaps text-white sirantap" style="background-color: #656064; width: 40px; height: 36px;" data-target="sirantap">
+                            <button class="w-100 mx-auto btn tugel-kolaps text-white sirantap" style="background-color: #656064; width: 40px; height: 36px;" data-target="sirantap" data-command-target="sirantap">
                                 <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Sistem Laporan Data Pemilu">
                                     <i class="fa-solid fa-s"></i>
                                 </span>
@@ -463,32 +463,32 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                         <div class="col-md petugas tugel-content" style="display: none">
                             <div class="row">
                                 <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                    <a href="{{url('')}}/administrator/verifikasi_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                    <a data-command-target-menu="petugas" data-command-target="saksi" href="{{url('')}}/administrator/verifikasi_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
                                         Saksi
                                     </a>
                                 </div>
                                 <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                    <a href="{{url('')}}/administrator/koordinator_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                                    <a data-command-target-menu="petugas" data-command-target="kordinator saksi" href="{{url('')}}/administrator/koordinator_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
                                         Kordinator Saksi
                                     </a>
                                 </div>
                                 <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                    <a href="{{url('')}}/administrator/relawan" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
+                                    <a data-command-target-menu="petugas" data-command-target="relawan" href="{{url('')}}/administrator/relawan" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
                                         Relawan
                                     </a>
                                 </div>
                                 <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                    <a href="{{url('')}}/administrator/enumerator" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
+                                    <a data-command-target-menu="petugas" data-command-target="enumerator" href="{{url('')}}/administrator/enumerator" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
                                         Enumerator
                                     </a>
                                 </div>
                                 <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                    <a href="{{url('')}}/administrator/verifikasi_crowd_c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                                    <a data-command-target-menu="petugas" data-command-target="crowd-c1" href="{{url('')}}/administrator/verifikasi_crowd_c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
                                         Crowd C1
                                     </a>
                                 </div>
                                 <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                    <a href="{{url('')}}/administrator/verifikasi_akun" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                    <a data-command-target-menu="petugas" data-command-target="admin" href="{{url('')}}/administrator/verifikasi_akun" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                         Admin
                                     </a>
                                 </div>
@@ -498,17 +498,17 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                         <div class="col-md operator tugel-content" style="display: none">
                             <div class="row">
                                 <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                    <a href="{{url('')}}/verifikator/verifikasi-c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                    <a data-command-target-menu="operator" data-command-target="verifikasi-c1" href="{{url('')}}/verifikator/verifikasi-c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
                                         Verifikasi C1
                                     </a>
                                 </div>
                                 <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                    <a href="{{url('')}}/auditor/audit-c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                                    <a data-command-target-menu="operator" data-command-target="audit-c1" href="{{url('')}}/auditor/audit-c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
                                         Audit C1
                                     </a>
                                 </div>
                                 <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                    <a href="{{url('')}}/administrator/crowd-c1-kpu" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                    <a data-command-target-menu="operator" data-command-target="crowd-c1-kpu" href="{{url('')}}/administrator/crowd-c1-kpu" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                         Crowd C1 KPU
                                     </a>
                                 </div>
@@ -525,27 +525,27 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                     <div class="col-md perhitungan tugel-content" style="display: none">
                         <div class="row">
                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                <a href="{{url('')}}/administrator/real_count2" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                <a data-command-target-menu="perhitungan" data-command-target="real-count" href="{{url('')}}/administrator/real_count2" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
                                     Real Count
                                 </a>
                             </div>
                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                <a href="{{url('')}}/administrator/quick_count2" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px">
+                                <a data-command-target-menu="perhitungan" data-command-target="quick-count" href="{{url('')}}/administrator/quick_count2" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px">
                                     Quick Count
                                 </a>
                             </div>
                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                <a href="{{url('')}}/administrator/terverifikasi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                                <a data-command-target-menu="perhitungan" data-command-target="terverifikasi" href="{{url('')}}/administrator/terverifikasi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
                                     Terverifikasi
                                 </a>
                             </div>
                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                <a href="{{url('')}}/administrator/rekapitulasi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                                <a data-command-target-menu="perhitungan" data-command-target="rekapitulasi" href="{{url('')}}/administrator/rekapitulasi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
                                     Rekapitulasi
                                 </a>
                             </div>
                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                <a href="{{url('')}}/administrator/hitung_kpu" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                <a data-command-target-menu="perhitungan" data-command-target="hitung-ulang-kpu" href="{{url('')}}/administrator/hitung_kpu" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                     Hitung Ulang KPU
                                 </a>
                             </div>
@@ -570,7 +570,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                     <div class="col-md dokumentasi tugel-content" style="display: none">
                         <div class="row">
                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                <a href="{{url('')}}/administrator/data-c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                <a data-command-target-menu="dokumentasi" data-command-target="data-c1-saksi" href="{{url('')}}/administrator/data-c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
                                     Data C1 Saksi
                                 </a>
                             </div>
@@ -580,24 +580,24 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                                                 </a>
                                             </div> -->
                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                <a href="{{url('')}}/administrator/dokumen_lain" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
+                                <a data-command-target-menu="dokumentasi" data-command-target="dokumen-lain" href="{{url('')}}/administrator/dokumen_lain" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
                                     {{-- C7 & Surat Suara --}}
                                     Dokumen Lain
                                 </a>
                             </div>
                             {{-- <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{route('superadmin.analisa_dpt_kpu')}}" class="py-1 btn fs-6 w-100 text-white glowy-menu"
+                                                <a data-command-target-menu="dokumentasi" data-command-target="realisasi-dpt" href="{{route('superadmin.analisa_dpt_kpu')}}" class="py-1 btn fs-6 w-100 text-white glowy-menu"
                             style="background-color: #528bff; border-radius: 0;">
                             Realisasi DPT
                             </a>
                         </div> --}}
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a href="{{url('')}}/administrator/data-crowd-c1-kpu" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                            <a data-command-target-menu="dokumentasi" data-command-target="data-crowd-c1-kpu" href="{{url('')}}/administrator/data-crowd-c1-kpu" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
                                 Data Crowd C1 KPU
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a href="{{route('superadmin.rdata')}}" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                            <a data-command-target-menu="dokumentasi" data-command-target="riwayat" href="{{route('superadmin.rdata')}}" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                 Riwayat
                             </a>
                         </div>
@@ -626,22 +626,22 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                 <div class="col-md sirantap tugel-content" style="display: none;">
                     <div class="row">
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a href="{{url('')}}/verifikator/verifikator_kecurangan" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 25px 0px 0px 25px;;">
+                            <a data-command-target-menu="sirantap" data-command-target="verifikasi-kecurangan" href="{{url('')}}/verifikator/verifikator_kecurangan" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 25px 0px 0px 25px;;">
                                 Verifikasi Kecurangan
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a href="{{url('')}}/administrator/fraud-data-print" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 0px;">
+                            <a data-command-target-menu="sirantap" data-command-target="bukti-kecurangan" href="{{url('')}}/administrator/fraud-data-print" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 0px;">
                                 Bukti Kecurangan
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a href="{{url('')}}/administrator/fraud-data-report" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 0px;">
+                            <a data-command-target-menu="sirantap" data-command-target="barcode-kecurangan" href="{{url('')}}/administrator/fraud-data-report" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 0px;">
                                 Barkode Kecurangan
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a href="{{url('')}}/administrator/index-tsm" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 0px 25px 25px 0px;">
+                            <a data-command-target-menu="sirantap" data-command-target="jenis-kecurangan" href="{{url('')}}/administrator/index-tsm" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 0px 25px 25px 0px;">
                                 Jenis Kecurangan
                             </a>
                         </div>
@@ -651,27 +651,27 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                 <div class="col-md lacak tugel-content" style="display: none">
                     <div class="row">
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a href="{{url('')}}/administrator/lacak_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                            <a data-command-target="lacak-saksi" href="{{url('')}}/administrator/lacak_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
                                 Lacak Saksi
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a href="{{url('')}}/administrator/lacak_relawan" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
+                            <a data-command-target="lacak-relawan" href="{{url('')}}/administrator/lacak_relawan" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
                                 Lacak Relawan
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a href="{{url('')}}/administrator/lacak_enumerator" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
+                            <a data-command-target="lacak-enumerator" href="{{url('')}}/administrator/lacak_enumerator" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
                                 Lacak Enumerator
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a href="{{url('')}}/administrator/lacak_admin" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                            <a data-command-target="lacak-admin" href="{{url('')}}/administrator/lacak_admin" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
                                 Lacak Admin
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a href="{{url('')}}/administrator/lacak_crowd_c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                            <a data-command-target="lacak-crowd-c1" href="{{url('')}}/administrator/lacak_crowd_c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
                                 Lacak Crowd C1
                             </a>
                         </div>
@@ -1084,14 +1084,14 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
         <div class="col-md-auto my-auto">
             <div class="row h-100 justify-content-end" style="gap: 10px;">
                 <div class="col-md-auto px-0">
-                    <button class="w-100 mx-auto btn tugel-kolaps text-white active-button" style="background-color: #656064; width: 40px; height: 36px;" data-target="dpt">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white active-button" style="background-color: #656064; width: 40px; height: 36px;" data-target="dpt" data-command-target="dpt">
                         <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="DPT">
                             <i class="fa-solid fa-database"></i>
                         </span>
                     </button>
                 </div>
                 <div class="col-md-auto px-0">
-                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="suara">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="suara" data-command-target="suara">
                         <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Urutan Suara">
                             <i class="fa-solid fa-ranking-star"></i>
                         </span>
@@ -1099,7 +1099,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                 </div>
 
                 <div class="col-md-auto px-0">
-                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="kota">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="kota" data-command-target="kota">
                         <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Kota">
                             <i class="fa-solid fa-city"></i>
                         </span>
@@ -1133,14 +1133,14 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                 </script>
 
                 <div class="col-md-auto px-0">
-                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="support">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="support" data-command-target="support">
                         <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Support">
                             <i class="fa-solid fa-headset"></i>
                         </span>
                     </button>
                 </div>
                 <div class="col-md-auto px-0">
-                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="featured">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="featured" data-command-target="featured">
                         <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Featured">
                             <i class="fa-solid fa-star"></i>
                         </span>
@@ -1188,7 +1188,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                             <button class="dropdown-item security">
                                 <i class="dropdown-icon fa-solid fa-shield"></i> Security System
                             </button>
-                            {{-- <button class="dropdown-item tugel-kolaps" href="#" data-target="setting">
+                            {{-- <button class="dropdown-item tugel-kolaps" href="#" data-target="setting" data-command-target="setting">
                                                     <i class="dropdown-icon fa-solid fa-gear"></i> Settings
                                                 </button> --}}
 
@@ -1399,7 +1399,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
     });
 </script>
 @if($config->quick_count == "yes")
-<script>
+<!-- <script>
     $(document).ready(function() {
         var recognition = new webkitSpeechRecognition() || new SpeechRecognition();
         recognition.lang = 'id-ID';
@@ -1438,19 +1438,20 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                         success: function(res) {
                             console.log(res);
                             const {
-                                action,
+                                type,
                                 target,
                                 hint
                             } = res
-                            if (action == 'redirect') {
-                                window.location = target;
+                            console.log('speech', finalTranscript.toLowerCase())
+                            if (type == 'redirect') {
+                                window.location = `${completeHostname}/${target}`;
                             }
-                            if (action == 'click') {
+                            if (type == 'action') {
                                 // alert('klik target')
                                 const namaSaksi = target;
                                 const h1Elements = document.querySelectorAll('.nama-saksi');
 
-                                for (const i = 0; i < h1Elements.length; i++) {
+                                for (let i = 0; i < h1Elements.length; i++) {
                                     const element = h1Elements[i];
                                     const elementText = element.textContent.toLowerCase();
 
@@ -1465,6 +1466,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
 
                                         const buttonVerifikasi = document.querySelector(`button[data-id="${idSaksi}"]`);
                                         console.log(buttonVerifikasi.textContent);
+                                        buttonVerifikasi.click();
                                         break;
                                     }
                                 }
@@ -1481,8 +1483,11 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
             }
         };
     });
-</script>
+</script> -->
+@if($config->quick_count == "yes")
 @endif
+@endif
+<script src="{{ asset('js/voiceProcessing.js') }}"></script>
 
 <!--app-content open-->
 <div class="app-content for-kolapse-kurangin" style="margin-top: 40px; margin-left: 0px !important">

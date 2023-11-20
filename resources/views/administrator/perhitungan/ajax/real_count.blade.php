@@ -91,9 +91,27 @@ $tps = Tps::count();
                                     <div class="col text-center">
                                         <h6 class="mt-4">{{$pas->candidate}} </h6>
                                         <h6 class="">{{$pas->deputy_candidate}} </h6>
-                                        <?php
+                                        @if (isset($url_first[3]))
+                                            @php
+                                            $data['url_id'] = Crypt::decrypt($url_first[3]);
+                                            $id = $data['url_id'];
+                                            @endphp
+                                        @endif
+                                        
+                                        @if (isset($url_first[3]) && $url_first[2] == "perhitungan_kecamatan") {{-- Perhitungan Kecamatan --}}
+                                            @php
+                                            $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->where('district_id', $id)->sum('voice');
+                                            @endphp
+                                        @elseif (isset($url_first[3]) && $url_first[2] == "perhitungan_kelurahan") {{-- Perhitungan Kelurahan --}}
+                                            @php
+                                            $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->where('village_id', $id)->sum('voice');
+                                            @endphp
+                                        @else {{--  Perhitungan Kota --}}
+                                            @php
                                             $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->sum('voice');
-                                        ?>
+                                            @endphp
+                                        @endif
+                                        {{-- {{$url_first}} --}}
                                         <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3>
                                     </div>
                                 </div>
@@ -105,14 +123,54 @@ $tps = Tps::count();
             </div>
         </div>
     </div>
+    @if (isset($url_first[3]) && $url_first[2] == "perhitungan_kecamatan")
+    <div class="{{($config->otonom == 'yes')?'col-6':'col-12'}}">
+        <table class="table table-bordered table-hover mb-0 {{($config->otonom == 'yes')?'h-100':''}}">
+            <thead class="bg-primary">
+                <tr>
+                    <th class="text-white text-center align-middle">KELURAHAN</th>
+                    @foreach ($paslon as $item)
+                    <th class="text-white text-center align-middle"
+                        style="background: {{$item->color}}; position:relative">
+                        <img style="width: 60px; position: absolute; left: 0; bottom: 0"
+                            src="{{asset('')}}storage/{{$item->picture}}" alt="">
+                        <div class="ms-7">
+                            {{ $item['candidate']}} - <br>
+                            {{ $item['deputy_candidate']}}
+                        </div>
+                    </th>
+                    @endforeach
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($kel as $item)
+                <tr onclick='check("{{Crypt::encrypt($item->id)}}")'>
+                    <td class="align-middle"><a
+                            href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
+                    </td>
+                    @foreach ($paslon as $cd)
+                    <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.village_id', (string)$item['id'])->sum('voice'); ?>
+                    <td class="align-middle">{{$saksi_dataa}}</td>
+                    @endforeach
+                </tr>
+                @endforeach
+            </tbody>
+            <script>
+                let check = function(id) {
+                            window.location = `{{url('/')}}/administrator/perhitungan_kecamatan/${id}`;
+                        }
+            </script>
+        </table>
+    </div>
+    @elseif (isset($url_first[3]) && $url_first[2] == "perhitungan_kelurahan")
+    @else
     <div class="{{($config->otonom == 'yes')?'col-6':'col-12'}}">
         <table class="table table-bordered table-hover mb-0 {{($config->otonom == 'yes')?'h-100':''}}">
             <thead class="bg-primary">
                 <tr>
                     <th class="text-white text-center align-middle">KECAMATAN</th>
                     @foreach ($paslon as $item)
-                    <th class="text-white text-center align-middle"
-                        style="background: {{$item->color}}; position:relative">
+                    <th class="text-white text-center align-middle" style="background: {{$item->color}}; position:relative">
                         <img style="width: 60px; position: absolute; left: 0; bottom: 0"
                             src="{{asset('')}}storage/{{$item->picture}}" alt="">
                         <div class="ms-7">
@@ -138,11 +196,12 @@ $tps = Tps::count();
             </tbody>
             <script>
                 let check = function(id) {
-                            window.location = `{{url('/')}}/administrator/perhitungan_kecamatan/${id}`;
-                        }
+                    window.location = `{{url('/')}}/administrator/perhitungan_kecamatan/${id}`;
+                }
             </script>
         </table>
     </div>
+    @endif
 </div>
 
         

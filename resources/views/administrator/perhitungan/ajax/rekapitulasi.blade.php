@@ -51,11 +51,11 @@ $tps = Tps::count();
 ?>
 
 <div class="row">
-    <div class="col-12">
+    <div class="{{($config->otonom == 'yes')?'col-6':'col-12'}}">
         <div class="row">
             <div class="col-6 d-flex">
                 <div class="container my-auto">
-                    {{-- <div class="text-center fs-3 mb-3 fw-bold">REKAPITULASI</div>
+                    {{-- <div class="text-center fs-3 mb-3 fw-bold">REAL COUNT</div>
                     <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
                     <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
                             {{$dpt}}</span></div> --}}
@@ -80,14 +80,31 @@ $tps = Tps::count();
                                             {{$i++}}
                                         </div>
                                     </div>
-                                    <div class="col text-center">
+                                    <div class="col-6 text-center">
                                         <h6 class="mt-4">{{$pas->candidate}} </h6>
                                         <h6 class="">{{$pas->deputy_candidate}} </h6>
-                                        <?php
-                                                        $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->sum('voice');
-                                                    ?>
-
-                                        <h3 class="mb-2 number-font">{{ $total_saksi }}<br> suara</h3>
+                                        @if (isset($url_first[3]))
+                                            @php
+                                            $data['url_id'] = Crypt::decrypt($url_first[3]);
+                                            $id = $data['url_id'];
+                                            @endphp
+                                        @endif
+                                        
+                                        @if (isset($url_first[3]) && $url_first[2] == "perhitungan_kecamatan") {{-- Perhitungan Kecamatan --}}
+                                            @php
+                                            $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->where('district_id', $id)->sum('voice');
+                                            @endphp
+                                        @elseif (isset($url_first[3]) && $url_first[2] == "perhitungan_kelurahan") {{-- Perhitungan Kelurahan --}}
+                                            @php
+                                            $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->where('village_id', $id)->sum('voice');
+                                            @endphp
+                                        @else {{--  Perhitungan Kota --}}
+                                            @php
+                                            $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->sum('voice');
+                                            @endphp
+                                        @endif
+                                        {{-- {{$url_first}} --}}
+                                        <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3>
                                     </div>
                                 </div>
                             </div>
