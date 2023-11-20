@@ -768,8 +768,6 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                     </div>
 
                                     <div class="col-md text-white dpt tugel-content" style="display:none">
-                                        <div class="row">
-                                            <div class="col py-2 judul text-center bg-secondary text-white"
                                             <?php  
                                                     $dpt_l = 0;
                                                     $dpt_p = 0;
@@ -789,15 +787,25 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
 
                                                     }
                                                 ?>
-
-
+                                        <div class="row">
+                                            @if (request()->segment(2) != 'perhitungan_tps')
+                                            <div class="col py-2 judul text-center bg-secondary text-white"
                                                 style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
                                                 <div class="text">Pria : <b>{{ $dpt_l }}</b></div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-danger text-white">
                                                 <div class="text">Wanita : <b>{{ $dpt_p }}</b></div>
                                             </div>
-                                            <div class="col py-2 judul text-center bg-primary text-white">
+                                            @endif
+
+                                            <div class="col py-2 judul text-center bg-primary text-white"
+                                                    {!!
+                                                (request()->segment(2) == 'perhitungan_tps')?
+                                                
+                                                'style=" border-top-left-radius: 25px; border-bottom-left-radius: 25px"'
+                                                :
+                                                ""
+                                                !!}>
                                             <?php  
                                                     $total_dpt = 0;
                                                     if (request()->segment(2) == 'index') {
@@ -812,7 +820,15 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                 ?>
                                                 <div class="text">Total : <b>{{ $total_dpt }}</b></div>
                                             </div>
-                                            <div class="col py-2 judul text-center bg-info text-white">
+                                            <div class="col py-2 judul text-center bg-info text-white"
+                                            {!!
+                                                (request()->segment(2) == 'perhitungan_tps')?
+                                                
+                                                'style="display:none"'
+                                                :
+                                                ""
+                                                !!}
+                                            >
                                                 <div class="text">Total TPS : <b>{{ $total_tps }}</b></div>
                                             </div>
                                             <div class="col py-2 judul text-center bg-warning text-white">
@@ -993,7 +1009,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                 </div>
                                             </div>
 
-                                            <div class="col-md">
+                                            <!-- <div class="col-md">
                                                 <div class="mid">
 
                                                     <label class="switch">
@@ -1008,7 +1024,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                     style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
                                                     Lockdown
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <div class="col-md">
                                                 <div class="mid">

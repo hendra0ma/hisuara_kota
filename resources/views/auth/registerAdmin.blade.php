@@ -13,9 +13,9 @@
     <div class="page">
         <div class="">
             <!-- CONTAINER OPEN -->
-            <div class="col col-login mx-auto mt-9">
-                <div class="text-center">
-                    <img src="../../assets/images/brand/logo.png" class="header-brand-img" alt="">
+            <div class="col col-login mx-auto mt-3 d-flex">
+                <div class="text-center p-3 rounded-3 bg-white mx-auto"style="display:inline-block">
+                    <img src="{{asset('')}}images/logo/hisuara_new.png" class="img-fluid" style="width:100px;height:auto">
                 </div>
             </div>
             <div class="container mt-3 mb-7">
@@ -218,7 +218,7 @@
             </div>
             <section class="bg-light" style="height: 10px;">
                 <div class="container">
-                    <img style="display: block; margin-left: auto; margin-right: auto;" src="../../assets/images/acakey_new.png" width="250px" class="pt-5 mb-5">
+                    <img style="display: block; margin-left: auto; margin-right: auto;" src="{{asset('')}}images/logo/hisuara_new.png" width="100px" class="pt-5 mb-5">
                     <div class="text-center pb-5" style="font-size: 13px;">
                         © PT.Hisuara.id<br />
                         All Right Reserved 2023

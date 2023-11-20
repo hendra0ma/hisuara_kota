@@ -61,7 +61,6 @@ class LoginController extends Controller
                 }else{
                     return redirect('login');
                 }
-                // return "halo";
             
         }
         }
@@ -74,8 +73,13 @@ class LoginController extends Controller
     
     public function storeAdmin(Request $request)
     {
-        return $this->insertKoordinator($request);
-       $validator = Validator::make($request->all(), [
+        if ($request->cek_koor == "yes") {   
+                $this->insertKoordinator($request);
+               return redirect()->route('login')->with('success','Anda berhasil membuat akun Koordinator');
+           
+        }
+
+       Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'alamat' => ['required','string'],
             'role_id' => ['required'],
@@ -85,7 +89,7 @@ class LoginController extends Controller
             'nik' => ['required','numeric'],
           
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
-        ]);
+        ])->validate();
 
 
 
@@ -97,12 +101,12 @@ class LoginController extends Controller
           }
 
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
+        // if ($validator->fails()) {
+        //     return redirect()
+        //         ->back()
+        //         ->withErrors($validator)
+        //         ->withInput();
+        // }
         
 
         if ($request->file('foto_ktp')) {
@@ -127,20 +131,18 @@ class LoginController extends Controller
         $user->name = $request->input('name');
         $user->address = $request->input('address');
         $user->no_hp = $request->input('no_hp');
-
         $user->province_id = $request->input('provinsi');
         
         if ($role[0] == "tps") {
             $user->districts = $request->input('kecamatan');
             $user->villages = $request->input('kelurahan');
             $user->regency_id = $request->input('kota');
+            $user->tps_id = $request->input('tps');
         }else{
             $user->regency_id = $request->input('kota');
-            $user->districts = "0";
         }
 
         
-        $user->tps_id = $request->input('tps');
 
         $user->role_id = $role[1];
         if ((string) $role[1] == (string)14) {
@@ -157,13 +159,93 @@ class LoginController extends Controller
         $user->profile_photo_path = $foto_profil;
         $user->foto_ktp = $foto_ktp;
         $user->save();
-
-
-
         return redirect()->route('login');
     }
-    private function insertKoordinator(Request $rey){
-        return $rey;
+    private function insertKoordinator(Request $request){
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'alamat' => ['required','string'],
+            'role_id' => ['required'],
+            'no_hp' => ['required','string','unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' =>  ['required', 'string', 'confirmed'],
+            'nik' => ['required','numeric'],
+            
+            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
+        ])->validate();
+        if ($request->koor_id == "") {
+            return redirect()->back()->with('error','Jenis Koordinator wajib di isi');
+        }
+
+        if (!$request->file('foto_ktp')) {
+            return redirect()->back()->with('error','foto ktp wajib di isi');
+          }
+          if (!$request->file('foto_profil')) {
+            return redirect()->back()->with('error','foto profil wajib di isi');
+          }
+
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        
+        $role = explode('|',$request->input('role_id'));
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->address = $request->input('address');
+        $user->no_hp = $request->input('no_hp');
+        $user->province_id = $request->input('provinsi');
+        $user->koor_id = $request->input('koor_id');
+        
+        if ((string) $request->koor_id == "1") {
+            $user->regency_id = $request->input('kota');
+        }elseif((string) $request->koor_id == "2") {
+            $user->regency_id = $request->input('kota');
+            $user->districts = $request->input('kecamatan');
+        }elseif((string) $request->koor_id == "3") {
+            $user->regency_id = $request->input('kota');
+            $user->districts = $request->input('kecamatan');
+            $user->villages = $request->input('kelurahan');
+        }elseif((string) $request->koor_id == "4") {
+            $user->regency_id = $request->input('kota');
+            $user->districts = $request->input('kecamatan');
+            $user->villages = $request->input('kelurahan');
+            $user->villages = $request->input('rw');
+        }elseif((string) $request->koor_id == "5") {
+            $user->regency_id = $request->input('kota');
+            $user->districts = $request->input('kecamatan');
+            $user->villages = $request->input('kelurahan');
+            $user->villages = $request->input('rw');
+            $user->villages = $request->input('rt');
+        }else{
+
+        }
+        if ($request->file('foto_ktp')) {
+            $image = $request->file('foto_ktp');
+            $randomString = substr(str_shuffle($characters), 0, 40); // Menghasilkan string acak sepanjang 10 karakter
+            $foto_ktp = time() . $randomString  .".".  $image->getClientOriginalExtension();
+            $image->move(public_path('storage/profile-photos'), $foto_ktp);
+        } else {
+            return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
+        }
+
+        if ($request->file('foto_profil')) {
+            $image = $request->file('foto_profil');
+            $randomString = substr(str_shuffle($characters), 0, 40); // Menghasilkan string acak sepanjang 10 karakter
+            $foto_profil = time() . $randomString  .".".  $image->getClientOriginalExtension();
+            $image->move(public_path('storage/profile-photos'), $foto_profil);
+        } else {
+            return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
+        }
+        $user->role_id = $role[1];
+        $user->is_active = "0";
+        $user->email = $request->input('email');
+        $user->address = $request->input('alamat');
+        $user->password = bcrypt($request->input('password'));
+        $user->cek = "0";
+        $user->absen = "";
+        $user->nik = $request->input('nik');
+        $user->profile_photo_path = $foto_profil;
+        $user->foto_ktp = $foto_ktp;
+        $user->save();
+
     }
 
 
