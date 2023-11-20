@@ -1,6 +1,7 @@
 const keywordRedirect = 'buka';
 const keywordClickBagian = 'buka bagian';
 const keywordClickTab = 'buka tab';
+const keywordClickButtonVerifikasi = 'buka verifikasi';
 
 $(document).ready(function () {
   var recognition = new webkitSpeechRecognition() || new SpeechRecognition();
@@ -43,7 +44,7 @@ $(document).ready(function () {
           var commandTargetMenuName = selectedElement.getAttribute('data-command-target-menu');
           var commandTargetMenuElement = document.querySelector('[data-command-target="' + commandTargetMenuName + '"]')
           console.log(selectedElement);
-          commandTargetMenuElement.click()
+          if (commandTargetMenuElement) commandTargetMenuElement.click()
           return selectedElement.click()
         }
 
