@@ -6,6 +6,7 @@ use App\Models\District;
 use App\Models\RegenciesDomain;
 use App\Models\Regency;
 use App\Models\SaksiData;
+use App\Models\QuickSaksiData;
 use App\Models\Tps;
 use App\Models\Village;
 use App\Models\User;
@@ -77,15 +78,27 @@ $tps = Tps::count();
                             <div class="col text-center">
                                 <h6 class="mt-4">{{$pas->candidate}} </h6>
                                 <h6 class="">{{$pas->deputy_candidate}} </h6>
-                                <?php
-                                                        $voice = 0;
-                                                        ?>
-                                @foreach ($pas->quicksaksidata as $dataTps)
-                                <?php
-                                                        $voice += $dataTps->voice;
-                                                        ?>
-                                @endforeach
-                                <h3 class="mb-2 number-font">{{ $voice }} <br>suara</h3>
+                                @if (isset($url_first[3]))
+                                    @php
+                                    $data['url_id'] = Crypt::decrypt($url_first[3]);
+                                    $id = $data['url_id'];
+                                    @endphp
+                                @endif
+                                
+                                @if (isset($url_first[3]) && $url_first[2] == "perhitungan_kecamatan") {{-- Perhitungan Kecamatan --}}
+                                    @php
+                                    $total_saksi = QuickSaksiData::join('quick_saksi', 'quick_saksi.id', '=', 'quick_saksi_data.saksi_id')->where('paslon_id', $pas->id)->where('quick_saksi_data.district_id', $id)->where('quick_saksi.verification', 1)->sum('voice');
+                                    @endphp
+                                @elseif (isset($url_first[3]) && $url_first[2] == "perhitungan_kelurahan") {{-- Perhitungan Kelurahan --}}
+                                @php
+                                    $total_saksi = QuickSaksiData::join('quick_saksi', 'quick_saksi.id', '=', 'quick_saksi_data.saksi_id')->where('paslon_id', $pas->id)->where('quick_saksi_data.village_id', $id)->where('quick_saksi.verification', 1)->sum('voice');
+                                    @endphp
+                                @else {{--  Perhitungan Kota --}}
+                                    @php
+                                    $total_saksi = QuickSaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->sum('voice');
+                                    @endphp
+                                @endif
+                                <h3 class="mb-2 number-font">{{ $total_saksi }} <br>suara</h3>
                             </div>
                         </div>
                     </div>

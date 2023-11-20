@@ -304,7 +304,7 @@ foreach ($kotas as $kota) {
                 Route::post('commander-settings', [CommanderController::class, 'settings']);
                 Route::get('notif-delete', [CommanderController::class, 'notifDel']);
                 Route::get('commander-defaults', [CommanderController::class, 'defaults']);
-               
+
                 Route::controller(AdminController::class)->group(function () {
                     //Administratorw
                     Route::get('get-data-c1-crowd', 'CrowdC1Id');
