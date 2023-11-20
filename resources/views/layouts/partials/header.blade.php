@@ -1416,7 +1416,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
 
                     const completeHostname = protocol + '//' + hostname;
                     $.ajax({
-                        url: `"${completeHostname}/api/findUrlByVoiceText"`,
+                        url: `${completeHostname}/api/findUrlByVoiceText`,
                         type: "get",
                         data: {
                             text: finalTranscript.toLowerCase()
