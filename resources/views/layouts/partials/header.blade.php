@@ -1424,7 +1424,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                         success: function(res) {
                             console.log(res);
                             const {
-                                action,
+                                type,
                                 target,
                                 hint
                             } = res
