@@ -1428,6 +1428,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                                 target,
                                 hint
                             } = res
+                            console.log('speech', finalTranscript.toLowerCase())
                             if (type == 'redirect') {
                                 window.location = `${completeHostname}/${target}`;
                             }
@@ -1469,6 +1470,8 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
         };
     });
 </script>
+@if($config->quick_count == "yes")
+@endif
 @endif
 
 <!--app-content open-->
