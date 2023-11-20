@@ -1429,7 +1429,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                                 hint
                             } = res
                             if (type == 'redirect') {
-                                window.location = `${completeHostname}/target`;
+                                window.location = `${completeHostname}/${target}`;
                             }
                             if (type == 'action') {
                                 // alert('klik target')
