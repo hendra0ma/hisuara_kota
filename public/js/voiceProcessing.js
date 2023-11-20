@@ -38,7 +38,7 @@ $(document).ready(function () {
         if (isCommandHasKeywordRedirect) {
           const dataTargetValue = getTextAfterSpecificWord(keywordRedirect, finalTranscript).trim()
           alert(dataTargetValue)
-          var selectedElement = $('[data-target="' + dataTargetValue + '"]');
+          var selectedElement = document.querySelector('[data-target="' + dataTargetValue + '"]')
           console.log(selectedElement);
           return selectedElement.click()
         }
