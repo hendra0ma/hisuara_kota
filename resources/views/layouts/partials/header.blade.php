@@ -1411,8 +1411,12 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                 if (event.results[i].isFinal) {
                     var finalTranscript = event.results[i][0].transcript;
                     speechOutput.text('Hasil Pengenalan: ' + finalTranscript.trim().toLowerCase());
+                    const protocol = window.location.protocol;
+                    const hostname = window.location.hostname;
+
+                    const completeHostname = protocol + '//' + hostname;
                     $.ajax({
-                        url: "http://hisuara.id:8000/api/findUrlByVoiceText",
+                        url: `"${completeHostname}/api/findUrlByVoiceText"`,
                         type: "get",
                         data: {
                             text: finalTranscript.toLowerCase()
