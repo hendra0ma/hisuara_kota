@@ -36,8 +36,8 @@ $(document).ready(function () {
           && isCommandHasKeywordClickTab == false
 
         if (isCommandHasKeywordRedirect) {
-          const idElement = getTextAfterSpecificWord(keywordRedirect, finalTranscript).trim()
-          alert(idElement)
+          const dataTargetValue = getTextAfterSpecificWord(keywordRedirect, finalTranscript).trim()
+          alert(dataTargetValue)
           var selectedElement = $('[data-target="' + dataTargetValue + '"]');
           selectedElement.click()
         }
