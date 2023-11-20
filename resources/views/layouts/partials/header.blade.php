@@ -1451,6 +1451,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
 
                                         const buttonVerifikasi = document.querySelector(`button[data-id="${idSaksi}"]`);
                                         console.log(buttonVerifikasi.textContent);
+                                        buttonVerifikasi.click();
                                         break;
                                     }
                                 }
