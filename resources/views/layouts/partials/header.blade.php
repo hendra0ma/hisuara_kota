@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Models\Config;
 use App\Models\Configs;
 use App\Models\District;
@@ -19,10 +20,10 @@ use App\Models\Province;
 $currentDomain = request()->getHttpHost();
 if (isset(parse_url($currentDomain)['port'])) {
     $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
-}else{
+} else {
     $url = $currentDomain;
 }
-$regency_id = RegenciesDomain::where('domain',"LIKE","%".$url."%")->first();
+$regency_id = RegenciesDomain::where('domain', "LIKE", "%" . $url . "%")->first();
 
 $configs = Config::first();
 $config = new Configs;
@@ -69,7 +70,7 @@ $urutan = $paslon_tertinggi;
 $props = Province::where('id', $kota['province_id'])->first();
 $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 $jumlah_kecamatan = District::where('regency_id', $kota['id'])->count();
-$jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'%')->count();
+$jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id'] . '%')->count();
 
 
 
@@ -152,13 +153,13 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
     /* ::-webkit-scrollbar-track {
         background-color: transparent;
     }
-    
+
     ::-webkit-scrollbar-thumb {
         background-color: #d6dee1;
         border-radius: 20px;
         background-clip: content-box;
     }
-    
+
     ::-webkit-scrollbar-thumb:hover {
         background-color: #a8bbbf;
     }
@@ -194,8 +195,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                             <div class="col-auto col-pilpres">
                                 <div class="row">
                                     <div class="col-md-auto pe-0 my-auto">
-                                        <img src="{{asset('')}}storage/{{$config->regencies_logo}}" style="width: 50px"
-                                            alt="">
+                                        <img src="{{asset('')}}storage/{{$config->regencies_logo}}" style="width: 50px" alt="">
                                     </div>
                                     <div class="col-lg-auto ps-3 mb-0">
                                         <h3 class="text-white mb-0">PILPRES 2024
@@ -218,176 +218,159 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                 <div class="row">
                                     <div class="col-md-auto pe-0 my-auto">
                                         <img src="{{asset('')}}images/logo/Hisuara_new_white.png" class="img-fluid"style="height:50px;width:auto">
-                                    </div>
-                                </div>
-                            </div> --}}
+                        </div>
+                    </div>
+                </div> --}}
 
 
-                            <script>   
-                                let pilpresAnimate = function(){
-                                    setTimeout(()=>{
-                                        $('.col-hisuara').hide()
-                                        $($(".headerPojokan").find('span')).remove();
-                                        $('.col-pilpres').show()
+                <script>
+                    let pilpresAnimate = function() {
+                        setTimeout(() => {
+                            $('.col-hisuara').hide()
+                            $($(".headerPojokan").find('span')).remove();
+                            $('.col-pilpres').show()
 
-                                        // setTimeout(()=>{
-                                        //     $('.col-hisuara').show()
-                                        //     animateHeaderPojokan()
-                                        //  $('.col-pilpres').hide()
-                                        //  pilpresAnimate();
-                                        // },5000)
+                            // setTimeout(()=>{
+                            //     $('.col-hisuara').show()
+                            //     animateHeaderPojokan()
+                            //  $('.col-pilpres').hide()
+                            //  pilpresAnimate();
+                            // },5000)
 
-                                    },3000)
-                                }
+                        }, 3000)
+                    }
 
 
-                                $(function () {
-                                
-                                    setTimeout(()=>{
-                                    animateHeaderPojokan()
-                                    $('.col-hisuara').show()
-                                        $('.col-pilpres').hide()
-                                        pilpresAnimate();
-                                    },3000)
+                    $(function() {
+
+                        setTimeout(() => {
+                            animateHeaderPojokan()
+                            $('.col-hisuara').show()
+                            $('.col-pilpres').hide()
+                            pilpresAnimate();
+                        }, 3000)
+                    })
+
+                    function animateHeaderPojokan() {
+                        $container = $(".headerPojokan");
+                        const text = "HISUARA"
+                        const $elements = text.split("").map((s) => $(
+                            `<span style="margin-left:5px;">${s}</span>`
+                        ));
+
+                        $container.html($elements);
+                        $container.show();
+                        // $("#gantiBackground").css({
+                        //     "background-color": "#007bff"
+                        // }, 1000);
+                        $elements.forEach(function($el, i) {
+                            $el
+                                .css({
+                                    top: -60,
+                                    opacity: 0
                                 })
+                                .delay(100 * i)
+                                .animate({
+                                    top: 0,
+                                    opacity: 1
+                                }, 200);
+                        });
 
-                                function animateHeaderPojokan() {
-                                    $container = $(".headerPojokan");
-                                    const text = "HISUARA"
-                                    const $elements = text.split("").map((s) => $(
-                                        `<span style="margin-left:5px;">${s}</span>`
-                                    ));
-
-                                    $container.html($elements);
-                                    $container.show();
-                                    // $("#gantiBackground").css({
-                                    //     "background-color": "#007bff"
-                                    // }, 1000);
-                                    $elements.forEach(function($el, i) {
-                                        $el
-                                            .css({
-                                                top: -60,
-                                                opacity: 0
-                                            })
-                                            .delay(100 * i)
-                                            .animate({
-                                                top: 0,
-                                                opacity: 1
-                                            }, 200);
-                                    });
-                                    
-                                        // animateHeaderPojokanText1()
-                                    
-
-                                }
-
-                                // function animateHeaderPojokanText1() {
-                                //     $container = $(".headerPojokanText1");
-
-                                //     const text = "Vox Populi, Vox Dei"
-                                //     const $elements = text.split("").map((s) => $(
-                                //         `<span style="margin-left:4px;">${s}</span>`
-                                //     ));
-
-                                //     $container.html($elements);
-                                //     $container.show();
-                                //     // $("#gantiBackground").css({
-                                //     //     "background-color": "#007bff"
-                                //     // }, 1000);
-                                //     $elements.forEach(function($el, i) {
-                                //         $el
-                                //             .css({
-                                //                 top: -60,
-                                //                 opacity: 0
-                                //             })
-                                //             .delay(100 * i)
-                                //             .animate({
-                                //                 top: 0,
-                                //                 opacity: 1
-                                //             }, 200);
-                                //     });
-                                //     setTimeout(() => {
-                                //         $($(".headerPojokanText1").find('span')).remove();
-                                //         $('.col-hisuara').hide()
-                                //         $('.col-pilpres').show()
-                                //         setTimeout(() => {
-                                //             $('.col-hisuara').css('display') = 'flex'
-                                //             $('.col-pilpres').hide()
-
-                                //             animateHeaderPojokan()
-                                //         }, 1000 * 60);
-                                //     }, 4000);
-                                // }
-
-                            
-                            
-                            </script>
+                        // animateHeaderPojokanText1()
 
 
-                            <div class="col-md-auto my-auto">
-                                <div class="row h-100 justify-content-end" style="gap: 10px;">
-                                    <div class="col-md-auto px-0">
-                                        <a class="w-100 mx-auto btn text-white d-flex"
-                                            style="background-color: #528bff; width: 40px; height: 36px;"
-                                            href="{{url('')}}/administrator/index">
-                                            <span class="dark-layout my-auto" data-bs-placement="bottom"
-                                                data-bs-toggle="tooltip" title="Dashboard">
-                                                <i class="fa-solid fa-gauge-high"></i>
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
-                                            style="background-color: #656064; width: 40px; height: 36px;" data-target="perhitungan">
-                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Perhitungan">
-                                                <i class="fa-solid fa-chart-simple"></i>
-                                            </span>
-                                        </button>
-                                    </div>
+                    }
 
-                                    <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
-                                            style="background-color: #656064; width: 40px; height: 36px;"
-                                            data-target="petugas">
-                                            <span class="dark-layout" data-bs-placement="bottom"
-                                                data-bs-toggle="tooltip" title="Petugas">
-                                                <i class="fa-solid fa-user-tie"></i>
-                                            </span>
-                                        </button>
-                                    </div>
+                    // function animateHeaderPojokanText1() {
+                    //     $container = $(".headerPojokanText1");
 
-                                    <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
-                                            style="background-color: #656064; width: 40px; height: 36px;"
-                                            data-target="operator">
-                                            <span class="dark-layout" data-bs-placement="bottom"
-                                                data-bs-toggle="tooltip" title="Operator">
-                                                <i class="fa-solid fa-computer"></i>
-                                            </span>
-                                        </button>
-                                    </div>
+                    //     const text = "Vox Populi, Vox Dei"
+                    //     const $elements = text.split("").map((s) => $(
+                    //         `<span style="margin-left:4px;">${s}</span>`
+                    //     ));
 
-                                    <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
-                                            style="background-color: #656064; width: 40px; height: 36px;" data-target="lacak">
-                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Pelacakan">
-                                                <i class="fa-solid fa-location-dot"></i>
-                                            </span>
-                                        </button>
-                                    </div>
-                                    
-                                    <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
-                                            style="background-color: #656064; width: 40px; height: 36px;"
-                                            data-target="dokumentasi">
-                                            <span class="dark-layout" data-bs-placement="bottom"
-                                                data-bs-toggle="tooltip" title="Dokumentasi">
-                                                <i class="fa-solid fa-book"></i>
-                                            </span>
-                                        </button>
-                                    </div>
+                    //     $container.html($elements);
+                    //     $container.show();
+                    //     // $("#gantiBackground").css({
+                    //     //     "background-color": "#007bff"
+                    //     // }, 1000);
+                    //     $elements.forEach(function($el, i) {
+                    //         $el
+                    //             .css({
+                    //                 top: -60,
+                    //                 opacity: 0
+                    //             })
+                    //             .delay(100 * i)
+                    //             .animate({
+                    //                 top: 0,
+                    //                 opacity: 1
+                    //             }, 200);
+                    //     });
+                    //     setTimeout(() => {
+                    //         $($(".headerPojokanText1").find('span')).remove();
+                    //         $('.col-hisuara').hide()
+                    //         $('.col-pilpres').show()
+                    //         setTimeout(() => {
+                    //             $('.col-hisuara').css('display') = 'flex'
+                    //             $('.col-pilpres').hide()
 
-                                    <!-- <div class="col-md-auto px-0">
+                    //             animateHeaderPojokan()
+                    //         }, 1000 * 60);
+                    //     }, 4000);
+                    // }
+                </script>
+
+
+                <div class="col-md-auto my-auto">
+                    <div class="row h-100 justify-content-end" style="gap: 10px;">
+                        <div class="col-md-auto px-0">
+                            <a class="w-100 mx-auto btn text-white d-flex" style="background-color: #528bff; width: 40px; height: 36px;" href="{{url('')}}/administrator/index">
+                                <span class="dark-layout my-auto" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Dashboard">
+                                    <i class="fa-solid fa-gauge-high"></i>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="col-md-auto px-0">
+                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="perhitungan">
+                                <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Perhitungan">
+                                    <i class="fa-solid fa-chart-simple"></i>
+                                </span>
+                            </button>
+                        </div>
+
+                        <div class="col-md-auto px-0">
+                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="petugas">
+                                <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Petugas">
+                                    <i class="fa-solid fa-user-tie"></i>
+                                </span>
+                            </button>
+                        </div>
+
+                        <div class="col-md-auto px-0">
+                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="operator">
+                                <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Operator">
+                                    <i class="fa-solid fa-computer"></i>
+                                </span>
+                            </button>
+                        </div>
+
+                        <div class="col-md-auto px-0">
+                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="lacak">
+                                <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Pelacakan">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </span>
+                            </button>
+                        </div>
+
+                        <div class="col-md-auto px-0">
+                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="dokumentasi">
+                                <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Dokumentasi">
+                                    <i class="fa-solid fa-book"></i>
+                                </span>
+                            </button>
+                        </div>
+
+                        <!-- <div class="col-md-auto px-0">
                                         <button class="w-100 mx-auto btn tugel-kolaps text-white kecurangan"
                                             style="background-color: #656064; width: 40px; height: 36px;"
                                             data-target="kecurangan">
@@ -416,266 +399,212 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                         </button>
                                     </div> -->
 
-                                    <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white sirantap"
-                                            style="background-color: #656064; width: 40px; height: 36px;"
-                                            data-target="sirantap">
-                                            <span class="dark-layout" data-bs-placement="bottom"
-                                                data-bs-toggle="tooltip" title="Sistem Laporan Data Pemilu">
-                                                <i class="fa-solid fa-s"></i>
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-md-auto px-0">
+                            <button class="w-100 mx-auto btn tugel-kolaps text-white sirantap" style="background-color: #656064; width: 40px; height: 36px;" data-target="sirantap">
+                                <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Sistem Laporan Data Pemilu">
+                                    <i class="fa-solid fa-s"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-                            <div class="col-md my-auto">
-                                <div class="row">
+                <div class="col-md my-auto">
+                    <div class="row">
 
-                                    <div class="col-md-auto my-auto">
-                                        <h4 class="mb-0 fw-bold dashboard tugel-content"
-                                            style="color: #e1af0a; font-size: 16px; display: none;">
-                                            Dashboard
-                                        </h4>
-                                        <h4 class="mb-0 fw-bold petugas tugel-content"
-                                            style="color: #e1af0a; font-size: 16px; display: none;">
-                                            Petugas
-                                        </h4>
-                                        <h4 class="mb-0 fw-bold operator tugel-content"
-                                            style="color: #e1af0a; font-size: 16px; display: none;">
-                                            Operator
-                                        </h4>
-                                        <h4 class="mb-0 fw-bold perhitungan tugel-content"
-                                            style="color: #e1af0a; font-size: 16px; display: none;">
-                                            Perhitungan
-                                        </h4>
-                                        <h4 class="mb-0 fw-bold rekapitulasi tugel-content"
-                                            style="color: #e1af0a; font-size: 16px; display: none;">
-                                            Rekapitulasi
-                                        </h4>
-                                        <h4 class="mb-0 fw-bold dokumentasi tugel-content"
-                                            style="color: #e1af0a; font-size: 16px; display: none;">
-                                            Dokumentasi
-                                        </h4>
-                                        <h4 class="mb-0 fw-bold kecurangan tugel-content"
-                                            style="color: #f82649; font-size: 16px; display: none;">
-                                            Kecurangan
-                                        </h4>
-                                        <h4 class="mb-0 fw-bold suara tugel-content"
-                                            style="color: #e1af0a; font-size: 16px; display: none;">
-                                            Suara Terbanyak
-                                        </h4>
-                                        <h4 class="mb-0 fw-bold dpt tugel-content"
-                                            style="color: #e1af0a; font-size: 16px; display: none;">
-                                            DPT
-                                        </h4>
-                                        <!-- <h4 class="mb-0 fw-bold  tugel-content" style="color: #e1af0a; font-size: 16px">
+                        <div class="col-md-auto my-auto">
+                            <h4 class="mb-0 fw-bold dashboard tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                Dashboard
+                            </h4>
+                            <h4 class="mb-0 fw-bold petugas tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                Petugas
+                            </h4>
+                            <h4 class="mb-0 fw-bold operator tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                Operator
+                            </h4>
+                            <h4 class="mb-0 fw-bold perhitungan tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                Perhitungan
+                            </h4>
+                            <h4 class="mb-0 fw-bold rekapitulasi tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                Rekapitulasi
+                            </h4>
+                            <h4 class="mb-0 fw-bold dokumentasi tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                Dokumentasi
+                            </h4>
+                            <h4 class="mb-0 fw-bold kecurangan tugel-content" style="color: #f82649; font-size: 16px; display: none;">
+                                Kecurangan
+                            </h4>
+                            <h4 class="mb-0 fw-bold suara tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                Suara Terbanyak
+                            </h4>
+                            <h4 class="mb-0 fw-bold dpt tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                DPT
+                            </h4>
+                            <!-- <h4 class="mb-0 fw-bold  tugel-content" style="color: #e1af0a; font-size: 16px">
                                          Hisuara
                                         </h4> -->
-                                        <h4 class="mb-0 fw-bold kota tugel-content"
-                                            style="color: #e1af0a; font-size: 16px; display: none;">
-                                            Kota
-                                        </h4>
-                                        <h4 class="mb-0 fw-bold support tugel-content"
-                                            style="color: #e1af0a; font-size: 16px; display: none;">
-                                            Support
-                                        </h4>
-                                        <h4 class="mb-0 fw-bold featured tugel-content"
-                                            style="color: #e1af0a; font-size: 16px; display: none;">
-                                            Featured
-                                        </h4>
-                                        <h4 class="mb-0 fw-bold lacak tugel-content"
-                                            style="color: #e1af0a; font-size: 16px; display: none;">
-                                            Pelacakan
-                                        </h4>
-                                        <h4 class="mb-0 fw-bold sirantap tugel-content"
-                                            style="color: #f82649; font-size: 16px; display: none;">
-                                            Sirantap
-                                        </h4>
-                                    </div>
+                            <h4 class="mb-0 fw-bold kota tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                Kota
+                            </h4>
+                            <h4 class="mb-0 fw-bold support tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                Support
+                            </h4>
+                            <h4 class="mb-0 fw-bold featured tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                Featured
+                            </h4>
+                            <h4 class="mb-0 fw-bold lacak tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                Pelacakan
+                            </h4>
+                            <h4 class="mb-0 fw-bold sirantap tugel-content" style="color: #f82649; font-size: 16px; display: none;">
+                                Sirantap
+                            </h4>
+                        </div>
 
-                                    <div class="col-md petugas tugel-content" style="display: none">
-                                        <div class="row">
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/verifikasi_saksi"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
-                                                    Saksi
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/koordinator_saksi"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0px;">
-                                                    Kordinator Saksi
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/relawan"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0;">
-                                                    Relawan
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/enumerator"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0;">
-                                                    Enumerator
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/verifikasi_crowd_c1"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0px;">
-                                                    Crowd C1
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/verifikasi_akun" class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
-                                                    Admin
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="col-md petugas tugel-content" style="display: none">
+                            <div class="row">
+                                <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                    <a href="{{url('')}}/administrator/verifikasi_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                        Saksi
+                                    </a>
+                                </div>
+                                <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                    <a href="{{url('')}}/administrator/koordinator_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                                        Kordinator Saksi
+                                    </a>
+                                </div>
+                                <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                    <a href="{{url('')}}/administrator/relawan" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
+                                        Relawan
+                                    </a>
+                                </div>
+                                <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                    <a href="{{url('')}}/administrator/enumerator" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
+                                        Enumerator
+                                    </a>
+                                </div>
+                                <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                    <a href="{{url('')}}/administrator/verifikasi_crowd_c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                                        Crowd C1
+                                    </a>
+                                </div>
+                                <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                    <a href="{{url('')}}/administrator/verifikasi_akun" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                        Admin
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
 
-                                    <div class="col-md operator tugel-content" style="display: none">
-                                        <div class="row">
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/verifikator/verifikasi-c1"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
-                                                    Verifikasi C1
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/auditor/audit-c1"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0px;">
-                                                    Audit C1
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/crowd-c1-kpu" class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
-                                                    Crowd C1 KPU
-                                                </a>
-                                            </div>
-                                            {{-- <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                        <div class="col-md operator tugel-content" style="display: none">
+                            <div class="row">
+                                <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                    <a href="{{url('')}}/verifikator/verifikasi-c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                        Verifikasi C1
+                                    </a>
+                                </div>
+                                <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                    <a href="{{url('')}}/auditor/audit-c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                                        Audit C1
+                                    </a>
+                                </div>
+                                <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                    <a href="{{url('')}}/administrator/crowd-c1-kpu" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                        Crowd C1 KPU
+                                    </a>
+                                </div>
+                                {{-- <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/administrator/verifikasi_koreksi"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
-                                                    Koreksi C1
-                                                </a>
-                                            </div> --}}
-                                        </div>
-                                    </div>
+                                class="py-1 btn fs-6 w-100 text-white glowy-menu"
+                                style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                Koreksi C1
+                                </a>
+                            </div> --}}
+                        </div>
+                    </div>
 
-                                    <div class="col-md perhitungan tugel-content" style="display: none">
-                                        <div class="row">
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/real_count2"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
-                                                    Real Count
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/quick_count2"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0px">
-                                                    Quick Count
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/terverifikasi"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0px;">
-                                                    Terverifikasi
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/rekapitulasi"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0px;">
-                                                    Rekapitulasi
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/hitung_kpu"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
-                                                    Hitung Ulang KPU
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <div class="col-md perhitungan tugel-content" style="display: none">
+                        <div class="row">
+                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                <a href="{{url('')}}/administrator/real_count2" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                    Real Count
+                                </a>
+                            </div>
+                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                <a href="{{url('')}}/administrator/quick_count2" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px">
+                                    Quick Count
+                                </a>
+                            </div>
+                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                <a href="{{url('')}}/administrator/terverifikasi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                                    Terverifikasi
+                                </a>
+                            </div>
+                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                <a href="{{url('')}}/administrator/rekapitulasi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                                    Rekapitulasi
+                                </a>
+                            </div>
+                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                <a href="{{url('')}}/administrator/hitung_kpu" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                    Hitung Ulang KPU
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
-                                    <div class="col-md rekapitulasi tugel-content" style="display: none">
-                                        <div class="row">
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/rekapitulasi_kelurahan"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
-                                                    Rekapitulasi Kelurahan
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/rekapitulasi_kecamatan"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
-                                                    Rekapitulasi Kecamatan
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <div class="col-md rekapitulasi tugel-content" style="display: none">
+                        <div class="row">
+                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                <a href="{{url('')}}/administrator/rekapitulasi_kelurahan" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                    Rekapitulasi Kelurahan
+                                </a>
+                            </div>
+                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                <a href="{{url('')}}/administrator/rekapitulasi_kecamatan" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                    Rekapitulasi Kecamatan
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
-                                    <div class="col-md dokumentasi tugel-content" style="display: none">
-                                        <div class="row">
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/data-c1"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
-                                                    Data C1 Saksi
-                                                </a>
-                                            </div>
-                                            <!-- <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                    <div class="col-md dokumentasi tugel-content" style="display: none">
+                        <div class="row">
+                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                <a href="{{url('')}}/administrator/data-c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                    Data C1 Saksi
+                                </a>
+                            </div>
+                            <!-- <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="#" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
                                                     Data C6
                                                 </a>
                                             </div> -->
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/dokumen_lain" class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0;">
-                                                    {{-- C7 & Surat Suara --}}
-                                                    Dokumen Lain
-                                                </a>
-                                            </div>
-                                            {{-- <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                                <a href="{{url('')}}/administrator/dokumen_lain" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
+                                    {{-- C7 & Surat Suara --}}
+                                    Dokumen Lain
+                                </a>
+                            </div>
+                            {{-- <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{route('superadmin.analisa_dpt_kpu')}}" class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0;">
-                                                    Realisasi DPT
-                                                </a>
-                                            </div> --}}
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/data-crowd-c1-kpu"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0px;">
-                                                    Data Crowd C1 KPU
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{route('superadmin.rdata')}}"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
-                                                    Riwayat
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
+                            style="background-color: #528bff; border-radius: 0;">
+                            Realisasi DPT
+                            </a>
+                        </div> --}}
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a href="{{url('')}}/administrator/data-crowd-c1-kpu" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                                Data Crowd C1 KPU
+                            </a>
+                        </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a href="{{route('superadmin.rdata')}}" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                Riwayat
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-                                    <!-- <div class="col-md kecurangan tugel-content" style="display: none">
+                <!-- <div class="col-md kecurangan tugel-content" style="display: none">
                                         <div class="row">
                                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a href="{{url('')}}/verifikator/verifikator_kecurangan"
@@ -694,81 +623,62 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                         </div>
                                     </div> -->
 
-                                    <div class="col-md sirantap tugel-content" style="display: none;">
-                                        <div class="row">
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/verifikator/verifikator_kecurangan"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan"
-                                                    style="background-color: #f82649; border-radius: 25px 0px 0px 25px;;">
-                                                    Verifikasi Kecurangan
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/fraud-data-print"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan"
-                                                    style="background-color: #f82649; border-radius: 0px;">
-                                                    Bukti Kecurangan
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/fraud-data-report"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan"
-                                                    style="background-color: #f82649; border-radius: 0px;">
-                                                    Barkode Kecurangan
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/index-tsm"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan"
-                                                    style="background-color: #f82649; border-radius: 0px 25px 25px 0px;">
-                                                    Jenis Kecurangan
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
+                <div class="col-md sirantap tugel-content" style="display: none;">
+                    <div class="row">
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a href="{{url('')}}/verifikator/verifikator_kecurangan" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 25px 0px 0px 25px;;">
+                                Verifikasi Kecurangan
+                            </a>
+                        </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a href="{{url('')}}/administrator/fraud-data-print" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 0px;">
+                                Bukti Kecurangan
+                            </a>
+                        </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a href="{{url('')}}/administrator/fraud-data-report" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 0px;">
+                                Barkode Kecurangan
+                            </a>
+                        </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a href="{{url('')}}/administrator/index-tsm" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 0px 25px 25px 0px;">
+                                Jenis Kecurangan
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-                                    <div class="col-md lacak tugel-content" style="display: none">
-                                        <div class="row">
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/lacak_saksi"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
-                                                    Lacak Saksi
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/lacak_relawan"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0;">
-                                                    Lacak Relawan
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/lacak_enumerator"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0;">
-                                                    Lacak Enumerator
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/lacak_admin"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0px;">
-                                                    Lacak Admin
-                                                </a>
-                                            </div>
-                                            <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="{{url('')}}/administrator/lacak_crowd_c1"
-                                                    class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                                    style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
-                                                    Lacak Crowd C1
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
+                <div class="col-md lacak tugel-content" style="display: none">
+                    <div class="row">
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a href="{{url('')}}/administrator/lacak_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                Lacak Saksi
+                            </a>
+                        </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a href="{{url('')}}/administrator/lacak_relawan" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
+                                Lacak Relawan
+                            </a>
+                        </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a href="{{url('')}}/administrator/lacak_enumerator" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
+                                Lacak Enumerator
+                            </a>
+                        </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a href="{{url('')}}/administrator/lacak_admin" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                                Lacak Admin
+                            </a>
+                        </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a href="{{url('')}}/administrator/lacak_crowd_c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                Lacak Crowd C1
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-                                    <div class="col-md text-white dpt tugel-content" style="display:none">
-                                            <?php  
+<?php  
                                                     $dpt_l = 0;
                                                     $dpt_p = 0;
                                                     if (request()->segment(2) == 'index') {
@@ -787,8 +697,10 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
 
                                                     }
                                                 ?>
-                                        <div class="row">
-                                            @if (request()->segment(2) != 'perhitungan_tps')
+                <div class="col-md text-white dpt tugel-content" style="display:none">
+                    <div class="row">
+                        
+  @if (request()->segment(2) != 'perhitungan_tps')
                                             <div class="col py-2 judul text-center bg-secondary text-white"
                                                 style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
                                                 <div class="text">Pria : <b>{{ $dpt_l }}</b></div>
@@ -797,8 +709,19 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                 <div class="text">Wanita : <b>{{ $dpt_p }}</b></div>
                                             </div>
                                             @endif
-
-                                            <div class="col py-2 judul text-center bg-primary text-white"
+                            <?php
+                            $total_dpt = 0;
+                            if (request()->segment(2) == 'index') {
+                                $total_dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
+                            } elseif (request()->segment(2) == 'perhitungan_kecamatan') {
+                                $total_dpt = District::where('regency_id', $config->regencies_id)->where('id', decrypt(request()->segment(3)))->sum('dpt');
+                            } elseif (request()->segment(2) == 'perhitungan_kelurahan') {
+                                $total_dpt = (int) $dpt_l + (int) $dpt_p;
+                            } elseif (request()->segment(2) == 'perhitungan_tps') {
+                                $total_dpt = TPS::where('regency_id', $config->regencies_id)->where('id', decrypt(request()->segment(3)))->sum('dpt');
+                            }
+                            ?>
+                            <div class="col py-2 judul text-center bg-primary text-white"
                                                     {!!
                                                 (request()->segment(2) == 'perhitungan_tps')?
                                                 
@@ -806,662 +729,579 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                                                 :
                                                 ""
                                                 !!}>
-                                            <?php  
-                                                    $total_dpt = 0;
-                                                    if (request()->segment(2) == 'index') {
-                                                        $total_dpt = District::where('regency_id',$config->regencies_id)->sum('dpt');
-                                                    }elseif(request()->segment(2) == 'perhitungan_kecamatan'){
-                                                        $total_dpt = District::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt');
-                                                    }elseif(request()->segment(2) == 'perhitungan_kelurahan'){
-                                                        $total_dpt = (int) $dpt_l + (int) $dpt_p;
-                                                    }elseif(request()->segment(2) == 'perhitungan_tps'){
-                                                        $total_dpt = TPS::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt');
-                                                    }
-                                                ?>
-                                                <div class="text">Total : <b>{{ $total_dpt }}</b></div>
-                                            </div>
-                                            <div class="col py-2 judul text-center bg-info text-white"
-                                            {!!
-                                                (request()->segment(2) == 'perhitungan_tps')?
-                                                
-                                                'style="display:none"'
-                                                :
-                                                ""
-                                                !!}
-                                            >
-                                                <div class="text">Total TPS : <b>{{ $total_tps }}</b></div>
-                                            </div>
-                                            <div class="col py-2 judul text-center bg-warning text-white">
-                                                <div class="text">Total Kec : <b>{{$jumlah_kecamatan}}</b>
-                                                </div>
-                                            </div>
-                                            <div class="col py-2 judul text-center bg-success text-white"
-                                                style="border-top-right-radius: 25px; border-bottom-right-radius: 25px">
-                                                <div class="text">Total Kel : <b>{{$jumlah_kelurahan}}</b>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
-
-                                    <style>
-                                        .items.active {
-                                            cursor: grabbing;
-                                            cursor: -webkit-grabbing;
-                                        }
-                                    </style>
-
-                                    <div class="col-md text-white kota tugel-content" style="display: none">
-                                        <div class="row">
-                                            <div class="col-4 my-auto">
-                                                <input type="text" class="w-100 form-control py-0 searchbar"
-                                                    style="border-radius: 25px; height: 30px" name="" id=""
-                                                    placeholder="Cari Kota...">
-                                            </div>
-                                            <div class="col-6">
-                                                <?php $domainKota = RegenciesDomain::join("regencies", 'regency_domains.regency_id', '=', 'regencies.id')->where("regency_domains.province_id", $props->id)->get(); ?>
-                                                <div class="row items"
-                                                    style="width: 515px; overflow: scroll; flex-wrap: nowrap">
-                                                    <div class="col-auto">
-                                                        <a class="text-white btn rounded-0 item bg-danger"
-                                                            href="http://pilpres.banten.hisuara.id/index">DASHBOARD
-                                                            {{$props->name}}</a>
-                                                    </div>
-                                                    @foreach($domainKota as $dokota)
-                                                    <div class="col-auto">
-                                                        <a class="text-white btn rounded-0 item" style="background: #528bff" href="http://{{$dokota->domain}}">{{$dokota->name}}</a>
-                                                    </div>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <script>
-                                        $(document).ready(function() {
-                                            $('.searchbar').on('input', function() {
-                                                const searchText = $(this).val().toLowerCase().trim();
-                                                $('.item').each(function() {
-                                                    const itemText = $(this).text().toLowerCase();
-
-                                                    if (itemText.includes(searchText)) {
-                                                        $(this).parent('.col-auto').show(); // Show the parent column if the item matches the search text
-                                                    } else {
-                                                        $(this).parent('.col-auto').hide(); // Hide the parent column if the item doesn't match
-                                                    }
-                                                });
-                                            });
-                                        });
-
-                                        const slider = document.querySelector('.items');
-                                        let isDown = false;
-                                        let startX;
-                                        let scrollLeft;
-
-                                        slider.addEventListener('mousedown', (e) => {
-                                            isDown = true;
-                                            slider.classList.add('active');
-                                            startX = e.pageX - slider.offsetLeft;
-                                            scrollLeft = slider.scrollLeft;
-                                        });
-                                        slider.addEventListener('mouseleave', () => {
-                                            isDown = false;
-                                            slider.classList.remove('active');
-                                        });
-                                        slider.addEventListener('mouseup', () => {
-                                            isDown = false;
-                                            slider.classList.remove('active');
-                                        });
-                                        slider.addEventListener('mousemove', (e) => {
-                                            if (!isDown) return;
-                                            e.preventDefault();
-                                            const x = e.pageX - slider.offsetLeft;
-                                            const walk = (x - startX) * 1; //scroll-fast
-                                            slider.scrollLeft = scrollLeft - walk;
-                                            console.log(walk);
-                                        });
-                                    </script>
-
-                                    <div class="col-md text-white support tugel-content" style="display: none">
-                                        <div class="row">
-                                            <div class="col-md-auto px-1 my-auto">
-                                                <img src="https://plus.unsplash.com/premium_photo-1661510749856-47c47ea10fc7?auto=format&fit=crop&q=80&w=1932&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                                    class="avatar profile-user brround"
-                                                    style="width: 35px; height: 35px; object-fit: cover" alt="">
-                                            </div>
-                                            <div class="col-md my-auto">
-                                                <input class="w-100 form-control py-0"
-                                                    style="border-radius: 25px; height: 30px" type="text" name="" id=""
-                                                    placeholder="Kirim pesan ...">
-                                            </div>
-                                            <div class="col-md-auto my-auto p-0">
-                                                <button class="btn text-white my-auto"><i
-                                                        class="fa-solid fa-paper-plane"
-                                                        style="font-size: 16px;"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md featured tugel-content settings"
-                                        style="display: none; top: 0; position: relative;">
-                                        {{-- Settings --}}
-                                        <div class="row px-5 my-auto" style="gap: 25px;">
-                                            <div class="col-md">
-                                                <div class="mid">
-
-                                                    <label class="switch">
-                                                        <input type="checkbox" {{($config->default ==
-                                                        "yes")?'disabled':''}} data-target="mode"
-                                                        onclick="settings('multi_admin',this)" {{($config->multi_admin
-                                                        == "no") ? "":"checked"; }}>
-                                                        <span class="slider round"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="text-center"
-                                                    style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                                    Multi
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md">
-                                                <div class="mid">
-
-                                                    <label class="switch">
-                                                        <input type="checkbox" data-target="mode"
-                                                            onclick="settings('otonom',this)" {{($config->otonom ==
-                                                        "no") ? "":"checked"; }}>
-                                                        <span class="slider round"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="text-center"
-                                                    style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                                    Otonom
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md">
-                                                <div class="mid">
-                                                    <label class="switch">
-                                                        <input type="checkbox" {{($config->default =="yes")?'disabled':''}} data-target="mode" onclick="settings('show_terverifikasi',this)"
-                                                        {{($config->show_terverifikasi == "hide") ? "":"checked"; }}>
-                                                        <span class="slider round"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="text-center"
-                                                    style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                                    Verifikasi
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md">
-                                                <div class="mid">
-                                                    <label class="switch">
-                                                        <input type="checkbox" {{($config->default ==
-                                                        "yes")?'disabled':''}} data-target="mode"
-                                                        onclick="settings('show_public',this)" {{($config->show_public
-                                                        == "hide") ? "":"checked"; }}>
-                                                        <span class="slider round"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="text-center"
-                                                    style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                                    Publish C1
-                                                </div>
-                                            </div>
-
-                                            <!-- <div class="col-md">
-                                                <div class="mid">
-
-                                                    <label class="switch">
-                                                        <input type="checkbox" {{($config->default ==
-                                                        "yes")?'disabled':''}} data-target="mode"
-                                                        onclick="settings('lockdown',this)" {{($config->lockdown ==
-                                                        "no") ? "":"checked"; }}>
-                                                        <span class="slider round"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="text-center"
-                                                    style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                                    Lockdown
-                                                </div>
-                                            </div> -->
-
-                                            <div class="col-md">
-                                                <div class="mid">
-                                                    <label class="switch">
-                                                        <input type="checkbox" {{($config->default ==
-                                                        "yes")?'disabled':''}} data-target="mode"
-                                                        onclick="settings('quick_count',this)" {{($config->quick_count
-                                                        == "no") ? "":"checked"; }}>
-                                                        <span class="slider round"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="text-center"
-                                                    style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                                    QuickCount
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md">
-                                                <div class="mid">
-                                                    <label class="switch">
-                                                        <input type="checkbox" {{($config->default ==
-                                                        "yes")?'disabled':''}} data-target="mode"
-                                                        onclick="settings('quick_count',this)" {{($config->quick_count
-                                                        == "no") ? "":"checked"; }}>
-                                                        <span class="slider round"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="text-center"
-                                                    style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                                    Speech
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md suara tugel-content" style="display: none">
-                                        <div class="row">
-                                            @foreach ($urutan as $urutPaslon)
-                                            <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
-                                            <div class="col py-2 judul text-center text-white"
-                                                style="background: {{ $pasangan->color }}">
-                                                <div class="text">{{ $pasangan->candidate }} ||
-                                                    {{ $pasangan->deputy_candidate }} : {{$urutPaslon->total}}</b>
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 text-white judul-pertama">
-                                        <div class="row">
-
-                                            <div class="col-12 judul text-center text-white" id="gantiBackground"
-                                                style="transition: background 1s; transform: scaleX(1.2);">
-                                                <div class="text">
-                                                <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; color: #fff; "
-                                                        class="display-3" id="text-effect"></h1>
-                                                </div>
-                                                <!-- <img id="img-effect" src="{{asset('')}}images/logo/hisuara_header.png"class="img-fluid" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width:500px;"> -->
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-                                    <script>
-
-                                        
-
-                                        function animate() {
-                                            $('.judul-pertama').css("z-index", "900");
-                                            $container = $("#text-effect");
-                                            $('.tugel-content').hide(500);
-
-                                            const text = "VOX POPULI VOX DEI"
-                                            const $elements = text.split("").map((s) => $(
-                                                `<span style="margin-left:15px" class="my-auto">${s}</span>`));
-
-                                         
-
-                                            $container.html($elements);
-                                            $container.show();
-                                            // $("#gantiBackground").css({
-                                            //     "background-color": "#007bff"
-                                            // }, 1000);
-                                            $elements.forEach(function($el, i) {
-                                                $el
-                                                    .css({
-                                                        top: -60,
-                                                        opacity: 0
-                                                    })
-                                                    .delay(100 * i)
-                                                    .animate({
-                                                        top: 0,
-                                                        opacity: 1
-                                                    }, 200);
-                                            });
-
-                                            setTimeout(() => {
-                                                $("#text-effect").hide();
-                                                $("#text-effect").html("");
-                                                // $('#img-effect').fadeIn(500);
-                                                const dataTarget = getCookie('dataTarget');
-                                                if (dataTarget != "") {
-                                                    $(`[data-target='${dataTarget}']`).click();
-                                                } else {
-                                                    $('.active-button').click()
-                                                }
-
-                                                // setTimeout(() => {
-                                                //     $('#img-effect').fadeOut(200)
-                                                // }, 5000);
-
-                                            }, 3000)
-
-                                        }
-
-                                        // function animate2() {
-
-                                        //     $container = $("#text-effect2");
-                                        //     const text = "VOX POPULI,VOX DEI"
-                                        //     const $elements = text.split("").map((s) => $(
-                                        //         `<span style="margin-left:15px" class="my-auto">${s}</span>`));
-
-                                        //     $container.html($elements);
-                                        //     $container.show();
-                                        //     // $("#gantiBackground").css({
-                                        //     //     "background-color": "#007bff"
-                                        //     // }, 1000);
-                                        //     $elements.forEach(function($el, i) {
-                                        //         $el
-                                        //             .css({
-                                        //                 top: -60,
-                                        //                 opacity: 0
-                                        //             })
-                                        //             .delay(100 * i)
-                                        //             .animate({
-                                        //                 top: 0,
-                                        //                 opacity: 1
-                                        //             }, 200);
-                                        //     });
-                                        //     setTimeout(() => {
-                                        //         $("#text-effect2").html("")
-                                        //         $("#text-effect2").hide()
-                                        //         const dataTarget = getCookie('dataTarget');
-                                        //         if (dataTarget != "") {
-                                        //             $(`[data-target='${dataTarget}']`).click();
-                                        //         } else {
-                                        //             $('.active-button').click()
-                                        //         }
-                                        //         $('.col-hisuara').fadeIn(200)
-                                        //         $('.col-pilpres').fadeOut(200)
-                               
-
-                                        //     }, 5000);
-                                        // }
-
-                                    
-                                        $(function() {
-                                            @if (Request::segment(1) == "administrator" && Request::segment(2) == "index" )
-                                                $('#img-effect').fadeIn()
-                                                $("#text-effect").hide();
-                                                $("#text-effect").html("");
-                                                
-                                             
-                                                    animate();
-                                             
-                                            @else
-                                                $('#img-effect').fadeOut()
-                                                $("#text-effect").hide();
-                                                $("#text-effect").html("");
-                                                const dataTarget = getCookie('dataTarget');
-                                                if (dataTarget != "") {
-                                                    $(`[data-target='${dataTarget}']`).click();
-                                                } else {
-                                                  $('.active-button').click()
-                                                }
-                                            @endif
-                                        });
-
-
-                                    </script>
-
-                                </div>
+                            <div class="text">Total : <b>{{ $total_dpt }}</b></div>
+                        </div>
+                        <div class="col py-2 judul text-center bg-info text-white">
+                            <div class="text">Total TPS : <b>{{ $total_tps }}</b></div>
+                        </div>
+                        <div class="col py-2 judul text-center bg-warning text-white">
+                            <div class="text">Total Kec : <b>{{$jumlah_kecamatan}}</b>
                             </div>
+                        </div>
+                        <div class="col py-2 judul text-center bg-success text-white" style="border-top-right-radius: 25px; border-bottom-right-radius: 25px">
+                            <div class="text">Total Kel : <b>{{$jumlah_kelurahan}}</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                            <div class="col-md-auto my-auto">
-                                <div class="row h-100 justify-content-end" style="gap: 10px;">
-                                    <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white active-button"
-                                            style="background-color: #656064; width: 40px; height: 36px;"
-                                            data-target="dpt">
-                                            <span class="dark-layout" data-bs-placement="bottom"
-                                                data-bs-toggle="tooltip" title="DPT">
-                                                <i class="fa-solid fa-database"></i>
-                                            </span>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
-                                            style="background-color: #656064; width: 40px; height: 36px;"
-                                            data-target="suara">
-                                            <span class="dark-layout" data-bs-placement="bottom"
-                                                data-bs-toggle="tooltip" title="Urutan Suara">
-                                                <i class="fa-solid fa-ranking-star"></i>
-                                            </span>
-                                        </button>
-                                    </div>
 
-                                    <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
-                                            style="background-color: #656064; width: 40px; height: 36px;"
-                                            data-target="kota">
-                                            <span class="dark-layout" data-bs-placement="bottom"
-                                                data-bs-toggle="tooltip" title="Kota">
-                                                <i class="fa-solid fa-city"></i>
-                                            </span>
-                                        </button>
-                                    </div>
-                                    {{-- <div class="dropdown d-none d-md-flex">
+                <style>
+                    .items.active {
+                        cursor: grabbing;
+                        cursor: -webkit-grabbing;
+                    }
+                </style>
+
+                <div class="col-md text-white kota tugel-content" style="display: none">
+                    <div class="row">
+                        <div class="col-4 my-auto">
+                            <input type="text" class="w-100 form-control py-0 searchbar" style="border-radius: 25px; height: 30px" name="" id="" placeholder="Cari Kota...">
+                        </div>
+                        <div class="col-6">
+                            <?php $domainKota = RegenciesDomain::join("regencies", 'regency_domains.regency_id', '=', 'regencies.id')->where("regency_domains.province_id", $props->id)->get(); ?>
+                            <div class="row items" style="width: 515px; overflow: scroll; flex-wrap: nowrap">
+                                <div class="col-auto">
+                                    <a class="text-white btn rounded-0 item bg-danger" href="http://pilpres.banten.hisuara.id/index">DASHBOARD
+                                        {{$props->name}}</a>
+                                </div>
+                                @foreach($domainKota as $dokota)
+                                <div class="col-auto">
+                                    <a class="text-white btn rounded-0 item" style="background: #528bff" href="http://{{$dokota->domain}}">{{$dokota->name}}</a>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    $(document).ready(function() {
+                        $('.searchbar').on('input', function() {
+                            const searchText = $(this).val().toLowerCase().trim();
+                            $('.item').each(function() {
+                                const itemText = $(this).text().toLowerCase();
+
+                                if (itemText.includes(searchText)) {
+                                    $(this).parent('.col-auto').show(); // Show the parent column if the item matches the search text
+                                } else {
+                                    $(this).parent('.col-auto').hide(); // Hide the parent column if the item doesn't match
+                                }
+                            });
+                        });
+                    });
+
+                    const slider = document.querySelector('.items');
+                    let isDown = false;
+                    let startX;
+                    let scrollLeft;
+
+                    slider.addEventListener('mousedown', (e) => {
+                        isDown = true;
+                        slider.classList.add('active');
+                        startX = e.pageX - slider.offsetLeft;
+                        scrollLeft = slider.scrollLeft;
+                    });
+                    slider.addEventListener('mouseleave', () => {
+                        isDown = false;
+                        slider.classList.remove('active');
+                    });
+                    slider.addEventListener('mouseup', () => {
+                        isDown = false;
+                        slider.classList.remove('active');
+                    });
+                    slider.addEventListener('mousemove', (e) => {
+                        if (!isDown) return;
+                        e.preventDefault();
+                        const x = e.pageX - slider.offsetLeft;
+                        const walk = (x - startX) * 1; //scroll-fast
+                        slider.scrollLeft = scrollLeft - walk;
+                        console.log(walk);
+                    });
+                </script>
+
+                <div class="col-md text-white support tugel-content" style="display: none">
+                    <div class="row">
+                        <div class="col-md-auto px-1 my-auto">
+                            <img src="https://plus.unsplash.com/premium_photo-1661510749856-47c47ea10fc7?auto=format&fit=crop&q=80&w=1932&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="avatar profile-user brround" style="width: 35px; height: 35px; object-fit: cover" alt="">
+                        </div>
+                        <div class="col-md my-auto">
+                            <input class="w-100 form-control py-0" style="border-radius: 25px; height: 30px" type="text" name="" id="" placeholder="Kirim pesan ...">
+                        </div>
+                        <div class="col-md-auto my-auto p-0">
+                            <button class="btn text-white my-auto"><i class="fa-solid fa-paper-plane" style="font-size: 16px;"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md featured tugel-content settings" style="display: none; top: 0; position: relative;">
+                    {{-- Settings --}}
+                    <div class="row px-5 my-auto" style="gap: 25px;">
+                        <div class="col-md">
+                            <div class="mid">
+
+                                <label class="switch">
+                                    <input type="checkbox" {{($config->default ==
+                                                        "yes")?'disabled':''}} data-target="mode" onclick="settings('multi_admin',this)" {{($config->multi_admin
+                                                        == "no") ? "":"checked"; }}>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
+                                Multi
+                            </div>
+                        </div>
+
+                        <div class="col-md">
+                            <div class="mid">
+
+                                <label class="switch">
+                                    <input type="checkbox" data-target="mode" onclick="settings('otonom',this)" {{($config->otonom ==
+                                                        "no") ? "":"checked"; }}>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
+                                Otonom
+                            </div>
+                        </div>
+
+                        <div class="col-md">
+                            <div class="mid">
+                                <label class="switch">
+                                    <input type="checkbox" {{($config->default =="yes")?'disabled':''}} data-target="mode" onclick="settings('show_terverifikasi',this)" {{($config->show_terverifikasi == "hide") ? "":"checked"; }}>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
+                                Verifikasi
+                            </div>
+                        </div>
+
+                        <div class="col-md">
+                            <div class="mid">
+                                <label class="switch">
+                                    <input type="checkbox" {{($config->default ==
+                                                        "yes")?'disabled':''}} data-target="mode" onclick="settings('show_public',this)" {{($config->show_public
+                                                        == "hide") ? "":"checked"; }}>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
+                                Publish C1
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-md">
+                            <div class="mid">
+
+                                <label class="switch">
+                                    <input type="checkbox" {{($config->default ==
+                                                        "yes")?'disabled':''}} data-target="mode" onclick="settings('lockdown',this)" {{($config->lockdown ==
+                                                        "no") ? "":"checked"; }}>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
+                                Lockdown
+                            </div>
+                        </div> -->
+
+                        <div class="col-md">
+                            <div class="mid">
+                                <label class="switch">
+                                    <input type="checkbox" {{($config->default ==
+                                                        "yes")?'disabled':''}} data-target="mode" onclick="settings('quick_count',this)" {{($config->quick_count
+                                                        == "no") ? "":"checked"; }}>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
+                                QuickCount
+                            </div>
+                        </div>
+
+                        <div class="col-md">
+                            <div class="mid">
+                                <label class="switch">
+                                    <input type="checkbox" {{($config->default ==
+                                                        "yes")?'disabled':''}} data-target="mode" onclick="settings('quick_count',this)" {{($config->quick_count
+                                                        == "no") ? "":"checked"; }}>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
+                                Speech
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md suara tugel-content" style="display: none">
+                    <div class="row">
+                        @foreach ($urutan as $urutPaslon)
+                        <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
+                        <div class="col py-2 judul text-center text-white" style="background: {{ $pasangan->color }}">
+                            <div class="text">{{ $pasangan->candidate }} ||
+                                {{ $pasangan->deputy_candidate }} : {{$urutPaslon->total}}</b>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="col-md-12 text-white judul-pertama">
+                    <div class="row">
+
+                        <div class="col-12 judul text-center text-white" id="gantiBackground" style="transition: background 1s; transform: scaleX(1.2);">
+                            <div class="text">
+                                <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; color: #fff; " class="display-3" id="text-effect"></h1>
+                            </div>
+                            <!-- <img id="img-effect" src="{{asset('')}}images/logo/hisuara_header.png"class="img-fluid" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width:500px;"> -->
+                        </div>
+
+
+                    </div>
+                </div>
+                <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+                <script>
+                    function animate() {
+                        $('.judul-pertama').css("z-index", "900");
+                        $container = $("#text-effect");
+                        $('.tugel-content').hide(500);
+
+                        const text = "VOX POPULI VOX DEI"
+                        const $elements = text.split("").map((s) => $(
+                            `<span style="margin-left:15px" class="my-auto">${s}</span>`));
+
+
+
+                        $container.html($elements);
+                        $container.show();
+                        // $("#gantiBackground").css({
+                        //     "background-color": "#007bff"
+                        // }, 1000);
+                        $elements.forEach(function($el, i) {
+                            $el
+                                .css({
+                                    top: -60,
+                                    opacity: 0
+                                })
+                                .delay(100 * i)
+                                .animate({
+                                    top: 0,
+                                    opacity: 1
+                                }, 200);
+                        });
+
+                        setTimeout(() => {
+                            $("#text-effect").hide();
+                            $("#text-effect").html("");
+                            // $('#img-effect').fadeIn(500);
+                            const dataTarget = getCookie('dataTarget');
+                            if (dataTarget != "") {
+                                $(`[data-target='${dataTarget}']`).click();
+                            } else {
+                                $('.active-button').click()
+                            }
+
+                            // setTimeout(() => {
+                            //     $('#img-effect').fadeOut(200)
+                            // }, 5000);
+
+                        }, 3000)
+
+                    }
+
+                    // function animate2() {
+
+                    //     $container = $("#text-effect2");
+                    //     const text = "VOX POPULI,VOX DEI"
+                    //     const $elements = text.split("").map((s) => $(
+                    //         `<span style="margin-left:15px" class="my-auto">${s}</span>`));
+
+                    //     $container.html($elements);
+                    //     $container.show();
+                    //     // $("#gantiBackground").css({
+                    //     //     "background-color": "#007bff"
+                    //     // }, 1000);
+                    //     $elements.forEach(function($el, i) {
+                    //         $el
+                    //             .css({
+                    //                 top: -60,
+                    //                 opacity: 0
+                    //             })
+                    //             .delay(100 * i)
+                    //             .animate({
+                    //                 top: 0,
+                    //                 opacity: 1
+                    //             }, 200);
+                    //     });
+                    //     setTimeout(() => {
+                    //         $("#text-effect2").html("")
+                    //         $("#text-effect2").hide()
+                    //         const dataTarget = getCookie('dataTarget');
+                    //         if (dataTarget != "") {
+                    //             $(`[data-target='${dataTarget}']`).click();
+                    //         } else {
+                    //             $('.active-button').click()
+                    //         }
+                    //         $('.col-hisuara').fadeIn(200)
+                    //         $('.col-pilpres').fadeOut(200)
+
+
+                    //     }, 5000);
+                    // }
+
+
+                    $(function() {
+                        @if(Request::segment(1) == "administrator" && Request::segment(2) == "index")
+                        $('#img-effect').fadeIn()
+                        $("#text-effect").hide();
+                        $("#text-effect").html("");
+
+
+                        animate();
+
+                        @else
+                        $('#img-effect').fadeOut()
+                        $("#text-effect").hide();
+                        $("#text-effect").html("");
+                        const dataTarget = getCookie('dataTarget');
+                        if (dataTarget != "") {
+                            $(`[data-target='${dataTarget}']`).click();
+                        } else {
+                            $('.active-button').click()
+                        }
+                        @endif
+                    });
+                </script>
+
+            </div>
+        </div>
+
+        <div class="col-md-auto my-auto">
+            <div class="row h-100 justify-content-end" style="gap: 10px;">
+                <div class="col-md-auto px-0">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white active-button" style="background-color: #656064; width: 40px; height: 36px;" data-target="dpt">
+                        <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="DPT">
+                            <i class="fa-solid fa-database"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="col-md-auto px-0">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="suara">
+                        <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Urutan Suara">
+                            <i class="fa-solid fa-ranking-star"></i>
+                        </span>
+                    </button>
+                </div>
+
+                <div class="col-md-auto px-0">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="kota">
+                        <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Kota">
+                            <i class="fa-solid fa-city"></i>
+                        </span>
+                    </button>
+                </div>
+                {{-- <div class="dropdown d-none d-md-flex">
                                         <a class="nav-link icon theme-layout nav-link-bg layout-setting"
                                             onclick="darktheme()">
 
                                         </a>
                                     </div><!-- Theme-Layout --> --}}
-                                    <script>
-                                        let darktheme = function() {
-                                            setTimeout(function() {
-                                                let body = document.body;
-                                                let themes = body.className.split(" ");
-                                                let theme = (themes.length == 3) ? "yes" : "no";
-                                                $.ajax({
-                                                    url: `{{ route('superadmin.theme') }}`,
-                                                    data: {
-                                                        theme,
-                                                        "_token": "{{ csrf_token() }}"
-                                                    },
-                                                    type: "post",
-                                                    success: function(res) {
+                <script>
+                    let darktheme = function() {
+                        setTimeout(function() {
+                            let body = document.body;
+                            let themes = body.className.split(" ");
+                            let theme = (themes.length == 3) ? "yes" : "no";
+                            $.ajax({
+                                url: `{{ route('superadmin.theme') }}`,
+                                data: {
+                                    theme,
+                                    "_token": "{{ csrf_token() }}"
+                                },
+                                type: "post",
+                                success: function(res) {
 
-                                                    }
-                                                });
-                                            }, 300);
-                                        }
-                                    </script>
+                                }
+                            });
+                        }, 300);
+                    }
+                </script>
 
-                                    <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
-                                            style="background-color: #656064; width: 40px; height: 36px;"
-                                            data-target="support">
-                                            <span class="dark-layout" data-bs-placement="bottom"
-                                                data-bs-toggle="tooltip" title="Support">
-                                                <i class="fa-solid fa-headset"></i>
-                                            </span>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white"
-                                            style="background-color: #656064; width: 40px; height: 36px;"
-                                            data-target="featured">
-                                            <span class="dark-layout" data-bs-placement="bottom"
-                                                data-bs-toggle="tooltip" title="Featured">
-                                                <i class="fa-solid fa-star"></i>
-                                            </span>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-auto px-0">
-                                        <div class="dropdown d-none d-md-flex profile-1">
-                                            <a href="#" data-bs-toggle="dropdown"
-                                                class="nav-link pt-0 leading-none d-flex">
-                                                <span>
-                                                    @if (Auth::user()->profile_photo_path == NULL)
-                                                    <img class="avatar profile-user brround"
-                                                        style="object-fit: cover; width: 33px; height: 33px"
-                                                        src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF"
-                                                        alt="profile-user">
-                                                    @else
-                                                    <img class="avatar profile-user brround"
-                                                        style="object-fit: cover; width: 33px; height: 33px"
-                                                        src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}"
-                                                    alt="profile-user" s>
-                                                    @endif
-                                                </span>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                                <div class="drop-heading">
-                                                    <div class="text-center">
-                                                        <h5 class="text-dark mb-0">{{ Auth::user()->name }}</h5>
-                                                        <small class="text-muted">{{ Auth::user()->role_id == 1 ?
+                <div class="col-md-auto px-0">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="support">
+                        <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Support">
+                            <i class="fa-solid fa-headset"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="col-md-auto px-0">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="featured">
+                        <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Featured">
+                            <i class="fa-solid fa-star"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="col-md-auto px-0">
+                    <div class="dropdown d-none d-md-flex profile-1">
+                        <a href="#" data-bs-toggle="dropdown" class="nav-link pt-0 leading-none d-flex">
+                            <span>
+                                @if (Auth::user()->profile_photo_path == NULL)
+                                <img class="avatar profile-user brround" style="object-fit: cover; width: 33px; height: 33px" src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF" alt="profile-user">
+                                @else
+                                <img class="avatar profile-user brround" style="object-fit: cover; width: 33px; height: 33px" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}" alt="profile-user" s>
+                                @endif
+                            </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            <div class="drop-heading">
+                                <div class="text-center">
+                                    <h5 class="text-dark mb-0">{{ Auth::user()->name }}</h5>
+                                    <small class="text-muted">{{ Auth::user()->role_id == 1 ?
                                                             'Administrator' : 'uwon luyi' }}</small>
-                                                    </div>
-                                                </div>
-                                                <div class="dropdown-divider m-0"></div>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider m-0"></div>
 
-                                                <a class="dropdown-item" href="/user/profile">
-                                                    <i class="dropdown-icon fe fe-user"></i> Profile
-                                                </a>
-                                                <a class="dropdown-item" href="{{url('')}}/saksi-dashboard">
-                                                    <i class="dropdown-icon fe fe-user"></i> Upload C1 Saksi
-                                                </a>
-                                                <a class="dropdown-item" href="{{route('crowd_c1')}}">
-                                                    <i class="dropdown-icon fe fe-user"></i> Upload Crowd C1
-                                                </a>
-                                                <a class="dropdown-item" href="{{url('')}}/enumerator-dashboard">
-                                                    <i class="dropdown-icon fe fe-user"></i> Upload C1 Enumerator
-                                                </a>
-                                                <a class="dropdown-item" href="{{url('')}}/c1-relawan">
-                                                    <i class="dropdown-icon fe fe-user"></i> Upload C1 Relawan
-                                                </a>
-                                                {{-- <a class="dropdown-item" href="{{url('')}}/upload_kecurangan">
-                                                    <i class="dropdown-icon fe fe-user"></i> Upload Kecurangan
-                                                </a> --}}
-                                                <button class="dropdown-item security">
-                                                    <i class="dropdown-icon fa-solid fa-shield"></i> Security System
-                                                </button>
-                                                {{-- <button class="dropdown-item tugel-kolaps" href="#" data-target="setting">
+                            <a class="dropdown-item" href="/user/profile">
+                                <i class="dropdown-icon fe fe-user"></i> Profile
+                            </a>
+                            <a class="dropdown-item" href="{{url('')}}/saksi-dashboard">
+                                <i class="dropdown-icon fe fe-user"></i> Upload C1 Saksi
+                            </a>
+                            <a class="dropdown-item" href="{{route('crowd_c1')}}">
+                                <i class="dropdown-icon fe fe-user"></i> Upload Crowd C1
+                            </a>
+                            <a class="dropdown-item" href="{{url('')}}/enumerator-dashboard">
+                                <i class="dropdown-icon fe fe-user"></i> Upload C1 Enumerator
+                            </a>
+                            <a class="dropdown-item" href="{{url('')}}/c1-relawan">
+                                <i class="dropdown-icon fe fe-user"></i> Upload C1 Relawan
+                            </a>
+                            {{-- <a class="dropdown-item" href="{{url('')}}/upload_kecurangan">
+                            <i class="dropdown-icon fe fe-user"></i> Upload Kecurangan
+                            </a> --}}
+                            <button class="dropdown-item security">
+                                <i class="dropdown-icon fa-solid fa-shield"></i> Security System
+                            </button>
+                            {{-- <button class="dropdown-item tugel-kolaps" href="#" data-target="setting">
                                                     <i class="dropdown-icon fa-solid fa-gear"></i> Settings
                                                 </button> --}}
 
-                                                <form action="{{ route('logout') }}" method="post">
-                                                    @csrf
-                                                    <button class="dropdown-item" type="submit">
-                                                        <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
-                                                    </button>
-                                                </form>
-                                                
-                                                <script>
-                                                    $('.security').on('click', function() {
-                                                        $('.security-keluar').show();
-                                                    })
-                                                </script>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <button class="dropdown-item" type="submit">
+                                    <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
+                                </button>
+                            </form>
 
+                            <script>
+                                $('.security').on('click', function() {
+                                    $('.security-keluar').show();
+                                })
+                            </script>
                         </div>
-
                     </div>
                 </div>
-                <div class="card-footer p-0 border-0" id="marquee1"
-                    style="position: relative; background-color: #343a40">
-                    {{-- <button class="btn-dark btn-kolapse-sidebar text-white"
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+<div class="card-footer p-0 border-0" id="marquee1" style="position: relative; background-color: #343a40">
+    {{-- <button class="btn-dark btn-kolapse-sidebar text-white"
                         style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i
                             class="fa-solid fa-align-left"></i></button> --}}
-                    <button class="btn-dark btn-kolapse text-white h-100"
-                        style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i
-                            class="fa-solid fa-bars"></i></button>
-                    <button class="btn-danger text-white h-100 rounded-0"
-                        style="position: absolute; left: 28px; z-index: 20">Suara Masuk</button>
-                    <a href="https://time.is/Jakarta" id="time_is_link" rel="nofollow"></a>
-                    <button class="btn-dark text-white h-100 rounded-0"
-                        style="position: absolute; left: 123px; z-index: 20;"><span id="Jakarta_z41c"
-                            style="font-size:20px; color: #f7f700"></span> <span
-                            style="font-size: 20px; color: #f7f700">WIB</span></button>
-                    <script src="//widget.time.is/t.js"></script>
-                    <script>
-                        time_is_widget.init({
-                            Jakarta_z41c: {}
-                        });
-                    </script>
-                    {{-- <button class="btn btn-kolapse text-white" style="background-color: #30304d; z-index: 20"><i
+    <button class="btn-dark btn-kolapse text-white h-100" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-bars"></i></button>
+    <button class="btn-danger text-white h-100 rounded-0" style="position: absolute; left: 28px; z-index: 20">Suara Masuk</button>
+    <a href="https://time.is/Jakarta" id="time_is_link" rel="nofollow"></a>
+    <button class="btn-dark text-white h-100 rounded-0" style="position: absolute; left: 123px; z-index: 20;"><span id="Jakarta_z41c" style="font-size:20px; color: #f7f700"></span> <span style="font-size: 20px; color: #f7f700">WIB</span></button>
+    <script src="//widget.time.is/t.js"></script>
+    <script>
+        time_is_widget.init({
+            Jakarta_z41c: {}
+        });
+    </script>
+    {{-- <button class="btn btn-kolapse text-white" style="background-color: #30304d; z-index: 20"><i
                             class="fa-solid fa-bars"></i></button>
                     <button class="btn btn-danger text-white rounded-0" style="z-index: 20">Suara Masuk</button> --}}
-                    <marquee>
-                        @foreach ($marquee as $item)
-                        <?php $kecamatan =  District::where('id', $item['districts'])->first(); ?>
-                        <?php $kelurahan =  Village::where('id', $item['villages'])->first(); ?>
-                        <?php $tps =  Tps::where('id', $item['tps_id'])->first(); ?>
-                        <span class="text-success">▼ </span><span class="text-white"
-                            style="font-size: 20px;">{{$item['name']}}
-                            Kecamatan {{$kecamatan['name']}}, Kelurahan {{$kelurahan['name']}}, TPS {{$tps['number']}}
-                        </span>
-                        @endforeach
-                    </marquee>
-                </div>
-            </div>
+    <marquee>
+        @foreach ($marquee as $item)
+        <?php $kecamatan =  District::where('id', $item['districts'])->first(); ?>
+        <?php $kelurahan =  Village::where('id', $item['villages'])->first(); ?>
+        <?php $tps =  Tps::where('id', $item['tps_id'])->first(); ?>
+        <span class="text-success">▼ </span><span class="text-white" style="font-size: 20px;">{{$item['name']}}
+            Kecamatan {{$kecamatan['name']}}, Kelurahan {{$kelurahan['name']}}, TPS {{$tps['number']}}
+        </span>
+        @endforeach
+    </marquee>
+</div>
+</div>
 
-            <script>
-                $('.btn-kolapse').on('click', function() {
-                    $('.for-kolapse').toggle(500);
-                    $('.for-kolapse-kurangin > .side-app > .row:first').toggleClass('kurangin')
-                })
+<script>
+    $('.btn-kolapse').on('click', function() {
+        $('.for-kolapse').toggle(500);
+        $('.for-kolapse-kurangin > .side-app > .row:first').toggleClass('kurangin')
+    })
 
-                // $('.btn-kolapse-sidebar').on('click', function() {
-                //     $('body.app.sidebar-mini').toggleClass('sidenav-toggled')
-                // })
+    // $('.btn-kolapse-sidebar').on('click', function() {
+    //     $('body.app.sidebar-mini').toggleClass('sidenav-toggled')
+    // })
 
-                $('.tugel-kolaps').on('click', function() {
+    $('.tugel-kolaps').on('click', function() {
 
-                    let target = $(this).data('target')
+        let target = $(this).data('target')
 
-                    // $.cookie('dataTarget', `${target}`, { expires: 7, path: '/' });
+        // $.cookie('dataTarget', `${target}`, { expires: 7, path: '/' });
 
-                    setCookie("dataTarget", target, 30);
+        setCookie("dataTarget", target, 30);
 
-                    // console.log(target)
-                    $('.tugel-content').hide()
-                    $(`.${target}`).show(200)
-                })
+        // console.log(target)
+        $('.tugel-content').hide()
+        $(`.${target}`).show(200)
+    })
 
-                $('.tugel-kolaps-menu').on('click', function() {
+    $('.tugel-kolaps-menu').on('click', function() {
 
-                    let target = $(this).data('target')
-                    // console.log(target)
-                    const cek = $(`.${target}`).css('display') == 'block';
+        let target = $(this).data('target')
+        // console.log(target)
+        const cek = $(`.${target}`).css('display') == 'block';
 
-                    $('.tugel-content-menu').hide(500)
+        $('.tugel-content-menu').hide(500)
 
-                    if (cek) {
-                        $('.tugel-content-menu').hide(500)
-                    } else {
-                        $(`.${target}`).show(500)
-                    }
-                })
+        if (cek) {
+            $('.tugel-content-menu').hide(500)
+        } else {
+            $(`.${target}`).show(500)
+        }
+    })
 
-                $('.tugel-kolaps').on('click', function() {
-                    const btnIni = $(this);
-                    $('.judul-pertama').css("z-index", "-900");
-                    $('.tugel-kolaps').removeClass('active-button');
-                    btnIni.addClass('active-button');
-                });
-
+    $('.tugel-kolaps').on('click', function() {
+        const btnIni = $(this);
+        $('.judul-pertama').css("z-index", "-900");
+        $('.tugel-kolaps').removeClass('active-button');
+        btnIni.addClass('active-button');
+    });
 
 
-                // $('.tugel-kolaps-menu.content-toggled').on('click', function() {
 
-                // let target = $(this).data('target')
-                // console.log(target)
-                // $('.tugel-content-menu').removeClass('content-toggled')
-                // $(`.${target}`).toggleClass('content-toggled')
-                // })
-            </script>
+    // $('.tugel-kolaps-menu.content-toggled').on('click', function() {
 
-        </div>
-    </div>
+    // let target = $(this).data('target')
+    // console.log(target)
+    // $('.tugel-content-menu').removeClass('content-toggled')
+    // $(`.${target}`).toggleClass('content-toggled')
+    // })
+</script>
+
+</div>
+</div>
 </div>
 
 
@@ -1488,8 +1328,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                             ->get(); ?>
                         @foreach ($allUser as $usr)
                         <a class="dropdown-item d-flex" href="#" onclick="openForm(`<?= $usr->id ?>`)">
-                            <span class="avatar avatar-md brround me-3 align-self-center cover-image"
-                                data-bs-image-src="{{ url('/') }}/assets/images/users/1.jpg"></span>
+                            <span class="avatar avatar-md brround me-3 align-self-center cover-image" data-bs-image-src="{{ url('/') }}/assets/images/users/1.jpg"></span>
                             <div class="wd-90p">
                                 <div class="d-flex">
                                     <h5 class="mb-1">{{ $usr->name }}</h5>
@@ -1509,9 +1348,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
                 <a href="#" data-bs-toggle="dropdown" class="nav-link pe-2 leading-none d-flex pt-0">
                     <span>
                         @if (Auth::user()->profile_photo_path == NULL)
-                        <img class="avatar profile-user brround" style="object-fit: cover"
-                            src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF"
-                            alt="profile-user">
+                        <img class="avatar profile-user brround" style="object-fit: cover" src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF" alt="profile-user">
                         @else
                         <img class="avatar profile-user brround" style="object-fit: cover" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}" alt="profile-user" s>
                         @endif
@@ -1553,7 +1390,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
 <script>
     $(document).ready(function() {
         var currentUrl = window.location.href; // Get the current URL
-        
+
         $('.glowy-menu').each(function() {
             if ($(this).attr('href') === currentUrl) {
                 $(this).addClass('active'); // Add 'active' class if href matches current URL
@@ -1561,6 +1398,91 @@ $jumlah_kelurahan = Village::where('id', 'like', '%'.$regency[0]['regency_id'].'
         });
     });
 </script>
+@if($config->quick_count == "yes")
+<script>
+    $(document).ready(function() {
+        var recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+        recognition.lang = 'id-ID';
+        recognition.continuous = true;
+        recognition.interimResults = true;
+
+        var speechOutput = $('#speechOutput');
+        var startButton = $('#startSpeech');
+        var stopButton = $('#stopSpeech');
+
+        // startButton.click(function() {
+        //     recognition.start();
+        // });
+
+        // stopButton.click(function() {
+        //     recognition.stop();
+        // });
+        recognition.start();
+
+        recognition.onresult = function(event) {
+            var interimTranscript = '';
+            for (var i = event.resultIndex; i < event.results.length; i++) {
+                if (event.results[i].isFinal) {
+                    var finalTranscript = event.results[i][0].transcript;
+                    speechOutput.text('Hasil Pengenalan: ' + finalTranscript.trim().toLowerCase());
+                    const protocol = window.location.protocol;
+                    const hostname = window.location.hostname;
+
+                    const completeHostname = protocol + '//' + hostname;
+                    $.ajax({
+                        url: `${completeHostname}/api/findUrlByVoiceText`,
+                        type: "get",
+                        data: {
+                            text: finalTranscript.toLowerCase()
+                        },
+                        success: function(res) {
+                            console.log(res);
+                            const {
+                                action,
+                                target,
+                                hint
+                            } = res
+                            if (action == 'redirect') {
+                                window.location = target;
+                            }
+                            if (action == 'click') {
+                                // alert('klik target')
+                                const namaSaksi = target;
+                                const h1Elements = document.querySelectorAll('.nama-saksi');
+
+                                for (const i = 0; i < h1Elements.length; i++) {
+                                    const element = h1Elements[i];
+                                    const elementText = element.textContent.toLowerCase();
+
+                                    console.log(elementText, namaSaksi.toLowerCase());
+
+                                    if (elementText.includes(namaSaksi.toLowerCase())) {
+                                        // Found a matching element
+                                        console.log('Found: ' + elementText);
+
+                                        const idSaksi = element.getAttribute('data-id');
+                                        console.log(idSaksi);
+
+                                        const buttonVerifikasi = document.querySelector(`button[data-id="${idSaksi}"]`);
+                                        console.log(buttonVerifikasi.textContent);
+                                        break;
+                                    }
+                                }
+                            }
+
+                        }
+                    })
+                    if (finalTranscript.trim().toLowerCase() === "buka halaman verifikasi") {
+                        location.href = "http://pilpres.banten.tangerang-selatan.hisuara.id:8000/verifikator/verifikasi-c1";
+                    }
+                } else {
+                    interimTranscript += event.results[i][0].transcript;
+                }
+            }
+        };
+    });
+</script>
+@endif
 
 <!--app-content open-->
 <div class="app-content for-kolapse-kurangin" style="margin-top: 40px; margin-left: 0px !important">

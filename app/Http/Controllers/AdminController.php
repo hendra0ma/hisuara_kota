@@ -100,7 +100,7 @@ class AdminController extends Controller
     {
         date_default_timezone_set("Asia/Jakarta");
         $data['jam'] = date("H");
-      $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
 
         $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $this->config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
 
@@ -209,6 +209,311 @@ class AdminController extends Controller
         $data['kecamatan'] = District::where('id', decrypt($id))->first();
         $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
         return view('administrator.rekapitulasi.kecamatan', $data);
+    }
+
+    function getRealCountAjax() {
+        date_default_timezone_set("Asia/Jakarta");
+        $data['jam'] = date("H");
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
+
+        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $this->config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
+
+        // Periksa apakah data kosong
+        if (count($paslon_tertinggi) > 0) {
+            $data['paslon_tertinggi'] = Paslon::find($paslon_tertinggi[0]->paslon_id);
+            $data['urutan'] = $paslon_tertinggi;
+        } else {
+            // Tetapkan nilai default atau ambil tindakan tertentu jika data kosong
+            $data['paslon_tertinggi'] = null;
+            $data['urutan'] = null;
+        }
+
+        $data['paslon']  = Paslon::with(['saksi_data' => function ($query) {
+            $query
+                ->where('saksi_data.regency_id', $this->config->regencies_id);
+        }])->get();
+        $data['paslon_terverifikasi']     = Paslon::with(['saksi_data' => function ($query) {
+            $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
+            ->whereNull('saksi.pending')
+            ->where('saksi_data.regency_id', $this->config->regencies_id)
+                ->where('saksi.verification', 1);
+        }])->get();
+        $verification                     = Saksi::where('regency_id', $this->config->regencies_id)->where('verification', 1)->with('saksi_data')->get();
+        $dpt                              = District::where('regency_id', $this->config->regencies_id)->sum("dpt") ?? 0;
+
+        $incoming_vote                    = SaksiData::where('regency_id', $this->config->regencies_id)->select('voice')->get();
+        $voice = SaksiData::sum('voice');
+        $data['total_verification_voice'] = 0;
+        $data['total_incoming_vote']      = SaksiData::where('regency_id', $this->config->regencies_id)->sum('voice') ?? 0;
+
+        $data['realcount']                =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
+        $data['district']                 = District::where("regency_id", $this->config->regencies_id)->get();
+        foreach ($verification as $key) {
+            foreach ($key->saksi_data as $verif) {
+                $data['total_verification_voice'] += $verif->voice;
+            }
+        }
+        $data['saksi_masuk'] = Saksi::count();
+
+        $data['tps_masuk'] = Tps::where('setup', 'terisi')->count();
+        $data['total_tps']   =  Tps::where('setup', 'belum terisi')->count();
+        $data['tps_kosong']  =  $data['total_tps'] - $data['tps_masuk'];
+
+
+        $data['saksi_terverifikasi'] = Saksi::where('regency_id', $this->config->regencies_id)->where('verification', 1)->count();
+        foreach ($incoming_vote as $key) {
+            $data['total_incoming_vote'] += $key->voice;
+        }
+        $data['suara_masuk'] = SaksiData::where('regency_id', $this->config->regencies_id)->count('voice');
+        $data['tracking'] = ModelsTracking::get();
+        $data['config'] = Config::first();
+        $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
+        $data['district_quick'] = District::where('regency_id', $this->config->regencies_id)->get();
+        return view('administrator.perhitungan.ajax.real_count', $data);
+    }
+
+    function getTerverifikasiAjax() {
+        date_default_timezone_set("Asia/Jakarta");
+        $data['jam'] = date("H");
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
+
+        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $this->config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
+
+        // Periksa apakah data kosong
+        if (count($paslon_tertinggi) > 0) {
+            $data['paslon_tertinggi'] = Paslon::find($paslon_tertinggi[0]->paslon_id);
+            $data['urutan'] = $paslon_tertinggi;
+        } else {
+            // Tetapkan nilai default atau ambil tindakan tertentu jika data kosong
+            $data['paslon_tertinggi'] = null;
+            $data['urutan'] = null;
+        }
+
+        $data['paslon']  = Paslon::with(['saksi_data' => function ($query) {
+            $query
+                ->where('saksi_data.regency_id', $this->config->regencies_id);
+        }])->get();
+        $data['paslon_terverifikasi']     = Paslon::with(['saksi_data' => function ($query) {
+            $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
+            ->whereNull('saksi.pending')
+            ->where('saksi_data.regency_id', $this->config->regencies_id)
+                ->where('saksi.verification', 1);
+        }])->get();
+        $verification                     = Saksi::where('regency_id', $this->config->regencies_id)->where('verification', 1)->with('saksi_data')->get();
+        $dpt                              = District::where('regency_id', $this->config->regencies_id)->sum("dpt") ?? 0;
+
+        $incoming_vote                    = SaksiData::where('regency_id', $this->config->regencies_id)->select('voice')->get();
+        $voice = SaksiData::sum('voice');
+        $data['total_verification_voice'] = 0;
+        $data['total_incoming_vote']      = SaksiData::where('regency_id', $this->config->regencies_id)->sum('voice') ?? 0;
+
+        $data['realcount']                =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
+        $data['district']                 = District::where("regency_id", $this->config->regencies_id)->get();
+        foreach ($verification as $key) {
+            foreach ($key->saksi_data as $verif) {
+                $data['total_verification_voice'] += $verif->voice;
+            }
+        }
+        $data['saksi_masuk'] = Saksi::count();
+
+        $data['tps_masuk'] = Tps::where('setup', 'terisi')->count();
+        $data['total_tps']   =  Tps::where('setup', 'belum terisi')->count();
+        $data['tps_kosong']  =  $data['total_tps'] - $data['tps_masuk'];
+
+
+        $data['saksi_terverifikasi'] = Saksi::where('regency_id', $this->config->regencies_id)->where('verification', 1)->count();
+        foreach ($incoming_vote as $key) {
+            $data['total_incoming_vote'] += $key->voice;
+        }
+        $data['suara_masuk'] = SaksiData::where('regency_id', $this->config->regencies_id)->count('voice');
+        $data['tracking'] = ModelsTracking::get();
+        $data['config'] = Config::first();
+        $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
+        $data['district_quick'] = District::where('regency_id', $this->config->regencies_id)->get();
+        return view('administrator.perhitungan.ajax.terverifikasi', $data);
+    }
+
+    function getQuickCountAjax() {
+        date_default_timezone_set("Asia/Jakarta");
+        $data['jam'] = date("H");
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
+
+        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $this->config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
+
+        // Periksa apakah data kosong
+        if (count($paslon_tertinggi) > 0) {
+            $data['paslon_tertinggi'] = Paslon::find($paslon_tertinggi[0]->paslon_id);
+            $data['urutan'] = $paslon_tertinggi;
+        } else {
+            // Tetapkan nilai default atau ambil tindakan tertentu jika data kosong
+            $data['paslon_tertinggi'] = null;
+            $data['urutan'] = null;
+        }
+
+        $data['paslon']  = Paslon::with(['saksi_data' => function ($query) {
+            $query
+                ->where('saksi_data.regency_id', $this->config->regencies_id);
+        }])->get();
+        $data['paslon_terverifikasi']     = Paslon::with(['saksi_data' => function ($query) {
+            $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
+            ->whereNull('saksi.pending')
+            ->where('saksi_data.regency_id', $this->config->regencies_id)
+                ->where('saksi.verification', 1);
+        }])->get();
+        $verification                     = Saksi::where('regency_id', $this->config->regencies_id)->where('verification', 1)->with('saksi_data')->get();
+        $dpt                              = District::where('regency_id', $this->config->regencies_id)->sum("dpt") ?? 0;
+
+        $incoming_vote                    = SaksiData::where('regency_id', $this->config->regencies_id)->select('voice')->get();
+        $voice = SaksiData::sum('voice');
+        $data['total_verification_voice'] = 0;
+        $data['total_incoming_vote']      = SaksiData::where('regency_id', $this->config->regencies_id)->sum('voice') ?? 0;
+
+        $data['realcount']                =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
+        $data['district']                 = District::where("regency_id", $this->config->regencies_id)->get();
+        foreach ($verification as $key) {
+            foreach ($key->saksi_data as $verif) {
+                $data['total_verification_voice'] += $verif->voice;
+            }
+        }
+        $data['saksi_masuk'] = Saksi::count();
+
+        $data['tps_masuk'] = Tps::where('setup', 'terisi')->count();
+        $data['total_tps']   =  Tps::where('setup', 'belum terisi')->count();
+        $data['tps_kosong']  =  $data['total_tps'] - $data['tps_masuk'];
+
+
+        $data['saksi_terverifikasi'] = Saksi::where('regency_id', $this->config->regencies_id)->where('verification', 1)->count();
+        foreach ($incoming_vote as $key) {
+            $data['total_incoming_vote'] += $key->voice;
+        }
+        $data['suara_masuk'] = SaksiData::where('regency_id', $this->config->regencies_id)->count('voice');
+        $data['tracking'] = ModelsTracking::get();
+        $data['config'] = Config::first();
+        $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
+        $data['district_quick'] = District::where('regency_id', $this->config->regencies_id)->get();
+        return view('administrator.perhitungan.ajax.quick_count', $data);
+    }
+
+    function getRekapitulasiAjax() {
+        date_default_timezone_set("Asia/Jakarta");
+        $data['jam'] = date("H");
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
+
+        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $this->config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
+
+        // Periksa apakah data kosong
+        if (count($paslon_tertinggi) > 0) {
+            $data['paslon_tertinggi'] = Paslon::find($paslon_tertinggi[0]->paslon_id);
+            $data['urutan'] = $paslon_tertinggi;
+        } else {
+            // Tetapkan nilai default atau ambil tindakan tertentu jika data kosong
+            $data['paslon_tertinggi'] = null;
+            $data['urutan'] = null;
+        }
+
+        $data['paslon']  = Paslon::with(['saksi_data' => function ($query) {
+            $query
+                ->where('saksi_data.regency_id', $this->config->regencies_id);
+        }])->get();
+        $data['paslon_terverifikasi']     = Paslon::with(['saksi_data' => function ($query) {
+            $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
+            ->whereNull('saksi.pending')
+            ->where('saksi_data.regency_id', $this->config->regencies_id)
+                ->where('saksi.verification', 1);
+        }])->get();
+        $verification                     = Saksi::where('regency_id', $this->config->regencies_id)->where('verification', 1)->with('saksi_data')->get();
+        $dpt                              = District::where('regency_id', $this->config->regencies_id)->sum("dpt") ?? 0;
+
+        $incoming_vote                    = SaksiData::where('regency_id', $this->config->regencies_id)->select('voice')->get();
+        $voice = SaksiData::sum('voice');
+        $data['total_verification_voice'] = 0;
+        $data['total_incoming_vote']      = SaksiData::where('regency_id', $this->config->regencies_id)->sum('voice') ?? 0;
+
+        $data['realcount']                =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
+        $data['district']                 = District::where("regency_id", $this->config->regencies_id)->get();
+        foreach ($verification as $key) {
+            foreach ($key->saksi_data as $verif) {
+                $data['total_verification_voice'] += $verif->voice;
+            }
+        }
+        $data['saksi_masuk'] = Saksi::count();
+
+        $data['tps_masuk'] = Tps::where('setup', 'terisi')->count();
+        $data['total_tps']   =  Tps::where('setup', 'belum terisi')->count();
+        $data['tps_kosong']  =  $data['total_tps'] - $data['tps_masuk'];
+
+
+        $data['saksi_terverifikasi'] = Saksi::where('regency_id', $this->config->regencies_id)->where('verification', 1)->count();
+        foreach ($incoming_vote as $key) {
+            $data['total_incoming_vote'] += $key->voice;
+        }
+        $data['suara_masuk'] = SaksiData::where('regency_id', $this->config->regencies_id)->count('voice');
+        $data['tracking'] = ModelsTracking::get();
+        $data['config'] = Config::first();
+        $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
+        $data['district_quick'] = District::where('regency_id', $this->config->regencies_id)->get();
+        return view('administrator.perhitungan.ajax.rekapitulasi', $data);
+    }
+
+    function getKPUAjax() {
+        date_default_timezone_set("Asia/Jakarta");
+        $data['jam'] = date("H");
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
+
+        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $this->config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
+
+        // Periksa apakah data kosong
+        if (count($paslon_tertinggi) > 0) {
+            $data['paslon_tertinggi'] = Paslon::find($paslon_tertinggi[0]->paslon_id);
+            $data['urutan'] = $paslon_tertinggi;
+        } else {
+            // Tetapkan nilai default atau ambil tindakan tertentu jika data kosong
+            $data['paslon_tertinggi'] = null;
+            $data['urutan'] = null;
+        }
+
+        $data['paslon']  = Paslon::with(['saksi_data' => function ($query) {
+            $query
+                ->where('saksi_data.regency_id', $this->config->regencies_id);
+        }])->get();
+        $data['paslon_terverifikasi']     = Paslon::with(['saksi_data' => function ($query) {
+            $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
+            ->whereNull('saksi.pending')
+            ->where('saksi_data.regency_id', $this->config->regencies_id)
+                ->where('saksi.verification', 1);
+        }])->get();
+        $verification                     = Saksi::where('regency_id', $this->config->regencies_id)->where('verification', 1)->with('saksi_data')->get();
+        $dpt                              = District::where('regency_id', $this->config->regencies_id)->sum("dpt") ?? 0;
+
+        $incoming_vote                    = SaksiData::where('regency_id', $this->config->regencies_id)->select('voice')->get();
+        $voice = SaksiData::sum('voice');
+        $data['total_verification_voice'] = 0;
+        $data['total_incoming_vote']      = SaksiData::where('regency_id', $this->config->regencies_id)->sum('voice') ?? 0;
+
+        $data['realcount']                =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
+        $data['district']                 = District::where("regency_id", $this->config->regencies_id)->get();
+        foreach ($verification as $key) {
+            foreach ($key->saksi_data as $verif) {
+                $data['total_verification_voice'] += $verif->voice;
+            }
+        }
+        $data['saksi_masuk'] = Saksi::count();
+
+        $data['tps_masuk'] = Tps::where('setup', 'terisi')->count();
+        $data['total_tps']   =  Tps::where('setup', 'belum terisi')->count();
+        $data['tps_kosong']  =  $data['total_tps'] - $data['tps_masuk'];
+
+
+        $data['saksi_terverifikasi'] = Saksi::where('regency_id', $this->config->regencies_id)->where('verification', 1)->count();
+        foreach ($incoming_vote as $key) {
+            $data['total_incoming_vote'] += $key->voice;
+        }
+        $data['suara_masuk'] = SaksiData::where('regency_id', $this->config->regencies_id)->count('voice');
+        $data['tracking'] = ModelsTracking::get();
+        $data['config'] = Config::first();
+        $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
+        $data['district_quick'] = District::where('regency_id', $this->config->regencies_id)->get();
+        return view('administrator.perhitungan.ajax.kpu', $data);
     }
 
 

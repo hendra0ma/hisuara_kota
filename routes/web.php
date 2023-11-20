@@ -311,7 +311,11 @@ foreach ($kotas as $kota) {
                     Route::get('/download-images/{status}', [DownloadImages::class, 'downloadImages']);
                     Route::post('simpan-suara-c1-crowd', 'simpanSuaraC1Crowd')->name('simpan_suara_crowd');
 
-
+                    Route::get('get_realcount_ajax', 'getRealCountAjax');
+                    Route::get('get_terverifikasi_ajax', 'getTerverifikasiAjax');
+                    Route::get('get_quickcount_ajax', 'getQuickCountAjax');
+                    Route::get('get_rekapitulasi_ajax', 'getRekapitulasiAjax');
+                    Route::get('get_kpu_ajax', 'getKPUAjax');
                     Route::get('data-c1', 'dataC1');
                     Route::get('r-data-record', 'rDataRecord');
                     Route::get('r-data', 'rdata')->name("rdata");
