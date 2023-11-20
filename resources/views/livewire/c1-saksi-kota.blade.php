@@ -1,6 +1,6 @@
 <div>
     <h4 class="fw-bold fs-4 mt-5 mb-0">
-    Jumlah Operator C1 Saksi : {{$jumlah_verifikasi_c1}}
+        Jumlah Operator C1 Saksi : {{$jumlah_verifikasi_c1}}
     </h4>
     <hr style="border: 1px solid">
 
@@ -26,15 +26,14 @@
                 <div class="hiasan-1" style="background-color: rgba(251, 107, 37, 0.8)">
                     <div class="gambar-bulat">
                         @if ($ls->profile_photo_path == NULL)
-                        <img class="rounded-circle" style="width: 125px; height: 125px; object-fit:cover;"
-                            src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF" alt="img">
+                        <img class="rounded-circle" style="width: 125px; height: 125px; object-fit:cover;" src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF" alt="img">
                         @else
                         <img class="rounded-circle" style="width: 125px; height: 125px; object-fit:cover;" src="{{url("/storage/profile-photos/".$ls->profile_photo_path) }}">
                         @endif
                     </div>
                 </div>
                 <div class="card-body py-7">
-                    <div class="text-center fs-4 fw-bold mb-3">{{$ls->name}}</div>
+                    <div class="nama-saksi text-center fs-4 fw-bold mb-3" data-id="{{$ls->tps_id}}">{{$ls->name}}</div>
                     <div class="px-3">
                         <table class="table">
                             <tr>
@@ -66,11 +65,10 @@
                                 <td class="ps-2">{{$ls->date}}</td>
                             </tr>
                         </table>
-    
+
                         <div class="row mt-2">
                             <div class="col-12 px-0">
-                                <button class="btn text-white rounded-0 w-100 periksa-c1-plano" style="background-color: rgb(251, 107, 37)" id="Cek" data-id="{{$ls->tps_id}}"
-                                    data-bs-toggle="modal" id="" data-bs-target="#periksaC1Verifikator">Verifikasi Kiriman C1</button>
+                                <button class="btn text-white rounded-0 w-100 periksa-c1-plano" style="background-color: rgb(251, 107, 37)" id="Cek" data-id="{{$ls->tps_id}}" data-bs-toggle="modal" id="" data-bs-target="#periksaC1Verifikator">Verifikasi Kiriman C1</button>
                             </div>
                         </div>
                     </div>
