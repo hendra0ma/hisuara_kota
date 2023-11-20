@@ -1,6 +1,6 @@
 <div>
     <h4 class="fw-bold fs-4 mt-5 mb-0">
-        Jumlah Saksi : (dummy)
+        Jumlah Saksi : {{count($surat_suaras)}}
     </h4>
     <hr style="border: 1px solid">
     
@@ -12,6 +12,7 @@
     </div>
 
     <div class="row justify-content-center">
+        @foreach ($surat_suaras as $surat_suara)
         <div class="col-3">
             <div class="card">
                 <div class="card-header bg-success">
@@ -19,166 +20,42 @@
                         (TPS 1 / Kelurahan CIPUTAT)</h4>
                 </div>
                 <div class="card-body p-0">
-                    <table class="table table-striped">
-                        <tr>
-                            <td style="width: 65%">Jumlah Hak Pilih (DPT)</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 65%">Surat Suara Sah</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 65%">Suara Tidak Sah</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 65%">Jumlah Suara Sah dan Suara Tidak Sah</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 65%">Total Surat Suara</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 65%">Sisa Surat Suara</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                    </table>
+                <table class="table table-striped">
+                    <tr>
+                        <td class="py-2 text-start" style="width: 50%">Jumlah Hak Pilih (DPT)</td>
+                        <td class="py-2" style="width: 5%">:</td>
+                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->dpt:"0"}}</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 text-start" style="width: 50%">Surat Suara Sah</td>
+                        <td class="py-2" style="width: 5%">:</td>
+                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->surat_suara_sah:"0"}}</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 text-start" style="width: 50%">Suara Tidak Sah</td>
+                        <td class="py-2" style="width: 5%">:</td>
+                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->surat_suara_tidak_sah:"0"}}</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 text-start" style="width: 50%">Jumlah Suara Sah dan Suara Tidak Sah</td>
+                        <td class="py-2" style="width: 5%">:</td>
+                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->jumlah_sah_dan_tidak:"0"}}</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 text-start" style="width: 50%">Total Surat Suara</td>
+                        <td class="py-2" style="width: 5%">:</td>
+                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->total_surat_suara:"0"}}</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 text-start" style="width: 50%">Sisa Surat Suara</td>
+                        <td class="py-2" style="width: 5%">:</td>
+                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->sisa_surat_suara:"0"}}</td>
+                    </tr>
+                </table>
                 </div>
             </div>
         </div>
-        <div class="col-3">
-            <div class="card">
-                <div class="card-header bg-success">
-                    <h4 class="mb-0 mx-auto text-white card-title text-center">Data Pemlih Dan Penggunaan Hak Pilih <br>
-                        (TPS 2 / Kelurahan CIPUTAT)</h4>
-                </div>
-                <div class="card-body p-0">
-                    <table class="table table-striped">
-                        <tr>
-                            <td style="width: 65%">Jumlah Hak Pilih (DPT)</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 65%">Surat Suara Sah</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 65%">Suara Tidak Sah</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 65%">Jumlah Suara Sah dan Suara Tidak Sah</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 65%">Total Surat Suara</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 65%">Sisa Surat Suara</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="card">
-                <div class="card-header bg-success">
-                    <h4 class="mb-0 mx-auto text-white card-title text-center">Data Pemlih Dan Penggunaan Hak Pilih <br>
-                        (TPS 3 / Kelurahan CIPUTAT)</h4>
-                </div>
-                <div class="card-body p-0">
-                    <table class="table table-striped">
-                        <tr>
-                            <td style="width: 65%">Jumlah Hak Pilih (DPT)</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 65%">Surat Suara Sah</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 65%">Suara Tidak Sah</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 65%">Jumlah Suara Sah dan Suara Tidak Sah</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 65%">Total Surat Suara</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 65%">Sisa Surat Suara</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="card">
-                <div class="card-header bg-success">
-                    <h4 class="mb-0 mx-auto text-white card-title text-center">Data Pemlih Dan Penggunaan Hak Pilih <br>
-                        (TPS 4 / Kelurahan CIPUTAT)</h4>
-                </div>
-                <div class="card-body p-0">
-                    <table class="table table-striped">
-                        <tr>
-                            <td style="width: 65%">Jumlah Hak Pilih (DPT)</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 65%">Surat Suara Sah</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 65%">Suara Tidak Sah</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 65%">Jumlah Suara Sah dan Suara Tidak Sah</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 65%">Total Surat Suara</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 65%">Sisa Surat Suara</td>
-                            <td style="width: 10%">:</td>
-                            <td style="width: 25%">(dummy)</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
+        @endforeach
+       
     </div>
 </div>

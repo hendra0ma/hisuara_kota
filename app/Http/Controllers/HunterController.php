@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Paslon;
 use App\Models\Relawan;
 use App\Models\RelawanData;
+use App\Models\SuratSuara;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,6 +33,7 @@ class HunterController extends Controller
             ->first();
         // dump($data);
         $data['paslon'] = Paslon::get();
+        $data['surat_suara'] = SuratSuara::where('tps_id',$req->id)->first();
         return view('hunter.modalView', $data);
     }
 

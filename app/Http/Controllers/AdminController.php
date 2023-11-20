@@ -39,6 +39,7 @@ use App\Models\CrowdC1;
 use App\Models\DataCrowdC1;
 use App\Models\RegenciesDomain;
 use App\Models\SuratPernyataan;
+use App\Models\SuratSuara;
 use Carbon\Carbon;
 use Exception;
 use Facade\FlareClient\Http\Response;
@@ -1060,6 +1061,7 @@ class AdminController extends Controller
             'verifikator' => $verifikator,
             'hukum' => $hukum,
             'kota' => $kota,
+            'surat_suara'=> SuratSuara::where('tps_id', $tps['id'])->first(),
             'list_kecurangan' => $list_kecurangan,
             'config' => Config::first(),
             'url' => $request->url,
@@ -1495,6 +1497,8 @@ class AdminController extends Controller
             $data['verifikator'] = null;
             $data['hukum'] = null;
         }
+        $data['surat_suara'] = SuratSuara::where('tps_id',(int)$id)->first();
+        
         
         return view('administrator.perhitungan.tps', $data);
     }
@@ -1663,6 +1667,7 @@ class AdminController extends Controller
         $data['kecamatan'] = District::where('id',  $data['tps']['district_id'])->first();
         $data['kelurahan'] = Village::where('id',  $data['tps']['villages_id'])->first();
         $data['config'] = Config::first();
+        $data['surat_suara'] = SuratSuara::where('tps_id',$request['id'])->first();
         if (count($data['saksi']) == 0) {
             return view('publik.ajax.result_eror');
         } else {
@@ -1980,6 +1985,7 @@ class AdminController extends Controller
         $status =  Qrcode::where('tps_id', Crypt::decrypt($request['id']))->update([
             'print' => 1
         ]);
+        $data['surat_suara'] = SuratSuara::where('tps_id',$request['id'])->first();
 
         return view('hukum.print.kecurangan', $data);
     }
@@ -2435,6 +2441,7 @@ class AdminController extends Controller
             $data['verifikator'] = null;
             $data['hukum'] = null;
         }
+        $data['surat_suara'] = SuratSuara::where('tps_id',$id)->first();
 
         return view('administrator.realcount.tps', $data);
     }
@@ -2668,7 +2675,7 @@ class AdminController extends Controller
             $data['verifikator'] = null;
             $data['hukum'] = null;
         }
-
+        $data['surat_suara'] = SuratSuara::where('tps_id',$id)->first();
         return view('administrator.hitung_kpu.tps', $data);
     }
 
@@ -2907,7 +2914,7 @@ class AdminController extends Controller
             $data['verifikator'] = null;
             $data['hukum'] = null;
         }
-
+        $data['surat_suara'] = SuratSuara::where('tps_id',$id)->first();
         return view('administrator.rekapitulasi-perhitungan.tps', $data);
     }
 
@@ -3257,7 +3264,7 @@ class AdminController extends Controller
             $data['verifikator'] = null;
             $data['hukum'] = null;
         }
-
+        $data['surat_suara'] = SuratSuara::where('tps_id',$id)->first();
         return view('administrator.terverifikasi.tps', $data);
     }
 

@@ -59,7 +59,7 @@ class AuthController extends Controller
 
         if ($request->file('foto_ktp')) {
             $image = $request->file('foto_ktp');
-            $randomString = substr(str_shuffle($characters), 0, 13); // Menghasilkan string acak sepanjang 10 karakter
+            $randomString = substr(str_shuffle($characters), 0, 50); // Menghasilkan string acak sepanjang 10 karakter
             $foto_ktp = time() . $randomString .".". $image->getClientOriginalExtension();
             $image->move(public_path('storage/profile-photos'), $foto_ktp);
         } else {
@@ -68,7 +68,7 @@ class AuthController extends Controller
 
         if ($request->file('foto_profil')) {
             $image = $request->file('foto_profil');
-            $randomString = substr(str_shuffle($characters), 0, 14); // Menghasilkan string acak sepanjang 10 karakter
+            $randomString = substr(str_shuffle($characters), 0, 50); // Menghasilkan string acak sepanjang 10 karakter
             $foto_profil = time() . $randomString  .".".  $image->getClientOriginalExtension();
             $image->move(public_path('storage/profile-photos'), $foto_profil);
         } else {
@@ -148,16 +148,15 @@ class AuthController extends Controller
 
         if ($request->file('foto_ktp')) {
             $image = $request->file('foto_ktp');
-            $randomString = substr(str_shuffle($characters), 0, 13); // Menghasilkan string acak sepanjang 10 karakter
+            $randomString = substr(str_shuffle($characters), 0, 50); // Menghasilkan string acak sepanjang 10 karakter
             $foto_profil = time() . $randomString  .".".  $image->getClientOriginalExtension();
             $image->move(public_path('storage/profile-photos'), $foto_profil);
         } else {
             return response()->json(['message' => 'Gagal mengunggah gambar'], 500);
         }
-
         if ($request->file('foto_profil')) {
             $image = $request->file('foto_profil');
-            $randomString = substr(str_shuffle($characters), 0, 13); // Menghasilkan string acak sepanjang 10 karakter
+            $randomString = substr(str_shuffle($characters), 0, 50); // Menghasilkan string acak sepanjang 10 karakter
             $foto_profil = time() . $randomString  .".".  $image->getClientOriginalExtension();
             $image->move(public_path('storage/profile-photos'), $foto_profil);
         } else {

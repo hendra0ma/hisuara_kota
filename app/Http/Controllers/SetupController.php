@@ -197,6 +197,7 @@ class SetupController extends Controller
             return redirect('selesai_tps');
         }else{
             $village  = Village::where('district_id',$regency['id'])->get();
+            
             return view('setup.tps',[
                 'kecamatan' => $regency,
                 'kelurahan' => $village,

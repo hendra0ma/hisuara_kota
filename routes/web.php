@@ -671,6 +671,7 @@ foreach ($kotas as $kota) {
 
         Route::get("upload-surat-suara", [DevelopingController::class, 'uploadSuratSuara'])->middleware(['auth', 'role:saksi'])->name('uploadSuratSuara');
 
+
         Route::post("action_absen_saksi", [DevelopingController::class, 'actionAbsensiSaksi'])->middleware(['auth', 'role:saksi'])->name('actionAbsensiSaksi');
 
         Route::post("action-surat-suara", [DevelopingController::class, 'actionSuratSuara'])->middleware(['auth', 'role:saksi'])->name('actionSuratSuara');

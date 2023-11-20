@@ -360,32 +360,32 @@ $tps = Tps::count();
                     <tr>
                         <td class="py-2 text-start" style="width: 50%">Jumlah Hak Pilih (DPT)</td>
                         <td class="py-2" style="width: 5%">:</td>
-                        <td class="py-2" style="width: 40%">(dummy)</td>
+                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->dpt:"0"}}</td>
                     </tr>
                     <tr>
                         <td class="py-2 text-start" style="width: 50%">Surat Suara Sah</td>
                         <td class="py-2" style="width: 5%">:</td>
-                        <td class="py-2" style="width: 40%">(dummy)</td>
+                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->surat_suara_sah:"0"}}</td>
                     </tr>
                     <tr>
                         <td class="py-2 text-start" style="width: 50%">Suara Tidak Sah</td>
                         <td class="py-2" style="width: 5%">:</td>
-                        <td class="py-2" style="width: 40%">(dummy)</td>
+                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->surat_suara_tidak_sah:"0"}}</td>
                     </tr>
                     <tr>
                         <td class="py-2 text-start" style="width: 50%">Jumlah Suara Sah dan Suara Tidak Sah</td>
                         <td class="py-2" style="width: 5%">:</td>
-                        <td class="py-2" style="width: 40%">(dummy)</td>
+                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->jumlah_sah_dan_tidak:"0"}}</td>
                     </tr>
                     <tr>
                         <td class="py-2 text-start" style="width: 50%">Total Surat Suara</td>
                         <td class="py-2" style="width: 5%">:</td>
-                        <td class="py-2" style="width: 40%">(dummy)</td>
+                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->total_surat_suara:"0"}}</td>
                     </tr>
                     <tr>
                         <td class="py-2 text-start" style="width: 50%">Sisa Surat Suara</td>
                         <td class="py-2" style="width: 5%">:</td>
-                        <td class="py-2" style="width: 40%">(dummy)</td>
+                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->sisa_surat_suara:"0"}}</td>
                     </tr>
                 </table>
             </div>

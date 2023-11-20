@@ -14,6 +14,7 @@ use App\Models\Qrcode as ModelsQrcode;
 use App\Models\Qrcode;
 use App\Models\Regency;
 use App\Models\Saksi;
+use App\Models\SuratSuara;
 use App\Models\Tps;
 use App\Models\User;
 use App\Models\Village;
@@ -228,6 +229,7 @@ class ValidatorHukumController extends Controller
         ->get();
         $data['foto_kecurangan'] = ModelsBuktifoto::where('tps_id', Crypt::decrypt($request['id']))->get();
         $data['vidio_kecurangan'] = ModelsBuktividio::where('tps_id', Crypt::decrypt($request['id']))->first();
+        $data['surat_suara'] = SuratSuara::where('tps_id',Crypt::decrypt($request['id']))->first();
         return view('validatorhukum.print.kecurangan',$data);
 
     }

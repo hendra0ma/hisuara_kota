@@ -44,7 +44,6 @@
                         </div>
                     </div>
 
-
                     
                     {{-- <h1 class="text-center">
                         <img src="{{asset('')}}assets/icons/hisuara_new.png" class="hadow-4 mb-3 mt-3 rounded-2" style="width: 175px;"

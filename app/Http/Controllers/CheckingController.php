@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Paslon;
 use App\Models\Saksi;
+use App\Models\SuratSuara;
 use App\Models\Tps;
 use App\Models\User;
 use App\Models\Village;
@@ -34,6 +35,7 @@ class CheckingController extends Controller
         }])->get();
 
         $data['village'] = Village::where('id', $data['paslon'][0]->saksi_data[0]->village_id)->first();
+        $data['surat_suara'] = SuratSuara::where('tps_id',$req->id)->first();
         return view('checking.modalView', $data);
     }
     public function verifikasi($id)

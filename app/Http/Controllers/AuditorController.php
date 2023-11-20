@@ -21,6 +21,7 @@ use App\Models\Koreksi;
 use App\Models\QuickSaksiData;
 use App\Models\RegenciesDomain;
 use App\Models\SaksiData;
+use App\Models\SuratSuara;
 use App\Models\Tracking as ModelsTracking;
 
 class AuditorController extends Controller
@@ -172,9 +173,10 @@ class AuditorController extends Controller
                 ->where('tps.id', '=', $req->id);
         }])->get();
         $data['user'] = User::where('tps_id', $req->id)->first();
-        // $data['tps']  = Tps::where("id", $data['user']['tps']); s
+        // $data['tps']  = Tps::where("id", $data['user']['tps']); 
 
         $data['village'] = Village::where('id', $data['paslon'][0]->saksi_data[0]->village_id)->first();
+        $data['surat_suara'] = SuratSuara::where('tps_id',$req->id)->first();
         return view('auditor.modalView', $data);
     }
 
