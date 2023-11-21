@@ -24,19 +24,15 @@ $(document).ready(function () {
 
   recognition.onresult = function (event) {
     var interimTranscript = '';
-    console.log('all rsults,', event.results);
     for (var i = event.resultIndex; i < event.results.length; i++) {
       if (event.results[i].isFinal) {
         var finalTranscript = event.results[i][0].transcript.trim().toLowerCase();
         speechOutput.text('Hasil Pengenalan: ' + finalTranscript);
 
-        // const isCommandHasKeywordClickBagian = finalTranscript.includes(keywordClickBagian);
-        // const isCommandHasKeywordClickTab = finalTranscript.includes(keywordClickTab);
         const isCommandHasKeywordClickButtonVerifikasi = finalTranscript.includes(keywordClickButtonVerifikasi)
         const isCommandHasKeywordRedirect =
         finalTranscript.includes(keywordRedirect)
-        // && isCommandHasKeywordClickBagian == false
-        // && isCommandHasKeywordClickTab == false
+        && isCommandHasKeywordClickButtonVerifikasi == false
 
         if (isCommandHasKeywordRedirect) {
           const dataTargetValue = getTextAfterSpecificWord(keywordRedirect, finalTranscript)
@@ -53,7 +49,6 @@ $(document).ready(function () {
         console.log('speech,', finalTranscript)
 
         if (isCommandHasKeywordClickButtonVerifikasi) {
-          // alert('klik target')
           const namaSaksi = getTextAfterSpecificWord(keywordClickButtonVerifikasi, finalTranscript);
           const h1Elements = document.querySelectorAll('.nama-saksi');
 
@@ -64,7 +59,6 @@ $(document).ready(function () {
             console.log(elementText, namaSaksi.toLowerCase());
 
             if (elementText.includes(namaSaksi.toLowerCase())) {
-              // Found a matching element
               console.log('Found: ' + elementText);
 
               const idSaksi = element.getAttribute('data-id');
