@@ -10,6 +10,7 @@ $(document).ready(function () {
   recognition.continuous = true;
   recognition.interimResults = true;
   const isSpeechCheckboxOn = document.querySelector('#speechCheckbox').checked
+  console.log(isSpeechCheckboxOn);
 
   if (isSpeechCheckboxOn) {
     recognition.start();
