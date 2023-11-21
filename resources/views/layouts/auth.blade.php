@@ -52,6 +52,10 @@
   <!-- MULTI SELECT CSS -->
   <link rel="stylesheet" href="../../assets/plugins/multipleselect/multiple-select.css">
   <style>
+    body {
+      overflow-x: hidden
+    }
+
     .otp-input-wrapper {
       width: 240px;
       text-align: left;
@@ -127,7 +131,7 @@
   </style>
 </head>
 
-<body class="">
+<body class="" style="background-color: #343a40">
 
 
   <!-- JQUERY JS -->
@@ -136,7 +140,25 @@
   <!-- BOOTSTRAP JS -->
   <script src="../../assets/plugins/bootstrap/js/popper.min.js"></script>
   <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-  @yield('content')
+  <div class="row">
+    <div class="col-8 p-0 m-0" style="height: 100vh; background-position: -600px 0px; background-size: cover; background-repeat: no-repeat; background-image: url({{asset('')}}assets/img/bg-login.jpg);">
+    </div>
+    <div class="col-4 p-0 m-0" style="height: 100vh; overflow:scroll">
+      @yield('content')
+    </div>
+    <div class="col-12">
+      <section class="bg-light">
+        <div class="container">
+          <img style="display: block; margin-left: auto; margin-right: auto;" src="{{asset('')}}images/logo/hisuara_new.png"
+            width="100px" class="pt-5 mb-5">
+          <div class="text-center pb-5" style="font-size: 13px;">
+            © PT.Hisuara Smart Count <br />
+            All Right Reserved 2021
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
 
   <!-- BACKGROUND-IMAGE CLOSED -->
 

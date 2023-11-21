@@ -23,7 +23,7 @@
                 <div class="container-login100 d-flex">
                     <div class="wrap-login100 p-0">
                         <div class="card-body">
-                     
+                            
                             <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <input type="hidden" id="latitude" name="latitude">
@@ -115,16 +115,7 @@
     
 
     </div>
-    <section class="bg-light" style="height: 10gitpx;">
-        <div class="container">
-            <img style="display: block; margin-left: auto; margin-right: auto;"
-                src="{{asset('')}}images/logo/hisuara_new.png" width="100px" class="pt-5 mb-5">
-            <div class="text-center pb-5" style="font-size: 13px;">
-                © PT.Hisuara Smart Count <br />
-                All Right Reserved 2021
-            </div>
-        </div>
-    </section>
+    
     <!-- End PAGE -->
     <script>
         var x = document.getElementById("demo");
