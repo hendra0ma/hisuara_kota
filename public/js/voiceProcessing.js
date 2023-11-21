@@ -5,6 +5,10 @@ const keywordClickButtonVerifikasi = 'buka verifikasi';
 const clickButtonVerifikasiExceptions = ['buka verifikasi c1'];
 
 $(document).ready(function () {
+  const namaLocalStorageCheckboxStatus = 'speechCheckboxStatus'
+  setCheckboxStatusForTheFirstTime(namaLocalStorageCheckboxStatus)
+  listenCheckboxStatus(namaLocalStorageCheckboxStatus);
+
   const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
   recognition.lang = 'id-ID';
   recognition.continuous = true;
@@ -77,10 +81,6 @@ $(document).ready(function () {
     }
   }
   };
-
-  const namaLocalStorageCheckboxStatus = 'speechCheckboxStatus'
-  setCheckboxStatusForTheFirstTime(namaLocalStorageCheckboxStatus)
-  listenCheckboxStatus(namaLocalStorageCheckboxStatus);
 });
 
 function setCheckboxStatusForTheFirstTime(namaLocalStorage) {
