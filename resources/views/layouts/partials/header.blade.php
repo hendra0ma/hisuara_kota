@@ -910,7 +910,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                         <div class="col-md">
                             <div class="mid">
                                 <label class="switch">
-                                    <input type="checkbox" id="speechCheckbox" 
+                                    <input type="checkbox" id="speechCheckbox"
                                     data-target="mode">
                                     <span class="slider round"></span>
                                 </label>
@@ -1406,9 +1406,8 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
         });
     });
 </script>
-@if($config->quick_count == "yes")
+
 <script src="{{ asset('js/voiceProcessing.js') }}"></script>
-@endif
 
 <!--app-content open-->
 <div class="app-content for-kolapse-kurangin" style="margin-top: 40px; margin-left: 0px !important">

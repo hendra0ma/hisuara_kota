@@ -2,14 +2,42 @@ const keywordRedirect = 'buka';
 const keywordClickBagian = 'buka bagian';
 const keywordClickTab = 'buka tab';
 const keywordClickButtonVerifikasi = 'buka verifikasi';
+const keywordClickHubungiButtonOnModalVerifikasi = 'hubungi';
+const keywordClickVerifikasiButtonOnModalVerifikasi = 'verifikasi oke';
+const keywordClickKoreksiButtonOnModalVerifikasi = 'koreksi';
+const keywordClickCloseModalButtonVerifikasi = 'tutup verifikasi';
+const clickButtonVerifikasiExceptions = ['buka verifikasi c1'];
 
 $(document).ready(function () {
+  const namaLocalStorageCheckboxStatus = 'speechCheckboxStatus'
+  setCheckboxStatusForTheFirstTime(namaLocalStorageCheckboxStatus)
+  listenCheckboxStatus(namaLocalStorageCheckboxStatus);
+
   const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
   recognition.lang = 'id-ID';
   recognition.continuous = true;
   recognition.interimResults = true;
+  const isSpeechCheckboxOn = document.querySelector('#speechCheckbox').checked
 
-  recognition.start();
+  if (isSpeechCheckboxOn) {
+    recognition.start();
+
+    function dontEndTheSpeech() {
+      if (document.querySelector('#speechCheckbox').checked) {
+        recognition.start();
+      }
+      console.log('Speech still listening...');
+    }
+
+    recognition.onend = function () {
+      dontEndTheSpeech()
+    };
+
+    // Clear the interval when the speech ends
+    recognition.onspeechend = function () {
+      dontEndTheSpeech()
+    };
+  }
 
   recognition.onresult = function (event) {
     for (let i = event.resultIndex; i < event.results.length; i++) {
@@ -21,7 +49,13 @@ $(document).ready(function () {
         finalTranscript.includes(keywordRedirect)
         && isCommandHasKeywordClickButtonVerifikasi == false
 
-        if (isCommandHasKeywordRedirect) {
+        const isClickButtonVerifikasiCommandHasExceptions = clickButtonVerifikasiExceptions.includes(finalTranscript);
+        const isCommandHasKeywordClickHubungiButtonOnModal = finalTranscript.includes(keywordClickHubungiButtonOnModalVerifikasi)
+        const isCommandHasKeywordClickVerifikasiButtonOnModal = finalTranscript.includes(keywordClickVerifikasiButtonOnModalVerifikasi)
+        const isCommandHasKeywordClickKoreksiButtonOnModal = finalTranscript.includes(keywordClickKoreksiButtonOnModalVerifikasi)
+        const isCommandHasKeywordClickCloseModalButton = finalTranscript.includes(keywordClickCloseModalButtonVerifikasi)
+
+        if (isCommandHasKeywordRedirect || isClickButtonVerifikasiCommandHasExceptions) {
           const dataTargetValue = getTextAfterSpecificWord(keywordRedirect, finalTranscript)
           const formattedFinalTranscript = formatFinalTranscriptToCommandTargetFormat(dataTargetValue)
           const selectedElement = document.querySelector('[data-command-target="' + formattedFinalTranscript + '"]')
@@ -32,7 +66,7 @@ $(document).ready(function () {
           return selectedElement.click()
         }
 
-        // console.log('speech,', finalTranscript)
+        console.log('speech,', finalTranscript)
 
         if (isCommandHasKeywordClickButtonVerifikasi) {
           const namaSaksi = getTextAfterSpecificWord(keywordClickButtonVerifikasi, finalTranscript);
@@ -42,7 +76,7 @@ $(document).ready(function () {
             const element = h1Elements[i];
             const elementText = element.textContent.toLowerCase();
 
-            
+
             if (elementText.includes(namaSaksi.toLowerCase())) {
               // console.log(elementText, namaSaksi.toLowerCase());
               const idSaksi = element.getAttribute('data-id');
@@ -52,36 +86,52 @@ $(document).ready(function () {
             }
           }
         }
+
+        if (isCommandHasKeywordClickHubungiButtonOnModal) {
+          const idElementButtonHubungiOnModal = 'hubungiWhatsappButton';
+          const url = $(`#${idElementButtonHubungiOnModal}`).attr('href');
+          window.location = url
+        }
+
+        if (isCommandHasKeywordClickKoreksiButtonOnModal) {
+          const idElementButtonKoreksiOnModal = 'koreksiButton';
+          const url = $(`#${idElementButtonKoreksiOnModal}`).attr('data-url');
+          window.location = url
+        }
+
+        if (isCommandHasKeywordClickVerifikasiButtonOnModal) {
+          const idElementButtonVerifikasiOnModal = 'verifikasiButton';
+          const url = $(`#${idElementButtonVerifikasiOnModal}`).attr('data-url');
+          window.location = url
+        }
+
+        if (isCommandHasKeywordClickCloseModalButton) {
+          const idElementButtonCloseModal = 'periksaC1Verifikator';
+          $(`#${idElementButtonCloseModal}`).modal('hide')
+        }
     }
   }
   };
-
-  listenCheckboxStatus();
-
-  const dontEndTheSpeech = setInterval(() => {
-    const isSpeechCheckboxStillOn = document.querySelector('#speechCheckbox').checked
-
-    recognition.onend = () => {
-      if (isSpeechCheckboxStillOn) {
-        recognition.start();
-      } else {
-        clearInterval(dontEndTheSpeech)
-      }
-    };
-    console.log('Speech still listening...');
-  }, 3000)
 });
 
-function listenCheckboxStatus() {
+function setCheckboxStatusForTheFirstTime(namaLocalStorage) {
+  const checkboxElement = document.getElementById("speechCheckbox")
+  const savedStatus = localStorage.getItem(namaLocalStorage)
+
+  if (savedStatus === null) {
+    localStorage.setItem(namaLocalStorage, checkboxElement.checked);
+  } else {
+    checkboxElement.checked = (savedStatus == 'true')
+  }
+}
+
+function listenCheckboxStatus(namaLocalStorage) {
   const checkboxElement = document.getElementById("speechCheckbox");
   checkboxElement.addEventListener("change", () => {
-    const savedStatus = localStorage.getItem("speechCheckboxStatus");
+    localStorage.setItem(namaLocalStorage, checkboxElement.checked);
+    const savedStatus = localStorage.getItem(namaLocalStorage);
 
-    if (savedStatus !== null) {
-      checkboxElement.checked = savedStatus === "true";
-    }
-    
-    localStorage.setItem("speechCheckboxStatus", checkboxElement.checked);
+    checkboxElement.checked = savedStatus === "true";
 
     location.reload()
   });
