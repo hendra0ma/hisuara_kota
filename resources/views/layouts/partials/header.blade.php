@@ -678,7 +678,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                     </div>
                 </div>
 
-<?php  
+<?php
                                                     $dpt_l = 0;
                                                     $dpt_p = 0;
                                                     if (request()->segment(2) == 'index') {
@@ -690,7 +690,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                                                     }elseif(request()->segment(2) == 'perhitungan_kelurahan'){
                                                         $dpt_l = Village::where('id',decrypt(request()->segment(3)))->sum('dpt_l');
                                                         $dpt_p = Village::where('id',decrypt(request()->segment(3)))->sum('dpt_p');
-                                                        
+
                                                     }elseif(request()->segment(2) == 'perhitungan_tps'){
                                                         $dpt_l = 128;
                                                         $dpt_p = 145;
@@ -699,7 +699,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                                                 ?>
                 <div class="col-md text-white dpt tugel-content" style="display:none">
                     <div class="row">
-                        
+
   @if (request()->segment(2) != 'perhitungan_tps')
                                             <div class="col py-2 judul text-center bg-secondary text-white"
                                                 style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
@@ -724,7 +724,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                             <div class="col py-2 judul text-center bg-primary text-white"
                                                     {!!
                                                 (request()->segment(2) == 'perhitungan_tps')?
-                                                
+
                                                 'style=" border-top-left-radius: 25px; border-bottom-left-radius: 25px"'
                                                 :
                                                 ""
@@ -1399,93 +1399,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
     });
 </script>
 @if($config->quick_count == "yes")
-<!-- <script>
-    $(document).ready(function() {
-        var recognition = new webkitSpeechRecognition() || new SpeechRecognition();
-        recognition.lang = 'id-ID';
-        recognition.continuous = true;
-        recognition.interimResults = true;
 
-        var speechOutput = $('#speechOutput');
-        var startButton = $('#startSpeech');
-        var stopButton = $('#stopSpeech');
-
-        // startButton.click(function() {
-        //     recognition.start();
-        // });
-
-        // stopButton.click(function() {
-        //     recognition.stop();
-        // });
-        recognition.start();
-
-        recognition.onresult = function(event) {
-            var interimTranscript = '';
-            for (var i = event.resultIndex; i < event.results.length; i++) {
-                if (event.results[i].isFinal) {
-                    var finalTranscript = event.results[i][0].transcript;
-                    speechOutput.text('Hasil Pengenalan: ' + finalTranscript.trim().toLowerCase());
-                    const protocol = window.location.protocol;
-                    const hostname = window.location.hostname;
-
-                    const completeHostname = protocol + '//' + hostname;
-                    $.ajax({
-                        url: `${completeHostname}/api/findUrlByVoiceText`,
-                        type: "get",
-                        data: {
-                            text: finalTranscript.toLowerCase()
-                        },
-                        success: function(res) {
-                            console.log(res);
-                            const {
-                                type,
-                                target,
-                                hint
-                            } = res
-                            console.log('speech', finalTranscript.toLowerCase())
-                            if (type == 'redirect') {
-                                window.location = `${completeHostname}/${target}`;
-                            }
-                            if (type == 'action') {
-                                // alert('klik target')
-                                const namaSaksi = target;
-                                const h1Elements = document.querySelectorAll('.nama-saksi');
-
-                                for (let i = 0; i < h1Elements.length; i++) {
-                                    const element = h1Elements[i];
-                                    const elementText = element.textContent.toLowerCase();
-
-                                    console.log(elementText, namaSaksi.toLowerCase());
-
-                                    if (elementText.includes(namaSaksi.toLowerCase())) {
-                                        // Found a matching element
-                                        console.log('Found: ' + elementText);
-
-                                        const idSaksi = element.getAttribute('data-id');
-                                        console.log(idSaksi);
-
-                                        const buttonVerifikasi = document.querySelector(`button[data-id="${idSaksi}"]`);
-                                        console.log(buttonVerifikasi.textContent);
-                                        buttonVerifikasi.click();
-                                        break;
-                                    }
-                                }
-                            }
-
-                        }
-                    })
-                    if (finalTranscript.trim().toLowerCase() === "buka halaman verifikasi") {
-                        location.href = "http://pilpres.banten.tangerang-selatan.hisuara.id:8000/verifikator/verifikasi-c1";
-                    }
-                } else {
-                    interimTranscript += event.results[i][0].transcript;
-                }
-            }
-        };
-    });
-</script> -->
-@if($config->quick_count == "yes")
-@endif
 @endif
 <script src="{{ asset('js/voiceProcessing.js') }}"></script>
 
