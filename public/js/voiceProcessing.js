@@ -85,7 +85,7 @@ $(document).ready(function () {
   };
 
 
-  setInterval((recognition) => {
+  setInterval(() => {
     const isSpeechCheckboxStillOn = document.querySelector('#speechCheckbox').checked
 
     recognition.onend = () => {
