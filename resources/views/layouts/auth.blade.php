@@ -140,14 +140,22 @@
   <!-- BOOTSTRAP JS -->
   <script src="../../assets/plugins/bootstrap/js/popper.min.js"></script>
   <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-  <div class="row">
-    <div class="col-8 p-0 m-0" style="height: 100vh; background-position: -600px 0px; background-size: cover; background-repeat: no-repeat; background-image: url({{asset('')}}assets/img/bg-login.jpg);">
-    </div>
-    <div class="col-4 p-0 m-0" style="height: 100vh; overflow:scroll">
+  <div class="row justify-content-end" 
+    style="margin: 0;
+      padding: 0;
+      height: 100vh; /* Set the height of the body to 100% of the viewport height */
+      display: flex;
+      align-items: center; /* Center items vertically */
+      justify-content: center; /* Center items horizontally */
+      background-image: url({{asset('')}}assets/img/bg-login.jpg); /* Replace 'your-image-url.jpg' with the URL or path to your image */
+      background-size: cover; /* Ensure the background image covers the entire container */
+      background-position: center; /* Center the background image */
+      background-repeat: no-repeat; /* Do not repeat the background image */">
+    <div class="col-md-3 col-sm-12 p-0 m-0" style="height: 100vh; overflow-y: auto">
       @yield('content')
     </div>
     <div class="col-12">
-      <section class="bg-light">
+      <section style="background: #5bb8e0">
         <div class="container">
           <img style="display: block; margin-left: auto; margin-right: auto;" src="{{asset('')}}images/logo/hisuara_new.png"
             width="100px" class="pt-5 mb-5">
