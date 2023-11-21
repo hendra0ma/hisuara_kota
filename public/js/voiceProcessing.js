@@ -89,19 +89,19 @@ $(document).ready(function () {
 
         if (isCommandHasKeywordClickHubungiButtonOnModal) {
           const idElementButtonHubungiOnModal = 'hubungiWhatsappButton';
-          const url = $(`${idElementButtonHubungiOnModal}`).attr('href');
+          const url = $(`#${idElementButtonHubungiOnModal}`).attr('href');
           window.location = url
         }
 
         if (isCommandHasKeywordClickKoreksiButtonOnModal) {
           const idElementButtonKoreksiOnModal = 'koreksiButton';
-          const url = $(`${idElementButtonKoreksiOnModal}`).attr('data-url');
+          const url = $(`#${idElementButtonKoreksiOnModal}`).attr('data-url');
           window.location = url
         }
 
         if (isCommandHasKeywordClickVerifikasiButtonOnModal) {
           const idElementButtonVerifikasiOnModal = 'verifikasiButton';
-          const url = $(`${idElementButtonVerifikasiOnModal}`).attr('data-url');
+          const url = $(`#${idElementButtonVerifikasiOnModal}`).attr('data-url');
           window.location = url
         }
 
