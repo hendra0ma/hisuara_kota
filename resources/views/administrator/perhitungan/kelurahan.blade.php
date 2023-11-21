@@ -311,7 +311,7 @@ $tps = Tps::count();
         </div>
     </div>
     @else
-    <div class="col-lg" style="{{($config->quick_count == 'yes')?'':'display:none'}}">
+    {{-- <div class="col-lg" style="{{($config->quick_count == 'yes')?'':'display:none'}}">
         <div class="card" style="margin-bottom: 1rem">
             <div class="card-header bg-info">
                 <h3 class="card-title text-white mx-auto">
@@ -362,7 +362,7 @@ $tps = Tps::count();
     
             </div>
         </div>
-    </div>
+    </div> --}}
     @endif
 
 

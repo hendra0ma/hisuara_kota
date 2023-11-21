@@ -648,7 +648,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                     </div>
                 </div>
 
-                <div class="col-md lacak tugel-content" style="display: none">
+                <div class="col-md pelacakan tugel-content" style="display: none">
                     <div class="row">
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                             <a data-command-target="lacak-saksi" href="{{url('')}}/administrator/lacak_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
@@ -918,16 +918,15 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                                 </label>
                             </div>
                             <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                QuickCount
+                                All Count
                             </div>
                         </div>
 
                         <div class="col-md">
                             <div class="mid">
                                 <label class="switch">
-                                    <input type="checkbox" id="speechCheckbox" {{($config->default ==
-                                                        "yes")?'disabled':''}} data-target="mode" onclick="settings('quick_count',this)" {{($config->quick_count
-                                                        == "no") ? "":"checked"; }}>
+                                    <input type="checkbox" id="speechCheckbox" 
+                                    data-target="mode">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
