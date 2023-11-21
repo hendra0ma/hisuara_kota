@@ -14,18 +14,21 @@ $(document).ready(function () {
   if (isSpeechCheckboxOn) {
     recognition.start();
 
-    const dontEndTheSpeech = setInterval(() => {
-      const isSpeechCheckboxStillOn = document.querySelector('#speechCheckbox').checked
-
-      recognition.onend = () => {
-        if (isSpeechCheckboxStillOn) {
-          recognition.start();
-        } else {
-          clearInterval(dontEndTheSpeech)
-        }
-      };
+    function dontEndTheSpeech() {
+      if (document.querySelector('#speechCheckbox').checked) {
+        recognition.start();
+      }
       console.log('Speech still listening...');
-    }, 3000)
+    }
+
+    recognition.onend = function () {
+      dontEndTheSpeech()
+    };
+
+    // Clear the interval when the speech ends
+    recognition.onspeechend = function () {
+      dontEndTheSpeech()
+    };
   }
 
   recognition.onresult = function (event) {
