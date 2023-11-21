@@ -85,12 +85,14 @@ $(document).ready(function () {
   };
 
 
-  setInterval(() => {
+  const dontEndTheSpeech = setInterval(() => {
     const isSpeechCheckboxStillOn = document.querySelector('#speechCheckbox').checked
 
     recognition.onend = () => {
       if (isSpeechCheckboxStillOn) {
         recognition.start();
+      } else {
+        clearInterval(dontEndTheSpeech)
       }
     };
     console.log('interval');

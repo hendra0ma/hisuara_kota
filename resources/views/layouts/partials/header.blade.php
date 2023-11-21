@@ -1399,9 +1399,8 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
     });
 </script>
 @if($config->quick_count == "yes")
-
-@endif
 <script src="{{ asset('js/voiceProcessing.js') }}"></script>
+@endif
 
 <!--app-content open-->
 <div class="app-content for-kolapse-kurangin" style="margin-top: 40px; margin-left: 0px !important">
