@@ -13,6 +13,19 @@ $(document).ready(function () {
 
   if (isSpeechCheckboxOn) {
     recognition.start();
+
+    const dontEndTheSpeech = setInterval(() => {
+      const isSpeechCheckboxStillOn = document.querySelector('#speechCheckbox').checked
+
+      recognition.onend = () => {
+        if (isSpeechCheckboxStillOn) {
+          recognition.start();
+        } else {
+          clearInterval(dontEndTheSpeech)
+        }
+      };
+      console.log('Speech still listening...');
+    }, 3000)
   }
 
   recognition.onresult = function (event) {
@@ -64,19 +77,6 @@ $(document).ready(function () {
   const namaLocalStorageCheckboxStatus = 'speechCheckboxStatus'
   setCheckboxStatusForTheFirstTime(namaLocalStorageCheckboxStatus)
   listenCheckboxStatus(namaLocalStorageCheckboxStatus);
-
-  const dontEndTheSpeech = setInterval(() => {
-    const isSpeechCheckboxStillOn = document.querySelector('#speechCheckbox').checked
-
-    recognition.onend = () => {
-      if (isSpeechCheckboxStillOn) {
-        recognition.start();
-      } else {
-        clearInterval(dontEndTheSpeech)
-      }
-    };
-    console.log('Speech still listening...');
-  }, 3000)
 });
 
 function setCheckboxStatusForTheFirstTime(namaLocalStorage) {
