@@ -304,7 +304,7 @@ foreach ($kotas as $kota) {
                 Route::post('commander-settings', [CommanderController::class, 'settings']);
                 Route::get('notif-delete', [CommanderController::class, 'notifDel']);
                 Route::get('commander-defaults', [CommanderController::class, 'defaults']);
-               
+
                 Route::controller(AdminController::class)->group(function () {
                     //Administratorw
                     Route::get('get-data-c1-crowd', 'CrowdC1Id');
@@ -670,6 +670,7 @@ foreach ($kotas as $kota) {
         Route::get("absensi-saksi", [DevelopingController::class, 'absensiSaksi'])->middleware(['auth', 'role:saksi'])->name('absensiSaksi');
 
         Route::get("upload-surat-suara", [DevelopingController::class, 'uploadSuratSuara'])->middleware(['auth', 'role:saksi'])->name('uploadSuratSuara');
+
 
         Route::post("action_absen_saksi", [DevelopingController::class, 'actionAbsensiSaksi'])->middleware(['auth', 'role:saksi'])->name('actionAbsensiSaksi');
 

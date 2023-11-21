@@ -36,6 +36,7 @@ use App\Models\RelawanData;
 use App\Models\QuickSaksiData;
 use App\Models\RegenciesDomain;
 use App\Models\SuratPernyataan;
+use App\Models\SuratSuara;
 use App\Models\Tracking as ModelsTracking;
 
 class VerificatorController extends Controller
@@ -154,6 +155,7 @@ class VerificatorController extends Controller
         }])->get();
         $data['village'] = Village::where('id', $data['paslon'][0]->saksi_data[0]->village_id)->first();
         $data['user'] = User::where('tps_id', $req->id)->first();
+        $data['surat_suara'] = SuratSuara::where('tps_id',$req->id)->first();
         return view('verificator.modalView', $data);
     }
     public function getSaksiPending(Request $req)
@@ -167,6 +169,7 @@ class VerificatorController extends Controller
 
         
         $data['village'] = Village::where('id', $data['paslon'][0]->saksi_data[0]->village_id)->first();
+        $data['surat_suara'] = SuratSuara::where('tps_id',$req->id)->first();
         return view('verificator.modalViewPending', $data);
     }
     public function getKecuranganSaksi(Request $request)
@@ -202,7 +205,7 @@ class VerificatorController extends Controller
         $data['pelanggaran_petugas'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->where('list_kecurangan.jenis', 1)->get();
         $data['pelanggaran_etik'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->where('list_kecurangan.jenis', 2)->get();
         $data['pelanggaran_aparatur'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->where('list_kecurangan.jenis', 3)->get();
-
+        $data['surat_suara'] = SuratSuara::where('tps_id',$request->id)->first();
         return view('verificator.modal-view-kecurangan', $data);
     }
     /**

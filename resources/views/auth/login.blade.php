@@ -23,11 +23,7 @@
                 <div class="container-login100 d-flex">
                     <div class="wrap-login100 p-0">
                         <div class="card-body">
-                            @if (session('error'))
-                                <div class="alert alert-danger">
-                                    {{ session('error') }}
-                                </div>
-                            @endif
+                     
                             <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <input type="hidden" id="latitude" name="latitude">
@@ -116,23 +112,13 @@
                 <!-- CONTAINER CLOSED -->
             </div>
         </div>
-        <section class="bg-light" style="height: 10px;">
-            <div class="container">
-                <img style="display: block; margin-left: auto; margin-right: auto;"
-                    src="{{ asset('/') }}assets/images/acakey_new.png" width="250px" class="pt-5 mb-5">
-                <div class="text-center pb-5" style="font-size: 13px;">
-                    © PT.Mahadaya Swara Teknologi <br />
-                    All Right Reserved 2021
-                </div>
-            </div>
-        </section>
-        <!-- End PAGE -->
+    
 
     </div>
     <section class="bg-light" style="height: 10gitpx;">
         <div class="container">
             <img style="display: block; margin-left: auto; margin-right: auto;"
-                src="{{asset('/')}}assets/images/acakey_new.png" width="250px" class="pt-5 mb-5">
+                src="{{asset('')}}images/logo/hisuara_new.png" width="100px" class="pt-5 mb-5">
             <div class="text-center pb-5" style="font-size: 13px;">
                 © PT.Hisuara Smart Count <br />
                 All Right Reserved 2021

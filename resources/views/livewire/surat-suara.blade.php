@@ -44,7 +44,6 @@
                         </div>
                     </div>
 
-
                     
                     {{-- <h1 class="text-center">
                         <img src="{{asset('')}}assets/icons/hisuara_new.png" class="hadow-4 mb-3 mt-3 rounded-2" style="width: 175px;"
@@ -72,19 +71,19 @@
                         <div class="row no-gutters mt-3">
                             <div class="col-lg-12 mb-2">
                                 <label for="total_surat_suara">Jumlah Hak Pilih (DPT)</label>
-                                <input type="number" class="form-control" id="" value="" name="" required>
+                                <input type="number" class="form-control" id="" value="{{old('dpt')}}" name="dpt" required>
                             </div>
                             <div class="col-lg-12 mb-2">
-                                <label for="surat_suara_tidak_sah">Surat Suara Sah</label>
-                                <input type="number" class="form-control" id="" value="" name="" required>
+                                <label for="surat_suara_sah">Surat Suara Sah</label>
+                                <input type="number" class="form-control" id="" value="{{old('surat_suara_sah')}}" name="surat_suara_sah" required>
                             </div>
                             <div class="col-lg-12 mb-2">
                                 <label for="surat_suara_tidak_sah">Suara Tidak Sah</label>
                                 <input type="number" class="form-control" id="surat_suara_tidak_sah" value="{{old('surat_suara_tidak_sah')}}" name="surat_suara_tidak_sah" required>
                             </div>
                             <div class="col-lg-12 mb-2">
-                                <label for="surat_suara_terpakai">Jumlah Suara Sah dan Suara Tidak Sah</label>
-                                <input type="number" class="form-control" id="" value="" name="" required>
+                                <label for="jumlah_sah_dan_tidak">Jumlah Suara Sah dan Suara Tidak Sah</label>
+                                <input type="number" class="form-control" id="jumlah_sah_dan_tidak" value="{{old('jumlah_sah_dan_tidak')}}" name="jumlah_sah_dan_tidak" required>
                             </div>
                             <div class="col-lg-12 mb-2">
                                 <label for="total_surat_suara">Total Surat Suara</label>

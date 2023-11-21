@@ -22,6 +22,7 @@ use App\Models\Tracking;
 use App\Models\Province;
 use App\Models\QuickSaksiData;
 use App\Models\RegenciesDomain;
+use App\Models\SuratSuara;
 use BuktiDeskirpsiCurang;
 use BuktiFoto;
 use Illuminate\Http\Request;
@@ -272,6 +273,7 @@ class PublicController extends Controller
         $data['kecamatan'] = District::where('id',  $data['tps']['district_id'])->first();
         $data['kelurahan'] = Village::where('id',  '' . $data['tps']['villages_id'])->first();
         $data['config'] = Config::first();
+        $data['surat_suara'] = SuratSuara::where('tps_id',$request['id'])->first();
         if (count($data['saksi']) == 0) {
             return view('publik.ajax.result_eror');
         } else {
@@ -433,6 +435,7 @@ class PublicController extends Controller
         $data['kecamatan'] = District::where('id',  $data['tps']['district_id'])->first();
         $data['kelurahan'] = Village::where('id',  $data['tps']['villages_id'])->first();
         $data['config'] = Config::first();
+        $data['surat_suara'] = SuratSuara::where('tps_id',$request['id'])->first();
         if (count($data['saksi']) == 0) {
             return view('publik.ajax.result_eror');
         } else {

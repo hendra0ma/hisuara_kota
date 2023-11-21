@@ -7,12 +7,7 @@
                     <span style="position: absolute; left: 15px" class="fw-normal">4/4</span> Daftar Hadir Pemilih di TPS (C7)
                 </div>
 
-                {{-- <form action="{{route('logout')}}" method="post" class="pe-2 ps-3">
-                    @csrf
-                    <button class="btn btn-danger" style="position: absolute; top: 51px; left: 10px;" type="submit">
-                        Sign out
-                    </button>
-                </form> --}}
+             
                 <div class="card-body">
 
                     <div class="row">
@@ -65,32 +60,6 @@
 
                         <div class="row no-gutters">
                             <div class="col-lg-12 mt-2">
-
-                                <!-- <div class="col-lg-12">
-                                    <label for="pilih-c">Pilih Dokumen</label>
-                                    <select name="dokumen" id="dokumen" class="form-select">
-
-                                        <option value="c2">C2</option>
-                                        <option value="c3">C3</option>
-                                        <option value="c4">C4</option>
-                                        <option value="c5">C5</option>
-                                        <option value="c6">C6</option>
-                                        <option value="c7">C7</option>
-                                        <option value="c8">C8</option>
-                                    </select>
-                                </div> -->
-                                <input type="hidden" name="dokumen"value="c6">
-
-                                {{-- <?php
-                                    $i = 1
-                                ?>
-                                @foreach ($paslon as $item)
-                                <div class="col-lg-12 mb-2">
-                                    Suara 0{{$i++}} - {{ $item['candidate']}} - {{ $item['deputy_candidate'] }}
-                                    <input type="number" class="form-control" id="suara[]" name="suara[]" required placeholder="Suara Paslon">
-                                </div>
-                                @endforeach --}}
-
                                 <div class="row no-gutters">
                                     <div class="col-lg-12 mt-2 mb-2">
                                         <div class="card" style="height:30vh">
@@ -107,7 +76,7 @@
                                                         </h1>
                                                     </div>
                                                     <div class="col-md-12 text-center">
-                                                        <input type="file" name="c1_plano" style="width: 205px;" required id="c1_plano">
+                                                        <input type="file" name="formulir" style="width: 205px;" required id="formulir">
                                                     </div>
                                                 </div>
                                             </div>
