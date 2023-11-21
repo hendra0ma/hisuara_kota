@@ -24,17 +24,19 @@ $(document).ready(function () {
 
   recognition.onresult = function (event) {
     var interimTranscript = '';
+    console.log('all rsults,', event.results);
     for (var i = event.resultIndex; i < event.results.length; i++) {
       if (event.results[i].isFinal) {
         var finalTranscript = event.results[i][0].transcript.trim().toLowerCase();
         speechOutput.text('Hasil Pengenalan: ' + finalTranscript);
 
-        const isCommandHasKeywordClickBagian = finalTranscript.includes(keywordClickBagian);
-        const isCommandHasKeywordClickTab = finalTranscript.includes(keywordClickTab);
+        // const isCommandHasKeywordClickBagian = finalTranscript.includes(keywordClickBagian);
+        // const isCommandHasKeywordClickTab = finalTranscript.includes(keywordClickTab);
+        const isCommandHasKeywordClickButtonVerifikasi = finalTranscript.includes(keywordClickButtonVerifikasi)
         const isCommandHasKeywordRedirect =
         finalTranscript.includes(keywordRedirect)
-        && isCommandHasKeywordClickBagian == false
-        && isCommandHasKeywordClickTab == false
+        // && isCommandHasKeywordClickBagian == false
+        // && isCommandHasKeywordClickTab == false
 
         if (isCommandHasKeywordRedirect) {
           const dataTargetValue = getTextAfterSpecificWord(keywordRedirect, finalTranscript)
@@ -48,14 +50,11 @@ $(document).ready(function () {
           return selectedElement.click()
         }
 
-        console.log('speech', finalTranscript)
-        if (type == 'redirect') {
-          window.location = `${completeHostname}/${target}`;
-        }
+        console.log('speech,', finalTranscript)
 
-        if (type == 'action') {
+        if (isCommandHasKeywordClickButtonVerifikasi) {
           // alert('klik target')
-          const namaSaksi = target;
+          const namaSaksi = getTextAfterSpecificWord(keywordClickButtonVerifikasi, finalTranscript);
           const h1Elements = document.querySelectorAll('.nama-saksi');
 
           for (let i = 0; i < h1Elements.length; i++) {
@@ -84,6 +83,18 @@ $(document).ready(function () {
       }
     }
   };
+
+
+  setInterval((recognition) => {
+    const isSpeechCheckboxStillOn = document.querySelector('#speechCheckbox').checked
+
+    recognition.onspeechend = () => {
+      if (isSpeechCheckboxStillOn) {
+        recognition.start();
+      }
+    };
+    console.log('interval');
+  }, 3000)
 });
 
 function getTextAfterSpecificWord(specificWord, text) {

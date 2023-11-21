@@ -911,7 +911,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                         <div class="col-md">
                             <div class="mid">
                                 <label class="switch">
-                                    <input type="checkbox" {{($config->default ==
+                                    <input type="checkbox" id="speechCheckbox" {{($config->default ==
                                                         "yes")?'disabled':''}} data-target="mode" onclick="settings('quick_count',this)" {{($config->quick_count
                                                         == "no") ? "":"checked"; }}>
                                     <span class="slider round"></span>
