@@ -1663,9 +1663,9 @@ class AdminController extends Controller
             $data['paslon_tertinggi'] = null;
             $data['urutan'] = null;
         }
-
+        $data['id_kec'] = $id;
         
-      $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
         $data['paslon']  = Paslon::with(['saksi_data' => function ($query) use ($id) {
             $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id', 'district_id')
                 ->whereNull('saksi.pending')
@@ -1721,7 +1721,7 @@ class AdminController extends Controller
             $data['urutan'] = null;
         }
 
-        
+        $data['id_kel'] = $id;
 
         $data['paslon'] = Paslon::with(['saksi_data' => function ($query) use ($id) {
             $query

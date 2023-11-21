@@ -312,9 +312,9 @@ $props = Province::where('id',$kota['province_id'])->first();
         <div class="col-3">
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <div class="card-title">
-                        <a href="{{url('/')}}/administrator/realcount_kecamatan/{{Crypt::encrypt($item['id'])}}">
-                            {{$item['name']}}
+                    <div class="card-title mx-auto">
+                        <a href="{{url('/')}}/administrator/rekap_kecamatan/{{Crypt::encrypt($item['id'])}}">
+                            KECAMATAN{{$item['name']}}
                         </a>
                     </div>
                 </div>

@@ -225,7 +225,11 @@ $tps = Tps::count();
     <div class="col-lg" style="{{($config->quick_count == 'yes')?'':'display:none'}}">
         <div class="card" style="margin-bottom: 1rem">
             <div class="card-header bg-info">
-                <h3 class="card-title text-white mx-auto">QUICK COUNT</h3>
+                <h3 class="card-title text-white mx-auto">
+                    <a href="{{url('')}}/administrator/quick_count2" class="text-white">
+                        QUICK COUNT
+                    </a>
+                </h3>
             </div>
             <div class="card-body" style="position: relative">
                 <img src="{{asset('')}}assets/icons/hisuara_new.png"
@@ -238,7 +242,11 @@ $tps = Tps::count();
     <div class="col-lg">
         <div class="card">
             <div class="card-header bg-info">
-                <h3 class="card-title text-white mx-auto">REKAPITULASI</h3>
+                <h3 class="card-title text-white mx-auto">
+                    <a href="{{url('')}}/administrator/rekapitulasi" class="text-white">
+                        REKAPITULASI
+                    </a>
+                </h3>
             </div>
             <div class="card-body" style="position: relative;">
                 <img src="{{asset('')}}assets/icons/hisuara_new.png"
@@ -252,7 +260,11 @@ $tps = Tps::count();
     <div class="col-lg">
         <div class="card">
             <div class="card-header bg-info">
-                <h3 class="card-title text-white mx-auto">HITUNG ULANG KPU</h3>
+                <h3 class="card-title text-white mx-auto">
+                    <a href="{{url('')}}/administrator/hitung_kpu" class="text-white">
+                        HITUNG ULANG KPU
+                    </a>
+                </h3>
             </div>
             <div class="card-body" style="position: relative;">
                 <img src="{{asset('')}}assets/icons/hisuara_new.png"
@@ -266,7 +278,11 @@ $tps = Tps::count();
     <div class="col-lg" style="{{($config->quick_count == 'yes')?'':'display:none'}}">
         <div class="card" style="margin-bottom: 1rem">
             <div class="card-header bg-info">
-                <h3 class="card-title text-white mx-auto">QUICK COUNT</h3>
+                <h3 class="card-title text-white mx-auto">
+                    <a href="{{url('')}}/administrator/quick_count2" class="text-white">
+                        QUICK COUNT
+                    </a>
+                </h3>
             </div>
             <div class="card-body" style="position: relative">
                 <img src="{{asset('')}}assets/icons/hisuara_new.png"
@@ -279,7 +295,11 @@ $tps = Tps::count();
     <div class="col-lg">
         <div class="card">
             <div class="card-header bg-info">
-                <h3 class="card-title text-white mx-auto">REKAPITULASI</h3>
+                <h3 class="card-title text-white mx-auto">
+                    <a href="{{url('')}}/administrator/rekapitulasi" class="text-white">
+                        REKAPITULASI
+                    </a>
+                </h3>
             </div>
             <div class="card-body" style="position: relative;">
                 <img src="{{asset('')}}assets/icons/hisuara_new.png"
@@ -293,7 +313,11 @@ $tps = Tps::count();
     <div class="col-lg">
         <div class="card">
             <div class="card-header bg-info">
-                <h3 class="card-title text-white mx-auto">HITUNG ULANG KPU</h3>
+                <h3 class="card-title text-white mx-auto">
+                    <a href="{{url('')}}/administrator/hitung_kpu" class="text-white">
+                        HITUNG ULANG KPU
+                    </a>
+                </h3>
             </div>
             <div class="card-body" style="position: relative;">
                 <img src="{{asset('')}}assets/icons/hisuara_new.png"
