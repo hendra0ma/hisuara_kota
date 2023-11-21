@@ -2,6 +2,7 @@
 
 @section('content')
 <?php
+
 use App\Models\District;
 use App\Models\Village;
 use App\Models\Tps;
@@ -10,16 +11,18 @@ use App\Models\Config;
 
 $data['config'] = Config::first();
 $config = Config::first();
+
 use App\Models\Configs;
 use App\Models\RegenciesDomain;
+
 $configs = Config::all()->first();
 $currentDomain = request()->getHttpHost();
 if (isset(parse_url($currentDomain)['port'])) {
     $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
-}else{
+} else {
     $url = $currentDomain;
 }
-$regency_id = RegenciesDomain::where('domain',"LIKE","%".$url."%")->first();
+$regency_id = RegenciesDomain::where('domain', "LIKE", "%" . $url . "%")->first();
 
 $config = new Configs;
 $config->regencies_id =  (string) $regency_id->regency_id;
@@ -70,16 +73,13 @@ $kota = Regency::where('id', $config->regencies_id)->first();
     <div class="col-md-8">
         <div class="row mt-2">
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 c1saksi tablink" onclick="openPage('C1-Saksi', this, '#6259ca')"
-                    id="defaultOpen">C1 Saksi</a>
+                <a class="btn text-white w-100 py-3 c1saksi tablink" onclick="openPage('C1-Saksi', this, '#6259ca')" id="defaultOpen">C1 Saksi</a>
             </div>
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 c1relawan tablink"
-                    onclick="openPage('C1-Relawan', this, '#6259ca')">C1 Relawan TPS</a>
+                <a class="btn text-white w-100 py-3 c1relawan tablink" onclick="openPage('C1-Relawan', this, '#6259ca')">C1 Relawan TPS</a>
             </div>
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 c1relawan tablink"
-                    onclick="openPage('C1-Crowd', this, '#6259ca')">C1 Crowd KPU</a>
+                <a class="btn text-white w-100 py-3 c1relawan tablink" onclick="openPage('C1-Crowd', this, '#6259ca')">C1 Crowd KPU</a>
             </div>
         </div>
     </div>
@@ -104,7 +104,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
         elmnt.classList.add("active-tab");
     }
     // Wrap this part in a DOMContentLoaded event listener
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("defaultOpen").click();
     });
 </script>
@@ -127,31 +127,31 @@ $kota = Regency::where('id', $config->regencies_id)->first();
     <livewire:c1-relawan-kota />
 </div>
 <div id="C1-Crowd" class="tabcontent mt-0 pt-0 px-0">
-<livewire:c1-crowd-voice />
+    <livewire:c1-crowd-voice />
 </div>
 
 <script>
-  // Script SweetAlert2 yang langsung muncul saat halaman dimuat
+    // Script SweetAlert2 yang langsung muncul saat halaman dimuat
     @if(Session::has('sukses_verif'))
-        document.addEventListener('DOMContentLoaded', function () {
-            Swal.fire({
-                icon: 'success',
-                title: 'Verifikasi Berhasil!',
-                text: 'Verifikasi berhasil dilakukan. Data telah dipindah ke Auditor',
-            });
+    document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Verifikasi Berhasil!',
+            text: 'Verifikasi berhasil dilakukan. Data telah dipindah ke Auditor',
+            timer: 4000,
+            showConfirmButton: false,
         });
+    });
     @endif
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-<div class="modal fade" id="periksaC1Verifikator" tabindex="-1" aria-labelledby="periksaC1VerifikatorLabel"
-    aria-hidden="true">
+<div class="modal fade" id="periksaC1Verifikator" tabindex="-1" aria-labelledby="periksaC1VerifikatorLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header" style="padding-right: 3rem">
                 <h3 class="modal-title fw-bold" id="periksaC1VerifikatorLabel">VERIFIKASI DATA C1 TPS</h3>
-                <button type="button" class="btn-close btn-danger text-white mr-5" style="width: 50px"
-                    data-bs-dismiss="modal" aria-label="Close">Close</button>
+                <button type="button" class="btn-close btn-danger text-white mr-5" style="width: 50px" data-bs-dismiss="modal" aria-label="Close">Close</button>
             </div>
             <div class="modal-body">
                 <div class="row" id="container-view-modal">
