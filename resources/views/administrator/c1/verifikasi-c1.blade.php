@@ -127,7 +127,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
     <livewire:c1-relawan-kota />
 </div>
 <div id="C1-Crowd" class="tabcontent mt-0 pt-0 px-0">
-<livewire:c1-crowd-voice />
+    <livewire:c1-crowd-voice />
 </div>
 
 <script>
