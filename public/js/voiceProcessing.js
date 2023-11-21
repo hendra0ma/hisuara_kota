@@ -14,7 +14,6 @@ $(document).ready(function () {
   recognition.continuous = true;
   recognition.interimResults = true;
   const isSpeechCheckboxOn = document.querySelector('#speechCheckbox').checked
-  console.log(isSpeechCheckboxOn);
 
   if (isSpeechCheckboxOn) {
     recognition.start();
@@ -46,6 +45,7 @@ $(document).ready(function () {
         finalTranscript.includes(keywordRedirect)
         && isCommandHasKeywordClickButtonVerifikasi == false
         const isClickButtonVerifikasiCommandHasExceptions = clickButtonVerifikasiExceptions.includes(finalTranscript);
+        console.log('ini', isClickButtonVerifikasiCommandHasExceptions);
 
         if (isCommandHasKeywordRedirect || isClickButtonVerifikasiCommandHasExceptions) {
           const dataTargetValue = getTextAfterSpecificWord(keywordRedirect, finalTranscript)
@@ -58,7 +58,7 @@ $(document).ready(function () {
           return selectedElement.click()
         }
 
-        // console.log('speech,', finalTranscript)
+        console.log('speech,', finalTranscript)
 
         if (isCommandHasKeywordClickButtonVerifikasi) {
           const namaSaksi = getTextAfterSpecificWord(keywordClickButtonVerifikasi, finalTranscript);
