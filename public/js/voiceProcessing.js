@@ -4,30 +4,17 @@ const keywordClickTab = 'buka tab';
 const keywordClickButtonVerifikasi = 'buka verifikasi';
 
 $(document).ready(function () {
-  var recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+  const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
   recognition.lang = 'id-ID';
   recognition.continuous = true;
   recognition.interimResults = true;
 
-  var speechOutput = $('#speechOutput');
-  var startButton = $('#startSpeech');
-  var stopButton = $('#stopSpeech');
-
-  // startButton.click(function() {
-  //     recognition.start();
-  // });
-
-  // stopButton.click(function() {
-  //     recognition.stop();
-  // });
   recognition.start();
 
   recognition.onresult = function (event) {
-    var interimTranscript = '';
-    for (var i = event.resultIndex; i < event.results.length; i++) {
+    for (let i = event.resultIndex; i < event.results.length; i++) {
       if (event.results[i].isFinal) {
-        var finalTranscript = event.results[i][0].transcript.trim().toLowerCase();
-        speechOutput.text('Hasil Pengenalan: ' + finalTranscript);
+        let finalTranscript = event.results[i][0].transcript.trim().toLowerCase();
 
         const isCommandHasKeywordClickButtonVerifikasi = finalTranscript.includes(keywordClickButtonVerifikasi)
         const isCommandHasKeywordRedirect =
@@ -37,16 +24,15 @@ $(document).ready(function () {
         if (isCommandHasKeywordRedirect) {
           const dataTargetValue = getTextAfterSpecificWord(keywordRedirect, finalTranscript)
           const formattedFinalTranscript = formatFinalTranscriptToCommandTargetFormat(dataTargetValue)
-          alert(dataTargetValue, formattedFinalTranscript)
-          var selectedElement = document.querySelector('[data-command-target="' + formattedFinalTranscript + '"]')
-          var commandTargetMenuName = selectedElement.getAttribute('data-command-target-menu');
-          var commandTargetMenuElement = document.querySelector('[data-command-target="' + commandTargetMenuName + '"]')
-          console.log(selectedElement);
+          const selectedElement = document.querySelector('[data-command-target="' + formattedFinalTranscript + '"]')
+          const commandTargetMenuName = selectedElement.getAttribute('data-command-target-menu');
+          const commandTargetMenuElement = document.querySelector('[data-command-target="' + commandTargetMenuName + '"]')
+
           if (commandTargetMenuElement) commandTargetMenuElement.click()
           return selectedElement.click()
         }
 
-        console.log('speech,', finalTranscript)
+        // console.log('speech,', finalTranscript)
 
         if (isCommandHasKeywordClickButtonVerifikasi) {
           const namaSaksi = getTextAfterSpecificWord(keywordClickButtonVerifikasi, finalTranscript);
@@ -56,28 +42,21 @@ $(document).ready(function () {
             const element = h1Elements[i];
             const elementText = element.textContent.toLowerCase();
 
-            console.log(elementText, namaSaksi.toLowerCase());
-
+            
             if (elementText.includes(namaSaksi.toLowerCase())) {
-              console.log('Found: ' + elementText);
-
+              // console.log(elementText, namaSaksi.toLowerCase());
               const idSaksi = element.getAttribute('data-id');
-              console.log(idSaksi);
-
               const buttonVerifikasi = document.querySelector(`button[data-id="${idSaksi}"]`);
-              console.log(buttonVerifikasi.textContent);
               buttonVerifikasi.click();
               break;
             }
           }
         }
-
-      } else {
-        interimTranscript += event.results[i][0].transcript;
-      }
     }
+  }
   };
 
+  listenCheckboxStatus();
 
   const dontEndTheSpeech = setInterval(() => {
     const isSpeechCheckboxStillOn = document.querySelector('#speechCheckbox').checked
@@ -89,16 +68,31 @@ $(document).ready(function () {
         clearInterval(dontEndTheSpeech)
       }
     };
-    console.log('interval');
+    console.log('Speech still listening...');
   }, 3000)
 });
 
+function listenCheckboxStatus() {
+  const checkboxElement = document.getElementById("speechCheckbox");
+  checkboxElement.addEventListener("change", () => {
+    const savedStatus = localStorage.getItem("speechCheckboxStatus");
+
+    if (savedStatus !== null) {
+      checkboxElement.checked = savedStatus === "true";
+    }
+    
+    localStorage.setItem("speechCheckboxStatus", checkboxElement.checked);
+
+    location.reload()
+  });
+}
+
 function getTextAfterSpecificWord(specificWord, text) {
-  var pattern = new RegExp("\\b(?:" + specificWord + ")\\s+(.*)\\b");
-  var matches = text.match(pattern);
+  const pattern = new RegExp("\\b(?:" + specificWord + ")\\s+(.*)\\b");
+  const matches = text.match(pattern);
 
   if (matches && matches[1] !== undefined) {
-    var wordsAfterSpecificWord = matches[1];
+    const wordsAfterSpecificWord = matches[1];
     return wordsAfterSpecificWord.trim();
   } else {
     console.log("Nama tidak terdeteksi");
