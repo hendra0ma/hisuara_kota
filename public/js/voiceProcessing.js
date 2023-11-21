@@ -2,14 +2,18 @@ const keywordRedirect = 'buka';
 const keywordClickBagian = 'buka bagian';
 const keywordClickTab = 'buka tab';
 const keywordClickButtonVerifikasi = 'buka verifikasi';
+const clickButtonVerifikasiExceptions = ['buka verifikasi c1'];
 
 $(document).ready(function () {
   const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
   recognition.lang = 'id-ID';
   recognition.continuous = true;
   recognition.interimResults = true;
+  const isSpeechCheckboxOn = document.querySelector('#speechCheckbox').checked
 
-  recognition.start();
+  if (isSpeechCheckboxOn) {
+    recognition.start();
+  }
 
   recognition.onresult = function (event) {
     for (let i = event.resultIndex; i < event.results.length; i++) {
@@ -20,8 +24,9 @@ $(document).ready(function () {
         const isCommandHasKeywordRedirect =
         finalTranscript.includes(keywordRedirect)
         && isCommandHasKeywordClickButtonVerifikasi == false
+        const isClickButtonVerifikasiCommandHasExceptions = clickButtonVerifikasiExceptions.includes(finalTranscript);
 
-        if (isCommandHasKeywordRedirect) {
+        if (isCommandHasKeywordRedirect || isClickButtonVerifikasiCommandHasExceptions) {
           const dataTargetValue = getTextAfterSpecificWord(keywordRedirect, finalTranscript)
           const formattedFinalTranscript = formatFinalTranscriptToCommandTargetFormat(dataTargetValue)
           const selectedElement = document.querySelector('[data-command-target="' + formattedFinalTranscript + '"]')
@@ -42,7 +47,7 @@ $(document).ready(function () {
             const element = h1Elements[i];
             const elementText = element.textContent.toLowerCase();
 
-            
+
             if (elementText.includes(namaSaksi.toLowerCase())) {
               // console.log(elementText, namaSaksi.toLowerCase());
               const idSaksi = element.getAttribute('data-id');
@@ -56,7 +61,9 @@ $(document).ready(function () {
   }
   };
 
-  listenCheckboxStatus();
+  const namaLocalStorageCheckboxStatus = 'speechCheckboxStatus'
+  setCheckboxStatusForTheFirstTime(namaLocalStorageCheckboxStatus)
+  listenCheckboxStatus(namaLocalStorageCheckboxStatus);
 
   const dontEndTheSpeech = setInterval(() => {
     const isSpeechCheckboxStillOn = document.querySelector('#speechCheckbox').checked
@@ -72,16 +79,24 @@ $(document).ready(function () {
   }, 3000)
 });
 
-function listenCheckboxStatus() {
+function setCheckboxStatusForTheFirstTime(namaLocalStorage) {
+  const checkboxElement = document.getElementById("speechCheckbox")
+  const savedStatus = localStorage.getItem(namaLocalStorage)
+
+  if (savedStatus === null) {
+    localStorage.setItem(namaLocalStorage, checkboxElement.checked);
+  } else {
+    checkboxElement.checked = (savedStatus == 'true')
+  }
+}
+
+function listenCheckboxStatus(namaLocalStorage) {
   const checkboxElement = document.getElementById("speechCheckbox");
   checkboxElement.addEventListener("change", () => {
-    const savedStatus = localStorage.getItem("speechCheckboxStatus");
+    localStorage.setItem(namaLocalStorage, checkboxElement.checked);
+    const savedStatus = localStorage.getItem(namaLocalStorage);
 
-    if (savedStatus !== null) {
-      checkboxElement.checked = savedStatus === "true";
-    }
-    
-    localStorage.setItem("speechCheckboxStatus", checkboxElement.checked);
+    checkboxElement.checked = savedStatus === "true";
 
     location.reload()
   });
