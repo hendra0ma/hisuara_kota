@@ -2,6 +2,7 @@ const keywordRedirect = 'buka';
 const keywordClickBagian = 'buka bagian';
 const keywordClickTab = 'buka tab';
 const keywordClickButtonVerifikasi = 'buka verifikasi';
+const keywordClickCloseModalButtonVerifikasi = 'tutup verifikasi';
 const clickButtonVerifikasiExceptions = ['buka verifikasi c1'];
 
 $(document).ready(function () {
@@ -45,7 +46,7 @@ $(document).ready(function () {
         finalTranscript.includes(keywordRedirect)
         && isCommandHasKeywordClickButtonVerifikasi == false
         const isClickButtonVerifikasiCommandHasExceptions = clickButtonVerifikasiExceptions.includes(finalTranscript);
-        console.log('ini', isClickButtonVerifikasiCommandHasExceptions);
+        const isCommandHasKeywordClickCloseModalButtonVerifikasi = finalTranscript.includes(keywordClickCloseModalButtonVerifikasi)
 
         if (isCommandHasKeywordRedirect || isClickButtonVerifikasiCommandHasExceptions) {
           const dataTargetValue = getTextAfterSpecificWord(keywordRedirect, finalTranscript)
@@ -77,6 +78,11 @@ $(document).ready(function () {
               break;
             }
           }
+        }
+
+        if (isCommandHasKeywordClickCloseModalButtonVerifikasi) {
+          const idElementButtonCloseModal = 'periksaC1Verifikator';
+          $(`#${idElementButtonCloseModal}`).modal('hide')
         }
     }
   }
