@@ -2,6 +2,9 @@ const keywordRedirect = 'buka';
 const keywordClickBagian = 'buka bagian';
 const keywordClickTab = 'buka tab';
 const keywordClickButtonVerifikasi = 'buka verifikasi';
+const keywordClickHubungiButtonOnModalVerifikasi = 'hubungi';
+const keywordClickVerifikasiButtonOnModalVerifikasi = 'verifikasi oke';
+const keywordClickKoreksiButtonOnModalVerifikasi = 'koreksi';
 const keywordClickCloseModalButtonVerifikasi = 'tutup verifikasi';
 const clickButtonVerifikasiExceptions = ['buka verifikasi c1'];
 
@@ -45,8 +48,12 @@ $(document).ready(function () {
         const isCommandHasKeywordRedirect =
         finalTranscript.includes(keywordRedirect)
         && isCommandHasKeywordClickButtonVerifikasi == false
+
         const isClickButtonVerifikasiCommandHasExceptions = clickButtonVerifikasiExceptions.includes(finalTranscript);
-        const isCommandHasKeywordClickCloseModalButtonVerifikasi = finalTranscript.includes(keywordClickCloseModalButtonVerifikasi)
+        const isCommandHasKeywordClickHubungiButtonOnModal = finalTranscript.includes(keywordClickHubungiButtonOnModalVerifikasi)
+        const isCommandHasKeywordClickVerifikasiButtonOnModal = finalTranscript.includes(keywordClickVerifikasiButtonOnModalVerifikasi)
+        const isCommandHasKeywordClickKoreksiButtonOnModal = finalTranscript.includes(keywordClickKoreksiButtonOnModalVerifikasi)
+        const isCommandHasKeywordClickCloseModalButton = finalTranscript.includes(keywordClickCloseModalButtonVerifikasi)
 
         if (isCommandHasKeywordRedirect || isClickButtonVerifikasiCommandHasExceptions) {
           const dataTargetValue = getTextAfterSpecificWord(keywordRedirect, finalTranscript)
@@ -80,7 +87,25 @@ $(document).ready(function () {
           }
         }
 
-        if (isCommandHasKeywordClickCloseModalButtonVerifikasi) {
+        if (isCommandHasKeywordClickHubungiButtonOnModal) {
+          const idElementButtonHubungiOnModal = 'hubungiWhatsappButton';
+          const url = $(`${idElementButtonHubungiOnModal}`).attr('href');
+          window.location = url
+        }
+
+        if (isCommandHasKeywordClickKoreksiButtonOnModal) {
+          const idElementButtonKoreksiOnModal = 'koreksiButton';
+          const url = $(`${idElementButtonKoreksiOnModal}`).attr('data-url');
+          window.location = url
+        }
+
+        if (isCommandHasKeywordClickVerifikasiButtonOnModal) {
+          const idElementButtonVerifikasiOnModal = 'verifikasiButton';
+          const url = $(`${idElementButtonVerifikasiOnModal}`).attr('data-url');
+          window.location = url
+        }
+
+        if (isCommandHasKeywordClickCloseModalButton) {
           const idElementButtonCloseModal = 'periksaC1Verifikator';
           $(`#${idElementButtonCloseModal}`).modal('hide')
         }
