@@ -7,13 +7,14 @@ const keywordClickButtonVerifikasi = 'buka verifikasi';
 const keywordClickHubungiButtonOnModalVerifikasi = 'hubungi';
 const keywordClickVerifikasiButtonOnModalVerifikasi = 'verifikasi oke';
 const keywordClickKoreksiButtonOnModalVerifikasi = 'koreksi';
-const keywordClickCloseModalButtonVerifikasi = 'tutup modal';
+const keywordClickCloseModalButtonVerifikasi = 'tutup verifikasi';
 const clickButtonVerifikasiExceptions = ['buka verifikasi c1', 'buka verifikasi saksi', 'buka verifikasi crowd c1', 'buka verifikasi admin'];
 
 const keywordClickKtpButton = 'lihat ktp';
 const keywordClickDiterimaButton = 'diterima';
 const keywordClickDitolakButton = 'ditolak';
 const keywordClickHubungiButton = 'hubungi';
+const keywordClickCloseModalButtonSaksi = 'tutup modal';
 
 const keywordScrollUp = ['scroll up', 'naik']
 const keywordScrollDown = ['scroll down', 'turun']
@@ -73,12 +74,13 @@ try {
           const isCommandHasKeywordClickHubungiButtonOnModal = finalTranscript.includes(keywordClickHubungiButtonOnModalVerifikasi)
           const isCommandHasKeywordClickVerifikasiButtonOnModal = finalTranscript.includes(keywordClickVerifikasiButtonOnModalVerifikasi)
           const isCommandHasKeywordClickKoreksiButtonOnModal = finalTranscript.includes(keywordClickKoreksiButtonOnModalVerifikasi)
-          const isCommandHasKeywordClickCloseModalButton = finalTranscript.includes(keywordClickCloseModalButtonVerifikasi)
+          const isCommandHasKeywordClickCloseModalButtonVerifikasi = finalTranscript.includes(keywordClickCloseModalButtonVerifikasi)
 
           const isCommandHasKeywordClickKtpButton = finalTranscript.includes(keywordClickKtpButton)
           const isCommandHasKeywordClickDiterimaButton = finalTranscript.includes(keywordClickDiterimaButton)
           const isCommandHasKeywordClickDitolakButton = finalTranscript.includes(keywordClickDitolakButton)
           const isCommandHasKeywordClickHubungiButton = finalTranscript.includes(keywordClickHubungiButton)
+          const isCommandHasKeywordClickCloseModalButtonSaksi = finalTranscript.includes(keywordClickCloseModalButtonSaksi)
 
           const isCommandHasKeywordScrollUp = keywordScrollUp.includes(finalTranscript)
           const isCommandHasKeywordScrollDown = keywordScrollDown.includes(finalTranscript)
@@ -133,9 +135,13 @@ try {
             window.location = url
           }
 
-          if (isCommandHasKeywordClickCloseModalButton) {
-            const idElementButtonCloseModal = 'periksaC1Verifikator';
-            $(`#${idElementButtonCloseModal}`).modal('hide')
+          if (isCommandHasKeywordClickCloseModalButtonVerifikasi) {
+            closeModal('periksaC1Verifikator')
+          }
+
+
+          if (isCommandHasKeywordClickCloseModalButtonSaksi) {
+            closeModal('cekmodal')
           }
 
           if (isCurrentPageVerifikasiSaksi) {
@@ -224,6 +230,9 @@ try {
       }
     };
 
+    function closeModal(id) {
+      $(`#${id}`).modal('hide')
+    }
 
     function setCheckboxStatusForTheFirstTime(namaLocalStorage) {
       const checkboxElement = document.getElementById("speechCheckbox")
