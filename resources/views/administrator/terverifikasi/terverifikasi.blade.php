@@ -75,20 +75,20 @@ $props = Province::where('id',$kota['province_id'])->first();
 
     .custom-prev {
         position: absolute;
-        top:7.5px;
+        top: 7.5px;
         left: 0px;
     }
 
     .custom-next {
         position: absolute;
-        top:7.5px;
+        top: 7.5px;
         right: 0px;
     }
 
     .carousel-item {
         transition: -webkit-transform .6s ease;
         transition: transform .6s ease;
-        transition: transform .6s ease,-webkit-transform .6s ease;
+        transition: transform .6s ease, -webkit-transform .6s ease;
     }
 
     .title-atas-table {
@@ -99,11 +99,11 @@ $props = Province::where('id',$kota['province_id'])->first();
 <div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
 
     <div class="col-lg-12">
-       <center>
-        <h2 class="mb-3 page-title mt-1" style="font-size: 60px">
-            TERVERIFIKASI
-        </h2>
-       </center>
+        <center>
+            <h2 class="mb-3 page-title mt-1" style="font-size: 60px">
+                TERVERIFIKASI
+            </h2>
+        </center>
     </div>
 
     <div class="col-lg-12">
@@ -113,44 +113,44 @@ $props = Province::where('id',$kota['province_id'])->first();
                 list-style: none;
                 background-color: #0d6efd !important;
             }
-    
+
             ul.breadcrumb li {
                 display: inline;
                 font-size: 18px;
             }
-    
+
             ul.breadcrumb li+li:before {
                 padding: 8px;
                 color: white;
                 content: "/\00a0";
             }
-    
+
             ul.breadcrumb li a {
-    
+
                 text-decoration: none;
             }
-    
+
             ul.breadcrumb li a:hover {
                 color: #01447e;
                 text-decoration: underline;
             }
         </style>
-    
+
         <ul class="breadcrumb">
             <?php $regency =Regency::where('id',$config->regencies_id)->select('name')->first(); ?>
             <li><a href="" class="text-white">{{$regency->name}}</a></li>
-    
+
         </ul>
     </div>
-    
+
     <div class="col-12 mt-1">
         <div class="card">
             {{-- <div class="card-header bg-secondary">
                 <h3 class="card-title text-white">Suara TPS Terverifikasi</h3>
             </div> --}}
             <div class="card-body" style="position: relative">
-                <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px"
-                    alt="">
+                <img src="{{asset('')}}assets/icons/hisuara_new.png"
+                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
                     <div class="col-xxl-6">
                         <div class="container">
@@ -163,7 +163,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                         </div>
                         <?php $i = 1; ?>
                         <div class="row mt-2">
-                        @foreach ($paslon_terverifikasi as $pas)
+                            @foreach ($paslon_terverifikasi as $pas)
                             <div class="col-lg col-md col-sm col-xl mb-3">
                                 <div class="card" style="margin-bottom: 0px;">
                                     <div class="card-body p-3">
@@ -199,7 +199,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                         .row:has(> .custom-urutan) {
                             margin-top: 75px
                         }
-                    
+
                         .custom-urutan::before {
                             position: absolute;
                             top: -80px;
@@ -208,15 +208,15 @@ $props = Province::where('id',$kota['province_id'])->first();
                             font-size: 60px;
                             color: black;
                         }
-                    
+
                         .custom-urutan:nth-child(1)::before {
                             content: '1'
                         }
-                    
+
                         .custom-urutan:nth-child(2)::before {
                             content: '2'
                         }
-                    
+
                         .custom-urutan:nth-child(3)::before {
                             content: '3'
                         }
@@ -224,14 +224,16 @@ $props = Province::where('id',$kota['province_id'])->first();
 
                     <div class="col-xxl-6">
                         <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Hasil Verifikasi Suara</div>
-                        <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Pemilihan Presiden dan Wakil Presiden</div>
+                        <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Pemilihan Presiden dan Wakil
+                            Presiden</div>
                         <div class="text-center title-atas-table fs-5 fw-bold">{{ $kota['name'] }}</div>
                         <div class="row mx-auto" style="width: 884.5px;">
                             @foreach ($urutan as $urutPaslon)
                             <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
                             <div class="col py-2 judul text-center text-white custom-urutan"
                                 style="background: {{ $pasangan->color }}">
-                                <div class="text">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} : {{$urutPaslon->total}}</b></div>
+                                <div class="text">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} :
+                                    {{$urutPaslon->total}}</b></div>
                             </div>
                             @endforeach
                         </div>
@@ -239,9 +241,10 @@ $props = Province::where('id',$kota['province_id'])->first();
                             <thead class="bg-primary">
                                 <td class="text-white text-center align-middle">KECAMATAN</td>
                                 @foreach ($paslon as $item)
-                                <th class="text-white text-center align-middle" style="background: {{$item->color}}; position:relative">
-                                    <img style="width: 60px; position: absolute; left: 0; bottom: 0" src="{{asset('')}}storage/{{$item->picture}}"
-                                        alt="">
+                                <th class="text-white text-center align-middle"
+                                    style="background: {{$item->color}}; position:relative">
+                                    <img style="width: 60px; position: absolute; left: 0; bottom: 0"
+                                        src="{{asset('')}}storage/{{$item->picture}}" alt="">
                                     <div class="ms-7">
                                         {{ $item['candidate']}} - <br>
                                         {{ $item['deputy_candidate']}}
@@ -271,15 +274,15 @@ $props = Province::where('id',$kota['province_id'])->first();
                         </h1>
                     </div>
                     <hr style="background-color: black"> --}}
-                    
-                    
+
+
                 </div>
 
 
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <div class="col-12 bg-danger text-white p-2 fs-5 fw-bold mb-3 text-center">
@@ -300,7 +303,7 @@ $props = Province::where('id',$kota['province_id'])->first();
         <div class="col-3">
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <div class="card-title mx-auto">
+                    <div class="card-title">
                         <a href="{{url('/')}}/administrator/terverifikasi_kecamatan/{{Crypt::encrypt($item['id'])}}">
                             KECAMATAN {{$item['name']}}
                         </a>

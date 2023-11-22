@@ -151,7 +151,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
         <div class="modal-content">
             <div class="modal-header" style="padding-right: 3rem">
                 <h3 class="modal-title fw-bold" id="periksaC1VerifikatorLabel">VERIFIKASI DATA C1 TPS</h3>
-                <button type="button" class="btn-close btn-danger text-white mr-5" style="width: 50px" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
             <div class="modal-body">
                 <div class="row" id="container-view-modal">
@@ -168,7 +168,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" id="periksaC1RelawanLabel">Data TPS Relawan</h3>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
             <div class="modal-body">
                 <div class="row" id="container-view-modal-relawan">

@@ -10,4 +10,5 @@ class ChatApp extends Model
     use HasFactory;
     protected $table = 'chat_app';
     protected $fillable = ['message', 'send_by', 'time', 'role_id'];
+    
 }

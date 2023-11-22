@@ -177,10 +177,9 @@
 
 <div class="modal fade" id="periksakecurangan" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-fullscreen" role="document">
-        <div class="modal-header bg-primary text-white" style="position: relative">
-            <h3 class="modal-title fw-bold mx-auto" id="periksaC1VerifikatorLabel">Proses Verifikasi & Validasi Data Kecurangan</h3>
-            <button type="button" class="btn-close btn-danger text-white " style="width: 50px; position: absolute; right: 3rem" data-bs-dismiss="modal"
-                aria-label="Close">Close</button>
+        <div class="modal-header bg-primary" style="position: relative">
+            <h3 class="modal-title fw-bold text-white mx-auto" id="periksaC1VerifikatorLabel">Proses Verifikasi & Validasi Data Kecurangan</h3>
+            <button class="btn btn-secondary" style="position: absolute; right: 3rem;" data-bs-dismiss="modal">Close</button>
         </div>
         <div class="modal-content h-auto">
             <div id="container-view-modal-kecurangan">

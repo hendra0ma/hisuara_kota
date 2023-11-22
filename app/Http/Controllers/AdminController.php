@@ -140,10 +140,10 @@ class AdminController extends Controller
                 $data['total_verification_voice'] += $verif->voice;
             }
         }
-        $data['saksi_masuk'] = Saksi::count();
+        $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
 
-        $data['tps_masuk'] = Tps::where('setup', 'terisi')->count();
-        $data['total_tps']   =  Tps::where('setup', 'belum terisi')->count();
+        $data['tps_masuk'] = Tps::where('regency_id',$this->config->regencies_id)->where('setup', 'terisi')->count();
+        $data['total_tps']   =  Tps::where('regency_id',$this->config->regencies_id)->where('setup', 'belum terisi')->count();
         $data['tps_kosong']  =  $data['total_tps'] - $data['tps_masuk'];
 
 
@@ -152,7 +152,7 @@ class AdminController extends Controller
             $data['total_incoming_vote'] += $key->voice;
         }
         $data['suara_masuk'] = SaksiData::where('regency_id', $this->config->regencies_id)->count('voice');
-        $data['tracking'] = ModelsTracking::get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->get();
         $data['config'] = Config::first();
         $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
         $data['district_quick'] = District::where('regency_id', $this->config->regencies_id)->get();
@@ -188,7 +188,7 @@ class AdminController extends Controller
                 ->whereNull('saksi.pending')
                 ->where('saksi.verification', 1)->where('saksi.district_id', decrypt($id));
         }])->get();
-        $verification = Saksi::where('verification', 1)->with('saksi_data')->where('district_id', decrypt($id))->get();
+        $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('district_id', decrypt($id))->get();
         $dpt = District::where('regency_id', $this->config->regencies_id)->sum("dpt");
         $incoming_vote = SaksiData::select('voice')->where('district_id', decrypt($id))->get();
         $data['total_verification_voice'] = 0;
@@ -204,11 +204,11 @@ class AdminController extends Controller
         $data['realcount']   =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
         $data['district']    = Village::where("district_id", decrypt($id))->get();
         $data['total_tps']   = Village::where('district_id', decrypt($id))->sum('tps');
-        $data['tps_masuk']   = Tps::where('district_id', decrypt($id))->where('setup', 'terisi')->count('number');
-        $data['tps_kosong']  = Tps::where('district_id', decrypt($id))->count('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('district_id', decrypt($id))->where('setup', 'terisi')->count('number');
+        $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('district_id', decrypt($id))->count('number');
         $data['suara_masuk'] = SaksiData::where('district_id', decrypt($id))->count('voice');
         $data['kecamatan'] = District::where('id', decrypt($id))->first();
-        $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
         return view('administrator.rekapitulasi.kecamatan', $data);
     }
 
@@ -230,7 +230,7 @@ class AdminController extends Controller
                     ->whereNull('saksi.pending')
                     ->where('saksi.verification', 1)->where('saksi.district_id', decrypt($id));
                 }])->get();
-            $verification = Saksi::where('verification', 1)->with('saksi_data')->where('district_id', decrypt($id))->get();
+            $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('district_id', decrypt($id))->get();
             $dpt = District::where('regency_id', $this->config->regencies_id)->sum("dpt");
             $incoming_vote = SaksiData::select('voice')->where('district_id', decrypt($id))->get();
             $data['total_verification_voice'] = 0;
@@ -247,14 +247,14 @@ class AdminController extends Controller
             $data['realcount']   =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
             $data['kel']    = Village::where("district_id", decrypt($id))->get();
             $data['total_tps']   = Village::where('district_id', decrypt($id))->sum('tps');
-            $data['tps_masuk']   = Tps::where('district_id', decrypt($id))->where('setup', 'terisi')->count('number');
-            $data['tps_kosong']  = Tps::where('district_id', decrypt($id))->count('number');
+            $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('district_id', decrypt($id))->where('setup', 'terisi')->count('number');
+            $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('district_id', decrypt($id))->count('number');
             $data['suara_masuk'] = SaksiData::where('district_id', decrypt($id))->count('voice');
             $data['kecamatan'] = District::where('id', decrypt($id))->first();
-            $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+            $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
             $data['title'] = "KECAMATAN " . $data['kecamatan']['name'] . "";
-            $data['saksi_masuk'] = Saksi::count();
-            $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
+            $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
+            $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->count();
             $data['id_kecamatan'] = decrypt($id);
         } elseif (isset($url_first[3]) && $url_first[2] == "perhitungan_kelurahan") { // Perhitungan Kelurahan
             $id = $data['url_first'][3];
@@ -278,7 +278,7 @@ class AdminController extends Controller
             foreach ($incoming_vote as $key) {
                 $data['total_incoming_vote'] += $key->voice;
             }
-            $verification = Saksi::where('verification', 1)->with('saksi_data')->where('village_id', decrypt($id))->get();
+            $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('village_id', decrypt($id))->get();
             $data['total_incoming_vote'] = 0;
             $data['total_verification_voice'] = 0;
             foreach ($verification as $key) {
@@ -286,12 +286,12 @@ class AdminController extends Controller
                     $data['total_verification_voice'] += $verif->voice;
                 }
             }
-            $data['tps_masuk']   = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->sum('number');
+            $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->sum('number');
             $data['realcount']   = (string) $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
 
             $data['total_tps']   = Village::where('id', (string)decrypt($id))->sum('tps');
-            $data['tps_masuk']   = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->count('number');
-            $data['tps_kosong']  = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'belum_terisi')->count('number');
+            $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->count('number');
+            $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'belum_terisi')->count('number');
             $data['suara_masuk'] = SaksiData::where('village_id', (string)decrypt($id))->sum('voice');
             $data['saksi']       = Saksi::where('village_id', (string)decrypt($id))->get();
 
@@ -305,7 +305,7 @@ class AdminController extends Controller
             $data['paslon_candidate'] = Paslon::get();
             $data['config'] = Config::first();
             $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', $id)->count();
-            $data['tps_kel'] = Tps::where('villages_id', (string)$id)->get();
+            $data['tps_kel'] = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)$id)->get();
             $data['id'] = $id;
             $data['id_kelurahan'] = $id;
             $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', (string)$id)->where('saksi.verification', (string)1)->count();
@@ -316,10 +316,10 @@ class AdminController extends Controller
             ->whereNull('saksi.pending')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->get();
-            $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+            $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
             $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
-            $data['saksi_masuk'] = Saksi::count();
-            $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
+            $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
+            $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->count();
         }else{ // Perhitungan Kota
             $data['paslon']  = Paslon::with(['saksi_data' => function ($query) {
                 $query
@@ -348,10 +348,10 @@ class AdminController extends Controller
                     $data['total_verification_voice'] += $verif->voice;
                 }
             }
-            $data['saksi_masuk'] = Saksi::count();
+            $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
 
-            $data['tps_masuk'] = Tps::where('setup', 'terisi')->count();
-            $data['total_tps']   =  Tps::where('setup', 'belum terisi')->count();
+            $data['tps_masuk'] = Tps::where('regency_id',$this->config->regencies_id)->where('setup', 'terisi')->count();
+            $data['total_tps']   =  Tps::where('regency_id',$this->config->regencies_id)->where('setup', 'belum terisi')->count();
             $data['tps_kosong']  =  $data['total_tps'] - $data['tps_masuk'];
 
 
@@ -360,7 +360,7 @@ class AdminController extends Controller
                 $data['total_incoming_vote'] += $key->voice;
             }
             $data['suara_masuk'] = SaksiData::where('regency_id', $this->config->regencies_id)->count('voice');
-            $data['tracking'] = ModelsTracking::get();
+            $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->get();
             $data['config'] = Config::first();
             $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
         }
@@ -386,7 +386,7 @@ class AdminController extends Controller
                 ->whereNull('saksi.pending')
                 ->where('saksi.verification', 1)->where('saksi.district_id', decrypt($id));
             }])->get();
-            $verification = Saksi::where('verification', 1)->with('saksi_data')->where('district_id', decrypt($id))->get();
+            $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('district_id', decrypt($id))->get();
             $dpt = District::where('regency_id', $this->config->regencies_id)->sum("dpt");
             $incoming_vote = SaksiData::select('voice')->where('district_id', decrypt($id))->get();
             $data['total_verification_voice'] = 0;
@@ -403,14 +403,14 @@ class AdminController extends Controller
             $data['realcount']   =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
             $data['kel']    = Village::where("district_id", decrypt($id))->get();
             $data['total_tps']   = Village::where('district_id', decrypt($id))->sum('tps');
-            $data['tps_masuk']   = Tps::where('district_id', decrypt($id))->where('setup', 'terisi')->count('number');
-            $data['tps_kosong']  = Tps::where('district_id', decrypt($id))->count('number');
+            $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('district_id', decrypt($id))->where('setup', 'terisi')->count('number');
+            $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('district_id', decrypt($id))->count('number');
             $data['suara_masuk'] = SaksiData::where('district_id', decrypt($id))->count('voice');
             $data['kecamatan'] = District::where('id', decrypt($id))->first();
-            $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+            $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
             $data['title'] = "KECAMATAN " . $data['kecamatan']['name'] . "";
-            $data['saksi_masuk'] = Saksi::count();
-            $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
+            $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
+            $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->count();
             $data['id_kecamatan'] = decrypt($id);
         } elseif (isset($url_first[3]) && $url_first[2] == "perhitungan_kelurahan") { // Perhitungan Kelurahan
             $id = $data['url_first'][3];
@@ -434,7 +434,7 @@ class AdminController extends Controller
             foreach ($incoming_vote as $key) {
                 $data['total_incoming_vote'] += $key->voice;
             }
-            $verification = Saksi::where('verification', 1)->with('saksi_data')->where('village_id', decrypt($id))->get();
+            $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('village_id', decrypt($id))->get();
             $data['total_incoming_vote'] = 0;
             $data['total_verification_voice'] = 0;
             foreach ($verification as $key) {
@@ -442,17 +442,17 @@ class AdminController extends Controller
                     $data['total_verification_voice'] += $verif->voice;
                 }
             }
-            $data['tps_masuk']   = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->sum('number');
+            $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->sum('number');
             $data['realcount']   = (string) $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
 
             $data['total_tps']   = Village::where('id', (string)decrypt($id))->sum('tps');
-            $data['tps_masuk']   = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->count('number');
-            $data['tps_kosong']  = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'belum_terisi')->count('number');
+            $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->count('number');
+            $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'belum_terisi')->count('number');
             $data['suara_masuk'] = SaksiData::where('village_id', (string)decrypt($id))->sum('voice');
             $data['saksi']       = Saksi::where('village_id', (string)decrypt($id))->get();
 
             $id = Crypt::decrypt($id);
-            $config = Config::first();
+       
             $data['regency'] = Regency::where('id', (string)$this->config->regencies_id)->first();
 
             $data['village'] = Village::where('id', (string)$id)->first();
@@ -461,7 +461,7 @@ class AdminController extends Controller
             $data['paslon_candidate'] = Paslon::get();
             $data['config'] = Config::first();
             $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', $id)->count();
-            $data['tps_kel'] = Tps::where('villages_id', (string)$id)->get();
+            $data['tps_kel'] = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)$id)->get();
             $data['id'] = $id;
             $data['id_kelurahan'] = $id;
             $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', (string)$id)->where('saksi.verification', (string)1)->count();
@@ -472,10 +472,10 @@ class AdminController extends Controller
                 ->whereNull('saksi.pending')
                 ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
                 ->get();
-            $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+            $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
             $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
-            $data['saksi_masuk'] = Saksi::count();
-            $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
+            $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
+            $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->count();
         } else { // Perhitungan Kota
             $data['paslon']  = Paslon::with(['saksi_data' => function ($query) {
                 $query
@@ -505,10 +505,10 @@ class AdminController extends Controller
                     $data['total_verification_voice'] += $verif->voice;
                 }
             }
-            $data['saksi_masuk'] = Saksi::count();
+            $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
 
-            $data['tps_masuk'] = Tps::where('setup', 'terisi')->count();
-            $data['total_tps']   =  Tps::where('setup', 'belum terisi')->count();
+            $data['tps_masuk'] = Tps::where('regency_id',$this->config->regencies_id)->where('setup', 'terisi')->count();
+            $data['total_tps']   =  Tps::where('regency_id',$this->config->regencies_id)->where('setup', 'belum terisi')->count();
             $data['tps_kosong']  =  $data['total_tps'] - $data['tps_masuk'];
 
 
@@ -517,8 +517,8 @@ class AdminController extends Controller
                 $data['total_incoming_vote'] += $key->voice;
             }
             $data['suara_masuk'] = SaksiData::where('regency_id', $this->config->regencies_id)->count('voice');
-            $data['tracking'] = ModelsTracking::get();
-            $data['config'] = Config::first();
+            $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->get();
+        
             $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
         }
         return view('administrator.perhitungan.ajax.terverifikasi', $data);
@@ -538,7 +538,7 @@ class AdminController extends Controller
             $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
             ->whereNull('saksi.pending')
             ->where('saksi_data.regency_id', $this->config->regencies_id)
-                ->where('saksi.verification', 1);
+            ->where('saksi.verification', 1);
         }])->get();
         $verification                     = Saksi::where('regency_id', $this->config->regencies_id)->where('verification', 1)->with('saksi_data')->get();
         $dpt                              = District::where('regency_id', $this->config->regencies_id)->sum("dpt") ?? 0;
@@ -555,10 +555,10 @@ class AdminController extends Controller
                 $data['total_verification_voice'] += $verif->voice;
             }
         }
-        $data['saksi_masuk'] = Saksi::count();
+        $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
 
-        $data['tps_masuk'] = Tps::where('setup', 'terisi')->count();
-        $data['total_tps']   =  Tps::where('setup', 'belum terisi')->count();
+        $data['tps_masuk'] = Tps::where('regency_id',$this->config->regencies_id)->where('setup', 'terisi')->count();
+        $data['total_tps']   =  Tps::where('regency_id',$this->config->regencies_id)->where('setup', 'belum terisi')->count();
         $data['tps_kosong']  =  $data['total_tps'] - $data['tps_masuk'];
 
 
@@ -567,7 +567,7 @@ class AdminController extends Controller
             $data['total_incoming_vote'] += $key->voice;
         }
         $data['suara_masuk'] = SaksiData::where('regency_id', $this->config->regencies_id)->count('voice');
-        $data['tracking'] = ModelsTracking::get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->get();
         $data['config'] = Config::first();
         $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
         $data['district_quick'] = District::where('regency_id', $this->config->regencies_id)->get();
@@ -592,7 +592,7 @@ class AdminController extends Controller
                 ->whereNull('saksi.pending')
                 ->where('saksi.verification', 1)->where('saksi.district_id', decrypt($id));
             }])->get();
-            $verification = Saksi::where('verification', 1)->with('saksi_data')->where('district_id', decrypt($id))->get();
+            $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('district_id', decrypt($id))->get();
             $dpt = District::where('regency_id', $this->config->regencies_id)->sum("dpt");
             $incoming_vote = SaksiData::select('voice')->where('district_id', decrypt($id))->get();
             $data['total_verification_voice'] = 0;
@@ -609,14 +609,14 @@ class AdminController extends Controller
             $data['realcount']   =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
             $data['kel']    = Village::where("district_id", decrypt($id))->get();
             $data['total_tps']   = Village::where('district_id', decrypt($id))->sum('tps');
-            $data['tps_masuk']   = Tps::where('district_id', decrypt($id))->where('setup', 'terisi')->count('number');
-            $data['tps_kosong']  = Tps::where('district_id', decrypt($id))->count('number');
+            $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('district_id', decrypt($id))->where('setup', 'terisi')->count('number');
+            $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('district_id', decrypt($id))->count('number');
             $data['suara_masuk'] = SaksiData::where('district_id', decrypt($id))->count('voice');
             $data['kecamatan'] = District::where('id', decrypt($id))->first();
-            $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+            $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
             $data['title'] = "KECAMATAN " . $data['kecamatan']['name'] . "";
-            $data['saksi_masuk'] = Saksi::count();
-            $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
+            $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
+            $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->count();
             $data['id_kecamatan'] = decrypt($id);
         } elseif (isset($url_first[3]) && $url_first[2] == "perhitungan_kelurahan") { // Perhitungan Kelurahan
             $id = $data['url_first'][3];
@@ -640,7 +640,7 @@ class AdminController extends Controller
             foreach ($incoming_vote as $key) {
                 $data['total_incoming_vote'] += $key->voice;
             }
-            $verification = Saksi::where('verification', 1)->with('saksi_data')->where('village_id', decrypt($id))->get();
+            $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('village_id', decrypt($id))->get();
             $data['total_incoming_vote'] = 0;
             $data['total_verification_voice'] = 0;
             foreach ($verification as $key) {
@@ -648,12 +648,12 @@ class AdminController extends Controller
                     $data['total_verification_voice'] += $verif->voice;
                 }
             }
-            $data['tps_masuk']   = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->sum('number');
+            $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->sum('number');
             $data['realcount']   = (string) $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
 
             $data['total_tps']   = Village::where('id', (string)decrypt($id))->sum('tps');
-            $data['tps_masuk']   = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->count('number');
-            $data['tps_kosong']  = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'belum_terisi')->count('number');
+            $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->count('number');
+            $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'belum_terisi')->count('number');
             $data['suara_masuk'] = SaksiData::where('village_id', (string)decrypt($id))->sum('voice');
             $data['saksi']       = Saksi::where('village_id', (string)decrypt($id))->get();
 
@@ -667,7 +667,7 @@ class AdminController extends Controller
             $data['paslon_candidate'] = Paslon::get();
             $data['config'] = Config::first();
             $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', $id)->count();
-            $data['tps_kel'] = Tps::where('villages_id', (string)$id)->get();
+            $data['tps_kel'] = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)$id)->get();
             $data['id'] = $id;
             $data['id_kelurahan'] = $id;
             $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', (string)$id)->where('saksi.verification', (string)1)->count();
@@ -678,10 +678,10 @@ class AdminController extends Controller
                 ->whereNull('saksi.pending')
                 ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
                 ->get();
-            $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+            $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
             $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
-            $data['saksi_masuk'] = Saksi::count();
-            $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
+            $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
+            $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->count();
         } else { // Perhitungan Kota
             $data['paslon']  = Paslon::with(['saksi_data' => function ($query) {
                 $query
@@ -711,10 +711,10 @@ class AdminController extends Controller
                     $data['total_verification_voice'] += $verif->voice;
                 }
             }
-            $data['saksi_masuk'] = Saksi::count();
+            $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
 
-            $data['tps_masuk'] = Tps::where('setup', 'terisi')->count();
-            $data['total_tps']   =  Tps::where('setup', 'belum terisi')->count();
+            $data['tps_masuk'] = Tps::where('regency_id',$this->config->regencies_id)->where('setup', 'terisi')->count();
+            $data['total_tps']   =  Tps::where('regency_id',$this->config->regencies_id)->where('setup', 'belum terisi')->count();
             $data['tps_kosong']  =  $data['total_tps'] - $data['tps_masuk'];
 
 
@@ -723,7 +723,7 @@ class AdminController extends Controller
                 $data['total_incoming_vote'] += $key->voice;
             }
             $data['suara_masuk'] = SaksiData::where('regency_id', $this->config->regencies_id)->count('voice');
-            $data['tracking'] = ModelsTracking::get();
+            $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->get();
             $data['config'] = Config::first();
             $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
         }
@@ -748,7 +748,7 @@ class AdminController extends Controller
                 ->whereNull('saksi.pending')
                 ->where('saksi.verification', 1)->where('saksi.district_id', decrypt($id));
             }])->get();
-            $verification = Saksi::where('verification', 1)->with('saksi_data')->where('district_id', decrypt($id))->get();
+            $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('district_id', decrypt($id))->get();
             $dpt = District::where('regency_id', $this->config->regencies_id)->sum("dpt");
             $incoming_vote = SaksiData::select('voice')->where('district_id', decrypt($id))->get();
             $data['total_verification_voice'] = 0;
@@ -765,14 +765,14 @@ class AdminController extends Controller
             $data['realcount']   =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
             $data['kel']    = Village::where("district_id", decrypt($id))->get();
             $data['total_tps']   = Village::where('district_id', decrypt($id))->sum('tps');
-            $data['tps_masuk']   = Tps::where('district_id', decrypt($id))->where('setup', 'terisi')->count('number');
-            $data['tps_kosong']  = Tps::where('district_id', decrypt($id))->count('number');
+            $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('district_id', decrypt($id))->where('setup', 'terisi')->count('number');
+            $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('district_id', decrypt($id))->count('number');
             $data['suara_masuk'] = SaksiData::where('district_id', decrypt($id))->count('voice');
             $data['kecamatan'] = District::where('id', decrypt($id))->first();
-            $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+            $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
             $data['title'] = "KECAMATAN " . $data['kecamatan']['name'] . "";
-            $data['saksi_masuk'] = Saksi::count();
-            $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
+            $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
+            $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->count();
             $data['id_kecamatan'] = decrypt($id);
         } elseif (isset($url_first[3]) && $url_first[2] == "perhitungan_kelurahan") { // Perhitungan Kelurahan
             $id = $data['url_first'][3];
@@ -796,7 +796,7 @@ class AdminController extends Controller
             foreach ($incoming_vote as $key) {
                 $data['total_incoming_vote'] += $key->voice;
             }
-            $verification = Saksi::where('verification', 1)->with('saksi_data')->where('village_id', decrypt($id))->get();
+            $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('village_id', decrypt($id))->get();
             $data['total_incoming_vote'] = 0;
             $data['total_verification_voice'] = 0;
             foreach ($verification as $key) {
@@ -804,12 +804,12 @@ class AdminController extends Controller
                     $data['total_verification_voice'] += $verif->voice;
                 }
             }
-            $data['tps_masuk']   = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->sum('number');
+            $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->sum('number');
             $data['realcount']   = (string) $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
 
             $data['total_tps']   = Village::where('id', (string)decrypt($id))->sum('tps');
-            $data['tps_masuk']   = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->count('number');
-            $data['tps_kosong']  = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'belum_terisi')->count('number');
+            $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->count('number');
+            $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'belum_terisi')->count('number');
             $data['suara_masuk'] = SaksiData::where('village_id', (string)decrypt($id))->sum('voice');
             $data['saksi']       = Saksi::where('village_id', (string)decrypt($id))->get();
 
@@ -823,7 +823,7 @@ class AdminController extends Controller
             $data['paslon_candidate'] = Paslon::get();
             $data['config'] = Config::first();
             $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', $id)->count();
-            $data['tps_kel'] = Tps::where('villages_id', (string)$id)->get();
+            $data['tps_kel'] = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)$id)->get();
             $data['id'] = $id;
             $data['id_kelurahan'] = $id;
             $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', (string)$id)->where('saksi.verification', (string)1)->count();
@@ -834,10 +834,10 @@ class AdminController extends Controller
                 ->whereNull('saksi.pending')
                 ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
                 ->get();
-            $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+            $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
             $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
-            $data['saksi_masuk'] = Saksi::count();
-            $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
+            $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
+            $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->count();
         } else { // Perhitungan Kota
             $data['paslon']  = Paslon::with(['saksi_data' => function ($query) {
                 $query
@@ -867,10 +867,10 @@ class AdminController extends Controller
                     $data['total_verification_voice'] += $verif->voice;
                 }
             }
-            $data['saksi_masuk'] = Saksi::count();
+            $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
 
-            $data['tps_masuk'] = Tps::where('setup', 'terisi')->count();
-            $data['total_tps']   =  Tps::where('setup', 'belum terisi')->count();
+            $data['tps_masuk'] = Tps::where('regency_id',$this->config->regencies_id)->where('setup', 'terisi')->count();
+            $data['total_tps']   =  Tps::where('regency_id',$this->config->regencies_id)->where('setup', 'belum terisi')->count();
             $data['tps_kosong']  =  $data['total_tps'] - $data['tps_masuk'];
 
 
@@ -879,7 +879,7 @@ class AdminController extends Controller
                 $data['total_incoming_vote'] += $key->voice;
             }
             $data['suara_masuk'] = SaksiData::where('regency_id', $this->config->regencies_id)->count('voice');
-            $data['tracking'] = ModelsTracking::get();
+            $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->get();
             $data['config'] = Config::first();
             $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
         }
@@ -889,33 +889,33 @@ class AdminController extends Controller
 
     public function rdata()
     {
-        $data['visitor'] = ModelsTracking::count();
-        $data['user_baru'] = User::orderBy('created_at')->count();
-        $data['saksi_masuk'] = Saksi::count();
-        $data['saksi_teregistrasi'] = User::where('role_id', 8)->count();
-        $data['auditor_teregistrasi'] = User::where('role_id', 3)->count();
-        $data['verifikator_teregistrasi'] = User::where('role_id', 2)->count();
-        $data['validator_teregistrasi'] = User::where('role_id', 10)->count();
-        $data['checking_teregistrasi'] = User::where('role_id', 5)->count();
-        $data['hunter_teregistrasi'] = User::where('role_id', 6)->count();
-        $data['hukum_teregistrasi'] = User::where('role_id', 7)->count();
-        $data['huver_teregistrasi'] = User::where('role_id', 20)->count();
-        $data['saksi_terblokir'] = User::where('role_id', 0)->count();
-        $data['auditor_terblokir'] = User::where('role_id', 0)->count();
-        $data['verifikator_terblokir'] = User::where('role_id', 0)->count();
-        $data['auditor_terblokir'] = User::where('role_id', 0)->count();
-        $data['validator_terblokir'] = User::where('role_id', 0)->count();
-        $data['checking_terblokir'] = User::where('role_id', 0)->count();
-        $data['hunter_terblokir'] = User::where('role_id', 0)->count();
-        $data['hukum_terblokir'] = User::where('role_id', 0)->count();
-        $data['huver_terblokir'] = User::where('role_id', 0)->count();
-        $data['saksi_baru'] = User::where('role_id', 8)->limit(12)->orderBy('created_at')->get();
-        $data['admin_baru'] =  User::where('role_id', '!=', 8)->limit(12)->orderBy('created_at')->get();
-        $data['data_relawan'] = Relawan::count();
+        $data['visitor'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->count();
+        $data['user_baru'] = User::where('regency_id',$this->config->regencies_id)->orderBy('created_at')->count();
+        $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
+        $data['saksi_teregistrasi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 8)->count();
+        $data['auditor_teregistrasi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 3)->count();
+        $data['verifikator_teregistrasi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 2)->count();
+        $data['validator_teregistrasi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 10)->count();
+        $data['checking_teregistrasi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 5)->count();
+        $data['hunter_teregistrasi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 6)->count();
+        $data['hukum_teregistrasi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 7)->count();
+        $data['huver_teregistrasi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 20)->count();
+        $data['saksi_terblokir'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 0)->count();
+        $data['auditor_terblokir'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 0)->count();
+        $data['verifikator_terblokir'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 0)->count();
+        $data['auditor_terblokir'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 0)->count();
+        $data['validator_terblokir'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 0)->count();
+        $data['checking_terblokir'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 0)->count();
+        $data['hunter_terblokir'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 0)->count();
+        $data['hukum_terblokir'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 0)->count();
+        $data['huver_terblokir'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 0)->count();
+        $data['saksi_baru'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 8)->limit(12)->orderBy('created_at')->get();
+        $data['admin_baru'] =  User::where('regency_id',$this->config->regencies_id)->where('role_id', '!=', 8)->limit(12)->orderBy('created_at')->get();
+        $data['data_relawan'] = Relawan::where('regency_id',$this->config->regencies_id)->where('role_id', '!=', 8)->count();
         $data['data_overlimit'] = Saksi::where('overlimit', '!=', 0)->count();
-        $data['bukti_foto_kecurangan'] = ModelsBuktifoto::count();
-        $data['bukti_video_kecurangan'] = Buktividio::count();
-        $data['tps_koreksi'] = Saksi::whereNotNull('koreksi')->count();
+        $data['bukti_foto_kecurangan'] = ModelsBuktifoto::join('tps','bukti_vidio.tps_id','=','tps.id')->where('tps.regency_id',$this->config->regencies_id)->count();
+        $data['bukti_video_kecurangan'] = Buktividio::join('tps','bukti_vidio.tps_id','=','tps.id')->where('tps.regency_id',$this->config->regencies_id)->count();
+        $data['tps_koreksi'] = Saksi::where('regency_id',$this->config->regencies_id)->whereNotNull('koreksi')->count();
         $data['config'] = Config::first();
         return view('administrator.r_data_recorder', $data);
     }
@@ -959,7 +959,7 @@ class AdminController extends Controller
         foreach ($incoming_vote as $key) {
             $data['total_incoming_vote'] += $key->voice;
         }
-        $verification = Saksi::where('verification', 1)->with('saksi_data')->where('village_id', decrypt($id))->get();
+        $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('village_id', decrypt($id))->get();
         $data['total_incoming_vote'] = 0;
         $data['total_verification_voice'] = 0;
         foreach ($verification as $key) {
@@ -967,12 +967,12 @@ class AdminController extends Controller
                 $data['total_verification_voice'] += $verif->voice;
             }
         }
-        $data['tps_masuk']   = Tps::where('villages_id', decrypt($id))->where('setup', 'terisi')->sum('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', decrypt($id))->where('setup', 'terisi')->sum('number');
         $data['realcount']   =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
         $data['district']    = Village::where("id", decrypt($id))->get();
         $data['total_tps']   = Village::where('id', decrypt($id))->sum('tps');
-        $data['tps_masuk']   = Tps::where('villages_id', decrypt($id))->where('setup', 'terisi')->count('number');
-        $data['tps_kosong']  = Tps::where('villages_id', decrypt($id))->count('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', decrypt($id))->where('setup', 'terisi')->count('number');
+        $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', decrypt($id))->count('number');
         $data['suara_masuk'] = SaksiData::where('village_id', decrypt($id))->count('voice');
         $data['saksi']       = Saksi::where('village_id', decrypt($id))->get();
 
@@ -998,7 +998,7 @@ class AdminController extends Controller
     public function verifikasi_akun()
     {
         $data['config'] = Config::first();
-        $data['jumlah_admin'] = User::where('role_id', '!=', 8)->where('is_active', '=', '2')->count();
+        $data['jumlah_admin'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '!=', 8)->where('is_active', '=', '2')->count();
         return view('administrator.verifikasi.verifikasi_akun', $data);
     }
 
@@ -1011,7 +1011,7 @@ class AdminController extends Controller
         $data['regency']  = Regency::where("id", $crowd->regency_id)->first();
         $data['district']  = District::where("id", $crowd->district_id)->first();
         $data['village']  = Village::where("id", $crowd->village_id)->first();
-        $data['tps']  = Tps::where("id", $crowd->tps_id)->first();
+        $data['tps']  = Tps::where('regency_id',$this->config->regencies_id)->where("id", $crowd->tps_id)->first();
         $data['paslon']  = Paslon::get();
 
         return view('administrator.ajax.get_verify_crowd', $data);
@@ -1092,7 +1092,7 @@ class AdminController extends Controller
     public function dataC1()
     {
         $data['config'] = Config::first();
-        $data['jumlah_c1'] = Saksi::count();
+        $data['jumlah_c1'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
         return view('administrator.perdataan.data-c1', $data);
     }
 
@@ -1115,70 +1115,70 @@ class AdminController extends Controller
     public function admin_terverifikasi()
     {
         $data['config'] = Config::first();
-        $data['jumlah_admin_terverifikasi'] = User::where('role_id', '!=', 8)->where('is_active', '=', '1')->count();
+        $data['jumlah_admin_terverifikasi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '!=', 8)->where('is_active', '=', '1')->count();
         return view('administrator.verifikasi.admin_terverifikasi', $data);
     }
 
     public function verifikasi_saksi()
     {
         $data['config'] = Config::first();
-        $data['jumlah_saksi'] = User::where('role_id', '=', 8)->where('is_active', '=', 0)->count();
+        $data['jumlah_saksi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 8)->where('is_active', '=', 0)->count();
         return view('administrator.verifikasi.verifikasi_saksi', $data);
     }
 
     public function koordinator_saksi()
     {
         $data['config'] = Config::first();
-        $data['jumlah_saksi'] = User::where('role_id', '=', 8)->where('is_active', '=', 0)->count();
+        $data['jumlah_saksi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 8)->where('is_active', '=', 0)->count();
         return view('administrator.verifikasi.koordinator_saksi', $data);
     }
 
     public function koordinator_kecamatan()
     {
         $data['config'] = Config::first();
-        $data['jumlah_saksi'] = User::where('role_id', '=', 8)->where('is_active', '=', 0)->count();
+        $data['jumlah_saksi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 8)->where('is_active', '=', 0)->count();
         return view('administrator.verifikasi.koordinator_kecamatan', $data);
     }
 
     public function koordinator_kelurahan()
     {
         $data['config'] = Config::first();
-        $data['jumlah_saksi'] = User::where('role_id', '=', 8)->where('is_active', '=', 0)->count();
+        $data['jumlah_saksi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 8)->where('is_active', '=', 0)->count();
         return view('administrator.verifikasi.koordinator_kelurahan', $data);
     }
 
     public function koordinator_rw()
     {
         $data['config'] = Config::first();
-        $data['jumlah_saksi'] = User::where('role_id', '=', 8)->where('is_active', '=', 0)->count();
+        $data['jumlah_saksi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 8)->where('is_active', '=', 0)->count();
         return view('administrator.verifikasi.koordinator_rw', $data);
     }
 
     public function koordinator_rt()
     {
         $data['config'] = Config::first();
-        $data['jumlah_saksi'] = User::where('role_id', '=', 8)->where('is_active', '=', 0)->count();
+        $data['jumlah_saksi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 8)->where('is_active', '=', 0)->count();
         return view('administrator.verifikasi.koordinator_rt', $data);
     }
 
     public function saksi_ditolak()
     {
         $data['config'] = Config::first();
-        $data['jumlah_saksi_ditolak'] = User::where('role_id', '=', 8)->where('is_active', '=', 5)->count();
+        $data['jumlah_saksi_ditolak'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 8)->where('is_active', '=', 5)->count();
         return view('administrator.verifikasi.saksi_ditolak', $data);
     }
 
     public function Enumerator()
     {
         $data['config'] = Config::first();
-        $data['jumlah_saksi'] = User::where('role_id', '=', 8)->where('is_active', '=', 0)->count();
+        $data['jumlah_saksi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 8)->where('is_active', '=', 0)->count();
         return view('administrator.enumerator.enumerator', $data);
     }
 
     public function EnumeratorTeregistrasi()
     {
         $data['config'] = Config::first();
-        $data['jumlah_saksi_teregistrasi'] = User::where('role_id', 8)->where('is_active', '=', 1)->count();
+        $data['jumlah_saksi_teregistrasi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 8)->where('is_active', '=', 1)->count();
         return view('administrator.enumerator.enumerator_teregistrasi', $data);
     }
 
@@ -1192,22 +1192,22 @@ class AdminController extends Controller
     public function EnumeratorTidakHadir()
     {
         $data['config'] = Config::first();
-        $data['jumlah_tidak_hadir'] = User::where('role_id', 8)->where('absen', 'tidak hadir')->where('is_active', '=', 1)->count();
+        $data['jumlah_tidak_hadir'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 8)->where('absen', 'tidak hadir')->where('is_active', '=', 1)->count();
         return view('administrator.enumerator.enumerator_tidak_hadir', $data);
     }
 
     public function EnumeratorDitolak()
     {
         $data['config'] = Config::first();
-        $data['jumlah_saksi_ditolak'] = User::where('role_id', '=', 8)->where('is_active', '=', 5)->count();
+        $data['jumlah_saksi_ditolak'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 8)->where('is_active', '=', 5)->count();
         return view('administrator.enumerator.enumerator_ditolak', $data);
     }
 
     public function VerifikasiCrowdC1()
     {
         $data['config'] = Config::first();
-        // $data['jumlah_saksi'] = User::where('role_id', '=', 17)->where('is_active', '=', 0)->count();
-        $data['jumlah_saksi'] = User::where('role_id', '=', 8)->where('is_active', '=', 0)->count();
+        // $data['jumlah_saksi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 17)->where('is_active', '=', 0)->count();
+        $data['jumlah_saksi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 8)->where('is_active', '=', 0)->count();
         return view('administrator.verifikasi.crowd-c1', $data);
     }
 
@@ -1216,8 +1216,8 @@ class AdminController extends Controller
         $data['config'] = Config::first();
         $config = Config::first();
         $data['kota']      = Regency::where('id', $this->config->regencies_id)->first();
-        // $data['jumlah_saksi_teregistrasi'] = User::where('role_id', 17)->where('is_active', '=', 1)->count();
-        $data['jumlah_saksi_teregistrasi'] = User::where('role_id', 8)->where('is_active', '=', 1)->count();
+        // $data['jumlah_saksi_teregistrasi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 17)->where('is_active', '=', 1)->count();
+        $data['jumlah_saksi_teregistrasi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 8)->where('is_active', '=', 1)->count();
 
         // $data['title'] = 'Saksi Teregistrasi (' . $data['jumlah'] . ')';
         $data['title'] = 'Saksi Teregistrasi';
@@ -1230,8 +1230,8 @@ class AdminController extends Controller
         $data['config'] = Config::first();
         $data['saksi_data'] = Saksi::join('users', 'users.tps_id', '=', 'saksi.tps_id')->where('koreksi', 1)->get();
         // $data['village'] = Village::where('id', $data['saksi_data'][0]->village_id)->first();
-        $data['total_tps']   =  Tps::where('setup', 'belum terisi')->count();
-        $data['tracking'] = ModelsTracking::get();
+        $data['total_tps']   =  Tps::where('regency_id',$this->config->regencies_id)->where('setup', 'belum terisi')->count();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->get();
         $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->count();
         $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
         if (count($data['saksi_data']) > 0) {
@@ -1252,7 +1252,7 @@ class AdminController extends Controller
         $data['saksi_koreksi'] = User::where('tps_id', $data['saksi']['tps_id'])->first();
         $data['kelurahan'] = Village::where('id', $data['saksi']['village_id'])->first();
         $data['kecamatan'] = District::where('id', $data['saksi']['district_id'])->first();
-        $data['tps'] = Tps::where('id', $data['saksi']['tps_id'])->first();
+        $data['tps'] = Tps::where('regency_id',$this->config->regencies_id)->where('id', $data['saksi']['tps_id'])->first();
 
         return view('administrator.ajax.get_koreksi_saksi', $data);
     }
@@ -1357,7 +1357,7 @@ class AdminController extends Controller
 
         $config = Config::first();
         $data['config'] = Config::first();
-        $data['team'] = User::where('role_id', '!=', 8)->get();
+        $data['team'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '!=', 8)->get();
         $data['district'] = District::where('regency_id',  $this->config->regencies_id)->get();
 
 
@@ -1370,7 +1370,7 @@ class AdminController extends Controller
 
         $config = Config::first();
         $data['config'] = Config::first();
-        $data['tracking'] = ModelsTracking::where('id_user', '!=', 2)->get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 2)->get();
         $data['district'] = District::where('regency_id',  $this->config->regencies_id)->get();
         return view('administrator.commander.tracking.maps', $data);
     }
@@ -1381,7 +1381,7 @@ class AdminController extends Controller
 
         $config = Config::first();
         $data['config'] = Config::first();
-        $data['tracking'] = ModelsTracking::where('id_user', decrypt($id))->get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', decrypt($id))->get();
         $data['profile']  = User::where('id', decrypt($id))->first();
         $data['district'] = District::where('regency_id',  $this->config->regencies_id)->get();
         return view('administrator.commander.tracking.detail', $data);
@@ -1394,7 +1394,7 @@ class AdminController extends Controller
         $user                       = User::where('id', $request['id'])->first();
         $district                   = District::where('id', $user['districts'])->first();
         $village                    = Village::where('id', $user['villages'])->first();
-        $tps                        = Tps::where('user_id', $user['id'])->first();
+        $tps                        = Tps::where('regency_id',$this->config->regencies_id)->where('user_id', $user['id'])->first();
         $absensi                    = Absensi::where('user_id', $user['id'])->first();
         $qrcode                     = Qrcode::where('tps_id', $user['tps_id'])->first();
         if ($qrcode != null) {
@@ -1458,7 +1458,7 @@ class AdminController extends Controller
         $district    = District::where('id', $user['districts'])->first();
         $village     = Village::where('id', $user['villages'])->first();
 
-        $tps     = Tps::where('user_id', $user['id'])->first();
+        $tps     = Tps::where('regency_id',$this->config->regencies_id)->where('user_id', $user['id'])->first();
         return view('administrator.ajax.get_verifikasi_akun', [
             'user' => $user,
             'district' => $district,
@@ -1548,7 +1548,7 @@ class AdminController extends Controller
                 'hukum' => null,
             ];
 
-            $data['tps'] = Tps::where('id', $data['saksi']['tps_id'])->first();
+            $data['tps'] = Tps::where('regency_id',$this->config->regencies_id)->where('id', $data['saksi']['tps_id'])->first();
 
             // Check if there's a QR code associated with the TPS
             $qrcode = Qrcode::where('tps_id', $saksi['tps_id'])->first();
@@ -1676,7 +1676,7 @@ class AdminController extends Controller
                 ->whereNull('saksi.pending')
                 ->where('saksi.verification', 1)->where('saksi.district_id', decrypt($id));
         }])->get();
-        $verification = Saksi::where('verification', 1)->with('saksi_data')->where('district_id', decrypt($id))->get();
+        $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('district_id', decrypt($id))->get();
         $dpt = District::where('regency_id', $this->config->regencies_id)->sum("dpt");
         $incoming_vote = SaksiData::select('voice')->where('district_id', decrypt($id))->get();
         $data['total_verification_voice'] = 0;
@@ -1693,14 +1693,14 @@ class AdminController extends Controller
         $data['realcount']   =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
         $data['district']    = Village::where("district_id", decrypt($id))->get();
         $data['total_tps']   = Village::where('district_id', decrypt($id))->sum('tps');
-        $data['tps_masuk']   = Tps::where('district_id', decrypt($id))->where('setup', 'terisi')->count('number');
-        $data['tps_kosong']  = Tps::where('district_id', decrypt($id))->count('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('district_id', decrypt($id))->where('setup', 'terisi')->count('number');
+        $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('district_id', decrypt($id))->count('number');
         $data['suara_masuk'] = SaksiData::where('district_id', decrypt($id))->count('voice');
         $data['kecamatan'] = District::where('id', decrypt($id))->first();
-        $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
         $data['title'] = "KECAMATAN " . $data['kecamatan']['name'] . "";
-        $data['saksi_masuk'] = Saksi::count();
-        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
+        $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
+        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->count();
         $data['id_kecamatan'] = decrypt($id);
         return view('administrator.perhitungan.kecamatan', $data);
     }
@@ -1743,7 +1743,7 @@ class AdminController extends Controller
         foreach ($incoming_vote as $key) {
             $data['total_incoming_vote'] += $key->voice;
         }
-        $verification = Saksi::where('verification', 1)->with('saksi_data')->where('village_id', decrypt($id))->get();
+        $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('village_id', decrypt($id))->get();
         $data['total_incoming_vote'] = 0;
         $data['total_verification_voice'] = 0;
         foreach ($verification as $key) {
@@ -1751,12 +1751,12 @@ class AdminController extends Controller
                 $data['total_verification_voice'] += $verif->voice;
             }
         }
-        $data['tps_masuk']   = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->sum('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->sum('number');
         $data['realcount']   = (string) $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
 
         $data['total_tps']   = Village::where('id', (string)decrypt($id))->sum('tps');
-        $data['tps_masuk']   = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->count('number');
-        $data['tps_kosong']  = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'belum_terisi')->count('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->count('number');
+        $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'belum_terisi')->count('number');
         $data['suara_masuk'] = SaksiData::where('village_id', (string)decrypt($id))->sum('voice');
         $data['saksi']       = Saksi::where('village_id', (string)decrypt($id))->get();
 
@@ -1770,7 +1770,7 @@ class AdminController extends Controller
         $data['paslon_candidate'] = Paslon::get();
         $data['config'] = Config::first();
         $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', $id)->count();
-        $data['tps_kel'] = Tps::where('villages_id', (string)$id)->get();
+        $data['tps_kel'] = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)$id)->get();
         $data['id'] = $id;
         $data['id_kelurahan'] = $id;
         $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', (string)$id)->where('saksi.verification', (string)1)->count();
@@ -1781,10 +1781,10 @@ class AdminController extends Controller
             ->whereNull('saksi.pending')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->get();
-        $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
         $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
-        $data['saksi_masuk'] = Saksi::count();
-        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
+        $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
+        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->count();
 
         return view('administrator.perhitungan.kelurahan', $data);
     }
@@ -1793,7 +1793,7 @@ class AdminController extends Controller
 
       $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
 
-        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id, SUM(voice) as total FROM saksi_data GROUP by paslon_id ORDER by total DESC'));
+        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $this->config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
 
         $data['paslon_tertinggi'] = Paslon::where('id', (string)$paslon_tertinggi['0']->paslon_id)->first();
         $data['urutan'] = $paslon_tertinggi;
@@ -1819,7 +1819,7 @@ class AdminController extends Controller
         foreach ($incoming_vote as $key) {
             $data['total_incoming_vote'] += $key->voice;
         }
-        $verification = Saksi::where('verification', 1)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->get();
+        $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->get();
         $data['total_incoming_vote'] = 0;
         $data['total_verification_voice'] = 0;
         foreach ($verification as $key) {
@@ -1827,11 +1827,11 @@ class AdminController extends Controller
                 $data['total_verification_voice'] += $verif->voice;
             }
         }
-        $data['saksi'] = Saksi::where('verification', 1)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->first();
+        $data['saksi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->first();
         $data['realcount']   = (string) $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
 
-        $data['tps_masuk']   = Tps::where('id', (string)Crypt::decrypt($id))->where('setup', 'terisi')->count('number');
-        $data['tps_kosong']  = Tps::where('id', (string)Crypt::decrypt($id))->where('setup', 'belum_terisi')->count('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('id', (string)Crypt::decrypt($id))->where('setup', 'terisi')->count('number');
+        $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('id', (string)Crypt::decrypt($id))->where('setup', 'belum_terisi')->count('number');
         $data['suara_masuk'] =  SaksiData::join('saksi', 'saksi_data.saksi_id', "=", 'saksi.id')->where('saksi.tps_id', (string)Crypt::decrypt($id))->sum('saksi_data.voice');
         $data['saksi']       = Saksi::where('tps_id', (string)Crypt::decrypt($id))->get();
 
@@ -1839,7 +1839,7 @@ class AdminController extends Controller
         $config = Config::first();
         $data['regency'] = Regency::where('id', (string)$this->config->regencies_id)->first();
 
-        $data_tps =     Tps::where('id', (string)$id)->first();
+        $data_tps =     Tps::where('regency_id',$this->config->regencies_id)->where('id', (string)$id)->first();
         $data['data_tps'] = $data_tps;
         $data['village'] = Village::where('id', (string)$data_tps->villages_id)->first();
         $data['district'] = District::where('id', (string)$data['village']->district_id)->first();
@@ -1856,7 +1856,7 @@ class AdminController extends Controller
             ->whereNull('saksi.pending')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->get();
-        $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
         $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
         $data['qrcode'] = Qrcode::where('tps_id', $data['saksi'][0]['tps_id'])->first();
         if ($data['qrcode'] != null) {
@@ -2007,7 +2007,7 @@ class AdminController extends Controller
         $data['config'] = Config::first();
         $config = Config::first();
         $data['kota']      = Regency::where('id', $this->config->regencies_id)->first();
-        $data['jumlah_saksi_teregistrasi'] = User::where('role_id', 8)->where('is_active', '=', 1)->count();
+        $data['jumlah_saksi_teregistrasi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 8)->where('is_active', '=', 1)->count();
 
         // $data['title'] = 'Saksi Teregistrasi (' . $data['jumlah'] . ')';
         $data['title'] = 'Saksi Teregistrasi';
@@ -2020,7 +2020,7 @@ class AdminController extends Controller
         $data['config'] = Config::first();
         $config = Config::first();
         $data['kota']      = Regency::where('id', $this->config->regencies_id)->first();
-        $data['jumlah_tidak_hadir'] = User::where('role_id', 8)->where('absen', 'tidak hadir')->where('is_active', '=', 1)->count();
+        $data['jumlah_tidak_hadir'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 8)->where('absen', 'tidak hadir')->where('is_active', '=', 1)->count();
 
         // $data['title'] = 'Saksi Absen (' . $data['jumlah'] . ')';
         $data['title'] = 'Saksi Absen';
@@ -2032,7 +2032,7 @@ class AdminController extends Controller
     public function get_tps_kelurahan(Request $request)
     {
         $data['saksi'] =  Saksi::where('tps_id', $request['id'])->get();
-        $data['id'] = Tps::where('id', $request['id'])->first();
+        $data['id'] = Tps::where('regency_id',$this->config->regencies_id)->where('id', $request['id'])->first();
         $data['kecamatan'] = District::where('id',  $data['tps']['district_id'])->first();
         $data['kelurahan'] = Village::where('id',  $data['tps']['villages_id'])->first();
         $data['config'] = Config::first();
@@ -2069,7 +2069,7 @@ class AdminController extends Controller
         }])->get();
         $data['paslon'] = Paslon::with('saksi_data')->get();
         $data['config'] = Config::first();
-        $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
         $data['country'] = Country::get();
         $data['paslon_can'] = Paslon::get();
         $data['luarnegri']  = Country::join('saksi', 'saksi.tps_id', '=', 'country.id')->get();
@@ -2321,7 +2321,7 @@ class AdminController extends Controller
             ->where('list_kecurangan.jenis', 0)->get();
         $data['pelanggaran_petugas'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
             ->where('list_kecurangan.jenis', 1)->get();
-        $data['tps'] = Tps::where('id', $request['id'])->first();
+        $data['tps'] = Tps::where('regency_id',$this->config->regencies_id)->where('id', $request['id'])->first();
         $data['kecamatan'] = District::where('id', $data['tps']['district_id'])->first();
         $data['bukti_vidio'] = Buktividio::where('tps_id', $request['id'])->get();
         $data['bukti_foto'] = Buktifoto::where('tps_id', $request['id'])->get();
@@ -2332,7 +2332,7 @@ class AdminController extends Controller
     }
     public function print(Request $request, $id)
     {
-        $data['tps']       = Tps::where('id', Crypt::decrypt($request['id']))->first();
+        $data['tps']       = Tps::where('regency_id',$this->config->regencies_id)->where('id', Crypt::decrypt($request['id']))->first();
         $data['saksi']     = Saksi::where('tps_id', Crypt::decrypt($request['id']))->first();
         $data['qrcode']    = Qrcode::where('tps_id', Crypt::decrypt($request['id']))->first();
         $data['kota']      = Regency::where('id', $data['saksi']['regency_id'])->first();
@@ -2374,8 +2374,8 @@ class AdminController extends Controller
                 ->whereNull('saksi.pending')
                 ->where('saksi.verification', 1);
         }])->get();
-        $data['tracking'] = ModelsTracking::get();
-        $data['paslon']                   = Paslon::with('saksi_data')->get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->get();
+        $data['paslon']   = Paslon::with('saksi_data')->get();
         $data['kecamatan'] =  District::where('regency_id', $this->config->regencies_id)->get();
         return view('administrator.super_feature.analisa_dpt_kpu', $data);
     }
@@ -2396,7 +2396,7 @@ class AdminController extends Controller
             ->join('users', 'users.tps_id', '=', 'qrcode_hukum.tps_id')->where('qrcode_hukum.tps_id', $request->id_tps)->first();
         $data['verifikator_id'] = User::where('id', $data['qrcode_hukum']['verifikator_id'])->first();
         $data['hukum_id'] = User::where('id', $data['qrcode_hukum']['hukum_id'])->first();
-        $data['data_tps'] = Tps::where('id', $request->id_tps)->first();
+        $data['data_tps'] = Tps::where('regency_id',$this->config->regencies_id)->where('id', $request->id_tps)->first();
         $data['bukti_foto'] = ModelsBuktifoto::where('tps_id', $data['qrcode_hukum']['tps_id'])->get();
         $data['bukti_vidio'] = Buktividio::where('tps_id', $data['qrcode_hukum']['tps_id'])->get();
         $data['list'] = Bukti_deskripsi_curang::where('tps_id', $data['qrcode_hukum']['tps_id'])->get();
@@ -2415,7 +2415,7 @@ class AdminController extends Controller
 
         $data['verifikator_id'] = User::where('id', $data['qrcode_hukum']['verifikator_id'])->first();
         $data['hukum_id'] = User::where('id', $data['qrcode_hukum']['hukum_id'])->first();
-        $data['data_tps'] = Tps::where('id', $id)->first();
+        $data['data_tps'] = Tps::where('regency_id',$this->config->regencies_id)->where('id', $id)->first();
 
         $data['bukti_foto'] = ModelsBuktifoto::where('tps_id', $data['qrcode_hukum']['tps_id'])->get();
         $data['bukti_vidio'] = Buktividio::where('tps_id', $data['qrcode_hukum']['tps_id'])->get();
@@ -2566,7 +2566,7 @@ class AdminController extends Controller
                 ->whereNull('saksi.pending')
                 ->where('saksi.verification', 1);
         }])->get();
-        $data['tracking'] = ModelsTracking::get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->get();
         $data['village'] = Village::first();
         $data['villages'] = Village::get();
         $data['district'] = District::first();
@@ -2598,7 +2598,7 @@ class AdminController extends Controller
                 ->where('saksi.verification', 1);
         }])->get();
         $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
-        $data['tracking'] = ModelsTracking::get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->get();
         $data['total_incoming_vote']      = SaksiData::sum('voice');
         $data['realcount']                =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
         $data['village'] = Village::first();
@@ -2628,7 +2628,7 @@ class AdminController extends Controller
                 ->whereNull('saksi.pending')
                 ->where('saksi.verification', 1)->where('saksi.district_id', decrypt($id));
         }])->get();
-        $verification = Saksi::where('verification', 1)->with('saksi_data')->where('district_id', decrypt($id))->get();
+        $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('district_id', decrypt($id))->get();
         $dpt = District::where('regency_id', $this->config->regencies_id)->sum("dpt");
         $incoming_vote = SaksiData::select('voice')->where('district_id', decrypt($id))->get();
         $data['total_verification_voice'] = 0;
@@ -2645,15 +2645,15 @@ class AdminController extends Controller
         $data['realcount']   =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
         $data['district']    = Village::where("district_id", decrypt($id))->get();
         $data['total_tps']   = Village::where('district_id', decrypt($id))->sum('tps');
-        $data['tps_masuk']   = Tps::where('district_id', decrypt($id))->where('setup', 'terisi')->count('number');
-        $data['tps_kosong']  = Tps::where('district_id', decrypt($id))->count('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('district_id', decrypt($id))->where('setup', 'terisi')->count('number');
+        $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('district_id', decrypt($id))->count('number');
         $data['suara_masuk'] = SaksiData::where('district_id', decrypt($id))->count('voice');
         $data['kecamatan'] = District::where('id', decrypt($id))->first();
         $data['kel'] = Village::where('district_id',  decrypt($id))->get();
-        $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
         $data['title'] = "KECAMATAN " . $data['kecamatan']['name'] . "";
-        $data['saksi_masuk'] = Saksi::count();
-        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
+        $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
+        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->count();
         $data['id_kecamatan'] = decrypt($id);
         return view('administrator.realcount.kecamatan', $data);
     }
@@ -2687,7 +2687,7 @@ class AdminController extends Controller
         foreach ($incoming_vote as $key) {
             $data['total_incoming_vote'] += $key->voice;
         }
-        $verification = Saksi::where('verification', 1)->with('saksi_data')->where('village_id', decrypt($id))->get();
+        $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('village_id', decrypt($id))->get();
         $data['total_incoming_vote'] = 0;
         $data['total_verification_voice'] = 0;
         foreach ($verification as $key) {
@@ -2695,12 +2695,12 @@ class AdminController extends Controller
                 $data['total_verification_voice'] += $verif->voice;
             }
         }
-        $data['tps_masuk']   = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->sum('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->sum('number');
         $data['realcount']   = (string) $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
 
         $data['total_tps']   = Village::where('id', (string)decrypt($id))->sum('tps');
-        $data['tps_masuk']   = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->count('number');
-        $data['tps_kosong']  = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'belum_terisi')->count('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->count('number');
+        $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'belum_terisi')->count('number');
         $data['suara_masuk'] = SaksiData::where('village_id', (string)decrypt($id))->sum('voice');
         $data['saksi']       = Saksi::where('village_id', (string)decrypt($id))->get();
 
@@ -2714,7 +2714,7 @@ class AdminController extends Controller
         $data['paslon_candidate'] = Paslon::get();
         $data['config'] = Config::first();
         $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', $id)->count();
-        $data['tps_kel'] = Tps::where('villages_id', (string)$id)->get();
+        $data['tps_kel'] = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)$id)->get();
         $data['id'] = $id;
         $data['id_kelurahan'] = $id;
         $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', (string)$id)->where('saksi.verification', (string)1)->count();
@@ -2725,10 +2725,10 @@ class AdminController extends Controller
             ->whereNull('saksi.pending')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->get();
-        $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
         $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
-        $data['saksi_masuk'] = Saksi::count();
-        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
+        $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
+        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->count();
 
         return view('administrator.realcount.kelurahan', $data);
     }
@@ -2737,7 +2737,7 @@ class AdminController extends Controller
     {
       $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
 
-        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data GROUP by paslon_id ORDER by total DESC'));
+        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $this->config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
         // return DB::table('saksi_data')->where('paslon_id',0)->sum('voice');
         $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
         $data['urutan'] = $paslon_tertinggi;
@@ -2763,7 +2763,7 @@ class AdminController extends Controller
         foreach ($incoming_vote as $key) {
             $data['total_incoming_vote'] += $key->voice;
         }
-        $verification = Saksi::where('verification', 1)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->get();
+        $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->get();
         $data['total_incoming_vote'] = 0;
         $data['total_verification_voice'] = 0;
         foreach ($verification as $key) {
@@ -2771,11 +2771,11 @@ class AdminController extends Controller
                 $data['total_verification_voice'] += $verif->voice;
             }
         }
-        $data['saksi'] = Saksi::where('verification', 1)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->first();
+        $data['saksi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->first();
         $data['realcount']   = (string) $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
 
-        $data['tps_masuk']   = Tps::where('id', (string)Crypt::decrypt($id))->where('setup', 'terisi')->count('number');
-        $data['tps_kosong']  = Tps::where('id', (string)Crypt::decrypt($id))->where('setup', 'belum_terisi')->count('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('id', (string)Crypt::decrypt($id))->where('setup', 'terisi')->count('number');
+        $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('id', (string)Crypt::decrypt($id))->where('setup', 'belum_terisi')->count('number');
         $data['suara_masuk'] =  SaksiData::join('saksi', 'saksi_data.saksi_id', "=", 'saksi.id')->where('saksi.tps_id', (string)Crypt::decrypt($id))->sum('saksi_data.voice');
         $data['saksi']       = Saksi::where('tps_id', (string)Crypt::decrypt($id))->get();
 
@@ -2783,7 +2783,7 @@ class AdminController extends Controller
         $config = Config::first();
         $data['regency'] = Regency::where('id', (string)$this->config->regencies_id)->first();
 
-        $data_tps =     Tps::where('id', (string)$id)->first();
+        $data_tps =     Tps::where('regency_id',$this->config->regencies_id)->where('id', (string)$id)->first();
         $data['data_tps'] = $data_tps;
         $data['village'] = Village::where('id', (string)$data_tps->villages_id)->first();
         $data['district'] = District::where('id', (string)$data['village']->district_id)->first();
@@ -2800,7 +2800,7 @@ class AdminController extends Controller
             ->whereNull('saksi.pending')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->get();
-        $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
         $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
         $data['qrcode'] = Qrcode::where('tps_id', $data['saksi'][0]['tps_id'])->first();
         if ($data['qrcode'] != null) {
@@ -2832,7 +2832,7 @@ class AdminController extends Controller
                 ->where('saksi.verification', 1);
         }])->get();
         $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
-        $data['tracking'] = ModelsTracking::get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->get();
         $data['total_incoming_vote']      = SaksiData::sum('voice');
         $data['realcount']                =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
         $data['village'] = Village::first();
@@ -2862,7 +2862,7 @@ class AdminController extends Controller
                 ->whereNull('saksi.pending')
                 ->where('saksi.verification', 1)->where('saksi.district_id', decrypt($id));
         }])->get();
-        $verification = Saksi::where('verification', 1)->with('saksi_data')->where('district_id', decrypt($id))->get();
+        $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('district_id', decrypt($id))->get();
         $dpt = District::where('regency_id', $this->config->regencies_id)->sum("dpt");
         $incoming_vote = SaksiData::select('voice')->where('district_id', decrypt($id))->get();
         $data['total_verification_voice'] = 0;
@@ -2879,15 +2879,15 @@ class AdminController extends Controller
         $data['realcount']   =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
         $data['district']    = Village::where("district_id", decrypt($id))->get();
         $data['total_tps']   = Village::where('district_id', decrypt($id))->sum('tps');
-        $data['tps_masuk']   = Tps::where('district_id', decrypt($id))->where('setup', 'terisi')->count('number');
-        $data['tps_kosong']  = Tps::where('district_id', decrypt($id))->count('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('district_id', decrypt($id))->where('setup', 'terisi')->count('number');
+        $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('district_id', decrypt($id))->count('number');
         $data['suara_masuk'] = SaksiData::where('district_id', decrypt($id))->count('voice');
         $data['kecamatan'] = District::where('id', decrypt($id))->first();
         $data['kel'] = Village::where('district_id',  decrypt($id))->get();
-        $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
         $data['title'] = "KECAMATAN " . $data['kecamatan']['name'] . "";
-        $data['saksi_masuk'] = Saksi::count();
-        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
+        $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
+        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->count();
         $data['id_kecamatan'] = decrypt($id);
         return view('administrator.hitung_kpu.kecamatan', $data);
     }
@@ -2921,7 +2921,7 @@ class AdminController extends Controller
         foreach ($incoming_vote as $key) {
             $data['total_incoming_vote'] += $key->voice;
         }
-        $verification = Saksi::where('verification', 1)->with('saksi_data')->where('village_id', decrypt($id))->get();
+        $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('village_id', decrypt($id))->get();
         $data['total_incoming_vote'] = 0;
         $data['total_verification_voice'] = 0;
         foreach ($verification as $key) {
@@ -2929,12 +2929,12 @@ class AdminController extends Controller
                 $data['total_verification_voice'] += $verif->voice;
             }
         }
-        $data['tps_masuk']   = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->sum('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->sum('number');
         $data['realcount']   = (string) $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
 
         $data['total_tps']   = Village::where('id', (string)decrypt($id))->sum('tps');
-        $data['tps_masuk']   = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->count('number');
-        $data['tps_kosong']  = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'belum_terisi')->count('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->count('number');
+        $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'belum_terisi')->count('number');
         $data['suara_masuk'] = SaksiData::where('village_id', (string)decrypt($id))->sum('voice');
         $data['saksi']       = Saksi::where('village_id', (string)decrypt($id))->get();
 
@@ -2948,7 +2948,7 @@ class AdminController extends Controller
         $data['paslon_candidate'] = Paslon::get();
         $data['config'] = Config::first();
         $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', $id)->count();
-        $data['tps_kel'] = Tps::where('villages_id', (string)$id)->get();
+        $data['tps_kel'] = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)$id)->get();
         $data['id'] = $id;
         $data['id_kelurahan'] = $id;
         $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', (string)$id)->where('saksi.verification', (string)1)->count();
@@ -2959,10 +2959,10 @@ class AdminController extends Controller
             ->whereNull('saksi.pending')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->get();
-        $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
         $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
-        $data['saksi_masuk'] = Saksi::count();
-        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
+        $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
+        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->count();
 
         return view('administrator.hitung_kpu.kelurahan', $data);
     }
@@ -2971,7 +2971,7 @@ class AdminController extends Controller
     {
       $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
 
-        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data GROUP by paslon_id ORDER by total DESC'));
+        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $this->config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
         // return DB::table('saksi_data')->where('paslon_id',0)->sum('voice');
         $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
         $data['urutan'] = $paslon_tertinggi;
@@ -2997,7 +2997,7 @@ class AdminController extends Controller
         foreach ($incoming_vote as $key) {
             $data['total_incoming_vote'] += $key->voice;
         }
-        $verification = Saksi::where('verification', 1)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->get();
+        $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->get();
         $data['total_incoming_vote'] = 0;
         $data['total_verification_voice'] = 0;
         foreach ($verification as $key) {
@@ -3005,11 +3005,11 @@ class AdminController extends Controller
                 $data['total_verification_voice'] += $verif->voice;
             }
         }
-        $data['saksi'] = Saksi::where('verification', 1)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->first();
+        $data['saksi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->first();
         $data['realcount']   = (string) $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
 
-        $data['tps_masuk']   = Tps::where('id', (string)Crypt::decrypt($id))->where('setup', 'terisi')->count('number');
-        $data['tps_kosong']  = Tps::where('id', (string)Crypt::decrypt($id))->where('setup', 'belum_terisi')->count('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('id', (string)Crypt::decrypt($id))->where('setup', 'terisi')->count('number');
+        $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('id', (string)Crypt::decrypt($id))->where('setup', 'belum_terisi')->count('number');
         $data['suara_masuk'] =  SaksiData::join('saksi', 'saksi_data.saksi_id', "=", 'saksi.id')->where('saksi.tps_id', (string)Crypt::decrypt($id))->sum('saksi_data.voice');
         $data['saksi']       = Saksi::where('tps_id', (string)Crypt::decrypt($id))->get();
 
@@ -3017,7 +3017,7 @@ class AdminController extends Controller
         $config = Config::first();
         $data['regency'] = Regency::where('id', (string)$this->config->regencies_id)->first();
 
-        $data_tps =     Tps::where('id', (string)$id)->first();
+        $data_tps =     Tps::where('regency_id',$this->config->regencies_id)->where('id', (string)$id)->first();
         $data['data_tps'] = $data_tps;
         $data['village'] = Village::where('id', (string)$data_tps->villages_id)->first();
         $data['district'] = District::where('id', (string)$data['village']->district_id)->first();
@@ -3034,7 +3034,7 @@ class AdminController extends Controller
             ->whereNull('saksi.pending')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->get();
-        $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
         $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
         $data['qrcode'] = Qrcode::where('tps_id', $data['saksi'][0]['tps_id'])->first();
         if ($data['qrcode'] != null) {
@@ -3064,7 +3064,7 @@ class AdminController extends Controller
                 ->where('saksi.verification', 1);
         }])->get();
         $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
-        $data['tracking'] = ModelsTracking::get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->get();
         $data['total_incoming_vote']      = SaksiData::sum('voice');
         $data['realcount']                =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
         $data['village'] = Village::first();
@@ -3094,7 +3094,7 @@ class AdminController extends Controller
                 ->whereNull('saksi.pending')
                 ->where('saksi.verification', 1)->where('saksi.district_id', decrypt($id));
         }])->get();
-        $verification = Saksi::where('verification', 1)->with('saksi_data')->where('district_id', decrypt($id))->get();
+        $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('district_id', decrypt($id))->get();
         $dpt = District::where('regency_id', $this->config->regencies_id)->sum("dpt");
         $incoming_vote = SaksiData::select('voice')->where('district_id', decrypt($id))->get();
         $data['total_verification_voice'] = 0;
@@ -3111,15 +3111,15 @@ class AdminController extends Controller
         $data['realcount']   =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
         $data['district']    = Village::where("district_id", decrypt($id))->get();
         $data['total_tps']   = Village::where('district_id', decrypt($id))->sum('tps');
-        $data['tps_masuk']   = Tps::where('district_id', decrypt($id))->where('setup', 'terisi')->count('number');
-        $data['tps_kosong']  = Tps::where('district_id', decrypt($id))->count('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('district_id', decrypt($id))->where('setup', 'terisi')->count('number');
+        $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('district_id', decrypt($id))->count('number');
         $data['suara_masuk'] = SaksiData::where('district_id', decrypt($id))->count('voice');
         $data['kecamatan'] = District::where('id', decrypt($id))->first();
         $data['kel'] = Village::where('district_id',  decrypt($id))->get();
-        $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
         $data['title'] = "KECAMATAN " . $data['kecamatan']['name'] . "";
-        $data['saksi_masuk'] = Saksi::count();
-        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
+        $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
+        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->count();
         $data['id_kecamatan'] = decrypt($id);
         return view('administrator.rekapitulasi-perhitungan.kecamatan', $data);
     }
@@ -3153,7 +3153,7 @@ class AdminController extends Controller
         foreach ($incoming_vote as $key) {
             $data['total_incoming_vote'] += $key->voice;
         }
-        $verification = Saksi::where('verification', 1)->with('saksi_data')->where('village_id', decrypt($id))->get();
+        $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('village_id', decrypt($id))->get();
         $data['total_incoming_vote'] = 0;
         $data['total_verification_voice'] = 0;
         foreach ($verification as $key) {
@@ -3161,12 +3161,12 @@ class AdminController extends Controller
                 $data['total_verification_voice'] += $verif->voice;
             }
         }
-        $data['tps_masuk']   = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->sum('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->sum('number');
         $data['realcount']   = (string) $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
 
         $data['total_tps']   = Village::where('id', (string)decrypt($id))->sum('tps');
-        $data['tps_masuk']   = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->count('number');
-        $data['tps_kosong']  = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'belum_terisi')->count('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->count('number');
+        $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'belum_terisi')->count('number');
         $data['suara_masuk'] = SaksiData::where('village_id', (string)decrypt($id))->sum('voice');
         $data['saksi']       = Saksi::where('village_id', (string)decrypt($id))->get();
 
@@ -3180,7 +3180,7 @@ class AdminController extends Controller
         $data['paslon_candidate'] = Paslon::get();
         $data['config'] = Config::first();
         $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', $id)->count();
-        $data['tps_kel'] = Tps::where('villages_id', (string)$id)->get();
+        $data['tps_kel'] = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)$id)->get();
         $data['id'] = $id;
         $data['id_kelurahan'] = $id;
         $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', (string)$id)->where('saksi.verification', (string)1)->count();
@@ -3191,10 +3191,10 @@ class AdminController extends Controller
             ->whereNull('saksi.pending')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->get();
-        $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
         $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
-        $data['saksi_masuk'] = Saksi::count();
-        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
+        $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
+        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->count();
 
         return view('administrator.rekapitulasi-perhitungan.kelurahan', $data);
     }
@@ -3236,7 +3236,7 @@ class AdminController extends Controller
         foreach ($incoming_vote as $key) {
             $data['total_incoming_vote'] += $key->voice;
         }
-        $verification = Saksi::where('verification', 1)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->get();
+        $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->get();
         $data['total_incoming_vote'] = 0;
         $data['total_verification_voice'] = 0;
         foreach ($verification as $key) {
@@ -3244,11 +3244,11 @@ class AdminController extends Controller
                 $data['total_verification_voice'] += $verif->voice;
             }
         }
-        $data['saksi'] = Saksi::where('verification', 1)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->first();
+        $data['saksi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->first();
         $data['realcount']   = (string) $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
 
-        $data['tps_masuk']   = Tps::where('id', (string)Crypt::decrypt($id))->where('setup', 'terisi')->count('number');
-        $data['tps_kosong']  = Tps::where('id', (string)Crypt::decrypt($id))->where('setup', 'belum_terisi')->count('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('id', (string)Crypt::decrypt($id))->where('setup', 'terisi')->count('number');
+        $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('id', (string)Crypt::decrypt($id))->where('setup', 'belum_terisi')->count('number');
         $data['suara_masuk'] =  SaksiData::join('saksi', 'saksi_data.saksi_id', "=", 'saksi.id')->where('saksi.tps_id', (string)Crypt::decrypt($id))->sum('saksi_data.voice');
         $data['saksi']       = Saksi::where('tps_id', (string)Crypt::decrypt($id))->get();
 
@@ -3256,7 +3256,7 @@ class AdminController extends Controller
         $config = Config::first();
         $data['regency'] = Regency::where('id', (string)$this->config->regencies_id)->first();
 
-        $data_tps =     Tps::where('id', (string)$id)->first();
+        $data_tps =     Tps::where('regency_id',$this->config->regencies_id)->where('id', (string)$id)->first();
         $data['data_tps'] = $data_tps;
         $data['village'] = Village::where('id', (string)$data_tps->villages_id)->first();
         $data['district'] = District::where('id', (string)$data['village']->district_id)->first();
@@ -3273,7 +3273,7 @@ class AdminController extends Controller
             ->whereNull('saksi.pending')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->get();
-        $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
         $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
         $data['qrcode'] = Qrcode::where('tps_id', $data['saksi'][0]['tps_id'])->first();
         if ($data['qrcode'] != null) {
@@ -3302,7 +3302,7 @@ class AdminController extends Controller
         }])->get();
         $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
         $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
-        $data['tracking'] = ModelsTracking::get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->get();
 
         $data['realcount']  =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
         $data['village'] = Village::first();
@@ -3338,7 +3338,7 @@ class AdminController extends Controller
         }])->get();
         $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
         $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
-        $data['tracking'] = ModelsTracking::get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->get();
 
         $data['realcount']  =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
         $data['village'] = Village::first();
@@ -3365,7 +3365,7 @@ class AdminController extends Controller
 
         $data['config'] = Config::first();
         $config = Config::first();
-        $verification                     = Saksi::where('verification', 1)->with('saksi_data')->get();
+        $verification                     = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->get();
         $dpt                              = District::where('regency_id', $this->config->regencies_id)->sum("dpt");
         $incoming_vote                    = SaksiData::select('voice')->get();
         $data['paslon'] = Paslon::with('quicksaksidata')->get();
@@ -3376,17 +3376,18 @@ class AdminController extends Controller
         }])->get();
         $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
         $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
-        $data['tracking'] = ModelsTracking::get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->get();
 
-        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
+        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->count();
         foreach ($incoming_vote as $key) {
             $data['total_incoming_vote'] += $key->voice;
         }
-        $data['saksi_masuk'] = Saksi::count();
+        $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
         $data['total_verification_voice'] = 0;
         $data['total_incoming_vote']      = 0;
 
-        $paslon_tertinggi = DB::select(DB::raw('SELECT saksi_data.paslon_id, SUM(saksi_data.voice) as total FROM saksi_data JOIN saksi ON saksi.id = saksi_data.saksi_id WHERE saksi.verification = 1 GROUP BY saksi_data.paslon_id ORDER BY total DESC'));
+        $paslon_tertinggi = DB::select(DB::raw('SELECT saksi_data.paslon_id, SUM(saksi_data.voice) as total FROM saksi_data JOIN saksi ON saksi.id = saksi_data.saksi_id WHERE saksi.verification = 1,WHERE saksi_data.regency_id = "' . $this->config->regencies_id . '" GROUP BY saksi_data.paslon_id ORDER BY total DESC'));
+        
         $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
         $data['urutan'] = $paslon_tertinggi;
 
@@ -3440,7 +3441,7 @@ class AdminController extends Controller
                 ->whereNull('saksi.pending')
                 ->where('saksi.verification', 1)->where('saksi.district_id', decrypt($id));;
         }])->get();
-        $verification = Saksi::where('verification', 1)->with('saksi_data')->where('district_id', decrypt($id))->get();
+        $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('district_id', decrypt($id))->get();
         $dpt = District::where('regency_id', $this->config->regencies_id)->sum("dpt");
         $incoming_vote = SaksiData::select('voice')->where('district_id', decrypt($id))->get();
         $data['total_verification_voice'] = 0;
@@ -3457,15 +3458,15 @@ class AdminController extends Controller
         $data['realcount']   =  $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
         $data['district']    = Village::where("district_id", decrypt($id))->get();
         $data['total_tps']   = Village::where('district_id', decrypt($id))->sum('tps');
-        $data['tps_masuk']   = Tps::where('district_id', decrypt($id))->where('setup', 'terisi')->count('number');
-        $data['tps_kosong']  = Tps::where('district_id', decrypt($id))->count('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('district_id', decrypt($id))->where('setup', 'terisi')->count('number');
+        $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('district_id', decrypt($id))->count('number');
         $data['suara_masuk'] = SaksiData::where('district_id', decrypt($id))->count('voice');
         $data['kecamatan'] = District::where('id', decrypt($id))->first();
         $data['kel'] = Village::where('district_id',  decrypt($id))->get();
-        $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
         $data['title'] = "KECAMATAN " . $data['kecamatan']['name'] . "";
-        $data['saksi_masuk'] = Saksi::count();
-        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
+        $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
+        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->count();
         $data['id_kecamatan'] = decrypt($id);
         return view('administrator.terverifikasi.kecamatan', $data);
     }
@@ -3510,7 +3511,7 @@ class AdminController extends Controller
         foreach ($incoming_vote as $key) {
             $data['total_incoming_vote'] += $key->voice;
         }
-        $verification = Saksi::where('verification', 1)->with('saksi_data')->where('village_id', decrypt($id))->get();
+        $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('village_id', decrypt($id))->get();
         $data['total_incoming_vote'] = 0;
         $data['total_verification_voice'] = 0;
         foreach ($verification as $key) {
@@ -3518,12 +3519,12 @@ class AdminController extends Controller
                 $data['total_verification_voice'] += $verif->voice;
             }
         }
-        $data['tps_masuk']   = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->sum('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->sum('number');
         $data['realcount']   = (string) $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
 
         $data['total_tps']   = Village::where('id', (string)decrypt($id))->sum('tps');
-        $data['tps_masuk']   = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->count('number');
-        $data['tps_kosong']  = Tps::where('villages_id', (string)decrypt($id))->where('setup', 'belum_terisi')->count('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'terisi')->count('number');
+        $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)decrypt($id))->where('setup', 'belum_terisi')->count('number');
         $data['suara_masuk'] = SaksiData::where('village_id', (string)decrypt($id))->sum('voice');
         $data['saksi']       = Saksi::where('village_id', (string)decrypt($id))->get();
 
@@ -3537,7 +3538,7 @@ class AdminController extends Controller
         $data['paslon_candidate'] = Paslon::get();
         $data['config'] = Config::first();
         $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', $id)->count();
-        $data['tps_kel'] = Tps::where('villages_id', (string)$id)->get();
+        $data['tps_kel'] = Tps::where('regency_id',$this->config->regencies_id)->where('villages_id', (string)$id)->get();
         $data['id'] = $id;
         $data['id_kelurahan'] = $id;
         $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('tps.villages_id', (string)$id)->where('saksi.verification', (string)1)->count();
@@ -3548,10 +3549,10 @@ class AdminController extends Controller
             ->whereNull('saksi.pending')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->get();
-        $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
         $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
-        $data['saksi_masuk'] = Saksi::count();
-        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
+        $data['saksi_masuk'] = Saksi::where('regency_id',$this->config->regencies_id)->count();
+        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->count();
 
         return view('administrator.terverifikasi.kelurahan', $data);
     }
@@ -3560,7 +3561,7 @@ class AdminController extends Controller
     {
       $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
 
-        $paslon_tertinggi = DB::select(DB::raw('SELECT saksi_data.paslon_id, SUM(saksi_data.voice) as total FROM saksi_data JOIN saksi ON saksi.id = saksi_data.saksi_id WHERE saksi.verification = 1 GROUP BY saksi_data.paslon_id ORDER BY total DESC'));
+        $paslon_tertinggi = DB::select(DB::raw('SELECT saksi_data.paslon_id, SUM(saksi_data.voice) as total FROM saksi_data JOIN saksi ON saksi.id = saksi_data.saksi_id WHERE saksi.verification = 1 WHERE regency_id = "' . $this->config->regencies_id . '" GROUP BY saksi_data.paslon_id ORDER BY total DESC'));
         $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
         $data['urutan'] = $paslon_tertinggi;
 
@@ -3586,7 +3587,7 @@ class AdminController extends Controller
         foreach ($incoming_vote as $key) {
             $data['total_incoming_vote'] += $key->voice;
         }
-        $verification = Saksi::where('verification', 1)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->get();
+        $verification = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->get();
         $data['total_incoming_vote'] = 0;
         $data['total_verification_voice'] = 0;
         foreach ($verification as $key) {
@@ -3594,11 +3595,11 @@ class AdminController extends Controller
                 $data['total_verification_voice'] += $verif->voice;
             }
         }
-        $data['saksi'] = Saksi::where('verification', 1)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->first();
+        $data['saksi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->with('saksi_data')->where('tps_id', Crypt::decrypt($id))->first();
         $data['realcount']   = (string) $dpt != 0 ? ($data['total_incoming_vote'] / $dpt * 100) : 0;
 
-        $data['tps_masuk']   = Tps::where('id', (string)Crypt::decrypt($id))->where('setup', 'terisi')->count('number');
-        $data['tps_kosong']  = Tps::where('id', (string)Crypt::decrypt($id))->where('setup', 'belum_terisi')->count('number');
+        $data['tps_masuk']   = Tps::where('regency_id',$this->config->regencies_id)->where('id', (string)Crypt::decrypt($id))->where('setup', 'terisi')->count('number');
+        $data['tps_kosong']  = Tps::where('regency_id',$this->config->regencies_id)->where('id', (string)Crypt::decrypt($id))->where('setup', 'belum_terisi')->count('number');
         $data['suara_masuk'] =  SaksiData::join('saksi', 'saksi_data.saksi_id', "=", 'saksi.id')->where('saksi.tps_id', (string)Crypt::decrypt($id))->sum('saksi_data.voice');
         $data['saksi']       = Saksi::where('tps_id', (string)Crypt::decrypt($id))->get();
 
@@ -3606,7 +3607,7 @@ class AdminController extends Controller
         $config = Config::first();
         $data['regency'] = Regency::where('id', (string)$this->config->regencies_id)->first();
 
-        $data_tps =     Tps::where('id', (string)$id)->first();
+        $data_tps =     Tps::where('regency_id',$this->config->regencies_id)->where('id', (string)$id)->first();
         $data['data_tps'] = $data_tps;
         $data['village'] = Village::where('id', (string)$data_tps->villages_id)->first();
         $data['district'] = District::where('id', (string)$data['village']->district_id)->first();
@@ -3623,7 +3624,7 @@ class AdminController extends Controller
             ->whereNull('saksi.pending')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->get();
-        $data['tracking'] = ModelsTracking::where('id_user', '!=', 1)->get();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->where('tracking.id_user', '!=', 1)->get();
         $data['title'] = "KELURAHAN " . $data['village']['name'] . "";
         $data['qrcode'] = Qrcode::where('tps_id', $data['saksi'][0]['tps_id'])->first();
         if ($data['qrcode'] != null) {
@@ -3649,8 +3650,8 @@ class AdminController extends Controller
         }])->get();
         $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
         $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
-        $data['tracking'] = ModelsTracking::get();
-        $data['jumlah_relawan'] = User::where('role_id', '=', (string)14)->where('is_active', '=', '1')->count();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->get();
+        $data['jumlah_relawan'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', (string)14)->where('is_active', '=', '1')->count();
         return view('administrator.relawan.relawan', $data);
     }
 
@@ -3666,16 +3667,16 @@ class AdminController extends Controller
         }])->get();
         $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
         $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
-        $data['tracking'] = ModelsTracking::get();
-        $data['jumlah_relawan_dihapus'] = User::where('role_id', '=', (string)14)->where('is_active', '=', '0')->count();
+        $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->get();
+        $data['jumlah_relawan_dihapus'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', (string)14)->where('is_active', '=', '0')->count();
         return view('administrator.relawan.relawan_dihapus', $data);
     }
 
     public function lacakSaksi()
     {
         $data['config'] = Config::first();
-        $data['jumlah_saksi'] = User::where('role_id', '=', 8)->count();
-        $data['saksi'] = User::where('role_id', '=', 8)->get();
+        $data['jumlah_saksi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 8)->count();
+        $data['saksi'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 8)->get();
         $data['tracking'] = ModelsTracking::join('users', 'users.id', '=', 'tracking.id_user')
             ->where('users.role_id', '=', 8)
             ->select('users.*', 'tracking.*')
@@ -3686,8 +3687,8 @@ class AdminController extends Controller
     public function lacakRelawan()
     {
         $data['config'] = Config::first();
-        $data['jumlah_relawan'] = User::where('role_id', '=', 14)->count();
-        $data['relawan'] = User::where('role_id', '=', 14)->get();
+        $data['jumlah_relawan'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 14)->count();
+        $data['relawan'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 14)->get();
         $data['tracking'] = ModelsTracking::join('users', 'users.id', '=', 'tracking.id_user')
             ->where('users.role_id', '=', 14)
             ->select('users.*', 'tracking.*')
@@ -3698,8 +3699,8 @@ class AdminController extends Controller
     public function lacakEnumerator()
     {
         $data['config'] = Config::first();
-        $data['jumlah_enumerator'] = User::where('role_id', '=', 8)->count();
-        $data['enumerator'] = User::where('role_id', '=', 8)->get();
+        $data['jumlah_enumerator'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 8)->count();
+        $data['enumerator'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 8)->get();
         $data['tracking'] = ModelsTracking::join('users', 'users.id', '=', 'tracking.id_user')
             ->where('users.role_id', '=', 8)
             ->select('users.*', 'tracking.*')
@@ -3710,8 +3711,8 @@ class AdminController extends Controller
     public function lacakAdmin()
     {
         $data['config'] = Config::first();
-        $data['jumlah_admin'] = User::where('role_id', '=', 1)->count();
-        $data['admin'] = User::where('role_id', '=', 1)->get();
+        $data['jumlah_admin'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 1)->count();
+        $data['admin'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 1)->get();
         $data['tracking'] = ModelsTracking::join('users', 'users.id', '=', 'tracking.id_user')
             ->where('users.role_id', '=', 1)
             ->select('users.*', 'tracking.*')
@@ -3722,8 +3723,8 @@ class AdminController extends Controller
     public function lacakCrowdC1()
     {
         $data['config'] = Config::first();
-        $data['jumlah_crowd_c1'] = User::where('role_id', '=', 17)->count();
-        $data['crowd_c1'] = User::where('role_id', '=', 17)->get();
+        $data['jumlah_crowd_c1'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 17)->count();
+        $data['crowd_c1'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', '=', 17)->get();
         $data['tracking'] = ModelsTracking::join('users', 'users.id', '=', 'tracking.id_user')
             ->where('users.role_id', '=', 17)
             ->select('users.*', 'tracking.*')

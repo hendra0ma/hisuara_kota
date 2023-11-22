@@ -9,12 +9,13 @@ class Saksi extends Model
 {
     use HasFactory;
     protected $table = "saksi";
-    protected $fillable =['c1_plano'];
+    protected $fillable = ['c1_plano'];
     public $timestamps = false;
+
+
 
     public function saksi_data()
     {
-        return $this->hasMany(SaksiData::class,"saksi_id","id");
+        return $this->hasMany(SaksiData::class, "saksi_id", "id");
     }
-
 }

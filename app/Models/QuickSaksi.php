@@ -9,4 +9,7 @@ class QuickSaksi extends Model
 {
     use HasFactory;
     protected $table = "quicksaksi";
+
+
+
 }

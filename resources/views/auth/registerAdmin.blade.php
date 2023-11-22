@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
-<div class="login-img bg-dark">
+<div class="login-img" style="background: transparent">
 
     <!-- GLOABAL LOADER -->
     <div id="global-loader">
@@ -13,12 +13,12 @@
     <div class="page">
         <div class="">
             <!-- CONTAINER OPEN -->
-            <div class="col col-login mx-auto">
+            {{-- <div class="col col-login mx-auto">
                 <div class="text-center">
                     <img src="{{ asset('') }}images/logo/hisuara.png" class="img-fluid img-thumbnail bg-dark shadow-lg border-0"
                         style="width:100px;height:auto;" alt="">
                 </div>
-            </div>
+            </div> --}}
             <div class="container-login100 d-flex">
                 <div class="wrap-login100 p-0">
                 
@@ -200,7 +200,7 @@
                                 </div>
                             </div>
                         
-                            <div class="tps-con" style="display:none">
+                            <div id="tps-con" style="display:none">
                                 <div class="form-group">
                                     <select class="form-control select2-show-search form-select" name="tps"
                                         id="tps">

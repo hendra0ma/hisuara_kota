@@ -11,4 +11,6 @@ class Qrcode extends Model
     public $table = "qrcode_hukum";
     protected $fillable = ['token','tps_id','nomor_berkas','verifikator_id','hukum_id','tanggal_masuk'];
     protected $guarded = [];
+
+ 
 }

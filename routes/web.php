@@ -97,6 +97,7 @@ Route::get("redirect-page", function () {
                 ]);
 });
 
+Route::get('register-admin', [LoginController::class, 'createAdmin'])->name('formRegister.admin');
 
 
 Route::get("update-dpt", function () {
@@ -155,6 +156,9 @@ foreach ($provinsi as $provinsis) {
     $domainProvinsi = ProvinceDomain::where('province_id', $provinsis->id)->first();
     Route::domain($domainProvinsi->domain)->group(function () use ($provinsis, $domainProvinsi) {
         Route::get('/dashboard-provinsi/{id}', [ProvinsiController::class, 'home'])->name('provinsi' . $provinsis->id . '.home');
+        Route::get('/',function () use ($provinsis) {
+            return redirect()->route('provinsi' . $provinsis->id . '.public',Crypt::encrypt($provinsis->id));
+        });
         Route::get('/public-provinsi/{id}', [ProvinsiController::class, 'pusatProvinsi'])->name('provinsi' . $provinsis->id . '.public');;
     });
 }
@@ -268,7 +272,7 @@ foreach ($kotas as $kota) {
 
         //auth
         //register Admin
-        Route::get('register-admin', [LoginController::class, 'createAdmin'])->name('formRegister.admin');
+        
         Route::get('get-koordinator',[LoginController::class,'getKoordinator'])->name('getKoordinator');
         Route::get('login/tracking', [LoginController::class, 'track_rec']);
         Route::post('store-admin', [LoginController::class, 'storeAdmin'])->name('storeRegister.admin');
@@ -545,6 +549,7 @@ foreach ($kotas as $kota) {
             Route::get('index', [HukumController::class, 'index'])->name('index');
             Route::controller(HukumController::class)->group(function () {
                 Route::get('terverifikasi', 'terverifikasi');
+                Route::get('mahkamah_konstitusi', 'mk');
                 Route::get('validator_kecurangan', 'validatorKecurangan')->name('validatorKecurangan');
                 Route::get('ditolak', 'ditolak');
                 Route::get('print/{id}', 'print');
@@ -1082,6 +1087,13 @@ Route::get('update-suara-c1-kota',function (){
         $c1Prov->save();
   
 });
+
+
+Route::get('cek-query',function () {
+   $saksi =new SaksiData;
+   return $saksi->toSql();
+});
+
 
 // Route::get('update-suara-c1-provinsi',function (){
 //     $paslon = Paslon::get();

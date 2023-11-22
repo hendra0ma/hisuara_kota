@@ -434,8 +434,8 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                             <h4 class="mb-0 fw-bold kecurangan tugel-content" style="color: #f82649; font-size: 16px; display: none;">
                                 Kecurangan
                             </h4>
-                            <h4 class="mb-0 fw-bold suara tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
-                                Suara Terbanyak
+                            <h4 class="mb-0 fw-bold laporan tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                Laporan
                             </h4>
                             <h4 class="mb-0 fw-bold dpt tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
                                 DPT
@@ -679,50 +679,55 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                 </div>
 
                 <?php
-                $dpt_l = 0;
-                $dpt_p = 0;
-                if (request()->segment(2) == 'index') {
-                    $dpt_l = District::where('regency_id', $config->regencies_id)->sum('dpt_l');
-                    $dpt_p = District::where('regency_id', $config->regencies_id)->sum('dpt_p');
-                } elseif (request()->segment(2) == 'perhitungan_kecamatan') {
-                    $dpt_l = District::where('regency_id', $config->regencies_id)->where('id', decrypt(request()->segment(3)))->sum('dpt_l');
-                    $dpt_p = District::where('regency_id', $config->regencies_id)->where('id', decrypt(request()->segment(3)))->sum('dpt_p');
-                } elseif (request()->segment(2) == 'perhitungan_kelurahan') {
-                    $dpt_l = Village::where('id', decrypt(request()->segment(3)))->sum('dpt_l');
-                    $dpt_p = Village::where('id', decrypt(request()->segment(3)))->sum('dpt_p');
-                } elseif (request()->segment(2) == 'perhitungan_tps') {
-                    $dpt_l = 128;
-                    $dpt_p = 145;
-                }
+                    $dpt_l = 0;
+                    $dpt_p = 0;
+                    if (request()->segment(2) == 'index') {
+                        $dpt_l = District::where('regency_id',$config->regencies_id)->sum('dpt_l');
+                        $dpt_p = District::where('regency_id',$config->regencies_id)->sum('dpt_p');
+                    }elseif(request()->segment(2) == 'perhitungan_kecamatan'){
+                        $dpt_l = District::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt_l');
+                        $dpt_p = District::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt_p');
+                    }elseif(request()->segment(2) == 'perhitungan_kelurahan'){
+                        $dpt_l = Village::where('id',decrypt(request()->segment(3)))->sum('dpt_l');
+                        $dpt_p = Village::where('id',decrypt(request()->segment(3)))->sum('dpt_p');
+
+                    }elseif(request()->segment(2) == 'perhitungan_tps'){
+                        $dpt_l = 128;
+                        $dpt_p = 145;
+
+                    }
                 ?>
                 <div class="col-md text-white dpt tugel-content" style="display:none">
                     <div class="row">
 
-                        @if (request()->segment(2) != 'perhitungan_tps')
-                        <div class="col py-2 judul text-center bg-secondary text-white" style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
-                            <div class="text">Pria : <b>{{ $dpt_l }}</b></div>
-                        </div>
-                        <div class="col py-2 judul text-center bg-danger text-white">
-                            <div class="text">Wanita : <b>{{ $dpt_p }}</b></div>
-                        </div>
-                        @endif
-                        <?php
-                        $total_dpt = 0;
-                        if (request()->segment(2) == 'index') {
-                            $total_dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
-                        } elseif (request()->segment(2) == 'perhitungan_kecamatan') {
-                            $total_dpt = District::where('regency_id', $config->regencies_id)->where('id', decrypt(request()->segment(3)))->sum('dpt');
-                        } elseif (request()->segment(2) == 'perhitungan_kelurahan') {
-                            $total_dpt = (int) $dpt_l + (int) $dpt_p;
-                        } elseif (request()->segment(2) == 'perhitungan_tps') {
-                            $total_dpt = TPS::where('regency_id', $config->regencies_id)->where('id', decrypt(request()->segment(3)))->sum('dpt');
-                        }
-                        ?>
-                        <div class="col py-2 judul text-center bg-primary text-white" {!! (request()->segment(2) == 'perhitungan_tps')?
+                            @if (request()->segment(2) != 'perhitungan_tps')
+                            <div class="col py-2 judul text-center bg-secondary text-white"
+                                style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
+                                <div class="text">Pria : <b>{{ $dpt_l }}</b></div>
+                            </div>
+                            <div class="col py-2 judul text-center bg-danger text-white">
+                                <div class="text">Wanita : <b>{{ $dpt_p }}</b></div>
+                            </div>
+                            @endif
+                            <?php
+                            $total_dpt = 0;
+                            if (request()->segment(2) == 'index') {
+                                $total_dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
+                            } elseif (request()->segment(2) == 'perhitungan_kecamatan') {
+                                $total_dpt = District::where('regency_id', $config->regencies_id)->where('id', decrypt(request()->segment(3)))->sum('dpt');
+                            } elseif (request()->segment(2) == 'perhitungan_kelurahan') {
+                                $total_dpt = (int) $dpt_l + (int) $dpt_p;
+                            } elseif (request()->segment(2) == 'perhitungan_tps') {
+                                $total_dpt = TPS::where('regency_id', $config->regencies_id)->where('id', decrypt(request()->segment(3)))->sum('dpt');
+                            }
+                            ?>
+                            <div class="col py-2 judul text-center bg-primary text-white"
+                            {!!
+                                (request()->segment(2) == 'perhitungan_tps')?
 
-                            'style=" border-top-left-radius: 25px; border-bottom-left-radius: 25px"'
-                            :
-                            ""
+                                'style=" border-top-left-radius: 25px; border-bottom-left-radius: 25px"'
+                                :
+                                ""
                             !!}>
 
                             <div class="text">Total : <b>{{ $total_dpt }}</b></div>
@@ -888,21 +893,6 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                             </div>
                         </div>
 
-                        <!-- <div class="col-md">
-                            <div class="mid">
-
-                                <label class="switch">
-                                    <input type="checkbox" {{($config->default ==
-                                                        "yes")?'disabled':''}} data-target="mode" onclick="settings('lockdown',this)" {{($config->lockdown ==
-                                                        "no") ? "":"checked"; }}>
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                            <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                Lockdown
-                            </div>
-                        </div> -->
-
                         <div class="col-md">
                             <div class="mid">
                                 <label class="switch">
@@ -931,16 +921,40 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
 
                     </div>
                 </div>
-                <div class="col-md suara tugel-content" style="display: none">
+                <div class="col-md laporan tugel-content" style="display: none">
                     <div class="row">
-                        @foreach ($urutan as $urutPaslon)
-                        <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
-                        <div class="col py-2 judul text-center text-white" style="background: {{ $pasangan->color }}">
-                            <div class="text">{{ $pasangan->candidate }} ||
-                                {{ $pasangan->deputy_candidate }} : {{$urutPaslon->total}}</b>
-                            </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a data-command-target="mk" href="{{url('')}}/hukum/mahkamah_konstitusi"
+                                class="py-1 btn fs-6 w-100 text-white glowy-menu"
+                                style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                MK
+                            </a>
                         </div>
-                        @endforeach
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a data-command-target="bawaslu" href="{{url('')}}/hukum/bawaslu"
+                                class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
+                                Bawaslu
+                            </a>
+                        </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a data-command-target="dkpp" href="{{url('')}}/hukum/dkpp"
+                                class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
+                                DKPP
+                            </a>
+                        </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a data-command-target="polri" href="{{url('')}}/hukum/polisi"
+                                class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                                Polri
+                            </a>
+                        </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a data-command-target="kpu" href="{{url('')}}/hukum/akun_kpu"
+                                class="py-1 btn fs-6 w-100 text-white glowy-menu"
+                                style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                KPU
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-12 text-white judul-pertama">
@@ -1084,8 +1098,8 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                     </button>
                 </div>
                 <div class="col-md-auto px-0">
-                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="suara" data-command-target="suara">
-                        <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Urutan Suara">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="laporan" data-command-target="laporan">
+                        <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Laporan">
                             <i class="fa-solid fa-ranking-star"></i>
                         </span>
                     </button>

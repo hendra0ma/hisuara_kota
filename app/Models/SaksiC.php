@@ -12,6 +12,10 @@ class SaksiC extends Model
     protected $fillable =['c_images'];
     public $timestamps = false;
 
+
+    
+
+
     public function saksi_data()
     {
         return $this->hasMany(DataSaksiC::class,"saksi_id","id");
