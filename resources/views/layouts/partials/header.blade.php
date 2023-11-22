@@ -938,6 +938,12 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a data-command-target="bawaslu" href="{{url('')}}/hukum/tim_hukum_paslon"
+                                class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
+                                Tim Hukum Paslon
+                            </a>
+                        </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                             <a data-command-target="dkpp" href="{{url('')}}/hukum/dkpp"
                                 class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
                                 DKPP

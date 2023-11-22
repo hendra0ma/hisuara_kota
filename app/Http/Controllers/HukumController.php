@@ -362,4 +362,45 @@ class HukumController extends Controller
         $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
         return view('penghukuman.mahkamah_konstitusi', $data);
     }
+
+    function bawaslu() {
+        $data['config'] = Config::first();
+        $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
+        $data['index_tsm']    = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
+        $data['qrcode'] = QrCode::join('surat_pernyataan', 'surat_pernyataan.qrcode_hukum_id', '=', 'qrcode_hukum.id')->get();
+        $data['list_suara']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
+            ->join('users', 'users.tps_id', '=', 'tps.id')
+            ->where('saksi.kecurangan', 'yes')
+            ->where('saksi.status_kecurangan', 'terverifikasi')
+            ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
+            ->limit(6)
+            ->get();
+            
+        return view('penghukuman.bawaslu', $data);
+    }
+
+    function timHukumPaslon() {
+        $data['index_tsm']    = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
+        $data['config'] = Config::first();
+        $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
+        $data['qrcode'] = QrCode::join('surat_pernyataan', 'surat_pernyataan.qrcode_hukum_id', '=', 'qrcode_hukum.id')->limit(8)->get();
+        $data['list_suara']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
+            ->join('users', 'users.tps_id', '=', 'tps.id')
+            ->where('saksi.kecurangan', 'yes')
+            ->where('saksi.status_kecurangan', 'terverifikasi')
+            ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
+            ->limit(6)
+            ->get();
+
+        $data['list_sidang']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
+            ->join('users', 'users.tps_id', '=', 'tps.id')
+            ->join('qrcode_hukum', 'qrcode_hukum.tps_id', '=', 'tps.id')
+            ->where('saksi.kecurangan', 'yes')
+            ->where('saksi.status_kecurangan', 'terverifikasi')
+            ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
+            ->limit(6)
+            ->get();
+
+        return view('penghukuman.tim_hukum_paslon', $data);
+    }
 }
