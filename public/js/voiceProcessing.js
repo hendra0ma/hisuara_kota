@@ -7,7 +7,7 @@ const keywordClickButtonVerifikasi = 'buka verifikasi';
 const keywordClickHubungiButtonOnModalVerifikasi = 'hubungi';
 const keywordClickVerifikasiButtonOnModalVerifikasi = 'verifikasi oke';
 const keywordClickKoreksiButtonOnModalVerifikasi = 'koreksi';
-const keywordClickCloseModalButtonVerifikasi = 'tutup verifikasi';
+const keywordClickCloseModalButtonVerifikasi = 'tutup modal';
 const clickButtonVerifikasiExceptions = ['buka verifikasi c1', 'buka verifikasi saksi', 'buka verifikasi crowd c1', 'buka verifikasi admin'];
 
 const keywordClickKtpButton = 'lihat ktp';
