@@ -690,11 +690,11 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                     }elseif(request()->segment(2) == 'perhitungan_kelurahan'){
                         $dpt_l = Village::where('id',decrypt(request()->segment(3)))->sum('dpt_l');
                         $dpt_p = Village::where('id',decrypt(request()->segment(3)))->sum('dpt_p');
-                    
+
                     }elseif(request()->segment(2) == 'perhitungan_tps'){
                         $dpt_l = 128;
                         $dpt_p = 145;
-                    
+
                     }
                 ?>
                 <div class="col-md text-white dpt tugel-content" style="display:none">
@@ -910,8 +910,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                         <div class="col-md">
                             <div class="mid">
                                 <label class="switch">
-                                    <input type="checkbox" id="speechCheckbox"
-                                    data-target="mode">
+                                    <input type="checkbox" id="speechCheckbox" data-target="mode">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -1154,7 +1153,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                     </button>
                 </div>
                 <div class="col-md-auto px-0">
-                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="featured" data-command-target="featured">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="featured" data-command-target="fitur">
                         <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Featured">
                             <i class="fa-solid fa-star"></i>
                         </span>
@@ -1208,7 +1207,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
 
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
-                                <button class="dropdown-item" type="submit">
+                                <button data-command-target="keluar-sistem" class="dropdown-item" type="submit">
                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                 </button>
                             </form>

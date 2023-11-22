@@ -4,6 +4,7 @@
 
 {{-- Verifikasi Saksi --}}
 <?php
+
 use App\Models\District;
 use App\Models\Village;
 use App\Models\Tps;
@@ -12,16 +13,18 @@ use App\Models\Config;
 
 $data['config'] = Config::first();
 $config = Config::first();
+
 use App\Models\Configs;
 use App\Models\RegenciesDomain;
+
 $configs = Config::all()->first();
 $currentDomain = request()->getHttpHost();
 if (isset(parse_url($currentDomain)['port'])) {
     $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
-}else{
+} else {
     $url = $currentDomain;
 }
-$regency_id = RegenciesDomain::where('domain',"LIKE","%".$url."%")->first();
+$regency_id = RegenciesDomain::where('domain', "LIKE", "%" . $url . "%")->first();
 
 $config = new Configs;
 $config->regencies_id =  (string) $regency_id->regency_id;
@@ -61,32 +64,32 @@ $kota = Regency::where('id', $config->regencies_id)->first();
         </ol>
     </div>
 
-    
+
 
     <div class="col-lg-4" style="position: fixed; right: 18px; width: 1244.66px; z-index: 10; background: #f2f3f9">
         <div class="row mt-2">
 
             {{-- <div class="col parent-link">
                 <a href="{{url('')}}/administrator/verifikasi_saksi" class="btn text-white w-100 py-3">Verifikasi Saksi</a>
-            </div>
-            <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi" class="btn text-white w-100 py-3">Saksi Teregristrasi</a>
-            </div>
-            <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi/hadir" class="btn text-white w-100 py-3">Saksi Hadir</a>
-            </div>
-            <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi/tidak_hadir" class="btn text-white w-100 py-3">Saksi Tidak Hadir</a>
-            </div> --}}
-            <div class="col parent-link">
-                <a href="{{url('')}}/administrator/relawan" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/relawan')?'active' : '' }}">Relawan Terdaftar</a>
-            </div>
-            <div class="col parent-link">
-                <a href="{{url('')}}/administrator/relawan_dihapus" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/relawan_dihapus')?'active' : '' }}">Relawan Dihapus</a>
-            </div>
-
         </div>
+        <div class="col parent-link">
+            <a href="{{url('')}}/administrator/absensi" class="btn text-white w-100 py-3">Saksi Teregristrasi</a>
+        </div>
+        <div class="col parent-link">
+            <a href="{{url('')}}/administrator/absensi/hadir" class="btn text-white w-100 py-3">Saksi Hadir</a>
+        </div>
+        <div class="col parent-link">
+            <a href="{{url('')}}/administrator/absensi/tidak_hadir" class="btn text-white w-100 py-3">Saksi Tidak Hadir</a>
+        </div> --}}
+        <div class="col parent-link">
+            <a data-command-target="relawan-terdaftar" href="{{url('')}}/administrator/relawan" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/relawan')?'active' : '' }}">Relawan Terdaftar</a>
+        </div>
+        <div class="col parent-link">
+            <a data-command-target="relawan-dihapus" href="{{url('')}}/administrator/relawan_dihapus" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/relawan_dihapus')?'active' : '' }}">Relawan Dihapus</a>
+        </div>
+
     </div>
+</div>
 </div>
 <!-- PAGE-HEADER END -->
 
@@ -112,7 +115,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
 
     <livewire:relawan>
 
-    {{-- <div class="col-lg-12 col-md-12">
+        {{-- <div class="col-lg-12 col-md-12">
         <div class="card">
 
             <div class="card-body">
@@ -137,47 +140,47 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                         </thead>
                         <tbody>
                             @foreach ($saksi_data as $saksi)
-                            <?php $kecamatan = \App\Models\District::where('id',(string)$saksi['districts'])->first(); ?>
-                            <?php $kelurahan = \App\Models\Village::where('id',(string)3674040006)->first(); ?>
-                            <?php $tps = \App\Models\Tps::where('user_id',$saksi['id'])->first(); ?>
+                            <?php $kecamatan = \App\Models\District::where('id', (string)$saksi['districts'])->first(); ?>
+                            <?php $kelurahan = \App\Models\Village::where('id', (string)3674040006)->first(); ?>
+                            <?php $tps = \App\Models\Tps::where('user_id', $saksi['id'])->first(); ?>
                             <tr>
                                 <td>  @if ($saksi['profile_photo_path'] == NULL)
                                     <img class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;" src="https://ui-avatars.com/api/?name={{ $saksi['name'] }}&color=7F9CF5&background=EBF4FF">
-                                    @else
-                                    <img class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".$saksi['profile_photo_path']) }}">
-                                    @endif
-                               </td>
-                                <td>{{$saksi['name']}}  &nbsp;@if ($saksi['role_id'] == 8)
-                                    <i class="fa fa-check-circle" data-bs-toggle="tooltip" title="" data-bs-original-title="fa fa-check-circle" aria-label="fa fa-check-circle"></i>
-                                    @else
+        @else
+        <img class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".$saksi['profile_photo_path']) }}">
+        @endif
+        </td>
+        <td>{{$saksi['name']}} &nbsp;@if ($saksi['role_id'] == 8)
+            <i class="fa fa-check-circle" data-bs-toggle="tooltip" title="" data-bs-original-title="fa fa-check-circle" aria-label="fa fa-check-circle"></i>
+            @else
 
-                                @endif</td>
-                                <td>{{$saksi['nik']}}</td>
-                                <td>{{$saksi['no_hp']}}</td>
-                                <td>{{$saksi['email']}}</td>
-                                <td>{{$kecamatan['name'] }}</td>
-                                <td>{{$kelurahan['name'] }}</td>
-                                <td><?php if($tps == null){?> <?php }else{ ?> {{$tps['number']}}<?php } ?></td>
-                                <td>
-                                    @if ($saksi['is_active'] == 2)
-                                    <span class="badge bg-danger  me-1 mb-1 mt-1">Belum Terverifikasi</span>
-                                    @else
-                                    <span class="badge bg-success  me-1 mb-1 mt-1">Terverifikasi</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="cekmodal" class="btn btn-primary cekmodal" style="font-size: 0.8em;" id="Cek" data-id="{{$saksi['id']}}"
-                                        data-bs-toggle="modal" id="" data-bs-target="#cekmodal">Cek</a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    
+            @endif
+        </td>
+        <td>{{$saksi['nik']}}</td>
+        <td>{{$saksi['no_hp']}}</td>
+        <td>{{$saksi['email']}}</td>
+        <td>{{$kecamatan['name'] }}</td>
+        <td>{{$kelurahan['name'] }}</td>
+        <td><?php if ($tps == null) { ?> <?php } else { ?> {{$tps['number']}}<?php } ?></td>
+        <td>
+            @if ($saksi['is_active'] == 2)
+            <span class="badge bg-danger  me-1 mb-1 mt-1">Belum Terverifikasi</span>
+            @else
+            <span class="badge bg-success  me-1 mb-1 mt-1">Terverifikasi</span>
+            @endif
+        </td>
+        <td>
+            <a href="cekmodal" class="btn btn-primary cekmodal" style="font-size: 0.8em;" id="Cek" data-id="{{$saksi['id']}}" data-bs-toggle="modal" id="" data-bs-target="#cekmodal">Cek</a>
+        </td>
+        </tr>
+        @endforeach
+        </tbody>
+        </table>
+</div>
+</div>
+</div>
+</div> --}}
+
 </div>
 <div style="background: #f2f3f9; position: fixed; width: 100%; height: 70px; top: 90px; left: 0; z-index: 8;"></div>
 <!-- CONTAINER END -->

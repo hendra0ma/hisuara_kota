@@ -200,7 +200,7 @@
                                 </div>
                             </div>
                         
-                            <div class="tps-con" style="display:none">
+                            <div id="tps-con" style="display:none">
                                 <div class="form-group">
                                     <select class="form-control select2-show-search form-select" name="tps"
                                         id="tps">

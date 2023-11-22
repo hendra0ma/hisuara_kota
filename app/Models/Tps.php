@@ -11,6 +11,10 @@ class Tps extends Model
     protected $table = 'tps';
     protected $fillable = ['dpt, created_at, number, villages_id, district_id, regency_id, province_id'];
 
+
+
+
+
     public function saksi()
     {
         return $this->hasOne(Saksi::class, 'tps_id', 'id');

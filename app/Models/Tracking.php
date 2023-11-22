@@ -10,4 +10,6 @@ class Tracking extends Model
     use HasFactory;
     public $table = "tracking";
     protected $fillable = ['longitude','latitude'];
+
+
 }

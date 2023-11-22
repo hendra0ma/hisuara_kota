@@ -67,10 +67,10 @@ $kota = Regency::where('id', $config->regencies_id)->first();
     <div class="col-lg-4" style="position: fixed; right: 18px; width: 1244.66px; z-index: 10; background: #f2f3f9">
         <div class="row mt-2">
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/verifikasi_akun" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/verifikasi_akun')?'active' : '' }}">Verifikasi Admin</a>
+                <a data-command-target="verifikasi-admin" href="{{url('')}}/administrator/verifikasi_akun" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/verifikasi_akun')?'active' : '' }}">Verifikasi Admin</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/admin_terverifikasi" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/admin_terverifikasi')?'active' : '' }}">Admin Terverifikasi</a>
+                <a data-command-target="admin-terverifikasi" href="{{url('')}}/administrator/admin_terverifikasi" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/admin_terverifikasi')?'active' : '' }}">Admin Terverifikasi</a>
             </div>
 
         </div>

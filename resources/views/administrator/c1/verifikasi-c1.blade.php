@@ -73,12 +73,12 @@ $kota = Regency::where('id', $config->regencies_id)->first();
     <div class="col-md-8">
         <div class="row mt-2">
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 c1saksi tablink" onclick="openPage('C1-Saksi', this, '#6259ca')" id="defaultOpen">C1 Saksi</a>
+                <a data-command-target="c1-saksi" class="btn text-white w-100 py-3 c1saksi tablink" onclick="openPage('C1-Saksi', this, '#6259ca')" id="defaultOpen">C1 Saksi</a>
             </div>
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 c1relawan tablink" onclick="openPage('C1-Relawan', this, '#6259ca')">C1 Relawan TPS</a>
+                <a data-command-target="c1-relawan-tps" class="btn text-white w-100 py-3 c1relawan tablink" onclick="openPage('C1-Relawan', this, '#6259ca')">C1 Relawan TPS</a>
             </div>
-            <div class="col parent-link">
+            <div data-command-target="c1-crowd-kpu" class="col parent-link">
                 <a class="btn text-white w-100 py-3 c1relawan tablink" onclick="openPage('C1-Crowd', this, '#6259ca')">C1 Crowd KPU</a>
             </div>
         </div>

@@ -66,91 +66,91 @@
     
     <!-- End PAGE -->
     <script>
-        var x = document.getElementById("demo");
-        $(window).on('load', function() {
-            getLocation()
+        // var x = document.getElementById("demo");
+        // $(window).on('load', function() {
+        //     getLocation()
 
-        });
+        // });
 
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
-            }
-        }
+        // function getLocation() {
+        //     if (navigator.geolocation) {
+        //         navigator.geolocation.getCurrentPosition(showPosition);
+        //     } else {
+        //         x.innerHTML = "Geolocation is not supported by this browser.";
+        //     }
+        // }
 
-        function showPosition(position) {
-            document.getElementById("latitude").value = position.coords.latitude;
-            document.getElementById("longitude").value = position.coords.longitude;
+        // function showPosition(position) {
+        //     document.getElementById("latitude").value = position.coords.latitude;
+        //     document.getElementById("longitude").value = position.coords.longitude;
 
-        }
+        // }
 
 
-        $("#pengajuan").on("click", function() {
-            let email = $("form").find('input[name="email"]');
-            if (email.val() == "") {
-                alert("untuk melakukan pengajuan kode,email wajib di isi");
-            } else {
-                $(this).attr("disabled", true);
-                $(this).html(`
-            <lord-icon
-            src="https://cdn.lordicon.com/ymrqtsej.json"
-            trigger="loop"
-            colors="primary:#121331"
-            style="width:40px;height:40px">
-            </lord-icon>  Sedang Meminta Kode
-            `);
-                let Containertime = $("p.containerTime");
+        // $("#pengajuan").on("click", function() {
+        //     let email = $("form").find('input[name="email"]');
+        //     if (email.val() == "") {
+        //         alert("untuk melakukan pengajuan kode,email wajib di isi");
+        //     } else {
+        //         $(this).attr("disabled", true);
+        //         $(this).html(`
+        //     <lord-icon
+        //     src="https://cdn.lordicon.com/ymrqtsej.json"
+        //     trigger="loop"
+        //     colors="primary:#121331"
+        //     style="width:40px;height:40px">
+        //     </lord-icon>  Sedang Meminta Kode
+        //     `);
+        //         let Containertime = $("p.containerTime");
 
-                $.ajax({
-                    url: "{{ route('getAca') }}",
-                    type: "get",
-                    data: {
-                        email: email.val(),
-                        _token: "{{ csrf_token() }}"
-                    },
-                    dataType: "json",
-                    success: function(res) {
-                        if (res.success != null) {
-                            $("div#kodeAlert")
-                                .removeClass("alert-danger")
-                                .addClass("alert-success");
-                            $("div#kodeAlert").html(res.success);
-                            $("#pengajuan").html(`   <img src="<?= asset('') ?>assets/acakey_new_icon_key.png" style="width:20px;height:auto;">&nbsp;
-                                    Get Kode ACA`);
-                            let time = 60;
-                            $("#pengajuan").attr("disabled", true);
-                            let timeOut = setInterval(function() {
-                                Containertime.html(
-                                    `Kamu dapat mengajukan Kode Lagi <br> setelah ${time--} detik.`
-                                );
-                            }, 1000);
-                            setTimeout(function() {
-                                $("#pengajuan").attr("disabled", false);
-                                $("#pengajuan").html(`   <img src="<?= asset('') ?>assets/acakey_new_icon_key.png" style="width:20px;height:auto;">&nbsp;
-                                    Get Kode ACA`);
-                                clearInterval(timeOut);
-                                Containertime.html("");
-                            }, time * 1000 + 2000);
-                        } else {
-                            $("div#kodeAlert")
-                                .removeClass("alert-success")
-                                .addClass("alert-danger");
-                            $("#pengajuan").attr("disabled", false);
-                            $("#pengajuan").html(`   <img src="<?= asset('') ?>assets/acakey_new_icon_key.png" style="width:20px;height:auto;">&nbsp;
-                                    Get Kode ACA`);
-                            $("div#kodeAlert").html(res.error);
-                        }
+        //         $.ajax({
+        //             url: "{{ route('getAca') }}",
+        //             type: "get",
+        //             data: {
+        //                 email: email.val(),
+        //                 _token: "{{ csrf_token() }}"
+        //             },
+        //             dataType: "json",
+        //             success: function(res) {
+        //                 if (res.success != null) {
+        //                     $("div#kodeAlert")
+        //                         .removeClass("alert-danger")
+        //                         .addClass("alert-success");
+        //                     $("div#kodeAlert").html(res.success);
+        //                     $("#pengajuan").html(`   <img src="<?= asset('') ?>assets/acakey_new_icon_key.png" style="width:20px;height:auto;">&nbsp;
+        //                             Get Kode ACA`);
+        //                     let time = 60;
+        //                     $("#pengajuan").attr("disabled", true);
+        //                     let timeOut = setInterval(function() {
+        //                         Containertime.html(
+        //                             `Kamu dapat mengajukan Kode Lagi <br> setelah ${time--} detik.`
+        //                         );
+        //                     }, 1000);
+        //                     setTimeout(function() {
+        //                         $("#pengajuan").attr("disabled", false);
+        //                         $("#pengajuan").html(`   <img src="<?= asset('') ?>assets/acakey_new_icon_key.png" style="width:20px;height:auto;">&nbsp;
+        //                             Get Kode ACA`);
+        //                         clearInterval(timeOut);
+        //                         Containertime.html("");
+        //                     }, time * 1000 + 2000);
+        //                 } else {
+        //                     $("div#kodeAlert")
+        //                         .removeClass("alert-success")
+        //                         .addClass("alert-danger");
+        //                     $("#pengajuan").attr("disabled", false);
+        //                     $("#pengajuan").html(`   <img src="<?= asset('') ?>assets/acakey_new_icon_key.png" style="width:20px;height:auto;">&nbsp;
+        //                             Get Kode ACA`);
+        //                     $("div#kodeAlert").html(res.error);
+        //                 }
 
-                        $("div#kodeAlert").show(100, function() {
-                            setTimeout(function() {
-                                $("div#kodeAlert").hide(200);
-                            }, 10000);
-                        });
-                    },
-                });
-            }
-        });
+        //                 $("div#kodeAlert").show(100, function() {
+        //                     setTimeout(function() {
+        //                         $("div#kodeAlert").hide(200);
+        //                     }, 10000);
+        //                 });
+        //             },
+        //         });
+        //     }
+        // });
     </script>
 @endsection
