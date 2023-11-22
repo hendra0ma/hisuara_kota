@@ -42,16 +42,12 @@ try {
 
       recognition.onerror = function (event) {
         console.error('Speech recognition error:', event.error);
-
-        if (event.error === 'no-speech') {
-          // Handle the case where no speech was detected
-        } else if (event.error === 'audio-capture') {
+        if (event.error === 'not-allowed') {
           // Handle the case where microphone access was denied
           console.warn('Microphone access denied.');
+          recognition.stop();
+          speechGotError = true;
         }
-
-        recognition.stop();
-        speechGotError = true;
       };
 
       recognition.onend = function () {
