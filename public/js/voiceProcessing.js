@@ -36,6 +36,7 @@ try {
     const isSpeechOn = getSpeechStatus()
 
     if (isSpeechOn == 'true') {
+      hideImage()
       let speechGotError = false;
 
       function dontEndTheSpeech() {
@@ -69,8 +70,14 @@ try {
         if (event.results[i].isFinal) {
           let finalTranscript = event.results[i][0].transcript.trim().toLowerCase();
 
-          if (finalTranscript.includes(startSpeech)) setSpeechStatus(true)
-          if (finalTranscript.includes(endSpeech)) setSpeechStatus(false)
+          if (finalTranscript.includes(startSpeech)) {
+            setSpeechStatus(true)
+            showImage()
+          }
+          if (finalTranscript.includes(endSpeech)) {
+            setSpeechStatus(false)
+            hideImage()
+          }
           console.log('sila status', getSpeechStatus());
           if (getSpeechStatus() == 'false') return
 
@@ -237,6 +244,14 @@ try {
         }
       }
     };
+
+    function showImage() {
+      $('#imageHisuara').show(300)
+    }
+
+    function hideImage() {
+      $('#imageHisuara').hide(300)
+    }
 
     function getSpeechStatus() {
       return localStorage.getItem('isSpeechOn')
