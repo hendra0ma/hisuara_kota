@@ -1147,7 +1147,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                     </button>
                 </div>
                 <div class="col-md-auto px-0">
-                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="featured" data-command-target="featured">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="featured" data-command-target="fitur">
                         <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Featured">
                             <i class="fa-solid fa-star"></i>
                         </span>

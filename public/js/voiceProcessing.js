@@ -98,7 +98,7 @@ try {
             const dataTargetValue = getTextAfterSpecificWord(keywordRedirect, finalTranscript)
             const formattedFinalTranscript = formatFinalTranscriptToCommandTargetFormat(dataTargetValue)
             const selectedElement = document.querySelector('[data-command-target="' + formattedFinalTranscript + '"]')
-            const commandTargetMenuName = selectedElement.getAttribute('data-command-target-menu');
+            const commandTargetMenuName = selectedElement?.getAttribute('data-command-target-menu');
             const commandTargetMenuElement = document.querySelector('[data-command-target="' + commandTargetMenuName + '"]')
 
             if (commandTargetMenuElement) commandTargetMenuElement.click()
