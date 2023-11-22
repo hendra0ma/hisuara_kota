@@ -18,6 +18,7 @@ const keywordClickCloseModalButtonSaksi = 'tutup modal';
 
 const keywordScrollUp = ['scroll up', 'naik']
 const keywordScrollDown = ['scroll down', 'turun']
+const keywordRefresh = ['refresh', 'segarkan']
 
 const startSpeech = 'hai sila'
 const endSpeech = 'sila berhenti'
@@ -100,6 +101,7 @@ try {
 
           const isCommandHasKeywordScrollUp = keywordScrollUp.includes(finalTranscript)
           const isCommandHasKeywordScrollDown = keywordScrollDown.includes(finalTranscript)
+          const isCommandHasKeywordRefresh = keywordRefresh.includes(finalTranscript)
 
           if (isCommandHasKeywordRedirect || isClickButtonVerifikasiCommandHasExceptions) {
             const dataTargetValue = getTextAfterSpecificWord(keywordRedirect, finalTranscript)
@@ -239,6 +241,10 @@ try {
 
           if (isCommandHasKeywordScrollDown) {
             window.scrollBy(0, 700);
+          }
+
+          if (isCommandHasKeywordRefresh) {
+            location.reload()
           }
 
         }
