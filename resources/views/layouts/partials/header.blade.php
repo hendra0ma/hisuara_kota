@@ -907,18 +907,6 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                             </div>
                         </div>
 
-                        <div class="col-md">
-                            <div class="mid">
-                                <label class="switch">
-                                    <input type="checkbox" id="speechCheckbox" data-target="mode">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                            <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                Speech
-                            </div>
-                        </div>
-
                     </div>
                 </div>
                 <div class="col-md laporan tugel-content" style="display: none">
