@@ -28,14 +28,15 @@ try {
     recognition.lang = 'id-ID';
     recognition.continuous = true;
     recognition.interimResults = true;
-    const isSpeechCheckboxOn = document.querySelector('#speechCheckbox').checked
+    // const isSpeechOn = document.querySelector('#speechCheckbox').checked
+    recognition.start();
+    const isSpeechOn = getSpeechStatus()
 
-    if (isSpeechCheckboxOn) {
-      recognition.start();
+    if (isSpeechOn) {
       let speechGotError = false;
 
       function dontEndTheSpeech() {
-        if (document.querySelector('#speechCheckbox').checked) {
+        if (getSpeechStatus()) {
           recognition.start();
         }
         console.log('Speech still listening...');
@@ -64,6 +65,9 @@ try {
       for (let i = event.resultIndex; i < event.results.length; i++) {
         if (event.results[i].isFinal) {
           let finalTranscript = event.results[i][0].transcript.trim().toLowerCase();
+
+          if (finalTranscript.includes('hai sila')) setSpeechStatus(true)
+          if (!getSpeechStatus()) return
 
           const isCommandHasKeywordClickButtonVerifikasi = finalTranscript.includes(keywordClickButtonVerifikasi)
           const isCommandHasKeywordRedirect =
@@ -228,6 +232,14 @@ try {
         }
       }
     };
+
+    function getSpeechStatus() {
+      return localStorage.getItem('isSpeechOn')
+    }
+
+    function setSpeechStatus(bool) {
+      return localStorage.setItem('isSpeechOn', bool)
+    }
 
     function closeModal(id) {
       $(`#${id}`).modal('hide')
