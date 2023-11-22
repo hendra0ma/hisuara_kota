@@ -139,11 +139,6 @@ try {
             closeModal('periksaC1Verifikator')
           }
 
-
-          if (isCommandHasKeywordClickCloseModalButtonSaksi) {
-            closeModal('cekmodal')
-          }
-
           if (isCurrentPageVerifikasiSaksi) {
             if (isCommandHasKeywordClickKtpButton) {
               const namaSaksi = getTextAfterSpecificWord(keywordClickKtpButton, finalTranscript);
@@ -215,6 +210,10 @@ try {
                   break;
                 }
               }
+            }
+
+            if (isCommandHasKeywordClickCloseModalButtonSaksi) {
+              closeModal('cekmodal')
             }
           }
 
