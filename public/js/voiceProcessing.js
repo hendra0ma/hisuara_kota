@@ -71,6 +71,7 @@ try {
 
           if (finalTranscript.includes(startSpeech)) setSpeechStatus(true)
           if (finalTranscript.includes(endSpeech)) setSpeechStatus(false)
+          console.log('sila status', getSpeechStatus());
           if (!getSpeechStatus()) return
 
           const isCommandHasKeywordClickButtonVerifikasi = finalTranscript.includes(keywordClickButtonVerifikasi)
