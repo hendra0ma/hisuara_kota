@@ -1,3 +1,5 @@
+const ROUTE_HALAMAN_VERIFIKASI_SAKSI = 'administrator/verifikasi_saksi'
+
 const keywordRedirect = 'buka';
 const keywordClickBagian = 'buka bagian';
 const keywordClickTab = 'buka tab';
@@ -6,149 +8,280 @@ const keywordClickHubungiButtonOnModalVerifikasi = 'hubungi';
 const keywordClickVerifikasiButtonOnModalVerifikasi = 'verifikasi oke';
 const keywordClickKoreksiButtonOnModalVerifikasi = 'koreksi';
 const keywordClickCloseModalButtonVerifikasi = 'tutup verifikasi';
-const clickButtonVerifikasiExceptions = ['buka verifikasi c1'];
+const clickButtonVerifikasiExceptions = ['buka verifikasi c1', 'buka verifikasi saksi', 'buka verifikasi crowd c1', 'buka verifikasi admin'];
 
-$(document).ready(function () {
-  const namaLocalStorageCheckboxStatus = 'speechCheckboxStatus'
-  setCheckboxStatusForTheFirstTime(namaLocalStorageCheckboxStatus)
-  listenCheckboxStatus(namaLocalStorageCheckboxStatus);
+const keywordClickKtpButton = 'lihat ktp';
+const keywordClickDiterimaButton = 'diterima';
+const keywordClickDitolakButton = 'ditolak';
+const keywordClickHubungiButton = 'hubungi';
 
-  const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
-  recognition.lang = 'id-ID';
-  recognition.continuous = true;
-  recognition.interimResults = true;
-  const isSpeechCheckboxOn = document.querySelector('#speechCheckbox').checked
+const keywordScrollUp = ['scroll up', 'naik']
+const keywordScrollDown = ['scroll down', 'turun']
+try {
+  $(document).ready(function () {
+    const namaLocalStorageCheckboxStatus = 'speechCheckboxStatus'
+    setCheckboxStatusForTheFirstTime(namaLocalStorageCheckboxStatus)
+    listenCheckboxStatus(namaLocalStorageCheckboxStatus);
 
-  if (isSpeechCheckboxOn) {
-    recognition.start();
+    const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+    recognition.lang = 'id-ID';
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    const isSpeechCheckboxOn = document.querySelector('#speechCheckbox').checked
 
-    function dontEndTheSpeech() {
-      if (document.querySelector('#speechCheckbox').checked) {
-        recognition.start();
+    if (isSpeechCheckboxOn) {
+      recognition.start();
+      let speechGotError = false;
+
+      function dontEndTheSpeech() {
+        if (document.querySelector('#speechCheckbox').checked) {
+          recognition.start();
+        }
+        console.log('Speech still listening...');
       }
-      console.log('Speech still listening...');
-    }
 
-    recognition.onend = function () {
-      dontEndTheSpeech()
-    };
+      recognition.onerror = function (event) {
+        console.error('Speech recognition error:', event.error);
 
-    // Clear the interval when the speech ends
-    recognition.onspeechend = function () {
-      dontEndTheSpeech()
-    };
-  }
-
-  recognition.onresult = function (event) {
-    for (let i = event.resultIndex; i < event.results.length; i++) {
-      if (event.results[i].isFinal) {
-        let finalTranscript = event.results[i][0].transcript.trim().toLowerCase();
-
-        const isCommandHasKeywordClickButtonVerifikasi = finalTranscript.includes(keywordClickButtonVerifikasi)
-        const isCommandHasKeywordRedirect =
-        finalTranscript.includes(keywordRedirect)
-        && isCommandHasKeywordClickButtonVerifikasi == false
-
-        const isClickButtonVerifikasiCommandHasExceptions = clickButtonVerifikasiExceptions.includes(finalTranscript);
-        const isCommandHasKeywordClickHubungiButtonOnModal = finalTranscript.includes(keywordClickHubungiButtonOnModalVerifikasi)
-        const isCommandHasKeywordClickVerifikasiButtonOnModal = finalTranscript.includes(keywordClickVerifikasiButtonOnModalVerifikasi)
-        const isCommandHasKeywordClickKoreksiButtonOnModal = finalTranscript.includes(keywordClickKoreksiButtonOnModalVerifikasi)
-        const isCommandHasKeywordClickCloseModalButton = finalTranscript.includes(keywordClickCloseModalButtonVerifikasi)
-
-        if (isCommandHasKeywordRedirect || isClickButtonVerifikasiCommandHasExceptions) {
-          const dataTargetValue = getTextAfterSpecificWord(keywordRedirect, finalTranscript)
-          const formattedFinalTranscript = formatFinalTranscriptToCommandTargetFormat(dataTargetValue)
-          const selectedElement = document.querySelector('[data-command-target="' + formattedFinalTranscript + '"]')
-          const commandTargetMenuName = selectedElement.getAttribute('data-command-target-menu');
-          const commandTargetMenuElement = document.querySelector('[data-command-target="' + commandTargetMenuName + '"]')
-
-          if (commandTargetMenuElement) commandTargetMenuElement.click()
-          return selectedElement.click()
+        if (event.error === 'no-speech') {
+          // Handle the case where no speech was detected
+        } else if (event.error === 'audio-capture') {
+          // Handle the case where microphone access was denied
+          console.warn('Microphone access denied.');
         }
 
-        console.log('speech,', finalTranscript)
+        recognition.stop();
+        speechGotError = true;
+      };
 
-        if (isCommandHasKeywordClickButtonVerifikasi) {
-          const namaSaksi = getTextAfterSpecificWord(keywordClickButtonVerifikasi, finalTranscript);
-          const h1Elements = document.querySelectorAll('.nama-saksi');
+      recognition.onend = function () {
+        if (speechGotError == false) dontEndTheSpeech()
+      };
 
-          for (let i = 0; i < h1Elements.length; i++) {
-            const element = h1Elements[i];
-            const elementText = element.textContent.toLowerCase();
+      recognition.onspeechend = function () {
+        if (speechGotError == false) dontEndTheSpeech()
+      };
+    }
 
+    recognition.onresult = function (event) {
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        if (event.results[i].isFinal) {
+          let finalTranscript = event.results[i][0].transcript.trim().toLowerCase();
 
-            if (elementText.includes(namaSaksi.toLowerCase())) {
-              // console.log(elementText, namaSaksi.toLowerCase());
-              const idSaksi = element.getAttribute('data-id');
-              const buttonVerifikasi = document.querySelector(`button[data-id="${idSaksi}"]`);
-              buttonVerifikasi.click();
-              break;
+          const isCommandHasKeywordClickButtonVerifikasi = finalTranscript.includes(keywordClickButtonVerifikasi)
+          const isCommandHasKeywordRedirect =
+            finalTranscript.includes(keywordRedirect)
+            && isCommandHasKeywordClickButtonVerifikasi == false
+
+          const isClickButtonVerifikasiCommandHasExceptions = clickButtonVerifikasiExceptions.includes(finalTranscript);
+          const isCommandHasKeywordClickHubungiButtonOnModal = finalTranscript.includes(keywordClickHubungiButtonOnModalVerifikasi)
+          const isCommandHasKeywordClickVerifikasiButtonOnModal = finalTranscript.includes(keywordClickVerifikasiButtonOnModalVerifikasi)
+          const isCommandHasKeywordClickKoreksiButtonOnModal = finalTranscript.includes(keywordClickKoreksiButtonOnModalVerifikasi)
+          const isCommandHasKeywordClickCloseModalButton = finalTranscript.includes(keywordClickCloseModalButtonVerifikasi)
+
+          const isCommandHasKeywordClickKtpButton = finalTranscript.includes(keywordClickKtpButton)
+          const isCommandHasKeywordClickDiterimaButton = finalTranscript.includes(keywordClickDiterimaButton)
+          const isCommandHasKeywordClickDitolakButton = finalTranscript.includes(keywordClickDitolakButton)
+          const isCommandHasKeywordClickHubungiButton = finalTranscript.includes(keywordClickHubungiButton)
+
+          const isCommandHasKeywordScrollUp = keywordScrollUp.includes(finalTranscript)
+          const isCommandHasKeywordScrollDown = keywordScrollDown.includes(finalTranscript)
+
+          if (isCommandHasKeywordRedirect || isClickButtonVerifikasiCommandHasExceptions) {
+            const dataTargetValue = getTextAfterSpecificWord(keywordRedirect, finalTranscript)
+            const formattedFinalTranscript = formatFinalTranscriptToCommandTargetFormat(dataTargetValue)
+            const selectedElement = document.querySelector('[data-command-target="' + formattedFinalTranscript + '"]')
+            const commandTargetMenuName = selectedElement.getAttribute('data-command-target-menu');
+            const commandTargetMenuElement = document.querySelector('[data-command-target="' + commandTargetMenuName + '"]')
+
+            if (commandTargetMenuElement) commandTargetMenuElement.click()
+            return selectedElement.click()
+          }
+
+          console.log('speech,', finalTranscript)
+
+          if (isCommandHasKeywordClickButtonVerifikasi) {
+            const namaSaksi = getTextAfterSpecificWord(keywordClickButtonVerifikasi, finalTranscript);
+            const h1Elements = document.querySelectorAll('.nama-saksi');
+
+            for (let i = 0; i < h1Elements.length; i++) {
+              const namaElement = h1Elements[i];
+              const namaElementText = namaElement.textContent.toLowerCase();
+
+              if (namaElementText.includes(namaSaksi.toLowerCase())) {
+                // console.log(namaElementText, namaSaksi.toLowerCase());
+                const idSaksi = namaElement.getAttribute('data-id');
+                const buttonVerifikasi = document.querySelector(`button[data-id="${idSaksi}"]`);
+                buttonVerifikasi.click();
+                break;
+              }
             }
           }
-        }
 
-        if (isCommandHasKeywordClickHubungiButtonOnModal) {
-          const idElementButtonHubungiOnModal = 'hubungiWhatsappButton';
-          const url = $(`#${idElementButtonHubungiOnModal}`).attr('href');
-          window.location = url
-        }
+          const isCurrentPageVerifikasiSaksi = window.location.pathname.includes(ROUTE_HALAMAN_VERIFIKASI_SAKSI)
+          if (isCommandHasKeywordClickHubungiButtonOnModal && isCurrentPageVerifikasiSaksi == false) {
+            const idElementButtonHubungiOnModal = 'hubungiWhatsappButton';
+            const url = $(`#${idElementButtonHubungiOnModal}`).attr('href');
+            window.location = url
+          }
 
-        if (isCommandHasKeywordClickKoreksiButtonOnModal) {
-          const idElementButtonKoreksiOnModal = 'koreksiButton';
-          const url = $(`#${idElementButtonKoreksiOnModal}`).attr('data-url');
-          window.location = url
-        }
+          if (isCommandHasKeywordClickKoreksiButtonOnModal) {
+            const idElementButtonKoreksiOnModal = 'koreksiButton';
+            const url = $(`#${idElementButtonKoreksiOnModal}`).attr('data-url');
+            window.location = url
+          }
 
-        if (isCommandHasKeywordClickVerifikasiButtonOnModal) {
-          const idElementButtonVerifikasiOnModal = 'verifikasiButton';
-          const url = $(`#${idElementButtonVerifikasiOnModal}`).attr('data-url');
-          window.location = url
-        }
+          if (isCommandHasKeywordClickVerifikasiButtonOnModal) {
+            const idElementButtonVerifikasiOnModal = 'verifikasiButton';
+            const url = $(`#${idElementButtonVerifikasiOnModal}`).attr('data-url');
+            window.location = url
+          }
 
-        if (isCommandHasKeywordClickCloseModalButton) {
-          const idElementButtonCloseModal = 'periksaC1Verifikator';
-          $(`#${idElementButtonCloseModal}`).modal('hide')
+          if (isCommandHasKeywordClickCloseModalButton) {
+            const idElementButtonCloseModal = 'periksaC1Verifikator';
+            $(`#${idElementButtonCloseModal}`).modal('hide')
+          }
+
+          if (isCurrentPageVerifikasiSaksi) {
+            if (isCommandHasKeywordClickKtpButton) {
+              const namaSaksi = getTextAfterSpecificWord(keywordClickKtpButton, finalTranscript);
+              const h1Elements = document.querySelectorAll('.nama-saksi');
+
+              for (let i = 0; i < h1Elements.length; i++) {
+                const namaElement = h1Elements[i];
+                const namaElementText = namaElement.textContent.toLowerCase();
+
+                if (namaElementText.includes(namaSaksi.toLowerCase())) {
+                  // console.log(namaElementText, namaSaksi.toLowerCase());
+                  const idSaksi = namaElement.getAttribute('id');
+                  const buttonVerifikasi = document.querySelector(`button[id="lihatKtp${idSaksi}"]`);
+                  buttonVerifikasi.click();
+                  break;
+                }
+              }
+            }
+
+            if (isCommandHasKeywordClickDiterimaButton) {
+              const namaSaksi = getTextBeforeSpecificWord(keywordClickDiterimaButton, finalTranscript);
+              const h1Elements = document.querySelectorAll('.nama-saksi');
+
+              for (let i = 0; i < h1Elements.length; i++) {
+                const namaElement = h1Elements[i];
+                const namaElementText = namaElement.textContent.toLowerCase();
+
+                if (namaElementText.includes(namaSaksi.toLowerCase())) {
+                  // console.log(namaElementText, namaSaksi.toLowerCase());
+                  const idSaksi = namaElement.getAttribute('id'); // format: diterima(id saksi)
+                  const buttonDiterima = document.querySelector(`button[id="diterima${idSaksi}"]`);
+                  buttonDiterima.click();
+                  break;
+                }
+              }
+            }
+
+            if (isCommandHasKeywordClickDitolakButton) {
+              const namaSaksi = getTextBeforeSpecificWord(keywordClickDitolakButton, finalTranscript);
+              const h1Elements = document.querySelectorAll('.nama-saksi');
+
+              for (let i = 0; i < h1Elements.length; i++) {
+                const namaElement = h1Elements[i];
+                const namaElementText = namaElement.textContent.toLowerCase();
+
+                if (namaElementText.includes(namaSaksi.toLowerCase())) {
+                  // console.log(namaElementText, namaSaksi.toLowerCase());
+                  const idSaksi = namaElement.getAttribute('id'); // format: ditolak(id saksi)
+                  const buttonDitolak = document.querySelector(`button[id="ditolak${idSaksi}"]`);
+                  buttonDitolak.click();
+                  break;
+                }
+              }
+            }
+
+            if (isCommandHasKeywordClickHubungiButton) {
+              const namaSaksi = getTextAfterSpecificWord(keywordClickHubungiButton, finalTranscript);
+              const h1Elements = document.querySelectorAll('.nama-saksi');
+
+              for (let i = 0; i < h1Elements.length; i++) {
+                const namaElement = h1Elements[i];
+                const namaElementText = namaElement.textContent.toLowerCase();
+
+                if (namaElementText.includes(namaSaksi.toLowerCase())) {
+                  // console.log(namaElementText, namaSaksi.toLowerCase());
+                  const idSaksi = namaElement.getAttribute('id'); // format: ditolak(id saksi)
+                  const buttonDitolak = document.querySelector(`a[id="hubungi${idSaksi}"]`);
+                  buttonDitolak.click();
+                  break;
+                }
+              }
+            }
+          }
+
+          if (isCommandHasKeywordScrollUp) {
+            window.scrollBy(0, -300);
+          }
+
+          if (isCommandHasKeywordScrollDown) {
+            window.scrollBy(0, 300);
+          }
+
         }
+      }
+    };
+
+
+    function setCheckboxStatusForTheFirstTime(namaLocalStorage) {
+      const checkboxElement = document.getElementById("speechCheckbox")
+      const savedStatus = localStorage.getItem(namaLocalStorage)
+
+      if (savedStatus === null) {
+        localStorage.setItem(namaLocalStorage, checkboxElement.checked);
+      } else {
+        checkboxElement.checked = (savedStatus == 'true')
+      }
     }
-  }
-  };
-});
 
-function setCheckboxStatusForTheFirstTime(namaLocalStorage) {
-  const checkboxElement = document.getElementById("speechCheckbox")
-  const savedStatus = localStorage.getItem(namaLocalStorage)
+    function listenCheckboxStatus(namaLocalStorage) {
+      const checkboxElement = document.getElementById("speechCheckbox");
+      checkboxElement.addEventListener("change", () => {
+        localStorage.setItem(namaLocalStorage, checkboxElement.checked);
+        const savedStatus = localStorage.getItem(namaLocalStorage);
 
-  if (savedStatus === null) {
-    localStorage.setItem(namaLocalStorage, checkboxElement.checked);
-  } else {
-    checkboxElement.checked = (savedStatus == 'true')
-  }
-}
+        checkboxElement.checked = savedStatus === "true";
 
-function listenCheckboxStatus(namaLocalStorage) {
-  const checkboxElement = document.getElementById("speechCheckbox");
-  checkboxElement.addEventListener("change", () => {
-    localStorage.setItem(namaLocalStorage, checkboxElement.checked);
-    const savedStatus = localStorage.getItem(namaLocalStorage);
+        location.reload()
+      });
+    }
 
-    checkboxElement.checked = savedStatus === "true";
+    function getTextBeforeSpecificWord(specificWord, text) {
+      const pattern = new RegExp("(.*)\\b(?:" + specificWord + ")\\b");
+      const matches = text.match(pattern);
 
-    location.reload()
+      if (matches && matches[1] !== undefined) {
+        const wordsBeforeSpecificWord = matches[1];
+        return wordsBeforeSpecificWord.trim();
+      } else {
+        console.log("Nama tidak terdeteksi");
+      }
+    }
+
+
+    function getTextAfterSpecificWord(specificWord, text) {
+      const pattern = new RegExp("\\b(?:" + specificWord + ")\\s+(.*)\\b");
+      const matches = text.match(pattern);
+
+      if (matches && matches[1] !== undefined) {
+        const wordsAfterSpecificWord = matches[1];
+        return wordsAfterSpecificWord.trim();
+      } else {
+        console.log("Nama tidak terdeteksi");
+      }
+    }
+
+    function formatFinalTranscriptToCommandTargetFormat(string) {
+      return string.replace(/\s+/g, '-')
+    }
   });
+} catch (error) {
+  console.error('Speech recognition has failed:', error);
 }
 
-function getTextAfterSpecificWord(specificWord, text) {
-  const pattern = new RegExp("\\b(?:" + specificWord + ")\\s+(.*)\\b");
-  const matches = text.match(pattern);
-
-  if (matches && matches[1] !== undefined) {
-    const wordsAfterSpecificWord = matches[1];
-    return wordsAfterSpecificWord.trim();
-  } else {
-    console.log("Nama tidak terdeteksi");
-  }
-}
-
-function formatFinalTranscriptToCommandTargetFormat(string) {
-  return string.replace(/\s+/g, '-')
-}

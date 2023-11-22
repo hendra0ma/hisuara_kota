@@ -16,11 +16,10 @@
     <div class="col-md-4">
         <div class="row mt-2">
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 c1saksi tablink" onclick="openPage('C1-Saksi', this, '#6259ca')"
-                    id="defaultOpen">Audit C1</a>
+                <a data-command-target="audit-c1" class="btn text-white w-100 py-3 c1saksi tablink" onclick="openPage('C1-Saksi', this, '#6259ca')" id="defaultOpen">Audit C1</a>
             </div>
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 c1relawan tablink" onclick="openPage('C1-Relawan', this, '#6259ca')">
+                <a data-command-target="c1-lolos-audit" class="btn text-white w-100 py-3 c1relawan tablink" onclick="openPage('C1-Relawan', this, '#6259ca')">
                     C1 Lolos Audit</a>
             </div>
             {{-- <div class="col parent-link">
@@ -41,9 +40,9 @@
     .inner-card {
         border-radius: 10px;
         background-color: #cbd7ff;
-        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5) inset;
-        -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5) inset;
-        -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5) inset;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5) inset;
+        -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5) inset;
+        -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5) inset;
     }
 </style>
 
@@ -62,12 +61,11 @@
         <div class="modal-content">
             <div class="modal-header" style="padding-right: 3rem">
                 <h3 class="modal-title fw-bold" id="periksaC1VerifikatorLabel">AUDIT DATA C1 TPS</h3>
-                <button type="button" class="btn-close btn-danger text-white mr-5" style="width: 50px" data-bs-dismiss="modal"
-                    aria-label="Close">Close</button>
+                <button type="button" class="btn-close btn-danger text-white mr-5" style="width: 50px" data-bs-dismiss="modal" aria-label="Close">Close</button>
             </div>
             <div class="modal-body">
                 <div class="row" id="container-view-modal">
-                    
+
                 </div>
             </div>
             <div class="modal-footer">
@@ -139,7 +137,6 @@
     }
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
-    
 </script>
 
 

@@ -4,6 +4,7 @@
 
 {{-- Verifikasi Saksi --}}
 <?php
+
 use App\Models\District;
 use App\Models\Village;
 use App\Models\Tps;
@@ -14,14 +15,15 @@ $data['config'] = Config::first();
 
 use App\Models\Configs;
 use App\Models\RegenciesDomain;
+
 $configs = Config::all()->first();
 $currentDomain = request()->getHttpHost();
 if (isset(parse_url($currentDomain)['port'])) {
     $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
-}else{
+} else {
     $url = $currentDomain;
 }
-$regency_id = RegenciesDomain::where('domain',"LIKE","%".$url."%")->first();
+$regency_id = RegenciesDomain::where('domain', "LIKE", "%" . $url . "%")->first();
 
 $config = new Configs;
 $config->regencies_id =  (string) $regency_id->regency_id;
@@ -67,13 +69,11 @@ $kota = Regency::where('id', $config->regencies_id)->first();
         <div class="row mt-2">
 
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/verifikasi_crowd_c1"
-                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/verifikasi_crowd_c1')?'active' : '' }}">Verifikasi
+                <a data-command-target="verifikasi-crowd-c1" href="{{url('')}}/administrator/verifikasi_crowd_c1" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/verifikasi_crowd_c1')?'active' : '' }}">Verifikasi
                     Crowd C1</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/crowd_c1_terverifikasi"
-                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/crowd_c1_terverifikasi')?'active' : '' }}">Crowd C1
+                <a data-command-target="crowd-c1-terverifikasi" href="{{url('')}}/administrator/crowd_c1_terverifikasi" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/crowd_c1_terverifikasi')?'active' : '' }}">Crowd C1
                     Terverifikasi</a>
             </div>
 
