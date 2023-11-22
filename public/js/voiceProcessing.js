@@ -37,7 +37,7 @@ try {
     const isSpeechOn = getSpeechStatus()
 
     if (isSpeechOn == 'true') {
-      hideImage()
+      showImage()
       let speechGotError = false;
 
       function dontEndTheSpeech() {
