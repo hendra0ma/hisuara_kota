@@ -218,11 +218,11 @@ try {
           }
 
           if (isCommandHasKeywordScrollUp) {
-            window.scrollBy(0, -1000);
+            window.scrollBy(0, -800);
           }
 
           if (isCommandHasKeywordScrollDown) {
-            window.scrollBy(0, 1000);
+            window.scrollBy(0, 800);
           }
 
         }
