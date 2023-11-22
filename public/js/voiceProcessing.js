@@ -170,7 +170,7 @@ try {
                   // console.log(namaElementText, namaSaksi.toLowerCase());
                   const idSaksi = namaElement.getAttribute('id'); // format: diterima(id saksi)
                   const buttonDiterima = document.querySelector(`button[id="diterima${idSaksi}"]`);
-                  buttonDiterima.click();
+                  buttonDiterima.parentNode.submit();
                   break;
                 }
               }
@@ -188,7 +188,7 @@ try {
                   // console.log(namaElementText, namaSaksi.toLowerCase());
                   const idSaksi = namaElement.getAttribute('id'); // format: ditolak(id saksi)
                   const buttonDitolak = document.querySelector(`button[id="ditolak${idSaksi}"]`);
-                  buttonDitolak.click();
+                  buttonDitolak.parentNode.submit();
                   break;
                 }
               }
