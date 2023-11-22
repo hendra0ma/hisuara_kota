@@ -1083,6 +1083,13 @@ Route::get('update-suara-c1-kota',function (){
   
 });
 
+
+Route::get('cek-query',function () {
+   $saksi =new SaksiData;
+   return $saksi->toSql();
+});
+
+
 // Route::get('update-suara-c1-provinsi',function (){
 //     $paslon = Paslon::get();
 //     $suaraP = [];

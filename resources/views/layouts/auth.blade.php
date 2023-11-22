@@ -161,8 +161,22 @@
   <!-- MULTI SELECT JS-->
   <script src="../../assets/plugins/multipleselect/multiple-select.js"></script>
   <script src="../../assets/plugins/multipleselect/multi-select.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 
   <script>
+
+      @if(Session::has('success'))
+        Swal.fire({
+            title: 'SUCCESS!',
+            text: `{{ Session::get('success') }}`,
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }) 
+        @endif
+
+
     // $('#koor_id').on('change', function() {
     //   const korId = $(this).val();
     //   $.ajax({
@@ -203,7 +217,6 @@
         $('.rw-con').hide();
         $('.rt-con').hide();
         $('#tps-con').show();
-
        $('#koor-form').hide();
        $('#cek_koor').val("")
       } else if (cekTps[0] == "kor") {

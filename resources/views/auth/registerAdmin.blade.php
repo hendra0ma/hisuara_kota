@@ -186,7 +186,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="tps-con"style="display:none">
+                                    <div class="tps-con"style="display:none"id="tps-con">
                                         <div class="form-group">
                                             <select class="form-control select2-show-search form-select" name="tps" id="tps">
                                                 <option disabled selected>Pilih Tps</option>

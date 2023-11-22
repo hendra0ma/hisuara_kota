@@ -10,4 +10,9 @@ class Koreksi extends Model
     use HasFactory;
     protected $table = 'koreksi';
     protected $fillable = ['paslon_id', 'district_id'];
+
+
+    
+
+    
 }

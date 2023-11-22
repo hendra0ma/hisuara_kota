@@ -15,6 +15,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Http\Responses\LoginResponse;
 use Laravel\Jetstream\Jetstream;
@@ -49,16 +50,26 @@ class JetstreamServiceProvider extends ServiceProvider
         Jetstream::deleteTeamsUsing(DeleteTeam::class);
         Jetstream::deleteUsersUsing(DeleteUser::class);
 
-        $this->app->singleton(LoginResponse::class,ResponsesLoginResponse::class);
+        $this->app->singleton(LoginResponse::class, ResponsesLoginResponse::class);
 
         Fortify::authenticateUsing(function (Request $request) {
-        $user = User::where('email', $request->email)->first();
-        if ($user && Hash::check($request->password, $user->password)){
-            $request->session()->put('latitude',$request->latitude);
-            $request->session()->put('longitude',$request->longitude);
-            return $user;
-        }
-        
+            $user = User::where('email', $request->email)->first();
+            if ($user && Hash::check($request->password, $user->password)) {
+                if ($user->is_active == "1") {
+                    $request->session()->put('latitude', $request->latitude);
+                    $request->session()->put('longitude', $request->longitude);
+                    return $user;
+                } else {
+                    throw ValidationException::withMessages([
+                        Fortify::username() => "Akun anda belum Aktif",
+                    ]);
+                }
+            } else {
+                throw ValidationException::withMessages([
+                    Fortify::username() => "Email Atau Password Anda salah",
+
+                ]);
+            }
         });
     }
 
