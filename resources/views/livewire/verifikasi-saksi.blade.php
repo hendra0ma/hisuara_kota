@@ -131,7 +131,7 @@
 
                         <div class="row mt-2">
                             <div class="col-12 px-0">
-                                <button class="btn btn-primary rounded-0 w-100 cekmodal" id="Cek" data-id="{{$ls['id']}}" data-bs-toggle="modal" id="lihatKtp{{$ls['id']}}" data-bs-target="#cekmodal" onclick="cekModal(this,{{$ls['id']}})">Foto E-KTP</button>
+                                <button class="btn btn-primary rounded-0 w-100 cekmodal" data-id="{{$ls['id']}}" data-bs-toggle="modal" id="lihatKtp{{$ls['id']}}" data-bs-target="#cekmodal" onclick="cekModal(this,{{$ls['id']}})">Foto E-KTP</button>
                             </div>
                         </div>
                     </div>
