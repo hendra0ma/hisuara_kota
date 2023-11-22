@@ -9,7 +9,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Zanex – Bootstrap  Admin & Dashboard Template">
   <meta name="author" content="Spruko Technologies Private Limited">
-  <meta name="keywords" content="admin, dashboard, dashboard ui, admin dashboard template, admin panel dashboard, admin panel html, admin panel html template, admin panel template, admin ui templates, administrative templates, best admin dashboard, best admin templates, bootstrap 4 admin template, bootstrap admin dashboard, bootstrap admin panel, html css admin templates, html5 admin template, premium bootstrap templates, responsive admin template, template admin bootstrap 4, themeforest html">
+  <meta name="keywords"
+    content="admin, dashboard, dashboard ui, admin dashboard template, admin panel dashboard, admin panel html, admin panel html template, admin panel template, admin ui templates, administrative templates, best admin dashboard, best admin templates, bootstrap 4 admin template, bootstrap admin dashboard, bootstrap admin panel, html css admin templates, html5 admin template, premium bootstrap templates, responsive admin template, template admin bootstrap 4, themeforest html">
 
   <!-- FAVICON -->
   <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/brand/favicon.ico" />
@@ -135,13 +136,13 @@
 
 
   <!-- JQUERY JS -->
-  <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+    crossorigin="anonymous"></script>
 
   <!-- BOOTSTRAP JS -->
   <script src="../../assets/plugins/bootstrap/js/popper.min.js"></script>
   <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-  <div class="row justify-content-end" 
-    style="margin: 0;
+  <div class="row justify-content-end" style="margin: 0;
       padding: 0;
       height: 100vh; /* Set the height of the body to 100% of the viewport height */
       display: flex;
@@ -150,15 +151,13 @@
       background-image: url({{asset('')}}assets/img/bg-login.jpg); /* Replace 'your-image-url.jpg' with the URL or path to your image */
       background-size: cover; /* Ensure the background image covers the entire container */
       background-position: center; /* Center the background image */
-      background-repeat: no-repeat; /* Do not repeat the background image */">
-    <div class="col-md-3 col-sm-12 p-0 m-0" style="height: 100vh; overflow-y: auto">
-      @yield('content')
-    </div>
+      background-repeat: no-repeat; /* Do not repeat the background image */"> 
+    @yield('content')
     <div class="col-12">
       <section style="background: #5bb8e0">
         <div class="container">
-          <img style="display: block; margin-left: auto; margin-right: auto;" src="{{asset('')}}images/logo/hisuara_new.png"
-            width="100px" class="pt-5 mb-5">
+          <img style="display: block; margin-left: auto; margin-right: auto;"
+            src="{{asset('')}}images/logo/hisuara_new.png" width="100px" class="pt-5 mb-5">
           <div class="text-center pb-5" style="font-size: 13px;">
             © PT.Hisuara Smart Count <br />
             All Right Reserved 2021
@@ -191,22 +190,8 @@
   <!-- MULTI SELECT JS-->
   <script src="../../assets/plugins/multipleselect/multiple-select.js"></script>
   <script src="../../assets/plugins/multipleselect/multi-select.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
 
   <script>
-
-      @if(Session::has('success'))
-        Swal.fire({
-            title: 'SUCCESS!',
-            text: `{{ Session::get('success') }}`,
-            icon: 'success',
-            confirmButtonText: 'OK'
-        }) 
-        @endif
-
-
     // $('#koor_id').on('change', function() {
     //   const korId = $(this).val();
     //   $.ajax({
@@ -247,6 +232,7 @@
         $('.rw-con').hide();
         $('.rt-con').hide();
         $('#tps-con').show();
+
        $('#koor-form').hide();
        $('#cek_koor').val("")
       } else if (cekTps[0] == "kor") {

@@ -434,8 +434,8 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                             <h4 class="mb-0 fw-bold kecurangan tugel-content" style="color: #f82649; font-size: 16px; display: none;">
                                 Kecurangan
                             </h4>
-                            <h4 class="mb-0 fw-bold suara tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
-                                Suara Terbanyak
+                            <h4 class="mb-0 fw-bold laporan tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                Laporan
                             </h4>
                             <h4 class="mb-0 fw-bold dpt tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
                                 DPT
@@ -648,7 +648,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                     </div>
                 </div>
 
-                <div class="col-md lacak tugel-content" style="display: none">
+                <div class="col-md pelacakan tugel-content" style="display: none">
                     <div class="row">
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                             <a data-command-target="lacak-saksi" href="{{url('')}}/administrator/lacak_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
@@ -678,37 +678,37 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                     </div>
                 </div>
 
-<?php  
-                                                    $dpt_l = 0;
-                                                    $dpt_p = 0;
-                                                    if (request()->segment(2) == 'index') {
-                                                        $dpt_l = District::where('regency_id',$config->regencies_id)->sum('dpt_l');
-                                                        $dpt_p = District::where('regency_id',$config->regencies_id)->sum('dpt_p');
-                                                    }elseif(request()->segment(2) == 'perhitungan_kecamatan'){
-                                                        $dpt_l = District::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt_l');
-                                                        $dpt_p = District::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt_p');
-                                                    }elseif(request()->segment(2) == 'perhitungan_kelurahan'){
-                                                        $dpt_l = Village::where('id',decrypt(request()->segment(3)))->sum('dpt_l');
-                                                        $dpt_p = Village::where('id',decrypt(request()->segment(3)))->sum('dpt_p');
-                                                        
-                                                    }elseif(request()->segment(2) == 'perhitungan_tps'){
-                                                        $dpt_l = 128;
-                                                        $dpt_p = 145;
-
-                                                    }
-                                                ?>
+                <?php
+                    $dpt_l = 0;
+                    $dpt_p = 0;
+                    if (request()->segment(2) == 'index') {
+                        $dpt_l = District::where('regency_id',$config->regencies_id)->sum('dpt_l');
+                        $dpt_p = District::where('regency_id',$config->regencies_id)->sum('dpt_p');
+                    }elseif(request()->segment(2) == 'perhitungan_kecamatan'){
+                        $dpt_l = District::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt_l');
+                        $dpt_p = District::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt_p');
+                    }elseif(request()->segment(2) == 'perhitungan_kelurahan'){
+                        $dpt_l = Village::where('id',decrypt(request()->segment(3)))->sum('dpt_l');
+                        $dpt_p = Village::where('id',decrypt(request()->segment(3)))->sum('dpt_p');
+                    
+                    }elseif(request()->segment(2) == 'perhitungan_tps'){
+                        $dpt_l = 128;
+                        $dpt_p = 145;
+                    
+                    }
+                ?>
                 <div class="col-md text-white dpt tugel-content" style="display:none">
                     <div class="row">
-                        
-  @if (request()->segment(2) != 'perhitungan_tps')
-                                            <div class="col py-2 judul text-center bg-secondary text-white"
-                                                style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
-                                                <div class="text">Pria : <b>{{ $dpt_l }}</b></div>
-                                            </div>
-                                            <div class="col py-2 judul text-center bg-danger text-white">
-                                                <div class="text">Wanita : <b>{{ $dpt_p }}</b></div>
-                                            </div>
-                                            @endif
+
+                            @if (request()->segment(2) != 'perhitungan_tps')
+                            <div class="col py-2 judul text-center bg-secondary text-white"
+                                style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
+                                <div class="text">Pria : <b>{{ $dpt_l }}</b></div>
+                            </div>
+                            <div class="col py-2 judul text-center bg-danger text-white">
+                                <div class="text">Wanita : <b>{{ $dpt_p }}</b></div>
+                            </div>
+                            @endif
                             <?php
                             $total_dpt = 0;
                             if (request()->segment(2) == 'index') {
@@ -722,13 +722,13 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                             }
                             ?>
                             <div class="col py-2 judul text-center bg-primary text-white"
-                                                    {!!
-                                                (request()->segment(2) == 'perhitungan_tps')?
-                                                
-                                                'style=" border-top-left-radius: 25px; border-bottom-left-radius: 25px"'
-                                                :
-                                                ""
-                                                !!}>
+                            {!!
+                                (request()->segment(2) == 'perhitungan_tps')?
+
+                                'style=" border-top-left-radius: 25px; border-bottom-left-radius: 25px"'
+                                :
+                                ""
+                            !!}>
 
                             <div class="text">Total : <b>{{ $total_dpt }}</b></div>
                         </div>
@@ -893,21 +893,6 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                             </div>
                         </div>
 
-                        <!-- <div class="col-md">
-                            <div class="mid">
-
-                                <label class="switch">
-                                    <input type="checkbox" {{($config->default ==
-                                                        "yes")?'disabled':''}} data-target="mode" onclick="settings('lockdown',this)" {{($config->lockdown ==
-                                                        "no") ? "":"checked"; }}>
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                            <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                Lockdown
-                            </div>
-                        </div> -->
-
                         <div class="col-md">
                             <div class="mid">
                                 <label class="switch">
@@ -918,16 +903,15 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                                 </label>
                             </div>
                             <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                QuickCount
+                                All Count
                             </div>
                         </div>
 
                         <div class="col-md">
                             <div class="mid">
                                 <label class="switch">
-                                    <input type="checkbox" {{($config->default ==
-                                                        "yes")?'disabled':''}} data-target="mode" onclick="settings('quick_count',this)" {{($config->quick_count
-                                                        == "no") ? "":"checked"; }}>
+                                    <input type="checkbox" id="speechCheckbox"
+                                    data-target="mode">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -938,16 +922,40 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
 
                     </div>
                 </div>
-                <div class="col-md suara tugel-content" style="display: none">
+                <div class="col-md laporan tugel-content" style="display: none">
                     <div class="row">
-                        @foreach ($urutan as $urutPaslon)
-                        <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
-                        <div class="col py-2 judul text-center text-white" style="background: {{ $pasangan->color }}">
-                            <div class="text">{{ $pasangan->candidate }} ||
-                                {{ $pasangan->deputy_candidate }} : {{$urutPaslon->total}}</b>
-                            </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a data-command-target="mk" href="{{url('')}}/hukum/mahkamah_konstitusi"
+                                class="py-1 btn fs-6 w-100 text-white glowy-menu"
+                                style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                MK
+                            </a>
                         </div>
-                        @endforeach
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a data-command-target="bawaslu" href="{{url('')}}/hukum/bawaslu"
+                                class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
+                                Bawaslu
+                            </a>
+                        </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a data-command-target="dkpp" href="{{url('')}}/hukum/dkpp"
+                                class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
+                                DKPP
+                            </a>
+                        </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a data-command-target="polri" href="{{url('')}}/hukum/polisi"
+                                class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                                Polri
+                            </a>
+                        </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a data-command-target="kpu" href="{{url('')}}/hukum/akun_kpu"
+                                class="py-1 btn fs-6 w-100 text-white glowy-menu"
+                                style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                KPU
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-12 text-white judul-pertama">
@@ -1091,8 +1099,8 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                     </button>
                 </div>
                 <div class="col-md-auto px-0">
-                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="suara" data-command-target="suara">
-                        <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Urutan Suara">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="laporan" data-command-target="laporan">
+                        <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Laporan">
                             <i class="fa-solid fa-ranking-star"></i>
                         </span>
                     </button>
@@ -1398,95 +1406,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
         });
     });
 </script>
-@if($config->quick_count == "yes")
-<!-- <script>
-    $(document).ready(function() {
-        var recognition = new webkitSpeechRecognition() || new SpeechRecognition();
-        recognition.lang = 'id-ID';
-        recognition.continuous = true;
-        recognition.interimResults = true;
 
-        var speechOutput = $('#speechOutput');
-        var startButton = $('#startSpeech');
-        var stopButton = $('#stopSpeech');
-
-        // startButton.click(function() {
-        //     recognition.start();
-        // });
-
-        // stopButton.click(function() {
-        //     recognition.stop();
-        // });
-        recognition.start();
-
-        recognition.onresult = function(event) {
-            var interimTranscript = '';
-            for (var i = event.resultIndex; i < event.results.length; i++) {
-                if (event.results[i].isFinal) {
-                    var finalTranscript = event.results[i][0].transcript;
-                    speechOutput.text('Hasil Pengenalan: ' + finalTranscript.trim().toLowerCase());
-                    const protocol = window.location.protocol;
-                    const hostname = window.location.hostname;
-
-                    const completeHostname = protocol + '//' + hostname;
-                    $.ajax({
-                        url: `${completeHostname}/api/findUrlByVoiceText`,
-                        type: "get",
-                        data: {
-                            text: finalTranscript.toLowerCase()
-                        },
-                        success: function(res) {
-                            console.log(res);
-                            const {
-                                type,
-                                target,
-                                hint
-                            } = res
-                            console.log('speech', finalTranscript.toLowerCase())
-                            if (type == 'redirect') {
-                                window.location = `${completeHostname}/${target}`;
-                            }
-                            if (type == 'action') {
-                                // alert('klik target')
-                                const namaSaksi = target;
-                                const h1Elements = document.querySelectorAll('.nama-saksi');
-
-                                for (let i = 0; i < h1Elements.length; i++) {
-                                    const element = h1Elements[i];
-                                    const elementText = element.textContent.toLowerCase();
-
-                                    console.log(elementText, namaSaksi.toLowerCase());
-
-                                    if (elementText.includes(namaSaksi.toLowerCase())) {
-                                        // Found a matching element
-                                        console.log('Found: ' + elementText);
-
-                                        const idSaksi = element.getAttribute('data-id');
-                                        console.log(idSaksi);
-
-                                        const buttonVerifikasi = document.querySelector(`button[data-id="${idSaksi}"]`);
-                                        console.log(buttonVerifikasi.textContent);
-                                        buttonVerifikasi.click();
-                                        break;
-                                    }
-                                }
-                            }
-
-                        }
-                    })
-                    if (finalTranscript.trim().toLowerCase() === "buka halaman verifikasi") {
-                        location.href = "http://pilpres.banten.tangerang-selatan.hisuara.id:8000/verifikator/verifikasi-c1";
-                    }
-                } else {
-                    interimTranscript += event.results[i][0].transcript;
-                }
-            }
-        };
-    });
-</script> -->
-@if($config->quick_count == "yes")
-@endif
-@endif
 <script src="{{ asset('js/voiceProcessing.js') }}"></script>
 
 <!--app-content open-->

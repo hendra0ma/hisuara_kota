@@ -104,7 +104,7 @@ $tps = Tps::count();
         </ul>
     </div>
 
-    <div class="col-lg-6" style="{{($config->quick_count == 'yes')?'':'display:none'}}">
+    {{-- <div class="col-lg-6" style="{{($config->quick_count == 'yes')?'':'display:none'}}">
         <div class="card" style="margin-bottom: 1rem">
             <div class="card-body" style="position: relative">
                 <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
@@ -154,7 +154,7 @@ $tps = Tps::count();
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="col-md-8 mt-4">
         <div class="card">

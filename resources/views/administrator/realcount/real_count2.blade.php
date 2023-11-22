@@ -275,12 +275,12 @@ $props = Province::where('id',$kota['province_id'])->first();
                 </div>
             </div>
 
-            
+
         </div>
     </div>
 </div>
 
-<div class="col-12 bg-danger text-white p-2 fs-5 fw-bold mb-3">
+<div class="col-12 bg-danger text-white p-2 fs-5 fw-bold mb-3 text-center">
     PERHITUNGAN TINGKAT KECAMATAN
 </div>
 
@@ -300,7 +300,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                 <div class="card-header bg-primary text-white">
                     <div class="card-title">
                         <a href="{{url('/')}}/administrator/realcount_kecamatan/{{Crypt::encrypt($item['id'])}}">
-                            {{$item['name']}}
+                            KECAMATAN {{$item['name']}}
                         </a>
                     </div>
                 </div>
@@ -315,7 +315,7 @@ $props = Province::where('id',$kota['province_id'])->first();
 
 @foreach($kec as $item)
 <script>
-  // Sample data
+    // Sample data
     $(document).ready(function() {
         var chartData = {
         columns: [

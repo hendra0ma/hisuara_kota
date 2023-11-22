@@ -280,6 +280,92 @@ $props = Province::where('id',$kota['province_id'])->first();
     </div>
 </div>
 
+<div class="col-12 bg-danger text-white p-2 fs-5 fw-bold mb-3 text-center">
+    PERHITUNGAN TINGKAT KELURAHAN
+</div>
+
+<?php 
+    $a = 1; 
+    $b = 1; 
+    $c = 1; 
+    $d = 1; 
+    $e = 1; 
+?>
+
+<div class="col-12">
+    <div class="row justify-content-center">
+        @foreach ($kel as $item)
+        <div class="col-3">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <div class="card-title mx-auto">
+                        <a href="{{url('/')}}/administrator/kpu_kecamatan/{{Crypt::encrypt($item['id'])}}">
+                            KELURAHAN {{$item['name']}}
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="charture-{{$a++}}" class="chartsh h-100 w-100"></div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
+
+@foreach($kel as $item)
+<script>
+    // Sample data
+    $(document).ready(function() {
+        var chartData = {
+        columns: [
+            @foreach($paslon as $pas)
+            <?php $saksi_dataaa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $pas['id'])->where('saksi_data.village_id', $item['id'])->sum('voice'); ?>
+            ['data{{$d++}}', {{$saksi_dataaa}}],
+            @endforeach
+        ],
+        type: 'pie', // Type of chart (line chart in this case)
+        colors: {
+            @foreach($paslon as $pas)
+            data{{$c++}}: '{{$pas->color}}', // Color for the third data series
+            @endforeach
+        },
+        names: {
+            // name of each serie
+            @foreach($paslon as $pas)
+            data{{$e++}}: " {{ $pas['candidate']}} - {{ $pas['deputy_candidate']}}",
+            @endforeach
+        },
+        legend: {
+            show: true, //hide legend
+        },
+        axis: {
+            rotated: true,
+        },
+    };
+
+    // Chart configuration
+    var chartConfig = {
+        bindto: '#charture-{{$b++}}', // ID of the chart container
+        data: chartData,
+        pie: {
+            label: {
+                format: function (value, ratio, id) {
+                    return d3.format('.1%')(ratio); // Show percentage on the labels
+                }
+            }
+        }
+    };
+
+    // Generate the chart
+    var chart = c3.generate(chartConfig);
+    })
+</script>
+<?php $c = 1;?>
+<?php $d = 1;?>
+<?php $e = 1;?>
+@endforeach
+
 <script>
     // $('.mode-1').on('click', function() {
     //     $('.tampilan-1').show();

@@ -356,4 +356,10 @@ class HukumController extends Controller
         return view('hukum.print.kecurangan', $data);
 
     }
+
+    function mk() {
+        $data['config'] = Config::first();
+        $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
+        return view('penghukuman.mahkamah_konstitusi', $data);
+    }
 }

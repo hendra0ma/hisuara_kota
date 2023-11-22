@@ -17,21 +17,25 @@
     </div>
     <div class="col-lg-4 text-center">
         <h4><img style="width: 150px" src="https://contactmk.mkri.id/design/img/logo_mk_new.png" alt="">
-        <br> <h1 class="fw-bold text-center mx-auto" style="margin-bottom: 5px;">MAHKAMAH KONSTITUSI RI</h1></h4>
+            <br>
+            <h1 class="fw-bold text-center mx-auto" style="margin-bottom: 5px;">MAHKAMAH KONSTITUSI RI</h1>
+        </h4>
     </div>
 </div>
 
 <div class="row mt-3">
     <div class="col-md-12">
-        <h2 class="fw-bold text-center mx-auto" style="margin-bottom: 5px;">Laporan Kecurangan dan Pelanggaran Pemilu</h2>
+        <h2 class="fw-bold text-center mx-auto" style="margin-bottom: 5px;">Laporan Kecurangan dan Pelanggaran Pemilu
+        </h2>
     </div>
     <div class="col-md-12">
-        <h2 class="fw-bold text-center mx-auto">  {{$config['jenis_pemilu']}}  Tahun  {{$config['tahun']}}  {{$kota->name}}</h2>
+        <h2 class="fw-bold text-center mx-auto"> {{$config['jenis_pemilu']}} Tahun {{$config['tahun']}} {{$kota->name}}
+        </h2>
     </div>
 </div>
 
 <div class="row mt-3">
-    
+
     <div class="col-lg-12 mt-2">
         <div class="row">
             <div class="col-lg justify-content-end">
@@ -102,30 +106,30 @@
     $scan_url = "" . url('/') . "/scanning-secure/" . Crypt::encrypt($qr_code['nomor_berkas']) . ""; ?>
     <div class="col-md-6 col-xl-4">
         <div class="card">
-              @if ($tag == 2)
-                                @if ($ls->makamah_konsitusi == "Ditolak")
-                                    <div class="ribbone">
-                                            <div class="ribbon"><span>{{ $ls->makamah_konsitusi }}</span></div>
-                                        </div>
-                                        @elseif ($ls->makamah_konsitusi == "Panggil")
-                                        <div class="ribbone">
-                                            <div class="ribbon"><span>{{ $ls->makamah_konsitusi }}</span></div>
-                                        </div>
-                                            @elseif ($ls->makamah_konsitusi == "Tidak Menjawab")
-                                        <div class="ribbone">
-                                            <div class="ribbon"><span>{{ $ls->makamah_konsitusi }}</span></div>
-                                        </div>
-                                            @elseif ($ls->makamah_konsitusi == "Selesai")
-                                        <div class="ribbone">
-                                            <div class="ribbon"><span>{{ $ls->makamah_konsitusi }}</span></div>
-                                        </div>
-                                        @else
+            @if ($tag == 2)
+            @if ($ls->makamah_konsitusi == "Ditolak")
+            <div class="ribbone">
+                <div class="ribbon"><span>{{ $ls->makamah_konsitusi }}</span></div>
+            </div>
+            @elseif ($ls->makamah_konsitusi == "Panggil")
+            <div class="ribbone">
+                <div class="ribbon"><span>{{ $ls->makamah_konsitusi }}</span></div>
+            </div>
+            @elseif ($ls->makamah_konsitusi == "Tidak Menjawab")
+            <div class="ribbone">
+                <div class="ribbon"><span>{{ $ls->makamah_konsitusi }}</span></div>
+            </div>
+            @elseif ($ls->makamah_konsitusi == "Selesai")
+            <div class="ribbone">
+                <div class="ribbon"><span>{{ $ls->makamah_konsitusi }}</span></div>
+            </div>
+            @else
 
-                        @endif
-        
-							
-              @endif
-          				
+            @endif
+
+
+            @endif
+
             <div class="card-header bg-primary">
                 <div class="card-title text-white">Saksi Pelapor : {{$ls['name']}}</div>
             </div>
@@ -137,8 +141,7 @@
                             src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF"
                             alt="img">
                         @else
-                        <img class="" style="width: 250px;"
-                            src="{{url("/storage/profile-photos/".$ls->profile_photo_path) }}">
+                        <img class="" style="width: 250px;" src="{{url("/storage/profile-photos/".$ls->profile_photo_path) }}">
                         @endif
                     </div>
                     <div class="col-md">
@@ -154,7 +157,6 @@
     @endforeach
 
     <script>
-     
         let qrsidang = function(ini){
             let id_tps = $(ini).data('id');
             $.ajax({
@@ -169,8 +171,7 @@
             })
         }
     </script>
-     <script>
-     
+    <script>
         let sidang_online = function(ini){
             let id_tps = $(ini).data('id');
             $.ajax({
