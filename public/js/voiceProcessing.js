@@ -18,6 +18,9 @@ const keywordClickCloseModalButtonSaksi = 'tutup modal';
 
 const keywordScrollUp = ['scroll up', 'naik']
 const keywordScrollDown = ['scroll down', 'turun']
+
+const startSpeech = 'hai sila'
+const endSpeech = 'sila berhenti'
 try {
   $(document).ready(function () {
     const namaLocalStorageCheckboxStatus = 'speechCheckboxStatus'
@@ -66,7 +69,8 @@ try {
         if (event.results[i].isFinal) {
           let finalTranscript = event.results[i][0].transcript.trim().toLowerCase();
 
-          if (finalTranscript.includes('hai sila')) setSpeechStatus(true)
+          if (finalTranscript.includes(startSpeech)) setSpeechStatus(true)
+          if (finalTranscript.includes(endSpeech)) setSpeechStatus(false)
           if (!getSpeechStatus()) return
 
           const isCommandHasKeywordClickButtonVerifikasi = finalTranscript.includes(keywordClickButtonVerifikasi)
