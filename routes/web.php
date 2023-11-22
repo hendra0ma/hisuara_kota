@@ -157,7 +157,7 @@ foreach ($provinsi as $provinsis) {
     Route::domain($domainProvinsi->domain)->group(function () use ($provinsis, $domainProvinsi) {
         Route::get('/dashboard-provinsi/{id}', [ProvinsiController::class, 'home'])->name('provinsi' . $provinsis->id . '.home');
         Route::get('/',function () use ($provinsis) {
-            return redirect()->route('provinsi' . $provinsis->id . '.public');
+            return redirect()->route('provinsi' . $provinsis->id . '.public',Crypt::encrypt($provinsis->id));
         });
         Route::get('/public-provinsi/{id}', [ProvinsiController::class, 'pusatProvinsi'])->name('provinsi' . $provinsis->id . '.public');;
     });
