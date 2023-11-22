@@ -35,7 +35,7 @@ try {
     recognition.start();
     const isSpeechOn = getSpeechStatus()
 
-    if (isSpeechOn) {
+    if (isSpeechOn == 'true') {
       let speechGotError = false;
 
       function dontEndTheSpeech() {
@@ -72,7 +72,7 @@ try {
           if (finalTranscript.includes(startSpeech)) setSpeechStatus(true)
           if (finalTranscript.includes(endSpeech)) setSpeechStatus(false)
           console.log('sila status', getSpeechStatus());
-          if (!getSpeechStatus()) return
+          if (getSpeechStatus() == 'false') return
 
           const isCommandHasKeywordClickButtonVerifikasi = finalTranscript.includes(keywordClickButtonVerifikasi)
           const isCommandHasKeywordRedirect =
