@@ -327,28 +327,28 @@ try {
       $(`#${id}`).modal('hide')
     }
 
-    function setCheckboxStatusForTheFirstTime(namaLocalStorage) {
-      const checkboxElement = document.getElementById("speechCheckbox")
-      const savedStatus = localStorage.getItem(namaLocalStorage)
+    // function setCheckboxStatusForTheFirstTime(namaLocalStorage) {
+    //   const checkboxElement = document.getElementById("speechCheckbox")
+    //   const savedStatus = localStorage.getItem(namaLocalStorage)
 
-      if (savedStatus === null) {
-        localStorage.setItem(namaLocalStorage, checkboxElement.checked);
-      } else {
-        checkboxElement.checked = (savedStatus == 'true')
-      }
-    }
+    //   if (savedStatus === null) {
+    //     localStorage.setItem(namaLocalStorage, checkboxElement.checked);
+    //   } else {
+    //     checkboxElement.checked = (savedStatus == 'true')
+    //   }
+    // }
 
-    function listenCheckboxStatus(namaLocalStorage) {
-      const checkboxElement = document.getElementById("speechCheckbox");
-      checkboxElement.addEventListener("change", () => {
-        localStorage.setItem(namaLocalStorage, checkboxElement.checked);
-        const savedStatus = localStorage.getItem(namaLocalStorage);
+    // function listenCheckboxStatus(namaLocalStorage) {
+    //   const checkboxElement = document.getElementById("speechCheckbox");
+    //   checkboxElement.addEventListener("change", () => {
+    //     localStorage.setItem(namaLocalStorage, checkboxElement.checked);
+    //     const savedStatus = localStorage.getItem(namaLocalStorage);
 
-        checkboxElement.checked = savedStatus === "true";
+    //     checkboxElement.checked = savedStatus === "true";
 
-        location.reload()
-      });
-    }
+    //     location.reload()
+    //   });
+    // }
 
     function getTextBeforeSpecificWord(specificWord, text) {
       const pattern = new RegExp("(.*)\\b(?:" + specificWord + ")\\b");
