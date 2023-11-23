@@ -20,9 +20,9 @@ const endSpeech = 'sila berhenti'
 
 try {
   $(document).ready(function () {
-    const namaLocalStorageCheckboxStatus = 'speechCheckboxStatus'
-    setCheckboxStatusForTheFirstTime(namaLocalStorageCheckboxStatus)
-    listenCheckboxStatus(namaLocalStorageCheckboxStatus);
+    // const namaLocalStorageCheckboxStatus = 'speechCheckboxStatus'
+    // setCheckboxStatusForTheFirstTime(namaLocalStorageCheckboxStatus)
+    // listenCheckboxStatus(namaLocalStorageCheckboxStatus);
 
     const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
     recognition.lang = 'id-ID';
