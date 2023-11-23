@@ -54,25 +54,23 @@
 @if ($message = Session::get('success'))
 
 <script>
-
-Swal.fire({
-  icon: 'success',
-  title: 'HASIL PERHITUNGAN TELAH DIAUDIT!',
-  text: 'Perolehan Suara Terverifikasi Telah Teraudit!',
-})
-
+  Swal.fire({
+    icon: 'success',
+    title: 'HASIL PERHITUNGAN TELAH DIAUDIT!',
+    text: 'Perolehan Suara Terverifikasi Telah Teraudit!',
+    timer: 4000,
+    showConfirmButton: false,
+  })
 </script>
 
 @elseif ($message = Session::get('success-batal'))
 
 <script>
-
-Swal.fire({
-  icon: 'success',
-  title: 'HASIL PERHITUNGAN TELAH DIBATALKAN!',
-  text: 'Perolehan Suara Terverifikasi Telah Dibatalkan!',
-})
-
+  Swal.fire({
+    icon: 'success',
+    title: 'HASIL PERHITUNGAN TELAH DIBATALKAN!',
+    text: 'Perolehan Suara Terverifikasi Telah Dibatalkan!',
+  })
 </script>
 
 @endif
@@ -81,7 +79,7 @@ Swal.fire({
 
 <script>
   const buttonperiksaC1 = $(".periksa-c1-plano");
-  
+
   buttonperiksaC1.on('click', function() {
     const urlCurrent = $('input.urlCurrent');
     const id = $(this).data('id');

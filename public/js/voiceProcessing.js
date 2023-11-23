@@ -1,4 +1,6 @@
 const ROUTE_HALAMAN_VERIFIKASI_SAKSI = 'administrator/verifikasi_saksi'
+const ROUTE_HALAMAN_VERIFIKASI_C1 = 'verifikator/verifikasi-c1'
+const ROUTE_HALAMAN_AUDIT_C1 = 'auditor/audit-c1'
 
 const keywordRedirect = 'buka';
 const keywordClickBagian = 'buka bagian';
@@ -10,23 +12,18 @@ const keywordClickKoreksiButtonOnModalVerifikasi = 'koreksi';
 const keywordClickCloseModalButtonVerifikasi = 'tutup verifikasi';
 const clickButtonVerifikasiExceptions = ['buka verifikasi c1', 'buka verifikasi saksi', 'buka verifikasi crowd c1', 'buka verifikasi admin'];
 
-const keywordClickKtpButton = 'lihat ktp';
-const keywordClickDiterimaButton = 'diterima';
-const keywordClickDitolakButton = 'ditolak';
-const keywordClickHubungiButton = 'hubungi';
-const keywordClickCloseModalButtonSaksi = 'tutup modal';
-
 const keywordScrollUp = ['scroll up', 'naik']
 const keywordScrollDown = ['scroll down', 'turun']
 const keywordRefresh = ['refresh', 'segarkan']
 
 const startSpeech = 'hai sila'
 const endSpeech = 'sila berhenti'
+
 try {
   $(document).ready(function () {
-    const namaLocalStorageCheckboxStatus = 'speechCheckboxStatus'
-    setCheckboxStatusForTheFirstTime(namaLocalStorageCheckboxStatus)
-    listenCheckboxStatus(namaLocalStorageCheckboxStatus);
+    // const namaLocalStorageCheckboxStatus = 'speechCheckboxStatus'
+    // setCheckboxStatusForTheFirstTime(namaLocalStorageCheckboxStatus)
+    // listenCheckboxStatus(namaLocalStorageCheckboxStatus);
 
     const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
     recognition.lang = 'id-ID';
@@ -93,12 +90,6 @@ try {
           const isCommandHasKeywordClickKoreksiButtonOnModal = finalTranscript.includes(keywordClickKoreksiButtonOnModalVerifikasi)
           const isCommandHasKeywordClickCloseModalButtonVerifikasi = finalTranscript.includes(keywordClickCloseModalButtonVerifikasi)
 
-          const isCommandHasKeywordClickKtpButton = finalTranscript.includes(keywordClickKtpButton)
-          const isCommandHasKeywordClickDiterimaButton = finalTranscript.includes(keywordClickDiterimaButton)
-          const isCommandHasKeywordClickDitolakButton = finalTranscript.includes(keywordClickDitolakButton)
-          const isCommandHasKeywordClickHubungiButton = finalTranscript.includes(keywordClickHubungiButton)
-          const isCommandHasKeywordClickCloseModalButtonSaksi = finalTranscript.includes(keywordClickCloseModalButtonSaksi)
-
           const isCommandHasKeywordScrollUp = keywordScrollUp.includes(finalTranscript)
           const isCommandHasKeywordScrollDown = keywordScrollDown.includes(finalTranscript)
           const isCommandHasKeywordRefresh = keywordRefresh.includes(finalTranscript)
@@ -135,29 +126,45 @@ try {
           }
 
           const isCurrentPageVerifikasiSaksi = window.location.pathname.includes(ROUTE_HALAMAN_VERIFIKASI_SAKSI)
-          if (isCommandHasKeywordClickHubungiButtonOnModal && isCurrentPageVerifikasiSaksi == false) {
-            const idElementButtonHubungiOnModal = 'hubungiWhatsappButton';
-            const url = $(`#${idElementButtonHubungiOnModal}`).attr('href');
-            window.location = url
-          }
+          const isCurrentPageVerifikasiC1 = window.location.pathname.includes(ROUTE_HALAMAN_VERIFIKASI_C1)
 
-          if (isCommandHasKeywordClickKoreksiButtonOnModal) {
-            const idElementButtonKoreksiOnModal = 'koreksiButton';
-            const url = $(`#${idElementButtonKoreksiOnModal}`).attr('data-url');
-            window.location = url
-          }
+          if (isCurrentPageVerifikasiC1) {
+            if (isCommandHasKeywordClickHubungiButtonOnModal && isCurrentPageVerifikasiSaksi == false) {
+              const idElementButtonHubungiOnModal = 'hubungiWhatsappButton';
+              const url = $(`#${idElementButtonHubungiOnModal}`).attr('href');
+              window.location = url
+            }
 
-          if (isCommandHasKeywordClickVerifikasiButtonOnModal) {
-            const idElementButtonVerifikasiOnModal = 'verifikasiButton';
-            const url = $(`#${idElementButtonVerifikasiOnModal}`).attr('data-url');
-            window.location = url
-          }
+            if (isCommandHasKeywordClickKoreksiButtonOnModal) {
+              const idElementButtonKoreksiOnModal = 'koreksiButton';
+              const url = $(`#${idElementButtonKoreksiOnModal}`).attr('data-url');
+              window.location = url
+            }
 
-          if (isCommandHasKeywordClickCloseModalButtonVerifikasi) {
-            closeModal('periksaC1Verifikator')
+            if (isCommandHasKeywordClickVerifikasiButtonOnModal) {
+              const idElementButtonVerifikasiOnModal = 'verifikasiButton';
+              const url = $(`#${idElementButtonVerifikasiOnModal}`).attr('data-url');
+              window.location = url
+            }
+
+            if (isCommandHasKeywordClickCloseModalButtonVerifikasi) {
+              closeModal('periksaC1Verifikator')
+            }
           }
 
           if (isCurrentPageVerifikasiSaksi) {
+            const keywordClickKtpButton = 'lihat ktp';
+            const keywordClickDiterimaButton = 'diterima';
+            const keywordClickDitolakButton = 'ditolak';
+            const keywordClickHubungiButton = 'hubungi';
+            const keywordClickCloseModalButtonSaksi = 'tutup modal';
+
+            const isCommandHasKeywordClickKtpButton = finalTranscript.includes(keywordClickKtpButton)
+            const isCommandHasKeywordClickDiterimaButton = finalTranscript.includes(keywordClickDiterimaButton)
+            const isCommandHasKeywordClickDitolakButton = finalTranscript.includes(keywordClickDitolakButton)
+            const isCommandHasKeywordClickHubungiButton = finalTranscript.includes(keywordClickHubungiButton)
+            const isCommandHasKeywordClickCloseModalButtonSaksi = finalTranscript.includes(keywordClickCloseModalButtonSaksi)
+
             if (isCommandHasKeywordClickKtpButton) {
               const namaSaksi = getTextAfterSpecificWord(keywordClickKtpButton, finalTranscript);
               const h1Elements = document.querySelectorAll('.nama-saksi');
@@ -235,6 +242,55 @@ try {
             }
           }
 
+          const isCurrentPageAuditC1 = window.location.pathname.includes(ROUTE_HALAMAN_AUDIT_C1)
+          if (isCurrentPageAuditC1) {
+            const keywordClickAuditButton = 'audit';
+            const keywordAuditLolos = 'lolos audit';
+            const keywordKoreksiAudit = 'koreksi';
+            const keywordClickHubungiButton = 'hubungi';
+            const keywordClickCloseModalButtonAudit = 'tutup modal';
+
+            const isCommandHasOpenAuditModal = finalTranscript.includes(keywordClickAuditButton);
+            const isCommandHasKeywordAuditLolos = finalTranscript.includes(keywordAuditLolos);
+            const isCommandHasKeywordKoreksiAudit = finalTranscript.includes(keywordKoreksiAudit);
+            const isCommandHasKeywordHubungi = finalTranscript.includes(keywordClickHubungiButton);
+            const isCommandHasKeywordCloseModalButton = finalTranscript.includes(keywordClickCloseModalButtonAudit);
+
+            if (isCommandHasOpenAuditModal && isCommandHasKeywordAuditLolos == false) {
+              const namaSaksi = getTextAfterSpecificWord(keywordClickAuditButton, finalTranscript);
+              const h1Elements = document.querySelectorAll('.nama-saksi');
+
+              for (let i = 0; i < h1Elements.length; i++) {
+                const namaElement = h1Elements[i];
+                const namaElementText = namaElement.textContent.toLowerCase();
+
+                if (namaElementText.includes(namaSaksi.toLowerCase())) {
+                  // console.log(namaElementText, namaSaksi.toLowerCase());
+                  const idSaksi = namaElement.getAttribute('id');
+                  const buttonAudit = document.querySelector(`button[id="audit${idSaksi}"]`);
+                  buttonAudit.click();
+                  break;
+                }
+              }
+            }
+
+            if (isCommandHasKeywordAuditLolos) {
+              document.querySelector('#lolosAuditButton').click();
+            }
+
+            if (isCommandHasKeywordKoreksiAudit) {
+              document.querySelector('#koreksiAuditButton').click();
+            }
+
+            if (isCommandHasKeywordHubungi) {
+              document.querySelector('#hubungiWhatsappButton').click();
+            }
+
+            if (isCommandHasKeywordCloseModalButton) {
+              closeModal('periksaC1Verifikator')
+            }
+          }
+
           if (isCommandHasKeywordScrollUp) {
             window.scrollBy(0, -700);
           }
@@ -271,28 +327,28 @@ try {
       $(`#${id}`).modal('hide')
     }
 
-    function setCheckboxStatusForTheFirstTime(namaLocalStorage) {
-      const checkboxElement = document.getElementById("speechCheckbox")
-      const savedStatus = localStorage.getItem(namaLocalStorage)
+    // function setCheckboxStatusForTheFirstTime(namaLocalStorage) {
+    //   const checkboxElement = document.getElementById("speechCheckbox")
+    //   const savedStatus = localStorage.getItem(namaLocalStorage)
 
-      if (savedStatus === null) {
-        localStorage.setItem(namaLocalStorage, checkboxElement.checked);
-      } else {
-        checkboxElement.checked = (savedStatus == 'true')
-      }
-    }
+    //   if (savedStatus === null) {
+    //     localStorage.setItem(namaLocalStorage, checkboxElement.checked);
+    //   } else {
+    //     checkboxElement.checked = (savedStatus == 'true')
+    //   }
+    // }
 
-    function listenCheckboxStatus(namaLocalStorage) {
-      const checkboxElement = document.getElementById("speechCheckbox");
-      checkboxElement.addEventListener("change", () => {
-        localStorage.setItem(namaLocalStorage, checkboxElement.checked);
-        const savedStatus = localStorage.getItem(namaLocalStorage);
+    // function listenCheckboxStatus(namaLocalStorage) {
+    //   const checkboxElement = document.getElementById("speechCheckbox");
+    //   checkboxElement.addEventListener("change", () => {
+    //     localStorage.setItem(namaLocalStorage, checkboxElement.checked);
+    //     const savedStatus = localStorage.getItem(namaLocalStorage);
 
-        checkboxElement.checked = savedStatus === "true";
+    //     checkboxElement.checked = savedStatus === "true";
 
-        location.reload()
-      });
-    }
+    //     location.reload()
+    //   });
+    // }
 
     function getTextBeforeSpecificWord(specificWord, text) {
       const pattern = new RegExp("(.*)\\b(?:" + specificWord + ")\\b");
