@@ -116,7 +116,7 @@
 
                         <div class="row mt-2">
                             <div class="col-12 px-0">
-                                <a class="btn btn-primary rounded-0 w-100" href="{{url('/')}}/administrator/patroli_mode/tracking/detail/<?= encrypt($ls['id'])?>">Detail Data Admin</a>
+                                <a class="btn btn-primary rounded-0 w-100" href="{{url('/')}}/administrator/patroli_mode/tracking/detail/<?= encrypt($ls['id'])?>">Lihat Aktifitas</a>
                             </div>
                         </div>
                         

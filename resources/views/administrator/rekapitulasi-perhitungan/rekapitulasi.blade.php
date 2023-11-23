@@ -48,8 +48,8 @@ $config->quick_count =  $configs->quick_count;
 $config->default =  $configs->default;
 
 $regency = District::where('regency_id', $config->regencies_id)->get();
-$paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
-$urutan = $paslon_tertinggi;
+// $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
+// $urutan = $paslon_tertinggi;
 $kota = Regency::where('id', $config->regencies_id)->first();
 $dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
 $tps = Tps::count();
@@ -229,7 +229,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                         <div class="row mx-auto" style="width: 884.5px;">
                             @foreach ($urutan as $urutPaslon)
                             <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
-                            <div class="col judul text-center text-white custom-urutan"
+                            <div class="col py-2 judul text-center text-white custom-urutan"
                                 style="background: {{ $pasangan->color }};">
                                 <div class="text">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} :
                                     {{$urutPaslon->total}}</b></div>
@@ -311,12 +311,12 @@ $props = Province::where('id',$kota['province_id'])->first();
 ?>
 
 <div class="col-12">
-    <div class="row justify-content-center">
+    <div class="row">
         @foreach ($kec as $item)
         <div class="col-3">
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <div class="card-title">
+                    <div class="card-title mx-auto">
                         <a href="{{url('/')}}/administrator/rekap_kecamatan/{{Crypt::encrypt($item['id'])}}">
                             KECAMATAN{{$item['name']}}
                         </a>

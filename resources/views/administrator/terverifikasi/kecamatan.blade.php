@@ -291,7 +291,7 @@ $props = Province::where('id',$kota['province_id'])->first();
 ?>
 
 <div class="col-12">
-    <div class="row justify-content-center">
+    <div class="row">
         @foreach ($kel as $item)
         <div class="col-3">
             <div class="card">
@@ -363,4 +363,12 @@ $props = Province::where('id',$kota['province_id'])->first();
 <?php $d = 1;?>
 <?php $e = 1;?>
 @endforeach
+
+<script>
+    $(document).ready(function() {
+        var specificUrl = "{{ url('') }}/administrator/terverifikasi"; // Specific URL to match
+    
+        $('.glowy-menu[href="' + specificUrl + '"]').addClass('active');
+    });
+</script>
 @endsection
