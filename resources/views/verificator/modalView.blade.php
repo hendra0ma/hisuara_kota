@@ -156,13 +156,25 @@
         Swal.fire({
             title: 'Apakah Anda yakin?',
             text: "Anda tidak akan dapat mengembalikan tindakan ini!",
+            footer: 'Halaman akan tertutup dalam <b></b> detik',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Ya, saya yakin!',
-            timer: 4000,
-            showConfirmButton: false,
+            timer: 5 * 1000,
+            // showConfirmButton: false, // Commented out to remove the loader
+            didOpen: () => {
+                // Swal.showLoading(); // Commented out to remove the loader
+                const timer = Swal.getPopup().querySelector("b");
+                timerInterval = setInterval(() => {
+                    const remainingSeconds = Math.ceil(Swal.getTimerLeft() / 1000);
+                    timer.textContent = `${remainingSeconds}`;
+                }, 1000); // Update every second
+            },
+            willClose: () => {
+                clearInterval(timerInterval);
+            }
         }).then((result) => {
             if (result.isConfirmed) {
                 // Jika pengguna mengkonfirmasi, lakukan pengalihan ke URL verifikasi
@@ -170,6 +182,7 @@
             }
         });
     }
+
 </script>
 
 <div class="row mt-5">
