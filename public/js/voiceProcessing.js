@@ -270,15 +270,15 @@ try {
             }
 
             if (isCommandHasKeywordAuditLolos) {
-              $('#lolosAuditButton').click()
+              document.querySelector('#lolosAuditButton').click();
             }
 
             if (isCommandHasKeywordKoreksiAudit) {
-              $('#koreksiAuditButton').click()
+              document.querySelector('#koreksiAuditButton').click();
             }
 
             if (isCommandHasKeywordHubungi) {
-              $('#hubungiWhatsappButton').click();
+              document.querySelector('#hubungiWhatsappButton').click();
             }
 
             if (isCommandHasKeywordCloseModalButton) {
