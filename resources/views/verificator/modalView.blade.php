@@ -160,7 +160,9 @@
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, saya yakin!'
+            confirmButtonText: 'Ya, saya yakin!',
+            timer: 4000,
+            showConfirmButton: false,
         }).then((result) => {
             if (result.isConfirmed) {
                 // Jika pengguna mengkonfirmasi, lakukan pengalihan ke URL verifikasi
