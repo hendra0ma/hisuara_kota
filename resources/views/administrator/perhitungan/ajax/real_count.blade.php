@@ -100,11 +100,11 @@ $tps = Tps::count();
                                         
                                         @if (isset($url_first[3]) && $url_first[2] == "perhitungan_kecamatan") {{-- Perhitungan Kecamatan --}}
                                             @php
-                                            $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->where('district_id', $id)->sum('voice');
+                                            $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->where('district_id', (string)$id)->sum('voice');
                                             @endphp
                                         @elseif (isset($url_first[3]) && $url_first[2] == "perhitungan_kelurahan") {{-- Perhitungan Kelurahan --}}
                                             @php
-                                            $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->where('village_id', $id)->sum('voice');
+                                            $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->where('village_id', (string)$id)->sum('voice');
                                             @endphp
                                         @else {{--  Perhitungan Kota --}}
                                             @php
@@ -157,7 +157,7 @@ $tps = Tps::count();
             </tbody>
             <script>
                 let check = function(id) {
-                            window.location = `{{url('/')}}/administrator/perhitungan_kecamatan/${id}`;
+                            window.location = `{{url('/')}}/administrator/perhitungan_kelurahan/${id}`;
                         }
             </script>
         </table>

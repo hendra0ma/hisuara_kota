@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice Detection with Google Assistant-like Visualization</title>
+  <style>
+    canvas {
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <h1>Voice Detection with Google Assistant-like Visualization</h1>
+
+  <button id="startButton">Start Listening</button>
+  <p id="output"></p>
+  <canvas id="waveformCanvas" width="800" height="200"></canvas>
+
+  <script>
+    const recognition = new webkitSpeechRecognition();
+    recognition.continuous = true;
+    recognition.lang = 'en-US';
+
+    const startButton = document.getElementById('startButton');
+    const output = document.getElementById('output');
+    const canvas = document.getElementById('waveformCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let audioContext;
+    let analyser;
+    let dataArray;
+    let mediaStream;
+
+    startButton.addEventListener('click', () => {
+      if (!mediaStream) {
+        navigator.mediaDevices.getUserMedia({ audio: true })
+          .then((stream) => {
+            mediaStream = stream;
+            startAudioVisualization(stream);
+            recognition.start();
+            output.textContent = 'Listening...';
+          })
+          .catch((error) => {
+            output.textContent = 'Error accessing microphone: ' + error;
+          });
+      } else {
+        recognition.start();
+        output.textContent = 'Listening...';
+      }
+    });
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[event.results.length - 1][0].transcript;
+      output.textContent = 'You said: ' + transcript;
+    };
+
+    recognition.onend = () => {
+      output.textContent = 'Recognition stopped.';
+    };
+
+    recognition.onerror = (event) => {
+      output.textContent = 'Error: ' + event.error;
+    };
+
+    function startAudioVisualization(stream) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      analyser = audioContext.createAnalyser();
+      analyser.fftSize = 512;
+      const source = audioContext.createMediaStreamSource(stream);
+      source.connect(analyser);
+      analyser.connect(audioContext.destination);
+
+      dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+      drawWaveform();
+    }
+
+    function drawWaveform() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      analyser.getByteFrequencyData(dataArray);
+
+      // Log the frequency data to the console
+      console.log(dataArray);
+
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#4285F4'; // Google Assistant's blue color
+      ctx.beginPath();
+
+      const sliceWidth = (canvas.width / analyser.frequencyBinCount) * 2;
+      let x = 0;
+
+      for (let i = 0; i < analyser.frequencyBinCount; i++) {
+        const v = dataArray[i] / 128.0;
+        const y = v * (canvas.height / 2);
+
+        if (i === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+
+        x += sliceWidth;
+      }
+
+      ctx.lineTo(canvas.width, canvas.height / 2);
+      ctx.stroke();
+
+      requestAnimationFrame(drawWaveform);
+    }
+  </script>
+</body>
+</html>

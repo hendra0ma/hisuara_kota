@@ -3437,13 +3437,13 @@ class AdminController extends Controller
         $data['paslon'] = Paslon::with('quicksaksidata')->get();
         $data['paslon_terverifikasi']     = Paslon::with(['saksi_data' => function ($query) {
             $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
-                ->whereNull('saksi.pending')
-                ->where('saksi.verification', 1);
+            ->whereNull('saksi.pending')
+            ->where('saksi.verification', 1);
         }])->get();
         $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
         $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
         $data['tracking'] = ModelsTracking::join("users",'tracking.id_user','=','users.id')->where('users.regency_id',$this->config->regencies_id)->get();
-
+        
         $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->where('regency_id',$this->config->regencies_id)->count();
         foreach ($incoming_vote as $key) {
             $data['total_incoming_vote'] += $key->voice;
@@ -3452,7 +3452,16 @@ class AdminController extends Controller
         $data['total_verification_voice'] = 0;
         $data['total_incoming_vote']      = 0;
 
-        $paslon_tertinggi = DB::select(DB::raw('SELECT saksi_data.paslon_id, SUM(saksi_data.voice) as total FROM saksi_data JOIN saksi ON saksi.id = saksi_data.saksi_id WHERE saksi.verification = 1,WHERE saksi_data.regency_id = "' . $this->config->regencies_id . '" GROUP BY saksi_data.paslon_id ORDER BY total DESC'));
+        $paslon_tertinggi = DB::table('saksi_data')
+        ->join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')
+        ->select('saksi_data.paslon_id', DB::raw('SUM(saksi_data.voice) as total'))
+        ->where('saksi.verification', 1)
+        ->where('saksi_data.regency_id', $this->config->regencies_id)
+        ->groupBy('saksi_data.paslon_id')
+        ->orderByDesc('total')
+        ->get();
+
+        // return $paslon_tertinggi;
         
         $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
         $data['urutan'] = $paslon_tertinggi;
@@ -3473,7 +3482,7 @@ class AdminController extends Controller
         $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
         $data['kecamatan'] = District::where('regency_id', $this->config->regencies_id)->get();
         $data['district'] = District::first();
-      $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)
             ->join('tps', 'tps.id', "=", "saksi.tps_id")
             ->where('tps.sample', 5)
             ->get();

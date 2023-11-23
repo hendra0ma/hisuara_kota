@@ -169,7 +169,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
     } */
 </style>
 
-<div class="app-header header header-baru py-0 pe-0" style="padding-left: 0px !important">
+<div class="app-header header header-baru py-0 pe-0" style="padding-left: 0px !important; z-index: 20 !important;">
     <div class="container-fluid px-0">
 
         <div class="d-flex" style="position: relative">
@@ -468,7 +468,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                                     </a>
                                 </div>
                                 <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                    <a data-command-target-menu="petugas" data-command-target="kordinator saksi" href="{{url('')}}/administrator/koordinator_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                                    <a data-command-target-menu="petugas" data-command-target="kordinator-saksi" href="{{url('')}}/administrator/koordinator_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
                                         Kordinator Saksi
                                     </a>
                                 </div>
@@ -690,11 +690,11 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                     }elseif(request()->segment(2) == 'perhitungan_kelurahan'){
                         $dpt_l = Village::where('id',decrypt(request()->segment(3)))->sum('dpt_l');
                         $dpt_p = Village::where('id',decrypt(request()->segment(3)))->sum('dpt_p');
-                    
+
                     }elseif(request()->segment(2) == 'perhitungan_tps'){
                         $dpt_l = 128;
                         $dpt_p = 145;
-                    
+
                     }
                 ?>
                 <div class="col-md text-white dpt tugel-content" style="display:none">
@@ -907,19 +907,6 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                             </div>
                         </div>
 
-                        <div class="col-md">
-                            <div class="mid">
-                                <label class="switch">
-                                    <input type="checkbox" id="speechCheckbox"
-                                    data-target="mode">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                            <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                Speech
-                            </div>
-                        </div>
-
                     </div>
                 </div>
                 <div class="col-md laporan tugel-content" style="display: none">
@@ -935,6 +922,12 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                             <a data-command-target="bawaslu" href="{{url('')}}/hukum/bawaslu"
                                 class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
                                 Bawaslu
+                            </a>
+                        </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a data-command-target="bawaslu" href="{{url('')}}/hukum/tim_hukum_paslon"
+                                class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
+                                Tim Hukum Paslon
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
@@ -1101,7 +1094,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                 <div class="col-md-auto px-0">
                     <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="laporan" data-command-target="laporan">
                         <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Laporan">
-                            <i class="fa-solid fa-ranking-star"></i>
+                            <i class="fa-solid fa-file-lines"></i>
                         </span>
                     </button>
                 </div>
@@ -1148,7 +1141,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                     </button>
                 </div>
                 <div class="col-md-auto px-0">
-                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="featured" data-command-target="featured">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="featured" data-command-target="fitur">
                         <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Featured">
                             <i class="fa-solid fa-star"></i>
                         </span>
@@ -1202,7 +1195,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
 
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
-                                <button class="dropdown-item" type="submit">
+                                <button data-command-target="keluar-sistem" class="dropdown-item" type="submit">
                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                 </button>
                             </form>

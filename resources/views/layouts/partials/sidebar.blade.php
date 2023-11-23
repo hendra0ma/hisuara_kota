@@ -47,9 +47,21 @@ $tps = 2963;
 ?>
 <!-- GLOBAL-LOADER -->
 <div id="global-loader">
-    <img src="{{url('/')}}/assets/images/loader.svg" class="loader-img" alt="Loader">
+    <img src="{{url('/')}}/assets/images/loader.svg" class="loader-img" id="loader" alt="Loader">
 </div>
 <!-- /GLOBAL-LOADER -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Display loader when the page starts loading
+        document.getElementById('loader').style.display = 'flex';
+        
+        // Hide loader when the page finishes loading
+        window.addEventListener('load', function () {
+            document.getElementById('loader').style.display = 'none';
+        });
+    });
+</script>
 
 <style>
     .side-menu__item {

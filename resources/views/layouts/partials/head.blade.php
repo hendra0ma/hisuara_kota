@@ -49,20 +49,17 @@
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{asset('')}}assets/colors/color1.css" />
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-     crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
 
     <link href="{{asset('')}}assets/plugins/sweet-alert/sweetalert.css" rel="stylesheet" />
     <!-- INTERNAL Notifications  Css -->
     <link href="{{asset('')}}assets/plugins/notify/css/jquery.growl.css" rel="stylesheet" />
     <link href="{{asset('')}}assets/plugins/notify/css/notifIt.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet" />
-    
-    <link rel="stylesheet" href="https://raw.githack.com/thdoan/magnify/master/dist/css/magnify.css">
-    
-    <style>
 
+    <link rel="stylesheet" href="https://raw.githack.com/thdoan/magnify/master/dist/css/magnify.css">
+
+    <style>
         @media screen and (max-width: 1366px) {
             body {
                 min-width: 1903px;
@@ -76,25 +73,26 @@
         .inner-card {
             border-radius: 10px;
             background-color: #cbd7ff;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5) inset;
-            -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5) inset;
-            -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5) inset;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5) inset;
+            -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5) inset;
+            -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5) inset;
         }
+
         .hiasan-1 {
             background-color: rgba(98, 89, 202, 0.8);
             height: 60px;
             position: relative;
         }
-    
+
         .hiasan-2 {
             background-color: #404042;
             height: 60px;
         }
-    
+
         .card.custom {
             position: relative;
         }
-    
+
         .gambar-bulat {
             position: absolute;
             left: 50%;
@@ -144,7 +142,7 @@
             margin-top: 25px;
         }
 
-         /* 
+        /*
         panjang/tinggi lingkaran = pt
         margin kiri = mk
         lebar background = lb
@@ -163,7 +161,8 @@
             --lebar-bg: 60px;
             --panjang-n-jarak: calc(var(--panjang-tinggi-lingkaran) + var(--jarak-kiri-lingkaran));
             --jarak-maks-bg: calc(var(--lebar-bg) - var(--panjang-n-jarak));
-            --trans-dibutuhkan: calc(var(--jarak-maks-bg) - var(--jarak-kiri-lingkaran)); /* Changed reference to --panjang-tinggi-lingkaran */
+            --trans-dibutuhkan: calc(var(--jarak-maks-bg) - var(--jarak-kiri-lingkaran));
+            /* Changed reference to --panjang-tinggi-lingkaran */
         }
 
         /* Your other styles remain unchanged */
@@ -175,6 +174,7 @@
             align-items: center;
             justify-content: center;
         }
+
         /* The switch - the box around the slider */
         .switch {
             position: relative;
@@ -182,6 +182,7 @@
             width: var(--lebar-bg);
             height: var(--tinggi-bg);
         }
+
         /* Hide default HTML checkbox */
         .switch input {
             opacity: 0;
@@ -189,7 +190,7 @@
             height: 0;
         }
 
-        
+
         .slider {
             position: absolute;
             cursor: pointer;
@@ -218,31 +219,37 @@
         input:checked+.slider {
             background-color: #2196F3;
         }
+
         input:focus+.slider {
             box-shadow: 0 0 1px #2196F3;
         }
+
         input:checked+.slider:before {
             -webkit-transform: translateX(var(--trans-dibutuhkan));
             -ms-transform: translateX(var(--trans-dibutuhkan));
             transform: translateX(var(--trans-dibutuhkan));
         }
+
         /* Rounded sliders */
         .slider.round {
             border-radius: 34px;
         }
+
         .slider.round:before {
             border-radius: 50%;
         }
+
         .btn-dark-custom {
             background: rgb(113, 56, 150);
             background: linear-gradient(180deg, rgba(113, 56, 150, 1) 0%, rgba(108, 48, 147, 1) 2%, rgba(96, 29, 140, 1) 9%, rgba(78, 0, 130, 1) 25%, rgba(64, 0, 107, 1) 84%, rgba(60, 0, 101, 1) 88%, rgba(65, 0, 109, 1) 93%, rgba(15, 0, 25, 1) 100%, rgba(0, 0, 0, 1) 100%, rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.75) 100%);
         }
+
         .bg-dark-custom {
             background: rgb(78, 0, 130);
             background: linear-gradient(180deg, rgba(78, 0, 130, 1) 0%, rgba(78, 0, 130, 1) 68%, rgba(15, 0, 25, 1) 100%, rgba(0, 0, 0, 1) 100%, rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.75) 100%);
         }
-        
-        .c3-legend-item text{
+
+        .c3-legend-item text {
             font-size: 11px;
         }
     </style>
@@ -380,7 +387,7 @@
         .parent-link a.active {
             background: #6259ca;
         }
-        
+
         .parent-link a.active:after {
             content: "";
             position: absolute;
@@ -396,7 +403,7 @@
         .parent-link a.active-tab {
             background: #6259ca;
         }
-        
+
         .parent-link a.active-tab:after {
             content: "";
             position: absolute;
@@ -412,7 +419,7 @@
         .parent-link.kecurangan a.active-tab {
             background: #ff4f4e;
         }
-        
+
         .parent-link.kecurangan a.active-tab:after {
             content: "";
             position: absolute;
@@ -507,7 +514,7 @@
         .box-security ul li {
             font-weight: bold;
             color: black;
-            line-height: 2.5rem;            
+            line-height: 2.5rem;
             font-size: 20px;
         }
 
@@ -522,30 +529,29 @@
             z-index: 20;
         }
     </style>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script>
         function setCookie(cname, cvalue, exdays) {
-        const d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        let expires = "expires="+d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            let expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
 
         function getCookie(cname) {
-        let name = cname + "=";
-        let ca = document.cookie.split(';');
-        for(let i = 0; i < ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) == ' ') {
-            c = c.substring(1);
+            let name = cname + "=";
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
             }
-            if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-            }
+            return "";
         }
-        return "";
-        }
-
     </script>
 
 </head>
@@ -553,11 +559,19 @@
 <?php $dark_mode = ($config->darkmode == "yes") ? 'dark-mode' : ""; ?>
 
 <body class="app sidebar-mini {{$dark_mode}}">
+    <img id="imageHisuara" src="{{asset('images/voice_hisuara.gif')}}" alt="hisuara image" style="
+        z-index: 20;
+        bottom: 15px;
+        width: 4%;
+        left: 50%;
+        transform: translateX(-50%);
+        position: fixed;
+        display: none;">
     <div class="security-keluar" style="display: none">
         <div class="box-security">
             <div class="row">
                 <div class="col-6 text-center">
-                    
+
                 </div>
                 <div class="col-6">
                     <ul>

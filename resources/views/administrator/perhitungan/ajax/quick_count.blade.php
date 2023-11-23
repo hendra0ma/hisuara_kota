@@ -87,11 +87,11 @@ $tps = Tps::count();
                                 
                                 @if (isset($url_first[3]) && $url_first[2] == "perhitungan_kecamatan") {{-- Perhitungan Kecamatan --}}
                                     @php
-                                    $total_saksi = QuickSaksiData::join('quick_saksi', 'quick_saksi.id', '=', 'quick_saksi_data.saksi_id')->where('paslon_id', $pas->id)->where('quick_saksi_data.district_id', $id)->where('quick_saksi.verification', 1)->sum('voice');
+                                    $total_saksi = QuickSaksiData::join('quick_saksi', 'quick_saksi.id', '=', 'quick_saksi_data.saksi_id')->where('paslon_id', $pas->id)->where('quick_saksi_data.district_id', (string)$id)->where('quick_saksi.verification', 1)->sum('voice');
                                     @endphp
                                 @elseif (isset($url_first[3]) && $url_first[2] == "perhitungan_kelurahan") {{-- Perhitungan Kelurahan --}}
                                 @php
-                                    $total_saksi = QuickSaksiData::join('quick_saksi', 'quick_saksi.id', '=', 'quick_saksi_data.saksi_id')->where('paslon_id', $pas->id)->where('quick_saksi_data.village_id', $id)->where('quick_saksi.verification', 1)->sum('voice');
+                                    $total_saksi = QuickSaksiData::join('quick_saksi', 'quick_saksi.id', '=', 'quick_saksi_data.saksi_id')->where('paslon_id', $pas->id)->where('quick_saksi_data.village_id', (string)$id)->where('quick_saksi.verification', 1)->sum('voice');
                                     @endphp
                                 @else {{--  Perhitungan Kota --}}
                                     @php
