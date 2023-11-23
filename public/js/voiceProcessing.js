@@ -1,4 +1,5 @@
 const ROUTE_HALAMAN_VERIFIKASI_SAKSI = 'administrator/verifikasi_saksi'
+const ROUTE_HALAMAN_AUDIT_C1 = 'auditor/audit-c1'
 
 const keywordRedirect = 'buka';
 const keywordClickBagian = 'buka bagian';
@@ -10,18 +11,13 @@ const keywordClickKoreksiButtonOnModalVerifikasi = 'koreksi';
 const keywordClickCloseModalButtonVerifikasi = 'tutup verifikasi';
 const clickButtonVerifikasiExceptions = ['buka verifikasi c1', 'buka verifikasi saksi', 'buka verifikasi crowd c1', 'buka verifikasi admin'];
 
-const keywordClickKtpButton = 'lihat ktp';
-const keywordClickDiterimaButton = 'diterima';
-const keywordClickDitolakButton = 'ditolak';
-const keywordClickHubungiButton = 'hubungi';
-const keywordClickCloseModalButtonSaksi = 'tutup modal';
-
 const keywordScrollUp = ['scroll up', 'naik']
 const keywordScrollDown = ['scroll down', 'turun']
 const keywordRefresh = ['refresh', 'segarkan']
 
 const startSpeech = 'hai sila'
 const endSpeech = 'sila berhenti'
+
 try {
   $(document).ready(function () {
     const namaLocalStorageCheckboxStatus = 'speechCheckboxStatus'
@@ -93,12 +89,6 @@ try {
           const isCommandHasKeywordClickKoreksiButtonOnModal = finalTranscript.includes(keywordClickKoreksiButtonOnModalVerifikasi)
           const isCommandHasKeywordClickCloseModalButtonVerifikasi = finalTranscript.includes(keywordClickCloseModalButtonVerifikasi)
 
-          const isCommandHasKeywordClickKtpButton = finalTranscript.includes(keywordClickKtpButton)
-          const isCommandHasKeywordClickDiterimaButton = finalTranscript.includes(keywordClickDiterimaButton)
-          const isCommandHasKeywordClickDitolakButton = finalTranscript.includes(keywordClickDitolakButton)
-          const isCommandHasKeywordClickHubungiButton = finalTranscript.includes(keywordClickHubungiButton)
-          const isCommandHasKeywordClickCloseModalButtonSaksi = finalTranscript.includes(keywordClickCloseModalButtonSaksi)
-
           const isCommandHasKeywordScrollUp = keywordScrollUp.includes(finalTranscript)
           const isCommandHasKeywordScrollDown = keywordScrollDown.includes(finalTranscript)
           const isCommandHasKeywordRefresh = keywordRefresh.includes(finalTranscript)
@@ -158,6 +148,18 @@ try {
           }
 
           if (isCurrentPageVerifikasiSaksi) {
+            const keywordClickKtpButton = 'lihat ktp';
+            const keywordClickDiterimaButton = 'diterima';
+            const keywordClickDitolakButton = 'ditolak';
+            const keywordClickHubungiButton = 'hubungi';
+            const keywordClickCloseModalButtonSaksi = 'tutup modal';
+
+            const isCommandHasKeywordClickKtpButton = finalTranscript.includes(keywordClickKtpButton)
+            const isCommandHasKeywordClickDiterimaButton = finalTranscript.includes(keywordClickDiterimaButton)
+            const isCommandHasKeywordClickDitolakButton = finalTranscript.includes(keywordClickDitolakButton)
+            const isCommandHasKeywordClickHubungiButton = finalTranscript.includes(keywordClickHubungiButton)
+            const isCommandHasKeywordClickCloseModalButtonSaksi = finalTranscript.includes(keywordClickCloseModalButtonSaksi)
+
             if (isCommandHasKeywordClickKtpButton) {
               const namaSaksi = getTextAfterSpecificWord(keywordClickKtpButton, finalTranscript);
               const h1Elements = document.querySelectorAll('.nama-saksi');
@@ -232,6 +234,55 @@ try {
 
             if (isCommandHasKeywordClickCloseModalButtonSaksi) {
               closeModal('cekmodal')
+            }
+          }
+
+          const isCurrentPageAuditC1 = window.location.pathname.includes(ROUTE_HALAMAN_VERIFIKASI_SAKSI)
+          if (isCurrentPageAuditC1) {
+            const keywordClickAuditButton = 'audit';
+            const keywordAuditLolos = 'lolos audit';
+            const keywordKoreksiAudit = 'koreksi ';
+            const keywordClickHubungiButton = 'hubungi';
+            const keywordClickCloseModalButtonAudit = 'tutup modal';
+
+            const isCommandHasOpenAuditModal = finalTranscript.includes(keywordClickAuditButton);
+            const isCommandHasKeywordAuditLolos = finalTranscript.includes(keywordAuditLolos);
+            const isCommandHasKeywordKoreksiAudit = finalTranscript.includes(keywordKoreksiAudit);
+            const isCommandHasKeywordHubungi = finalTranscript.includes(keywordClickHubungiButton);
+            const isCommandHasKeywordCloseModalButton = finalTranscript.includes(keywordClickCloseModalButtonAudit);
+
+            if (isCommandHasOpenAuditModal) {
+              const namaSaksi = getTextAfterSpecificWord(keywordClickAuditButton, finalTranscript);
+              const h1Elements = document.querySelectorAll('.nama-saksi');
+
+              for (let i = 0; i < h1Elements.length; i++) {
+                const namaElement = h1Elements[i];
+                const namaElementText = namaElement.textContent.toLowerCase();
+
+                if (namaElementText.includes(namaSaksi.toLowerCase())) {
+                  // console.log(namaElementText, namaSaksi.toLowerCase());
+                  const idSaksi = namaElement.getAttribute('id');
+                  const buttonAudit = document.querySelector(`button[id="audit${idSaksi}"]`);
+                  buttonAudit.click();
+                  break;
+                }
+              }
+            }
+
+            if (isCommandHasKeywordAuditLolos) {
+              $('#lolosAuditButton').click()
+            }
+
+            if (isCommandHasKeywordKoreksiAudit) {
+              $('#koreksiAuditButton').click()
+            }
+
+            if (isCommandHasKeywordHubungi) {
+              $('#hubungiWhatsappButton').click();
+            }
+
+            if (isCommandHasKeywordCloseModalButton) {
+              closeModal('periksaC1Verifikator')
             }
           }
 

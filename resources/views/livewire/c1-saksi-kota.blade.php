@@ -68,7 +68,7 @@
 
                         <div class="row mt-2">
                             <div class="col-12 px-0">
-                                <button class="btn text-white rounded-0 w-100 periksa-c1-plano" style="background-color: rgb(251, 107, 37)" id="Cek" data-id="{{$ls->tps_id}}" data-bs-toggle="modal" id="" data-bs-target="#periksaC1Verifikator">Verifikasi Kiriman C1</button>
+                                <button class="btn text-white rounded-0 w-100 periksa-c1-plano" style="background-color: rgb(251, 107, 37)" id="Cek" data-id="{{$ls->tps_id}}" data-bs-toggle="modal" data-bs-target="#periksaC1Verifikator">Verifikasi Kiriman C1</button>
                             </div>
                         </div>
                     </div>

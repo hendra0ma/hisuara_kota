@@ -22,7 +22,7 @@
 
 <div class="col-lg-6 w-cus-sb" style="height: 100vh; overflow: scroll">
     <center>
-        <img src="{{ asset('storage/' . '/' . $paslon[0]->saksi_data[0]->c1_images) }}" data-magnify-speed="200" alt="" data-magnify-magnifiedwidth="2500"data-magnify-magnifiedheight="2500" class="img-fluid
+        <img src="{{ asset('storage/' . '/' . $paslon[0]->saksi_data[0]->c1_images) }}" data-magnify-speed="200" alt="" data-magnify-magnifiedwidth="2500" data-magnify-magnifiedheight="2500" class="img-fluid
         zoom" data-magnify-src="{{asset('storage'.'/'.$paslon[0]->saksi_data[0]->c1_images)}}">
     </center>
 </div>
@@ -66,7 +66,7 @@
                             </div>
                         </div>
                         <div class="col-md">
-                            <a href="https://wa.me/{{$user->no_hp}}" class="btn btn-success h-100 w-100 d-flex">
+                            <a id="hubungiWhatsappButton" href="https://wa.me/{{$user->no_hp}}" class="btn btn-success h-100 w-100 d-flex">
                                 <div class="row mx-auto my-auto">
                                     <div class="col-md-12">
                                         <i class="fa-brands fa-whatsapp fs-1"></i>
@@ -96,20 +96,19 @@
                                 $voice = 0;
                                 ?>
                                 @foreach ($pas->saksi_data as $dataTps)
-                    
+
                                 <?php
                                 $voice += $dataTps->voice;
-                                $total_suara = App\Models\SaksiData::where('saksi_id',$dataTps->saksi_id)->sum('voice');
+                                $total_suara = App\Models\SaksiData::where('saksi_id', $dataTps->saksi_id)->sum('voice');
                                 ?>
-                    
+
                                 @endforeach
                                 <div class="form-group col-md-12">
                                     <label>Suara 0{{$i++}}</label>
-                                    <input type="number" class="form-control" readonly="" value="{{$voice}}" name="suara[]"
-                                        placeholder="Suara" readonly>
+                                    <input type="number" class="form-control" readonly="" value="{{$voice}}" name="suara[]" placeholder="Suara" readonly>
                                 </div>
                                 <?php $voice = 0;  ?>
-                    
+
                                 @endforeach
                             </div>
                         </div>
@@ -125,36 +124,37 @@
                                 </div>
                             </div>
                             {{-- <div class="display-2 fw-bold">Total :</div>
-                            <div class="display-2 fw-bold">{{$total_suara }}</div> --}}
-                        </div>
+                            <div class="display-2 fw-bold">{{$total_suara }}
+                        </div> --}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="row" id="buttons">
+<div class="row" id="buttons">
 
-        @if ($paslon[0]->saksi_data[0]->audit == 1)
-        @else
-        <div class="col-lg-6 mt-1">
-            <a href="{{ route('auditor.auditData', Crypt::encrypt($paslon[0]->saksi_data[0]->saksi_id)) }}" class="btn btn-block btn-info">Lolos Audit</a>
-        </div>
-        <div class="col-lg-6 mt-1">
-            <a class="btn btn-block btn-danger text-white modal-kelos c1-dikoreksi"
-            data-id="{{$user->tps_id}}" data-bs-toggle="modal" id="" data-bs-target="#periksaC1Auditor">Koreksi</a>
-        </div>
-        @endif
+    @if ($paslon[0]->saksi_data[0]->audit == 1)
+    @else
+    <div class="col-lg-6 mt-1">
+        <a id="lolosAuditButton" href="{{ route('auditor.auditData', Crypt::encrypt($paslon[0]->saksi_data[0]->saksi_id)) }}" class="btn btn-block btn-info">Lolos Audit</a>
     </div>
+    <div class="col-lg-6 mt-1">
+        <a id="koreksiAuditButton" class="btn btn-block btn-danger text-white modal-kelos c1-dikoreksi" data-id="{{$user->tps_id}}" data-bs-toggle="modal" data-bs-target="#periksaC1Auditor">Koreksi</a>
+    </div>
+    @endif
+</div>
 
-    <div class="row mt-5">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header bg-success">
-                    <h4 class="mb-0 mx-auto text-white card-title">Data Pemlih Dan Penggunaan Hak Pilih (TPS
-                        {{$paslon[0]->saksi_data[0]->number}})</h4>
-                </div>
-                <div class="card-body p-0">
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-success">
+                <h4 class="mb-0 mx-auto text-white card-title">Data Pemlih Dan Penggunaan Hak Pilih (TPS
+                    {{$paslon[0]->saksi_data[0]->number}})
+                </h4>
+            </div>
+            <div class="card-body p-0">
                 <table class="table table-striped">
                     <tr>
                         <td class="py-2 text-start" style="width: 50%">Jumlah Hak Pilih (DPT)</td>
@@ -187,10 +187,10 @@
                         <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->sisa_surat_suara:"0"}}</td>
                     </tr>
                 </table>
-                </div>
             </div>
         </div>
     </div>
+</div>
 
 </div>
 <script>
@@ -204,7 +204,7 @@
 </script>
 
 <script>
-    // const buttonC1Dibatalkan = 
+    // const buttonC1Dibatalkan =
     $(".c1-dikoreksi").on('click', function() {
         const id = $(this).data('id');
         const urlCurrent = $('input.urlCurrent');
