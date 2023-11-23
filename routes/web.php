@@ -404,6 +404,8 @@ foreach ($kotas as $kota) {
                     Route::get('ajax/get_kecamatan_tracking', 'get_kecamatan_tracking');
                     Route::get('ajax/get_test', 'get_test');
                     Route::get('/ajax/get_koreksi_saksi', 'get_koreksi_saksi');
+                    Route::get('/ajax/get_riwayat_koreksi', 'get_riwayat_koreksi');
+
                     Route::post('kecamatan/rekapitulator/action_rekapitulator/{id}', 'action_rekapitulator');
                     Route::post('action_setujui/{id}', 'action_setujui');
                     Route::post('action_setuju_koreksi_auditor/{id}', 'actionSetujuKoreksiAuditor')->name('actionSetujuKoreksiAuditor');

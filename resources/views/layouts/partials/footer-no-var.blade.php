@@ -278,6 +278,22 @@
         });
     });
 
+    $('.modaldokumenKoreksiC1').on('click', function () {
+        let id = $(this).data('id');
+        $.ajax({
+            url: '{{url("/")}}/administrator/ajax/get_riwayat_koreksi',
+            type: "GET",
+            data: {
+                id
+            },
+            success: function (response) {
+                if (response) {
+                    $('#container-riwayat-koreksi').html(response);
+                }
+            }
+        });
+    });
+
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>

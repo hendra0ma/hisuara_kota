@@ -19,10 +19,7 @@
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{url('/')}}/assets/colors/color1.css" />
     <link href="{{url('/')}}/assets/plugins/fileuploads/css/fileupload.css" rel="stylesheet" type="text/css" />
-        
-        <!-- SELECT2 CSS -->
-        <!-- BOOTSTRAP CSS -->
-        <link href="{{url('/')}}/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{{url('/')}}/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 

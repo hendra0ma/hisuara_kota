@@ -199,7 +199,6 @@ class DevelopingController extends Controller
             'suara2' => $suara2,
             'suara3' => $suara3,
         ]);
-        // }
         return redirect()->route('dashboard.saksi2');
     }
 
