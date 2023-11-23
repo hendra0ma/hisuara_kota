@@ -246,7 +246,7 @@ try {
           if (isCurrentPageAuditC1) {
             const keywordClickAuditButton = 'audit';
             const keywordAuditLolos = 'lolos audit';
-            const keywordKoreksiAudit = 'koreksi ';
+            const keywordKoreksiAudit = 'koreksi';
             const keywordClickHubungiButton = 'hubungi';
             const keywordClickCloseModalButtonAudit = 'tutup modal';
 
