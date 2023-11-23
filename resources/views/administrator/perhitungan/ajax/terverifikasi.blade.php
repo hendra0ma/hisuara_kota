@@ -96,15 +96,15 @@ $tps = Tps::count();
                                         
                                         @if (isset($url_first[3]) && $url_first[2] == "perhitungan_kecamatan") {{-- Perhitungan Kecamatan --}}
                                             @php
-                                            $total_saksi = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $pas->id)->where('saksi_data.district_id', $id)->where('saksi.verification', 1)->sum('voice');
+                                            $total_saksi = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $pas->id)->where('saksi_data.district_id', (string)$id)->where('saksi.verification', 1)->sum('voice');
                                             @endphp
                                         @elseif (isset($url_first[3]) && $url_first[2] == "perhitungan_kelurahan") {{-- Perhitungan Kelurahan --}}
                                         @php
-                                            $total_saksi = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $pas->id)->where('saksi_data.village_id', $id)->where('saksi.verification', 1)->sum('voice');
+                                            $total_saksi = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $pas->id)->where('saksi_data.village_id', (string)$id)->where('saksi.verification', 1)->sum('voice');
                                             @endphp
                                         @else {{--  Perhitungan Kota --}}
                                             @php
-                                            $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->sum('voice');
+                                            $total_saksi = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $pas->id)->where('saksi.verification', 1)->sum('voice');
                                             @endphp
                                         @endif
                                         <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3>
@@ -141,7 +141,7 @@ $tps = Tps::count();
                     href="{{url('/')}}/administrator/perhitungan_kelurahan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
             </td>
             @foreach ($paslon as $cd)
-            <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.village_id', $item['id'])->where('saksi.verification', 1)->sum('voice'); ?>
+            <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.village_id', (string)$item['id'])->where('saksi.verification', 1)->sum('voice'); ?>
             <td class="align-middle">{{$saksi_dataa}}</td>
             @endforeach
         </tr>
