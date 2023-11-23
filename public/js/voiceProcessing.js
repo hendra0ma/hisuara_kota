@@ -1,4 +1,5 @@
 const ROUTE_HALAMAN_VERIFIKASI_SAKSI = 'administrator/verifikasi_saksi'
+const ROUTE_HALAMAN_VERIFIKASI_C1 = 'verifikator/verifikasi-c1'
 const ROUTE_HALAMAN_AUDIT_C1 = 'auditor/audit-c1'
 
 const keywordRedirect = 'buka';
@@ -125,26 +126,30 @@ try {
           }
 
           const isCurrentPageVerifikasiSaksi = window.location.pathname.includes(ROUTE_HALAMAN_VERIFIKASI_SAKSI)
-          if (isCommandHasKeywordClickHubungiButtonOnModal && isCurrentPageVerifikasiSaksi == false) {
-            const idElementButtonHubungiOnModal = 'hubungiWhatsappButton';
-            const url = $(`#${idElementButtonHubungiOnModal}`).attr('href');
-            window.location = url
-          }
+          const isCurrentPageVerifikasiC1 = window.location.pathname.includes(ROUTE_HALAMAN_VERIFIKASI_C1)
 
-          if (isCommandHasKeywordClickKoreksiButtonOnModal) {
-            const idElementButtonKoreksiOnModal = 'koreksiButton';
-            const url = $(`#${idElementButtonKoreksiOnModal}`).attr('data-url');
-            window.location = url
-          }
+          if (isCurrentPageVerifikasiC1) {
+            if (isCommandHasKeywordClickHubungiButtonOnModal && isCurrentPageVerifikasiSaksi == false) {
+              const idElementButtonHubungiOnModal = 'hubungiWhatsappButton';
+              const url = $(`#${idElementButtonHubungiOnModal}`).attr('href');
+              window.location = url
+            }
 
-          if (isCommandHasKeywordClickVerifikasiButtonOnModal) {
-            const idElementButtonVerifikasiOnModal = 'verifikasiButton';
-            const url = $(`#${idElementButtonVerifikasiOnModal}`).attr('data-url');
-            window.location = url
-          }
+            if (isCommandHasKeywordClickKoreksiButtonOnModal) {
+              const idElementButtonKoreksiOnModal = 'koreksiButton';
+              const url = $(`#${idElementButtonKoreksiOnModal}`).attr('data-url');
+              window.location = url
+            }
 
-          if (isCommandHasKeywordClickCloseModalButtonVerifikasi) {
-            closeModal('periksaC1Verifikator')
+            if (isCommandHasKeywordClickVerifikasiButtonOnModal) {
+              const idElementButtonVerifikasiOnModal = 'verifikasiButton';
+              const url = $(`#${idElementButtonVerifikasiOnModal}`).attr('data-url');
+              window.location = url
+            }
+
+            if (isCommandHasKeywordClickCloseModalButtonVerifikasi) {
+              closeModal('periksaC1Verifikator')
+            }
           }
 
           if (isCurrentPageVerifikasiSaksi) {
