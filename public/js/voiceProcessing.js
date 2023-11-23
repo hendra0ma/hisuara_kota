@@ -251,7 +251,7 @@ try {
             const isCommandHasKeywordHubungi = finalTranscript.includes(keywordClickHubungiButton);
             const isCommandHasKeywordCloseModalButton = finalTranscript.includes(keywordClickCloseModalButtonAudit);
 
-            if (isCommandHasOpenAuditModal) {
+            if (isCommandHasOpenAuditModal && isCommandHasKeywordAuditLolos == false) {
               const namaSaksi = getTextAfterSpecificWord(keywordClickAuditButton, finalTranscript);
               const h1Elements = document.querySelectorAll('.nama-saksi');
 
