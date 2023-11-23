@@ -237,7 +237,7 @@ try {
             }
           }
 
-          const isCurrentPageAuditC1 = window.location.pathname.includes(ROUTE_HALAMAN_VERIFIKASI_SAKSI)
+          const isCurrentPageAuditC1 = window.location.pathname.includes(ROUTE_HALAMAN_AUDIT_C1)
           if (isCurrentPageAuditC1) {
             const keywordClickAuditButton = 'audit';
             const keywordAuditLolos = 'lolos audit';
