@@ -38,6 +38,8 @@ use App\Models\Configs;
 use App\Models\CrowdC1;
 use App\Models\DataCrowdC1;
 use App\Models\RegenciesDomain;
+use App\Models\RiwayatKoreksi;
+use App\Models\RiwayatKoreksiData;
 use App\Models\SuratPernyataan;
 use App\Models\SuratSuara;
 use Carbon\Carbon;
@@ -911,9 +913,9 @@ class AdminController extends Controller
         $data['huver_terblokir'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 0)->count();
         $data['saksi_baru'] = User::where('regency_id',$this->config->regencies_id)->where('role_id', 8)->limit(12)->orderBy('created_at')->get();
         $data['admin_baru'] =  User::where('regency_id',$this->config->regencies_id)->where('role_id', '!=', 8)->limit(12)->orderBy('created_at')->get();
-        $data['data_relawan'] = Relawan::where('regency_id',$this->config->regencies_id)->where('role_id', '!=', 8)->count();
+        $data['data_relawan'] = Relawan::where('regency_id',$this->config->regencies_id)->count();
         $data['data_overlimit'] = Saksi::where('overlimit', '!=', 0)->count();
-        $data['bukti_foto_kecurangan'] = ModelsBuktifoto::join('tps','bukti_vidio.tps_id','=','tps.id')->where('tps.regency_id',$this->config->regencies_id)->count();
+        $data['bukti_foto_kecurangan'] = ModelsBuktifoto::join('tps','bukti_foto.tps_id','=','tps.id')->where('tps.regency_id',$this->config->regencies_id)->count();
         $data['bukti_video_kecurangan'] = Buktividio::join('tps','bukti_vidio.tps_id','=','tps.id')->where('tps.regency_id',$this->config->regencies_id)->count();
         $data['tps_koreksi'] = Saksi::where('regency_id',$this->config->regencies_id)->whereNotNull('koreksi')->count();
         $data['config'] = Config::first();
@@ -1256,6 +1258,24 @@ class AdminController extends Controller
 
         return view('administrator.ajax.get_koreksi_saksi', $data);
     }
+    public function get_riwayat_koreksi(Request $request)
+    {
+        $data['config'] = Config::first();
+        $data['saksi']  =  Saksi::where('tps_id', $request['id'])->first();
+        $data['riwayat_koreksi'] = RiwayatKoreksi::where('tps_id',$request['id'])->first();
+        $data['riwayat_koreksi_data'] = RiwayatKoreksiData::where('tps_id',$request['id'])->get();
+        if ($data['saksi'] != null) {
+            $data['saksi_data'] = SaksiData::where('saksi_id', $data['saksi']['id'])->get();
+        }
+        
+        $data['admin_req'] = User::where('id',  $data['riwayat_koreksi']['petugas_id'])->first();
+        $data['saksi_koreksi'] = User::where('id', $data['riwayat_koreksi']['user_id'])->first();
+        $data['kelurahan'] = Village::where('id', $data['riwayat_koreksi']['village_id'])->first();
+        $data['kecamatan'] = District::where('id', $data['riwayat_koreksi']['district_id'])->first();
+        $data['tps'] = Tps::where('regency_id',$this->config->regencies_id)->where('id',$data['riwayat_koreksi']['tps_id'])->first();
+
+        return view('administrator.ajax.get_riwayat_koreksi_saksi', $data);
+    }
 
     public function action_setujui(Request $request, $id)
     {
@@ -1280,6 +1300,52 @@ class AdminController extends Controller
     {
         $id = Crypt::decrypt($id);
         $paslon = Paslon::get();
+
+        $saksi = Saksi::where('id', $id)->first();
+        $saksi_data = SaksiData::where('saksi_id', $id)->get();
+        $regency_voice = Regency::where('id',$this->config->regencies_id)->first();
+        
+        $user = User::where('tps_id',$saksi->tps_id)->first();
+
+        $riwayatKoreksi = new RiwayatKoreksi;
+        $riwayatKoreksi->c1_images = $saksi->c1_images;
+        $riwayatKoreksi->user_id = $user->id;
+        $riwayatKoreksi->province_id = $saksi->province_id;
+        $riwayatKoreksi->regency_Id = $saksi->regency_Id;
+        $riwayatKoreksi->village_id = $saksi->village_id;
+        $riwayatKoreksi->district_id = $saksi->district_id;
+        $riwayatKoreksi->tps_id = $saksi->tps_id;
+        $riwayatKoreksi->from = "auditor";
+        $riwayatKoreksi->petugas_id =Auth::user()->id;
+        $riwayatKoreksi->save();
+        $riwayatKoreksiId = $riwayatKoreksi->id;
+    
+        foreach ($paslon as $key => $value) {
+            RiwayatKoreksiData::insert([
+                'user_id' =>  $user->id,
+                "voice"=> $saksi_data[$key]->voice,
+                "paslon_id"=>$value->id,
+                "riwayat_koreksi_id"=>$riwayatKoreksiId,
+                "province_id"=>$saksi->province_id,
+                "regency_id"=>$saksi->regency_id,
+                "tps_id"=>$saksi->tps_id,
+                "village_id"=>$saksi->village_id,
+                "district_id"=>$saksi->district_id,
+                "petugas_id"=>Auth::user()->id,
+            ]);
+        }
+    
+
+
+        $voice1 =  $regency_voice->suara1 - $saksi_data[0]->voice + $request->paslon0;
+        $voice2 =  $regency_voice->suara2 - $saksi_data[1]->voice + $request->paslon1;
+        $voice3 =  $regency_voice->suara3 - $saksi_data[2]->voice + $request->paslon2;
+        Regency::where('id',$this->config->regencies_id)->update([
+            'suara1'=>$voice1,
+            'suara2'=>$voice2,
+            'suara3'=>$voice3,
+        ]);
+
         foreach ($paslon as $pas) {
             // $saksi_data = SaksiData::where('paslon_id',$pas->id)->where('saksi_id',$id)->first();
             SaksiData::where('paslon_id', $pas->id)->where('saksi_id', $id)->update(

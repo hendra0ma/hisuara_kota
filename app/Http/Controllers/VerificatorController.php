@@ -35,6 +35,8 @@ use App\Models\Relawan;
 use App\Models\RelawanData;
 use App\Models\QuickSaksiData;
 use App\Models\RegenciesDomain;
+use App\Models\RiwayatKoreksi;
+use App\Models\RiwayatKoreksiData;
 use App\Models\SuratPernyataan;
 use App\Models\SuratSuara;
 use App\Models\Tracking as ModelsTracking;
@@ -289,19 +291,63 @@ class VerificatorController extends Controller
             'suara.*' => ['required'],
             "persetujuan" => ['required']
         ]);
+        
         $id = Crypt::decrypt($id);
+        $saksi = Saksi::where('id', $id)->first();
         $saksi_data = SaksiData::where('saksi_id', $id)->get();
-        foreach($saksi_data as $i=> $sd){
+        $regency_voice = Regency::where('id',$this->config->regencies_id)->first();
+        
+        $user = User::where('tps_id',$saksi->tps_id)->first();
 
+        $riwayatKoreksi = new RiwayatKoreksi;
+        $riwayatKoreksi->c1_images = $saksi->c1_images;
+        $riwayatKoreksi->user_id = $user->id;
+        $riwayatKoreksi->province_id = $saksi->province_id;
+        $riwayatKoreksi->regency_Id = $saksi->regency_Id;
+        $riwayatKoreksi->village_id = $saksi->village_id;
+        $riwayatKoreksi->district_id = $saksi->district_id;
+        $riwayatKoreksi->tps_id = $saksi->tps_id;
+        $riwayatKoreksi->from = "verifikator";
+        $riwayatKoreksi->petugas_id =Auth::user()->id;
+        $riwayatKoreksi->save();
+        $riwayatKoreksiId = $riwayatKoreksi->id;
+        $paslon = Paslon::get();
+        foreach ($paslon as $key => $value) {
+            RiwayatKoreksiData::insert([
+                'user_id' =>  $user->id,
+                "voice"=> $saksi_data[$key]->voice,
+                "paslon_id"=>$value->id,
+                "riwayat_koreksi_id"=>$riwayatKoreksiId,
+                "province_id"=>$saksi->province_id,
+                "regency_id"=>$saksi->regency_id,
+                "tps_id"=>$saksi->tps_id,
+                "village_id"=>$saksi->village_id,
+                "district_id"=>$saksi->district_id,
+                "petugas_id"=>Auth::user()->id,
+            ]);
+        }
+    
+
+
+        foreach($saksi_data as $i=> $sd){
             SaksiData::where('id',$sd->id)->update([
                 "voice" => (int)$req->suara[$i],
             ]);
         }
-        Saksi::where('id', $id)->update([
-              "koreksi" => 1,
-                "kecurangan_id_users" =>  Auth::user()->id,
+        $voice1 =  $regency_voice->suara1 - $saksi_data[0]->voice + $req->suara[0];
+        $voice2 =  $regency_voice->suara2 - $saksi_data[1]->voice + $req->suara[1];
+        $voice3 =  $regency_voice->suara3 - $saksi_data[2]->voice + $req->suara[2];
+        Regency::where('id',$this->config->regencies_id)->update([
+            'suara1'=>$voice1,
+            'suara2'=>$voice2,
+            'suara3'=>$voice3,
         ]);
-        $saksi = Saksi::where('id', $id)->first();
+
+        Saksi::where('id', $id)->update([
+            "koreksi" => 1,
+            "kecurangan_id_users" =>  Auth::user()->id,
+        ]);
+     
         $tps = Tps::where('id', $saksi['tps_id'])->first();
         $kecamatan = District::where('id', $saksi['district_id'])->first();
         $kelurahan = Village::where('id', $saksi['village_id'])->first();
@@ -310,8 +356,6 @@ class VerificatorController extends Controller
             'user_id' => Auth::user()->id,
             'action' => $pesan,
         ]);
-        // event(new NotifEvent($pesan));
-        // return redirect()->route('verifikator.village', Crypt::encrypt($saksi_data[0]->village_id));
         return redirect()->route('verifikator.verifikasiC1');
     }
     public function getRelawanData(Request $req)
