@@ -552,6 +552,9 @@ foreach ($kotas as $kota) {
                 Route::get('mahkamah_konstitusi', 'mk');
                 Route::get('bawaslu', 'bawaslu');
                 Route::get('tim_hukum_paslon', 'timHukumPaslon');
+                Route::get('dkpp', 'dkpp');
+                Route::get('polisi', 'polri');
+                Route::get('akun_kpu', 'kpu');
                 Route::get('validator_kecurangan', 'validatorKecurangan')->name('validatorKecurangan');
                 Route::get('ditolak', 'ditolak');
                 Route::get('print/{id}', 'print');

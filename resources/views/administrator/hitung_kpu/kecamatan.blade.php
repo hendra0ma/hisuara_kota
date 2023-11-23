@@ -320,7 +320,7 @@ $props = Province::where('id',$kota['province_id'])->first();
         var chartData = {
         columns: [
             @foreach($paslon as $pas)
-            <?php $saksi_dataaa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $pas['id'])->where('saksi_data.village_id', $item['id'])->sum('voice'); ?>
+            <?php $saksi_dataaa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $pas['id'])->where('saksi_data.village_id', (string)$item['id'])->sum('voice'); ?>
             ['data{{$d++}}', {{$saksi_dataaa}}],
             @endforeach
         ],

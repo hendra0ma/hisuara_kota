@@ -157,7 +157,7 @@ $tps = Tps::count();
             </tbody>
             <script>
                 let check = function(id) {
-                            window.location = `{{url('/')}}/administrator/perhitungan_kecamatan/${id}`;
+                            window.location = `{{url('/')}}/administrator/perhitungan_kelurahan/${id}`;
                         }
             </script>
         </table>

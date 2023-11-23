@@ -169,7 +169,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
     } */
 </style>
 
-<div class="app-header header header-baru py-0 pe-0" style="padding-left: 0px !important">
+<div class="app-header header header-baru py-0 pe-0" style="padding-left: 0px !important; z-index: 20 !important;">
     <div class="container-fluid px-0">
 
         <div class="d-flex" style="position: relative">
@@ -1094,7 +1094,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                 <div class="col-md-auto px-0">
                     <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="laporan" data-command-target="laporan">
                         <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Laporan">
-                            <i class="fa-solid fa-ranking-star"></i>
+                            <i class="fa-solid fa-file-lines"></i>
                         </span>
                     </button>
                 </div>

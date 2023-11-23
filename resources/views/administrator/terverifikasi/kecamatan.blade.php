@@ -49,8 +49,6 @@ $config->default =  $configs->default;
 
 $regency = District::where('regency_id', $config->regencies_id)->get();
 $kota = Regency::where('id', $config->regencies_id)->first();
-$paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
-$urutan = $paslon_tertinggi;
 $dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
 $tps = Tps::count();
 $props = Province::where('id',$kota['province_id'])->first();
@@ -320,7 +318,7 @@ $props = Province::where('id',$kota['province_id'])->first();
         var chartData = {
         columns: [
             @foreach($paslon as $pas)
-            <?php $saksi_dataaa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $pas['id'])->where('saksi_data.village_id', $item['id'])->where('saksi.verification',1)->sum('voice'); ?>
+            <?php $saksi_dataaa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $pas['id'])->where('saksi_data.village_id', (string)$item['id'])->where('saksi.verification',1)->sum('voice'); ?>
             ['data{{$d++}}', {{$saksi_dataaa}}],
             @endforeach
         ],
