@@ -20,13 +20,6 @@ const commands = [
     }
   },
   {
-    keyword: /^tutup/, // tutup modal
-    exceptions: [],
-    execute: () => {
-      $('#periksaC1Verifikator').modal('hide')
-    }
-  },
-  {
     keyword: /^hubungi/, // tombol hubungi di modal
     exceptions: [],
     execute: () => {
@@ -40,6 +33,21 @@ const commands = [
     execute: () => {
       const url = $('#koreksiButton').attr('href');
       window.location = url
+    }
+  },
+  {
+    keyword: /^verifikasi oke/,
+    exceptions: [],
+    execute: (finalTranscript) => {
+      const url = $('#verifikasiButton').attr('href');
+      window.location = url
+    }
+  },
+  {
+    keyword: /^tutup/, // tutup modal
+    exceptions: [],
+    execute: () => {
+      $('#periksaC1Verifikator').modal('hide')
     }
   },
   {

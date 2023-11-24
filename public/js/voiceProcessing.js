@@ -110,6 +110,34 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/js/voiceProcessing/pages/adminTerverifikasi.js":
+/*!******************************************************************!*\
+  !*** ./resources/js/voiceProcessing/pages/adminTerverifikasi.js ***!
+  \******************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var _require = __webpack_require__(/*! ../helper */ "./resources/js/voiceProcessing/helper.js"),
+    getTextAfterSpecificWord = _require.getTextAfterSpecificWord,
+    getSaksiElementByName = _require.getSaksiElementByName,
+    setCommandRoute = _require.setCommandRoute;
+
+var commands = [{
+  keyword: /^lihat aktivitas/,
+  // 'lihat aktivitas (nama saksi)'
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    var keyword = 'lihat aktivitas';
+    var namaSaksi = getTextAfterSpecificWord(keyword, finalTranscript);
+    var namaSaksiElement = getSaksiElementByName(namaSaksi);
+    var idSaksi = namaSaksiElement.getAttribute('id');
+    var buttonAudit = document.querySelector("a[id=\"lihatAktivitas".concat(idSaksi, "\"]"));
+    buttonAudit.click();
+  }
+}];
+module.exports = setCommandRoute('/administrator/admin_terverifikasi', commands);
+
+/***/ }),
+
 /***/ "./resources/js/voiceProcessing/pages/auditC1.js":
 /*!*******************************************************!*\
   !*** ./resources/js/voiceProcessing/pages/auditC1.js ***!
@@ -387,13 +415,6 @@ var commands = [{
     buttonVerifikasi.click();
   }
 }, {
-  keyword: /^tutup/,
-  // tutup modal
-  exceptions: [],
-  execute: function execute() {
-    $('#periksaC1Verifikator').modal('hide');
-  }
-}, {
   keyword: /^hubungi/,
   // tombol hubungi di modal
   exceptions: [],
@@ -408,6 +429,20 @@ var commands = [{
   execute: function execute() {
     var url = $('#koreksiButton').attr('href');
     window.location = url;
+  }
+}, {
+  keyword: /^verifikasi oke/,
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    var url = $('#verifikasiButton').attr('href');
+    window.location = url;
+  }
+}, {
+  keyword: /^tutup/,
+  // tutup modal
+  exceptions: [],
+  execute: function execute() {
+    $('#periksaC1Verifikator').modal('hide');
   }
 }, {
   keyword: /^halaman sebelumnya/,
@@ -572,7 +607,9 @@ var verifikasiSaksiCommands = __webpack_require__(/*! ./pages/verifikasiSaksi */
 
 var enumeratorCommands = __webpack_require__(/*! ./pages/enumerator */ "./resources/js/voiceProcessing/pages/enumerator.js");
 
-var ALL_COMMANDS = [].concat(_toConsumableArray(navbarCommands), _toConsumableArray(commonCommands), _toConsumableArray(verifikasiC1Commands), _toConsumableArray(auditC1Commands), _toConsumableArray(verifikasiSaksiCommands), _toConsumableArray(enumeratorCommands));
+var adminTerverifikasiCommands = __webpack_require__(/*! ./pages/adminTerverifikasi */ "./resources/js/voiceProcessing/pages/adminTerverifikasi.js");
+
+var ALL_COMMANDS = [].concat(_toConsumableArray(navbarCommands), _toConsumableArray(commonCommands), _toConsumableArray(verifikasiC1Commands), _toConsumableArray(auditC1Commands), _toConsumableArray(verifikasiSaksiCommands), _toConsumableArray(enumeratorCommands), _toConsumableArray(adminTerverifikasiCommands));
 
 var _require = __webpack_require__(/*! ./helper */ "./resources/js/voiceProcessing/helper.js"),
     getSpeechStatus = _require.getSpeechStatus,
