@@ -118,7 +118,7 @@ module.exports = {
 
 var _require = __webpack_require__(/*! ../helper */ "./resources/js/voiceProcessing/helper.js"),
     getTextAfterSpecificWord = _require.getTextAfterSpecificWord,
-    formatTranscriptToCommandTargetFormat = _require.formatTranscriptToCommandTargetFormat,
+    getSaksiElementByName = _require.getSaksiElementByName,
     setCommandRoute = _require.setCommandRoute;
 
 var commands = [{
@@ -343,7 +343,8 @@ module.exports = setCommandRoute('/verifikator/verifikasi-c1', commands);
 var _require = __webpack_require__(/*! ../helper */ "./resources/js/voiceProcessing/helper.js"),
     getTextAfterSpecificWord = _require.getTextAfterSpecificWord,
     getTextBeforeSpecificWord = _require.getTextBeforeSpecificWord,
-    setCommandRoute = _require.setCommandRoute;
+    setCommandRoute = _require.setCommandRoute,
+    getSaksiElementByName = _require.getSaksiElementByName;
 
 var commands = [{
   keyword: /^lihat ktp/,
