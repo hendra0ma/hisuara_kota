@@ -116,7 +116,7 @@
 
                         <div class="row mt-2">
                             <div class="col-12 px-0">
-                                <button class="btn btn-primary rounded-0 w-100 cekmodalakun" id="Cek" data-id="{{$ls['id']}}" data-bs-toggle="modal" id="" data-bs-target="#cekmodalakun">Detail Data Admin</button>
+                                <button class="btn btn-primary rounded-0 w-100 cekmodalakun" id="Cek" data-id="{{$ls['id']}}" data-bs-toggle="modal" id="" data-bs-target="#cekmodalakun">Lihat Aktifitas</button>
                             </div>
                         </div>
                         

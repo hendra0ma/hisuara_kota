@@ -82,28 +82,18 @@ $kota = Regency::where('id', $config->regencies_id)->first();
             </div> --}}
             <div class="col parent-link">
                 <a href="{{url('')}}/administrator/koordinator_saksi"
-                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_saksi')?'active' : '' }}">Koordinator
+                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_saksi')?'active' : '' }}">Koordinator Saksi
                     Kota</a>
             </div>
             <div class="col parent-link">
                 <a href="{{url('')}}/administrator/koordinator_kecamatan"
-                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_kecamatan')?'active' : '' }}">Koordinator
+                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_kecamatan')?'active' : '' }}">Koordinator Saksi
                     Kecamatan</a>
             </div>
             <div class="col parent-link">
                 <a href="{{url('')}}/administrator/koordinator_kelurahan"
-                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_kelurahan')?'active' : '' }}">Koordinator
+                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_kelurahan')?'active' : '' }}">Koordinator Saksi
                     Kelurahan</a>
-            </div>
-            <div class="col parent-link">
-                <a href="{{url('')}}/administrator/koordinator_rw"
-                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_rw')?'active' : '' }}">Koordinator
-                    RT</a>
-            </div>
-            <div class="col parent-link">
-                <a href="{{url('')}}/administrator/koordinator_rt"
-                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_rt')?'active' : '' }}">Koordinator
-                    RW</a>
             </div>
 
         </div>

@@ -404,6 +404,8 @@ foreach ($kotas as $kota) {
                     Route::get('ajax/get_kecamatan_tracking', 'get_kecamatan_tracking');
                     Route::get('ajax/get_test', 'get_test');
                     Route::get('/ajax/get_koreksi_saksi', 'get_koreksi_saksi');
+                    Route::get('/ajax/get_riwayat_koreksi', 'get_riwayat_koreksi');
+
                     Route::post('kecamatan/rekapitulator/action_rekapitulator/{id}', 'action_rekapitulator');
                     Route::post('action_setujui/{id}', 'action_setujui');
                     Route::post('action_setuju_koreksi_auditor/{id}', 'actionSetujuKoreksiAuditor')->name('actionSetujuKoreksiAuditor');
@@ -552,6 +554,9 @@ foreach ($kotas as $kota) {
                 Route::get('mahkamah_konstitusi', 'mk');
                 Route::get('bawaslu', 'bawaslu');
                 Route::get('tim_hukum_paslon', 'timHukumPaslon');
+                Route::get('dkpp', 'dkpp');
+                Route::get('polisi', 'polri');
+                Route::get('akun_kpu', 'kpu');
                 Route::get('validator_kecurangan', 'validatorKecurangan')->name('validatorKecurangan');
                 Route::get('ditolak', 'ditolak');
                 Route::get('print/{id}', 'print');

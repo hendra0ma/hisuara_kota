@@ -49,8 +49,6 @@ $config->default =  $configs->default;
 
 $regency = District::where('regency_id', $config->regencies_id)->get();
 $kota = Regency::where('id', $config->regencies_id)->first();
-$paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
-$urutan = $paslon_tertinggi;
 $dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
 $tps = Tps::count();
 $props = Province::where('id',$kota['province_id'])->first();
@@ -267,7 +265,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                                 <tr data-id="{{$item['id']}}" data-bs-toggle="modal" class="modal-id"
                                     data-bs-target="#modal-id">
                                     <td> <a href="{{url('')}}/administrator/terverifikasi_tps/{{Crypt::encrypt($item->id)}}"
-                                            class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS
+                                            class="modal-id " style="font-size: 0.8em;" id="Cek">TPS
                                             {{$item['number']}}</a>
                                         @foreach ($paslon_candidate as $cd)
 
@@ -287,4 +285,11 @@ $props = Province::where('id',$kota['province_id'])->first();
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        var specificUrl = "{{ url('') }}/administrator/terverifikasi"; // Specific URL to match
+    
+        $('.glowy-menu[href="' + specificUrl + '"]').addClass('active');
+    });
+</script>
 @endsection

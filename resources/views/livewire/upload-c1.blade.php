@@ -25,10 +25,10 @@
                             @endif
                         </div>
                         <div class="px-0 col-12 my-auto text-center">
-                            <?php
+                           @php
                                 $tps = App\Models\Tps::where('tps.id', '=', Auth::user()->tps_id)->first();
                                 $kelurahan = App\Models\Village::where('villages.id', '=', Auth::user()->villages)->first();
-                            ?>
+                            @endphp
                             <div class="mb-0 fw-bold" style="font-size: 20px">{{ Auth::user()->name }}</div>
                             <div style="font-size: 15px">NIK : {{ Auth::user()->nik }}</div>
                             @if($tps == null)
@@ -65,9 +65,9 @@
 
                         <div class="row no-gutters">
                             <div class="col-lg-12 mt-2">
-                                <?php 
+                               @php 
                                     $i = 1
-                                ?>
+                                @endphp
                                 @foreach ($paslon as $item)
                                 <div class="col-lg-12 mb-2">
                                     Suara 0{{$i++}} - {{ $item['candidate'] }} - {{ $item['deputy_candidate'] }}

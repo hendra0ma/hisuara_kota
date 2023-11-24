@@ -49,8 +49,6 @@ $config->default =  $configs->default;
 
 $regency = District::where('regency_id', $config->regencies_id)->get();
 $kota = Regency::where('id', $config->regencies_id)->first();
-$paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
-$urutan = $paslon_tertinggi;
 $dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
 $tps = Tps::count();
 $props = Province::where('id',$kota['province_id'])->first();
@@ -298,12 +296,12 @@ $props = Province::where('id',$kota['province_id'])->first();
 ?>
 
 <div class="col-12">
-    <div class="row justify-content-center">
+    <div class="row">
         @foreach ($kec as $item)
         <div class="col-3">
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <div class="card-title">
+                    <div class="card-title mx-auto">
                         <a href="{{url('/')}}/administrator/terverifikasi_kecamatan/{{Crypt::encrypt($item['id'])}}">
                             KECAMATAN {{$item['name']}}
                         </a>
