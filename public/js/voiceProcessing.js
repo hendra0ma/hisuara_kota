@@ -162,6 +162,13 @@ var commands = [{
     $('#periksaC1Verifikator').modal('hide');
   }
 }, {
+  keyword: /^tutup koreksi/,
+  // tutup modal
+  exceptions: [],
+  execute: function execute() {
+    $('#periksaC1Auditor').modal('hide');
+  }
+}, {
   keyword: /^halaman sebelumnya/,
   // previous pagination
   exceptions: [],

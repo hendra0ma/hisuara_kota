@@ -48,6 +48,13 @@ const commands = [
     }
   },
   {
+    keyword: /^tutup koreksi/, // tutup modal
+    exceptions: [],
+    execute: () => {
+      $('#periksaC1Auditor').modal('hide')
+    }
+  },
+  {
     keyword: /^halaman sebelumnya/, // previous pagination
     exceptions: [],
     execute: () => {
