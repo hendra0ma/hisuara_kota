@@ -177,7 +177,7 @@ module.exports = setCommandRoute(null, commands);
 
 var _require = __webpack_require__(/*! ../helper */ "./resources/js/voiceProcessing/helper.js"),
     getTextAfterSpecificWord = _require.getTextAfterSpecificWord,
-    formatFinalTranscriptToCommandTargetFormat = _require.formatFinalTranscriptToCommandTargetFormat,
+    formatTranscriptToCommandTargetFormat = _require.formatTranscriptToCommandTargetFormat,
     setCommandRoute = _require.setCommandRoute;
 
 var commands = [{
@@ -187,7 +187,7 @@ var commands = [{
   execute: function execute(finalTranscript) {
     var keyword = 'buka';
     var dataTargetValue = getTextAfterSpecificWord(keyword, finalTranscript);
-    var formattedFinalTranscript = formatFinalTranscriptToCommandTargetFormat(dataTargetValue);
+    var formattedFinalTranscript = formatTranscriptToCommandTargetFormat(dataTargetValue);
     var selectedElement = document.querySelector('[data-command-target="' + formattedFinalTranscript + '"]');
     var commandTargetMenuName = selectedElement === null || selectedElement === void 0 ? void 0 : selectedElement.getAttribute('data-command-target-menu');
     var commandTargetMenuElement = document.querySelector('[data-command-target="' + commandTargetMenuName + '"]');
