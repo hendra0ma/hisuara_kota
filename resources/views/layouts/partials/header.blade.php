@@ -1400,7 +1400,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
     });
 </script>
 
-<script src="{{ asset('js/voiceProcessing.js') }}"></script>
+<script src="{{ mix('js/voiceProcessing.js') }}"></script>
 
 <!--app-content open-->
 <div class="app-content for-kolapse-kurangin" style="margin-top: 40px; margin-left: 0px !important">
