@@ -110,6 +110,76 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/js/voiceProcessing/pages/auditC1.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/voiceProcessing/pages/auditC1.js ***!
+  \*******************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var _require = __webpack_require__(/*! ../helper */ "./resources/js/voiceProcessing/helper.js"),
+    getTextAfterSpecificWord = _require.getTextAfterSpecificWord,
+    formatTranscriptToCommandTargetFormat = _require.formatTranscriptToCommandTargetFormat,
+    setCommandRoute = _require.setCommandRoute;
+
+var commands = [{
+  keyword: /^audit/,
+  // 'audit (nama saksi), klik tombol audit lalu buka modal'
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    var keyword = 'audit';
+    var namaSaksi = getTextAfterSpecificWord(keyword, finalTranscript);
+    var namaSaksiElement = getSaksiElementByName(namaSaksi);
+    var idSaksi = namaSaksiElement.getAttribute('id');
+    var buttonAudit = document.querySelector("button[id=\"audit".concat(idSaksi, "\"]"));
+    buttonAudit.click();
+  }
+}, {
+  keyword: /^audit lolos/,
+  // klik tombol lolos audit di modal
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    document.querySelector('#lolosAuditButton').click();
+  }
+}, {
+  keyword: /^koreksi/,
+  // klik tombol koreksi di modal
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    document.querySelector('#koreksiAuditButton').click();
+  }
+}, {
+  keyword: /^hubungi/,
+  // klik tombol hubungi di modal
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    document.querySelector('#hubungiWhatsappButton').click();
+  }
+}, {
+  keyword: /^tutup/,
+  // tutup modal
+  exceptions: [],
+  execute: function execute() {
+    $('#periksaC1Verifikator').modal('hide');
+  }
+}, {
+  keyword: /^halaman sebelumnya/,
+  // previous pagination
+  exceptions: [],
+  execute: function execute() {
+    document.querySelector('button[dusk="previousPage"]').click();
+  }
+}, {
+  keyword: /^halaman berikutnya/,
+  // next pagination
+  exceptions: [],
+  execute: function execute() {
+    document.querySelector('button[dusk="nextPage"]').click();
+  }
+}];
+module.exports = setCommandRoute('/auditor/audit-c1', commands);
+
+/***/ }),
+
 /***/ "./resources/js/voiceProcessing/pages/common.js":
 /*!******************************************************!*\
   !*** ./resources/js/voiceProcessing/pages/common.js ***!
@@ -262,6 +332,92 @@ var commands = [{
 }];
 module.exports = setCommandRoute('/verifikator/verifikasi-c1', commands);
 
+/***/ }),
+
+/***/ "./resources/js/voiceProcessing/pages/verifikasiSaksi.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/voiceProcessing/pages/verifikasiSaksi.js ***!
+  \***************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var _require = __webpack_require__(/*! ../helper */ "./resources/js/voiceProcessing/helper.js"),
+    getTextAfterSpecificWord = _require.getTextAfterSpecificWord,
+    getTextBeforeSpecificWord = _require.getTextBeforeSpecificWord,
+    setCommandRoute = _require.setCommandRoute;
+
+var commands = [{
+  keyword: /^lihat ktp/,
+  // 'lihat ktp (nama saksi), klik tombol lihat ktp lalu buka modal'
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    var keyword = 'lihat ktp';
+    var namaSaksi = getTextAfterSpecificWord(keyword, finalTranscript);
+    var namaSaksiElement = getSaksiElementByName(namaSaksi);
+    var idSaksi = namaSaksiElement.getAttribute('id');
+    var buttonLihatKtp = document.querySelector("button[id=\"lihatKtp".concat(idSaksi, "\"]"));
+    buttonLihatKtp.click();
+  }
+}, {
+  keyword: /diterima$/,
+  // "(nama saksi) diterima", klik tombol diterima
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    var keyword = 'lihat ktp';
+    var namaSaksi = getTextBeforeSpecificWord(keyword, finalTranscript);
+    var namaSaksiElement = getSaksiElementByName(namaSaksi);
+    var idSaksi = namaSaksiElement.getAttribute('id');
+    var buttonDiterima = document.querySelector("button[id=\"diterima".concat(idSaksi, "\"]"));
+    buttonDiterima.parentNode.submit();
+  }
+}, {
+  keyword: /ditolak$/,
+  // "(nama saksi) ditolak", klik tombol ditolak
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    var keyword = 'ditolak';
+    var namaSaksi = getTextBeforeSpecificWord(keyword, finalTranscript);
+    var namaSaksiElement = getSaksiElementByName(namaSaksi);
+    var idSaksi = namaSaksiElement.getAttribute('id');
+    var buttonDitolak = document.querySelector("button[id=\"ditolak".concat(idSaksi, "\"]"));
+    buttonDitolak.parentNode.submit();
+  }
+}, {
+  keyword: /^hubungi/,
+  // klik tombol hubungi
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    var keyword = 'hubungi';
+    var namaSaksi = getTextAfterSpecificWord(keyword, finalTranscript);
+    var namaSaksiElement = getSaksiElementByName(namaSaksi);
+    var idSaksi = namaSaksiElement.getAttribute('id'); // format: ditolak(id saksi)
+
+    var buttonHubungi = document.querySelector("a[id=\"hubungi".concat(idSaksi, "\"]"));
+    buttonHubungi.click();
+  }
+}, {
+  keyword: /^tutup/,
+  // tutup modal
+  exceptions: [],
+  execute: function execute() {
+    $('#cekmodal').modal('hide');
+  }
+}, {
+  keyword: /^halaman sebelumnya/,
+  // previous pagination
+  exceptions: [],
+  execute: function execute() {
+    document.querySelector('button[dusk="previousPage"]').click();
+  }
+}, {
+  keyword: /^halaman berikutnya/,
+  // next pagination
+  exceptions: [],
+  execute: function execute() {
+    document.querySelector('button[dusk="nextPage"]').click();
+  }
+}];
+module.exports = setCommandRoute('/administrator/verifikasi_saksi', commands);
+
 /***/ })
 
 /******/ 	});
@@ -315,7 +471,11 @@ var commonCommands = __webpack_require__(/*! ./pages/common */ "./resources/js/v
 
 var verifikasiC1Commands = __webpack_require__(/*! ./pages/verifikasiC1 */ "./resources/js/voiceProcessing/pages/verifikasiC1.js");
 
-var ALL_COMMANDS = [].concat(_toConsumableArray(navbarCommands), _toConsumableArray(commonCommands), _toConsumableArray(verifikasiC1Commands));
+var auditC1Commands = __webpack_require__(/*! ./pages/auditC1 */ "./resources/js/voiceProcessing/pages/auditC1.js");
+
+var verifikasiSaksiCommands = __webpack_require__(/*! ./pages/verifikasiSaksi */ "./resources/js/voiceProcessing/pages/verifikasiSaksi.js");
+
+var ALL_COMMANDS = [].concat(_toConsumableArray(navbarCommands), _toConsumableArray(commonCommands), _toConsumableArray(verifikasiC1Commands), _toConsumableArray(auditC1Commands), _toConsumableArray(verifikasiSaksiCommands));
 
 var _require = __webpack_require__(/*! ./helper */ "./resources/js/voiceProcessing/helper.js"),
     getSpeechStatus = _require.getSpeechStatus,

@@ -1,11 +1,15 @@
 const navbarCommands = require('./pages/navbar');
 const commonCommands = require('./pages/common');
 const verifikasiC1Commands = require('./pages/verifikasiC1');
+const auditC1Commands = require('./pages/auditC1');
+const verifikasiSaksiCommands = require('./pages/verifikasiSaksi');
 
 const ALL_COMMANDS = [
   ...navbarCommands,
   ...commonCommands,
   ...verifikasiC1Commands,
+  ...auditC1Commands,
+  ...verifikasiSaksiCommands,
 ];
 
 const {
