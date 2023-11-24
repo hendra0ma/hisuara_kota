@@ -46,14 +46,14 @@ const commands = [
     keyword: /^halaman sebelumnya/, // previous pagination
     exceptions: [],
     execute: () => {
-      document.querySelector('button[dusk="previousPage"]')
+      document.querySelector('button[dusk="previousPage"]').click()
     }
   },
   {
     keyword: /^halaman berikutnya/, // next pagination
     exceptions: [],
     execute: () => {
-      document.querySelector('button[dusk="nextPage"]')
+      document.querySelector('button[dusk="nextPage"]').click()
     }
   },
 ]

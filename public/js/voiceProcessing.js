@@ -250,14 +250,14 @@ var commands = [{
   // previous pagination
   exceptions: [],
   execute: function execute() {
-    document.querySelector('button[dusk="previousPage"]');
+    document.querySelector('button[dusk="previousPage"]').click();
   }
 }, {
   keyword: /^halaman berikutnya/,
   // next pagination
   exceptions: [],
   execute: function execute() {
-    document.querySelector('button[dusk="nextPage"]');
+    document.querySelector('button[dusk="nextPage"]').click();
   }
 }];
 module.exports = setCommandRoute('/verifikator/verifikasi-c1', commands);
