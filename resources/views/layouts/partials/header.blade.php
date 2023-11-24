@@ -137,10 +137,10 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
         background-color: #f82649 !important;
     }
 
+
     .perhitungan .glowy-menu.active {
         /* background-color: rgb(4, 217, 255); */
-        color: black !important;
-        background-color: #f44afa !important;
+        background-color: #04b8ff !important;
         /* -webkit-box-shadow: 0px 0px 50px 0px rgb(4, 217, 255);
         -moz-box-shadow: 0px 0px 50px 0px rgb(4, 217, 255);
         box-shadow: 0px 0px 50px 0px rgb(4, 217, 255); */
@@ -148,8 +148,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
 
     .petugas .glowy-menu.active {
         /* background-color: rgb(4, 217, 255); */
-        color: black !important;
-        background-color: #ff850c !important;
+        background-color: #e465fa !important;
         /* -webkit-box-shadow: 0px 0px 50px 0px rgb(4, 217, 255);
         -moz-box-shadow: 0px 0px 50px 0px rgb(4, 217, 255);
         box-shadow: 0px 0px 50px 0px rgb(4, 217, 255); */
@@ -164,8 +163,34 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
         box-shadow: 0px 0px 50px 0px rgb(4, 217, 255); */
     }
 
+    .pelacakan .glowy-menu.active {
+        color: white;
+        /* background-color: rgb(4, 217, 255); */
+        background-color: #fc5162 !important;
+        /* -webkit-box-shadow: 0px 0px 50px 0px rgb(4, 217, 255);
+        -moz-box-shadow: 0px 0px 50px 0px rgb(4, 217, 255);
+        box-shadow: 0px 0px 50px 0px rgb(4, 217, 255); */
+    }
+
+    .dokumentasi .glowy-menu {
+        color: black !important;
+        /* background-color: rgb(4, 217, 255); */
+        /* -webkit-box-shadow: 0px 0px 50px 0px rgb(4, 217, 255);
+        -moz-box-shadow: 0px 0px 50px 0px rgb(4, 217, 255);
+        box-shadow: 0px 0px 50px 0px rgb(4, 217, 255); */
+    }
+
+    .dokumentasi .glowy-menu.active {
+        /* background-color: rgb(4, 217, 255); */
+        background-color: #fc918f !important;
+        /* -webkit-box-shadow: 0px 0px 50px 0px rgb(4, 217, 255);
+        -moz-box-shadow: 0px 0px 50px 0px rgb(4, 217, 255);
+        box-shadow: 0px 0px 50px 0px rgb(4, 217, 255); */
+    }
+
     .glowy-menu.glow-kecurangan.active {
-        background-color: rgb(254, 118, 8) !important;
+        /* background-color: rgb(254, 118, 8) !important; */
+        background-color: #eb000c;
         /* -webkit-box-shadow: 0px 0px 50px 0px rgb(254, 118, 8);
         -moz-box-shadow: 0px 0px 50px 0px rgb(254, 118, 8);
         box-shadow: 0px 0px 50px 0px rgb(254, 118, 8); */
@@ -483,7 +508,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                         </div>
 
                         <div class="col-md petugas tugel-content" style="display: none">
-                            <div class="row" style="background: linear-gradient(90deg, rgba(140,215,122,1) 0%, rgba(250,159,66,1) 100%);; border-radius: 25px">
+                            <div class="row" style="background: linear-gradient(90deg, rgba(141,58,236,1) 0%, rgba(234,128,252,1) 100%); border-radius: 25px">
                                 <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                     <a data-command-target-menu="petugas" data-command-target="saksi" href="{{url('')}}/administrator/verifikasi_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="border-radius: 25px 0px 0px 25px;">
                                         Saksi
@@ -545,7 +570,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                     </div>
 
                     <div class="col-md perhitungan tugel-content" style="display: none">
-                        <div class="row" style="background: linear-gradient(90deg, rgba(254,195,177,1) 0%, rgba(248,101,254,1) 100%);; border-radius: 25px">
+                        <div class="row" style="background: linear-gradient(90deg, rgba(1,125,197,1) 0%, rgba(0,173,239,1) 100%); border-radius: 25px">
                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                 <a data-command-target-menu="perhitungan" data-command-target="real-count" href="{{url('')}}/administrator/real_count2" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="border-radius: 25px 0px 0px 25px;">
                                     Real Count
@@ -590,36 +615,36 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                     </div>
 
                     <div class="col-md dokumentasi tugel-content" style="display: none">
-                        <div class="row">
+                        <div class="row" style="background: linear-gradient(90deg, rgba(152,219,175,1) 0%, rgba(246,187,186,1) 100%); border-radius: 25px">
                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                <a data-command-target-menu="dokumentasi" data-command-target="data-c1-saksi" href="{{url('')}}/administrator/data-c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                <a data-command-target-menu="dokumentasi" data-command-target="data-c1-saksi" href="{{url('')}}/administrator/data-c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="border-radius: 25px 0px 0px 25px;">
                                     Data C1 Saksi
                                 </a>
                             </div>
                             <!-- <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                                <a href="#" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
+                                                <a href="#" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="border-radius: 0;">
                                                     Data C6
                                                 </a>
                                             </div> -->
                             <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                                <a data-command-target-menu="dokumentasi" data-command-target="dokumen-lain" href="{{url('')}}/administrator/dokumen_lain" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
+                                <a data-command-target-menu="dokumentasi" data-command-target="dokumen-lain" href="{{url('')}}/administrator/dokumen_lain" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="border-radius: 0;">
                                     {{-- C7 & Surat Suara --}}
                                     Dokumen Lain
                                 </a>
                             </div>
                             {{-- <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                                                 <a data-command-target-menu="dokumentasi" data-command-target="realisasi-dpt" href="{{route('superadmin.analisa_dpt_kpu')}}" class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                            style="background-color: #528bff; border-radius: 0;">
+                            style="border-radius: 0;">
                             Realisasi DPT
                             </a>
                         </div> --}}
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target-menu="dokumentasi" data-command-target="data-crowd-c1-kpu" href="{{url('')}}/administrator/data-crowd-c1-kpu" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                            <a data-command-target-menu="dokumentasi" data-command-target="data-crowd-c1-kpu" href="{{url('')}}/administrator/data-crowd-c1-kpu" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="border-radius: 0px;">
                                 Data Crowd C1 KPU
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target-menu="dokumentasi" data-command-target="riwayat" href="{{route('superadmin.rdata')}}" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                            <a data-command-target-menu="dokumentasi" data-command-target="riwayat" href="{{route('superadmin.rdata')}}" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="border-radius: 0px 25px 25px 0px;">
                                 Riwayat
                             </a>
                         </div>
@@ -646,24 +671,24 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                                     </div> -->
 
                 <div class="col-md sirantap tugel-content" style="display: none;">
-                    <div class="row">
+                    <div class="row" style="background: linear-gradient(90deg, rgba(157,11,14,1) 0%, rgba(237,27,36,1) 100%); border-radius: 25px">
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target-menu="sirantap" data-command-target="verifikasi-kecurangan" href="{{url('')}}/verifikator/verifikator_kecurangan" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 25px 0px 0px 25px;;">
+                            <a data-command-target-menu="sirantap" data-command-target="verifikasi-kecurangan" href="{{url('')}}/verifikator/verifikator_kecurangan" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="border-radius: 25px 0px 0px 25px;;">
                                 Verifikasi Kecurangan
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target-menu="sirantap" data-command-target="bukti-kecurangan" href="{{url('')}}/administrator/fraud-data-print" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 0px;">
+                            <a data-command-target-menu="sirantap" data-command-target="bukti-kecurangan" href="{{url('')}}/administrator/fraud-data-print" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="border-radius: 0px;">
                                 Bukti Kecurangan
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target-menu="sirantap" data-command-target="barcode-kecurangan" href="{{url('')}}/administrator/fraud-data-report" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 0px;">
+                            <a data-command-target-menu="sirantap" data-command-target="barcode-kecurangan" href="{{url('')}}/administrator/fraud-data-report" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="border-radius: 0px;">
                                 Barkode Kecurangan
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target-menu="sirantap" data-command-target="jenis-kecurangan" href="{{url('')}}/administrator/index-tsm" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="background-color: #f82649; border-radius: 0px 25px 25px 0px;">
+                            <a data-command-target-menu="sirantap" data-command-target="jenis-kecurangan" href="{{url('')}}/administrator/index-tsm" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="border-radius: 0px 25px 25px 0px;">
                                 Jenis Kecurangan
                             </a>
                         </div>
@@ -671,29 +696,29 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                 </div>
 
                 <div class="col-md pelacakan tugel-content" style="display: none">
-                    <div class="row">
+                    <div class="row" style="background: linear-gradient(90deg, rgba(114,90,122,1) 0%, rgba(255,117,130,1) 100%); border-radius: 25px">
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target="lacak-saksi" href="{{url('')}}/administrator/lacak_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                            <a data-command-target="lacak-saksi" href="{{url('')}}/administrator/lacak_saksi" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="border-radius: 25px 0px 0px 25px;">
                                 Lacak Saksi
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target="lacak-relawan" href="{{url('')}}/administrator/lacak_relawan" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
+                            <a data-command-target="lacak-relawan" href="{{url('')}}/administrator/lacak_relawan" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="border-radius: 0;">
                                 Lacak Relawan
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target="lacak-enumerator" href="{{url('')}}/administrator/lacak_enumerator" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
+                            <a data-command-target="lacak-enumerator" href="{{url('')}}/administrator/lacak_enumerator" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="border-radius: 0;">
                                 Lacak Enumerator
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target="lacak-admin" href="{{url('')}}/administrator/lacak_admin" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                            <a data-command-target="lacak-admin" href="{{url('')}}/administrator/lacak_admin" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="border-radius: 0px;">
                                 Lacak Admin
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target="lacak-crowd-c1" href="{{url('')}}/administrator/lacak_crowd_c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                            <a data-command-target="lacak-crowd-c1" href="{{url('')}}/administrator/lacak_crowd_c1" class="py-1 btn fs-6 w-100 text-white glowy-menu" style="border-radius: 0px 25px 25px 0px;">
                                 Lacak Crowd C1
                             </a>
                         </div>
