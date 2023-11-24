@@ -1,0 +1,2 @@
+1. copas dulu isi main.js ke voiceProcessing.js agar main.js tidak berubah
+2. jalankan npm run dev untuk mengcompile menjadi file public/js/voiceProcessing.js
