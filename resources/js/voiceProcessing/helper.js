@@ -61,6 +61,14 @@ function setCommandRoute(route, arrayOfCommand) {
   return newCommands
 }
 
+function showImage() {
+  $('#imageHisuara').show(300)
+}
+
+function hideImage() {
+  $('#imageHisuara').hide(300)
+}
+
 module.exports = {
   getTextBeforeSpecificWord,
   getTextAfterSpecificWord,
@@ -69,5 +77,7 @@ module.exports = {
   setSpeechStatus,
   getSaksiElementByName,
   setCommandRoute,
+  showImage,
+  hideImage,
 };
 

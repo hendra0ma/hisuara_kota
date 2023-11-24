@@ -11,7 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('public/js/voiceProcessing/voiceProcessing.js', 'public/js/')
+mix.js('resources/js/voiceProcessing/main.js', 'public/js/voiceProcessing.js')
+// mix.js('public/js/voiceProcessing/voiceProcessing.js', 'public/js/')
     // .postCss('resources/css/app.css', 'public/css', [
     //     require('postcss-import'),
     //     require('tailwindcss'),

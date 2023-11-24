@@ -1,10 +1,10 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./public/js/voiceProcessing/helper.js":
-/*!*********************************************!*\
-  !*** ./public/js/voiceProcessing/helper.js ***!
-  \*********************************************/
+/***/ "./resources/js/voiceProcessing/helper.js":
+/*!************************************************!*\
+  !*** ./resources/js/voiceProcessing/helper.js ***!
+  \************************************************/
 /***/ ((module) => {
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -88,6 +88,14 @@ function setCommandRoute(route, arrayOfCommand) {
   return newCommands;
 }
 
+function showImage() {
+  $('#imageHisuara').show(300);
+}
+
+function hideImage() {
+  $('#imageHisuara').hide(300);
+}
+
 module.exports = {
   getTextBeforeSpecificWord: getTextBeforeSpecificWord,
   getTextAfterSpecificWord: getTextAfterSpecificWord,
@@ -95,22 +103,81 @@ module.exports = {
   getSpeechStatus: getSpeechStatus,
   setSpeechStatus: setSpeechStatus,
   getSaksiElementByName: getSaksiElementByName,
-  setCommandRoute: setCommandRoute
+  setCommandRoute: setCommandRoute,
+  showImage: showImage,
+  hideImage: hideImage
 };
 
 /***/ }),
 
-/***/ "./public/js/voiceProcessing/pages/navbar.js":
-/*!***************************************************!*\
-  !*** ./public/js/voiceProcessing/pages/navbar.js ***!
-  \***************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ "./resources/js/voiceProcessing/pages/common.js":
+/*!******************************************************!*\
+  !*** ./resources/js/voiceProcessing/pages/common.js ***!
+  \******************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var _this = this;
+var _require = __webpack_require__(/*! ../helper */ "./resources/js/voiceProcessing/helper.js"),
+    setSpeechStatus = _require.setSpeechStatus,
+    setCommandRoute = _require.setCommandRoute,
+    showImage = _require.showImage,
+    hideImage = _require.hideImage;
 
-var _require = __webpack_require__(/*! ../helper */ "./public/js/voiceProcessing/helper.js"),
+var commands = [{
+  keyword: /^hai sila/,
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    setSpeechStatus(true);
+    showImage();
+  }
+}, {
+  keyword: /^sila berhenti/,
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    hideImage();
+    setSpeechStatus(false);
+  }
+}, {
+  keyword: /^refresh/,
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    location.reload();
+  }
+}, {
+  keyword: /^naik/,
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    window.scrollBy(0, -700);
+  }
+}, {
+  keyword: /^turun/,
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    window.scrollBy(0, 700);
+  }
+}, {
+  keyword: /^sila keluar sistem/,
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    var selectedElement = document.querySelector('[data-command-target="keluar-sistem"]');
+    var commandTargetMenuName = selectedElement === null || selectedElement === void 0 ? void 0 : selectedElement.getAttribute('data-command-target-menu');
+    var commandTargetMenuElement = document.querySelector('[data-command-target="' + commandTargetMenuName + '"]');
+    if (commandTargetMenuElement) commandTargetMenuElement.click();
+    selectedElement.click();
+  }
+}];
+module.exports = setCommandRoute(null, commands);
+
+/***/ }),
+
+/***/ "./resources/js/voiceProcessing/pages/navbar.js":
+/*!******************************************************!*\
+  !*** ./resources/js/voiceProcessing/pages/navbar.js ***!
+  \******************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var _require = __webpack_require__(/*! ../helper */ "./resources/js/voiceProcessing/helper.js"),
     getTextAfterSpecificWord = _require.getTextAfterSpecificWord,
-    formatFinalTranscriptToCommandTargetFormat = _require.formatFinalTranscriptToCommandTargetFormat,
+    formatTranscriptToCommandTargetFormat = _require.formatTranscriptToCommandTargetFormat,
     setCommandRoute = _require.setCommandRoute;
 
 var commands = [{
@@ -118,29 +185,29 @@ var commands = [{
   // 'buka (nama menu)'
   exceptions: [],
   execute: function execute(finalTranscript) {
-    var keyword = _this.keyword;
+    var keyword = 'buka';
     var dataTargetValue = getTextAfterSpecificWord(keyword, finalTranscript);
-    var formattedFinalTranscript = formatFinalTranscriptToCommandTargetFormat(dataTargetValue);
+    var formattedFinalTranscript = formatTranscriptToCommandTargetFormat(dataTargetValue);
     var selectedElement = document.querySelector('[data-command-target="' + formattedFinalTranscript + '"]');
     var commandTargetMenuName = selectedElement === null || selectedElement === void 0 ? void 0 : selectedElement.getAttribute('data-command-target-menu');
     var commandTargetMenuElement = document.querySelector('[data-command-target="' + commandTargetMenuName + '"]');
     if (commandTargetMenuElement) commandTargetMenuElement.click();
-    return selectedElement.click();
+    selectedElement.click();
   }
 }];
 module.exports = setCommandRoute(null, commands);
 
 /***/ }),
 
-/***/ "./public/js/voiceProcessing/pages/verifikasiC1.js":
-/*!*********************************************************!*\
-  !*** ./public/js/voiceProcessing/pages/verifikasiC1.js ***!
-  \*********************************************************/
+/***/ "./resources/js/voiceProcessing/pages/verifikasiC1.js":
+/*!************************************************************!*\
+  !*** ./resources/js/voiceProcessing/pages/verifikasiC1.js ***!
+  \************************************************************/
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 var _this = this;
 
-var _require = __webpack_require__(/*! ../helper */ "./public/js/voiceProcessing/helper.js"),
+var _require = __webpack_require__(/*! ../helper */ "./resources/js/voiceProcessing/helper.js"),
     getTextAfterSpecificWord = _require.getTextAfterSpecificWord,
     getSaksiElementByName = _require.getSaksiElementByName,
     setCommandRoute = _require.setCommandRoute;
@@ -181,15 +248,21 @@ var commands = [{
     window.location = url;
   }
 }, {
-  keyword: /^verifikasi/,
-  // tombol verifikasi di modal
+  keyword: /^halaman sebelumnya/,
+  // previous pagination
   exceptions: [],
   execute: function execute() {
-    var url = $('#verifikasiButton').attr('href');
-    window.location = url;
+    document.querySelector('button[dusk="previousPage"]');
+  }
+}, {
+  keyword: /^halaman berikutnya/,
+  // next pagination
+  exceptions: [],
+  execute: function execute() {
+    document.querySelector('button[dusk="nextPage"]');
   }
 }];
-module.exports = setCommandRoute('verifikator/verifikasi-c1', commands);
+module.exports = setCommandRoute('/verifikator/verifikasi-c1', commands);
 
 /***/ })
 
@@ -223,9 +296,9 @@ module.exports = setCommandRoute('verifikator/verifikasi-c1', commands);
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!******************************************************!*\
-  !*** ./public/js/voiceProcessing/voiceProcessing.js ***!
-  \******************************************************/
+/*!**********************************************!*\
+  !*** ./resources/js/voiceProcessing/main.js ***!
+  \**********************************************/
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -238,19 +311,18 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-var navbarCommands = __webpack_require__(/*! ./pages/navbar */ "./public/js/voiceProcessing/pages/navbar.js");
+var navbarCommands = __webpack_require__(/*! ./pages/navbar */ "./resources/js/voiceProcessing/pages/navbar.js");
 
-var verifikasiC1Commands = __webpack_require__(/*! ./pages/verifikasiC1 */ "./public/js/voiceProcessing/pages/verifikasiC1.js");
+var commonCommands = __webpack_require__(/*! ./pages/common */ "./resources/js/voiceProcessing/pages/common.js");
 
-var ALL_COMMANDS = [].concat(_toConsumableArray(navbarCommands), _toConsumableArray(verifikasiC1Commands));
+var verifikasiC1Commands = __webpack_require__(/*! ./pages/verifikasiC1 */ "./resources/js/voiceProcessing/pages/verifikasiC1.js");
 
-var _require = __webpack_require__(/*! ./helper */ "./public/js/voiceProcessing/helper.js"),
+var ALL_COMMANDS = [].concat(_toConsumableArray(navbarCommands), _toConsumableArray(commonCommands), _toConsumableArray(verifikasiC1Commands));
+
+var _require = __webpack_require__(/*! ./helper */ "./resources/js/voiceProcessing/helper.js"),
     getSpeechStatus = _require.getSpeechStatus,
-    setSpeechStatus = _require.setSpeechStatus;
-
-var ROUTE_HALAMAN_VERIFIKASI_SAKSI = 'administrator/verifikasi_saksi';
-var ROUTE_HALAMAN_VERIFIKASI_C1 = 'verifikator/verifikasi-c1';
-var ROUTE_HALAMAN_AUDIT_C1 = 'auditor/audit-c1';
+    setSpeechStatus = _require.setSpeechStatus,
+    showImage = _require.showImage;
 
 try {
   $(document).ready(function () {
@@ -259,74 +331,62 @@ try {
     recognition.continuous = true;
     recognition.interimResults = true;
     recognition.start();
-    var isSpeechOn = getSpeechStatus();
+    console.log('Speech status:', getSpeechStatus());
+    if (getSpeechStatus() === null) setSpeechStatus(false);
 
-    if (isSpeechOn === 'true') {
-      var dontEndTheSpeech = function dontEndTheSpeech() {
-        if (getSpeechStatus() === 'true') {
-          recognition.start();
-        }
-
-        console.log('Speech still listening...');
-      };
-
+    if (getSpeechStatus() === 'true') {
       showImage();
-      var speechGotError = false;
-
-      recognition.onerror = function (event) {
-        console.error('Speech recognition error:', event.error);
-
-        if (event.error === 'not-allowed') {
-          // Handle the case where microphone access was denied
-          console.warn('Microphone access denied.');
-          recognition.stop();
-          speechGotError = true;
-        }
-      };
-
-      recognition.onend = function () {
-        if (speechGotError === false) {
-          dontEndTheSpeech();
-        }
-      };
-
-      recognition.onspeechend = function () {
-        if (speechGotError === false) {
-          dontEndTheSpeech();
-        }
-      };
     }
 
     recognition.onresult = function (event) {
       for (var i = event.resultIndex; i < event.results.length; i++) {
         if (event.results[i].isFinal) {
           var finalTranscript = event.results[i][0].transcript.trim().toLowerCase();
-          handleSpeechRecognitionStatus(finalTranscript);
-
-          if (getSpeechStatus() === 'false') {
-            return;
-          }
-
           var command = findMatchingCommand(finalTranscript);
+          console.log(finalTranscript);
           console.log(command);
-          command.execute(finalTranscript);
+          var isTheCommandHaiSila = command === null || command === void 0 ? void 0 : command.keyword.test('hai sila');
+
+          if (getSpeechStatus() === 'true' || isTheCommandHaiSila) {
+            command.execute(finalTranscript);
+          }
         }
       }
     };
 
-    function handleSpeechRecognitionStatus(finalTranscript) {
-      if (finalTranscript.includes(startSpeech)) {
-        setSpeechStatus(true);
-        $('#imageHisuara').show(300);
-      }
+    var speechGotError = false;
 
-      if (finalTranscript.includes(endSpeech)) {
-        setSpeechStatus(false);
-        $('#imageHisuara').hide(300);
-      }
-
-      console.log('Speech status:', getSpeechStatus());
+    function dontEndTheSpeech() {
+      recognition.start();
+      console.log('Speech is still listening...');
     }
+
+    recognition.onend = function () {
+      if (speechGotError === false) {
+        dontEndTheSpeech();
+      }
+    };
+
+    recognition.onspeechend = function () {
+      if (speechGotError === false) {
+        dontEndTheSpeech();
+      }
+    };
+
+    recognition.onerror = function (event) {
+      console.error('Speech recognition error:', event.error);
+
+      if (event.error === 'not-allowed') {
+        // Handle the case where microphone access was denied
+        console.warn('Microphone access denied.');
+        recognition.stop();
+        speechGotError = true;
+      }
+
+      if (event.error === 'no-speech') {
+        dontEndTheSpeech();
+      }
+    };
 
     function findMatchingCommand(finalTranscript) {
       var currentRoute = window.location.pathname;
@@ -336,9 +396,10 @@ try {
             exceptions = command.exceptions;
         var isTheTranscriptContainsKeyword = keyword.test(finalTranscript);
         var isTheTranscriptNotContainsException = exceptions.includes(finalTranscript) === false;
-        var isTheCommandForCurrentRoute = route == null || route.includes(currentRoute);
+        var isTheCommandForCurrentRoute = route == null || currentRoute.includes(route);
         return isTheTranscriptContainsKeyword && isTheTranscriptNotContainsException && isTheCommandForCurrentRoute;
-      }); // ambil last command karena return dari relatedCommands elemen pertama pasti berupa command untuk navbar. Contoh, coba cari command dengan finalTranscript 'buka verifikasi c1'
+      });
+      console.log('related coomand', relatedCommands); // ambil last command karena return dari relatedCommands elemen pertama pasti berupa command untuk navbar. Contoh, coba cari command dengan finalTranscript 'buka verifikasi c1'
 
       var lastCommand = relatedCommands[relatedCommands.length - 1];
       return lastCommand;

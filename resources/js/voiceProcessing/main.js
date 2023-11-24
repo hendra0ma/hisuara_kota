@@ -1,19 +1,18 @@
 const navbarCommands = require('./pages/navbar');
+const commonCommands = require('./pages/common');
 const verifikasiC1Commands = require('./pages/verifikasiC1');
 
 const ALL_COMMANDS = [
   ...navbarCommands,
+  ...commonCommands,
   ...verifikasiC1Commands,
 ];
 
 const {
   getSpeechStatus,
-  setSpeechStatus
+  setSpeechStatus,
+  showImage
 } = require('./helper');
-
-const ROUTE_HALAMAN_VERIFIKASI_SAKSI = 'administrator/verifikasi_saksi';
-const ROUTE_HALAMAN_VERIFIKASI_C1 = 'verifikator/verifikasi-c1';
-const ROUTE_HALAMAN_AUDIT_C1 = 'auditor/audit-c1';
 
 try {
   $(document).ready(function () {
@@ -23,40 +22,11 @@ try {
     recognition.interimResults = true;
 
     recognition.start();
-    const isSpeechOn = getSpeechStatus();
+    console.log('Speech status:', getSpeechStatus());
 
-    if (isSpeechOn === 'true') {
+    if (getSpeechStatus() === null) setSpeechStatus(false)
+    if (getSpeechStatus() === 'true') {
       showImage();
-      let speechGotError = false;
-
-      function dontEndTheSpeech() {
-        if (getSpeechStatus() === 'true') {
-          recognition.start();
-        }
-        console.log('Speech still listening...');
-      }
-
-      recognition.onerror = function (event) {
-        console.error('Speech recognition error:', event.error);
-        if (event.error === 'not-allowed') {
-          // Handle the case where microphone access was denied
-          console.warn('Microphone access denied.');
-          recognition.stop();
-          speechGotError = true;
-        }
-      };
-
-      recognition.onend = function () {
-        if (speechGotError === false) {
-          dontEndTheSpeech();
-        }
-      };
-
-      recognition.onspeechend = function () {
-        if (speechGotError === false) {
-          dontEndTheSpeech();
-        }
-      };
     }
 
     recognition.onresult = function (event) {
@@ -64,32 +34,50 @@ try {
         if (event.results[i].isFinal) {
           let finalTranscript = event.results[i][0].transcript.trim().toLowerCase();
 
-          handleSpeechRecognitionStatus(finalTranscript);
-
-          if (getSpeechStatus() === 'false') {
-            return;
-          }
-
           const command = findMatchingCommand(finalTranscript)
+          console.log(finalTranscript);
           console.log(command);
-          command.execute(finalTranscript)
+          const isTheCommandHaiSila = command?.keyword.test('hai sila')
+
+          if (getSpeechStatus() === 'true' || isTheCommandHaiSila) {
+            command.execute(finalTranscript)
+          }
         }
       }
     };
 
-    function handleSpeechRecognitionStatus(finalTranscript) {
-      if (finalTranscript.includes(startSpeech)) {
-        setSpeechStatus(true);
-        $('#imageHisuara').show(300)
-      }
+    let speechGotError = false;
 
-      if (finalTranscript.includes(endSpeech)) {
-        setSpeechStatus(false);
-        $('#imageHisuara').hide(300)
-      }
-
-      console.log('Speech status:', getSpeechStatus());
+    function dontEndTheSpeech() {
+      recognition.start();
+      console.log('Speech is still listening...');
     }
+
+    recognition.onend = function () {
+      if (speechGotError === false) {
+        dontEndTheSpeech();
+      }
+    };
+
+    recognition.onspeechend = function () {
+      if (speechGotError === false) {
+        dontEndTheSpeech();
+      }
+    };
+
+    recognition.onerror = function (event) {
+      console.error('Speech recognition error:', event.error);
+      if (event.error === 'not-allowed') {
+        // Handle the case where microphone access was denied
+        console.warn('Microphone access denied.');
+        recognition.stop();
+        speechGotError = true;
+      }
+
+      if (event.error === 'no-speech') {
+        dontEndTheSpeech()
+      }
+    };
 
     function findMatchingCommand(finalTranscript) {
       const currentRoute = window.location.pathname
@@ -98,12 +86,14 @@ try {
         const { route, keyword, exceptions } = command;
         const isTheTranscriptContainsKeyword = keyword.test(finalTranscript)
         const isTheTranscriptNotContainsException = exceptions.includes(finalTranscript) === false
-        const isTheCommandForCurrentRoute = route == null || route.includes(currentRoute)
+        const isTheCommandForCurrentRoute = route == null || currentRoute.includes(route)
 
         return isTheTranscriptContainsKeyword
           && isTheTranscriptNotContainsException
           && isTheCommandForCurrentRoute
       })
+
+      console.log('related coomand', relatedCommands);
 
       // ambil last command karena return dari relatedCommands elemen pertama pasti berupa command untuk navbar. Contoh, coba cari command dengan finalTranscript 'buka verifikasi c1'
       const lastCommand = relatedCommands[relatedCommands.length - 1]
