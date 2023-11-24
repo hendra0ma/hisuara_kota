@@ -1,6 +1,8 @@
 const {
   setSpeechStatus,
   setCommandRoute,
+  showImage,
+  hideImage,
 } = require('../helper')
 
 const commands = [
@@ -9,7 +11,7 @@ const commands = [
     exceptions: [],
     execute: (finalTranscript) => {
       setSpeechStatus(true);
-      $('#imageHisuara').show(300)
+      showImage()
     }
   },
   {
@@ -17,7 +19,7 @@ const commands = [
     exceptions: [],
     execute: (finalTranscript) => {
       setSpeechStatus(false);
-      $('#imageHisuara').hide(300)
+      hideImage()
     }
   },
   {

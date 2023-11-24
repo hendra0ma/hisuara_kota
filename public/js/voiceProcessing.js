@@ -88,6 +88,14 @@ function setCommandRoute(route, arrayOfCommand) {
   return newCommands;
 }
 
+function showImage() {
+  $('#imageHisuara').show(300);
+}
+
+function hideImage() {
+  $('#imageHisuara').show(300);
+}
+
 module.exports = {
   getTextBeforeSpecificWord: getTextBeforeSpecificWord,
   getTextAfterSpecificWord: getTextAfterSpecificWord,
@@ -95,7 +103,9 @@ module.exports = {
   getSpeechStatus: getSpeechStatus,
   setSpeechStatus: setSpeechStatus,
   getSaksiElementByName: getSaksiElementByName,
-  setCommandRoute: setCommandRoute
+  setCommandRoute: setCommandRoute,
+  showImage: showImage,
+  hideImage: hideImage
 };
 
 /***/ }),
