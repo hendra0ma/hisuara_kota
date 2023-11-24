@@ -203,9 +203,7 @@ module.exports = setCommandRoute(null, commands);
 /*!************************************************************!*\
   !*** ./resources/js/voiceProcessing/pages/verifikasiC1.js ***!
   \************************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
-
-var _this = this;
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var _require = __webpack_require__(/*! ../helper */ "./resources/js/voiceProcessing/helper.js"),
     getTextAfterSpecificWord = _require.getTextAfterSpecificWord,
@@ -217,7 +215,7 @@ var commands = [{
   // 'buka verifikasi (nama)'
   exceptions: ['buka verifikasi c1', 'buka verifikasi saksi', 'buka verifikasi crowd c1', 'buka verifikasi admin'],
   execute: function execute(finalTranscript) {
-    var keyword = _this.keyword;
+    var keyword = 'buka verifikasi';
     var namaSaksi = getTextAfterSpecificWord(keyword, finalTranscript);
     var namaSaksiElement = getSaksiElementByName(namaSaksi);
     var idSaksi = namaSaksiElement.getAttribute('data-id');
@@ -286,7 +284,7 @@ module.exports = setCommandRoute('/verifikator/verifikasi-c1', commands);
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
