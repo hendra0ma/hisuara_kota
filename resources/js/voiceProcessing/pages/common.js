@@ -18,8 +18,8 @@ const commands = [
     keyword: /^sila berhenti/,
     exceptions: [],
     execute: (finalTranscript) => {
-      setSpeechStatus(false);
       hideImage()
+      setSpeechStatus(false);
     }
   },
   {

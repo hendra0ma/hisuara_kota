@@ -93,7 +93,7 @@ function showImage() {
 }
 
 function hideImage() {
-  $('#imageHisuara').show(300);
+  $('#imageHisuara').hide(300);
 }
 
 module.exports = {
@@ -133,8 +133,8 @@ var commands = [{
   keyword: /^sila berhenti/,
   exceptions: [],
   execute: function execute(finalTranscript) {
-    setSpeechStatus(false);
     hideImage();
+    setSpeechStatus(false);
   }
 }, {
   keyword: /^refresh/,
@@ -356,12 +356,8 @@ try {
     var speechGotError = false;
 
     function dontEndTheSpeech() {
-      if (getSpeechStatus() === 'true') {
-        recognition.start();
-        console.log('Speech is still listening...');
-      }
-
-      console.log('Speech is stop listening...');
+      recognition.start();
+      console.log('Speech is still listening...');
     }
 
     recognition.onend = function () {
@@ -384,6 +380,10 @@ try {
         console.warn('Microphone access denied.');
         recognition.stop();
         speechGotError = true;
+      }
+
+      if (event.error === 'no-speech') {
+        dontEndTheSpeech();
       }
     };
 
