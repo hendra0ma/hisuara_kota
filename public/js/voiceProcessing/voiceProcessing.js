@@ -11,10 +11,6 @@ const {
   setSpeechStatus
 } = require('./helper');
 
-const ROUTE_HALAMAN_VERIFIKASI_SAKSI = 'administrator/verifikasi_saksi';
-const ROUTE_HALAMAN_VERIFIKASI_C1 = 'verifikator/verifikasi-c1';
-const ROUTE_HALAMAN_AUDIT_C1 = 'auditor/audit-c1';
-
 try {
   $(document).ready(function () {
     const recognition = new (webkitSpeechRecognition || SpeechRecognition)();
@@ -24,6 +20,7 @@ try {
 
     recognition.start();
     const isSpeechOn = getSpeechStatus();
+    console.log('Speech status:', isSpeechOn);
 
     if (isSpeechOn === 'true') {
       showImage();
@@ -76,20 +73,6 @@ try {
         }
       }
     };
-
-    function handleSpeechRecognitionStatus(finalTranscript) {
-      if (finalTranscript.includes(startSpeech)) {
-        setSpeechStatus(true);
-        $('#imageHisuara').show(300)
-      }
-
-      if (finalTranscript.includes(endSpeech)) {
-        setSpeechStatus(false);
-        $('#imageHisuara').hide(300)
-      }
-
-      console.log('Speech status:', getSpeechStatus());
-    }
 
     function findMatchingCommand(finalTranscript) {
       const currentRoute = window.location.pathname

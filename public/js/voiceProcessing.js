@@ -104,9 +104,7 @@ module.exports = {
 /*!***************************************************!*\
   !*** ./public/js/voiceProcessing/pages/navbar.js ***!
   \***************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
-
-var _this = this;
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var _require = __webpack_require__(/*! ../helper */ "./public/js/voiceProcessing/helper.js"),
     getTextAfterSpecificWord = _require.getTextAfterSpecificWord,
@@ -118,14 +116,14 @@ var commands = [{
   // 'buka (nama menu)'
   exceptions: [],
   execute: function execute(finalTranscript) {
-    var keyword = _this.keyword;
+    var keyword = 'buka';
     var dataTargetValue = getTextAfterSpecificWord(keyword, finalTranscript);
     var formattedFinalTranscript = formatFinalTranscriptToCommandTargetFormat(dataTargetValue);
     var selectedElement = document.querySelector('[data-command-target="' + formattedFinalTranscript + '"]');
     var commandTargetMenuName = selectedElement === null || selectedElement === void 0 ? void 0 : selectedElement.getAttribute('data-command-target-menu');
     var commandTargetMenuElement = document.querySelector('[data-command-target="' + commandTargetMenuName + '"]');
     if (commandTargetMenuElement) commandTargetMenuElement.click();
-    return selectedElement.click();
+    selectedElement.click();
   }
 }];
 module.exports = setCommandRoute(null, commands);
@@ -181,12 +179,18 @@ var commands = [{
     window.location = url;
   }
 }, {
-  keyword: /^verifikasi/,
-  // tombol verifikasi di modal
+  keyword: /^halaman sebelumnya/,
+  // previous pagination
   exceptions: [],
   execute: function execute() {
-    var url = $('#verifikasiButton').attr('href');
-    window.location = url;
+    document.querySelector('button[dusk="previousPage"]');
+  }
+}, {
+  keyword: /^halaman berikutnya/,
+  // next pagination
+  exceptions: [],
+  execute: function execute() {
+    document.querySelector('button[dusk="nextPage"]');
   }
 }];
 module.exports = setCommandRoute('verifikator/verifikasi-c1', commands);
@@ -248,10 +252,6 @@ var _require = __webpack_require__(/*! ./helper */ "./public/js/voiceProcessing/
     getSpeechStatus = _require.getSpeechStatus,
     setSpeechStatus = _require.setSpeechStatus;
 
-var ROUTE_HALAMAN_VERIFIKASI_SAKSI = 'administrator/verifikasi_saksi';
-var ROUTE_HALAMAN_VERIFIKASI_C1 = 'verifikator/verifikasi-c1';
-var ROUTE_HALAMAN_AUDIT_C1 = 'auditor/audit-c1';
-
 try {
   $(document).ready(function () {
     var recognition = new (webkitSpeechRecognition || SpeechRecognition)();
@@ -260,6 +260,7 @@ try {
     recognition.interimResults = true;
     recognition.start();
     var isSpeechOn = getSpeechStatus();
+    console.log('Speech status:', isSpeechOn);
 
     if (isSpeechOn === 'true') {
       var dontEndTheSpeech = function dontEndTheSpeech() {
@@ -313,20 +314,6 @@ try {
         }
       }
     };
-
-    function handleSpeechRecognitionStatus(finalTranscript) {
-      if (finalTranscript.includes(startSpeech)) {
-        setSpeechStatus(true);
-        $('#imageHisuara').show(300);
-      }
-
-      if (finalTranscript.includes(endSpeech)) {
-        setSpeechStatus(false);
-        $('#imageHisuara').hide(300);
-      }
-
-      console.log('Speech status:', getSpeechStatus());
-    }
 
     function findMatchingCommand(finalTranscript) {
       var currentRoute = window.location.pathname;

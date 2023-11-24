@@ -20,6 +20,7 @@ try {
 
     recognition.start();
     const isSpeechOn = getSpeechStatus();
+    console.log('Speech status:', isSpeechOn);
 
     if (isSpeechOn === 'true') {
       showImage();
@@ -72,20 +73,6 @@ try {
         }
       }
     };
-
-    function handleSpeechRecognitionStatus(finalTranscript) {
-      if (finalTranscript.includes(startSpeech)) {
-        setSpeechStatus(true);
-        $('#imageHisuara').show(300)
-      }
-
-      if (finalTranscript.includes(endSpeech)) {
-        setSpeechStatus(false);
-        $('#imageHisuara').hide(300)
-      }
-
-      console.log('Speech status:', getSpeechStatus());
-    }
 
     function findMatchingCommand(finalTranscript) {
       const currentRoute = window.location.pathname

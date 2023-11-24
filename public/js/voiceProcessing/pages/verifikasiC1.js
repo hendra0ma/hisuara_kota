@@ -43,11 +43,17 @@ const commands = [
     }
   },
   {
-    keyword: /^verifikasi/, // tombol verifikasi di modal
+    keyword: /^halaman sebelumnya/, // previous pagination
     exceptions: [],
     execute: () => {
-      const url = $('#verifikasiButton').attr('href');
-      window.location = url
+      document.querySelector('button[dusk="previousPage"]')
+    }
+  },
+  {
+    keyword: /^halaman berikutnya/, // next pagination
+    exceptions: [],
+    execute: () => {
+      document.querySelector('button[dusk="nextPage"]')
     }
   },
 ]
