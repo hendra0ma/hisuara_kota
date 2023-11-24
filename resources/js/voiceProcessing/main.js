@@ -3,6 +3,7 @@ const commonCommands = require('./pages/common');
 const verifikasiC1Commands = require('./pages/verifikasiC1');
 const auditC1Commands = require('./pages/auditC1');
 const verifikasiSaksiCommands = require('./pages/verifikasiSaksi');
+const enumeratorCommands = require('./pages/enumerator');
 
 const ALL_COMMANDS = [
   ...navbarCommands,
@@ -10,6 +11,7 @@ const ALL_COMMANDS = [
   ...verifikasiC1Commands,
   ...auditC1Commands,
   ...verifikasiSaksiCommands,
+  ...enumeratorCommands,
 ];
 
 const {
