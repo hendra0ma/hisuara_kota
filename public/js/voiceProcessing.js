@@ -110,6 +110,65 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./public/js/voiceProcessing/pages/common.js":
+/*!***************************************************!*\
+  !*** ./public/js/voiceProcessing/pages/common.js ***!
+  \***************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var _require = __webpack_require__(/*! ../helper */ "./public/js/voiceProcessing/helper.js"),
+    setSpeechStatus = _require.setSpeechStatus,
+    setCommandRoute = _require.setCommandRoute,
+    showImage = _require.showImage,
+    hideImage = _require.hideImage;
+
+var commands = [{
+  keyword: /^hai sila/,
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    setSpeechStatus(true);
+    showImage();
+  }
+}, {
+  keyword: /^sila berhenti/,
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    setSpeechStatus(false);
+    hideImage();
+  }
+}, {
+  keyword: /^refresh/,
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    location.reload();
+  }
+}, {
+  keyword: /^naik/,
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    window.scrollBy(0, -700);
+  }
+}, {
+  keyword: /^turun/,
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    window.scrollBy(0, 700);
+  }
+}, {
+  keyword: /^sila keluar sistem/,
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    var selectedElement = document.querySelector('[data-command-target="keluar-sistem"]');
+    var commandTargetMenuName = selectedElement === null || selectedElement === void 0 ? void 0 : selectedElement.getAttribute('data-command-target-menu');
+    var commandTargetMenuElement = document.querySelector('[data-command-target="' + commandTargetMenuName + '"]');
+    if (commandTargetMenuElement) commandTargetMenuElement.click();
+    selectedElement.click();
+  }
+}];
+module.exports = setCommandRoute(null, commands);
+
+/***/ }),
+
 /***/ "./public/js/voiceProcessing/pages/navbar.js":
 /*!***************************************************!*\
   !*** ./public/js/voiceProcessing/pages/navbar.js ***!
@@ -254,13 +313,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 var navbarCommands = __webpack_require__(/*! ./pages/navbar */ "./public/js/voiceProcessing/pages/navbar.js");
 
+var commonCommands = __webpack_require__(/*! ./pages/common */ "./public/js/voiceProcessing/pages/common.js");
+
 var verifikasiC1Commands = __webpack_require__(/*! ./pages/verifikasiC1 */ "./public/js/voiceProcessing/pages/verifikasiC1.js");
 
-var ALL_COMMANDS = [].concat(_toConsumableArray(navbarCommands), _toConsumableArray(verifikasiC1Commands));
+var ALL_COMMANDS = [].concat(_toConsumableArray(navbarCommands), _toConsumableArray(commonCommands), _toConsumableArray(verifikasiC1Commands));
 
 var _require = __webpack_require__(/*! ./helper */ "./public/js/voiceProcessing/helper.js"),
     getSpeechStatus = _require.getSpeechStatus,
-    setSpeechStatus = _require.setSpeechStatus;
+    setSpeechStatus = _require.setSpeechStatus,
+    showImage = _require.showImage;
 
 try {
   $(document).ready(function () {
@@ -271,48 +333,12 @@ try {
     recognition.start();
     var isSpeechOn = getSpeechStatus();
     console.log('Speech status:', isSpeechOn);
-
-    if (isSpeechOn === 'true') {
-      var dontEndTheSpeech = function dontEndTheSpeech() {
-        if (getSpeechStatus() === 'true') {
-          recognition.start();
-        }
-
-        console.log('Speech still listening...');
-      };
-
-      showImage();
-      var speechGotError = false;
-
-      recognition.onerror = function (event) {
-        console.error('Speech recognition error:', event.error);
-
-        if (event.error === 'not-allowed') {
-          // Handle the case where microphone access was denied
-          console.warn('Microphone access denied.');
-          recognition.stop();
-          speechGotError = true;
-        }
-      };
-
-      recognition.onend = function () {
-        if (speechGotError === false) {
-          dontEndTheSpeech();
-        }
-      };
-
-      recognition.onspeechend = function () {
-        if (speechGotError === false) {
-          dontEndTheSpeech();
-        }
-      };
-    }
+    handleSpeechStatus();
 
     recognition.onresult = function (event) {
       for (var i = event.resultIndex; i < event.results.length; i++) {
         if (event.results[i].isFinal) {
           var finalTranscript = event.results[i][0].transcript.trim().toLowerCase();
-          handleSpeechRecognitionStatus(finalTranscript);
 
           if (getSpeechStatus() === 'false') {
             return;
@@ -324,6 +350,46 @@ try {
         }
       }
     };
+
+    function handleSpeechStatus() {
+      if (getSpeechStatus() === null) setSpeechStatus(false);
+
+      if (getSpeechStatus() === 'true') {
+        var dontEndTheSpeech = function dontEndTheSpeech() {
+          if (getSpeechStatus() === 'true') {
+            recognition.start();
+          }
+
+          console.log('Speech still listening...');
+        };
+
+        showImage();
+        var speechGotError = false;
+
+        recognition.onerror = function (event) {
+          console.error('Speech recognition error:', event.error);
+
+          if (event.error === 'not-allowed') {
+            // Handle the case where microphone access was denied
+            console.warn('Microphone access denied.');
+            recognition.stop();
+            speechGotError = true;
+          }
+        };
+
+        recognition.onend = function () {
+          if (speechGotError === false) {
+            dontEndTheSpeech();
+          }
+        };
+
+        recognition.onspeechend = function () {
+          if (speechGotError === false) {
+            dontEndTheSpeech();
+          }
+        };
+      }
+    }
 
     function findMatchingCommand(finalTranscript) {
       var currentRoute = window.location.pathname;
