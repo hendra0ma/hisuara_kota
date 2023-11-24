@@ -364,7 +364,7 @@ var commands = [{
   exceptions: [],
   execute: function execute(finalTranscript) {
     var keyword = 'lihat ktp';
-    var namaSaksi = getTextBeforeSpecificWord(keyword, finalTranscript);
+    var namaSaksi = getTextAfterSpecificWord(keyword, finalTranscript);
     var namaSaksiElement = getSaksiElementByName(namaSaksi);
     var idSaksi = namaSaksiElement.getAttribute('id');
     var buttonDiterima = document.querySelector("button[id=\"diterima".concat(idSaksi, "\"]"));
@@ -376,7 +376,7 @@ var commands = [{
   exceptions: [],
   execute: function execute(finalTranscript) {
     var keyword = 'ditolak';
-    var namaSaksi = getTextBeforeSpecificWord(keyword, finalTranscript);
+    var namaSaksi = getTextAfterSpecificWord(keyword, finalTranscript);
     var namaSaksiElement = getSaksiElementByName(namaSaksi);
     var idSaksi = namaSaksiElement.getAttribute('id');
     var buttonDitolak = document.querySelector("button[id=\"ditolak".concat(idSaksi, "\"]"));
@@ -388,7 +388,7 @@ var commands = [{
   exceptions: [],
   execute: function execute(finalTranscript) {
     var keyword = 'hubungi';
-    var namaSaksi = getTextAfterSpecificWord(keyword, finalTranscript);
+    var namaSaksi = getTextBeforeSpecificWord(keyword, finalTranscript);
     var namaSaksiElement = getSaksiElementByName(namaSaksi);
     var idSaksi = namaSaksiElement.getAttribute('id'); // format: ditolak(id saksi)
 
