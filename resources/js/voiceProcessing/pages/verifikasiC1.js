@@ -9,7 +9,7 @@ const commands = [
     keyword: /^buka verifikasi/, // 'buka verifikasi (nama)'
     exceptions: ['buka verifikasi c1', 'buka verifikasi saksi', 'buka verifikasi crowd c1', 'buka verifikasi admin'],
     execute: (finalTranscript) => {
-      const keyword = this.keyword
+      const keyword = 'buka verifikasi'
       const namaSaksi = getTextAfterSpecificWord(keyword, finalTranscript);
       const namaSaksiElement = getSaksiElementByName(namaSaksi)
 
