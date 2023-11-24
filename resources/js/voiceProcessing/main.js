@@ -75,6 +75,11 @@ try {
         recognition.stop();
         speechGotError = true;
       }
+
+      if (event.error === 'no-speech') {
+        recognition.start();
+        console.log('Speech is still listening...');
+      }
     };
 
     function findMatchingCommand(finalTranscript) {
