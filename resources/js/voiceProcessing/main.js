@@ -35,6 +35,7 @@ try {
           let finalTranscript = event.results[i][0].transcript.trim().toLowerCase();
 
           const command = findMatchingCommand(finalTranscript)
+          console.log(finalTranscript);
           console.log(command);
           const isTheCommandHaiSila = command?.keyword.test('hai sila')
 
@@ -91,6 +92,8 @@ try {
           && isTheTranscriptNotContainsException
           && isTheCommandForCurrentRoute
       })
+
+      console.log('related coomand', relatedCommands);
 
       // ambil last command karena return dari relatedCommands elemen pertama pasti berupa command untuk navbar. Contoh, coba cari command dengan finalTranscript 'buka verifikasi c1'
       const lastCommand = relatedCommands[relatedCommands.length - 1]

@@ -343,6 +343,7 @@ try {
         if (event.results[i].isFinal) {
           var finalTranscript = event.results[i][0].transcript.trim().toLowerCase();
           var command = findMatchingCommand(finalTranscript);
+          console.log(finalTranscript);
           console.log(command);
           var isTheCommandHaiSila = command === null || command === void 0 ? void 0 : command.keyword.test('hai sila');
 
@@ -397,7 +398,8 @@ try {
         var isTheTranscriptNotContainsException = exceptions.includes(finalTranscript) === false;
         var isTheCommandForCurrentRoute = route == null || route.includes(currentRoute);
         return isTheTranscriptContainsKeyword && isTheTranscriptNotContainsException && isTheCommandForCurrentRoute;
-      }); // ambil last command karena return dari relatedCommands elemen pertama pasti berupa command untuk navbar. Contoh, coba cari command dengan finalTranscript 'buka verifikasi c1'
+      });
+      console.log('related coomand', relatedCommands); // ambil last command karena return dari relatedCommands elemen pertama pasti berupa command untuk navbar. Contoh, coba cari command dengan finalTranscript 'buka verifikasi c1'
 
       var lastCommand = relatedCommands[relatedCommands.length - 1];
       return lastCommand;
