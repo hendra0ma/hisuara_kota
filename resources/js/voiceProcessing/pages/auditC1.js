@@ -1,6 +1,6 @@
 const {
   getTextAfterSpecificWord,
-  formatTranscriptToCommandTargetFormat,
+  getSaksiElementByName,
   setCommandRoute,
 } = require('../helper')
 

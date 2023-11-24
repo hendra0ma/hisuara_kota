@@ -2,6 +2,7 @@ const {
   getTextAfterSpecificWord,
   getTextBeforeSpecificWord,
   setCommandRoute,
+  getSaksiElementByName,
 } = require('../helper')
 
 const commands = [
