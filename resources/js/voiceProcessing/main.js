@@ -86,7 +86,7 @@ try {
         const { route, keyword, exceptions } = command;
         const isTheTranscriptContainsKeyword = keyword.test(finalTranscript)
         const isTheTranscriptNotContainsException = exceptions.includes(finalTranscript) === false
-        const isTheCommandForCurrentRoute = route == null || route.includes(currentRoute)
+        const isTheCommandForCurrentRoute = route == null || currentRoute.includes(route)
 
         return isTheTranscriptContainsKeyword
           && isTheTranscriptNotContainsException

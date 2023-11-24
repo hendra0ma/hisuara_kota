@@ -58,4 +58,4 @@ const commands = [
   },
 ]
 
-module.exports = setCommandRoute('verifikator/verifikasi-c1', commands)
+module.exports = setCommandRoute('/verifikator/verifikasi-c1', commands)

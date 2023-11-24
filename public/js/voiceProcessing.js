@@ -262,7 +262,7 @@ var commands = [{
     document.querySelector('button[dusk="nextPage"]');
   }
 }];
-module.exports = setCommandRoute('verifikator/verifikasi-c1', commands);
+module.exports = setCommandRoute('/verifikator/verifikasi-c1', commands);
 
 /***/ })
 
@@ -396,7 +396,7 @@ try {
             exceptions = command.exceptions;
         var isTheTranscriptContainsKeyword = keyword.test(finalTranscript);
         var isTheTranscriptNotContainsException = exceptions.includes(finalTranscript) === false;
-        var isTheCommandForCurrentRoute = route == null || route.includes(currentRoute);
+        var isTheCommandForCurrentRoute = route == null || currentRoute.includes(route);
         return isTheTranscriptContainsKeyword && isTheTranscriptNotContainsException && isTheCommandForCurrentRoute;
       });
       console.log('related coomand', relatedCommands); // ambil last command karena return dari relatedCommands elemen pertama pasti berupa command untuk navbar. Contoh, coba cari command dengan finalTranscript 'buka verifikasi c1'
