@@ -36,7 +36,7 @@ try {
 
           const command = findMatchingCommand(finalTranscript)
           console.log(command);
-          const isTheCommandHaiSila = command.keyword.test('hai sila')
+          const isTheCommandHaiSila = command?.keyword.test('hai sila')
 
           if (getSpeechStatus() === 'true' || isTheCommandHaiSila) {
             command.execute(finalTranscript)
@@ -48,11 +48,8 @@ try {
     let speechGotError = false;
 
     function dontEndTheSpeech() {
-      if (getSpeechStatus() === 'true') {
-        recognition.start();
-        console.log('Speech is still listening...');
-      }
-      console.log('Speech is stop listening...');
+      recognition.start();
+      console.log('Speech is still listening...');
     }
 
     recognition.onend = function () {
@@ -77,8 +74,7 @@ try {
       }
 
       if (event.error === 'no-speech') {
-        recognition.start();
-        console.log('Speech is still listening...');
+        dontEndTheSpeech()
       }
     };
 
