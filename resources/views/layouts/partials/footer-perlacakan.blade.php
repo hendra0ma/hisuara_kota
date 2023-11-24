@@ -140,9 +140,9 @@
         <div class="col text-center">
             ${
             marker.photoUrl
-            ? `<img style="height: 100px; object-fit: cover" src="{{ asset('') }}storage/profile-photos/${marker.photoUrl}"
+            ? `<img class="rounded-circle" style="height: 100px; width: 100px; object-fit: cover" src="{{ asset('') }}storage/profile-photos/${marker.photoUrl}"
                 alt="Photo">`
-            : `<img style="height: 100px; object-fit: cover"
+            : `<img class="rounded-circle" style="height: 100px; width: 100px; object-fit: cover"
                 src="https://ui-avatars.com/api/?name=${marker.name}&color=${marker.name}7F9CF5&background=EBF4FF"
                 alt="Placeholder">`
             }
