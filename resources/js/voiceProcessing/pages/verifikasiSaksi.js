@@ -24,8 +24,8 @@ const commands = [
     keyword: /diterima$/, // "(nama saksi) diterima", klik tombol diterima
     exceptions: [],
     execute: (finalTranscript) => {
-      const keyword = 'lihat ktp';
-      const namaSaksi = getTextAfterSpecificWord(keyword, finalTranscript);
+      const keyword = 'diterima';
+      const namaSaksi = getTextBeforeSpecificWord(keyword, finalTranscript);
       const namaSaksiElement = getSaksiElementByName(namaSaksi)
 
       const idSaksi = namaSaksiElement.getAttribute('id');
@@ -38,7 +38,7 @@ const commands = [
     exceptions: [],
     execute: (finalTranscript) => {
       const keyword = 'ditolak';
-      const namaSaksi = getTextAfterSpecificWord(keyword, finalTranscript);
+      const namaSaksi = getTextBeforeSpecificWord(keyword, finalTranscript);
       const namaSaksiElement = getSaksiElementByName(namaSaksi)
 
       const idSaksi = namaSaksiElement.getAttribute('id');
@@ -51,7 +51,7 @@ const commands = [
     exceptions: [],
     execute: (finalTranscript) => {
       const keyword = 'hubungi';
-      const namaSaksi = getTextBeforeSpecificWord(keyword, finalTranscript);
+      const namaSaksi = getTextAfterSpecificWord(keyword, finalTranscript);
       const namaSaksiElement = getSaksiElementByName(namaSaksi)
       const idSaksi = namaSaksiElement.getAttribute('id'); // format: ditolak(id saksi)
       const buttonHubungi = document.querySelector(`a[id="hubungi${idSaksi}"]`);
