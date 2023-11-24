@@ -66,7 +66,7 @@ function showImage() {
 }
 
 function hideImage() {
-  $('#imageHisuara').show(300)
+  $('#imageHisuara').hide(300)
 }
 
 module.exports = {
