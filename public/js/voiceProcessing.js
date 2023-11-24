@@ -1,10 +1,10 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./public/js/voiceProcessing/helper.js":
-/*!*********************************************!*\
-  !*** ./public/js/voiceProcessing/helper.js ***!
-  \*********************************************/
+/***/ "./resources/js/voiceProcessing/helper.js":
+/*!************************************************!*\
+  !*** ./resources/js/voiceProcessing/helper.js ***!
+  \************************************************/
 /***/ ((module) => {
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -110,13 +110,13 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./public/js/voiceProcessing/pages/common.js":
-/*!***************************************************!*\
-  !*** ./public/js/voiceProcessing/pages/common.js ***!
-  \***************************************************/
+/***/ "./resources/js/voiceProcessing/pages/common.js":
+/*!******************************************************!*\
+  !*** ./resources/js/voiceProcessing/pages/common.js ***!
+  \******************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var _require = __webpack_require__(/*! ../helper */ "./public/js/voiceProcessing/helper.js"),
+var _require = __webpack_require__(/*! ../helper */ "./resources/js/voiceProcessing/helper.js"),
     setSpeechStatus = _require.setSpeechStatus,
     setCommandRoute = _require.setCommandRoute,
     showImage = _require.showImage,
@@ -169,13 +169,13 @@ module.exports = setCommandRoute(null, commands);
 
 /***/ }),
 
-/***/ "./public/js/voiceProcessing/pages/navbar.js":
-/*!***************************************************!*\
-  !*** ./public/js/voiceProcessing/pages/navbar.js ***!
-  \***************************************************/
+/***/ "./resources/js/voiceProcessing/pages/navbar.js":
+/*!******************************************************!*\
+  !*** ./resources/js/voiceProcessing/pages/navbar.js ***!
+  \******************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var _require = __webpack_require__(/*! ../helper */ "./public/js/voiceProcessing/helper.js"),
+var _require = __webpack_require__(/*! ../helper */ "./resources/js/voiceProcessing/helper.js"),
     getTextAfterSpecificWord = _require.getTextAfterSpecificWord,
     formatFinalTranscriptToCommandTargetFormat = _require.formatFinalTranscriptToCommandTargetFormat,
     setCommandRoute = _require.setCommandRoute;
@@ -199,15 +199,15 @@ module.exports = setCommandRoute(null, commands);
 
 /***/ }),
 
-/***/ "./public/js/voiceProcessing/pages/verifikasiC1.js":
-/*!*********************************************************!*\
-  !*** ./public/js/voiceProcessing/pages/verifikasiC1.js ***!
-  \*********************************************************/
+/***/ "./resources/js/voiceProcessing/pages/verifikasiC1.js":
+/*!************************************************************!*\
+  !*** ./resources/js/voiceProcessing/pages/verifikasiC1.js ***!
+  \************************************************************/
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 var _this = this;
 
-var _require = __webpack_require__(/*! ../helper */ "./public/js/voiceProcessing/helper.js"),
+var _require = __webpack_require__(/*! ../helper */ "./resources/js/voiceProcessing/helper.js"),
     getTextAfterSpecificWord = _require.getTextAfterSpecificWord,
     getSaksiElementByName = _require.getSaksiElementByName,
     setCommandRoute = _require.setCommandRoute;
@@ -296,9 +296,9 @@ module.exports = setCommandRoute('verifikator/verifikasi-c1', commands);
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!******************************************************!*\
-  !*** ./public/js/voiceProcessing/voiceProcessing.js ***!
-  \******************************************************/
+/*!**********************************************!*\
+  !*** ./resources/js/voiceProcessing/main.js ***!
+  \**********************************************/
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -311,15 +311,15 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-var navbarCommands = __webpack_require__(/*! ./pages/navbar */ "./public/js/voiceProcessing/pages/navbar.js");
+var navbarCommands = __webpack_require__(/*! ./pages/navbar */ "./resources/js/voiceProcessing/pages/navbar.js");
 
-var commonCommands = __webpack_require__(/*! ./pages/common */ "./public/js/voiceProcessing/pages/common.js");
+var commonCommands = __webpack_require__(/*! ./pages/common */ "./resources/js/voiceProcessing/pages/common.js");
 
-var verifikasiC1Commands = __webpack_require__(/*! ./pages/verifikasiC1 */ "./public/js/voiceProcessing/pages/verifikasiC1.js");
+var verifikasiC1Commands = __webpack_require__(/*! ./pages/verifikasiC1 */ "./resources/js/voiceProcessing/pages/verifikasiC1.js");
 
 var ALL_COMMANDS = [].concat(_toConsumableArray(navbarCommands), _toConsumableArray(commonCommands), _toConsumableArray(verifikasiC1Commands));
 
-var _require = __webpack_require__(/*! ./helper */ "./public/js/voiceProcessing/helper.js"),
+var _require = __webpack_require__(/*! ./helper */ "./resources/js/voiceProcessing/helper.js"),
     getSpeechStatus = _require.getSpeechStatus,
     setSpeechStatus = _require.setSpeechStatus,
     showImage = _require.showImage;
@@ -331,65 +331,61 @@ try {
     recognition.continuous = true;
     recognition.interimResults = true;
     recognition.start();
-    var isSpeechOn = getSpeechStatus();
-    console.log('Speech status:', isSpeechOn);
-    handleSpeechStatus();
+    console.log('Speech status:', getSpeechStatus());
+    if (getSpeechStatus() === null) setSpeechStatus(false);
+
+    if (getSpeechStatus() === 'true') {
+      showImage();
+    }
 
     recognition.onresult = function (event) {
       for (var i = event.resultIndex; i < event.results.length; i++) {
         if (event.results[i].isFinal) {
           var finalTranscript = event.results[i][0].transcript.trim().toLowerCase();
-
-          if (getSpeechStatus() === 'false') {
-            return;
-          }
-
           var command = findMatchingCommand(finalTranscript);
           console.log(command);
-          command.execute(finalTranscript);
+          var isTheCommandHaiSila = command.keyword.test('hai sila');
+
+          if (getSpeechStatus() === 'true' || isTheCommandHaiSila) {
+            command.execute(finalTranscript);
+          }
         }
       }
     };
 
-    function handleSpeechStatus() {
-      if (getSpeechStatus() === null) setSpeechStatus(false);
+    var speechGotError = false;
 
+    function dontEndTheSpeech() {
       if (getSpeechStatus() === 'true') {
-        var dontEndTheSpeech = function dontEndTheSpeech() {
-          if (getSpeechStatus() === 'true') {
-            recognition.start();
-          }
-
-          console.log('Speech still listening...');
-        };
-
-        showImage();
-        var speechGotError = false;
-
-        recognition.onerror = function (event) {
-          console.error('Speech recognition error:', event.error);
-
-          if (event.error === 'not-allowed') {
-            // Handle the case where microphone access was denied
-            console.warn('Microphone access denied.');
-            recognition.stop();
-            speechGotError = true;
-          }
-        };
-
-        recognition.onend = function () {
-          if (speechGotError === false) {
-            dontEndTheSpeech();
-          }
-        };
-
-        recognition.onspeechend = function () {
-          if (speechGotError === false) {
-            dontEndTheSpeech();
-          }
-        };
+        recognition.start();
+        console.log('Speech is still listening...');
       }
+
+      console.log('Speech is stop listening...');
     }
+
+    recognition.onend = function () {
+      if (speechGotError === false) {
+        dontEndTheSpeech();
+      }
+    };
+
+    recognition.onspeechend = function () {
+      if (speechGotError === false) {
+        dontEndTheSpeech();
+      }
+    };
+
+    recognition.onerror = function (event) {
+      console.error('Speech recognition error:', event.error);
+
+      if (event.error === 'not-allowed') {
+        // Handle the case where microphone access was denied
+        console.warn('Microphone access denied.');
+        recognition.stop();
+        speechGotError = true;
+      }
+    };
 
     function findMatchingCommand(finalTranscript) {
       var currentRoute = window.location.pathname;

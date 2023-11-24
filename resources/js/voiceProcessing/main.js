@@ -22,64 +22,60 @@ try {
     recognition.interimResults = true;
 
     recognition.start();
-    const isSpeechOn = getSpeechStatus();
-    console.log('Speech status:', isSpeechOn);
+    console.log('Speech status:', getSpeechStatus());
 
-    handleSpeechStatus()
+    if (getSpeechStatus() === null) setSpeechStatus(false)
+    if (getSpeechStatus() === 'true') {
+      showImage();
+    }
 
     recognition.onresult = function (event) {
       for (let i = event.resultIndex; i < event.results.length; i++) {
         if (event.results[i].isFinal) {
           let finalTranscript = event.results[i][0].transcript.trim().toLowerCase();
 
-          if (getSpeechStatus() === 'false') {
-            return;
-          }
-
           const command = findMatchingCommand(finalTranscript)
           console.log(command);
-          command.execute(finalTranscript)
+          const isTheCommandHaiSila = command.keyword.test('hai sila')
+
+          if (getSpeechStatus() === 'true' || isTheCommandHaiSila) {
+            command.execute(finalTranscript)
+          }
         }
       }
     };
 
-    function handleSpeechStatus() {
-      if (getSpeechStatus() === null) setSpeechStatus(false)
+    let speechGotError = false;
 
+    function dontEndTheSpeech() {
       if (getSpeechStatus() === 'true') {
-        showImage();
-        let speechGotError = false;
-
-        function dontEndTheSpeech() {
-          if (getSpeechStatus() === 'true') {
-            recognition.start();
-          }
-          console.log('Speech still listening...');
-        }
-
-        recognition.onerror = function (event) {
-          console.error('Speech recognition error:', event.error);
-          if (event.error === 'not-allowed') {
-            // Handle the case where microphone access was denied
-            console.warn('Microphone access denied.');
-            recognition.stop();
-            speechGotError = true;
-          }
-        };
-
-        recognition.onend = function () {
-          if (speechGotError === false) {
-            dontEndTheSpeech();
-          }
-        };
-
-        recognition.onspeechend = function () {
-          if (speechGotError === false) {
-            dontEndTheSpeech();
-          }
-        };
+        recognition.start();
+        console.log('Speech is still listening...');
       }
+      console.log('Speech is stop listening...');
     }
+
+    recognition.onend = function () {
+      if (speechGotError === false) {
+        dontEndTheSpeech();
+      }
+    };
+
+    recognition.onspeechend = function () {
+      if (speechGotError === false) {
+        dontEndTheSpeech();
+      }
+    };
+
+    recognition.onerror = function (event) {
+      console.error('Speech recognition error:', event.error);
+      if (event.error === 'not-allowed') {
+        // Handle the case where microphone access was denied
+        console.warn('Microphone access denied.');
+        recognition.stop();
+        speechGotError = true;
+      }
+    };
 
     function findMatchingCommand(finalTranscript) {
       const currentRoute = window.location.pathname
