@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="card-body py-7">
-                    <div id="<?= $ls['id'] ?>" class="nama-saksi text-center fs-4 fw-bold mb-3">{{$ls->name}}</div>
+                    <div id="<?= $ls->id ?>" class="nama-saksi text-center fs-4 fw-bold mb-3">{{$ls->name}}</div>
                     <div class="px-3">
                         <table class="table">
                             <tr>
@@ -116,7 +116,7 @@
 
                 <div class="row mt-2">
                     <div class="col-12 px-0">
-                        <a id="lihatAktivitas<?= $ls['id'] ?>" class="btn btn-primary rounded-0 w-100" href="{{url('/')}}/administrator/patroli_mode/tracking/detail/<?= encrypt($ls['id']) ?>">Lihat Aktifitas</a>
+                        <a id="lihatAktivitas<?= $ls->id ?>" class="btn btn-primary rounded-0 w-100" href="{{url('/')}}/administrator/patroli_mode/tracking/detail/<?= encrypt($ls['id']) ?>">Lihat Aktifitas</a>
                     </div>
                 </div>
 
