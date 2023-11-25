@@ -320,16 +320,16 @@ var _require = __webpack_require__(/*! ../helper */ "./resources/js/voiceProcess
     setCommandRoute = _require.setCommandRoute;
 
 var commands = [{
-  keyword: /^lihat aktivitas/,
-  // 'lihat aktivitas (nama saksi)'
+  keyword: /^lihat detail/,
+  // 'lihat detail (nama saksi)'
   exceptions: [],
   execute: function execute(finalTranscript) {
-    var keyword = 'lihat aktivitas';
+    var keyword = 'lihat detail';
     var namaSaksi = getTextAfterSpecificWord(keyword, finalTranscript);
     var namaSaksiElement = getSaksiElementByName(namaSaksi);
     var idSaksi = namaSaksiElement.getAttribute('id');
-    var buttonLihatAktivitas = document.querySelector("a[id=\"lihatAktivitas".concat(idSaksi, "\"]"));
-    buttonLihatAktivitas.click();
+    var buttonLihatDetail = document.querySelector("a[id=\"lihatDetail".concat(idSaksi, "\"]"));
+    buttonLihatDetail.click();
   }
 }, {
   keyword: /^tutup/,

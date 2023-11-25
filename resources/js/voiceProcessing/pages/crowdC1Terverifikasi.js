@@ -6,17 +6,17 @@ const {
 
 const commands = [
   {
-    keyword: /^lihat aktivitas/, // 'lihat aktivitas (nama saksi)'
+    keyword: /^lihat detail/, // 'lihat detail (nama saksi)'
     exceptions: [],
     execute: (finalTranscript) => {
-      const keyword = 'lihat aktivitas';
+      const keyword = 'lihat detail';
       const namaSaksi = getTextAfterSpecificWord(keyword, finalTranscript);
       const namaSaksiElement = getSaksiElementByName(namaSaksi)
 
       const idSaksi = namaSaksiElement.getAttribute('id');
-      const buttonLihatAktivitas = document.querySelector(`a[id="lihatAktivitas${idSaksi}"]`);
+      const buttonLihatDetail = document.querySelector(`a[id="lihatDetail${idSaksi}"]`);
 
-      buttonLihatAktivitas.click();
+      buttonLihatDetail.click();
     }
   },
   {
