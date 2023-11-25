@@ -430,6 +430,41 @@ module.exports = setCommandRoute('/administrator/enumerator', commands);
 
 /***/ }),
 
+/***/ "./resources/js/voiceProcessing/pages/enumeratorHadir.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/voiceProcessing/pages/enumeratorHadir.js ***!
+  \***************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var _require = __webpack_require__(/*! ../helper */ "./resources/js/voiceProcessing/helper.js"),
+    getTextAfterSpecificWord = _require.getTextAfterSpecificWord,
+    getSaksiElementByName = _require.getSaksiElementByName,
+    setCommandRoute = _require.setCommandRoute;
+
+var commands = [{
+  keyword: /^lihat detail/,
+  // 'lihat detail (nama saksi)'
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    var keyword = 'lihat detail';
+    var namaSaksi = getTextAfterSpecificWord(keyword, finalTranscript);
+    var namaSaksiElement = getSaksiElementByName(namaSaksi);
+    var idSaksi = namaSaksiElement.getAttribute('id');
+    var buttonLihatDetail = document.querySelector("a[data-id=\"".concat(idSaksi, "\"]"));
+    buttonLihatDetail.click();
+  }
+}, {
+  keyword: /^tutup/,
+  // tutup modal
+  exceptions: [],
+  execute: function execute() {
+    $('#cekmodal').modal('hide');
+  }
+}];
+module.exports = setCommandRoute('/administrator/enumerator_hadir', commands);
+
+/***/ }),
+
 /***/ "./resources/js/voiceProcessing/pages/enumeratorTeregistrasi.js":
 /*!**********************************************************************!*\
   !*** ./resources/js/voiceProcessing/pages/enumeratorTeregistrasi.js ***!
@@ -883,7 +918,9 @@ var crowdC1TerverifikasiCommands = __webpack_require__(/*! ./pages/crowdC1Terver
 
 var enumeratorTeregistrasiCommands = __webpack_require__(/*! ./pages/enumeratorTeregistrasi */ "./resources/js/voiceProcessing/pages/enumeratorTeregistrasi.js");
 
-var ALL_COMMANDS = [].concat(_toConsumableArray(navbarCommands), _toConsumableArray(commonCommands), _toConsumableArray(verifikasiC1Commands), _toConsumableArray(auditC1Commands), _toConsumableArray(verifikasiSaksiCommands), _toConsumableArray(enumeratorCommands), _toConsumableArray(adminTerverifikasiCommands), _toConsumableArray(adminDetailCommands), _toConsumableArray(saksiTeregistrasiCommands), _toConsumableArray(saksiHadirCommands), _toConsumableArray(verifikasiCrowdC1Commands), _toConsumableArray(crowdC1TerverifikasiCommands), _toConsumableArray(enumeratorTeregistrasiCommands));
+var enumeratorHadirCommands = __webpack_require__(/*! ./pages/enumeratorHadir */ "./resources/js/voiceProcessing/pages/enumeratorHadir.js");
+
+var ALL_COMMANDS = [].concat(_toConsumableArray(navbarCommands), _toConsumableArray(commonCommands), _toConsumableArray(verifikasiC1Commands), _toConsumableArray(auditC1Commands), _toConsumableArray(verifikasiSaksiCommands), _toConsumableArray(enumeratorCommands), _toConsumableArray(adminTerverifikasiCommands), _toConsumableArray(adminDetailCommands), _toConsumableArray(saksiTeregistrasiCommands), _toConsumableArray(saksiHadirCommands), _toConsumableArray(verifikasiCrowdC1Commands), _toConsumableArray(crowdC1TerverifikasiCommands), _toConsumableArray(enumeratorTeregistrasiCommands), _toConsumableArray(enumeratorHadirCommands));
 
 var _require = __webpack_require__(/*! ./helper */ "./resources/js/voiceProcessing/helper.js"),
     getSpeechStatus = _require.getSpeechStatus,
