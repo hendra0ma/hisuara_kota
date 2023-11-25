@@ -1445,6 +1445,15 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
             }
         });
     });
+
+    $('.glowy-menu').on('click', function() {
+        $('#global-loader').show();
+        $('#global-loader .loader-img').show();
+        setTimeout(() => {
+            $('#global-loader').hide();
+            $('#global-loader .loader-img').hide();
+        }, 5000);
+    })
 </script>
 
 <script src="{{ mix('js/voiceProcessing.js') }}"></script>

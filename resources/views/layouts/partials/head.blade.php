@@ -559,7 +559,7 @@
 <?php $dark_mode = ($config->darkmode == "yes") ? 'dark-mode' : ""; ?>
 
 <body class="app sidebar-mini {{$dark_mode}}">
-    <img id="imageHisuara" src="{{asset('images/voice_hisuara.gif')}}" alt="hisuara image" style="
+    <img id="imageHisuara" src="{{asset('images/hisuara-sila.gif')}}" alt="hisuara image" style="
         z-index: 20;
         bottom: 15px;
         width: 4%;
