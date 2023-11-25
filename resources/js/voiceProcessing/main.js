@@ -47,7 +47,7 @@ try {
           console.log(command);
           const isTheCommandHaiSila = command?.keyword.test('hai sila')
 
-          if (!command) {
+          if (command === undefined) {
             return console.error('Command not found')
           }
 

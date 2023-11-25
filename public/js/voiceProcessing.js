@@ -640,7 +640,7 @@ try {
           console.log(command);
           var isTheCommandHaiSila = command === null || command === void 0 ? void 0 : command.keyword.test('hai sila');
 
-          if (!command) {
+          if (command === undefined) {
             return console.error('Command not found');
           }
 
