@@ -5,6 +5,8 @@ const auditC1Commands = require('./pages/auditC1');
 const verifikasiSaksiCommands = require('./pages/verifikasiSaksi');
 const enumeratorCommands = require('./pages/enumerator');
 const adminTerverifikasiCommands = require('./pages/adminTerverifikasi');
+const adminDetailCommands = require('./pages/adminDetail');
+const saksiTeregistrasiCommands = require('./pages/saksiTeregistrasi');
 
 const ALL_COMMANDS = [
   ...navbarCommands,
@@ -14,6 +16,8 @@ const ALL_COMMANDS = [
   ...verifikasiSaksiCommands,
   ...enumeratorCommands,
   ...adminTerverifikasiCommands,
+  ...adminDetailCommands,
+  ...saksiTeregistrasiCommands,
 ];
 
 const {
@@ -30,7 +34,6 @@ try {
     recognition.interimResults = true;
 
     recognition.start();
-    console.log('Speech status:', getSpeechStatus());
 
     if (getSpeechStatus() === null) setSpeechStatus(false)
     if (getSpeechStatus() === 'true') {
@@ -44,7 +47,7 @@ try {
 
           const command = findMatchingCommand(finalTranscript)
           console.log(finalTranscript);
-          console.log(command);
+          console.log('Speech status:', getSpeechStatus());
           const isTheCommandHaiSila = command?.keyword.test('hai sila')
 
           if (command === undefined) {
