@@ -433,6 +433,7 @@ module.exports = setCommandRoute(null, commands);
 
 var _require = __webpack_require__(/*! ../helper */ "./resources/js/voiceProcessing/helper.js"),
     getTextAfterSpecificWord = _require.getTextAfterSpecificWord,
+    getSaksiElementByName = _require.getSaksiElementByName,
     setCommandRoute = _require.setCommandRoute;
 
 var commands = [{

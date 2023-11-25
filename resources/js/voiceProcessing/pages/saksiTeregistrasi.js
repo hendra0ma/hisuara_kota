@@ -1,5 +1,6 @@
 const {
   getTextAfterSpecificWord,
+  getSaksiElementByName,
   setCommandRoute,
 } = require('../helper')
 
