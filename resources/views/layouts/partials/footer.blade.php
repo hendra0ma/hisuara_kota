@@ -111,6 +111,14 @@
         // Use above variables to manipulate the DOM
     });
 
+    $('.btn-to-loader').on('click', function() {
+        $('#global-loader').show();
+        $('#global-loader .loader-img').show();
+        setTimeout(() => {
+            $('#global-loader').hide();
+            $('#global-loader .loader-img').hide();
+        }, 6000);
+    })
 </script>
 
 <!-- FOOTER -->
