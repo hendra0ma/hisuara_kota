@@ -36,10 +36,10 @@ const commands = [
     }
   },
   {
-    keyword: /^verifikasi oke/,
+    keyword: /^verifikasi oke/, // tombol verifikasi di modal
     exceptions: [],
     execute: (finalTranscript) => {
-      const url = $('#verifikasiButton').attr('href');
+      const url = $('#verifikasiButton').attr('data-url');
       window.location = url
     }
   },
