@@ -13,9 +13,9 @@
 
     <div class="row" style="margin-top: 50px;">
         @foreach ($absen as $ls)
-        <?php $district = App\Models\District::where('id',$ls['districts'])->first(); ?>
-        <?php $villages = App\Models\Village::where('id',$ls['villages'])->first(); ?>
-        <?php $tps = App\Models\Tps::where('id',$ls['tps_id'])->first(); ?>
+        <?php $district = App\Models\District::where('id', $ls['districts'])->first(); ?>
+        <?php $villages = App\Models\Village::where('id', $ls['villages'])->first(); ?>
+        <?php $tps = App\Models\Tps::where('id', $ls['tps_id'])->first(); ?>
         <div class="col-xl-3">
             <div class="card">
                 <div class="card-header text-white border-0" style="background-color: #404042">
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="card-body py-7">
-                    <div class="text-center fs-4 fw-bold mb-3">{{$ls->name}}</div>
+                    <div id="{{$ls['id']}}" class="text-center fs-4 fw-bold mb-3">{{$ls->name}}</div>
                     <div class="px-3">
                         <table class="table">
                             <tr>
@@ -93,7 +93,7 @@
 
                         <div class="row mt-2">
                             <div class="col-12 px-0">
-                                <a class="btn btn-primary rounded-0 w-100 cekmodal" id="Cek" data-id="{{$ls['id']}}" data-bs-toggle="modal" id="" data-bs-target="#cekmodal" onclick="cekModal(this,{{$ls['id']}})">Detail Data Saksi</a>
+                                <a class="btn btn-primary rounded-0 w-100 cekmodal" data-id="{{$ls['id']}}" data-bs-toggle="modal" data-bs-target="#cekmodal" onclick="cekModal(this,{{$ls['id']}})">Detail Data Saksi</a>
                             </div>
                         </div>
                     </div>
