@@ -23,7 +23,7 @@ const commands = [
     }
   },
   {
-    keyword: /^refresh/,
+    keyword: /^muat ulang/,
     exceptions: [],
     execute: (finalTranscript) => {
       location.reload()
