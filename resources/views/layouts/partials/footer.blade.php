@@ -117,7 +117,7 @@
         setTimeout(() => {
             $('#global-loader').hide();
             $('#global-loader .loader-img').hide();
-        }, 6000);
+        }, 10000);
     })
 </script>
 
