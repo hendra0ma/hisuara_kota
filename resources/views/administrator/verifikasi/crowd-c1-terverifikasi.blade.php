@@ -68,12 +68,12 @@ $kota = Regency::where('id', $config->regencies_id)->first();
         <div class="row mt-2">
 
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/verifikasi_crowd_c1"
+                <a data-command-target="verifikasi-crowd-c1" href="{{url('')}}/administrator/verifikasi_crowd_c1"
                     class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/verifikasi_crowd_c1')?'active' : '' }}">Verifikasi
                     Crowd C1</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/crowd_c1_terverifikasi"
+                <a data-command-target="crowd-c1-terverifikasi" href="{{url('')}}/administrator/crowd_c1_terverifikasi"
                     class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/crowd_c1_terverifikasi')?'active' : '' }}">Crowd
                     C1
                     Terverifikasi</a>

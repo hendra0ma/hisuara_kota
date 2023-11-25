@@ -66,19 +66,29 @@ $kota = Regency::where('id', $config->regencies_id)->first();
     <div class="col-lg-8" style="position: fixed; right: 18px; width: 1244.66px; z-index: 10; background: #f2f3f9">
         <div class="row mt-2">
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/verifikasi_saksi" class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/verifikasi_saksi')?'active' : '' }}">Verifikasi Saksi</a>
+                <a data-command-target="verifikasi-saksi" href="{{url('')}}/administrator/verifikasi_saksi"
+                    class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/verifikasi_saksi')?'active' : '' }}">Verifikasi
+                    Saksi</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi" class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/absensi')?'active' : '' }}">Saksi Teregristrasi</a>
+                <a data-command-target="saksi-teregistrasi" href="{{url('')}}/administrator/absensi"
+                    class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/absensi')?'active' : '' }}">Saksi
+                    Teregistrasi</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi/hadir" class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/absensi/hadir')?'active' : '' }}">Saksi Hadir</a>
+                <a data-command-target="saksi-hadir" href="{{url('')}}/administrator/absensi/hadir"
+                    class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/absensi/hadir')?'active' : '' }}">Saksi
+                    Hadir</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/absensi/tidak_hadir" class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/absensi/tidak_hadir')?'active' : '' }}">Saksi Tidak Hadir</a>
+                <a data-command-target="saksi-tidak-hadir" href="{{url('')}}/administrator/absensi/tidak_hadir"
+                    class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/absensi/tidak_hadir')?'active' : '' }}">Saksi
+                    Tidak Hadir</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/saksi_ditolak" class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/saksi_ditolak')?'active' : '' }}">Saksi Ditolak</a>
+                <a data-command-target="saksi-ditolak" href="{{url('')}}/administrator/saksi_ditolak"
+                    class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/saksi_ditolak')?'active' : '' }}">Saksi
+                    Ditolak</a>
             </div>
 
         </div>

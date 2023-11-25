@@ -23,7 +23,7 @@ const commands = [
     }
   },
   {
-    keyword: /^refresh/,
+    keyword: /^muat ulang/,
     exceptions: [],
     execute: (finalTranscript) => {
       location.reload()
@@ -41,6 +41,13 @@ const commands = [
     exceptions: [],
     execute: (finalTranscript) => {
       window.scrollBy(0, 700);
+    }
+  },
+  {
+    keyword: /^kembali/,
+    exceptions: [],
+    execute: (finalTranscript) => {
+      history.back()
     }
   },
   {

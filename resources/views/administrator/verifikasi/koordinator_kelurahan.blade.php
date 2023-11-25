@@ -82,17 +82,17 @@ $kota = Regency::where('id', $config->regencies_id)->first();
             </div> --}}
             <div class="col parent-link">
                 <a href="{{url('')}}/administrator/koordinator_saksi"
-                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_saksi')?'active' : '' }}">Kordinator Saksi
+                    class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/koordinator_saksi')?'active' : '' }}">Kordinator Saksi
                     Kota</a>
             </div>
             <div class="col parent-link">
                 <a href="{{url('')}}/administrator/koordinator_kecamatan"
-                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_kecamatan')?'active' : '' }}">Kordinator Saksi
+                    class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/koordinator_kecamatan')?'active' : '' }}">Kordinator Saksi
                     Kecamatan</a>
             </div>
             <div class="col parent-link">
                 <a href="{{url('')}}/administrator/koordinator_kelurahan"
-                    class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/koordinator_kelurahan')?'active' : '' }}">Kordinator Saksi
+                    class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/koordinator_kelurahan')?'active' : '' }}">Kordinator Saksi
                     Kelurahan</a>
             </div>
         </div>

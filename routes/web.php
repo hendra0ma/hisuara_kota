@@ -476,6 +476,7 @@ foreach ($kotas as $kota) {
             Route::get('verifikasi-data-c1-crowd/{id}', [VerificatorController::class, 'verifikasiDataC1Crowd'])->name('verifikasiDataC1Crowd');
 
             Route::get('koreksidata/{id}', [VerificatorController::class, 'koreksidata'])->name('koreksidata');
+            Route::get('getKoreksiVerifikator', [VerificatorController::class, 'getKoreksiVerifikator'])->name('getKoreksiVerifikator');
             Route::post('actionKoreksiData/{id}', [VerificatorController::class, 'actionKoreksiData'])->name('actionKoreksiData');
             Route::get('village/{id}', [VerificatorController::class, "village"])->middleware('districtCheck:kelurahan')->name("village");
             Route::get('verifikasi-c1', [VerificatorController::class, 'verifikasiC1'])->name('verifikasiC1');

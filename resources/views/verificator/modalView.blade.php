@@ -146,9 +146,10 @@
         <a id="verifikasiButton" data-url="{{ route('verifikator.verifikasiData', Crypt::encrypt($paslon[0]->saksi_data[0]->saksi_id)) }}" onclick="konfirmasiVerifikasi('{{ route('verifikator.verifikasiData', Crypt::encrypt($paslon[0]->saksi_data[0]->saksi_id)) }}')" class="btn btn-block btn-info text-white">Verifikasi</a>
     </div>
     <div class="col-6">
-        <a id="koreksiButton" data-url="{{Crypt::encrypt($paslon[0]->saksi_data[0]->saksi_id)}}" href="{{url('verifikator/koreksidata')}}/{{Crypt::encrypt($paslon[0]->saksi_data[0]->saksi_id)}}" class="btn btn-primary btn-block openModalKoreksi">Koreksi</a>
+        <a id="koreksiButton" data-url="{{Crypt::encrypt($paslon[0]->saksi_data[0]->saksi_id)}}" class="btn btn-primary btn-block openModalKoreksi" data-id="{{Crypt::encrypt($paslon[0]->saksi_data[0]->saksi_id)}}" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#koreksiC1Verifikator">Koreksi</a>
     </div>
     @endif
+    {{-- href="{{url('verifikator/koreksidata')}}/{{Crypt::encrypt($paslon[0]->saksi_data[0]->saksi_id)}}" --}}
 </div>
 
 <script>
@@ -250,4 +251,26 @@
     <?php else :  ?>
         $('#buttons').show();
     <?php endif;  ?>
+</script>
+
+<script>
+    // const buttonC1Dibatalkan =
+    $(".openModalKoreksi").on('click', function() {
+        const id = $(this).data('id');
+        const urlCurrent = $('input.urlCurrent');
+
+        $.ajax({
+            url: "{{ route('verifikator.getKoreksiVerifikator') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                url: urlCurrent.val(),
+                id
+            },
+            type: "GET",
+            dataType: "html",
+            success: function(data) {
+                $('#container-koreksi-verifikator').html(data)
+            }
+        });
+    });
 </script>

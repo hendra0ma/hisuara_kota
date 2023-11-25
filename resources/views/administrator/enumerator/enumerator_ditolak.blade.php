@@ -79,19 +79,27 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                 <a href="{{url('')}}/administrator/absensi/tidak_hadir" class="btn text-white w-100 py-3">Saksi Tidak Hadir</a>
             </div> --}}
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/enumerator" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/enumerator')?'active' : '' }}">Enumerator</a>
+                <a href="{{url('')}}/administrator/enumerator" class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/enumerator')?'active' : '' }}">Enumerator</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/enumerator_teregistrasi" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/enumerator_teregistrasi')?'active' : '' }}">Enumerator Teregistrasi</a>
+                <a data-command-target="enumerator-teregistrasi" href="{{url('')}}/administrator/enumerator_teregistrasi"
+                    class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/enumerator_teregistrasi')?'active' : '' }}">Enumerator
+                    Teregistrasi</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/enumerator_hadir" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/enumerator_hadir')?'active' : '' }}">Enumerator Hadir</a>
+                <a data-command-target="enumerator-hadir" href="{{url('')}}/administrator/enumerator_hadir"
+                    class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/enumerator_hadir')?'active' : '' }}">Enumerator
+                    Hadir</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/enumerator_tidak_hadir" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/enumerator_tidak_hadir')?'active' : '' }}">Enumerator Tidak Hadir</a>
+                <a data-command-target="enumerator-tidak-hadir" href="{{url('')}}/administrator/enumerator_tidak_hadir"
+                    class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/enumerator_tidak_hadir')?'active' : '' }}">Enumerator
+                    Tidak Hadir</a>
             </div>
             <div class="col parent-link">
-                <a href="{{url('')}}/administrator/enumerator_ditolak" class="btn text-white w-100 py-3 {{ (url()->current() == url('').'/administrator/enumerator_ditolak')?'active' : '' }}">Enumerator Ditolak</a>
+                <a data-command-target="enumerator-ditolak" href="{{url('')}}/administrator/enumerator_ditolak"
+                    class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/enumerator_ditolak')?'active' : '' }}">Enumerator
+                    Ditolak</a>
             </div>
 
         </div>

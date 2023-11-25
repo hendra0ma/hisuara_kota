@@ -5,6 +5,13 @@ const auditC1Commands = require('./pages/auditC1');
 const verifikasiSaksiCommands = require('./pages/verifikasiSaksi');
 const enumeratorCommands = require('./pages/enumerator');
 const adminTerverifikasiCommands = require('./pages/adminTerverifikasi');
+const adminDetailCommands = require('./pages/adminDetail');
+const saksiTeregistrasiCommands = require('./pages/saksiTeregistrasi');
+const saksiHadirCommands = require('./pages/saksiHadir');
+const verifikasiCrowdC1Commands = require('./pages/verifikasiCrowdC1');
+const crowdC1TerverifikasiCommands = require('./pages/crowdC1Terverifikasi');
+const enumeratorTeregistrasiCommands = require('./pages/enumeratorTeregistrasi');
+const enumeratorHadirCommands = require('./pages/enumeratorHadir');
 
 const ALL_COMMANDS = [
   ...navbarCommands,
@@ -14,6 +21,13 @@ const ALL_COMMANDS = [
   ...verifikasiSaksiCommands,
   ...enumeratorCommands,
   ...adminTerverifikasiCommands,
+  ...adminDetailCommands,
+  ...saksiTeregistrasiCommands,
+  ...saksiHadirCommands,
+  ...verifikasiCrowdC1Commands,
+  ...crowdC1TerverifikasiCommands,
+  ...enumeratorTeregistrasiCommands,
+  ...enumeratorHadirCommands,
 ];
 
 const {
@@ -30,7 +44,6 @@ try {
     recognition.interimResults = true;
 
     recognition.start();
-    console.log('Speech status:', getSpeechStatus());
 
     if (getSpeechStatus() === null) setSpeechStatus(false)
     if (getSpeechStatus() === 'true') {
@@ -44,10 +57,10 @@ try {
 
           const command = findMatchingCommand(finalTranscript)
           console.log(finalTranscript);
-          console.log(command);
+          console.log('Speech status:', getSpeechStatus());
           const isTheCommandHaiSila = command?.keyword.test('hai sila')
 
-          if (!command) {
+          if (command === undefined) {
             return console.error('Command not found')
           }
 
