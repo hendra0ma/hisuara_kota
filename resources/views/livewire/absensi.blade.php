@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="card-body py-7">
-                    <div id="{{$ls['id']}}" class="text-center fs-4 fw-bold mb-3">{{$ls->name}}</div>
+                    <div id="{{$ls['id']}}" class="nama-saksi text-center fs-4 fw-bold mb-3">{{$ls->name}}</div>
                     <div class="px-3">
                         <table class="table">
                             <tr>

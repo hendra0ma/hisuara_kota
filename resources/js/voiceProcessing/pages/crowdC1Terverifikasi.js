@@ -6,17 +6,17 @@ const {
 
 const commands = [
   {
-    keyword: /^lihat detail/, // 'lihat detail (nama saksi)'
+    keyword: /^lihat aktivitas/, // 'lihat aktivitas (nama saksi)'
     exceptions: [],
     execute: (finalTranscript) => {
-      const keyword = 'lihat detail'
+      const keyword = 'lihat aktivitas';
       const namaSaksi = getTextAfterSpecificWord(keyword, finalTranscript);
       const namaSaksiElement = getSaksiElementByName(namaSaksi)
 
       const idSaksi = namaSaksiElement.getAttribute('id');
-      const buttonLihatDetail = document.querySelector(`a[data-id="${idSaksi}"]`);
+      const buttonLihatAktivitas = document.querySelector(`a[id="lihatAktivitas${idSaksi}"]`);
 
-      buttonLihatDetail.click();
+      buttonLihatAktivitas.click();
     }
   },
   {
@@ -28,4 +28,4 @@ const commands = [
   },
 ]
 
-module.exports = setCommandRoute('/administrator/absensi', commands)
+module.exports = setCommandRoute('/administrator/crowd_c1_terverifikasi', commands)

@@ -28,4 +28,4 @@ const commands = [
   },
 ]
 
-module.exports = setCommandRoute('/administrator/absensi', commands)
+module.exports = setCommandRoute('/administrator/absensi/hadir', commands)

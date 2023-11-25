@@ -14,9 +14,9 @@ const commands = [
       const namaSaksiElement = getSaksiElementByName(namaSaksi)
 
       const idSaksi = namaSaksiElement.getAttribute('id');
-      const buttonAudit = document.querySelector(`a[id="lihatAktivitas${idSaksi}"]`);
+      const buttonLihatAktivitas = document.querySelector(`a[id="lihatAktivitas${idSaksi}"]`);
 
-      buttonAudit.click();
+      buttonLihatAktivitas.click();
     }
   }
 ]
