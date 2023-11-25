@@ -395,7 +395,6 @@ class VerificatorController extends Controller
     public function getCrowdData(Request $req)
     {
         $data['relawan'] = CrowdC1::with('crowd_data')->where('id', $req->id)->first();
-    //    return $data;
         return view('verificator.modal-view-crowd', $data);
     }
     public function verifikasiDataC1Relawan($id)

@@ -18,7 +18,10 @@ class DataCrowdC1Kpu extends Component
 
     public function render()
     {
-        $data['all_c1'] = CrowdC1::join('tps','crowd_c1.tps_id','=','tps.id')->where('status',"1")->where('tps.number', 'like', '%' . $this->search . '%')->paginate(12);
+        $data['all_c1'] = CrowdC1::join('tps','crowd_c1.tps_id','=','tps.id')
+        ->where('status',"1")
+        ->where('tps.number', 'like', '%' . $this->search . '%')
+        ->paginate(12);
         return view('livewire.data-crowd-c1-kpu', $data);
     }
 }
