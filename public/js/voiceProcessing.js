@@ -568,6 +568,93 @@ module.exports = setCommandRoute('/verifikator/verifikasi-c1', commands);
 
 /***/ }),
 
+/***/ "./resources/js/voiceProcessing/pages/verifikasiCrowdC1.js":
+/*!*****************************************************************!*\
+  !*** ./resources/js/voiceProcessing/pages/verifikasiCrowdC1.js ***!
+  \*****************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var _require = __webpack_require__(/*! ../helper */ "./resources/js/voiceProcessing/helper.js"),
+    getTextAfterSpecificWord = _require.getTextAfterSpecificWord,
+    getTextBeforeSpecificWord = _require.getTextBeforeSpecificWord,
+    setCommandRoute = _require.setCommandRoute,
+    getSaksiElementByName = _require.getSaksiElementByName;
+
+var commands = [{
+  keyword: /^lihat ktp/,
+  // 'lihat ktp (nama saksi), klik tombol lihat ktp lalu buka modal'
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    var keyword = 'lihat ktp';
+    var namaSaksi = getTextAfterSpecificWord(keyword, finalTranscript);
+    var namaSaksiElement = getSaksiElementByName(namaSaksi);
+    var idSaksi = namaSaksiElement.getAttribute('id');
+    var buttonLihatKtp = document.querySelector("button[data-id=\"".concat(idSaksi, "\"]"));
+    buttonLihatKtp.click();
+  }
+}, {
+  keyword: /diterima$/,
+  // "(nama saksi) diterima", klik tombol diterima
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    var keyword = 'diterima';
+    var namaSaksi = getTextBeforeSpecificWord(keyword, finalTranscript);
+    var namaSaksiElement = getSaksiElementByName(namaSaksi);
+    var idSaksi = namaSaksiElement.getAttribute('id');
+    var buttonDiterima = document.querySelector("button[id=\"diterima".concat(idSaksi, "\"]"));
+    buttonDiterima.parentNode.submit();
+  }
+}, {
+  keyword: /ditolak$/,
+  // "(nama saksi) ditolak", klik tombol ditolak
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    var keyword = 'ditolak';
+    var namaSaksi = getTextBeforeSpecificWord(keyword, finalTranscript);
+    var namaSaksiElement = getSaksiElementByName(namaSaksi);
+    var idSaksi = namaSaksiElement.getAttribute('id');
+    var buttonDitolak = document.querySelector("button[id=\"ditolak".concat(idSaksi, "\"]"));
+    buttonDitolak.parentNode.submit();
+  }
+}, {
+  keyword: /^hubungi/,
+  // klik tombol hubungi
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    var keyword = 'hubungi';
+    var namaSaksi = getTextAfterSpecificWord(keyword, finalTranscript);
+    var namaSaksiElement = getSaksiElementByName(namaSaksi);
+    var idSaksi = namaSaksiElement.getAttribute('id'); // format: ditolak(id saksi)
+
+    var buttonHubungi = document.querySelector("a[id=\"hubungi".concat(idSaksi, "\"]"));
+    buttonHubungi.click();
+  }
+}, {
+  keyword: /^tutup/,
+  // tutup modal
+  exceptions: [],
+  execute: function execute() {
+    $('#cekmodal').modal('hide');
+  }
+}, {
+  keyword: /^halaman sebelumnya/,
+  // previous pagination
+  exceptions: [],
+  execute: function execute() {
+    document.querySelector('button[dusk="previousPage"]').click();
+  }
+}, {
+  keyword: /^halaman berikutnya/,
+  // next pagination
+  exceptions: [],
+  execute: function execute() {
+    document.querySelector('button[dusk="nextPage"]').click();
+  }
+}];
+module.exports = setCommandRoute('/administrator/verifikasi_crowd_c1', commands);
+
+/***/ }),
+
 /***/ "./resources/js/voiceProcessing/pages/verifikasiSaksi.js":
 /*!***************************************************************!*\
   !*** ./resources/js/voiceProcessing/pages/verifikasiSaksi.js ***!
@@ -720,7 +807,9 @@ var saksiTeregistrasiCommands = __webpack_require__(/*! ./pages/saksiTeregistras
 
 var saksiHadirCommands = __webpack_require__(/*! ./pages/saksiHadir */ "./resources/js/voiceProcessing/pages/saksiHadir.js");
 
-var ALL_COMMANDS = [].concat(_toConsumableArray(navbarCommands), _toConsumableArray(commonCommands), _toConsumableArray(verifikasiC1Commands), _toConsumableArray(auditC1Commands), _toConsumableArray(verifikasiSaksiCommands), _toConsumableArray(enumeratorCommands), _toConsumableArray(adminTerverifikasiCommands), _toConsumableArray(adminDetailCommands), _toConsumableArray(saksiTeregistrasiCommands), _toConsumableArray(saksiHadirCommands));
+var verifikasiCrowdC1Commands = __webpack_require__(/*! ./pages/verifikasiCrowdC1 */ "./resources/js/voiceProcessing/pages/verifikasiCrowdC1.js");
+
+var ALL_COMMANDS = [].concat(_toConsumableArray(navbarCommands), _toConsumableArray(commonCommands), _toConsumableArray(verifikasiC1Commands), _toConsumableArray(auditC1Commands), _toConsumableArray(verifikasiSaksiCommands), _toConsumableArray(enumeratorCommands), _toConsumableArray(adminTerverifikasiCommands), _toConsumableArray(adminDetailCommands), _toConsumableArray(saksiTeregistrasiCommands), _toConsumableArray(saksiHadirCommands), _toConsumableArray(verifikasiCrowdC1Commands));
 
 var _require = __webpack_require__(/*! ./helper */ "./resources/js/voiceProcessing/helper.js"),
     getSpeechStatus = _require.getSpeechStatus,
