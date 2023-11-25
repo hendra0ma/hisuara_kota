@@ -89,8 +89,8 @@ class LoginController extends Controller
             'provinsi' => ['required'],
             'kota' => ['required'],
             'kecamatan' => ['required'],
-            'kelurahan' => ['required'],
-            'tps' => ['required'],
+            // 'kelurahan' => ['required'],
+            // 'tps' => ['required'],
           
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
