@@ -27,7 +27,7 @@
                             action="{{ route('storeRegister.admin') }}" enctype="multipart/form-data">
                             @csrf
                             <span class="login100-form-title">
-                                Registration
+                                Pendaftaran
                             </span>
                             <x-jet-validation-errors class="mb-4" />
                             <input type="hidden" name="cek_koor" id="cek_koor">
@@ -46,8 +46,8 @@
                                     <option value="tps|16">Enumerator</option>
                                     <option value="kor|18|koordinator">Koordinator</option>
                                     <option value="tdk|17">Crowd C1</option>
-                                    <option value="tdk|9">Rekapitulator</option>
-                                    <option value="tps|14">Relawan Tps</option>
+                                    {{-- <option value="tdk|9">Rekapitulator</option> --}}
+                                    <option value="tps|14">Relawan TPS</option>
                                     <option value="tdk|1">Admin</option>
                                 </select>
                             </div>

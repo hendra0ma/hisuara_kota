@@ -6,7 +6,7 @@
     <hr style="border: 1px solid">
     <script>
             
-            function  periksac1Crowds(id) {
+      unction  periksac1Crowds(id) {
         
         $.ajax({
             url: "{{ route('verifikator.getCrowdData') }}",

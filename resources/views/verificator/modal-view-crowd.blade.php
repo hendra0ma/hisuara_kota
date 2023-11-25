@@ -88,7 +88,7 @@
                         <div class="form-group col-md-12">
                             <label><b>Total</b></label>
                             <input type="number" class="form-control" readonly="" value="{{$voice }}"  placeholder="Suara" readonly>
-                            <a href="{{route('verifikator.verifikasiDataC1Relawan',Crypt::encrypt($relawan->id))}}" class="btn btn-success btn-block mt-4">
+                            <a href="{{route('verifikator.verifikasiDataC1Crowd',Crypt::encrypt($relawan->id))}}" class="btn btn-success btn-block mt-4">
                                 Verifikasi C1 Crowd
                             </a>
                         </div>

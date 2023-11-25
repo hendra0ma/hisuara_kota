@@ -1052,9 +1052,8 @@ class AdminController extends Controller
         $saksi->tps_id = $crowd->tps_id;
         $saksi->regency_id = $crowd->regency_id;
         $saksi->province_id = substr($crowd->regency_id, 0, 2);
-
-
         $saksi->save();
+        
         $ide = $saksi->id;
         $paslon = Paslon::get();
         $i = 0;
@@ -1086,6 +1085,15 @@ class AdminController extends Controller
         CrowdC1::where('id', $request->crowd_id)->update([
             "status" => "1",
             "petugas_id" => Auth::user()->id
+        ]);
+        $regency_voice = Regency::where('id', $crowd->id)->first();
+        $suara1 = $regency_voice->suara1 +  $request->suara[0];
+        $suara2 = $regency_voice->suara2 +  $request->suara[1];
+        $suara3 = $regency_voice->suara3 +  $request->suara[2];
+        Regency::where('id', $regency_voice->id)->update([
+            'suara1' => $suara1,
+            'suara2' => $suara2,
+            'suara3' => $suara3,
         ]);
         return redirect()->back()->with('success', 'Berhasil Menambah Data Realcount dari C1 Crowd');
     }
@@ -1334,17 +1342,25 @@ class AdminController extends Controller
                 "petugas_id"=>Auth::user()->id,
             ]);
         }
-    
-
-
-        $voice1 =  $regency_voice->suara1 - $saksi_data[0]->voice + $request->paslon0;
-        $voice2 =  $regency_voice->suara2 - $saksi_data[1]->voice + $request->paslon1;
-        $voice3 =  $regency_voice->suara3 - $saksi_data[2]->voice + $request->paslon2;
-        Regency::where('id',$this->config->regencies_id)->update([
-            'suara1'=>$voice1,
-            'suara2'=>$voice2,
-            'suara3'=>$voice3,
+        $regencyId = $this->config->regencies_id;
+        $requestPaslons = [$request->paslon0, $request->paslon1, $request->paslon2];
+        
+        for ($i = 0; $i < 3; $i++) {
+            $index = $i;
+        
+            $voicev[$index] = $regency_voice->{"suarav{$index}"} - $saksi_data[$index]->voice + $requestPaslons[$index];
+            $voice[$index] = $regency_voice->{"suara{$index}"} - $saksi_data[$index]->voice + $requestPaslons[$index];
+        }
+        
+        Regency::where('id', $regencyId)->update([
+            'suarav1' => $voicev[0],
+            'suarav2' => $voicev[1],
+            'suarav3' => $voicev[2],
+            'suara1' => $voice[0],
+            'suara2' => $voice[1],
+            'suara3' => $voice[2],
         ]);
+
 
         foreach ($paslon as $pas) {
             // $saksi_data = SaksiData::where('paslon_id',$pas->id)->where('saksi_id',$id)->first();

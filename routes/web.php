@@ -100,30 +100,32 @@ Route::get("redirect-page", function () {
 Route::get('register-admin', [LoginController::class, 'createAdmin'])->name('formRegister.admin');
 
 
-Route::get("update-dpt", function () {
-    set_time_limit(999999999999);
-    $dpt_indonesia = DB::table('dpt_indonesia')->limit(10000)->get();
-    // return $dpt_indonesia;
-    foreach ($dpt_indonesia as $dpt) {
-        $province = Province::where('name', $dpt->province_name)->first();
-        $regency = Regency::where('province_id', $province->id)->where('name', $dpt->regency_name)->first();
 
-        $district = District::where('regency_id', $regency->id)->where('name', $dpt->district_name)->first();
-        $village = Village::where('district_id', $district->id)->where('name', $dpt->village_name)->first();
 
-        DB::table('dpt_indonesia')
-            ->where('province_name', $province->name)
-            ->where('regency_name', $regency->name)
-            ->where('district_name', $district->name)
-            ->where('village_name', $village->name)
-            ->update([
-                "province_id" => $province->id,
-                "regency_id" => $regency->id,
-                "district_id" => $district->id,
-                "village_id" => $village->id,
-            ]);
-    }
-});
+// Route::get("update-dpt", function () {
+//     set_time_limit(999999999999);
+//     $dpt_indonesia = DB::table('dpt_indonesia')->limit(10000)->get();
+//     // return $dpt_indonesia;
+//     foreach ($dpt_indonesia as $dpt) {
+//         $province = Province::where('name', $dpt->province_name)->first();
+//         $regency = Regency::where('province_id', $province->id)->where('name', $dpt->regency_name)->first();
+
+//         $district = District::where('regency_id', $regency->id)->where('name', $dpt->district_name)->first();
+//         $village = Village::where('district_id', $district->id)->where('name', $dpt->village_name)->first();
+
+//         DB::table('dpt_indonesia')
+//             ->where('province_name', $province->name)
+//             ->where('regency_name', $regency->name)
+//             ->where('district_name', $district->name)
+//             ->where('village_name', $village->name)
+//             ->update([
+//                 "province_id" => $province->id,
+//                 "regency_id" => $regency->id,
+//                 "district_id" => $district->id,
+//                 "village_id" => $village->id,
+//             ]);
+//     }
+// });
 
 
 
@@ -145,7 +147,7 @@ Route::domain('hisuara.id')->name('pusat.')->group(function () {
 
 
     Route::group(["middleware" => 'role:administrator'], function () {
-        Route::get('/dashboard-pusats', [PusatController::class, "home"])->name('home');
+        Route::get('/   dashboard-pusats', [PusatController::class, "home"])->name('home');
     });
 });
 
@@ -475,6 +477,8 @@ foreach ($kotas as $kota) {
             Route::get('verifikasiData/{id}', [VerificatorController::class, 'verifikasiData'])->name('verifikasiData');
             Route::get('verifikasi-data-pending/{id}', [VerificatorController::class, 'verifikasiDataPending'])->name('verifikasiDataPending');
             Route::get('verifikasi-data-c1-relawan/{id}', [VerificatorController::class, 'verifikasiDataC1Relawan'])->name('verifikasiDataC1Relawan');
+            Route::get('verifikasi-data-c1-crowd/{id}', [VerificatorController::class, 'verifikasiDataC1Crowd'])->name('verifikasiDataC1Crowd');
+
             Route::get('koreksidata/{id}', [VerificatorController::class, 'koreksidata'])->name('koreksidata');
             Route::post('actionKoreksiData/{id}', [VerificatorController::class, 'actionKoreksiData'])->name('actionKoreksiData');
             Route::get('village/{id}', [VerificatorController::class, "village"])->middleware('districtCheck:kelurahan')->name("village");
@@ -1096,10 +1100,6 @@ Route::get('update-suara-c1-kota',function (){
 });
 
 
-Route::get('cek-query',function () {
-   $saksi =new SaksiData;
-   return $saksi->toSql();
-});
 
 
 // Route::get('update-suara-c1-provinsi',function (){
