@@ -727,15 +727,15 @@ foreach ($kotas as $kota) {
         Route::controller(DevelopingController::class)->group(function () {
             Route::get('dev/index', 'index');
 
-            Route::get('c1Crowd/index', 'c1Crowd')->name('crowd_c1');
-            Route::post('c1Crowd/upload', 'uploadC1Crowd');
-            Route::post('dev/action_saksi', 'action_saksi');
-            Route::get('dev/tps_update', 'tps_update');
-            Route::get('dev/saksi_update', 'saksi_update');
-            Route::get('dev/tps_user_update', 'tps_user_update');
+            Route::get('c1Crowd/index', 'c1Crowd')->middleware('auth')->name('crowd_c1');
+            Route::post('c1Crowd/upload', 'uploadC1Crowd')->middleware('auth');
+            Route::post('dev/action_saksi', 'action_saksi')->middleware('auth');
+            Route::get('dev/tps_update', 'tps_update')->middleware('auth');
+            Route::get('dev/saksi_update', 'saksi_update')->middleware('auth');
+            Route::get('dev/tps_user_update', 'tps_user_update')->middleware('auth');
             Route::get('upload_kecurangan', 'upload_kecurangan');
             Route::get('upload_kecurangan_2', 'upload_kecurangan_2');
-            Route::get('upload_c1', 'upload_c1')->name('upload_c1');
+            Route::get('upload_c1', 'upload_c1')->middleware('auth')->name('upload_c1');
             Route::get('input-c1-quickcount', 'c1_quickcount');
             Route::post('action_upload_kecurangan', 'action_upload_kecurangan')->name('action_upload_kecurangan');
             Route::get('dev/absen', 'absen');
