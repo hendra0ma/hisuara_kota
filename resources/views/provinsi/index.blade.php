@@ -5,6 +5,7 @@
     use App\Models\Config;
     use App\Models\District;
     use App\Models\ProvinceDomain;
+    use App\Models\RegenciesDomain;
     use App\Models\Regency;
     use App\Models\SaksiData;
     use App\Models\Tps;
@@ -98,9 +99,10 @@
             </style>
 
             <ul class="breadcrumb">
-          
+
                 <li><a href="https://hisuara.id/dashboard-pusats" class="text-white">Indonesia</a></li>
-                <li><a href="{{request()->url()}}" class="text-white">Provinsi {{ucwords(strtolower($provinsi_ini->name))}}</a></li>
+                <li><a href="{{ request()->url() }}" class="text-white">Provinsi
+                        {{ ucwords(strtolower($provinsi_ini->name)) }}</a></li>
 
             </ul>
         </div>
@@ -212,15 +214,17 @@
 
                                     <tbody>
                                         @foreach ($regencies as $item)
+                                            @php
+                                                $regDom = RegenciesDomain::where('regency_id', $item->id)->first();
+                                            @endphp
                                             <tr>
                                                 <td class="align-middle">
                                                     <a
-                                                        href="">{{ $item['name'] }}</a>
+                                                        href="{{ env('HTTP_SSL') . $regDom->domain . env('HTTP_PORT', '') }}/administrator/index">{{ $item['name'] }}</a>
                                                 </td>
                                                 <?php $i = 1; ?>
                                                 @foreach ($paslon as $cd)
-                                                  
-                                                    <td class="align-middle">{{ $item->{"suara".$i} }}</td>
+                                                    <td class="align-middle">{{ $item->{'suara' . $i} }}</td>
                                                     @php
                                                         $i++;
                                                     @endphp
@@ -245,10 +249,13 @@
                     @foreach ($regencies as $item)
                         <div class="col-3">
                             <div class="card">
+                                @php
+                                    $regDom = RegenciesDomain::where('regency_id', $item->id)->first();
+                                @endphp
                                 <div class="card-header bg-primary text-white">
                                     <div class="card-title mx-auto">
                                         <a
-                                            href="">{{ $item['name'] }}
+                                            href="{{ env('HTTP_SSL') . $regDom->domain . env('HTTP_PORT', '') }}/administrator/index">{{ $item['name'] }}
                                         </a>
                                     </div>
                                 </div>
@@ -264,3 +271,4 @@
         </div>
     </div>
 @endsection
+ 
