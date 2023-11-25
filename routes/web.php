@@ -186,10 +186,6 @@ Route::get('/getKelurahan/{id}', function ($id) {
 foreach ($kotas as $kota) {
 
     Route::domain($kota->domain)->group(function () {
-
-
-
-
         Route::get('/ceksetup', function () {
             $config = Config::first();
             if ($config->setup == 'yes') {

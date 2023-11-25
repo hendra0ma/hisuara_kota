@@ -18,12 +18,14 @@ $regency = District::where('regency_id', $config->regencies_id)->get();
 $kota = Regency::where('id', $config->regencies_id)->first();
 $dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
 $tps = Tps::count();
-$marquee = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->get();
-$total_tps = Tps::where('setup', 'belum terisi')->count();;
+$marquee = Saksi::join('users', 'users.tps_id', '=', 'saksi.tps_id')->get();
+$total_tps = Tps::where('setup', 'belum terisi')->count();
 $tps_masuk = Tps::where('setup', 'terisi')->count();
 $tps_kosong = $total_tps - $tps_masuk;
 $suara_masuk = SaksiData::count('voice');
-$verification = Saksi::where('verification', 1)->with('saksi_data')->get();
+$verification = Saksi::where('verification', 1)
+    ->with('saksi_data')
+    ->get();
 $total_verification_voice = 0;
 foreach ($verification as $key) {
     foreach ($key->saksi_data as $verif) {
@@ -128,8 +130,10 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
                                     <div class="col-md ps-3 mb-0 text-light headerAnimate">
                                         <h2 class="text-white mb-0 text-center headerPojokan"></h2>
-                                        <h2 class="text-white mb-0 text-center headerPojokanText1" style="display:none;font-size:medium"></h2>
-                                        <h2 class="text-white mb-0 text-center headerPojokanText2" style="display:none;"> </h2>
+                                        <h2 class="text-white mb-0 text-center headerPojokanText1"
+                                            style="display:none;font-size:medium"></h2>
+                                        <h2 class="text-white mb-0 text-center headerPojokanText2"
+                                            style="display:none;"> </h2>
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +142,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                 <div class="row">
 
                                     <div class="col-md-auto pe-0 my-auto">
-                                       
+
                                     </div>
                                     <div class="col-lg-auto ps-3 mb-0">
                                         <h3 class="text-white mb-0">PILPRES 2024
@@ -146,8 +150,8 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         </h3>
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item active text-white" aria-current="page">
-                                               <h4> Indonesia</h4>
-                                           
+                                                <h4> Indonesia</h4>
+
                                             </li>
                                         </ol>
                                     </div>
@@ -227,7 +231,7 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                             </script>
 
 
-                          
+
                             <div class="col-md my-auto">
                                 <div class="row">
                                     <style>
@@ -237,21 +241,27 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         }
                                     </style>
 
-                                    <div class="col-md text-white kota tugel-content" style="display: none">
+                                    <div class="col-md text-white kota tugel-content">
                                         <div class="row">
-                                            <div class="col-4 my-auto">
-                                                <input type="text" class="w-100 form-control py-0 searchbar" style="border-radius: 25px; height: 30px" name="" id="" placeholder="Cari Provinsi...">
+                                            <div class="col-6 my-auto">
+                                                <input type="text" class="w-100 form-control py-0 searchbar"
+                                                    style="border-radius: 25px; height: 30px" name=""
+                                                    id="" placeholder="Cari Provinsi...">
                                             </div>
                                             <div class="col-6">
-                                                <?php $domainProvinsi = ProvinceDomain::join("provinces", 'province_domains.province_id', '=', 'provinces.id')->get(); ?>
-                                                <div class="row items" style="width: 700px; overflow: scroll; flex-wrap: nowrap">
+                                                <?php $domainProvinsi = ProvinceDomain::join('provinces', 'province_domains.province_id', '=', 'provinces.id')->get(); ?>
+                                                <div class="row items"
+                                                    style="width: 700px; overflow: scroll; flex-wrap: nowrap;">
                                                     <div class="col-auto">
-                                                        <a class="text-white btn rounded-0 item bg-danger" href="http://hisuara.id">DASHBOARD PUSAT</a>
+                                                        <a class="text-white btn rounded-0 item bg-danger"
+                                                            href="http://hisuara.id">DASHBOARD PUSAT</a>
                                                     </div>
-                                                    @foreach($domainProvinsi as $dokota)
-                                                    <div class="col-auto">
-                                                        <a class="text-white btn rounded-0 item" style="background: #528bff" href="https://{{$dokota->domain}}">{{$dokota->name}}</a>
-                                                    </div>
+                                                    @foreach ($domainProvinsi as $dokota)
+                                                        <div class="col-auto">
+                                                            <a class="text-white btn rounded-0 item"
+                                                                style="background: #528bff"
+                                                                href="https://{{ $dokota->domain }}">{{ $dokota->name }}</a>
+                                                        </div>
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -262,13 +272,16 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         $(document).ready(function() {
                                             $('.searchbar').on('input', function() {
                                                 const searchText = $(this).val().toLowerCase().trim();
+
                                                 $('.item').each(function() {
                                                     const itemText = $(this).text().toLowerCase();
 
                                                     if (itemText.includes(searchText)) {
-                                                        $(this).parent('.col-auto').show(); // Show the parent column if the item matches the search text
+                                                        $(this).parent('.col-auto')
+                                                            .show(); // Show the parent column if the item matches the search text
                                                     } else {
-                                                        $(this).parent('.col-auto').hide(); // Hide the parent column if the item doesn't match
+                                                        $(this).parent('.col-auto')
+                                                            .hide(); // Hide the parent column if the item doesn't match
                                                     }
                                                 });
                                             });
@@ -303,8 +316,8 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                         });
                                     </script>
 
-                             
-                                    
+
+
                                     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
                                     <script>
@@ -390,23 +403,23 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
                                             <?php
                                             if (request()->segment(2) != "index") {  ?>
-                                                const dataTarget = getCookie('dataTarget');
-                                                if (dataTarget != "") {
-                                                    $(`[data-target='${dataTarget}']`).click();
-                                                } else {
-                                                    $('.active-button').click()
-                                                }
+                                            const dataTarget = getCookie('dataTarget');
+                                            if (dataTarget != "") {
+                                                $(`[data-target='${dataTarget}']`).click();
+                                            } else {
+                                                $('.active-button').click()
+                                            }
 
-                                                setTimeout(() => {
-                                                    $('.col-hisuara').css('display') = 'flex'
-                                                    $('.col-pilpres').hide()
-                                                    animateHeaderPojokan();
-                                                }, 6000);
+                                            setTimeout(() => {
+                                                $('.col-hisuara').css('display') = 'flex'
+                                                $('.col-pilpres').hide()
+                                                animateHeaderPojokan();
+                                            }, 6000);
 
 
 
                                             <?php } else { ?>
-                                                animate();
+                                            animate();
                                             <?php  } ?>
 
                                         });
@@ -417,54 +430,34 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
 
                             <div class="col-md-auto my-auto">
                                 <div class="row h-100 justify-content-end" style="gap: 10px;">
-                                 
 
-                                    <div class="col-md-auto px-0">
-                                        <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="kota">
-                                            <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="">
-                                                <i class="fa-solid fa-city"></i>
-                                            </span>
-                                        </button>
-                                    </div>
                                     {{-- <div class="dropdown d-none d-md-flex">
                                         <a class="nav-link icon theme-layout nav-link-bg layout-setting" onclick="darktheme()">
                                             
                                         </a>
                                     </div><!-- Theme-Layout --> --}}
-                                    <script>
-                                        let darktheme = function() {
-                                            setTimeout(function() {
-                                                let body = document.body;
-                                                let themes = body.className.split(" ");
-                                                let theme = (themes.length == 3) ? "yes" : "no";
-                                                $.ajax({
-                                                    url: `{{ route('superadmin.theme') }}`,
-                                                    data: {
-                                                        theme,
-                                                        "_token": "{{ csrf_token() }}"
-                                                    },
-                                                    type: "post",
-                                                    success: function(res) {
-
-                                                    }
-                                                });
-                                            }, 300);
-                                        }
-                                    </script>
-                                    <!-- <div class="col-md-auto px-0" style="color: #212529 !important">
+                                  
+                                 {{-- <div class="col-md-auto px-0" style="color: #212529 !important">
                                         <a class="w-100 mx-auto btn nav-link theme-layout nav-link-bg layout-setting px-3 text-white" onclick="darktheme()" style="background-color: #656064; width: 40px; height: 36px; margin: 0px; font-size: 16px" data-target="">
                                             <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Dark Theme"><i class="fe fe-moon"></i></span>
                                             <span class="light-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Light Theme"><i class="fe fe-sun"></i></span>
                                         </a>
-                                    </div> -->
+                                    </div>  --}}
                                     <div class="col-md-auto px-0">
                                         <div class="dropdown d-none d-md-flex profile-1">
-                                            <a href="#" data-bs-toggle="dropdown" class="nav-link pt-0 leading-none d-flex">
+                                            <a href="#" data-bs-toggle="dropdown"
+                                                class="nav-link pt-0 leading-none d-flex">
                                                 <span>
-                                                    @if (Auth::user()->profile_photo_path == NULL)
-                                                    <img class="avatar profile-user brround" style="object-fit: cover; width: 33px; height: 33px" src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF" alt="profile-user">
+                                                    @if (Auth::user()->profile_photo_path == null)
+                                                        <img class="avatar profile-user brround"
+                                                            style="object-fit: cover; width: 33px; height: 33px"
+                                                            src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF"
+                                                            alt="profile-user">
                                                     @else
-                                                    <img class="avatar profile-user brround" style="object-fit: cover; width: 33px; height: 33px" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}" alt="profile-user" s>
+                                                        <img class="avatar profile-user brround"
+                                                            style="object-fit: cover; width: 33px; height: 33px"
+                                                            src="{{ url('/storage/profile-photos/' . Auth::user()->profile_photo_path) }}"
+                                                            alt="profile-user" s>
                                                     @endif
                                                 </span>
                                             </a>
@@ -472,7 +465,8 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                                 <div class="drop-heading">
                                                     <div class="text-center">
                                                         <h5 class="text-dark mb-0">{{ Auth::user()->name }}</h5>
-                                                        <small class="text-muted">{{ Auth::user()->role_id == 1 ? 'Administrator' : 'uwon luyi' }}</small>
+                                                        <small
+                                                            class="text-muted">{{ Auth::user()->role_id == 1 ? 'Administrator' : 'uwon luyi' }}</small>
                                                     </div>
                                                 </div>
                                                 <div class="dropdown-divider m-0"></div>
@@ -488,17 +482,18 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
-                <div class="card-footer p-0 border-0" id="marquee1" style="position: relative; background-color: #343a40">
+                <div class="card-footer p-0 border-0 bg-secondary" id="marquee1" style="position: relative;">
                     {{-- <button class="btn-dark btn-kolapse-sidebar text-white" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-align-left"></i></button> --}}
-                    <button class="btn-dark btn-kolapse text-white h-100" style="background-color: #30304d; position: absolute; left: 0; z-index: 20; border-0"><i class="fa-solid fa-bars"></i></button>
-                    <button class="btn-danger text-white h-100 rounded-0" style="position: absolute; left: 28px; z-index: 20">Suara Masuk</button>
+                    <button class="btn-secondary btn-kolapse text-white h-100"><i class="fa-solid fa-bars"></i></button>
+                    <button class="btn-secondary text-white h-100 rounded-0">Suara Masuk</button>
                     <a href="https://time.is/Jakarta" id="time_is_link" rel="nofollow"></a>
-                    <button class="btn-dark text-white h-100 rounded-0" style="position: absolute; left: 123px; z-index: 20;"><span id="Jakarta_z41c" style="font-size:20px; color: #f7f700"></span> <span style="font-size: 20px; color: #f7f700">WIB</span></button>
+                    <button class="btn-secondary text-white h-100 rounded-0">
+                        <span id="Jakarta_z41c" style="font-size:20px; color: #f7f700"></span>
+                        <span style="font-size: 20px; color: #f7f700">WIB</span>
+                    </button>
                     <script src="//widget.time.is/t.js"></script>
                     <script>
                         time_is_widget.init({
@@ -594,17 +589,18 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                             ->where('role_id', '!=', 14)
                             ->get(); ?>
                         @foreach ($allUser as $usr)
-                        <a class="dropdown-item d-flex" href="#" onclick="openForm(`<?= $usr->id ?>`)">
-                            <span class="avatar avatar-md brround me-3 align-self-center cover-image" data-bs-image-src="{{ url('/') }}/assets/images/users/1.jpg"></span>
-                            <div class="wd-90p">
-                                <div class="d-flex">
-                                    <h5 class="mb-1">{{ $usr->name }}</h5>
-                                    <small class="text-muted ms-auto text-end">
+                            <a class="dropdown-item d-flex" href="#" onclick="openForm(`<?= $usr->id ?>`)">
+                                <span class="avatar avatar-md brround me-3 align-self-center cover-image"
+                                    data-bs-image-src="{{ url('/') }}/assets/images/users/1.jpg"></span>
+                                <div class="wd-90p">
+                                    <div class="d-flex">
+                                        <h5 class="mb-1">{{ $usr->name }}</h5>
+                                        <small class="text-muted ms-auto text-end">
 
-                                    </small>
+                                        </small>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
                         @endforeach
                     </div>
                     <div class="dropdown-divider m-0"></div>
@@ -614,10 +610,14 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
             <div class="dropdown d-md-flex profile-1">
                 <a href="#" data-bs-toggle="dropdown" class="nav-link pe-2 leading-none d-flex pt-0">
                     <span>
-                        @if (Auth::user()->profile_photo_path == NULL)
-                        <img class="avatar profile-user brround" style="object-fit: cover" src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF" alt="profile-user">
+                        @if (Auth::user()->profile_photo_path == null)
+                            <img class="avatar profile-user brround" style="object-fit: cover"
+                                src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF"
+                                alt="profile-user">
                         @else
-                        <img class="avatar profile-user brround" style="object-fit: cover" src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}" alt="profile-user" s>
+                            <img class="avatar profile-user brround" style="object-fit: cover"
+                                src="{{ url('/storage/profile-photos/' . Auth::user()->profile_photo_path) }}"
+                                alt="profile-user" s>
                         @endif
                     </span>
                 </a>
@@ -625,7 +625,8 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                     <div class="drop-heading">
                         <div class="text-center">
                             <h5 class="text-dark mb-0">{{ Auth::user()->name }}</h5>
-                            <small class="text-muted">{{ Auth::user()->role_id == 1 ? 'Administrator' : 'uwon luyi' }}</small>
+                            <small
+                                class="text-muted">{{ Auth::user()->role_id == 1 ? 'Administrator' : 'uwon luyi' }}</small>
                         </div>
                     </div>
                     <div class="dropdown-divider m-0"></div>
@@ -644,7 +645,8 @@ $cityProp = Regency::where('province_id', $kota['province_id'])->get();
                 </div>
             </div>
             <div class="dropdown d-md-flex header-settings">
-                <a href="#" class="nav-link icon " data-bs-toggle="sidebar-right" data-target=".sidebar-right">
+                <a href="#" class="nav-link icon " data-bs-toggle="sidebar-right"
+                    data-target=".sidebar-right">
                     <i class="fe fe-menu"></i>
                 </a>
             </div><!-- SIDE-MENU -->

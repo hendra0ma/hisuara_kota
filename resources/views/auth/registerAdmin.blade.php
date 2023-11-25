@@ -122,7 +122,7 @@
                             </div>
                         
                             <div class="wrap-input100 validate-input" data-bs-validate="Password is required">
-                                <label class="form-label mt-3">Upload Foto Ktp</label>
+                                <label class="form-label mt-3"> Foto Ktp</label>
                                 <label class="picture" for="picture__input" tabIndex="0">
                                     <span class="picture__image"></span>
                                 </label>
@@ -131,7 +131,7 @@
                             </div>
                         
                             <div class="wrap-input100 validate-input" data-bs-validate="Password is required">
-                                <label class="form-label mt-3">Upload Foto Profile</label>
+                                <label class="form-label mt-3"> Foto Profil</label>
                                 <label class="picture" for="picture__input2" tabIndex="0">
                                     <span class="picture__image2"></span>
                                 </label>
@@ -211,17 +211,16 @@
                         
                             <label class="custom-control custom-checkbox mt-4">
                                 <input type="checkbox" class="custom-control-input">
-                                <span class="custom-control-label">Agree the <a href="#">terms and
-                                        policy</a></span>
+                                <span class="custom-control-label">Setuju dengan <a href="#">ketentuan dan kebijakan</a></span>
                             </label>
                             <div class="container-login100-form-btn">
                                 <button type="submit" class="login100-form-btn btn-primary">
-                                    Register
+                                    Daftar
                                 </button>
                             </div>
                             <div class="text-center pt-3">
-                                <p class="text-dark mb-0">Already have account?<a href="{{url('')}}/login"
-                                        class="text-primary ms-1">Sign In</a></p>
+                                <p class="text-dark mb-0">Sudah Punya Akun?<a href="{{url('')}}/login"
+                                        class="text-primary ms-1">Masuk Disini</a></p>
                             </div>
                         
                         </form>

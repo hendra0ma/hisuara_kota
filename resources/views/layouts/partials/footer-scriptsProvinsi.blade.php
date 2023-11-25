@@ -131,37 +131,8 @@ let myModal = new bootstrap.Modal(document.getElementById('modallockdown'), {
         @if($config->lockdown == "yes")
             myModal.show()
         @endif;
-        var pusher = new Pusher('d3492f7a24c6c2d7ed0f', {
-            cluster: 'ap1'
-        });
-        var channel = pusher.subscribe('messages');
-        channel.bind('my-event', function(data) {
-            show_count(data);
-            playSound();
-        });
-
-        function show_count(data) {
-            $('div.notification-menu').append(`
-            <a class="dropdown-item d-flex" href="#">
-                <div class="me-3 notifyimg  bg-primary-gradient brround box-shadow-primary">
-                    <i class="fe fe-message-square"></i>
-                </div>
-                <div class="mt-1">
-                    <h5 class="notification-label mb-1">${data.message}</h5>
-                    <span class="notification-subtext">1 minutes ago</span>
-                </div>
-            </a>
-            `);
-        }
-
-        function playSound(url) {
-            const audio = new Audio(url);
-            audio.play();
-            // console.log(audio);
-        }
     });
 </script>
-@if(Request::segment('2') != "index-tsm")
 <script>
     /*chart-pie*/
     var chartmode1 = c3.generate({
@@ -170,13 +141,21 @@ let myModal = new bootstrap.Modal(document.getElementById('modallockdown'), {
             columns: [
                 // each columns data
 
+                    @php
+                    $i=1;
+                    @endphp
+                  
                 <?php foreach ($paslon as $pas) :  ?>
-                    <?php $voice = 0;  ?>
-                    <?php foreach ($pas->saksi_data as $pak) :  ?>
-                        <?php
-                        $voice += $pak->voice;
-                        ?>
-                    <?php endforeach  ?>['data<?= $pas->id  ?>', <?= $voice ?>],
+                    @php
+                    $voice = 0;
+                        foreach($regencies as $regency){
+                            $voice += $regency->{"suara".$i};
+                        }
+                    @endphp
+                   ['data<?= $pas->id  ?>', <?= $voice ?>],
+                      @php
+                         $i++;
+                    @endphp
                 <?php endforeach  ?>
             ],
             type: 'pie', // default type of chart
@@ -202,396 +181,58 @@ let myModal = new bootstrap.Modal(document.getElementById('modallockdown'), {
 </script>
 
 <script>
-    /*chart-pie*/
-    var chartmode2 = c3.generate({
-        bindto: '#chart-pie-mode-2', // id of chart wrapper
-        data: {
-            columns: [
-                // each columns data
-
-                <?php foreach ($paslon as $pas) :  ?>
-                    <?php $voice = 0;  ?>
-                    <?php foreach ($pas->saksi_data as $pak) :  ?>
-                        <?php
-                        $voice += $pak->voice;
-                        ?>
-                    <?php endforeach  ?>['data<?= $pas->id  ?>', <?= $voice ?>],
-                <?php endforeach  ?>
-            ],
-            type: 'pie', // default type of chart
-            colors: {
-                <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': "<?= $pas->color ?>",
-                <?php endforeach  ?>
-            },
-            names: {
-                // name of each serie
-                <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': " <?= $pas->candidate ?> - <?= $pas->deputy_candidate ?>",
-                <?php endforeach  ?>
-            }
-        },
-        axis: {},
-        legend: {
-            show: true, //hide legend
-        },
-        padding: {
-            bottom: 0,
-            top: 0
-        },
-    });
-</script>
-
-<script>
-    /*chart-pie*/
-    var chart = c3.generate({
-        bindto: '#chart-pie2', // id of chart wrapper
-        data: {
-            columns: [
-                // each columns data
-
-                <?php foreach ($paslon as $pas) :  ?>
-                    <?php $voice = 0;  ?>
-                    <?php foreach ($pas->quicksaksidata as $pak) :  ?>
-                        <?php
-                        $voice += $pak->voice;
-                        ?>
-                    <?php endforeach  ?>['data<?= $pas->id  ?>', <?= $voice ?>],
-                <?php endforeach  ?>
-            ],
-            type: 'pie', // default type of chart
-            colors: {
-                <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': "<?= $pas->color ?>",
-                <?php endforeach  ?>
-            },
-            names: {
-                // name of each serie
-                <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': " <?= $pas->candidate ?> - <?= $pas->deputy_candidate ?>",
-                <?php endforeach  ?>
-            }
-        },
-        axis: {},
-        legend: {
-            show: true, //hide legend
-        },
-        padding: {
-            bottom: 0,
-            top: 0
-        },
-    });
-</script>
-
-<script>
-    /*chart-pie*/
-    var chartV1 = c3.generate({
-        bindto: '#chart-donut', // id of chart wrapper
-    data: {
-            columns: [
-                // each columns data
-
-                <?php foreach ($paslon_terverifikasi as $pas) :  ?>
-                    <?php $voice = 0;  ?>
-                    <?php foreach ($pas->saksi_data as $pak) :  ?>
-                        <?php
-                        $voice += $pak->voice;
-                        ?>
-                    <?php endforeach  ?>['data<?= $pas->id  ?>', <?= $voice ?>],
-                <?php endforeach  ?>
-            ],
-            type: 'pie', // default type of chart
-            colors: {
-                <?php foreach ($paslon_terverifikasi as $pas) :  ?> 'data<?= $pas->id  ?>': "<?= $pas->color ?>",
-                <?php endforeach  ?>
-            },
-            names: {
-                // name of each serie
-                <?php foreach ($paslon_terverifikasi as $pas) :  ?> 'data<?= $pas->id  ?>': " <?= $pas->candidate ?> - <?= $pas->deputy_candidate ?>",
-                <?php endforeach  ?>
-            }
-        },
-        axis: {},
-        legend: {
-            show: true, //hide legend
-        },
-        padding: {
-            bottom: 0,
-            top: 0
-        },
-    });
-
-    var chartV2 = c3.generate({
-        bindto: '#chart-donut-mode-2', // id of chart wrapper
-    data: {
-            columns: [
-                // each columns data
-
-                <?php foreach ($paslon_terverifikasi as $pas) :  ?>
-                    <?php $voice = 0;  ?>
-                    <?php foreach ($pas->saksi_data as $pak) :  ?>
-                        <?php
-                        $voice += $pak->voice;
-                        ?>
-                    <?php endforeach  ?>['data<?= $pas->id  ?>', <?= $voice ?>],
-                <?php endforeach  ?>
-            ],
-            type: 'pie', // default type of chart
-            colors: {
-                <?php foreach ($paslon_terverifikasi as $pas) :  ?> 'data<?= $pas->id  ?>': "<?= $pas->color ?>",
-                <?php endforeach  ?>
-            },
-            names: {
-                // name of each serie
-                <?php foreach ($paslon_terverifikasi as $pas) :  ?> 'data<?= $pas->id  ?>': " <?= $pas->candidate ?> - <?= $pas->deputy_candidate ?>",
-                <?php endforeach  ?>
-            }
-        },
-        axis: {},
-        legend: {
-            show: true, //hide legend
-        },
-        padding: {
-            bottom: 0,
-            top: 0
-        },
-    });
 
 
-
-</script>
-
-
-<!-- Make sure you put this AFTER Leaflet's CSS -->
-<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-     crossorigin=""></script>
-     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
-<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
-<!-- CHART-CIRCLE JS-->
-<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
-<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
-<script src="../../assets/js/circle-progress.min.js"></script>
-<!-- CHART-CIRCLE JS-->
-<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
-<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
-@livewireScripts
-
-<script>
-    $('a.modaltpsQuick2').on('click', function() {
-        
-        let id = $(this).data('id');
-        $.ajax({
-            url: '{{url("/")}}/ajax/get_tps_quick2',
-            type: "GET",
-            data: {
-                id
-            },
-            success: function(response) {
-                if (response) {
-                    $('#container-tps-quick2').html(response);
-                }
-            }
-        });
-
-    });
-</script>
-<script>
-
-    $('#ikon-map-full').on('click',function(){
-        map.toggleFullscreen();
-    });
-
-
-
-    var cities = L.layerGroup();
-
-
-   @foreach($tracking as $track)
-    <?php $user = User::where('id', (string)$track->id_user)->first(); ?>
-    @if($user == NULL)
-      L.marker([{{$track['latitude']}},{{$track['longitude']}}]).bindPopup(' Tidak Terdeteksi ').addTo(cities);
-    @else
-       var text<?= $user['id'] ?> = '<div class="row"><div class="col-4"><img src="' + '<?php if($user["profile_photo_path"] == NULL){ echo "https://ui-avatars.com/api/?name=' + '".$user["name"]."' +'&color=7F9CF5&background=EBF4FF"; }else{ echo url("/storage/profile-photos/".$user["profile_photo_path"]); } ?>' + '" class="'+ 'img-fluid' + '"  width="150px" height="auto" /></div>   <div class="col-8"><table>' + '<tr><td>Nama</td><td>:</td><td>' + '<?= $user["name"] ?>' + '</td></tr>' + '<tr><td>Email</td><td>:</td><td>' + '<?= $user["email"]?>' + '</td></tr>' + '<tr><td>Nomor</td><td>:</td><td>' + '<?= $user["no_hp"]?>' + '</td></tr>' + '<tr><td>Last Seen</td><td>:</td><td>' + '    {{ \Carbon\Carbon::parse($user["last_seen"])->diffForHumans() }}' + '</td></tr>' + '</table><a href="{{url('/')}}/administrator/patroli_mode/tracking/detail/<?= encrypt($user["id"])?>">Detail Tracking</a>  </div> </div>';
-    L.marker([{{ $track['latitude']}}, {{ $track['longitude']}}]).bindPopup(text<?= $user['id'] ?>).addTo(cities);
-    @endif
-
-    @endforeach
-
-    var mbAttr = '',
-        mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaXNhYTIxIiwiYSI6ImNsZnc5dmQ3NDBmMjUzcW8zZzg0c2RnazgifQ.mphOBqpgqHl5ONLL092Txw';
-    var grayscale = L.tileLayer(mbUrl, {
-            maxZoom: 20,
-            id: 'mapbox/satellite-v9',
-            tileSize: 512,
-            zoomOffset: -1,
-
-        }),
-        streets = L.tileLayer(mbUrl, {
-            maxZoom: 20,
-            id: 'mapbox/streets-v11',
-            tileSize: 512,
-            zoomOffset: -1,
-            attribution: mbAttr
-        });
-    var map = L.map('map', {
-        center: [-6.289576896901706, 106.71141255004683],
-        zoom: 10,
-        layers: [streets, cities],
-
-    });
-
-    $('#ikon-map-full').on('click',function(){
-        map.toggleFullscreen();
-    });
-
-
-
-    fetch("{{url('/')}}/geojson/tangsel.json").then(response => response.json())
-        .then(json => {
-            console.log(json.features)
-            L.geoJSON(json.features[7]).addTo(map);
-        });
-    let i = 0;
-    var baseLayers = {
-        "Track": streets,
-        "Satelit": grayscale,
-    };
-
-    var overlays = {
-        "Cities": cities
-    };
-
-    L.control.layers(baseLayers, overlays).addTo(map);
-    L.Control.geocoder().addTo(map);
-</script>
-
-@else
-        <script>
-               var chartmode1 = c3.generate({
-                bindto: '#chart-pie', // id of chart wrapper
-                data: {
-                    columns: [
-                         <?php $i = 1 ?>
-                                    <?php foreach ($index_tsm as $item): ?>
-                                        <?php    if($item->jenis !=0){
-                                            continue;
-                                        } ?>
-                                        <?php
-                                     $totalKec =  App\Models\Bukti_deskripsi_curang::join('list_kecurangan','list_kecurangan.id','=','bukti_deskripsi_curang.list_kecurangan_id')
-                                     ->join('saksi', 'saksi.tps_id', '=', 'bukti_deskripsi_curang.tps_id')
-                                                     ->where('saksi.status_kecurangan', "terverifikasi")
-                                    ->where('bukti_deskripsi_curang.list_kecurangan_id',$item->id)
-                                    ->where('list_kecurangan.jenis',0)
-                                    ->count();
-                                    $jumlahSaksi = App\Models\Saksi::where('kecurangan',"yes")->count();
-                                    $persen = ($totalKec/ $jumlahSaksi)*100;
-                                      ?>
-                                      ['{{$i++}}',<?=substr($persen,0,4)?>],
-                                    <?php endforeach ?>
-                    ],
-                                type: 'pie',
-                },
-                axis: {},
-                legend: {
-                    show: true, //hide legend
-                },
-                axis: {
- 		        	rotated: true,
- 		        },
-                padding: {
-                    bottom: 0,
-                    top: 0
-                },
-                size: {
-                    height: 300,
-                    width: 300
-                }
-            });
-               var chart2 = c3.generate({
-                bindto: '#chart-donut', // id of chart wrapper
-                data: {
-                    columns: [
-                         <?php $i = 1 ?>
-                                    <?php foreach ($index_tsm as $item): ?>
-                                        <?php    if($item->jenis !=1){
-                                            continue;
-                                        } ?>
-                                        <?php
-                                   $totalKec =  App\Models\Bukti_deskripsi_curang::join('list_kecurangan','list_kecurangan.id','=','bukti_deskripsi_curang.list_kecurangan_id')
-                                     ->join('saksi', 'saksi.tps_id', '=', 'bukti_deskripsi_curang.tps_id')
-                                                     ->where('saksi.status_kecurangan', "terverifikasi")
-                                    ->where('bukti_deskripsi_curang.list_kecurangan_id',$item->id)
-                                    ->where('list_kecurangan.jenis',1)
-                                    ->count();
-                                    $jumlahSaksi = App\Models\Saksi::where('kecurangan',"yes")->count();
-                                    $persen = ($totalKec/ $jumlahSaksi)*100;
-                                      ?>
-                                      ['{{$i++}}',<?=substr($persen,0,4)?>],
-                                    <?php endforeach ?>
-                    ],
-                                type: 'pie',
-                },
-                axis: {},
-                legend: {
-                    show: true, //hide legend
-                },
-                padding: {
-                    bottom: 0,
-                    top: 0
-                },
-                size: {
-                    height: 300,
-                    width: 300
-                }
-            });
-            
-        
-        </script>
-
-
-@endif
-<script>
+@foreach ($regencies as $item)
     
-     $('.mode-1').on('click', function() {
+     c3.generate({
+        bindto: '#charture-{{$item->id}}', // id of chart wrapper
+        data: {
+            columns: [
+                // each columns data
 
-        $('.tampilan-1').show();
-       
-        $('.tampilan-2').hide();
-        setTimeout(() => {
-             chartmode1.flush()
-        chartmode2.flush()
-        }, 5);
-        
-    })
-    $('.mode-2').on('click', function() {
-        $('.tampilan-1').hide();
-        
-        $('.tampilan-2').show();
-        setTimeout(() => {
-              chartmode1.flush()
-                chartmode2.flush()
-        }, 5);
-    })
+                    @php
+                    $i=1;
+                    @endphp
+                  
+                <?php foreach ($paslon as $pas) :  ?>
+                   ['data<?= $pas->id  ?>', <?= $item->{"suara".$i} ?>],
+                      @php
+                         $i++;
+                    @endphp
+                <?php endforeach  ?>
+            ],
+            type: 'pie', // default type of chart
+            colors: {
+                <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': "<?= $pas->color ?>",
+                <?php endforeach  ?>
+            },
+            names: {
+                // name of each serie
+                <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': " <?= $pas->candidate ?> - <?= $pas->deputy_candidate ?>",
+                <?php endforeach  ?>
+            }
+        },
+        axis: {},
+        legend: {
+            show: true, //hide legend
+        },
+        padding: {
+            bottom: 0,
+            top: 0
+        },
+        });
+@endforeach
 
-    $('.mode-v-1').on('click', function() {
 
-        $('.tampilan-v-1').show();
-       
-        $('.tampilan-v-2').hide();
-        setTimeout(() => {
-            chartV1.flush()
-            chartV2.flush()
-        }, 5);
-        
-    })
-    $('.mode-v-2').on('click', function() {
-        $('.tampilan-v-1').hide();
-        
-        $('.tampilan-v-2').show();
-        setTimeout(() => {
-            chartV1.flush()
-            chartV2.flush()
-        }, 5);
-    })
 </script>
 
+
+
+
+
+
+@livewireScripts
 
 </body>
 

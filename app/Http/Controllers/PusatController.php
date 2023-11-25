@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\District;
 use App\Models\Paslon;
 use App\Models\Province;
+use App\Models\Regency;
 use App\Models\Saksi;
 use App\Models\SaksiData;
 use App\Models\Tps;
@@ -20,44 +21,24 @@ class PusatController extends Controller
         date_default_timezone_set("Asia/Jakarta");
         $data['jam'] = date("H");
         
-        
-        // dd($data['urutan']);
+    
 
 
         $data['paslon']                   = Paslon::with('saksi_data')->get();
-        $data['paslon_terverifikasi']     = Paslon::with(['saksi_data' => function ($query) {
-            $query->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
-                ->whereNull('saksi.pending')
-                ->where('saksi.verification', 1);
-        }])->get();
-        $verification                     = Saksi::where('verification', 1)->with('saksi_data')->get();
-        $dpt                              = District::sum("dpt");
+    
+        $dpt         = Regency::sum("dpt");
+        
+
         $data['dpt'] = $dpt;
+        $data['regency'] =Regency::sum("dpt");
 
-        $incoming_vote                    = SaksiData::select('voice')->get();
-        $voice = SaksiData::sum('voice');
-        $data['total_verification_voice'] = 0;
-        $data['total_incoming_vote']      = SaksiData::sum('voice');
+    
+        $data['total_incoming_vote']      = Regency::sum('suara1') + Regency::sum('suara2') + Regency::sum('suara3') ;
         $data['realcount']                = $data['total_incoming_vote'] / $dpt * 100;
-        foreach ($verification as $key) {
-            foreach ($key->saksi_data as $verif) {
-                $data['total_verification_voice'] += $verif->voice;
-            }
-        }
-        $data['saksi_masuk'] = Saksi::count();
-
-        $data['tps_masuk'] = Tps::where('setup', 'terisi')->count();
-        $data['total_tps']   =  Tps::where('setup', 'belum terisi')->count();
-        $data['tps_kosong']  =  $data['total_tps'] - $data['tps_masuk'];
-
-
-        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)->count();
-        foreach ($incoming_vote as $key) {
-            $data['total_incoming_vote'] += $key->voice;
-        }
-        $data['suara_masuk'] = SaksiData::count('voice');
-        $data['tracking'] = Tracking::get();
+     
         $data['provinsi'] = Province::get();
+
+        
         return view('pusat.index', $data);
         // return "hai";
     }
