@@ -318,7 +318,7 @@ class VerificatorController extends Controller
         $riwayatKoreksi->c1_images = $saksi->c1_images;
         $riwayatKoreksi->user_id = $user->id;
         $riwayatKoreksi->province_id = $saksi->province_id;
-        $riwayatKoreksi->regency_Id = $saksi->regency_Id;
+        $riwayatKoreksi->regency_Id = $saksi->regency_id;
         $riwayatKoreksi->village_id = $saksi->village_id;
         $riwayatKoreksi->district_id = $saksi->district_id;
         $riwayatKoreksi->tps_id = $saksi->tps_id;

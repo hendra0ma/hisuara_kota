@@ -137,6 +137,13 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
         background-color: #f82649 !important;
     }
 
+    .laporan .glowy-menu.active {
+        background-color: rgb(4, 217, 255) !important;
+        /* background-color: #04b8ff !important; */
+        /* -webkit-box-shadow: 0px 0px 50px 0px rgb(4, 217, 255);
+        -moz-box-shadow: 0px 0px 50px 0px rgb(4, 217, 255);
+        box-shadow: 0px 0px 50px 0px rgb(4, 217, 255); */
+    }
 
     .perhitungan .glowy-menu.active {
         /* background-color: rgb(4, 217, 255); */
@@ -1452,7 +1459,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
         setTimeout(() => {
             $('#global-loader').hide();
             $('#global-loader .loader-img').hide();
-        }, 5000);
+        }, 10000);
     })
 </script>
 
