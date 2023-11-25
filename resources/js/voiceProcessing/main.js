@@ -7,6 +7,7 @@ const enumeratorCommands = require('./pages/enumerator');
 const adminTerverifikasiCommands = require('./pages/adminTerverifikasi');
 const adminDetailCommands = require('./pages/adminDetail');
 const saksiTeregistrasiCommands = require('./pages/saksiTeregistrasi');
+const saksiHadirCommands = require('./pages/saksiHadir');
 
 const ALL_COMMANDS = [
   ...navbarCommands,
@@ -18,6 +19,7 @@ const ALL_COMMANDS = [
   ...adminTerverifikasiCommands,
   ...adminDetailCommands,
   ...saksiTeregistrasiCommands,
+  ...saksiHadirCommands,
 ];
 
 const {

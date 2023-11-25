@@ -425,6 +425,41 @@ module.exports = setCommandRoute(null, commands);
 
 /***/ }),
 
+/***/ "./resources/js/voiceProcessing/pages/saksiHadir.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/voiceProcessing/pages/saksiHadir.js ***!
+  \**********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var _require = __webpack_require__(/*! ../helper */ "./resources/js/voiceProcessing/helper.js"),
+    getTextAfterSpecificWord = _require.getTextAfterSpecificWord,
+    getSaksiElementByName = _require.getSaksiElementByName,
+    setCommandRoute = _require.setCommandRoute;
+
+var commands = [{
+  keyword: /^lihat detail/,
+  // 'lihat detail (nama saksi)'
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    var keyword = 'lihat detail';
+    var namaSaksi = getTextAfterSpecificWord(keyword, finalTranscript);
+    var namaSaksiElement = getSaksiElementByName(namaSaksi);
+    var idSaksi = namaSaksiElement.getAttribute('id');
+    var buttonLihatDetail = document.querySelector("a[data-id=\"".concat(idSaksi, "\"]"));
+    buttonLihatDetail.click();
+  }
+}, {
+  keyword: /^tutup/,
+  // tutup modal
+  exceptions: [],
+  execute: function execute() {
+    $('#cekmodal').modal('hide');
+  }
+}];
+module.exports = setCommandRoute('/administrator/absensi/hadir', commands);
+
+/***/ }),
+
 /***/ "./resources/js/voiceProcessing/pages/saksiTeregistrasi.js":
 /*!*****************************************************************!*\
   !*** ./resources/js/voiceProcessing/pages/saksiTeregistrasi.js ***!
@@ -438,7 +473,7 @@ var _require = __webpack_require__(/*! ../helper */ "./resources/js/voiceProcess
 
 var commands = [{
   keyword: /^lihat detail/,
-  // 'buka (nama menu)'
+  // 'lihat detail (nama saksi)'
   exceptions: [],
   execute: function execute(finalTranscript) {
     var keyword = 'lihat detail';
@@ -683,7 +718,9 @@ var adminDetailCommands = __webpack_require__(/*! ./pages/adminDetail */ "./reso
 
 var saksiTeregistrasiCommands = __webpack_require__(/*! ./pages/saksiTeregistrasi */ "./resources/js/voiceProcessing/pages/saksiTeregistrasi.js");
 
-var ALL_COMMANDS = [].concat(_toConsumableArray(navbarCommands), _toConsumableArray(commonCommands), _toConsumableArray(verifikasiC1Commands), _toConsumableArray(auditC1Commands), _toConsumableArray(verifikasiSaksiCommands), _toConsumableArray(enumeratorCommands), _toConsumableArray(adminTerverifikasiCommands), _toConsumableArray(adminDetailCommands), _toConsumableArray(saksiTeregistrasiCommands));
+var saksiHadirCommands = __webpack_require__(/*! ./pages/saksiHadir */ "./resources/js/voiceProcessing/pages/saksiHadir.js");
+
+var ALL_COMMANDS = [].concat(_toConsumableArray(navbarCommands), _toConsumableArray(commonCommands), _toConsumableArray(verifikasiC1Commands), _toConsumableArray(auditC1Commands), _toConsumableArray(verifikasiSaksiCommands), _toConsumableArray(enumeratorCommands), _toConsumableArray(adminTerverifikasiCommands), _toConsumableArray(adminDetailCommands), _toConsumableArray(saksiTeregistrasiCommands), _toConsumableArray(saksiHadirCommands));
 
 var _require = __webpack_require__(/*! ./helper */ "./resources/js/voiceProcessing/helper.js"),
     getSpeechStatus = _require.getSpeechStatus,
