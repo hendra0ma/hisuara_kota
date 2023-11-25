@@ -284,6 +284,21 @@ class VerificatorController extends Controller
 
         return view('verificator.viewKoreksi', $data);
     }
+    public function getKoreksiVerifikator(Request $request)
+    {
+
+        $data['config'] = Config::first();
+        $id = Crypt::decrypt($request->id);
+        $data['id'] = $id;
+        $data['saksi'] = Saksi::with('saksi_data')->where('id',(string)$id)->get();
+        $data['saksis'] = Saksi::with('saksi_data')->where('id',(string)$id)->first();
+        $data['title2'] = "-";
+        $data['title'] = "";
+        // dd($data['saksi']);
+        $data['user'] = User::where('tps_id', $data['saksis']['tps_id'])->first();
+
+        return view('verificator.modalViewKoreksi', $data);
+    }
     public function actionKoreksiData(Request $req, $id)
     {
 

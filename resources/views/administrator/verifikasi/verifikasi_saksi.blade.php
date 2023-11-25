@@ -96,7 +96,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
             <a data-command-target="saksi-tidak-hadir" href="{{url('')}}/administrator/absensi/tidak_hadir" class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/absensi/tidak_hadir')?'active' : '' }}">Saksi Tidak Hadir</a>
         </div>
         <div class="col parent-link">
-            <a data-command-target="saksi-ditolak" href="{{url('')}}/administrator/saksi_ditolak" class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/absensi/saksi_ditolak')?'active' : '' }}">Saksi Ditolak</a>
+            <a data-command-target="saksi-ditolak" href="{{url('')}}/administrator/saksi_ditolak" class="btn text-white w-100 py-3 btn-to-loader {{ (url()->current() == url('').'/administrator/saksi_ditolak')?'active' : '' }}">Saksi Ditolak</a>
         </div>
 
     </div>

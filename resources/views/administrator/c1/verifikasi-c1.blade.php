@@ -163,6 +163,25 @@ $kota = Regency::where('id', $config->regencies_id)->first();
         </div>
     </div>
 </div>
+
+<div class="modal fade" style="overflow: scroll" id="koreksiC1Verifikator" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-xl scrollable" role="document">
+        <div class="modal-header bg-primary text-white">
+            <div class="modal-title mx-auto">
+                <h4 class="mb-0 fw-bold">C1 Koreksi (Verifikator)</h4>
+            </div>
+        </div>
+        <div class="modal-content">
+            <div class="container" id="container-koreksi-verifikator">
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="periksaC1Relawan" tabindex="-1" aria-labelledby="periksaC1RelawanLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
