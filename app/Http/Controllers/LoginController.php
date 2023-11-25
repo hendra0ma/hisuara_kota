@@ -86,7 +86,11 @@ class LoginController extends Controller
             'no_hp' => ['required','string','unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' =>  ['required', 'string', 'confirmed'],
-            'nik' => ['required','numeric'],
+            'provinsi' => ['required'],
+            'kota' => ['required'],
+            'kecamatan' => ['required'],
+            'kelurahan' => ['required'],
+            'tps' => ['required'],
           
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();

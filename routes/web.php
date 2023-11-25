@@ -137,6 +137,7 @@ Route::get('/redirect', [LoginController::class, 'index']);
 
 //Hisuara Pusat
 
+
 Route::domain('hisuara.id')->name('pusat.')->group(function () {
 
     Route::get('/',  function () {
