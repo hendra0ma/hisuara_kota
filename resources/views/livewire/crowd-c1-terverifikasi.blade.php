@@ -79,7 +79,7 @@
 
                         <div class="row mt-2">
                             <div class="col-12 px-0">
-                                <a id="lihatAktivitas{{$ls['id']}}" class="btn btn-primary rounded-0 w-100 cekmodal" data-id="{{$ls['id']}}" data-bs-toggle="modal" data-bs-target="#cekmodal" onclick="cekModal(this,{{$ls['id']}})">Detail Data Crowd C1</a>
+                                <a id="lihatDetail{{$ls['id']}}" class="btn btn-primary rounded-0 w-100 cekmodal" data-id="{{$ls['id']}}" data-bs-toggle="modal" data-bs-target="#cekmodal" onclick="cekModal(this,{{$ls['id']}})">Detail Data Crowd C1</a>
                             </div>
                         </div>
                     </div>

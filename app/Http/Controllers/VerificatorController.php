@@ -30,6 +30,7 @@ use App\Models\Buktividio as ModelsBuktividio;
 use App\Models\Configs;
 use App\Models\CrowdC1;
 use App\Models\Databukti;
+use App\Models\DataCrowdC1;
 use App\Models\Listkecurangan as ModelsListkecurangan;
 use App\Models\Relawan;
 use App\Models\RelawanData;
@@ -225,6 +226,16 @@ class VerificatorController extends Controller
                 'verification' => 1
             ]
         );
+        $saksi_data = SaksiData::where('saksi_id',$id)->get();
+        $regency_voice = Regency::where('id',$this->config->regencies_id)->first();
+        $voice1 =  $regency_voice->suarav1 + $saksi_data[0]->voice;
+        $voice2 =  $regency_voice->suarav2 + $saksi_data[1]->voice;
+        $voice3 =  $regency_voice->suarav3 + $saksi_data[2]->voice;
+        Regency::where('id',$this->config->regencies_id)->update([
+            'suarav1'=>$voice1,
+            'suarav2'=>$voice2,
+            'suarav3'=>$voice3,
+        ]);
         $saksi = Saksi::where('id', $id)->first();
         $tps = Tps::where('id', $saksi['tps_id'])->first();
         $kecamatan = District::where('id', $saksi['district_id'])->first();
@@ -236,6 +247,8 @@ class VerificatorController extends Controller
             'saksi_id' => $saksi['id'],
             'status' => 1,
         ]);
+
+     
         // event(new NotifEvent($pesan));
         // Set pesan sukses dalam session flash
         session()->flash('sukses_verif', 'Verifikasi berhasil dilakukan.');
@@ -366,7 +379,7 @@ class VerificatorController extends Controller
         $tps = Tps::where('id', $saksi['tps_id'])->first();
         $kecamatan = District::where('id', $saksi['district_id'])->first();
         $kelurahan = Village::where('id', $saksi['village_id'])->first();
-        $pesan = "" . Auth::user()->name . " Melakukan Koreksi Di Tps " . $tps['number'] . " Kecamatan " . $kecamatan['name'] . " Kelurahan " . $kecamatan['name'] . "  ";
+        $pesan = "" . Auth::user()->name . " Melakukan Koreksi Di Tps " . $tps['number'] . " Kecamatan " . $kecamatan['name'] . " Kelurahan " . $kelurahan['name'] . "  ";
         $history = History::create([
             'user_id' => Auth::user()->id,
             'action' => $pesan,
@@ -416,11 +429,20 @@ class VerificatorController extends Controller
             $saksi_data->saksi_id = $saksiId;
             $saksi_data->save();
         }
+        $regency_voice = Regency::where('id', $this->config->regencies_id)->first();
+        $suara1 = $regency_voice->suara1 +  $relawan_data->voice[0];
+        $suara2 = $regency_voice->suara2 +  $relawan_data->voice[1];
+        $suara3 = $regency_voice->suara3 +  $relawan_data->voice[2];
+        Regency::where('id', $regency_voice->id)->update([
+            'suara1' => $suara1,
+            'suara2' => $suara2,
+            'suara3' => $suara3,
+        ]);
         $saksi = Saksi::where('id', $id)->first();
         $tps = Tps::where('id', $saksi['tps_id'])->first();
         $kecamatan = District::where('id', $saksi['district_id'])->first();
         $kelurahan = Village::where('id', $saksi['village_id'])->first();
-        $pesan = "" . Auth::user()->name . " Memverifikasi Data Relawan -  Tps " . $tps['number'] . " Kecamatan " . $kecamatan['name'] . " Kelurahan " . $kecamatan['name'] . "  ";
+        $pesan = "" . Auth::user()->name . " Memverifikasi Data Relawan -  Tps " . $tps['number'] . " Kecamatan " . $kecamatan['name'] . " Kelurahan " . $kelurahan['name'] . "  ";
         $history = History::create([
             'user_id' => Auth::user()->id,
             'action' => $pesan,
@@ -428,6 +450,58 @@ class VerificatorController extends Controller
         // event(new NotifEvent($pesan));
 
         return redirect()->back()->with(['success' => 'berhasil memverifikasi data relawan']);
+    }
+    public function verifikasiDataC1Crowd($id)
+    {
+        $id = Crypt::decrypt($id);
+        $crowd_c1 = CrowdC1::where('id', $id)->first();
+        CrowdC1::where('id', $id)->update([
+            'status' => 2
+        ]);
+        $crowd_c1_data = DataCrowdC1::where('crowd_c1_id', $id)->get();
+        $saksi = new Saksi();
+        $saksi->c1_images = $crowd_c1->c1_images;
+        $saksi->district_id = $crowd_c1->district_id;
+        $saksi->village_id = $crowd_c1->village_id;
+        $saksi->regency_id = $crowd_c1->regency_id;
+        $saksi->tps_id = $crowd_c1->tps_id;
+        $saksi->verification = "";
+        $saksi->audit = "";
+        $saksi->overlimit = 0;
+        $saksi->kecurangan = "no";
+        $saksi->save();
+        $saksiId = $saksi->id;
+        foreach ($crowd_c1_data as $rd) {
+            $saksi_data = new SaksiData();
+            $saksi_data->voice = $rd->voice;
+            $saksi_data->village_id = $rd->village_id;
+            $saksi_data->regency_id = $rd->regency_id;
+            $saksi_data->district_id = $rd->district_id;
+            $saksi_data->paslon_id = $rd->paslon_id;
+            $saksi_data->user_id = $rd->crowd_c1_id;
+            $saksi_data->saksi_id = $saksiId;
+            $saksi_data->save();
+        }
+        $regency_voice = Regency::where('id', $this->config->regencies_id)->first();
+        $suara1 = $regency_voice->suara1 +  $crowd_c1_data->voice[0];
+        $suara2 = $regency_voice->suara2 +  $crowd_c1_data->voice[1];
+        $suara3 = $regency_voice->suara3 +  $crowd_c1_data->voice[2];
+        Regency::where('id', $regency_voice->id)->update([
+            'suara1' => $suara1,
+            'suara2' => $suara2,
+            'suara3' => $suara3,
+        ]);
+        $saksi = Saksi::where('id', $id)->first();
+        $tps = Tps::where('id', $saksi['tps_id'])->first();
+        $kecamatan = District::where('id', $saksi['district_id'])->first();
+
+        $pesan = "" . Auth::user()->name . " Memverifikasi Data Crowd C1 -  Tps " . $tps['number'] . " Kecamatan " . $kecamatan['name'] . " Kelurahan " . $kecamatan['name'] . "  ";
+        History::create([
+            'user_id' => Auth::user()->id,
+            'action' => $pesan,
+        ]);
+
+        return redirect()->back()->with(['success' => 'berhasil memverifikasi data Crowd C1']);
     }
 
     public function verifikasiC1() {

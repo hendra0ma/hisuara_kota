@@ -14,7 +14,7 @@ const commands = [
       const namaSaksiElement = getSaksiElementByName(namaSaksi)
 
       const idSaksi = namaSaksiElement.getAttribute('id');
-      const buttonLihatDetail = document.querySelector(`a[id="lihatDetail${idSaksi}"]`);
+      const buttonLihatDetail = document.querySelector(`a[data-id="${idSaksi}"]`);
 
       buttonLihatDetail.click();
     }
@@ -28,4 +28,4 @@ const commands = [
   },
 ]
 
-module.exports = setCommandRoute('/administrator/crowd_c1_terverifikasi', commands)
+module.exports = setCommandRoute('/administrator/enumerator_teregistrasi', commands)

@@ -10,6 +10,8 @@ const saksiTeregistrasiCommands = require('./pages/saksiTeregistrasi');
 const saksiHadirCommands = require('./pages/saksiHadir');
 const verifikasiCrowdC1Commands = require('./pages/verifikasiCrowdC1');
 const crowdC1TerverifikasiCommands = require('./pages/crowdC1Terverifikasi');
+const enumeratorTeregistrasiCommands = require('./pages/enumeratorTeregistrasi');
+const enumeratorHadirCommands = require('./pages/enumeratorHadir');
 
 const ALL_COMMANDS = [
   ...navbarCommands,
@@ -24,6 +26,8 @@ const ALL_COMMANDS = [
   ...saksiHadirCommands,
   ...verifikasiCrowdC1Commands,
   ...crowdC1TerverifikasiCommands,
+  ...enumeratorTeregistrasiCommands,
+  ...enumeratorHadirCommands,
 ];
 
 const {
