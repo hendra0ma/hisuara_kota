@@ -44,6 +44,13 @@ const commands = [
     }
   },
   {
+    keyword: /^kembali/,
+    exceptions: [],
+    execute: (finalTranscript) => {
+      history.back()
+    }
+  },
+  {
     keyword: /^sila keluar sistem/,
     exceptions: [],
     execute: (finalTranscript) => {
