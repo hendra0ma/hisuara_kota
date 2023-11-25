@@ -296,12 +296,12 @@ $props = Province::where('id',$kota['province_id'])->first();
 ?>
 
 <div class="col-12">
-    <div class="row justify-content-center">
+    <div class="row">
         @foreach ($kec as $item)
         <div class="col-3">
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <div class="card-title">
+                    <div class="card-title mx-auto">
                         <a href="{{url('/')}}/administrator/terverifikasi_kecamatan/{{Crypt::encrypt($item['id'])}}">
                             KECAMATAN {{$item['name']}}
                         </a>

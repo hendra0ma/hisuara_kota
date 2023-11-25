@@ -407,6 +407,14 @@ $tps = Tps::count();
 
 </div>
 
+<script>
+    $(document).ready(function() {
+        var specificUrl = "{{ url('') }}/administrator/terverifikasi"; // Specific URL to match
+    
+        $('.glowy-menu[href="' + specificUrl + '"]').addClass('active');
+    });
+</script>
+
 
 
 <!-- SWEET-ALERT JS -->

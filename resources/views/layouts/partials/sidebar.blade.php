@@ -47,7 +47,7 @@ $tps = 2963;
 ?>
 <!-- GLOBAL-LOADER -->
 <div id="global-loader">
-    <img src="{{url('/')}}/assets/images/loader.svg" class="loader-img" id="loader" alt="Loader">
+    <img src="{{url('/')}}/assets/images/loading-hisuara.gif" class="loader-img" id="loader" alt="Loader">
 </div>
 <!-- /GLOBAL-LOADER -->
 

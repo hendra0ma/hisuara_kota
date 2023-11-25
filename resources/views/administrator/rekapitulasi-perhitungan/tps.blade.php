@@ -564,6 +564,12 @@ $tps = Tps::count();
     </div>
 </div>
 
-
+<script>
+    $(document).ready(function() {
+        var specificUrl = "{{ url('') }}/administrator/rekapitulasi"; // Specific URL to match
+    
+        $('.glowy-menu[href="' + specificUrl + '"]').addClass('active');
+    });
+</script>
 
 @endsection

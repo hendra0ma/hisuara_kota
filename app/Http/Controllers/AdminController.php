@@ -2817,9 +2817,17 @@ class AdminController extends Controller
 
     public function realcountTPS($id)
     {
-      $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
 
-        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $this->config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
+        $paslon_tertinggi = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')
+        ->select('saksi_data.paslon_id', DB::raw('SUM(saksi_data.voice) as total'))
+        ->where('saksi.tps_id', (string)decrypt($id))
+        ->where('saksi_data.regency_id', $this->config->regencies_id)
+        ->groupBy('saksi_data.paslon_id')
+        ->orderByDesc('total')
+        ->get();
+
+
         // return DB::table('saksi_data')->where('paslon_id',0)->sum('voice');
         $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
         $data['urutan'] = $paslon_tertinggi;
@@ -3051,9 +3059,15 @@ class AdminController extends Controller
 
     public function kpuTPS($id)
     {
-      $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
 
-        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $this->config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
+        $paslon_tertinggi = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')
+        ->select('saksi_data.paslon_id', DB::raw('SUM(saksi_data.voice) as total'))
+        ->where('saksi.tps_id', (string)decrypt($id))
+        ->where('saksi_data.regency_id', $this->config->regencies_id)
+        ->groupBy('saksi_data.paslon_id')
+        ->orderByDesc('total')
+        ->get();
         // return DB::table('saksi_data')->where('paslon_id',0)->sum('voice');
         $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
         $data['urutan'] = $paslon_tertinggi;
@@ -3283,9 +3297,15 @@ class AdminController extends Controller
 
     public function rekapTPS($id)
     {
-      $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
 
-        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $this->config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
+        $paslon_tertinggi = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')
+        ->select('saksi_data.paslon_id', DB::raw('SUM(saksi_data.voice) as total'))
+        ->where('saksi.tps_id', (string)decrypt($id))
+        ->where('saksi_data.regency_id', $this->config->regencies_id)
+        ->groupBy('saksi_data.paslon_id')
+        ->orderByDesc('total')
+        ->get();
 
         // Periksa apakah data kosong
         if (count($paslon_tertinggi) > 0) {
@@ -3650,9 +3670,19 @@ class AdminController extends Controller
 
     public function terverifikasiTPS($id)
     {
-      $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
+        $data['marquee'] = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->where('saksi.regency_id', $this->config->regencies_id)->get();
 
-        $paslon_tertinggi = DB::select(DB::raw('SELECT saksi_data.paslon_id, SUM(saksi_data.voice) as total FROM saksi_data JOIN saksi ON saksi.id = saksi_data.saksi_id WHERE saksi.verification = 1 WHERE regency_id = "' . $this->config->regencies_id . '" GROUP BY saksi_data.paslon_id ORDER BY total DESC'));
+        $paslon_tertinggi = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')
+        ->select('saksi_data.paslon_id', DB::raw('SUM(saksi_data.voice) as total'))
+        ->where('saksi.verification', 1)
+        ->where('saksi_data.regency_id', $this->config->regencies_id)
+        ->where('saksi.tps_id', (string)decrypt($id))
+        ->groupBy('saksi_data.paslon_id')
+        ->orderByDesc('total')
+        ->get();
+
+        // return $paslon_tertinggi;
+
         $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
         $data['urutan'] = $paslon_tertinggi;
 

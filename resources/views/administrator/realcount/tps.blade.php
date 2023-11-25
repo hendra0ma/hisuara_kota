@@ -567,7 +567,11 @@ $tps = Tps::count();
         </div>
     </div>
 </div>
-
-
-
+<script>
+    $(document).ready(function() {
+        var specificUrl = "{{ url('') }}/administrator/real_count2"; // Specific URL to match
+    
+        $('.glowy-menu[href="' + specificUrl + '"]').addClass('active');
+    });
+</script>
 @endsection
