@@ -110,6 +110,34 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/js/voiceProcessing/pages/adminDetail.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/voiceProcessing/pages/adminDetail.js ***!
+  \***********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var _require = __webpack_require__(/*! ../helper */ "./resources/js/voiceProcessing/helper.js"),
+    setCommandRoute = _require.setCommandRoute;
+
+var commands = [{
+  keyword: /^lihat riwayat/,
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    var buttonHistory = document.querySelector('#lihatRiwayat');
+    buttonHistory.click();
+  }
+}, {
+  keyword: /^tutup/,
+  // tutup modal
+  exceptions: [],
+  execute: function execute() {
+    $('#exampleModal').modal('hide');
+  }
+}];
+module.exports = setCommandRoute('/administrator/patroli_mode/tracking/detail', commands);
+
+/***/ }),
+
 /***/ "./resources/js/voiceProcessing/pages/adminTerverifikasi.js":
 /*!******************************************************************!*\
   !*** ./resources/js/voiceProcessing/pages/adminTerverifikasi.js ***!
@@ -610,7 +638,9 @@ var enumeratorCommands = __webpack_require__(/*! ./pages/enumerator */ "./resour
 
 var adminTerverifikasiCommands = __webpack_require__(/*! ./pages/adminTerverifikasi */ "./resources/js/voiceProcessing/pages/adminTerverifikasi.js");
 
-var ALL_COMMANDS = [].concat(_toConsumableArray(navbarCommands), _toConsumableArray(commonCommands), _toConsumableArray(verifikasiC1Commands), _toConsumableArray(auditC1Commands), _toConsumableArray(verifikasiSaksiCommands), _toConsumableArray(enumeratorCommands), _toConsumableArray(adminTerverifikasiCommands));
+var adminDetailCommands = __webpack_require__(/*! ./pages/adminDetail */ "./resources/js/voiceProcessing/pages/adminDetail.js");
+
+var ALL_COMMANDS = [].concat(_toConsumableArray(navbarCommands), _toConsumableArray(commonCommands), _toConsumableArray(verifikasiC1Commands), _toConsumableArray(auditC1Commands), _toConsumableArray(verifikasiSaksiCommands), _toConsumableArray(enumeratorCommands), _toConsumableArray(adminTerverifikasiCommands), _toConsumableArray(adminDetailCommands));
 
 var _require = __webpack_require__(/*! ./helper */ "./resources/js/voiceProcessing/helper.js"),
     getSpeechStatus = _require.getSpeechStatus,
@@ -624,7 +654,6 @@ try {
     recognition.continuous = true;
     recognition.interimResults = true;
     recognition.start();
-    console.log('Speech status:', getSpeechStatus());
     if (getSpeechStatus() === null) setSpeechStatus(false);
 
     if (getSpeechStatus() === 'true') {
@@ -637,7 +666,7 @@ try {
           var finalTranscript = event.results[i][0].transcript.trim().toLowerCase();
           var command = findMatchingCommand(finalTranscript);
           console.log(finalTranscript);
-          console.log(command);
+          console.log('Speech status:', getSpeechStatus());
           var isTheCommandHaiSila = command === null || command === void 0 ? void 0 : command.keyword.test('hai sila');
 
           if (command === undefined) {

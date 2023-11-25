@@ -18,7 +18,7 @@
             </div> --}}
         </div>
     </div>
-    
+
     <div class="mt-3">
         <div class="main-body">
             <div class="row gutters-sm">
@@ -46,9 +46,9 @@
                                         {{-- <p class="text-muted font-size-sm">{{$profile['address']}}</p> --}}
                                     </div>
                                 </div>
-    
+
                                 <div class="col-md">
-    
+
                                     <div class="row">
                                         <div class="col-12 mt-1 mb-1">
                                             <a type="button" href="tel:{{$profile['no_hp']}}" class="btn btn-info w-100 rounded-0"><i class="mdi mdi-phone"></i> Telepon</a>
@@ -63,13 +63,13 @@
                                             <a type="button" href="/administrator/blokir/{{Crypt::encrypt($profile['id'])}}" class="btn btn-danger w-100 rounded-0"><i class="mdi mdi-block-helper"></i> Blokir</a>
                                         </div>
                                         <div class="col-12 mt-1 mb-1">
-                                            <button type="button" class="btn btn-primary  w-100 rounded-0" data-bs-toggle="modal"
+                                            <button id="lihatRiwayat" type="button" class="btn btn-primary w-100 rounded-0" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal">
                                                 <i class="mdi mdi-history"></i> History
                                             </button>
                                         </div>
                                     </div>
-    
+
                                 </div>
                             </div>
                         </div>
@@ -123,16 +123,16 @@
                                 </div>
                             </div>
                             <hr>
-    
+
                         </div>
                     </div>
-    
+
                 </div>
             </div>
-    
+
         </div>
     </div>
-    
+
     <div class="card mg-b-20">
         <div class="card-header">
             <div class="card-title">Tracking</div>
@@ -162,7 +162,7 @@
                             @if(count($history) == 0)
                                <tr>
                                 <td colspan="3"><center>Tidak Ada Data</center></td>
-                             
+
                             </tr>
                            @else
                             @foreach($history as $hs)
@@ -174,19 +174,19 @@
                                 @else
                                  <td><a class="btn btn-lg btn-danger" href="{{url('/')}}/administrator/action/batalkan_history/{{encrypt($hs['id'])}}/{{encrypt($profile['id'])}}">Batalkan</a></td>
                                 @endif
-                                  
+
                             </tr>
                             @endforeach
                            @endif
-    
+
                         </tbody>
                     </table>
-    
+
                 </div>
                 <div class="modal-footer">
-                    <td><a  href="{{url('/')}}/administrator/patroli/batalkan_semua/{{encrypt($profile['id'])}}" class="btn btn-lg btn-danger" href="#">Batalkan Semua</a></td>  
+                    <td><a  href="{{url('/')}}/administrator/patroli/batalkan_semua/{{encrypt($profile['id'])}}" class="btn btn-lg btn-danger" href="#">Batalkan Semua</a></td>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-    
+
                 </div>
             </div>
         </div>
