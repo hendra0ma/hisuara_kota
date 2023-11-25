@@ -432,9 +432,10 @@ var commands = [{
   }
 }, {
   keyword: /^verifikasi oke/,
+  // tombol verifikasi di modal
   exceptions: [],
   execute: function execute(finalTranscript) {
-    var url = $('#verifikasiButton').attr('href');
+    var url = $('#verifikasiButton').attr('data-url');
     window.location = url;
   }
 }, {
@@ -638,6 +639,10 @@ try {
           console.log(finalTranscript);
           console.log(command);
           var isTheCommandHaiSila = command === null || command === void 0 ? void 0 : command.keyword.test('hai sila');
+
+          if (!command) {
+            return console.error('Command not found');
+          }
 
           if (getSpeechStatus() === 'true' || isTheCommandHaiSila) {
             command.execute(finalTranscript);

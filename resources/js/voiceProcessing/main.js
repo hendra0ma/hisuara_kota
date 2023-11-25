@@ -47,6 +47,10 @@ try {
           console.log(command);
           const isTheCommandHaiSila = command?.keyword.test('hai sila')
 
+          if (!command) {
+            return console.error('Command not found')
+          }
+
           if (getSpeechStatus() === 'true' || isTheCommandHaiSila) {
             command.execute(finalTranscript)
           }
