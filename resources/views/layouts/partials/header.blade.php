@@ -966,7 +966,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                 <div class="col-md laporan tugel-content" style="display: none">
                     <div class="row">
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target="bawaslu" href="{{url('')}}/hukum/tim_hukum_paslon"
+                            <a data-command-target="tim-hukum-paslon" href="{{url('')}}/hukum/tim_hukum_paslon"
                                 class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
                                 Tim Hukum Paslon
                             </a>
