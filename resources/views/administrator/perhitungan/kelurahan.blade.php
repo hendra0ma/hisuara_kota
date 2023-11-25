@@ -61,7 +61,7 @@ $tps = Tps::count();
             ul.breadcrumb {
                 padding: 10px 16px;
                 list-style: none;
-                background-color: #0d6efd !important;
+                background: linear-gradient(90deg, rgba(11,53,217,1) 0%, rgba(23,154,236,1) 100%)
             }
 
             ul.breadcrumb li {
@@ -106,7 +106,7 @@ $tps = Tps::count();
         <div class="card">
             <img src="{{asset('')}}assets/icons/hisuara_new.png"
                 style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
-            {{-- <div class="card-header bg-info">
+            {{-- <div class="card-header" style="background: linear-gradient(90deg, rgba(11,53,217,1) 0%, rgba(23,154,236,1) 100%);">
                 <h3 class="card-title text-white">Suara TPS Masuk</h3>
             </div> --}}
             <div class="card-body" style="position: relative;">
@@ -117,7 +117,7 @@ $tps = Tps::count();
     
     <div class="col-lg-6 col-md" style="display:{{($config->otonom == 'yes')?'none':'block'}}">
         <div class="card">
-            {{-- <div class="card-header bg-info">
+            {{-- <div class="card-header" style="background: linear-gradient(90deg, rgba(11,53,217,1) 0%, rgba(23,154,236,1) 100%);">
                 <h3 class="card-title text-white">Suara TPS Masuk</h3>
             </div> --}}
             <div class="card-body" style="position: relative;">
@@ -260,7 +260,7 @@ $tps = Tps::count();
     
     <div class="col-lg" style="{{($config->quick_count == 'yes')?'':'display:none'}}">
         <div class="card" style="margin-bottom: 1rem">
-            <div class="card-header bg-info">
+            <div class="card-header" style="background: linear-gradient(90deg, rgba(11,53,217,1) 0%, rgba(23,154,236,1) 100%);">
                 <h3 class="card-title text-white mx-auto">
                     <a href="{{url('')}}/administrator/quick_count2" class="text-white">
                         QUICK COUNT
@@ -277,7 +277,7 @@ $tps = Tps::count();
     
     <div class="col-lg">
         <div class="card">
-            <div class="card-header bg-info">
+            <div class="card-header" style="background: linear-gradient(90deg, rgba(11,53,217,1) 0%, rgba(23,154,236,1) 100%);">
                 <h3 class="card-title text-white mx-auto">
                     <a href="{{url('')}}/administrator/rekap_kelurahan/{{$id_kel}}" class="text-white">
                         REKAPITULASI
@@ -295,7 +295,7 @@ $tps = Tps::count();
     
     <div class="col-lg">
         <div class="card">
-            <div class="card-header bg-info">
+            <div class="card-header" style="background: linear-gradient(90deg, rgba(11,53,217,1) 0%, rgba(23,154,236,1) 100%);">
                 <h3 class="card-title text-white mx-auto">
                     <a href="{{url('')}}/administrator/kpu_kelurahan/{{$id_kel}}" class="text-white">
                         HITUNG ULANG KPU 
@@ -313,7 +313,7 @@ $tps = Tps::count();
     @else
     {{-- <div class="col-lg" style="{{($config->quick_count == 'yes')?'':'display:none'}}">
         <div class="card" style="margin-bottom: 1rem">
-            <div class="card-header bg-info">
+            <div class="card-header" style="background: linear-gradient(90deg, rgba(11,53,217,1) 0%, rgba(23,154,236,1) 100%);">
                 <h3 class="card-title text-white mx-auto">
                     <a href="{{url('')}}/administrator/quick_count2" class="text-white">
                         QUICK COUNT
@@ -330,7 +330,7 @@ $tps = Tps::count();
     
     <div class="col-lg">
         <div class="card">
-            <div class="card-header bg-info">
+            <div class="card-header" style="background: linear-gradient(90deg, rgba(11,53,217,1) 0%, rgba(23,154,236,1) 100%);">
                 <h3 class="card-title text-white mx-auto">
                     <a href="{{url('')}}/administrator/rekap_kelurahan/{{$id_kel}}" class="text-white">
                         REKAPITULASI
@@ -348,7 +348,7 @@ $tps = Tps::count();
     
     <div class="col-lg">
         <div class="card">
-            <div class="card-header bg-info">
+            <div class="card-header" style="background: linear-gradient(90deg, rgba(11,53,217,1) 0%, rgba(23,154,236,1) 100%);">
                 <h3 class="card-title text-white mx-auto">
                     <a href="{{url('')}}/administrator/kpu_kelurahan/{{$id_kel}}" class="text-white">
                         HITUNG ULANG KPU
@@ -394,7 +394,7 @@ $tps = Tps::count();
 {{-- <div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
     <div class="col-lg-6 col-md-12">
         <div class="card">
-            <div class="card-header bg-info-gradient">
+            <div class="card-header- style="background: linear-gradient(90deg, rgba(11,53,217,1) 0%, rgba(23,154,236,1) 100%);"gradient">
                 <h3 class="card-title text-white">Suara TPS Masuk</h3>
             </div>
             <div class="card-body">

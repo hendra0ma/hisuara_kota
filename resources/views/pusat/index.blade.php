@@ -57,13 +57,16 @@
         }
     </style>
 
-    <div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
+    <div class="row">
 
         <div class="col-lg-12">
             <center>
-                <h5 class="page-title mt-1 mb-3" style="font-size: 30px">
-                PERHITUNGAN SUARA <br>
-                PRESIDEN & WAKIL PRESIDEN RI 2024
+                <h5 class="page-title mt-1 mb-5" style="font-size: 30px;">
+                    <img src="{{asset('images/logo/garuda.png')}}" style="width: 100px" class="mb-3" alt=""> <br>
+                    <div class="my-auto mx-auto">
+                        PERHITUNGAN SUARA <br>
+                        PRESIDEN & WAKIL PRESIDEN RI 2024
+                    </div>
                 </h5>
             </center>
         </div>
@@ -73,7 +76,8 @@
                 ul.breadcrumb {
                     padding: 10px 16px;
                     list-style: none;
-                    background-color: #0d6efd !important;
+                    height: 50px;
+                    background: linear-gradient(90deg, rgba(241,12,69,1) 0%, rgba(165,0,128,1) 100%);
                 }
 
                 ul.breadcrumb li {
@@ -100,7 +104,7 @@
 
             <ul class="breadcrumb">
                 <?php $regencies = Regency::get(); ?>
-                <li><a href="" class="text-white">Indonesia</a></li>
+                <li><a href="" class="text-white"></a></li>
 
             </ul>
         </div>
@@ -186,11 +190,29 @@
                             <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Hasil Perhitungan Suara</div>
                             <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Pemilihan Presiden dan Wakil
                                 Presiden</div>
-                            <div class="text-center title-atas-table fs-5 fw-bold">Indonesia</div>
+                            <div class="text-center title-atas-table fs-5 fw-bold">Tingkat Nasional</div>
                             <div class="row mx-auto" style="width: 884.5px;">
 
                             </div>
-                            <div style="overflow-y:auto;height:500px">
+                            <style>
+                                table, tr td {
+                                    border: 1px solid red
+                                }
+                                tbody {
+                                    display: block;
+                                    height: 450px;
+                                    overflow: auto;
+                                }
+                                thead, tbody tr {
+                                    display: table;
+                                    width: 100%;
+                                    table-layout: fixed;/* even columns width , fix width of table too*/
+                                }
+                                table {
+                                    width: 400px;
+                                }
+                            </style>
+                            {{-- <div style="overflow-y:auto;height:500px"> --}}
                                 <table class="table table-bordered table-hover mt-3">
                                     <thead class="bg-primary">
                                         <tr>
@@ -209,7 +231,7 @@
                                             @endforeach
                                         </tr>
                                     </thead>
-
+                                    
                                     <tbody>
                                         @foreach ($provinsi as $item)
                                             <tr>
@@ -231,7 +253,7 @@
 
 
                                 </table>
-                            </div>
+                            {{-- </div> --}}
                         </div>
 
                     </div>
@@ -240,12 +262,16 @@
 
             </div>
 
+            <div style="background: linear-gradient(90deg, rgba(204,61,189,1) 0%, rgba(119,42,220,1) 100%);" class="col-12 text-white p-2 fs-5 fw-bold mb-5 text-center">
+                PERHITUNGAN TINGKAT PROVINSI
+            </div>
+
             <div class="col-12">
                 <div class="row">
                     @foreach ($provinsi as $item)
                         <div class="col-3">
                             <div class="card">
-                                <div class="card-header bg-primary text-white">
+                                <div class="card-header text-white" style="background: linear-gradient(90deg, rgba(39,109,231,1) 0%, rgba(119,42,220,1) 100%);">
                                     <div class="card-title mx-auto">
                                         <a
                                             href="{{route('provinsi' . $item->id . '.home',Crypt::encrypt($item['id']) )}}">

@@ -58,52 +58,55 @@
         }
     </style>
 
-    <div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
+    <div class="row">
 
         <div class="col-lg-12">
             <center>
-                <h2 class="page-title mt-1 mb-3" style="font-size: 60px">
-                    REAL COUNT
-                </h2>
+                <h5 class="page-title mt-1 mb-5" style="font-size: 30px;">
+                    <img src="{{asset('images/logo/garuda.png')}}" style="width: 100px" class="mb-3" alt=""> <br>
+                    <div class="my-auto mx-auto">
+                        PERHITUNGAN SUARA <br>
+                        PRESIDEN & WAKIL PRESIDEN RI 2024
+                    </div>
+                </h5>
             </center>
         </div>
-
+        
         <div class="col-lg-12">
             <style>
                 ul.breadcrumb {
                     padding: 10px 16px;
                     list-style: none;
-                    background-color: #0d6efd !important;
+                    height: 50px;
+                    background: linear-gradient(90deg, rgba(241, 12, 69, 1) 0%, rgba(165, 0, 128, 1) 100%);
                 }
-
+        
                 ul.breadcrumb li {
                     display: inline;
                     font-size: 18px;
                 }
-
+        
                 ul.breadcrumb li+li:before {
                     padding: 8px;
                     color: white;
                     content: "/\00a0";
                 }
-
+        
                 ul.breadcrumb li a {
-
+        
                     text-decoration: none;
                 }
-
+        
                 ul.breadcrumb li a:hover {
                     color: #01447e;
                     text-decoration: underline;
                 }
             </style>
-
+        
             <ul class="breadcrumb">
-
-                <li><a href="https://hisuara.id/dashboard-pusats" class="text-white">Indonesia</a></li>
-                <li><a href="{{ request()->url() }}" class="text-white">Provinsi
-                        {{ ucwords(strtolower($provinsi_ini->name)) }}</a></li>
-
+                {{-- <?php $regencies = Regency::get(); ?> --}}
+                <li><a href="" class="text-white"></a></li>
+        
             </ul>
         </div>
 
@@ -188,7 +191,7 @@
                             <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Hasil Perhitungan Suara</div>
                             <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Pemilihan Presiden dan Wakil
                                 Presiden</div>
-                            <div class="text-center title-atas-table fs-5 fw-bold">Indonesia</div>
+                            <div class="text-center title-atas-table fs-5 fw-bold">Tingkat Provinsi</div>
                             <div class="row mx-auto" style="width: 884.5px;">
 
                             </div>
@@ -244,6 +247,18 @@
 
             </div>
 
+            <div class="col-12 mb-5" style="">
+                <div class="row">
+                    <div class="col-12 text-center pt-2">
+                        <img src="{{asset('assets/imagesProvinsi/'. $provinsi_ini->logo_provinsi)}}" alt="">
+                    </div>
+                    <div class="col-12 text-black p-2 fs-5 fw-bold text-center">
+                        PERHITUNGAN TINGKAT KABUPATEN / KOTA <br>
+                        PROVINSI {{$provinsi_ini->name}}
+                    </div>
+                </div>
+            </div>
+
             <div class="col-12">
                 <div class="row">
                     @foreach ($regencies as $item)
@@ -252,7 +267,7 @@
                                 @php
                                     $regDom = RegenciesDomain::where('regency_id', $item->id)->first();
                                 @endphp
-                                <div class="card-header bg-primary text-white">
+                                <div class="card-header text-white" style="background: linear-gradient(90deg, rgba(39,109,231,1) 0%, rgba(119,42,220,1) 100%);">
                                     <div class="card-title mx-auto">
                                         <a
                                             href="{{ env('HTTP_SSL') . $regDom->domain . env('HTTP_PORT', '') }}/administrator/index">{{ $item['name'] }}
