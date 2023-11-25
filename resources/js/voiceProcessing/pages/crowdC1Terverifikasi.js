@@ -18,7 +18,14 @@ const commands = [
 
       buttonLihatAktivitas.click();
     }
-  }
+  },
+  {
+    keyword: /^tutup/, // tutup modal
+    exceptions: [],
+    execute: () => {
+      $('#cekmodal').modal('hide')
+    }
+  },
 ]
 
-module.exports = setCommandRoute('/administrator/admin_terverifikasi', commands)
+module.exports = setCommandRoute('/administrator/crowd_c1_terverifikasi', commands)
