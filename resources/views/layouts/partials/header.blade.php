@@ -447,7 +447,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                                     </div> -->
 
                         <div class="col-md-auto px-0">
-                            <button class="w-100 mx-auto btn tugel-kolaps text-white sirantap" style="background-color: #656064; width: 40px; height: 36px;" data-target="sirantap" data-command-target="sirantap">
+                            <button class="w-100 mx-auto btn tugel-kolaps text-white sirantap" style="background-color: #656064; width: 40px; height: 36px;" data-target="sirantap" data-command-target="kecurangan">
                                 <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Sistem Laporan Data Pemilu">
                                     <i class="fa-solid fa-s"></i>
                                 </span>
