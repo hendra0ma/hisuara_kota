@@ -673,22 +673,22 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                 <div class="col-md sirantap tugel-content" style="display: none;">
                     <div class="row" style="background: linear-gradient(90deg, rgba(157,11,14,1) 0%, rgba(237,27,36,1) 100%); border-radius: 25px">
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target-menu="sirantap" data-command-target="verifikasi-kecurangan" href="{{url('')}}/verifikator/verifikator_kecurangan" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="border-radius: 25px 0px 0px 25px;;">
+                            <a data-command-target-menu="kecurangan" data-command-target="verifikasi-kecurangan" href="{{url('')}}/verifikator/verifikator_kecurangan" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="border-radius: 25px 0px 0px 25px;;">
                                 Verifikasi Kecurangan
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target-menu="sirantap" data-command-target="bukti-kecurangan" href="{{url('')}}/administrator/fraud-data-print" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="border-radius: 0px;">
+                            <a data-command-target-menu="kecurangan" data-command-target="bukti-kecurangan" href="{{url('')}}/administrator/fraud-data-print" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="border-radius: 0px;">
                                 Bukti Kecurangan
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target-menu="sirantap" data-command-target="barcode-kecurangan" href="{{url('')}}/administrator/fraud-data-report" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="border-radius: 0px;">
+                            <a data-command-target-menu="kecurangan" data-command-target="barcode-kecurangan" href="{{url('')}}/administrator/fraud-data-report" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="border-radius: 0px;">
                                 Barkode Kecurangan
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target-menu="sirantap" data-command-target="jenis-kecurangan" href="{{url('')}}/administrator/index-tsm" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="border-radius: 0px 25px 25px 0px;">
+                            <a data-command-target-menu="kecurangan" data-command-target="jenis-kecurangan" href="{{url('')}}/administrator/index-tsm" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="border-radius: 0px 25px 25px 0px;">
                                 Jenis Kecurangan
                             </a>
                         </div>
