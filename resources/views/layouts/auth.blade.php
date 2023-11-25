@@ -93,7 +93,7 @@
     }
 
     .picture {
-      width: 300px;
+      width: 100%;
       aspect-ratio: 16/9;
       background: #ddd;
       display: flex;

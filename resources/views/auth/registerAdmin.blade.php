@@ -44,11 +44,11 @@
                                     <option disabled selected>Pilih Role</option>
                                     <option value="tps|8">Saksi</option>
                                     <option value="tps|16">Enumerator</option>
-                                    <option value="kor|18|koordinator">Koordinator</option>
-                                    <option value="tdk|17">Crowd C1</option>
+                                    <option value="tdk|17">Crowd C1 KPU</option>
                                     {{-- <option value="tdk|9">Rekapitulator</option> --}}
                                     <option value="tps|14">Relawan TPS</option>
                                     <option value="tdk|1">Admin</option>
+                                    <option value="kor|18|koordinator">Koordinator Saksi</option>
                                 </select>
                             </div>
                         
