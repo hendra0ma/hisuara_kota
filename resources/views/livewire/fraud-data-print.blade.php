@@ -60,7 +60,7 @@
 
                                 <script>
                                     function openNewPage() {
-                                            window.open('print/{{ Crypt::encrypt($ls->tps_id)}}', '_blank');
+                                            window.open('{{url('')}}/administrator/print/{{ Crypt::encrypt($ls->tps_id)}}', '_blank');
                                         }
                                 </script>
                             </div>

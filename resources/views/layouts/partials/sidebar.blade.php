@@ -1,4 +1,4 @@
-konfirmasiVerifikasi<?php
+<?php
 
 use App\Models\Config;
 use App\Models\District;

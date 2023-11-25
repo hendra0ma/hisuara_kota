@@ -16,7 +16,7 @@ $solution = \App\Models\SolutionFraud::get();
         </div>
         @endif
 
-        <h1 class="page-title fs-1 mt-2">DKPP
+        <h1 class="page-title fs-1 mt-2">Tim Hukum Paslon
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">
@@ -26,27 +26,73 @@ $solution = \App\Models\SolutionFraud::get();
         </ol>
     </div>
 
+    <div class="col-md-8">
+        <div class="row mt-2">
+            <div class="col parent-link">
+                <a class="btn text-white w-100 py-3 tablink" data-command-target="data-1"
+                    onclick="openPage('data-1', this, '#6259ca')" id="defaultOpen">Data 1</a>
+            </div>
+            <div class="col parent-link">
+                <a class="btn text-white w-100 py-3 tablink" data-command-target="data-2"
+                    onclick="openPage('data-2', this, '#6259ca')">Data 2</a>
+            </div>
+            <div class="col parent-link">
+                <a class="btn text-white w-100 py-3 tablink" data-command-target="data-3"
+                    onclick="openPage('data-3', this, '#6259ca')">Data 3</a>
+            </div>
+            <div class="col parent-link">
+                <a class="btn text-white w-100 py-3 tablink" data-command-target="data-4"
+                    onclick="openPage('data-4', this, '#6259ca')">Data 4</a>
+            </div>
+            {{-- <div class="col parent-link">
+                <a data-command-target="data-1" class="btn text-white w-100 py-3 kecurangan-masuk tablink"
+                    onclick="openPage('data-1', this, '#6259ca')" id="defaultOpen">Data 1</a>
+            </div> --}}
+        </div>
+    </div>
 </div>
 
-<div class="row mt-5 mb-5" style="padding-left: 13px; padding-right: 13px">
-    <h2 style="border-bottom: 2px solid" class="px-0 fw-bold mb-0 tugel pb-2" data-bs-toggle="collapse"
-        href="#collapse1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
-        <div class="row">
-            <div class="col-6">
-                Data 1
-            </div>
-            <div class="col-6 text-end">
-                <i class="fa-solid fa-chevron-down"></i>
-                <i class="fa-solid fa-chevron-right" style="display: none"></i>
-            </div>
+<script>
+    function openPage(pageName, elmnt, color) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+            // Remove the "active-tab" class from all tab links
+            tablinks[i].classList.remove("active-tab");
+        }
+        document.getElementById(pageName).style.display = "block";
+        elmnt.style.backgroundColor = color;
+        // Add the "active-tab" class to the selected tab link
+        elmnt.classList.add("active-tab");
+    }
+    // Wrap this part in a DOMContentLoaded event listener
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("defaultOpen").click();
+    });
+</script>
+
+<style>
+    /* Define a CSS class for the active tab text */
+    .active-tab {
+        color: white;
+    }
+
+    .active-tab:hover {
+        color: white;
+    }
+</style>
+
+<div id="data-1" class="tabcontent mt-0 pt-0 px-0">
+    <div class="row">
+        <div class="col-12 mt-5">
+            <h2 class="fw-bold">Index TSM Pemilu</h2>
         </div>
-    </h2>
-
-    <!-- PAGE-HEADER END -->
-    <div class="row mt-5 collapse multi-collapse show chevron-logic container mx-auto" id="collapse1">
-
-        <h2 class="fw-bold">Index TSM Pemilu</h2>
-        <div class="col-lg-12">
+        <div class="col-lg-6">
             <div class="row justify-content-center">
                 <div class="col-lg-12 ">
                     <div class="card">
@@ -78,20 +124,20 @@ $solution = \App\Models\SolutionFraud::get();
                                         <?php $i = 1 ?>
                                         @foreach ($index_tsm as $item)
                                         <?php if ($item->jenis != 0) {
-                                            continue;
-                                        } ?>
+                                                    continue;
+                                                } ?>
                                         <tr>
                                             <?php
-                                                $totalKec =  App\Models\Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
-                                                    ->join('saksi', 'saksi.tps_id', '=', 'bukti_deskripsi_curang.tps_id')
-                                                    ->where('saksi.status_kecurangan', "terverifikasi")
-                                                    ->where('bukti_deskripsi_curang.list_kecurangan_id', $item->id)
-                                                    ->where('list_kecurangan.jenis', 0)
-                                                    ->count();
-                                                $jumlahSaksi =        App\Models\Saksi::whereNull('pending')->count();
-                                                $persen = ($totalKec / $jumlahSaksi) * 100;
-    
-                                            ?>
+                                                        $totalKec =  App\Models\Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+                                                            ->join('saksi', 'saksi.tps_id', '=', 'bukti_deskripsi_curang.tps_id')
+                                                            ->where('saksi.status_kecurangan', "terverifikasi")
+                                                            ->where('bukti_deskripsi_curang.list_kecurangan_id', $item->id)
+                                                            ->where('list_kecurangan.jenis', 0)
+                                                            ->count();
+                                                        $jumlahSaksi =        App\Models\Saksi::whereNull('pending')->count();
+                                                        $persen = ($totalKec / $jumlahSaksi) * 100;
+            
+                                                    ?>
                                             <td>{{ $i++ }}</td>
                                             <td>{{$item->kode}}</td>
                                             <td>{{substr($persen,0,4)}}%</td>
@@ -108,7 +154,7 @@ $solution = \App\Models\SolutionFraud::get();
 
         </div>
 
-        <div class="col-lg-12">
+        <div class="col-lg-6">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                     <div class="card">
@@ -141,19 +187,19 @@ $solution = \App\Models\SolutionFraud::get();
                                         <?php $i = 1 ?>
                                         @foreach ($index_tsm as $item)
                                         <?php if ($item->jenis != 1) {
-                                            continue;
-                                        } ?>
+                                                    continue;
+                                                } ?>
                                         <tr>
                                             <?php
-                                                $totalKec =  App\Models\Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
-                                                    ->join('saksi', 'saksi.tps_id', '=', 'bukti_deskripsi_curang.tps_id')
-                                                    ->where('saksi.status_kecurangan', "terverifikasi")
-                                                    ->where('bukti_deskripsi_curang.list_kecurangan_id', $item->id)
-                                                    ->where('list_kecurangan.jenis', 1)
-                                                    ->count();
-                                                $jumlahSaksi = App\Models\Saksi::whereNull('pending')->count();
-                                                $persen = ($totalKec / $jumlahSaksi) * 100;
-                                            ?>
+                                                        $totalKec =  App\Models\Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+                                                            ->join('saksi', 'saksi.tps_id', '=', 'bukti_deskripsi_curang.tps_id')
+                                                            ->where('saksi.status_kecurangan', "terverifikasi")
+                                                            ->where('bukti_deskripsi_curang.list_kecurangan_id', $item->id)
+                                                            ->where('list_kecurangan.jenis', 1)
+                                                            ->count();
+                                                        $jumlahSaksi = App\Models\Saksi::whereNull('pending')->count();
+                                                        $persen = ($totalKec / $jumlahSaksi) * 100;
+                                                    ?>
                                             <td>{{ $i++ }}</td>
                                             <td>{{$item->kode}}</td>
                                             <td>{{substr($persen,0,4)}}%</td>
@@ -170,7 +216,7 @@ $solution = \App\Models\SolutionFraud::get();
             </div>
         </div>
 
-        <div class="col-lg-12">
+        <div class="col-lg-6">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                     <div class="card">
@@ -203,19 +249,19 @@ $solution = \App\Models\SolutionFraud::get();
                                         <?php $i = 1 ?>
                                         @foreach ($index_tsm as $item)
                                         <?php if ($item->jenis != 2) {
-                                                    continue;
-                                                } ?>
+                                                            continue;
+                                                        } ?>
                                         <tr>
                                             <?php
-                                                $totalKec =  App\Models\Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
-                                                    ->join('saksi', 'saksi.tps_id', '=', 'bukti_deskripsi_curang.tps_id')
-                                                    ->where('saksi.status_kecurangan', "terverifikasi")
-                                                    ->where('bukti_deskripsi_curang.list_kecurangan_id', $item->id)
-                                                    ->where('list_kecurangan.jenis', 1)
-                                                    ->count();
-                                                $jumlahSaksi =        App\Models\Saksi::whereNull('pending')->count();
-                                                $persen = ($totalKec / $jumlahSaksi) * 100;
-                                            ?>
+                                                        $totalKec =  App\Models\Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+                                                            ->join('saksi', 'saksi.tps_id', '=', 'bukti_deskripsi_curang.tps_id')
+                                                            ->where('saksi.status_kecurangan', "terverifikasi")
+                                                            ->where('bukti_deskripsi_curang.list_kecurangan_id', $item->id)
+                                                            ->where('list_kecurangan.jenis', 1)
+                                                            ->count();
+                                                        $jumlahSaksi =        App\Models\Saksi::whereNull('pending')->count();
+                                                        $persen = ($totalKec / $jumlahSaksi) * 100;
+                                                    ?>
                                             <td>{{ $i++ }}</td>
                                             <td>{{$item->kode}}</td>
                                             <td>{{substr($persen,0,4)}}%</td>
@@ -232,7 +278,7 @@ $solution = \App\Models\SolutionFraud::get();
             </div>
         </div>
 
-        <div class="col-lg-12">
+        <div class="col-lg-6">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                     <div class="card">
@@ -265,20 +311,20 @@ $solution = \App\Models\SolutionFraud::get();
                                         <?php $i = 1 ?>
                                         @foreach ($index_tsm as $item)
                                         <?php if ($item->jenis != 3) {
-                                                        continue;
-                                                    } ?>
+                                                                continue;
+                                                            } ?>
                                         <tr>
                                             <?php
-        
-                                                        $totalKec =  App\Models\Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
-                                                             ->join('saksi', 'saksi.tps_id', '=', 'bukti_deskripsi_curang.tps_id')
-                                                             ->where('saksi.status_kecurangan', "terverifikasi")
-                                                            ->where('bukti_deskripsi_curang.list_kecurangan_id', $item->id)
-                                                            ->where('list_kecurangan.jenis', 1)
-                                                            ->count();
-                                                       $jumlahSaksi =        App\Models\Saksi::whereNull('pending')->count();
-                                                        $persen = ($totalKec / $jumlahSaksi) * 100;
-                                                        ?>
+                
+                                                                $totalKec =  App\Models\Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+                                                                     ->join('saksi', 'saksi.tps_id', '=', 'bukti_deskripsi_curang.tps_id')
+                                                                     ->where('saksi.status_kecurangan', "terverifikasi")
+                                                                    ->where('bukti_deskripsi_curang.list_kecurangan_id', $item->id)
+                                                                    ->where('list_kecurangan.jenis', 1)
+                                                                    ->count();
+                                                               $jumlahSaksi =        App\Models\Saksi::whereNull('pending')->count();
+                                                                $persen = ($totalKec / $jumlahSaksi) * 100;
+                                                                ?>
                                             <td>{{ $i++ }}</td>
                                             <td>{{$item->kode}}</td>
                                             <td>{{substr($persen,0,4)}}%</td>
@@ -303,8 +349,8 @@ $solution = \App\Models\SolutionFraud::get();
                 <div class="card-body">
                     <table class="table table-bordered w-100">
                         <?php 
-                        $kodeF = DB::table('solution_frauds')->get();
-                        ?>
+                                $kodeF = DB::table('solution_frauds')->get();
+                                ?>
                         <tr>
                             @foreach($kodeF as $kod)
 
@@ -329,235 +375,129 @@ $solution = \App\Models\SolutionFraud::get();
             </div>
         </div>
     </div>
+</div>
+<div id="data-2" class="tabcontent mt-0 pt-0 px-0">
+    <div class="col-12 px-0 mt-5">
+        <h2 class="fw-bold">
+            Rekomendasi Tindakan
+        </h2>
+    </div>
+    <div class="col-lg-12 px-0">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
 
-    <hr>
-    <h2 style="border-bottom: 2px solid" class="px-0 pb-3 fw-bold mb-0 tugel mt-3" data-bs-toggle="collapse"
-        href="#collapse2" role="button" aria-expanded="false" aria-controls="multiCollapseExample2">
-        <div class="row">
-            <div class="col-6">
-                Data 2
-            </div>
-            <div class="col-6 text-end">
-                <i class="fa-solid fa-chevron-down" style="display: none"></i>
-                <i class="fa-solid fa-chevron-right"></i>
-            </div>
-        </div>
-    </h2>
-
-    <div class="row collapse multi-collapse chevron-logic" id="collapse2">
-        <div class="col-12 px-0 mt-5">
-            <h2 class="fw-bold">
-                Rekomendasi Tindakan
-            </h2>
-        </div>
-        <div class="col-lg-12 px-0">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">Rekomendasi</div>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-
-                        @foreach($solution as $solut)
-                        <?php $jmlh_kecurangan =  \App\Models\Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
-                                                    ->join('users', 'users.tps_id', '=', 'tps.id')
-                                                    ->join('bukti_deskripsi_curang', 'bukti_deskripsi_curang.tps_id', '=', 'tps.id')
-                                                    ->join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
-                                                    ->where('list_kecurangan.solution_fraud_id',$solut->id)
-                                                    ->where('saksi.kecurangan', 'yes')
-                                                    ->where('saksi.status_kecurangan', 'terverifikasi')
-                                                    ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
-                                                    ->get();
-                                                    
-                                                    
-                                                    ?>
+                    @foreach($solution as $solut)
+                    <?php $jmlh_kecurangan =  \App\Models\Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
+                                                        ->join('users', 'users.tps_id', '=', 'tps.id')
+                                                        ->join('bukti_deskripsi_curang', 'bukti_deskripsi_curang.tps_id', '=', 'tps.id')
+                                                        ->join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+                                                        ->where('list_kecurangan.solution_fraud_id',$solut->id)
+                                                        ->where('saksi.kecurangan', 'yes')
+                                                        ->where('saksi.status_kecurangan', 'terverifikasi')
+                                                        ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
+                                                        ->get();
+                                                        
+                                                        
+                                                        ?>
 
 
-                        <div class="col-lg justify-content-end">
-                            <div class="card">
-                                <div class="card-header bg-primary">
-                                    <div class="card-title text-white">{{$solut->solution}}
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col mx-auto text-center">
-                                            <b class="fs-4 mx-auto target-container<?=$solut->id?>"> </b>
-                                            <script>
-                                                data = [@foreach($jmlh_kecurangan as $jmlh)
-                                                    '{{$jmlh->tps_id}}', @endforeach
-                                                ];
-                                                uniqueArray = data.filter(function (item, pos) {
-                                                    return data.indexOf(item) == pos;
-                                                });
-                                                document.querySelector('b.target-container<?=$solut->id?>').innerHTML =
-                                                    uniqueArray.length
-    
-                                            </script>
-                                        </div>
-                                        <div class="col my-auto text-end">
-                                            <a href="{{route('superadmin.solution',encrypt($solut->id))}}"
-                                                class="my-auto">Lihat <i class="mdi mdi-eye"></i></a>
-                                        </div>
-                                    </div>
+                    <div class="col-lg justify-content-end">
+                        <div class="card">
+                            <div class="card-header bg-primary">
+                                <div class="card-title text-white">{{$solut->solution}}
                                 </div>
                             </div>
-                        </div>
-                        @endforeach
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <hr>
-    <h2 style="border-bottom: 2px solid" class="px-0 pb-3 fw-bold mb-0 tugel mt-3" data-bs-toggle="collapse"
-        href="#collapse3" role="button" aria-expanded="false" aria-controls="multiCollapseExample2">
-        <div class="row">
-            <div class="col-6">
-                Data 3
-            </div>
-            <div class="col-6 text-end">
-                <i class="fa-solid fa-chevron-down" style="display: none"></i>
-                <i class="fa-solid fa-chevron-right"></i>
-            </div>
-        </div>
-    </h2>
-
-    <div class="row collapse multi-collapse chevron-logic" id="collapse3">
-        <div class="col-12 px-0">
-            <h2 class="fw-bold mt-5">
-                Barkode Kecurangan
-
-            </h2>
-        </div>
-        <div class="col-lg-12 px-0">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title text-center mx-auto">Barkode Kecurangan</h4>
-
-                </div>
-                <div class="card-body">
-                    <livewire:fraud-barcode-report-component />
-                    {{-- <div class="row">
-                        @foreach ($qrcode as $item)
-                        <?php $scan_url = "" . url('/') . "/scanning-secure/" . Crypt::encrypt($item['nomor_berkas']) . ""; ?>
-                        <div class="col-md-3">
-                            <center>
-                                <div class="card" style="background-color:white">
-                                    <div class="card-body">
-                                        <a href="{{url('/') . " /scanning-secure/" .
-                                            Crypt::encrypt($item['nomor_berkas'])}}" target="_blank"
-                                            rel="noopener noreferrer">
-                                            {!! QrCode::size(200)->generate($scan_url); !!}
-                                        </a>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col mx-auto text-center">
+                                        <b class="fs-4 mx-auto target-container<?=$solut->id?>"> </b>
+                                        <script>
+                                            data = [@foreach($jmlh_kecurangan as $jmlh)
+                                                        '{{$jmlh->tps_id}}', @endforeach
+                                                    ];
+                                                    uniqueArray = data.filter(function (item, pos) {
+                                                        return data.indexOf(item) == pos;
+                                                    });
+                                                    document.querySelector('b.target-container<?=$solut->id?>').innerHTML =
+                                                        uniqueArray.length
+        
+                                        </script>
                                     </div>
-                                </div>
-                            </center>
-                        </div>
-                        @endforeach
-                        <div class="col-lg-12">
-                            <div class="row justify-content-end">
-                                <div class="col-lg-2">
-                                    <a href="{{url('')}}/administrator/fraud-data-report"
-                                        class="btn btn-dark btn-block">Selengkapnya</a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div> --}}
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <hr>
-    <h2 style="border-bottom: 2px solid" class="px-0 pb-3 fw-bold mb-0 tugel mt-3" data-bs-toggle="collapse"
-        href="#collapse4" role="button" aria-expanded="false" aria-controls="multiCollapseExample2">
-        <div class="row">
-            <div class="col-6">
-                Data 4
-            </div>
-            <div class="col-6 text-end">
-                <i class="fa-solid fa-chevron-down" style="display: none"></i>
-                <i class="fa-solid fa-chevron-right"></i>
-            </div>
-        </div>
-    </h2>
-
-    <div class="row collapse multi-collapse chevron-logic" id="collapse4">
-        <div class="col-12 px-0">
-            <h2 class="fw-bold mt-5">
-                Election Fraud Data Print (EFDP)
-            </h2>
-        </div>
-        <div class="col-lg-12 px-0">
-            <div class="row">
-                @foreach($list_suara as $ls)
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="card-header bg-primary">
-                            <div class="card-title text-white">DATA SAKSI</div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md">
-                                    @if ($ls->profile_photo_path == NULL)
-                                    <img class="" style="width: 250px;"
-                                        src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF"
-                                        alt="img">
-                                    @else
-                                    <img class="" style="width: 250px;" src="{{url("/storage/profile-photos/".$ls->profile_photo_path) }}">
-                                    @endif
-                                </div>
-                                <div class="col-md">
-                                    <div class="row mb-2">
-                                        <div class="col-md-4 fw-bold">NIK</div>
-                                        <div class="col-md">{{$ls->nik}}</div>
-                                    </div>
-                                    <div class="row mb-2">
-                                        <div class="col-md-4 fw-bold">Nama</div>
-                                        <div class="col-md">{{$ls->name}}</div>
-                                    </div>
-                                    <div class="row mb-2">
-                                        <div class="col-md-4 fw-bold">No Wa</div>
-                                        <div class="col-md">{{$ls->no_hp}}</div>
-                                    </div>
-                                    <div class="row mb-5">
-                                        <div class="col-md-4 fw-bold">Date</div>
-                                        <div class="col-md">{{$ls->date}}</div>
-                                    </div>
-                                    <div class="row mb-2">
-                                        <div class="col-md fw-bold">
-                                            <a href="fotomasalah"
-                                                class="btn btn-secondary w-90 fotoKecuranganterverifikasi mt-2 rounded-0"
-                                                id="Cek" data-bs-toggle="modal" id=""
-                                                data-bs-target="#fotoKecuranganterverifikasi" data-id="{{$ls->tps_id}}">
-                                                Arsip Kecurangan</a>
-                                        </div>
+                                    <div class="col my-auto text-end">
+                                        <a href="{{route('superadmin.solution',encrypt($solut->id))}}"
+                                            class="my-auto">Lihat
+                                            <i class="mdi mdi-eye"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="data-3" class="tabcontent mt-0 pt-0 px-0">
+    <div class="col-12 px-0 mt-5">
+        <h2 class="fw-bold">
+            Barkode Kecurangan
+        </h2>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <livewire:fraud-barcode-report-component />
+            {{-- <div class="row">
+                @foreach ($qrcode as $item)
+                <?php $scan_url = "" . url('/') . "/scanning-secure/" . Crypt::encrypt($item['nomor_berkas']) . ""; ?>
+                <div class="col-md-3">
+                    <center>
+                        <div class="card" style="background-color:white">
+                            <div class="card-body">
+                                <a href="{{url('/') . " /scanning-secure/" . Crypt::encrypt($item['nomor_berkas'])}}"
+                                    target="_blank" rel="noopener noreferrer">
+                                    {!! QrCode::size(200)->generate($scan_url); !!}
+                                </a>
+                            </div>
+                        </div>
+                    </center>
                 </div>
                 @endforeach
-
                 <div class="col-lg-12">
                     <div class="row justify-content-end">
                         <div class="col-lg-2">
-                            <a href="{{url('')}}/administrator/fraud-data-print"
+                            <a href="{{url('')}}/administrator/fraud-data-report"
                                 class="btn btn-dark btn-block">Selengkapnya</a>
                         </div>
                     </div>
                 </div>
 
-            </div>
+            </div> --}}
+
         </div>
     </div>
+</div>
+<div id="data-4" class="tabcontent mt-0 pt-0 px-0">
+    <div class="col-12 px-0 mt-5">
+        <h2 class="fw-bold">
+            Bukti Kecurangan
+        </h2>
+    </div>
+    <div class="row">
+        <livewire:fraud-data-print>
 
+            <div class="col-lg-12">
+                <div class="row justify-content-end">
+                    <div class="col-lg-2">
+                        <a href="{{url('')}}/administrator/fraud-data-print"
+                            class="btn btn-dark btn-block">Selengkapnya</a>
+                    </div>
+                </div>
+            </div>
+
+    </div>
 </div>
 
 <div id="fotoKecuranganterverifikasi" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
@@ -576,25 +516,6 @@ $solution = \App\Models\SolutionFraud::get();
         </div>
     </div>
 </div>
-
-<script>
-    $('h2.tugel').on('click', function () {
-        let koleps = $(this).attr('href');
-        let down = $(this).find('i.fa-chevron-down')
-        let right = $(this).find('i.fa-chevron-right')
-        setTimeout(() => {
-            if ($(koleps).hasClass('show')) {
-                $(down).show();
-                $(right).hide();
-            } else {
-                $(down).hide();
-                $(right).show();
-            }
-        }, 10);
-    });
-
-</script>
-
 
 
 <script>

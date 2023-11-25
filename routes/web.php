@@ -557,6 +557,7 @@ foreach ($kotas as $kota) {
                 Route::get('tim_hukum_paslon', 'timHukumPaslon');
                 Route::get('dkpp', 'dkpp');
                 Route::get('polisi', 'polri');
+                Route::get('panrb', 'panrb');
                 Route::get('akun_kpu', 'kpu');
                 Route::get('validator_kecurangan', 'validatorKecurangan')->name('validatorKecurangan');
                 Route::get('ditolak', 'ditolak');

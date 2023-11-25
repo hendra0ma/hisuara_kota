@@ -25,23 +25,23 @@
     <div class="col-md-8">
         <div class="row mt-2">
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 kecurangan-masuk tablink" onclick="openPage('mk-kecurangan-masuk', this, '#6259ca')"
+                <a data-command-target="kecurangan-masuk" class="btn text-white w-100 py-3 kecurangan-masuk tablink" onclick="openPage('mk-kecurangan-masuk', this, '#6259ca')"
                     id="defaultOpen">Kecurangan Masuk</a>
             </div>
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 kecurangan-ditolak tablink"
+                <a data-command-target="kecurangan-ditolak" class="btn text-white w-100 py-3 kecurangan-ditolak tablink"
                     onclick="openPage('kecurangan-ditolak', this, '#6259ca')">Kecurangan Ditolak</a>
             </div>
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 peserta-sidang-online tablink"
+                <a data-command-target="peserta-sidang-online" class="btn text-white w-100 py-3 peserta-sidang-online tablink"
                     onclick="openPage('peserta-sidang-online', this, '#6259ca')">Peserta Sidang Online</a>
             </div>
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 sidang-tidak-menjawab tablink"
+                <a data-command-target="sidang-tidak-menjawab" class="btn text-white w-100 py-3 sidang-tidak-menjawab tablink"
                     onclick="openPage('sidang-tidak-menjawab', this, '#6259ca')">Sidang Tidak Menjawab</a>
             </div>
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 semua-kecurangan tablink"
+                <a data-command-target="semua-kecurangan" class="btn text-white w-100 py-3 semua-kecurangan tablink"
                     onclick="openPage('semua-kecurangan', this, '#6259ca')">Semua Kecurangan</a>
             </div>
         </div>
@@ -115,4 +115,35 @@
         </div>
     </div>
 </div>
+
+<script>
+    let qrsidang = function(ini){
+                        let id_tps = $(ini).data('id');
+                        $.ajax({
+                            url : "{{url('')}}/administrator/get_qrsidang",
+                            data : {
+                                    id_tps,
+                                },
+                            type : 'GET',
+                            success : function(response){
+                                document.querySelector('div#qrSidang').innerHTML = response;
+                            }
+                        })
+                    }
+</script>
+<script>
+    let sidang_online = function(ini){
+                        let id_tps = $(ini).data('id');
+                        $.ajax({
+                            url : "{{url('')}}/administrator/get_sidang_online",
+                            data : {
+                                    id_tps,
+                                },
+                            type : 'GET',
+                            success : function(response){
+                                document.querySelector('div#qrSidangOnline').innerHTML = response;
+                            }
+                        })
+                    }
+</script>
 @endsection

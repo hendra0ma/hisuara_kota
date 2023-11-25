@@ -966,22 +966,15 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                 <div class="col-md laporan tugel-content" style="display: none">
                     <div class="row">
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target="mk" href="{{url('')}}/hukum/mahkamah_konstitusi"
-                                class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
-                                MK
+                            <a data-command-target="bawaslu" href="{{url('')}}/hukum/tim_hukum_paslon"
+                                class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                Tim Hukum Paslon
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                             <a data-command-target="bawaslu" href="{{url('')}}/hukum/bawaslu"
                                 class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
                                 Bawaslu
-                            </a>
-                        </div>
-                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target="bawaslu" href="{{url('')}}/hukum/tim_hukum_paslon"
-                                class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
-                                Tim Hukum Paslon
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
@@ -997,10 +990,22 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a data-command-target="panrb" href="{{url('')}}/hukum/panrb"
+                                class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                                PANRB
+                            </a>
+                        </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                             <a data-command-target="kpu" href="{{url('')}}/hukum/akun_kpu"
                                 class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                style="background-color: #528bff; border-radius: 0px;">
                                 KPU
+                            </a>
+                        </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a data-command-target="mk" href="{{url('')}}/hukum/mahkamah_konstitusi"
+                                class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                MK
                             </a>
                         </div>
                     </div>
