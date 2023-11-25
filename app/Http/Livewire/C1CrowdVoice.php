@@ -61,9 +61,7 @@ class C1CrowdVoice extends Component
             ->where('tps.number', 'like', '%'.$this->search.'%')
             ->select('users.*','tps.*','crowd_c1.*','crowd_c1.id as crowd_id')
             ->paginate(25);
-
-      
-
+            
         return view('livewire.c1-crowd-voice', $data);
     }
 }
