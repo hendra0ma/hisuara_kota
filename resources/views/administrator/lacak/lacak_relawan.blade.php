@@ -64,10 +64,10 @@ $kota = Regency::where('id', $config->regencies_id)->first();
             @foreach ($relawan as $ls)
             <div class="col-md-auto">
                 @if ($ls->profile_photo_path == NULL)
-                <img class="" style="width: 125px; height: 125px; object-fit: cover"
+                <img class="rounded-circle" style="width: 125px; height: 125px; object-fit: cover"
                     src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF" alt="img">
                 @else
-                <img class="" style="width: 125px; height: 125px; object-fit: cover" src="{{url("/storage/profile-photos/".$ls->profile_photo_path) }}">
+                <img class="rounded-circle" style="width: 125px; height: 125px; object-fit: cover" src="{{url("/storage/profile-photos/".$ls->profile_photo_path) }}">
                 @endif
             </div>
             @endforeach
