@@ -38,10 +38,15 @@ const {
 
 try {
   $(document).ready(function () {
-    let recognition = new (webkitSpeechRecognition || SpeechRecognition)();
+    const grammar =
+    "#JSGF V1.0; grammar hisuara; public <hisuara> = kota | crowd;";
+    const recognition = new (webkitSpeechRecognition || SpeechRecognition)();
+    const speechRecognitionList = new SpeechGrammarList();
+    speechRecognitionList.addFromString(grammar, 1);
+    recognition.grammars = speechRecognitionList;
     recognition.lang = 'id-ID';
-    recognition.continuous = false;
-    recognition.interimResults = false;
+    recognition.continuous = true;
+    recognition.interimResults = true;
 
     recognition.start();
 
@@ -52,7 +57,7 @@ try {
 
     recognition.onresult = function (event) {
       for (let i = event.resultIndex; i < event.results.length; i++) {
-        // if (event.results[i].isFinal) {
+        if (event.results[i].isFinal) {
           let finalTranscript = event.results[i][0].transcript.trim().toLowerCase();
 
           const command = findMatchingCommand(finalTranscript)
@@ -67,10 +72,8 @@ try {
           if (getSpeechStatus() === 'true' || isTheCommandHaiSila) {
             command.execute(finalTranscript)
           }
-        // }
+        }
       }
-
-      recognition = new (webkitSpeechRecognition || SpeechRecognition)();
     };
 
     let speechGotError = false;
