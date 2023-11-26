@@ -54,20 +54,6 @@ const commands = [
       $('#periksaC1Auditor').modal('hide')
     }
   },
-  {
-    keyword: /^halaman sebelumnya/, // previous pagination
-    exceptions: [],
-    execute: () => {
-      document.querySelector('button[dusk="previousPage"]').click()
-    }
-  },
-  {
-    keyword: /^halaman berikutnya/, // next pagination
-    exceptions: [],
-    execute: () => {
-      document.querySelector('button[dusk="nextPage"]').click()
-    }
-  },
 ]
 
 module.exports = setCommandRoute('/auditor/audit-c1', commands)

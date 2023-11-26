@@ -50,20 +50,6 @@ const commands = [
       $('#periksaC1Verifikator').modal('hide')
     }
   },
-  {
-    keyword: /^halaman sebelumnya/, // previous pagination
-    exceptions: [],
-    execute: () => {
-      document.querySelector('button[dusk="previousPage"]').click()
-    }
-  },
-  {
-    keyword: /^halaman berikutnya/, // next pagination
-    exceptions: [],
-    execute: () => {
-      document.querySelector('button[dusk="nextPage"]').click()
-    }
-  },
 ]
 
 module.exports = setCommandRoute('/verifikator/verifikasi-c1', commands)

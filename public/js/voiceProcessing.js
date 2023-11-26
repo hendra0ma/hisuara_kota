@@ -224,20 +224,6 @@ var commands = [{
   execute: function execute() {
     $('#periksaC1Auditor').modal('hide');
   }
-}, {
-  keyword: /^halaman sebelumnya/,
-  // previous pagination
-  exceptions: [],
-  execute: function execute() {
-    document.querySelector('button[dusk="previousPage"]').click();
-  }
-}, {
-  keyword: /^halaman berikutnya/,
-  // next pagination
-  exceptions: [],
-  execute: function execute() {
-    document.querySelector('button[dusk="nextPage"]').click();
-  }
 }];
 module.exports = setCommandRoute('/auditor/audit-c1', commands);
 
@@ -292,6 +278,20 @@ var commands = [{
   exceptions: [],
   execute: function execute(finalTranscript) {
     history.back();
+  }
+}, {
+  keyword: /^halaman sebelumnya/,
+  // previous pagination
+  exceptions: [],
+  execute: function execute() {
+    document.querySelector('button[dusk="previousPage"]').click();
+  }
+}, {
+  keyword: /^halaman berikutnya/,
+  // next pagination
+  exceptions: [],
+  execute: function execute() {
+    document.querySelector('button[dusk="nextPage"]').click();
   }
 }, {
   keyword: /^sila keluar sistem/,
@@ -410,20 +410,6 @@ var commands = [{
   exceptions: [],
   execute: function execute() {
     $('#cekmodal').modal('hide');
-  }
-}, {
-  keyword: /^halaman sebelumnya/,
-  // previous pagination
-  exceptions: [],
-  execute: function execute() {
-    document.querySelector('button[dusk="previousPage"]').click();
-  }
-}, {
-  keyword: /^halaman berikutnya/,
-  // next pagination
-  exceptions: [],
-  execute: function execute() {
-    document.querySelector('button[dusk="nextPage"]').click();
   }
 }];
 module.exports = setCommandRoute('/administrator/enumerator', commands);
@@ -654,20 +640,6 @@ var commands = [{
   execute: function execute() {
     $('#periksaC1Verifikator').modal('hide');
   }
-}, {
-  keyword: /^halaman sebelumnya/,
-  // previous pagination
-  exceptions: [],
-  execute: function execute() {
-    document.querySelector('button[dusk="previousPage"]').click();
-  }
-}, {
-  keyword: /^halaman berikutnya/,
-  // next pagination
-  exceptions: [],
-  execute: function execute() {
-    document.querySelector('button[dusk="nextPage"]').click();
-  }
 }];
 module.exports = setCommandRoute('/verifikator/verifikasi-c1', commands);
 
@@ -741,20 +713,6 @@ var commands = [{
   execute: function execute() {
     $('#cekmodal').modal('hide');
   }
-}, {
-  keyword: /^halaman sebelumnya/,
-  // previous pagination
-  exceptions: [],
-  execute: function execute() {
-    document.querySelector('button[dusk="previousPage"]').click();
-  }
-}, {
-  keyword: /^halaman berikutnya/,
-  // next pagination
-  exceptions: [],
-  execute: function execute() {
-    document.querySelector('button[dusk="nextPage"]').click();
-  }
 }];
 module.exports = setCommandRoute('/administrator/verifikasi_crowd_c1', commands);
 
@@ -827,20 +785,6 @@ var commands = [{
   exceptions: [],
   execute: function execute() {
     $('#cekmodal').modal('hide');
-  }
-}, {
-  keyword: /^halaman sebelumnya/,
-  // previous pagination
-  exceptions: [],
-  execute: function execute() {
-    document.querySelector('button[dusk="previousPage"]').click();
-  }
-}, {
-  keyword: /^halaman berikutnya/,
-  // next pagination
-  exceptions: [],
-  execute: function execute() {
-    document.querySelector('button[dusk="nextPage"]').click();
   }
 }];
 module.exports = setCommandRoute('/administrator/verifikasi_saksi', commands);
