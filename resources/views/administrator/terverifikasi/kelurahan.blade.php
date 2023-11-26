@@ -272,7 +272,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                                         <?php
                                         $tpsass = \App\Models\Tps::where('number', (string)$item['number'])->where('villages_id', (string)$id)->first(); ?>
                                         <?php $saksi_data = \App\Models\SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('tps_id', $tpsass->id)->where('saksi.verification', 1)->sum('voice'); ?>
-                                    <td>{{$saksi_data}}</td>
+                                    <td class="text-end">{{$saksi_data}}</td>
 
                                     @endforeach
                                 </tr>

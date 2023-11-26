@@ -242,7 +242,7 @@
                                                 <?php $i = 1; ?>
                                                 @foreach ($paslon as $cd)
                                                     <?php $saksi_dataa = Regency::where('province_id', $item->id)->sum('suara' . $i); ?>
-                                                    <td class="align-middle">{{ $saksi_dataa }}</td>
+                                                    <td class="align-middle text-end">{{ $saksi_dataa }}</td>
                                                     @php
                                                         $i++;
                                                     @endphp

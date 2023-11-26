@@ -150,7 +150,7 @@ $tps = Tps::count();
                     </td>
                     @foreach ($paslon as $cd)
                     <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.village_id', (string)$item['id'])->sum('voice'); ?>
-                    <td class="align-middle">{{$saksi_dataa}}</td>
+                    <td class="align-middle text-end">{{$saksi_dataa}}</td>
                     @endforeach
                 </tr>
                 @endforeach
@@ -189,7 +189,7 @@ $tps = Tps::count();
                     </td>
                     @foreach ($paslon as $cd)
                     <?php $saksi_dataa = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->sum('voice'); ?>
-                    <td class="align-middle">{{$saksi_dataa}}</td>
+                    <td class="align-middle text-end">{{$saksi_dataa}}</td>
                     @endforeach
                 </tr>
                 @endforeach

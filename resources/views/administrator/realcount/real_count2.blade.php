@@ -259,7 +259,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                                     </td>
                                     @foreach ($paslon as $cd)
                                     <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->sum('voice'); ?>
-                                    <td class="align-middle">{{$saksi_dataa}}</td>
+                                    <td class="align-middle text-end">{{$saksi_dataa}}</td>
                                     @endforeach
                                 </tr>
                                 @endforeach

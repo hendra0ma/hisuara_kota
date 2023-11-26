@@ -227,7 +227,7 @@
                                                 </td>
                                                 <?php $i = 1; ?>
                                                 @foreach ($paslon as $cd)
-                                                    <td class="align-middle">{{ $item->{'suara' . $i} }}</td>
+                                                    <td class="align-middle text-end">{{ $item->{'suara' . $i} }}</td>
                                                     @php
                                                         $i++;
                                                     @endphp
