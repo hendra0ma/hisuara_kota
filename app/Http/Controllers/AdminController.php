@@ -3498,9 +3498,14 @@ class AdminController extends Controller
         ->orderByDesc('total')
         ->get();
 
-        // return $paslon_tertinggi;
 
-        $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        
+        if (isset($paslon_tertinggi['0'])) {
+            $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        }else{
+            $data['paslon_tertinggi'] = Paslon::first();
+        }
+
         $data['urutan'] = $paslon_tertinggi;
 
         foreach ($verification as $key) {

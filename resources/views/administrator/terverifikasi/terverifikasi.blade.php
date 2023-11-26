@@ -180,7 +180,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                                                 ?>
                                                 @foreach ($pas->saksi_data as $dataTps)
                                                 <?php
-                                                $voice += $dataTps->voice;
+                                                $voice += isset($dataTps->voice)?$dataTps->voice:0;
                                                 ?>
                                                 @endforeach
                                                 <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
