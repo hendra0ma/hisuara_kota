@@ -511,6 +511,15 @@ var commands = [{
     if (commandTargetMenuElement) commandTargetMenuElement.click();
     selectedElement.click();
   }
+}, {
+  keyword: /^tutup menu/,
+  // tutup navbar
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    var keyword = 'menu';
+    var selectedElement = document.querySelector('[data-command-target="' + keyword + '"]');
+    selectedElement.click();
+  }
 }];
 module.exports = setCommandRoute(null, commands);
 
