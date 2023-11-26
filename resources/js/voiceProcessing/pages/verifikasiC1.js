@@ -31,8 +31,7 @@ const commands = [
     keyword: /^koreksi/, // tombol koreksi di modal
     exceptions: [],
     execute: () => {
-      const url = $('#koreksiButton').attr('href');
-      window.location = url
+      document.querySelector(`#koreksiButton`).click()
     }
   },
   {
