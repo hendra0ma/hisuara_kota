@@ -235,8 +235,10 @@ class AuditorController extends Controller
            ->where('saksi.batalkan', 1)
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->paginate(18);
-
-        $data['village'] = Village::where('id', $data['list_suara'][0]->village_id)->first();
+        if ( count($data['list_suara']) > 0) {
+            
+            $data['village'] = Village::where('id', $data['list_suara'][0]->village_id)->first();
+        }
         return view('administrator.c1.audit-c1', $data);
     }
 }
