@@ -211,7 +211,7 @@ var commands = [{
     document.querySelector('#hubungiWhatsappButton').click();
   }
 }, {
-  keyword: /^tutup/,
+  keyword: /\btutup\b(?!.*\S)/,
   // tutup modal
   exceptions: [],
   execute: function execute() {
@@ -405,7 +405,7 @@ var commands = [{
     buttonHubungi.click();
   }
 }, {
-  keyword: /^tutup/,
+  keyword: /\btutup\b(?!.*\S)/,
   // tutup modal
   exceptions: [],
   execute: function execute() {
@@ -440,7 +440,7 @@ var commands = [{
     buttonLihatDetail.click();
   }
 }, {
-  keyword: /^tutup/,
+  keyword: /\btutup\b(?!.*\S)/,
   // tutup modal
   exceptions: [],
   execute: function execute() {
@@ -475,7 +475,7 @@ var commands = [{
     buttonLihatDetail.click();
   }
 }, {
-  keyword: /^tutup/,
+  keyword: /\btutup\b(?!.*\S)/,
   // tutup modal
   exceptions: [],
   execute: function execute() {
@@ -549,7 +549,7 @@ var commands = [{
     buttonLihatDetail.click();
   }
 }, {
-  keyword: /^tutup/,
+  keyword: /\btutup\b(?!.*\S)/,
   // tutup modal
   exceptions: [],
   execute: function execute() {
@@ -642,7 +642,7 @@ var commands = [{
     window.location = url;
   }
 }, {
-  keyword: /^tutup/,
+  keyword: /\btutup\b(?!.*\S)/,
   // tutup modal
   exceptions: [],
   execute: function execute() {
@@ -715,7 +715,7 @@ var commands = [{
     buttonHubungi.click();
   }
 }, {
-  keyword: /^tutup/,
+  keyword: /\btutup\b(?!.*\S)/,
   // tutup modal
   exceptions: [],
   execute: function execute() {
@@ -788,7 +788,7 @@ var commands = [{
     buttonHubungi.click();
   }
 }, {
-  keyword: /^tutup/,
+  keyword: /\btutup\b(?!.*\S)/,
   // tutup modal
   exceptions: [],
   execute: function execute() {

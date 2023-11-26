@@ -20,7 +20,7 @@ const commands = [
     }
   },
   {
-    keyword: /^tutup/, // tutup modal
+    keyword: /\btutup\b(?!.*\S)/, // tutup modal
     exceptions: [],
     execute: () => {
       $('#cekmodal').modal('hide')
