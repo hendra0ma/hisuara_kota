@@ -69,8 +69,6 @@ try {
           }
         }
       }
-
-      recognition = new (webkitSpeechRecognition || SpeechRecognition)();
     };
 
     let speechGotError = false;
