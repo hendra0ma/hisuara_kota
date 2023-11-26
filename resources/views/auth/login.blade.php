@@ -4,8 +4,22 @@
     <div class="login-img" style="background: transparent; position: relative;">
 
         <!-- GLOABAL LOADER -->
+        <style>
+            .parent-nya {
+                position: absolute; top: 63%; 
+                left: 50%; 
+                transform: translate(-50%, 0%) !important
+            }
+
+            @media only screen and (max-width: 767px) {
+                .parent-nya {
+                    position: absolute; 
+                    top: 50%;
+                }
+            }
+        </style>
         
-        <div style="position: absolute; top: 63%; left: 50%; transform: translate(-50%, 0%) !important">
+        <div class="parent-nya">
             <form class="login100-form validate-form" style="width: auto" method="POST" action="{{ route('login') }}">
                 @csrf
                 <input type="hidden" id="latitude" name="latitude">
@@ -16,7 +30,7 @@
             
                 <x-jet-validation-errors class="mb-4" />
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-md-4">
                         <div class="wrap-input100 validate-input">
                             <input class="input100" type="text" name="email" placeholder="Masukkan No. KTP/No. Hp/Email" required>
                             <span class="focus-input100"></span>
@@ -25,7 +39,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-md-4">
                         <div class="wrap-input100 validate-input" data-bs-validate="Password is required">
                             <input class="input100" type="password" name="password" placeholder="Password" required>
                             <span class="focus-input100"></span>
@@ -34,17 +48,16 @@
                             </span>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-md-4">
                         <button type="submit" class="login100-form-btn" style="background-color: #6c757d!important;color:white">
                             Login
                         </button>
                     </div>
-                    <div class="col-4">
-                        <a href="#" class="text-primary ms-1" style="color: white !important">Forgot Password?</a>
+                    <div class="col-md-4">
+                        <a href="#" class="text-primary ms-1 link-login">Forgot Password?</a>
                     </div>
-                    <div class="col-4">
-                        <p class="text-dark mb-0 text-white">Not a member?<a href="register-admin" class="text-primary ms-1"
-                                style="color: white !important">Create an Account</a></p>
+                    <div class="col-md-4">
+                        <p class="text-dark mb-0 link-login">Not a member?<a href="register-admin" class="text-primary ms-1 link-login">Create an Account</a></p>
                     </div>
                 </div>
             
