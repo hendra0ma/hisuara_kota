@@ -19,58 +19,62 @@
                 
                 $scan_url = "" . url('/') . "/scanning-secure/" . Crypt::encrypt($qr_code['nomor_berkas']) . ""; ?>
         <div class="col-md-6 col-xl-4">
-            <div class="card">
-                @if ($tag == 2)
-                @if ($ls->makamah_konsitusi == "Ditolak")
-                <div class="ribbone">
-                    <div class="ribbon"><span>{{ $ls->makamah_konsitusi }}</span></div>
-                </div>
-                @elseif ($ls->makamah_konsitusi == "Panggil")
-                <div class="ribbone">
-                    <div class="ribbon"><span>{{ $ls->makamah_konsitusi }}</span></div>
-                </div>
-                @elseif ($ls->makamah_konsitusi == "Tidak Menjawab")
-                <div class="ribbone">
-                    <div class="ribbon"><span>{{ $ls->makamah_konsitusi }}</span></div>
-                </div>
-                @elseif ($ls->makamah_konsitusi == "Selesai")
-                <div class="ribbone">
-                    <div class="ribbon"><span>{{ $ls->makamah_konsitusi }}</span></div>
-                </div>
-                @else
-        
-                @endif
-        
-        
-                @endif
-        
-                <div class="card-header bg-primary">
-                    <div class="card-title text-white">Saksi Pelapor : {{$ls['name']}}</div>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md">
-                            @if ($ls->profile_photo_path == NULL)
-                            <img class="" style="width: 250px;"
-                                src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF" alt="img">
-                            @else
-                            <img class="" style="width: 250px;" src="{{url("/storage/profile-photos/".$ls->profile_photo_path)
-                            }}">
-                            @endif
-                        </div>
-                        <div class="col-md">
-                            <a id="Cek" data-bs-toggle="modal" onclick="qrsidang(this)" data-bs-target="#modalQrCode"
-                                data-id="{{$ls->tps_id}}" href="#">
-                                {!! QrCode::size(250)->generate($scan_url); !!}
-                            </a>
+            <a id="Cek" data-bs-toggle="modal" onclick="qrsidang(this)" data-bs-target="#modalQrCode" data-id="{{$ls->tps_id}}"
+                href="#">
+                <div class="card">
+                    @if ($tag == 2)
+                    @if ($ls->makamah_konsitusi == "Ditolak")
+                    <div class="ribbone">
+                        <div class="ribbon"><span>{{ $ls->makamah_konsitusi }}</span></div>
+                    </div>
+                    @elseif ($ls->makamah_konsitusi == "Panggil")
+                    <div class="ribbone">
+                        <div class="ribbon"><span>{{ $ls->makamah_konsitusi }}</span></div>
+                    </div>
+                    @elseif ($ls->makamah_konsitusi == "Tidak Menjawab")
+                    <div class="ribbone">
+                        <div class="ribbon"><span>{{ $ls->makamah_konsitusi }}</span></div>
+                    </div>
+                    @elseif ($ls->makamah_konsitusi == "Selesai")
+                    <div class="ribbone">
+                        <div class="ribbon"><span>{{ $ls->makamah_konsitusi }}</span></div>
+                    </div>
+                    @else
+                
+                    @endif
+                
+                
+                    @endif
+                
+                    <div class="card-header bg-primary">
+                        <div class="card-title text-white">Saksi Pelapor : {{$ls['name']}}</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md text-center">
+                                @if ($ls->profile_photo_path == NULL)
+                                <img class="" style="width: 175px;"
+                                    src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF" alt="img">
+                                @else
+                                <img class="" style="width: 175px;" src="{{url("/storage/profile-photos/".$ls->profile_photo_path)
+                                }}">
+                                @endif
+                            </div>
+                            <div class="col-6 my-auto text-center">
+                                <?php $village = App\Models\Village::where('id', $ls->village_id)->first(); ?>
+                                <div class="mb-0 fw-bold" style="font-size: 25px">{{ $ls['name'] }}</div>
+                                <div style="font-size: 15px">NIK : {{ $ls['nik'] }}</div>
+                                <div style="font-size: 15px">SAKSI TPS {{ $ls['number'] }}</div>
+                                <div style="font-size: 15px">KELURAHAN {{ $village['name'] }}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
         @endforeach
         
-        <script>
+        {{-- <script>
             let qrsidang = function(ini){
                         let id_tps = $(ini).data('id');
                         $.ajax({
@@ -99,6 +103,6 @@
                             }
                         })
                     }
-        </script>
+        </script> --}}
     </div>
 </div>

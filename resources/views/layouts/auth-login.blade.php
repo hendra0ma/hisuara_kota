@@ -159,8 +159,7 @@
           <img style="display: block; margin-left: auto; margin-right: auto;"
             src="{{asset('')}}images/logo/hisuara_new.png" width="100px" class="pt-5 mb-5">
           <div class="text-center pb-5" style="font-size: 13px;">
-            © PT.Hisuara Smart Count <br />
-            All Right Reserved 2021
+               Hisuara Smart Count, All Right Reserved 2021
           </div>
         </div>
       </section>

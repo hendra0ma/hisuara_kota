@@ -100,30 +100,32 @@ Route::get("redirect-page", function () {
 Route::get('register-admin', [LoginController::class, 'createAdmin'])->name('formRegister.admin');
 
 
-Route::get("update-dpt", function () {
-    set_time_limit(999999999999);
-    $dpt_indonesia = DB::table('dpt_indonesia')->limit(10000)->get();
-    // return $dpt_indonesia;
-    foreach ($dpt_indonesia as $dpt) {
-        $province = Province::where('name', $dpt->province_name)->first();
-        $regency = Regency::where('province_id', $province->id)->where('name', $dpt->regency_name)->first();
 
-        $district = District::where('regency_id', $regency->id)->where('name', $dpt->district_name)->first();
-        $village = Village::where('district_id', $district->id)->where('name', $dpt->village_name)->first();
 
-        DB::table('dpt_indonesia')
-            ->where('province_name', $province->name)
-            ->where('regency_name', $regency->name)
-            ->where('district_name', $district->name)
-            ->where('village_name', $village->name)
-            ->update([
-                "province_id" => $province->id,
-                "regency_id" => $regency->id,
-                "district_id" => $district->id,
-                "village_id" => $village->id,
-            ]);
-    }
-});
+// Route::get("update-dpt", function () {
+//     set_time_limit(999999999999);
+//     $dpt_indonesia = DB::table('dpt_indonesia')->limit(10000)->get();
+//     // return $dpt_indonesia;
+//     foreach ($dpt_indonesia as $dpt) {
+//         $province = Province::where('name', $dpt->province_name)->first();
+//         $regency = Regency::where('province_id', $province->id)->where('name', $dpt->regency_name)->first();
+
+//         $district = District::where('regency_id', $regency->id)->where('name', $dpt->district_name)->first();
+//         $village = Village::where('district_id', $district->id)->where('name', $dpt->village_name)->first();
+
+//         DB::table('dpt_indonesia')
+//             ->where('province_name', $province->name)
+//             ->where('regency_name', $regency->name)
+//             ->where('district_name', $district->name)
+//             ->where('village_name', $village->name)
+//             ->update([
+//                 "province_id" => $province->id,
+//                 "regency_id" => $regency->id,
+//                 "district_id" => $district->id,
+//                 "village_id" => $village->id,
+//             ]);
+//     }
+// });
 
 
 
@@ -135,6 +137,7 @@ Route::get('/redirect', [LoginController::class, 'index']);
 
 //Hisuara Pusat
 
+
 Route::domain('hisuara.id')->name('pusat.')->group(function () {
 
     Route::get('/',  function () {
@@ -145,7 +148,7 @@ Route::domain('hisuara.id')->name('pusat.')->group(function () {
 
 
     Route::group(["middleware" => 'role:administrator'], function () {
-        Route::get('/dashboard-pusats', [PusatController::class, "home"])->name('home');
+        Route::get('/   dashboard-pusats', [PusatController::class, "home"])->name('home');
     });
 });
 
@@ -184,10 +187,6 @@ Route::get('/getKelurahan/{id}', function ($id) {
 foreach ($kotas as $kota) {
 
     Route::domain($kota->domain)->group(function () {
-
-
-
-
         Route::get('/ceksetup', function () {
             $config = Config::first();
             if ($config->setup == 'yes') {
@@ -475,6 +474,8 @@ foreach ($kotas as $kota) {
             Route::get('verifikasiData/{id}', [VerificatorController::class, 'verifikasiData'])->name('verifikasiData');
             Route::get('verifikasi-data-pending/{id}', [VerificatorController::class, 'verifikasiDataPending'])->name('verifikasiDataPending');
             Route::get('verifikasi-data-c1-relawan/{id}', [VerificatorController::class, 'verifikasiDataC1Relawan'])->name('verifikasiDataC1Relawan');
+            Route::get('verifikasi-data-c1-crowd/{id}', [VerificatorController::class, 'verifikasiDataC1Crowd'])->name('verifikasiDataC1Crowd');
+
             Route::get('koreksidata/{id}', [VerificatorController::class, 'koreksidata'])->name('koreksidata');
             Route::get('getKoreksiVerifikator', [VerificatorController::class, 'getKoreksiVerifikator'])->name('getKoreksiVerifikator');
             Route::post('actionKoreksiData/{id}', [VerificatorController::class, 'actionKoreksiData'])->name('actionKoreksiData');
@@ -557,6 +558,7 @@ foreach ($kotas as $kota) {
                 Route::get('tim_hukum_paslon', 'timHukumPaslon');
                 Route::get('dkpp', 'dkpp');
                 Route::get('polisi', 'polri');
+                Route::get('panrb', 'panrb');
                 Route::get('akun_kpu', 'kpu');
                 Route::get('validator_kecurangan', 'validatorKecurangan')->name('validatorKecurangan');
                 Route::get('ditolak', 'ditolak');
@@ -725,15 +727,15 @@ foreach ($kotas as $kota) {
         Route::controller(DevelopingController::class)->group(function () {
             Route::get('dev/index', 'index');
 
-            Route::get('c1Crowd/index', 'c1Crowd')->name('crowd_c1');
-            Route::post('c1Crowd/upload', 'uploadC1Crowd');
-            Route::post('dev/action_saksi', 'action_saksi');
-            Route::get('dev/tps_update', 'tps_update');
-            Route::get('dev/saksi_update', 'saksi_update');
-            Route::get('dev/tps_user_update', 'tps_user_update');
+            Route::get('c1Crowd/index', 'c1Crowd')->middleware('auth')->name('crowd_c1');
+            Route::post('c1Crowd/upload', 'uploadC1Crowd')->middleware('auth');
+            Route::post('dev/action_saksi', 'action_saksi')->middleware('auth');
+            Route::get('dev/tps_update', 'tps_update')->middleware('auth');
+            Route::get('dev/saksi_update', 'saksi_update')->middleware('auth');
+            Route::get('dev/tps_user_update', 'tps_user_update')->middleware('auth');
             Route::get('upload_kecurangan', 'upload_kecurangan');
             Route::get('upload_kecurangan_2', 'upload_kecurangan_2');
-            Route::get('upload_c1', 'upload_c1')->name('upload_c1');
+            Route::get('upload_c1', 'upload_c1')->middleware('auth')->name('upload_c1');
             Route::get('input-c1-quickcount', 'c1_quickcount');
             Route::post('action_upload_kecurangan', 'action_upload_kecurangan')->name('action_upload_kecurangan');
             Route::get('dev/absen', 'absen');
@@ -1097,10 +1099,6 @@ Route::get('update-suara-c1-kota',function (){
 });
 
 
-Route::get('cek-query',function () {
-   $saksi =new SaksiData;
-   return $saksi->toSql();
-});
 
 
 // Route::get('update-suara-c1-provinsi',function (){

@@ -498,7 +498,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                                          Hisuara
                                         </h4> -->
                             <h4 class="mb-0 fw-bold kota tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
-                                Kota
+                                Wilayah
                             </h4>
                             <h4 class="mb-0 fw-bold support tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
                                 Support
@@ -966,22 +966,15 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                 <div class="col-md laporan tugel-content" style="display: none">
                     <div class="row">
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target="mk" href="{{url('')}}/hukum/mahkamah_konstitusi"
-                                class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
-                                MK
+                            <a data-command-target="tim-hukum-paslon" href="{{url('')}}/hukum/tim_hukum_paslon"
+                                class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 25px 0px 0px 25px;">
+                                Tim Hukum Paslon
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                             <a data-command-target="bawaslu" href="{{url('')}}/hukum/bawaslu"
                                 class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
                                 Bawaslu
-                            </a>
-                        </div>
-                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target="bawaslu" href="{{url('')}}/hukum/tim_hukum_paslon"
-                                class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0;">
-                                Tim Hukum Paslon
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
@@ -997,10 +990,22 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a data-command-target="panrb" href="{{url('')}}/hukum/panrb"
+                                class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px;">
+                                PANRB
+                            </a>
+                        </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
                             <a data-command-target="kpu" href="{{url('')}}/hukum/akun_kpu"
                                 class="py-1 btn fs-6 w-100 text-white glowy-menu"
-                                style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                style="background-color: #528bff; border-radius: 0px;">
                                 KPU
+                            </a>
+                        </div>
+                        <div class="col-md" style="padding-left: 1px; padding-right: 1px">
+                            <a data-command-target="mk" href="{{url('')}}/hukum/mahkamah_konstitusi"
+                                class="py-1 btn fs-6 w-100 text-white glowy-menu" style="background-color: #528bff; border-radius: 0px 25px 25px 0px;">
+                                MK
                             </a>
                         </div>
                     </div>
@@ -1154,8 +1159,8 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                 </div>
 
                 <div class="col-md-auto px-0">
-                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="kota" data-command-target="kota">
-                        <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Kota">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="kota" data-command-target="wilayah">
+                        <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Wilayah">
                             <i class="fa-solid fa-city"></i>
                         </span>
                     </button>
@@ -1188,8 +1193,8 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id']
                 </script>
 
                 <div class="col-md-auto px-0">
-                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="support" data-command-target="support">
-                        <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Support">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="support" data-command-target="bantuan">
+                        <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Bantuan">
                             <i class="fa-solid fa-headset"></i>
                         </span>
                     </button>

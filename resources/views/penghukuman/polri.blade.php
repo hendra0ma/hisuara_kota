@@ -41,11 +41,11 @@ $solution = \App\Models\SolutionFraud::get();
                         </center>
                     </div>
                     <div class="card-body">
-    
+
                         <center>
                             <div id="chart-donut"></div>
                         </center>
-    
+
                         <div class="table-responsive">
                             <table
                                 class="table table-bordered text-nowrap border-bottom dataTable no-footer table-striped table-hover datable"
@@ -81,7 +81,7 @@ $solution = \App\Models\SolutionFraud::get();
                                         <td>{{ $item['kecurangan'] }}</td>
                                     </tr>
                                     @endforeach
-    
+
                                 </tbody>
                             </table>
                         </div>
@@ -92,6 +92,6 @@ $solution = \App\Models\SolutionFraud::get();
     </div>
 </div>
 
-        
+
 @include('layouts.partials.footer')
 @include('layouts.partials.scripts-bapilu')

@@ -64,7 +64,7 @@ $config->default =  $configs->default;
                 </div>
 
                 <table class="table table-striped">
-                    <thead class="bg-dark text-white">
+                    <thead class="text-white" style="background: linear-gradient(90deg, rgba(39,109,231,1) 0%, rgba(119,42,220,1) 100%);">
                         <tr>
                             <th class="text-white">
                                 No

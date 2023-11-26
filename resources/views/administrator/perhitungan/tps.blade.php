@@ -65,7 +65,7 @@ $tps = Tps::count();
             ul.breadcrumb {
                 padding: 10px 16px;
                 list-style: none;
-                background-color: #0d6efd !important;
+                background: linear-gradient(90deg, rgba(11,53,217,1) 0%, rgba(23,154,236,1) 100%)
             }
 
             ul.breadcrumb li {
