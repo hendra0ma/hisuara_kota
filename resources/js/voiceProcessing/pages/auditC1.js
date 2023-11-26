@@ -45,13 +45,7 @@ const commands = [
     exceptions: [],
     execute: () => {
       $('#periksaC1Verifikator').modal('hide')
-    }
-  },
-  {
-    keyword: /^tutup koreksi/, // tutup modal
-    exceptions: [],
-    execute: () => {
-      $('#periksaC1Auditor').modal('hide')
+        || $('#periksaC1Auditor').modal('hide')
     }
   },
 ]

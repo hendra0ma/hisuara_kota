@@ -215,14 +215,7 @@ var commands = [{
   // tutup modal
   exceptions: [],
   execute: function execute() {
-    $('#periksaC1Verifikator').modal('hide');
-  }
-}, {
-  keyword: /^tutup koreksi/,
-  // tutup modal
-  exceptions: [],
-  execute: function execute() {
-    $('#periksaC1Auditor').modal('hide');
+    $('#periksaC1Verifikator').modal('hide') || $('#periksaC1Auditor').modal('hide');
   }
 }];
 module.exports = setCommandRoute('/auditor/audit-c1', commands);
@@ -646,7 +639,7 @@ var commands = [{
   // tutup modal
   exceptions: [],
   execute: function execute() {
-    $('#periksaC1Verifikator').modal('hide');
+    $('#periksaC1Verifikator').modal('hide') || $('#koreksiC1Verifikator').modal('hide');
   }
 }];
 module.exports = setCommandRoute('/verifikator/verifikasi-c1', commands);
@@ -881,7 +874,11 @@ var _require = __webpack_require__(/*! ./helper */ "./resources/js/voiceProcessi
 
 try {
   $(document).ready(function () {
+    var grammar = "#JSGF V1.0; grammar hisuara; public <hisuara> = kota | crowd;";
     var recognition = new (webkitSpeechRecognition || SpeechRecognition)();
+    var speechRecognitionList = new SpeechGrammarList();
+    speechRecognitionList.addFromString(grammar, 1);
+    recognition.grammars = speechRecognitionList;
     recognition.lang = 'id-ID';
     recognition.continuous = true;
     recognition.interimResults = true;
