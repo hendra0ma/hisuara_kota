@@ -10,7 +10,7 @@
 
 
     $user = App\Models\User::where('id', $relawan->user_id)->first();
-    $tps = App\Models\TPS::where('id', $relawan->tps_id)->first();
+    $tps = App\Models\Tps::where('id', $relawan->tps_id)->first();
 
     $village = App\Models\Village::where('id', $relawan->village_id)->first();
 
