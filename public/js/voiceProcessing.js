@@ -876,11 +876,12 @@ var _require = __webpack_require__(/*! ./helper */ "./resources/js/voiceProcessi
 
 try {
   $(document).ready(function () {
-    var grammar = "#JSGF V1.0; grammar hisuara; public <hisuara> = kota | crowd;";
-    var recognition = new (webkitSpeechRecognition || SpeechRecognition)();
-    var speechRecognitionList = new SpeechGrammarList();
-    speechRecognitionList.addFromString(grammar, 1);
-    recognition.grammars = speechRecognitionList;
+    // const grammar =
+    // "#JSGF V1.0; grammar hisuara; public <hisuara> = kota | crowd;";
+    var recognition = new (webkitSpeechRecognition || SpeechRecognition)(); // const speechRecognitionList = new SpeechGrammarList();
+    // speechRecognitionList.addFromString(grammar, 1);
+    // recognition.grammars = speechRecognitionList;
+
     recognition.lang = 'id-ID';
     recognition.continuous = true;
     recognition.interimResults = true;
