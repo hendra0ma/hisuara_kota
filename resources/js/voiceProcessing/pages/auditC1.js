@@ -41,7 +41,7 @@ const commands = [
     }
   },
   {
-    keyword: /^tutup/, // tutup modal
+    keyword: /\btutup\b(?!.*\S)/, // tutup modal
     exceptions: [],
     execute: () => {
       $('#periksaC1Verifikator').modal('hide')
@@ -52,20 +52,6 @@ const commands = [
     exceptions: [],
     execute: () => {
       $('#periksaC1Auditor').modal('hide')
-    }
-  },
-  {
-    keyword: /^halaman sebelumnya/, // previous pagination
-    exceptions: [],
-    execute: () => {
-      document.querySelector('button[dusk="previousPage"]').click()
-    }
-  },
-  {
-    keyword: /^halaman berikutnya/, // next pagination
-    exceptions: [],
-    execute: () => {
-      document.querySelector('button[dusk="nextPage"]').click()
     }
   },
 ]

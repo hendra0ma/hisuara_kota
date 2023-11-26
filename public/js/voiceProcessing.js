@@ -211,7 +211,7 @@ var commands = [{
     document.querySelector('#hubungiWhatsappButton').click();
   }
 }, {
-  keyword: /^tutup/,
+  keyword: /\btutup\b(?!.*\S)/,
   // tutup modal
   exceptions: [],
   execute: function execute() {
@@ -223,20 +223,6 @@ var commands = [{
   exceptions: [],
   execute: function execute() {
     $('#periksaC1Auditor').modal('hide');
-  }
-}, {
-  keyword: /^halaman sebelumnya/,
-  // previous pagination
-  exceptions: [],
-  execute: function execute() {
-    document.querySelector('button[dusk="previousPage"]').click();
-  }
-}, {
-  keyword: /^halaman berikutnya/,
-  // next pagination
-  exceptions: [],
-  execute: function execute() {
-    document.querySelector('button[dusk="nextPage"]').click();
   }
 }];
 module.exports = setCommandRoute('/auditor/audit-c1', commands);
@@ -292,6 +278,20 @@ var commands = [{
   exceptions: [],
   execute: function execute(finalTranscript) {
     history.back();
+  }
+}, {
+  keyword: /^halaman sebelumnya/,
+  // previous pagination
+  exceptions: [],
+  execute: function execute() {
+    document.querySelector('button[dusk="previousPage"]').click();
+  }
+}, {
+  keyword: /^halaman berikutnya/,
+  // next pagination
+  exceptions: [],
+  execute: function execute() {
+    document.querySelector('button[dusk="nextPage"]').click();
   }
 }, {
   keyword: /^sila keluar sistem/,
@@ -405,25 +405,11 @@ var commands = [{
     buttonHubungi.click();
   }
 }, {
-  keyword: /^tutup/,
+  keyword: /\btutup\b(?!.*\S)/,
   // tutup modal
   exceptions: [],
   execute: function execute() {
     $('#cekmodal').modal('hide');
-  }
-}, {
-  keyword: /^halaman sebelumnya/,
-  // previous pagination
-  exceptions: [],
-  execute: function execute() {
-    document.querySelector('button[dusk="previousPage"]').click();
-  }
-}, {
-  keyword: /^halaman berikutnya/,
-  // next pagination
-  exceptions: [],
-  execute: function execute() {
-    document.querySelector('button[dusk="nextPage"]').click();
   }
 }];
 module.exports = setCommandRoute('/administrator/enumerator', commands);
@@ -454,7 +440,7 @@ var commands = [{
     buttonLihatDetail.click();
   }
 }, {
-  keyword: /^tutup/,
+  keyword: /\btutup\b(?!.*\S)/,
   // tutup modal
   exceptions: [],
   execute: function execute() {
@@ -489,7 +475,7 @@ var commands = [{
     buttonLihatDetail.click();
   }
 }, {
-  keyword: /^tutup/,
+  keyword: /\btutup\b(?!.*\S)/,
   // tutup modal
   exceptions: [],
   execute: function execute() {
@@ -525,6 +511,15 @@ var commands = [{
     if (commandTargetMenuElement) commandTargetMenuElement.click();
     selectedElement.click();
   }
+}, {
+  keyword: /^tutup menu/,
+  // tutup navbar
+  exceptions: [],
+  execute: function execute(finalTranscript) {
+    var keyword = 'menu';
+    var selectedElement = document.querySelector('[data-command-target="' + keyword + '"]');
+    selectedElement.click();
+  }
 }];
 module.exports = setCommandRoute(null, commands);
 
@@ -554,7 +549,7 @@ var commands = [{
     buttonLihatDetail.click();
   }
 }, {
-  keyword: /^tutup/,
+  keyword: /\btutup\b(?!.*\S)/,
   // tutup modal
   exceptions: [],
   execute: function execute() {
@@ -636,8 +631,7 @@ var commands = [{
   // tombol koreksi di modal
   exceptions: [],
   execute: function execute() {
-    var url = $('#koreksiButton').attr('href');
-    window.location = url;
+    document.querySelector("#koreksiButton").click();
   }
 }, {
   keyword: /^verifikasi oke/,
@@ -648,25 +642,11 @@ var commands = [{
     window.location = url;
   }
 }, {
-  keyword: /^tutup/,
+  keyword: /\btutup\b(?!.*\S)/,
   // tutup modal
   exceptions: [],
   execute: function execute() {
     $('#periksaC1Verifikator').modal('hide');
-  }
-}, {
-  keyword: /^halaman sebelumnya/,
-  // previous pagination
-  exceptions: [],
-  execute: function execute() {
-    document.querySelector('button[dusk="previousPage"]').click();
-  }
-}, {
-  keyword: /^halaman berikutnya/,
-  // next pagination
-  exceptions: [],
-  execute: function execute() {
-    document.querySelector('button[dusk="nextPage"]').click();
   }
 }];
 module.exports = setCommandRoute('/verifikator/verifikasi-c1', commands);
@@ -735,25 +715,11 @@ var commands = [{
     buttonHubungi.click();
   }
 }, {
-  keyword: /^tutup/,
+  keyword: /\btutup\b(?!.*\S)/,
   // tutup modal
   exceptions: [],
   execute: function execute() {
     $('#cekmodal').modal('hide');
-  }
-}, {
-  keyword: /^halaman sebelumnya/,
-  // previous pagination
-  exceptions: [],
-  execute: function execute() {
-    document.querySelector('button[dusk="previousPage"]').click();
-  }
-}, {
-  keyword: /^halaman berikutnya/,
-  // next pagination
-  exceptions: [],
-  execute: function execute() {
-    document.querySelector('button[dusk="nextPage"]').click();
   }
 }];
 module.exports = setCommandRoute('/administrator/verifikasi_crowd_c1', commands);
@@ -822,25 +788,11 @@ var commands = [{
     buttonHubungi.click();
   }
 }, {
-  keyword: /^tutup/,
+  keyword: /\btutup\b(?!.*\S)/,
   // tutup modal
   exceptions: [],
   execute: function execute() {
     $('#cekmodal').modal('hide');
-  }
-}, {
-  keyword: /^halaman sebelumnya/,
-  // previous pagination
-  exceptions: [],
-  execute: function execute() {
-    document.querySelector('button[dusk="previousPage"]').click();
-  }
-}, {
-  keyword: /^halaman berikutnya/,
-  // next pagination
-  exceptions: [],
-  execute: function execute() {
-    document.querySelector('button[dusk="nextPage"]').click();
   }
 }];
 module.exports = setCommandRoute('/administrator/verifikasi_saksi', commands);

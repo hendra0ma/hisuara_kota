@@ -1109,7 +1109,8 @@ class AdminController extends Controller
     public function crowdC1()
     {
         $data['config'] = Config::first();
-        $data['jumlah_c1'] = CrowdC1::join('tps', 'crowd_c1.tps_id', '=', 'tps.id')->whereNull('crowd_c1.tps_id')->where('status', '0')->where('crowd_c1.regency_id', $this->config->regencies_id)->count();
+        $data['jumlah_c1'] = CrowdC1::where('status', '0')->whereNull('crowd_c1.tps_id')->where('crowd_c1.regency_id', $this->config->regencies_id)->count();
+
 
         return view('administrator.c1.crowd-c1-kpu', $data);
     }
@@ -3497,9 +3498,14 @@ class AdminController extends Controller
         ->orderByDesc('total')
         ->get();
 
-        // return $paslon_tertinggi;
 
-        $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        
+        if (isset($paslon_tertinggi['0'])) {
+            $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        }else{
+            $data['paslon_tertinggi'] = Paslon::first();
+        }
+
         $data['urutan'] = $paslon_tertinggi;
 
         foreach ($verification as $key) {

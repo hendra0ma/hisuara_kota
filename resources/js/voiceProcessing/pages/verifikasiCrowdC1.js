@@ -59,24 +59,10 @@ const commands = [
     }
   },
   {
-    keyword: /^tutup/, // tutup modal
+    keyword: /\btutup\b(?!.*\S)/, // tutup modal
     exceptions: [],
     execute: () => {
       $('#cekmodal').modal('hide')
-    }
-  },
-  {
-    keyword: /^halaman sebelumnya/, // previous pagination
-    exceptions: [],
-    execute: () => {
-      document.querySelector('button[dusk="previousPage"]').click()
-    }
-  },
-  {
-    keyword: /^halaman berikutnya/, // next pagination
-    exceptions: [],
-    execute: () => {
-      document.querySelector('button[dusk="nextPage"]').click()
     }
   },
 ]

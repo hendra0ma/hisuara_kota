@@ -31,8 +31,7 @@ const commands = [
     keyword: /^koreksi/, // tombol koreksi di modal
     exceptions: [],
     execute: () => {
-      const url = $('#koreksiButton').attr('href');
-      window.location = url
+      document.querySelector(`#koreksiButton`).click()
     }
   },
   {
@@ -44,24 +43,10 @@ const commands = [
     }
   },
   {
-    keyword: /^tutup/, // tutup modal
+    keyword: /\btutup\b(?!.*\S)/, // tutup modal
     exceptions: [],
     execute: () => {
       $('#periksaC1Verifikator').modal('hide')
-    }
-  },
-  {
-    keyword: /^halaman sebelumnya/, // previous pagination
-    exceptions: [],
-    execute: () => {
-      document.querySelector('button[dusk="previousPage"]').click()
-    }
-  },
-  {
-    keyword: /^halaman berikutnya/, // next pagination
-    exceptions: [],
-    execute: () => {
-      document.querySelector('button[dusk="nextPage"]').click()
     }
   },
 ]

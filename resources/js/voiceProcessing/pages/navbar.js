@@ -19,6 +19,15 @@ const commands = [
       if (commandTargetMenuElement) commandTargetMenuElement.click()
       selectedElement.click()
     }
+  },
+  {
+    keyword: /^tutup menu/, // tutup navbar
+    exceptions: [],
+    execute: (finalTranscript) => {
+      const keyword = 'menu'
+      const selectedElement = document.querySelector('[data-command-target="' + keyword + '"]')
+      selectedElement.click()
+    }
   }
 ]
 
