@@ -38,12 +38,12 @@ const {
 
 try {
   $(document).ready(function () {
-    const grammar =
-    "#JSGF V1.0; grammar hisuara; public <hisuara> = kota | crowd;";
+    // const grammar =
+    // "#JSGF V1.0; grammar hisuara; public <hisuara> = kota | crowd;";
     const recognition = new (webkitSpeechRecognition || SpeechRecognition)();
-    const speechRecognitionList = new SpeechGrammarList();
-    speechRecognitionList.addFromString(grammar, 1);
-    recognition.grammars = speechRecognitionList;
+    // const speechRecognitionList = new SpeechGrammarList();
+    // speechRecognitionList.addFromString(grammar, 1);
+    // recognition.grammars = speechRecognitionList;
     recognition.lang = 'id-ID';
     recognition.continuous = true;
     recognition.interimResults = true;
