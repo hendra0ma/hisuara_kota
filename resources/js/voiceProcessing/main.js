@@ -38,7 +38,7 @@ const {
 
 try {
   $(document).ready(function () {
-    const recognition = new (webkitSpeechRecognition || SpeechRecognition)();
+    let recognition = new (webkitSpeechRecognition || SpeechRecognition)();
     recognition.lang = 'id-ID';
     recognition.continuous = true;
     recognition.interimResults = true;
@@ -69,6 +69,8 @@ try {
           }
         }
       }
+
+      recognition = new (webkitSpeechRecognition || SpeechRecognition)();
     };
 
     let speechGotError = false;
