@@ -129,6 +129,10 @@
     .picture__img {
       max-width: 100%;
     }
+
+    .link-login {
+      color: white !important
+    }
   </style>
 </head>
 
@@ -159,7 +163,7 @@
           <img style="display: block; margin-left: auto; margin-right: auto;"
             src="{{asset('')}}images/logo/hisuara_new.png" width="100px" class="pt-5 mb-5">
           <div class="text-center pb-5" style="font-size: 13px;">
-               Hisuara Smart Count, All Right Reserved 2021
+              Hisuara Smart Count, All Right Reserved 2021
           </div>
         </div>
       </section>

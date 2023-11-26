@@ -285,5 +285,26 @@
 
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+                const createChartContainer = (style) => {
+                    return `<div style="${style}"></div>`;
+                };
+            
+                const chartStyle = `
+                    height: 320px;
+                    width: 260px;
+                    background: transparent;
+                    position: absolute;
+                    z-index: 1;
+                `;
+            
+                const chartContainer1 = createChartContainer(chartStyle);
+                const chartContainer2 = createChartContainer(`${chartStyle} right: 25px;`);
+            
+                $('.chartsh').prepend(chartContainer1, chartContainer2);
+            })
+    </script>
 @endsection
  
