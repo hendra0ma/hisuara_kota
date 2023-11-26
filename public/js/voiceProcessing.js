@@ -622,8 +622,7 @@ var commands = [{
   // tombol koreksi di modal
   exceptions: [],
   execute: function execute() {
-    var url = $('#koreksiButton').attr('href');
-    window.location = url;
+    document.querySelector("#koreksiButton").click();
   }
 }, {
   keyword: /^verifikasi oke/,
