@@ -215,7 +215,8 @@ var commands = [{
   // tutup modal
   exceptions: [],
   execute: function execute() {
-    $('#periksaC1Verifikator').modal('hide') || $('#periksaC1Auditor').modal('hide');
+    $('#periksaC1Verifikator').modal('hide');
+    $('#periksaC1Auditor').modal('hide');
   }
 }];
 module.exports = setCommandRoute('/auditor/audit-c1', commands);
@@ -639,7 +640,8 @@ var commands = [{
   // tutup modal
   exceptions: [],
   execute: function execute() {
-    $('#periksaC1Verifikator').modal('hide') || $('#koreksiC1Verifikator').modal('hide');
+    $('#periksaC1Verifikator').modal('hide');
+    $('#koreksiC1Verifikator').modal('hide');
   }
 }];
 module.exports = setCommandRoute('/verifikator/verifikasi-c1', commands);

@@ -47,7 +47,7 @@ const commands = [
     exceptions: [],
     execute: () => {
       $('#periksaC1Verifikator').modal('hide')
-      || $('#koreksiC1Verifikator').modal('hide')
+      $('#koreksiC1Verifikator').modal('hide')
     }
   },
 ]
