@@ -100,8 +100,7 @@ $tps = Tps::count();
                                         </div>
                                     </div>
                                     <div class="col-12 text-center">
-                                        <h6 class="mt-4">{{$pas->candidate}} </h6>
-                                        <h6 class="">{{$pas->deputy_candidate}} </h6>
+                                        <h6 class="mt-4">{{$pas->candidate}} - {{$pas->deputy_candidate}}</h6>
                                         @if (isset($url_first[3]))
                                             @php
                                             $data['url_id'] = Crypt::decrypt($url_first[3]);
