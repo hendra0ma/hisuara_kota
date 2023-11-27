@@ -140,8 +140,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col text-center">
-                                                        <h6 class="mt-4">{{ $pas->candidate }} </h6>
-                                                        <h6 class="">{{ $pas->deputy_candidate }} </h6>
+                                                        <h6 class="mt-4">{{$pas->candidate}} - {{$pas->deputy_candidate}}</h6>
                                                         @php
                                                             $voice = 0;
                                                             foreach ($regencies as $regency) {
