@@ -56,6 +56,18 @@ $tps = Tps::count();
         fill: red !important;
         /* Change 'red' to your desired hover color */
     }
+    .c3-tooltip {
+        border-collapse: collapse;
+        border-spacing: 0;
+        empty-cells: show;
+        font-size: 11px;
+        line-height: 1;
+        font-weight: 700;
+        color: #000;
+        border-radius: 3px;
+        background: #212529;
+        white-space: nowrap;
+    }
 </style>
 
 <div class="row">

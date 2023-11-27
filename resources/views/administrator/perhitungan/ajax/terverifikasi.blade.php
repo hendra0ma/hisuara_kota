@@ -50,6 +50,21 @@ $dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
 $tps = Tps::count();
 ?>
 
+<style>
+    .c3-tooltip {
+        border-collapse: collapse;
+        border-spacing: 0;
+        empty-cells: show;
+        font-size: 11px;
+        line-height: 1;
+        font-weight: 700;
+        color: #000;
+        border-radius: 3px;
+        background: #212529;
+        white-space: nowrap;
+    }
+</style>
+
 <!-- Include C3.js -->
 <link rel="stylesheet" type="text/css" href="https://unpkg.com/c3@0.7.20/c3.min.css">
 <script src="https://unpkg.com/c3@0.7.20/c3.min.js"></script>
