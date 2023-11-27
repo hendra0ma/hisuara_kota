@@ -96,8 +96,8 @@ $tps = Tps::count();
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
-                                            style="margin-bottom: 0; background-color: {{$pas->color}};">
-                                            {{$i++}}
+                                            style="margin-bottom: 0; background-color: {{ $pas->color }}; overflow: hidden; position:relative">
+                                                <img style="bottom: -10px; position: absolute; left: 50%; transform: translateX(-50%)" src="{{ asset('') }}storage/{{ $pas->picture }}" alt="">
                                         </div>
                                     </div>
                                     <div class="col text-center">
