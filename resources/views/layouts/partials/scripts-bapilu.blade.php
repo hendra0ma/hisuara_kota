@@ -115,115 +115,111 @@ use App\Models\User;
 
 
 
-        <script>
-               var chart = c3.generate({
-                bindto: '#chart-pie', // id of chart wrapper
-                data: {
-                    columns: [
-                         <?php $i = 1 ?>
-                                    <?php foreach ($index_tsm as $item): ?>
-                                        <?php    if($item->jenis !=0){
-                                            continue;
-                                        } ?>
-                                        <?php
-                                    $totalKec =  App\Models\Bukti_deskripsi_curang::join('list_kecurangan','list_kecurangan.id','=','bukti_deskripsi_curang.list_kecurangan_id')
-                                    ->where('bukti_deskripsi_curang.list_kecurangan_id',$item->id)
-                                    ->where('list_kecurangan.jenis',0)
-                                    ->count();
-                                    $jumlahSaksi = App\Models\Saksi::where('kecurangan',"yes")->count();
-                                    $persen = ($totalKec/ $jumlahSaksi)*100;
-                                      ?>
-                                      ['{{$i++}}',<?=$persen?>],
-                                    <?php endforeach ?>
-                    ],
-                                type: 'pie',
-                },
-                axis: {
-                    rotated: true
-                },
-                legend: {
-                    show: true, //hide legend
-                },
-                padding: {
-                    bottom: 0,
-                    top: 0
-                },
-                size: {
-                    height: 300,
-                    width: 300
-                }
-            });
-               var chart2 = c3.generate({
-                bindto: '#chart-donut', // id of chart wrapper
-                data: {
-                    columns: [
-                         <?php $i = 1 ?>
-                                    <?php foreach ($index_tsm as $item): ?>
-                                        <?php    if($item->jenis !=1){
-                                            continue;
-                                        } ?>
-                                        <?php
-                                    $totalKec =  App\Models\Bukti_deskripsi_curang::join('list_kecurangan','list_kecurangan.id','=','bukti_deskripsi_curang.list_kecurangan_id')
-                                    ->where('bukti_deskripsi_curang.list_kecurangan_id',$item->id)
-                                    ->where('list_kecurangan.jenis',1)
-                                    ->count();
-                                    $jumlahSaksi = App\Models\Saksi::where('kecurangan',"yes")->count();
-                                    $persen = ($totalKec/ $jumlahSaksi)*100;
-                                      ?>
-                                      ['{{$i++}}',<?=$persen?>],
-                                    <?php endforeach ?>
-                    ],
-                                type: 'pie',
-                },
-                axis: {},
-                legend: {
-                    show: true, //hide legend
-                },
-                padding: {
-                    bottom: 0,
-                    top: 0
-                },
-                size: {
-                    height: 300,
-                    width: 300
-                }
-            });
-               var chart2 = c3.generate({
-                bindto: '#chart-donut-et', // id of chart wrapper
-                data: {
-                    columns: [
-                         <?php $i = 1 ?>
-                                    <?php foreach ($index_tsm as $item): ?>
-                                        <?php    if($item->jenis !=2){
-                                            continue;
-                                        } ?>
-                                        <?php
-                                    $totalKec =  App\Models\Bukti_deskripsi_curang::join('list_kecurangan','list_kecurangan.id','=','bukti_deskripsi_curang.list_kecurangan_id')
-                                    ->where('bukti_deskripsi_curang.list_kecurangan_id',$item->id)
-                                    ->where('list_kecurangan.jenis',1)
-                                    ->count();
-                                    $jumlahSaksi = App\Models\Saksi::where('kecurangan',"yes")->count();
-                                    $persen = ($totalKec/ $jumlahSaksi)*100;
-                                      ?>
-                                      ['{{$i++}}',<?=$persen?>],
-                                    <?php endforeach ?>
-                    ],
-                                type: 'pie',
-                },
-                axis: {},
-                legend: {
-                    show: true, //hide legend
-                },
-                padding: {
-                    bottom: 0,
-                    top: 0
-                },
-                size: {
-                    height: 300,
-                    width: 300
-                }
-            });
-        </script>
+<script>
+    var chart = c3.generate({
+        bindto: '#chart-pie', // id of chart wrapper
+        data: {
+            columns: [
+                <?php $i = 1 ?>
+                <?php foreach ($index_tsm as $item): ?>
+                    <?php    if($item->jenis !=0){
+                        continue;
+                    } ?>
+                    <?php
+                $totalKec =  App\Models\Bukti_deskripsi_curang::join('list_kecurangan','list_kecurangan.id','=','bukti_deskripsi_curang.list_kecurangan_id')
+                ->where('bukti_deskripsi_curang.list_kecurangan_id',$item->id)
+                ->where('list_kecurangan.jenis',0)
+                ->count();
+                $jumlahSaksi = App\Models\Saksi::where('kecurangan',"yes")->count();
+                $persen = ($totalKec/ $jumlahSaksi)*100;
+                ?>
+                ['{{$i++}}',<?=$persen?>],
+                <?php endforeach ?>
+            ],
+            type: 'bar',
+        },
+        axis: {
+            rotated: false
+        },
+        legend: {
+            show: true, //hide legend
+        },
+        padding: {
+            bottom: 0,
+            top: 0
+        },
+    });
+    
+    var chart2 = c3.generate({
+        bindto: '#chart-donut', // id of chart wrapper
+        data: {
+            columns: [
+                <?php $i = 1 ?>
+                <?php foreach ($index_tsm as $item): ?>
+                    <?php    if($item->jenis !=1){
+                        continue;
+                    } ?>
+                    <?php
+                $totalKec =  App\Models\Bukti_deskripsi_curang::join('list_kecurangan','list_kecurangan.id','=','bukti_deskripsi_curang.list_kecurangan_id')
+                ->where('bukti_deskripsi_curang.list_kecurangan_id',$item->id)
+                ->where('list_kecurangan.jenis',1)
+                ->count();
+                $jumlahSaksi = App\Models\Saksi::where('kecurangan',"yes")->count();
+                $persen = ($totalKec/ $jumlahSaksi)*100;
+                ?>
+                ['{{$i++}}',<?=$persen?>],
+                <?php endforeach ?>
+            ],
+            type: 'bar',
+        },
+        axis: {},
+        legend: {
+            show: true, //hide legend
+        },
+        padding: {
+            bottom: 0,
+            top: 0
+        },
+    });
+
+    var chart3 = c3.generate({
+        bindto: '#chart-donut-et', // id of chart wrapper
+        data: {
+            columns: [
+                <?php $i = 1 ?>
+                <?php foreach ($index_tsm as $item): ?>
+                    <?php    if($item->jenis !=2){
+                        continue;
+                    } ?>
+                    <?php
+                $totalKec =  App\Models\Bukti_deskripsi_curang::join('list_kecurangan','list_kecurangan.id','=','bukti_deskripsi_curang.list_kecurangan_id')
+                ->where('bukti_deskripsi_curang.list_kecurangan_id',$item->id)
+                ->where('list_kecurangan.jenis',1)
+                ->count();
+                $jumlahSaksi = App\Models\Saksi::where('kecurangan',"yes")->count();
+                $persen = ($totalKec/ $jumlahSaksi)*100;
+                ?>
+                ['{{$i++}}',<?=$persen?>],
+                <?php endforeach ?>
+            ],
+            type: 'bar',
+        },
+        axis: {},
+        legend: {
+            show: true, //hide legend
+        },
+        padding: {
+            bottom: 0,
+            top: 0
+        },
+    });
+
+    setTimeout(() => {
+        chart.flush();
+        chart2.flush();
+        chart3.flush();
+    }, 500);
+</script>
 
 
 </body>
