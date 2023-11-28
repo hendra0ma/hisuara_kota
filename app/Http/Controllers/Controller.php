@@ -18,19 +18,16 @@ class Controller extends BaseController
 
     public function request()
     {
-
-          $pesan = "".Auth::user()->name." Memverifikasi Tps ";
-          $history = History::create([
-              'user_id' => Auth::user()->id,
-              'action' => $pesan,
-          ]);
-          event(new NotifEvent($pesan));
+        $pesan = '' . Auth::user()->name . ' Memverifikasi Tps ';
+        $history = History::create([
+            'user_id' => Auth::user()->id,
+            'action' => $pesan,
+        ]);
+        event(new NotifEvent($pesan));
     }
 
     public function ambil()
     {
-       return view('ambil');
+        return view('ambil');
     }
-
-
 }
