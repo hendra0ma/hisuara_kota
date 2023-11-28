@@ -1,8 +1,12 @@
-@extends('layouts.mainlayout')
+@extends('layouts.mainlayoutKpu')
 
 @section('content')
 
 <?php
+
+
+
+
 use App\Models\User;
 
 use App\Models\Config;
@@ -47,12 +51,7 @@ $config->tahun =  $configs->tahun;
 $config->quick_count =  $configs->quick_count;
 $config->default =  $configs->default;
 
-$regency = District::where('regency_id', $config->regencies_id)->get();
-// $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
-// $urutan = $paslon_tertinggi;
 $kota = Regency::where('id', $config->regencies_id)->first();
-$dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
-$tps = Tps::count();
 $props = Province::where('id',$kota['province_id'])->first();
 ?>
 
@@ -138,7 +137,7 @@ $props = Province::where('id',$kota['province_id'])->first();
     
         <ul class="breadcrumb">
             <?php
-                $regency = Regency::where('id', $config->regencies_id)->select('name')->first();
+                $regency = $kota;
                 $kcamatan = District::where('id', $id_kecamatan)->select('name')->first();
                 ?>
             <li><a href="{{url('')}}/administrator/real_count2" class="text-white">{{$regency->name}}</a></li>
@@ -178,15 +177,9 @@ $props = Province::where('id',$kota['province_id'])->first();
                                             <div class="col text-center">
                                                 <h6 class="mt-4">{{$pas->candidate}} </h6>
                                                 <h6 class="">{{$pas->deputy_candidate}} </h6>
-                                                <?php
-                                                $voice = 0;
-                                                ?>
-                                                @foreach ($pas->saksi_data as $dataTps)
-                                                <?php
-                                                $voice += $dataTps->voice;
-                                                ?>
-                                                @endforeach
-                                                <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                            
+                                              
+                                                <h3 class="mb-2 number-font">{{ $suaraCrowd['suaraCrowd'.$pas->id] }} suara</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -229,13 +222,13 @@ $props = Province::where('id',$kota['province_id'])->first();
                             Presiden</div>
                         <div class="text-center title-atas-table fs-5 fw-bold">{{ $kota['name'] }}</div>
                         <div class="row mx-auto" style="width: 884.5px;">
-                            @foreach ($urutan as $urutPaslon)
-                            <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
-                            <div class="col py-2 judul text-center text-white custom-urutan"
-                                style="background: {{ $pasangan->color }}">
-                                <div class="text">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} :
-                                    {{$urutPaslon->total}}</b></div>
-                            </div>
+                            @foreach ($urutan as $pasangan)
+                                <div class="col py-2 judul text-center text-white custom-urutan"
+                                    style="background: {{ $pasangan->color }}">
+                                    <div class="text">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} :
+                                    
+                                        </b></div>
+                                </div>
                             @endforeach
                         </div>
                         <table class="table table-bordered table-hover mt-3">
@@ -260,8 +253,17 @@ $props = Province::where('id',$kota['province_id'])->first();
                                     <td class="align-middle"><a
                                             href="{{url('/')}}/administrator/kpu_kelurahan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
                                     </td>
+                                    @php
+                                        ${"suara".$item->id} = [];
+                                    @endphp
+
                                     @foreach ($paslon as $cd)
-                                    <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.village_id', (string)$item['id'])->sum('voice'); ?>
+                                    <?php $saksi_dataa =  App\Models\DataCrowdC1::where('paslon_id', $cd['id'])
+                                    ->where('village_id', (string)$item['id'])
+                                    ->sum('voice');
+                                    
+                                      ${"suara".$item->id}[$cd->id] = $saksi_dataa;
+                                     ?>
                                     <td class="align-middle text-end">{{$saksi_dataa}}</td>
                                     @endforeach
                                 </tr>
@@ -284,13 +286,6 @@ $props = Province::where('id',$kota['province_id'])->first();
     PERHITUNGAN TINGKAT KELURAHAN
 </div>
 
-<?php 
-    $a = 1; 
-    $b = 1; 
-    $c = 1; 
-    $d = 1; 
-    $e = 1; 
-?>
 
 <div class="col-12">
     <div class="row">
@@ -305,7 +300,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                     </div>
                 </div>
                 <div class="card-body">
-                    <div id="charture-{{$a++}}" class="chartsh h-100 w-100"></div>
+                    <div id="charture-{{$item->id}}" class="chartsh h-100 w-100"></div>
                 </div>
             </div>
         </div>
@@ -320,20 +315,20 @@ $props = Province::where('id',$kota['province_id'])->first();
         var chartData = {
         columns: [
             @foreach($paslon as $pas)
-            <?php $saksi_dataaa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $pas['id'])->where('saksi_data.village_id', (string)$item['id'])->sum('voice'); ?>
-            ['data{{$d++}}', {{$saksi_dataaa}}],
+    
+            ['data{{$pas->id}}', <?=   ${"suara".$item->id}[$pas->id] ?>],
             @endforeach
         ],
         type: 'pie', // Type of chart (line chart in this case)
         colors: {
             @foreach($paslon as $pas)
-            data{{$c++}}: '{{$pas->color}}', // Color for the third data series
+            data{{$pas->id}}: '{{$pas->color}}', // Color for the third data series
             @endforeach
         },
         names: {
             // name of each serie
             @foreach($paslon as $pas)
-            data{{$e++}}: " {{ $pas['candidate']}} - {{ $pas['deputy_candidate']}}",
+            data{{$pas->id}}: " {{ $pas['candidate']}} - {{ $pas['deputy_candidate']}}",
             @endforeach
         },
         legend: {
@@ -346,7 +341,7 @@ $props = Province::where('id',$kota['province_id'])->first();
 
     // Chart configuration
     var chartConfig = {
-        bindto: '#charture-{{$b++}}', // ID of the chart container
+        bindto: '#charture-{{$item->id}}', // ID of the chart container
         data: chartData,
         pie: {
             label: {
@@ -361,9 +356,7 @@ $props = Province::where('id',$kota['province_id'])->first();
     var chart = c3.generate(chartConfig);
     })
 </script>
-<?php $c = 1;?>
-<?php $d = 1;?>
-<?php $e = 1;?>
+
 @endforeach
 
 <script>

@@ -51,6 +51,7 @@ use App\Http\Controllers\PusatController;
 use App\Models\MultiAdministrator;
 use App\Models\Paslon;
 use App\Models\RegenciesDomain;
+use App\Models\RegencyCrowdC1;
 use App\Models\Saksi;
 use App\Models\SaksiData;
 use App\Models\SuaraC1Provinsi;
@@ -1126,3 +1127,7 @@ Route::get('get-marquee',function (Request $request) {
     $data_marquee = new MarqueeController($id_wilayah,$tables,$limit);
     return response()->json($data_marquee->getDataMarquee(),200);
 })->name('getMarquee');
+Route::get('ajaxKpuKecamatan',function (Request $request) {
+    $data['request'] = $request;
+    return view('ajax-hitung-suara-kpu',$data);
+})->name("ajaxKpuKecamatan");
