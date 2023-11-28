@@ -267,12 +267,14 @@
             <div class="row my-3" style="flex-wrap: nowrap; overflow-x: scroll">
                 @foreach ($provinsi as $item)
                 <div class="col-auto my-2">
-                    <div class="text-center mb-2">
-                        <img src="{{asset('assets/imagesProvinsi/'. $item->logo_provinsi)}}" alt="">
-                    </div>
-                    <div class="text-center">
-                        {{$item->name}}
-                    </div>
+                    <a href="{{route('provinsi' . $item->id . '.home',Crypt::encrypt($item['id']) )}}">
+                        <div class="text-center mb-2">
+                            <img src="{{asset('assets/imagesProvinsi/'. $item->logo_provinsi)}}" alt="">
+                        </div>
+                        <div class="text-center">
+                            {{$item->name}}
+                        </div>
+                    </a>
                 </div>
                 @endforeach
             </div>
