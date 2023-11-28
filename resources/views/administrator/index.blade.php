@@ -462,8 +462,6 @@
             
             let displayData = function(data, index) {
 
-               
-
                 if (index < Object.keys(data).length) {
                     const {
                         username,
@@ -477,17 +475,24 @@
                 }
                 $('#container-marquee').children(':last').fadeIn(1000);
 
-                // $('#container-marquee').animate({
-                //     scrollLeft: "+=" + $('#container-marquee')[0].scrollWidth + 100
-                // }, 1000);
+                $('#container-marquee').animate({
+                    scrollLeft: "+=" + ($('#container-marquee')[0].scrollWidth + 25)
+                }, {
+                    duration: 1000,  // Change the total duration in milliseconds
+                    // step: function (now, fx) {
+                    //     if (fx.prop === "scrollLeft") {
+                    //         $(this).stop(); // Stop the animation on each step
+                    //         $(this).animate({scrollLeft: now}, 100); // Add a delay between each step (e.g., 100 milliseconds)
+                    //     }
+                    // }
+                });
 
-                if(index == Object.keys(data).length){
-                    $('#container-marquee').animate({
-                    scrollLeft: "-=" + $('#container-marquee')
-                }, 1000);
-                }
 
-              
+                // if(index == Object.keys(data).length){
+                //     $('#container-marquee').animate({
+                //         scrollLeft: "-=" + $('#container-marquee')
+                //     }, 1000);
+                // }
 
                 setTimeout(() => {
                     // if(index == Object.keys(data).length){
