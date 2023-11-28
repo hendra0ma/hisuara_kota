@@ -247,7 +247,7 @@
 
             </div>
 
-            <div class="col-12 mb-5" style="">
+            <div class="col-12 mt-5" style="">
                 <div class="row">
                     <div class="col-12 text-center pt-2">
                         <img src="{{asset('assets/imagesProvinsi/'. $provinsi_ini->logo_provinsi)}}" alt="">
@@ -256,6 +256,21 @@
                         PERHITUNGAN TINGKAT KABUPATEN / KOTA <br>
                         PROVINSI {{$provinsi_ini->name}}
                     </div>
+                </div>
+            </div>
+
+            <div class="col-12 mb-2">
+                <div class="row my-3" style="flex-wrap: nowrap; overflow-x: scroll">
+                    @foreach ($provinsi as $item)
+                    <div class="col-auto my-2">
+                        <div class="text-center mb-2">
+                            <img src="{{asset('assets/imagesProvinsi/'. $item->logo_provinsi)}}" alt="">
+                        </div>
+                        <div class="text-center">
+                            {{$item->name}}
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
             </div>
 
