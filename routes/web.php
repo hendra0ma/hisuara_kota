@@ -44,6 +44,7 @@ use App\Http\Controllers\DownloadImages;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\HunterController;
+use App\Http\Controllers\MarqueeController;
 use App\Http\Controllers\Payrole;
 use App\Http\Controllers\ProvinsiController;
 use App\Http\Controllers\PusatController;
@@ -1101,6 +1102,8 @@ Route::get('update-suara-c1-kota',function (){
 
 
 
+
+
 // Route::get('update-suara-c1-provinsi',function (){
 //     $paslon = Paslon::get();
 //     $suaraP = [];
@@ -1115,14 +1118,11 @@ Route::get('update-suara-c1-kota',function (){
 //         $c1Prov->save();
 
 // });
-// Route::get('cek-saksi-data',function () {
-//     $saksidata = SaksiData::get();
-//     foreach ($saksidata as $key => $value) {
-//         $saksi = Saksi::where('id',$value->saksi_id)->first();
-//         if ($saksi !=null) {
-//             continue;
-//         }
-//         SaksiData::where('id',$value->id)->delete();
+Route::get('get-marquee',function (Request $request) {
+    $tables = $request->tables;
+    $id_wilayah = $request->id_wilayah;
+    $limit = $request->limit;
 
-//     }
-// });
+    $data_marquee = new MarqueeController($id_wilayah,$tables,$limit);
+    return response()->json($data_marquee->getDataMarquee(),200);
+})->name('getMarquee');
