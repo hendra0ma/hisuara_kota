@@ -133,13 +133,12 @@
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
-                                                            style="margin-bottom: 0; background-color: {{ $pas->color }};">
-                                                            {{ $i }}
+                                                            style="margin-bottom: 0; background-color: {{ $pas->color }}; overflow: hidden; position:relative">
+                                                            <img style="bottom: -10px; position: absolute; left: 50%; transform: translateX(-50%)" src="{{ asset('') }}storage/{{ $pas->picture }}" alt="">
                                                         </div>
                                                     </div>
                                                     <div class="col text-center">
-                                                        <h6 class="mt-4">{{ $pas->candidate }} </h6>
-                                                        <h6 class="">{{ $pas->deputy_candidate }} </h6>
+                                                        <h6 class="mt-4">{{ $pas->candidate }} - {{ $pas->deputy_candidate }}</h6>
                                                         @php
                                                             $voice = 0;
                                                             foreach ($regencies as $regency) {
@@ -242,7 +241,7 @@
                                                 <?php $i = 1; ?>
                                                 @foreach ($paslon as $cd)
                                                     <?php $saksi_dataa = Regency::where('province_id', $item->id)->sum('suara' . $i); ?>
-                                                    <td class="align-middle">{{ $saksi_dataa }}</td>
+                                                    <td class="align-middle text-end">{{ $saksi_dataa }}</td>
                                                     @php
                                                         $i++;
                                                     @endphp
@@ -262,8 +261,20 @@
 
             </div>
 
-            <div style="background: linear-gradient(90deg, rgba(204,61,189,1) 0%, rgba(119,42,220,1) 100%);" class="col-12 text-white p-2 fs-5 fw-bold mb-5 text-center">
+            <div style="background: linear-gradient(90deg, rgba(204,61,189,1) 0%, rgba(119,42,220,1) 100%);" class="col-12 text-white p-2 fs-5 fw-bold text-center">
                 PERHITUNGAN TINGKAT PROVINSI
+            </div>
+            <div class="row my-3" style="flex-wrap: nowrap; overflow-x: scroll">
+                @foreach ($provinsi as $item)
+                <div class="col-auto my-2">
+                    <div class="text-center mb-2">
+                        <img src="{{asset('assets/imagesProvinsi/'. $item->logo_provinsi)}}" alt="">
+                    </div>
+                    <div class="text-center">
+                        {{$item->name}}
+                    </div>
+                </div>
+                @endforeach
             </div>
 
             <div class="col-12">

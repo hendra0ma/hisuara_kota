@@ -266,7 +266,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                                     </td>
                                     @foreach ($paslon as $cd)
                                     <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.village_id', (string)$item['id'])->sum('voice'); ?>
-                                    <td class="align-middle">
+                                    <td class="align-middle text-end">
                                         {{$saksi_dataa}}</td>
                                     <?php     
                                         $totalSaksiDataa[$cd['id']] += $saksi_dataa; ?>
@@ -279,7 +279,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                                     </td>
                                 
                                     @foreach ($paslon as $cd)
-                                    <td class="align-middle">{{$totalSaksiDataa[$cd['id']]}}</td>
+                                    <td class="align-middle text-end">{{$totalSaksiDataa[$cd['id']]}}</td>
                                     @endforeach
                                 </tr>
                             </tbody>

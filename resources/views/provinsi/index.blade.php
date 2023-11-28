@@ -134,13 +134,13 @@
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
-                                                            style="margin-bottom: 0; background-color: {{ $pas->color }};">
-                                                            {{ $i }}
+                                                            style="margin-bottom: 0; background-color: {{ $pas->color }};position:relative; overflow: hidden">
+                                                            <img style="bottom: -10px; position: absolute; left: 50%; transform: translateX(-50%);"
+                                                                src="{{ asset('') }}storage/{{ $pas->picture }}" alt="">
                                                         </div>
                                                     </div>
                                                     <div class="col text-center">
-                                                        <h6 class="mt-4">{{ $pas->candidate }} </h6>
-                                                        <h6 class="">{{ $pas->deputy_candidate }} </h6>
+                                                        <h6 class="mt-4">{{$pas->candidate}} - {{$pas->deputy_candidate}}</h6>
                                                         @php
                                                             $voice = 0;
                                                             foreach ($regencies as $regency) {
@@ -227,7 +227,7 @@
                                                 </td>
                                                 <?php $i = 1; ?>
                                                 @foreach ($paslon as $cd)
-                                                    <td class="align-middle">{{ $item->{'suara' . $i} }}</td>
+                                                    <td class="align-middle text-end">{{ $item->{'suara' . $i} }}</td>
                                                     @php
                                                         $i++;
                                                     @endphp

@@ -56,6 +56,18 @@ $tps = Tps::count();
         fill: red !important;
         /* Change 'red' to your desired hover color */
     }
+    .c3-tooltip {
+        border-collapse: collapse;
+        border-spacing: 0;
+        empty-cells: show;
+        font-size: 11px;
+        line-height: 1;
+        font-weight: 700;
+        color: #000;
+        border-radius: 3px;
+        background: #212529;
+        white-space: nowrap;
+    }
 </style>
 
 <div class="row">
@@ -84,13 +96,12 @@ $tps = Tps::count();
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white "
-                                            style="margin-bottom: 0; background-color: {{$pas->color}};">
-                                            {{$i++}}
+                                            style="margin-bottom: 0; background-color: {{ $pas->color }}; overflow: hidden; position:relative">
+                                                <img style="bottom: -10px; position: absolute; left: 50%; transform: translateX(-50%)" src="{{ asset('') }}storage/{{ $pas->picture }}" alt="">
                                         </div>
                                     </div>
                                     <div class="col text-center">
-                                        <h6 class="mt-4">{{$pas->candidate}} </h6>
-                                        <h6 class="">{{$pas->deputy_candidate}} </h6>
+                                        <h6 class="mt-4">{{$pas->candidate}} - {{$pas->deputy_candidate}}</h6>
                                         @if (isset($url_first[3]))
                                             @php
                                             $data['url_id'] = Crypt::decrypt($url_first[3]);
@@ -150,7 +161,7 @@ $tps = Tps::count();
                     </td>
                     @foreach ($paslon as $cd)
                     <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.village_id', (string)$item['id'])->sum('voice'); ?>
-                    <td class="align-middle">{{$saksi_dataa}}</td>
+                    <td class="align-middle text-end">{{$saksi_dataa}}</td>
                     @endforeach
                 </tr>
                 @endforeach
@@ -189,7 +200,7 @@ $tps = Tps::count();
                     </td>
                     @foreach ($paslon as $cd)
                     <?php $saksi_dataa = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->sum('voice'); ?>
-                    <td class="align-middle">{{$saksi_dataa}}</td>
+                    <td class="align-middle text-end">{{$saksi_dataa}}</td>
                     @endforeach
                 </tr>
                 @endforeach

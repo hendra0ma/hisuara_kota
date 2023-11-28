@@ -344,7 +344,7 @@ $tps = Tps::count();
                             <tr>
                                 <td>{{$no_u++}}</td>
                                 <td>{{$pasangan->candidate}} - {{$pasangan->deputy_candidate}}</td>
-                                <td>{{$urutPaslon->total}}</td>
+                                <td class="text-end">{{$urutPaslon->total}}</td>
                             </tr>
                             @endforeach
                         </tbody>

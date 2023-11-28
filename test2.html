@@ -1,127 +1,52 @@
-<div class="container" id="container-koreksi">
-    <div class="row">
-        <div class="col-md-6 mt-3">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">Admin Requestas</h5>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">
-                    </p>
-                    <div class="media">
-                        <img class="rounded-circle"
-                            style="width: 70px; height: 70px; object-fit: cover; margin-right: 10px;"
-                            src="http://pilpres.banten.tangerang-selatan.hisuara.id:8000/storage/profile-photos/forma4.jpg">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Pie Chart with Names</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.20/c3.css" integrity="sha512-GQSxWe9Cj4o4EduO7zO9HjULmD4olIjiQqZ7VJuwBxZlkWaUFGCxRkn39jYnD2xZBtEilm0m4WBG7YEmQuMs5Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
 
+<div id="chart"></div>
 
-                        <div class="media-body">
-                            <h5 class="mt-0">Dewangga</h5>
-                            NIK : 3525015201880002
-                        </div>
-                    </div>
-                    <p></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 mt-3">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">Saksi</h5>
-                </div>
-                <div class="card-body  text-center">
-                    <p class="card-text">
-                    </p>
-                    <div class="row fw-bolder">
-                        <div class="col">Lidya Mandasari M.M.</div>
-                        <div class="col">TPS 4</div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col">NIK : 1234567890123</div>
-                        <div class="col">Kecamatan CIPUTAT/Kelurahan CIPAYUNG</div>
-                    </div>
-                    <p></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md mb-3"><img
-                src="http://pilpres.banten.tangerang-selatan.hisuara.id:8000/storage/c1_plano/nTZGXl4YlsjmpjGgFykEXYhhaJ1BaofeOFofVdqr.jpg">
-        </div>
-        <div class="col-md">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title">Data Lama</h5>
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">
-                            </p>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="suara01">Suara 00</label>
-                                    <input type="text" id="suara01" class="form-control" value="105" disabled="">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="suara01">Suara 01</label>
-                                    <input type="text" id="suara01" class="form-control" value="30" disabled="">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="suara01">Suara 02</label>
-                                    <input type="text" id="suara01" class="form-control" value="54" disabled="">
-                                </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.20/c3.min.js" integrity="sha512-+IpCthlNahOuERYUSnKFjzjdKXIbJ/7Dd6xvUp+7bEw0Jp2dg6tluyxLs+zq9BMzZgrLv8886T4cBSqnKiVgUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" integrity="sha512-oJp0DdQuQQrRsKVly+Ww6fAN1GwJN7d1bi8UubpEbzDUh84WrJ2CFPBnT4LqBCcfqTcHR5OGXFFhaPe3g1/bzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script>
+    var chart = c3.generate({
+        data: {
+            // iris data from R
+            columns: [
+                ['data1', 30],
+                ['data2', 120],
+            ],
+            type : 'pie',
+            onclick: function (d, i) { console.log("onclick", d, i); },
+            onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+            onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+        }
+    });
 
-                            </div>
-                            <p></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title">Pengajuan Data Baru</h5>
-                        </div>
-                        <form
-                            action="action_setujui/eyJpdiI6Imd4TmcyNTJFdHZFbjhxUzRrdVNVeXc9PSIsInZhbHVlIjoiL0RIY3Y3VXcxV0k2M2pOdUZjYmx5Zz09IiwibWFjIjoiNDgwZTBmYmI0NWM2OGEzNzU3MDMzYmFiZDhhYTkzZjFmNzM5NTI5YTJkNjA4MWRjNjIxODQyYWQ5MGZkYjViZSIsInRhZyI6IiJ9"
-                            method="POST">
-                            <input type="hidden" name="_token" value="I3ZLGrgawGZYueKmxuyF6fLNyHpsGKtFLlIaN5oZ">
-                            <div class="card-body">
-                                <p class="card-text">
-                                </p>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="suara01">Suara 00</label>
-                                        <input type="text" id="suara01" class="form-control" name="paslon0" value="100">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="suara01">Suara 01</label>
-                                        <input type="text" id="suara01" class="form-control" name="paslon1" value="35">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="suara01">Suara 02</label>
-                                        <input type="text" id="suara01" class="form-control" name="paslon2" value="55">
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label for="keterangan">Keterangan</label>
-                                        <textarea class="form-control" id="keterangan" cols="30" rows="10"
-                                            disabled="">saya salah salah kan</textarea>
-                                    </div>
-                                </div>
-                                <p></p>
-                            </div>
-                            <div class="card-footer">
-                                <button type="submit" class="btn bg-success text-light w-100">Setujui</button>
-                                <a href="tolak_koreksi/eyJpdiI6IjVrc1UrMzRvMkV2NUx2STI2RHFLdmc9PSIsInZhbHVlIjoia1l3TGdaQy9lZnViR013WDlFQzdzQT09IiwibWFjIjoiMDQzNWUxM2NhNTFkZDMyNTcyNGU2NGNiNTJkOGNkZTMxODI2MDRmOTJmNTBiNDZkMTZmNjYxODQzZDAwNDI4NCIsInRhZyI6IiJ9"
-                                    class="btn bg-danger mt-2 text-light w-100">Tolak</a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    setTimeout(function () {
+        chart.load({
+            columns: [
+                ["setosa", 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.4, 0.4, 0.3, 0.3, 0.3, 0.2, 0.4, 0.2, 0.5, 0.2, 0.2, 0.4, 0.2, 0.2, 0.2, 0.2, 0.4, 0.1, 0.2, 0.2, 0.2, 0.2, 0.1, 0.2, 0.2, 0.3, 0.3, 0.2, 0.6, 0.4, 0.3, 0.2, 0.2, 0.2, 0.2],
+                ["versicolor", 1.4, 1.5, 1.5, 1.3, 1.5, 1.3, 1.6, 1.0, 1.3, 1.4, 1.0, 1.5, 1.0, 1.4, 1.3, 1.4, 1.5, 1.0, 1.5, 1.1, 1.8, 1.3, 1.5, 1.2, 1.3, 1.4, 1.4, 1.7, 1.5, 1.0, 1.1, 1.0, 1.2, 1.6, 1.5, 1.6, 1.5, 1.3, 1.3, 1.3, 1.2, 1.4, 1.2, 1.0, 1.3, 1.2, 1.3, 1.3, 1.1, 1.3],
+                ["virginica", 2.5, 1.9, 2.1, 1.8, 2.2, 2.1, 1.7, 1.8, 1.8, 2.5, 2.0, 1.9, 2.1, 2.0, 2.4, 2.3, 1.8, 2.2, 2.3, 1.5, 2.3, 2.0, 2.0, 1.8, 2.1, 1.8, 1.8, 1.8, 2.1, 1.6, 1.9, 2.0, 2.2, 1.5, 1.4, 2.3, 2.4, 1.8, 1.8, 2.1, 2.4, 2.3, 1.9, 2.3, 2.5, 2.3, 1.9, 2.0, 2.3, 1.8],
+            ]
+        });
+    }, 1500);
+
+    setTimeout(function () {
+        chart.unload({
+            ids: 'data1'
+        });
+        chart.unload({
+            ids: 'data2'
+        });
+    }, 2500);
+</script>
+
+</body>
+</html>
