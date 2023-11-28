@@ -49,12 +49,28 @@ $config->tahun =  $configs->tahun;
 $config->quick_count =  $configs->quick_count;
 $config->default =  $configs->default;
 
-
+$regency = District::where('regency_id', $config->regencies_id)->get();
+$kota = Regency::where('id', $config->regencies_id)->first();
+$dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
+$tps = Tps::count();
+$marquee = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->get();
+$total_tps = Tps::where('setup', 'belum terisi')->count();;
+$tps_masuk = Tps::where('setup', 'terisi')->count();
+$tps_kosong = $total_tps - $tps_masuk;
+$suara_masuk = SaksiData::count('voice');
+$verification = Saksi::where('verification', 1)->with('saksi_data')->get();
+$total_verification_voice = 0;
+foreach ($verification as $key) {
+    foreach ($key->saksi_data as $verif) {
+        $total_verification_voice += $verif->voice;
+    }
+}
+$paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
+$urutan = $paslon_tertinggi;
 $props = Province::where('id', $kota['province_id'])->first();
 $cityProp = Regency::where('province_id', $kota['province_id'])->get();
-
 $jumlah_kecamatan = District::where('regency_id', $kota['id'])->count();
-$jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '%')->count();
+$jumlah_kelurahan = Village::where('id', 'like', '%' . $regency[0]['regency_id'] . '%')->count();
 
 
 

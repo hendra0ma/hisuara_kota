@@ -459,6 +459,7 @@
                     }
                 });
             }
+            
             let displayData = function(data, index) {
 
                 if (index < Object.keys(data).length) {

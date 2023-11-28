@@ -35,6 +35,7 @@ class filterTps implements \PhpOffice\PhpSpreadsheet\Reader\IReadFilter
     }
 }
 
+
 class ExcelController extends Controller
 {
     // use IOFactory;
@@ -205,7 +206,7 @@ class ExcelController extends Controller
             $spreadsheetForGetLocation = $worksheetForGetLocation->load($files);
             $worksheetForGetLocation = $spreadsheetForGetLocation->getActiveSheet();
             $worksheetForGetLocation = $worksheetForGetLocation->toArray();
-
+            
             $namaKabupatenKota = $worksheetForGetLocation[1][1];
             $namaKecamatan = $worksheetForGetLocation[2][1];
             $namaKelurahan = $worksheetForGetLocation[3][1];
