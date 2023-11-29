@@ -48,10 +48,10 @@ $config->default =  $configs->default;
 $regency = District::where('regency_id', $config->regencies_id)->get();
 $kota = Regency::where('id', $config->regencies_id)->first();
 $dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
-$tps = Tps::count();
+
 ?>
 
-@extends('layouts.main-perhitungan')
+@extends('layouts.mainlayoutKpu')
 @section('content')
 <!-- PAGE-HEADER -->
 <div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
@@ -132,6 +132,7 @@ $tps = Tps::count();
                 $desa = Village::where('id', (string)$village->id)->first();
                 $regency = Regency::where('id',(string) $config->regencies_id)->first();
                 $kcamatan = District::where('id', (string)$desa->district_id)->first();
+                $district = $kcamatan;
                 ?>
             <li><a href="{{url('')}}/administrator/index" class="text-white">{{$regency->name}}</a></li>
             <li><a href="{{url('')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($district->id)}}"
@@ -226,7 +227,7 @@ $tps = Tps::count();
             </div>
             <div class="card-body text-center">
                 <a href="#" data-toggle="modal" data-target="#imgBig">
-                    <img style="height: 594.92px" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}" alt="">
+                    <img style="height: 594.92px" src="{{asset('')}}storage/{{$crowd_c1->crowd_c1}}" alt="">
                 </a>
             </div>
         </div>
@@ -258,7 +259,7 @@ $tps = Tps::count();
                         <div class="card rounded-0 mb-0">
                             <div class="card-body">
                                 <div class="row">
-                                    @if ($saksi[0]['kecurangan'] == "yes" && $qrcode != null)
+                                    @if ($crowd_c1['kecurangan'] == "yes" && $qrcode != null)
                                     <?php $scan_url = url('') . "/scanning-secure/" . (string)Crypt::encrypt($qrcode->nomor_berkas); ?>
                                     <div class="col-auto my-auto">
                                         {!! QrCode::size(100)->generate( $scan_url); !!}
@@ -268,7 +269,7 @@ $tps = Tps::count();
                                     <div class="col mt-2">
                                         <div class="media">
                                             <?php
-                                                                                        $user = User::where('tps_id', '=',$saksi[0]['tps_id'])->first();
+                                                                                        $user = User::where('tps_id', '=',$crowd_c1['tps_id'])->first();
                                                                                     ?>
                                             @if ($user['profile_photo_path'] == NULL)
                                             <img class="rounded-circle"
@@ -297,10 +298,10 @@ $tps = Tps::count();
                     </div>
                     <div class="col-lg-12" style="height: 100vh; overflow: scroll">
                         <center>
-                            <img width="100%" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}"
+                            <img width="100%" src="{{asset('')}}storage/{{$crowd_c1->c1_images}}"
                                 data-magnify-speed="200" alt="" data-magnify-magnifiedwidth="2500"
                                 data-magnify-magnifiedheight="2500" class="img-fluid zoom"
-                                data-magnify-src="{{asset('')}}storage/{{$saksi[0]->c1_images}}">
+                                data-magnify-src="{{asset('')}}storage/{{$crowd_c1->c1_images}}">
                         </center>
                     </div>
                 </div>
@@ -335,12 +336,12 @@ $tps = Tps::count();
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($urutan as $urutPaslon)
-                            <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
+                            @foreach ($urutan as $pasangan)
+                            
                             <tr>
                                 <td>{{$no_u++}}</td>
                                 <td>{{$pasangan->candidate}} - {{$pasangan->deputy_candidate}}</td>
-                                <td class="text-end">{{$urutPaslon->total}}</td>
+                                <td class="text-end"></td>
                             </tr>
                             @endforeach
                         </tbody>

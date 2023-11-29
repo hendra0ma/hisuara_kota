@@ -1,4 +1,4 @@
-@extends('layouts.mainlayout')
+@extends('layouts.mainlayoutKpu')
 
 @section('content')
 
@@ -138,10 +138,10 @@ $props = Province::where('id',$kota['province_id'])->first();
     
         <ul class="breadcrumb">
             <?php
-                $desa = Village::where('id', (string) $id_kelurahan)->first();
+            
             
                 $regency = Regency::where('id', $config->regencies_id)->first();
-                $kcamatan = District::where('id',(string) $desa->district_id)->first();
+                $district = District::where('id',(string) $desa->district_id)->first();
                 ?>
             <li><a href="{{url('')}}/administrator/real_count2" class="text-white">{{$regency->name}}</a></li>
             <li><a href="{{url('')}}/administrator/realcount_kecamatan/{{Crypt::encrypt($district->id)}}"
@@ -182,15 +182,8 @@ $props = Province::where('id',$kota['province_id'])->first();
                                             <div class="col text-center">
                                                 <h6 class="mt-4">{{$pas->candidate}} </h6>
                                                 <h6 class="">{{$pas->deputy_candidate}} </h6>
-                                                <?php
-                                                $voice = 0;
-                                                ?>
-                                                @foreach ($pas->saksi_data as $dataTps)
-                                                <?php
-                                                $voice += $dataTps->voice;
-                                                ?>
-                                                @endforeach
-                                                <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                              
+                                                <h3 class="mb-2 number-font">{{ $suaraCrowd['suaraCrowd'.$pas->id] }} suara</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -233,12 +226,12 @@ $props = Province::where('id',$kota['province_id'])->first();
                             Presiden</div>
                         <div class="text-center title-atas-table fs-5 fw-bold">{{ $kota['name'] }}</div>
                         <div class="row mx-auto" style="width: 884.5px;">
-                            @foreach ($urutan as $urutPaslon)
-                            <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
+                            @foreach ($urutan as $pasangan)
+                       
                             <div class="col py-2 judul text-center text-white custom-urutan"
                                 style="background: {{ $pasangan->color }}">
                                 <div class="text">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} :
-                                    {{$urutPaslon->total}}</b></div>
+                                </b></div>
                             </div>
                             @endforeach
                         </div>
@@ -246,7 +239,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                             <thead style="background-color: #45aaf2;">
                                 <tr>
                                     <th class="align-middle text-white text-center align-middle" rowspan="2">TPS</th>
-                                    @foreach ($paslon_candidate as $item)
+                                    @foreach ($urutan as $item)
                                     <th class="text-white text-center align-middle" style="background: {{$item->color}}; position:relative">
                                         <img style="width: 60px; position: absolute; left: 0; bottom: 0" src="{{asset('')}}storage/{{$item->picture}}"
                                             alt="">
@@ -268,14 +261,23 @@ $props = Province::where('id',$kota['province_id'])->first();
                                     <td> <a href="{{url('')}}/administrator/kpu_tps/{{Crypt::encrypt($item->id)}}"
                                             class="modal-id" style="font-size: 0.8em;" id="Cek">TPS
                                             {{$item['number']}}</a>
-                                    @foreach ($paslon_candidate as $cd)
+                                
                         
-                                    <?php
-                                        $tpsass = \App\Models\Tps::where('number', (string)$item['number'])->where('villages_id', (string)$id)->first(); ?>
-                                    <?php $saksi_data = \App\Models\SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('tps_id', $tpsass->id)->sum('voice'); ?>
-                                    <td class="text-end">{{$saksi_data}}</td>
-                        
+                                    @php
+                                        ${"suara".$item->id} = [];
+                                    @endphp
+
+                                    @foreach ($paslon as $cd)
+                                    <?php $saksi_dataa =  App\Models\DataCrowdC1::where('paslon_id', $cd['id'])
+                                    ->where('tps_id', (string)$item['id'])
+                                    ->sum('voice');
+                                    
+                                      ${"suara".$item->id}[$cd->id] = $saksi_dataa;
+                                     ?>
+                                    <td class="align-middle text-end">{{$saksi_dataa}}</td>
+
                                     @endforeach
+                                
                                 </tr>
                                 @endforeach
                             </tbody>
