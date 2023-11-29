@@ -2559,6 +2559,7 @@ class AdminController extends Controller
         $id = (string) decrypt($id);
         $data['solution'] = SolutionFraud::get();
         $data['titel'] = SolutionFraud::where('id', $id)->first();
+        $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
         $data['config'] = Config::first();
         $data['data_kecurangan'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
             ->join('users', 'users.tps_id', '=', 'tps.id')
@@ -4342,48 +4343,6 @@ class AdminController extends Controller
             ->where('regency_id', $this->config->regencies_id)
             ->get();
         return view('administrator.quickcount.quick_count2', $data);
-        // dd($data['paslon']);
-    }
-
-    public function quick_count_nasional()
-    {
-        $data['config'] = Config::first();
-        $config = Config::first();
-        $dpt = District::where('regency_id', $this->config->regencies_id)->sum('dpt');
-        $data['paslon'] = Paslon::with('quicksaksidata')->get();
-        $data['paslon_terverifikasi'] = Paslon::with([
-            'quicksaksidata' => function ($query) {
-                $query
-                    ->join('quicksaksi', 'quicksaksidata.saksi_id', 'quicksaksi.id')
-                    ->whereNull('quicksaksi.pending')
-                    ->where('quicksaksi.verification', 1);
-            },
-        ])->get();
-        $data['total_incoming_vote'] = QuickSaksiData::where('regency_id', $this->config->regencies_id)->sum('voice');
-        $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
-        $data['tracking'] = ModelsTracking::join('users', 'tracking.id_user', '=', 'users.id')
-            ->where('users.regency_id', $this->config->regencies_id)
-            ->get();
-
-        $data['realcount'] = $dpt != 0 ? ($data['total_incoming_vote'] / $dpt) * 100 : 0;
-        $data['village'] = Village::first();
-        $data['villages'] = Village::get();
-        $data['realcount'] = $dpt != 0 ? ($data['total_incoming_vote'] / $dpt) * 100 : 0;
-        $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
-        $data['kecamatan'] = District::where('regency_id', $this->config->regencies_id)->get();
-        $data['district'] = District::first();
-        $data['marquee'] = Saksi::join('users', 'users.tps_id', '=', 'saksi.tps_id')
-            ->where('saksi.regency_id', $this->config->regencies_id)
-            ->join('tps', 'tps.id', '=', 'saksi.tps_id')
-            ->where('tps.sample', 5)
-            ->get();
-        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $this->config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
-        $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
-        $data['urutan'] = $paslon_tertinggi;
-        $data['district_quick'] = District::join('villages', 'villages.district_id', '=', 'districts.id')
-            ->where('regency_id', $this->config->regencies_id)
-            ->get();
-        return view('administrator.quickcount.quick_count_nasional', $data);
         // dd($data['paslon']);
     }
 

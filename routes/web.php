@@ -150,7 +150,22 @@ Route::domain('hisuara.id')->name('pusat.')->group(function () {
 
 
     Route::group(["middleware" => 'role:administrator'], function () {
-        Route::get('/   dashboard-pusats', [PusatController::class, "home"])->name('home');
+        Route::get('/dashboard-pusats', [PusatController::class, "home"])->name('home');
+        Route::get('quick_count_nasional', [PusatController::class, "quick_count_nasional"])->name('quick_count_nasional');
+    });
+});
+
+Route::domain('quickcount.hisuara.id')->name('quickcount_pusat.')->group(function () {
+
+    Route::get('/',  function () {
+        return redirect('login');
+    });
+
+    Route::get('public/pusat', [PublicController::class, 'pusatIndex']);
+
+
+    Route::group(["middleware" => 'role:administrator'], function () {
+        Route::get('/quick_count_nasional', [PusatController::class, "quick_count_nasional"])->name('quick_count_nasional');
     });
 });
 
@@ -339,7 +354,6 @@ foreach ($kotas as $kota) {
 
                     Route::get('rekapitulasi_kecamatan', 'rekapitulasiKecamatan')->name('rekapitulasiKecamatan');
                     Route::get('quick_count2', 'quick_count2')->name('quick_count2');
-                    Route::get('quick_count_nasional', 'quick_count_nasional')->name('quick_count_nasional');
                     Route::get('redirect_quick_nasional', function () {
                         return view('administrator.quickcount.redirect');
                     });
