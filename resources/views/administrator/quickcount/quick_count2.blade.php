@@ -47,12 +47,12 @@ $config->tahun =  $configs->tahun;
 $config->quick_count =  $configs->quick_count;
 $config->default =  $configs->default;
 
-$regency = District::where('regency_id', $config->regencies_id)->get();
-$kota = Regency::where('id', $config->regencies_id)->first();
-$paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
-$urutan = $paslon_tertinggi;
+// $regency = District::where('regency_id', $config->regencies_id)->get();
+// $kota = Regency::where('id', $config->regencies_id)->first();
+// $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
+// $urutan = $paslon_tertinggi;
 $dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
-$tps = Tps::count();
+// $tps = Tps::count();
 $props = Province::where('id',$kota['province_id'])->first();
 ?>
 
@@ -122,7 +122,13 @@ $props = Province::where('id',$kota['province_id'])->first();
                                 <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
                                 <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
                                         {{$dpt}}</span></div>
-                                <div id="chart-pie2" class="chartsh h-100 w-100"></div>
+                                {{-- <div id="chart-pie2" class="chartsh h-100 w-100"></div> --}}
+                            </div>
+                            <div class="card my-5">
+                                <div class="card-body text-center">
+                                    <h1 class="fw-bold">Halaman Quick Count Kabupaten Kota dialihkan ke Quick Count Nasional</h1>
+                                    <a href="{{url('')}}/administrator/quick_count_nasional" class="btn btn-success">Redirect</a>
+                                </div>
                             </div>
 
                             <?php $i = 1; ?>
@@ -213,8 +219,8 @@ $props = Province::where('id',$kota['province_id'])->first();
                                 <tbody>
                                     @foreach ($kec as $item)
                                     <tr onclick='check("{{Crypt::encrypt($item->id)}}")'>
-                                        <td class="align-middle"><a
-                                                href="{{url('/')}}/administrator/perhitungan_kecamatan/{{Crypt::encrypt($item['id'])}}">{{$item['name']}}</a>
+                                        <td class="align-middle">
+                                            {{$item['name']}}
                                         </td>
                                         @foreach ($paslon as $cd)
                                         <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->sum('voice'); ?>
@@ -223,11 +229,6 @@ $props = Province::where('id',$kota['province_id'])->first();
                                     </tr>
                                     @endforeach
                                 </tbody>
-                                <script>
-                                    let check = function (id) {
-                                        window.location = `{{url('/')}}/administrator/perhitungan_kecamatan/${id}`;
-                                    }
-                                </script>
                             </table>
                         </div>
 

@@ -21,6 +21,10 @@
             display: block;
         }
 
+        .title-atas-table {
+            line-height: 23px
+        }
+
         @media (max-width: 1680px) {
 
             .open-desktop {

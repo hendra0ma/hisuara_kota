@@ -29,18 +29,18 @@ $solution = \App\Models\SolutionFraud::get();
     <div class="col-md-8">
         <div class="row mt-2">
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 tablink" data-command-target="data-1" onclick="openPage('data-1', this, '#6259ca')" id="defaultOpen">Data 1</a></div>
+                <a class="btn text-white w-100 py-3 tablink" data-command-target="index-tsm" onclick="openPage('index-tsm', this, '#6259ca')" id="defaultOpen">Index TSM</a></div>
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 tablink" data-command-target="data-2" onclick="openPage('data-2', this, '#6259ca')">Data 2</a></div>
+                <a class="btn text-white w-100 py-3 tablink" data-command-target="rekomendasi-tindakan" onclick="openPage('rekomendasi-tindakan', this, '#6259ca')">Rekomendasi Tindakan</a></div>
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 tablink" data-command-target="data-3" onclick="openPage('data-3', this, '#6259ca')">Data 3</a></div>
+                <a class="btn text-white w-100 py-3 tablink" data-command-target="bukti-kecurangan" onclick="openPage('bukti-kecurangan', this, '#6259ca')">Bukti Kecurangan</a></div>
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 tablink" data-command-target="data-4" onclick="openPage('data-4', this, '#6259ca')">Data 4</a></div>
+                <a class="btn text-white w-100 py-3 tablink" data-command-target="barkode-kecurangan" onclick="openPage('barkode-kecurangan', this, '#6259ca')">Barkode Kecurangan</a></div>
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 tablink" data-command-target="data-5" onclick="openPage('data-5', this, '#6259ca')">Data 5</a></div>
+                <a class="btn text-white w-100 py-3 tablink" data-command-target="laporan-mk" onclick="openPage('laporan-mk', this, '#6259ca')">Laporan MK</a></div>
             {{-- <div class="col parent-link">
-                <a data-command-target="data-1" class="btn text-white w-100 py-3 kecurangan-masuk tablink"
-                    onclick="openPage('data-1', this, '#6259ca')" id="defaultOpen">Data 1</a>
+                <a data-command-target="index-tsm" class="btn text-white w-100 py-3 kecurangan-masuk tablink"
+                    onclick="openPage('index-tsm', this, '#6259ca')" id="defaultOpen">Data 1</a>
             </div> --}}
         </div>
     </div>
@@ -81,7 +81,7 @@ $solution = \App\Models\SolutionFraud::get();
     }
 </style>
 
-<div id="data-1" class="tabcontent mt-0 pt-0 px-0">
+<div id="index-tsm" class="tabcontent mt-0 pt-0 px-0">
     <div class="row">
         <div class="col-12 mt-5">
             <h2 class="fw-bold">Index TSM Pemilu</h2>
@@ -93,7 +93,7 @@ $solution = \App\Models\SolutionFraud::get();
                         <div class="card-header bg-danger">
                             <center>
                                 <h4 class="mx-auto text-white mb-0 fw-bold">
-                                    PELANGGARAN ADMINISTRASI PEMILU
+                                    1. PELANGGARAN ADMINISTRASI PEMILU
                                 </h4>
                             </center>
                         </div>
@@ -155,7 +155,7 @@ $solution = \App\Models\SolutionFraud::get();
                         <div class="card-header bg-danger">
                             <center>
                                 <h4 class="mx-auto text-white mb-0 fw-bold">
-                                    PELANGGARAN TINDAK PIDANA
+                                    2. PELANGGARAN TINDAK PIDANA
                                 </h4>
                             </center>
                         </div>
@@ -217,7 +217,7 @@ $solution = \App\Models\SolutionFraud::get();
                         <div class="card-header bg-danger">
                             <center>
                                 <h4 class="mx-auto text-white mb-0 fw-bold">
-                                    PELANGGARAN KODE ETIK
+                                    3. PELANGGARAN KODE ETIK
                                 </h4>
                             </center>
                         </div>
@@ -279,7 +279,7 @@ $solution = \App\Models\SolutionFraud::get();
                         <div class="card-header bg-danger">
                             <center>
                                 <h4 class="mx-auto fw-bold text-white mb-0">
-                                    PELANGGARAN APARATUR SIPIL NEGARA
+                                    4. PELANGGARAN APARATUR SIPIL NEGARA
                                 </h4>
                             </center>
                         </div>
@@ -369,7 +369,7 @@ $solution = \App\Models\SolutionFraud::get();
         </div>
     </div>
 </div>
-<div id="data-2" class="tabcontent mt-0 pt-0 px-0">
+<div id="rekomendasi-tindakan" class="tabcontent mt-0 pt-0 px-0">
     <div class="col-12 px-0 mt-5">
         <h2 class="fw-bold">
             Rekomendasi Tindakan
@@ -432,7 +432,7 @@ $solution = \App\Models\SolutionFraud::get();
         </div>
     </div>
 </div>
-<div id="data-3" class="tabcontent mt-0 pt-0 px-0">
+<div id="barkode-kecurangan" class="tabcontent mt-0 pt-0 px-0">
     <div class="col-12 px-0 mt-5">
         <h2 class="fw-bold">
             Barkode Kecurangan
@@ -471,7 +471,7 @@ $solution = \App\Models\SolutionFraud::get();
         </div>
     </div>
 </div>
-<div id="data-4" class="tabcontent mt-0 pt-0 px-0">
+<div id="bukti-kecurangan" class="tabcontent mt-0 pt-0 px-0">
     <div class="col-12 px-0 mt-5">
         <h2 class="fw-bold">
             Bukti Kecurangan
@@ -490,7 +490,7 @@ $solution = \App\Models\SolutionFraud::get();
     
     </div>
 </div>
-<div id="data-5" class="tabcontent mt-0 pt-0 px-0">
+<div id="laporan-mk" class="tabcontent mt-0 pt-0 px-0">
     <div class="col-12 px-0">
         <h2 class="fw-bold mt-5">
             Peserta Sidang MK
