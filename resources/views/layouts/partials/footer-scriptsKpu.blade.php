@@ -279,6 +279,12 @@ let myModal = new bootstrap.Modal(document.getElementById('modallockdown'), {
                     ['data<?= $pas->id  ?>', <?= $suaraCrowd['suaraCrowd'.$pas->id] ?>],
                 <?php endforeach  ?>
 
+                @else
+                <?php foreach ($paslon as $pas) :  ?>
+                
+                    ['data<?= $pas->id  ?>', <?= $suaraCrowd['suaraCrowd'.$pas->id] ?>],
+                <?php endforeach  ?>
+
 
                 @endif
                     

@@ -3,7 +3,7 @@
         position: relative;
     }
 
-    td > input[type=checkbox] {
+    td>input[type=checkbox] {
         position: absolute;
         top: 14px
     }
@@ -21,8 +21,8 @@
                 <div class="col-12">
                     <div class="row justify-content-center">
                         <div class="col-12">
-                            <img src="{{asset('')}}assets/icons/hisuara_new.png" alt="Avatar" class="hadow-4 mb-3"
-                                style="width: 157px;" />
+                            <img src="{{ asset('') }}assets/icons/hisuara_new.png" alt="Avatar"
+                                class="hadow-4 mb-3" style="width: 157px;" />
                         </div>
                     </div>
                 </div>
@@ -38,37 +38,42 @@
         <div class="container">
             <p style="text-align: justify">
                 <b>Jenis-jenis pelanggaran pemilu</b>
-                <ol>
-                    <li>
-                        <b>
-                            Pelanggaran administrasi
-                        </b><br>
-                        Pelanggaran Administrasi Pemilu adalah pelanggaran yang meliputi tata cara, prosedur, dan mekanisme yang berkaitan
-                        dengan administrasi pelaksanaan Pemilu dalam setiap tahapan Penyelenggaraan Pemilu.
-                    </li>
-                    <li>
-                        <b>
-                            Pelanggaran Tindak pidana pemilu
-                        </b><br>
-                        Tindak Pidana Pemilu adalah tindak pidana pelanggaran dan/atau kejahatan terhadap ketentuan tindak pidana Pemilu
-                        sebagaimana diatur dalam Undang-Undang tentang Pemilihan umum dan Undang- Undang tentang Pemilihan Gubernur, Bupati, dan
-                        Walikota
-                    </li>
-                    <li>
-                        <b>
-                            Pelanggran kode etik pemilu
-                        </b><br>
-                        Pelanggaran Kode Etik adalah pelanggaran terhadap etika Penyelenggara Pemilu yang berpedoman pada sumpah dan/atau janji
-                        sebelum menjalankan tugas sebagai Penyelenggara Pemilu.
-                    </li>
-                    <li>
-                        <b>
-                            Pelanggran Aparatur Sipil Negara (ASN)
-                        </b><br>
-                        Pasal 2 UU No 5 Tahun 2014 “Setiap pegawai ASN harus patuh pada asas netralitas dengan tidak berpihak dari segala bentuk
-                        pengaruh manapun dan tidak memihak kepada kepentingan tertentu”.
-                    </li>
-                </ol>
+            <ol>
+                <li>
+                    <b>
+                        Pelanggaran administrasi
+                    </b><br>
+                    Pelanggaran Administrasi Pemilu adalah pelanggaran yang meliputi tata cara, prosedur, dan mekanisme
+                    yang berkaitan
+                    dengan administrasi pelaksanaan Pemilu dalam setiap tahapan Penyelenggaraan Pemilu.
+                </li>
+                <li>
+                    <b>
+                        Pelanggaran Tindak pidana pemilu
+                    </b><br>
+                    Tindak Pidana Pemilu adalah tindak pidana pelanggaran dan/atau kejahatan terhadap ketentuan tindak
+                    pidana Pemilu
+                    sebagaimana diatur dalam Undang-Undang tentang Pemilihan umum dan Undang- Undang tentang Pemilihan
+                    Gubernur, Bupati, dan
+                    Walikota
+                </li>
+                <li>
+                    <b>
+                        Pelanggran kode etik pemilu
+                    </b><br>
+                    Pelanggaran Kode Etik adalah pelanggaran terhadap etika Penyelenggara Pemilu yang berpedoman pada
+                    sumpah dan/atau janji
+                    sebelum menjalankan tugas sebagai Penyelenggara Pemilu.
+                </li>
+                <li>
+                    <b>
+                        Pelanggran Aparatur Sipil Negara (ASN)
+                    </b><br>
+                    Pasal 2 UU No 5 Tahun 2014 “Setiap pegawai ASN harus patuh pada asas netralitas dengan tidak
+                    berpihak dari segala bentuk
+                    pengaruh manapun dan tidak memihak kepada kepentingan tertentu”.
+                </li>
+            </ol>
             </p>
             <p><b>Berdasarkan peraturan Mahkamah Konstitusi
                     Republik Indonesia No.1 Tahun 2014 tentang pedoman beracara dalam perselisihan hasil
@@ -94,7 +99,8 @@
             </ol>
             <div class="row">
                 <div class="col-12">
-                    <button class="btn btn-secondary btn-halaman w-100" data-bs-toggle="modal" data-bs-target="#extralargemodal">
+                    <button class="btn btn-secondary btn-halaman w-100" data-bs-toggle="modal"
+                        data-bs-target="#extralargemodal">
                         Upload Bukti Kecurangan</button>
                 </div>
             </div>
@@ -105,35 +111,37 @@
         <div class="col-12 mt-3">
             <div class="row">
                 <div class="px-0 col-12 text-center mb-3">
-                    @if (Auth::user()->profile_photo_path == NULL)
-                    <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
-                        src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF">
+                    @if (Auth::user()->profile_photo_path == null)
+                        <img class="rounded-circle"
+                            style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                            src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF">
                     @else
-                    <img class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
-                        src="{{url("/storage/profile-photos/".Auth::user()->profile_photo_path) }}">
+                        <img class="rounded-circle"
+                            style="width: 100px; height: 100px; object-fit: cover; margin-right: 10px;"
+                            src="{{ url('/storage/profile-photos/' . Auth::user()->profile_photo_path) }}">
                     @endif
                 </div>
                 <div class="px-0 col-12 my-auto text-center">
                     <?php
-                                            $tps = App\Models\Tps::where('tps.id', '=', Auth::user()->tps_id)->first();
-                                            $kelurahan = App\Models\Village::where('villages.id', '=', Auth::user()->villages)->first();
-                                        ?>
+                    $tps = App\Models\Tps::where('tps.id', '=', Auth::user()->tps_id)->first();
+                    $kelurahan = App\Models\Village::where('villages.id', '=', Auth::user()->villages)->first();
+                    ?>
                     <div class="mb-0 fw-bold" style="font-size: 20px">{{ Auth::user()->name }}</div>
                     <div style="font-size: 15px">NIK : {{ Auth::user()->nik }}</div>
-                    @if($tps == null)
-                    <div style="font-size: 15px">SAKSI TPS 1</div>
+                    @if ($tps == null)
+                        <div style="font-size: 15px">SAKSI TPS 1</div>
                     @else
-                    <div style="font-size: 15px">SAKSI TPS {{ $tps->number }}</div>
+                        <div style="font-size: 15px">SAKSI TPS {{ $tps->number }}</div>
                     @endif
                     @if ($kelurahan == null)
-                    <div style="font-size: 15px">KELURAHAN CIPUTAT</div>
+                        <div style="font-size: 15px">KELURAHAN CIPUTAT</div>
                     @else
-                    <div style="font-size: 15px">KELURAHAN {{ $kelurahan->name }}</div>
+                        <div style="font-size: 15px">KELURAHAN {{ $kelurahan->name }}</div>
                     @endif
                 </div>
             </div>
         </div>
-        <form action="{{route('action_upload_kecurangan')}}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('action_upload_kecurangan') }}" method="post" enctype="multipart/form-data">
             <div class="modal-body">
 
                 @csrf
@@ -204,8 +212,8 @@
                         <div class="dropify-loader"></div>
                         <div class="dropify-errors-container">
                             <ul></ul>
-                        </div><input type="file" class="dropify" name="video_pernyataan" data-bs-height="180"><button
-                            type="button" class="dropify-clear">Remove</button>
+                        </div><input type="file" class="dropify" name="video_pernyataan"
+                            data-bs-height="180"><button type="button" class="dropify-clear">Remove</button>
                         <div class="dropify-preview"><span class="dropify-render"></span>
                             <div class="dropify-infos">
                                 <div class="dropify-infos-inner">
@@ -226,7 +234,6 @@
                 </div>
                 <table class="table mt-2">
                     <thead>
-                        <input type="hidden" name="id_relawan">
                         <tr>
                             <td class="bg-dark text-light"></td>
                             <th class="bg-dark text-light">
@@ -234,17 +241,16 @@
                             </th>
                         </tr>
                         @foreach ($pelanggaran_umum as $item)
-                        <tr>
-                            <td><input type="checkbox" name="curang[]"
-                                    value=" {{ $item['kecurangan'] }}|{{$item['jenis']}}" data-id="{{ $item['id'] }}"
-                                    onclick="ajaxGetSolution(this)">
-                            </td>
-                            <td><label>{{ $item['kecurangan'] }} </label></td>
-                        </tr>
+                            <tr>
+                                <td><input type="checkbox" name="curang[]"
+                                        value=" {{ $item['kecurangan'] }}|{{ $item['jenis'] }}"data-jenis="{{ $item['jenis'] }}"
+                                        data-id="{{ $item['id'] }}" onclick="ajaxGetSolution(this)">
+                                </td>
+                                <td><label>{{ $item['kecurangan'] }} </label></td>
+                            </tr>
                         @endforeach
                     </thead>
                     <thead>
-                        <input type="hidden" name="id_relawan">
                         <tr>
                             <td class="bg-dark text-light"></td>
                             <th class="bg-dark text-light">
@@ -252,17 +258,16 @@
                             </th>
                         </tr>
                         @foreach ($pelanggaran_petugas as $item)
-                        <tr>
-                            <td><input type="checkbox" name="curang[]"
-                                    value=" {{ $item['kecurangan'] }}|{{$item['jenis']}}" data-id="{{ $item['id'] }}"
-                                    onclick="ajaxGetSolution(this)">
-                            </td>
-                            <td><label>{{ $item['kecurangan'] }} </label></td>
-                        </tr>
+                            <tr>
+                                <td><input type="checkbox" name="curang[]"
+                                        value=" {{ $item['kecurangan'] }}|{{ $item['jenis'] }}"data-jenis="{{ $item['jenis'] }}"
+                                        data-id="{{ $item['id'] }}" onclick="ajaxGetSolution(this)">
+                                </td>
+                                <td><label>{{ $item['kecurangan'] }} </label></td>
+                            </tr>
                         @endforeach
                     </thead>
                     <thead>
-                        <input type="hidden" name="id_relawan">
                         <tr>
                             <td class="bg-dark text-light"></td>
                             <th class="bg-dark text-light">
@@ -270,17 +275,16 @@
                             </th>
                         </tr>
                         @foreach ($pelanggaran_etik as $item)
-                        <tr>
-                            <td><input type="checkbox" name="curang[]"
-                                    value=" {{ $item['kecurangan'] }}|{{$item['jenis']}}" data-id="{{ $item['id'] }}"
-                                    onclick="ajaxGetSolution(this)">
-                            </td>
-                            <td><label>{{ $item['kecurangan'] }} </label></td>
-                        </tr>
+                            <tr>
+                                <td><input type="checkbox" name="curang[]"
+                                        value=" {{ $item['kecurangan'] }}|{{ $item['jenis'] }}"data-jenis="{{ $item['jenis'] }}"
+                                        data-id="{{ $item['id'] }}" onclick="ajaxGetSolution(this)">
+                                </td>
+                                <td><label>{{ $item['kecurangan'] }} </label></td>
+                            </tr>
                         @endforeach
                     </thead>
                     <thead>
-                        <input type="hidden" name="id_relawan">
                         <tr>
                             <td class="bg-dark text-light"></td>
                             <th class="bg-dark text-light">
@@ -288,13 +292,13 @@
                             </th>
                         </tr>
                         @foreach ($pelanggaran_apartur as $item)
-                        <tr>
-                            <td><input type="checkbox" name="curang[]"
-                                    value=" {{ $item['kecurangan'] }}|{{$item['jenis']}}" data-id="{{ $item['id'] }}"
-                                    onclick="ajaxGetSolution(this)">
-                            </td>
-                            <td><label>{{ $item['kecurangan'] }} </label></td>
-                        </tr>
+                            <tr>
+                                <td><input type="checkbox" name="curang[]"
+                                        value=" {{ $item['kecurangan'] }}|{{ $item['jenis'] }}"data-jenis="{{ $item['jenis'] }}"
+                                        data-id="{{ $item['id'] }}" onclick="ajaxGetSolution(this)">
+                                </td>
+                                <td><label>{{ $item['kecurangan'] }} </label></td>
+                            </tr>
                         @endforeach
                     </thead>
 
@@ -308,22 +312,33 @@
                     <tbody id="container-rekomendasi">
 
                     </tbody>
-                        <tr>
-                            <th>
-                                <label for="LainnyaPetugas">lainnya</label>
-                            </th>
-                            <td>
-                                <textarea class="form-control" name="deskripsi" id="LainnyaPetugas" rows="3"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="fw-bold">Tambahkan Pesan Suara</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="text-end"><button class="btn btn-info text-white"><i class="fa-solid fa-microphone"></i> Rekam</button></td>
-                        </tr>
+                    <tr>
+                        <th>
+                            <label for="LainnyaPetugas">lainnya</label>
+                        </th>
+                        <td>
+                            <textarea class="form-control" name="deskripsi" id="LainnyaPetugas" rows="3"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="fw-bold">Tambahkan Pesan Suara</td>
+                    </tr>
+                    <tr>
+                        <td class="text-end"><button class="btn btn-info text-white"id="startRecording"type="button"><i
+                                    class="fa-solid fa-microphone"></i> Rekam</button></td>
+                        <td class="text-end"><button class="btn btn-dark text-white" id="stopRecording" type="button" disabled><i
+                                    class="fa-solid fa-microphone"></i> Berhenti Merekam</button></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <audio controls id="audioPlayer" style="display:none;"></audio>
+                            <input type="file" accept="audio/*" name="audioFile" id="audioFile"
+                                style="display:none;">
+                        </td>
+                    </tr>
+                
 
-                    
+
                     </thead>
                 </table>
 
@@ -349,10 +364,53 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
 
 <script>
     $('.btn-halaman').on('click', function() {
         $('.halaman-1').hide();
         $('.halaman-2').show()
     })
+
+
+
+$(document).ready(function () {
+
+    var audioContext;
+    var recorder;
+
+    navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(function (stream) {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            var input = audioContext.createMediaStreamSource(stream);
+            recorder = new Recorder(input);
+        })
+        .catch(function (err) {
+            console.error('Error accessing microphone:', err);
+        });
+
+    $('#startRecording').click(function () {
+        recorder && recorder.record();
+        $('#startRecording').prop('disabled', true);
+        $('#stopRecording').prop('disabled', false);
+    });
+
+    $('#stopRecording').click(function () {
+        recorder && recorder.stop();
+        $('#startRecording').prop('disabled', false);
+        $('#stopRecording').prop('disabled', true);
+
+        recorder.exportWAV(function (blob) {
+            var audioURL = URL.createObjectURL(blob);
+            $('#audioPlayer').attr('src', audioURL);
+            $('#audioPlayer').css('display', 'block');
+
+            var formData = new FormData();
+            formData.append('audioFile', blob, 'recordedAudio.wav');
+
+        });
+    });
+
+});
+
 </script>

@@ -186,15 +186,9 @@ $dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
                                                     <div class="col text-center">
                                                         <h6>{{$pas->candidate}} </h6>
                                                         <h6>{{$pas->deputy_candidate}} </h6>
-                                                        <?php
-                                                        $voice = 0;
-                                                        ?>
-                                                        @foreach ($pas->saksi_data as $dataTps)
-                                                        <?php
-                                                        $voice += $dataTps->voice;
-                                                        ?>
-                                                        @endforeach
-                                                        <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                                      
+                                                    
+                                                        <h3 class="mb-2 number-font">{{ $suaraCrowd['suaraCrowd'.$pas->id] }} suara</h3>
                                                     </div>
                                                 </div>
                                             </div>
@@ -227,7 +221,7 @@ $dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
             </div>
             <div class="card-body text-center">
                 <a href="#" data-toggle="modal" data-target="#imgBig">
-                    <img style="height: 594.92px" src="{{asset('')}}storage/{{$crowd_c1->crowd_c1}}" alt="">
+                    <img style="height: 594.92px" src="{{asset('')}}storage/c1_plano/{{$crowd_c1->crowd_c1}}" alt="">
                 </a>
             </div>
         </div>
@@ -341,7 +335,8 @@ $dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
                             <tr>
                                 <td>{{$no_u++}}</td>
                                 <td>{{$pasangan->candidate}} - {{$pasangan->deputy_candidate}}</td>
-                                <td class="text-end"></td>
+                                <td class="text-end">
+                                {{ $suaraCrowd['suaraCrowd'.$pasangan->id] }}</td>
                             </tr>
                             @endforeach
                         </tbody>

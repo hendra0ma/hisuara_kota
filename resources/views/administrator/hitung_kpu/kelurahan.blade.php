@@ -52,7 +52,6 @@ $regency = District::where('regency_id', $config->regencies_id)->get();
 // $urutan = $paslon_tertinggi;
 $kota = Regency::where('id', $config->regencies_id)->first();
 $dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
-$tps = Tps::count();
 $props = Province::where('id',$kota['province_id'])->first();
 ?>
 

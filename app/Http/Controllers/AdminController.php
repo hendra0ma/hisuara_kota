@@ -3775,7 +3775,7 @@ class AdminController extends Controller
          $data['suaraCrowd'] = [];
          $data['total_incoming_vote'] = 0;
          foreach( $data['paslon'] as $pas){
-             $data['suaraCrowd']["suaraCrowd$pas->id"] = DataCrowdC1::where('village_id',$id)->where('paslon_id',$pas->id)->sum('voice');
+             $data['suaraCrowd']["suaraCrowd$pas->id"] = DataCrowdC1::where('tps_id',$id)->where('paslon_id',$pas->id)->sum('voice');
              $data['total_incoming_vote'] += $data['suaraCrowd']["suaraCrowd$pas->id"];
          }
          $data['crowd_c1'] = CrowdC1::join('users','crowd_c1.user_id','=','users.id')->where('crowd_c1.tps_id',$id)->first();

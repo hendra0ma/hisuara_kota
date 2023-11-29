@@ -20,12 +20,8 @@ class PusatController extends Controller
     function home() {
         date_default_timezone_set("Asia/Jakarta");
         $data['jam'] = date("H");
-        
-    
-
-
         $data['paslon']                   = Paslon::with('saksi_data')->get();
-    
+
         $dpt         = Regency::sum("dpt");
         
 

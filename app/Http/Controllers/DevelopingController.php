@@ -20,6 +20,7 @@ use App\Models\CrowdC1;
 use App\Models\DataCrowdC1;
 use App\Models\DataSaksiC;
 use App\Models\District;
+use App\Models\Kecurangan;
 use App\Models\Province;
 use App\Models\Regency;
 use App\Models\SaksiC;
@@ -217,20 +218,20 @@ class DevelopingController extends Controller
         $village_id =   Auth::user()->villages;
         $district_id =  Auth::user()->districts;
         $tps_id =  Auth::user()->tps_id;
-       
 
-     
+
+
 
         $saksi = new SaksiC;
         $saksi->c_images = $formulir;
-        $saksi->regency_id = substr($district_id,0,4);
-        $saksi->province_id = substr($district_id,0,2);
+        $saksi->regency_id = substr($district_id, 0, 4);
+        $saksi->province_id = substr($district_id, 0, 2);
         $saksi->district_id = $district_id;
         $saksi->village_id =  $village_id;
         $saksi->tps_id =   $tps_id;
         $saksi->save();
-       
-        
+
+
         return redirect()->route('dashboard.saksi2');
     }
 
@@ -300,7 +301,7 @@ class DevelopingController extends Controller
             "jumlah_sah_dan_tidak" => $request->input("jumlah_sah_dan_tidak"),
             "foto_surat_suara" => $namaFoto,
             "tps_id" => Auth::user()->tps_id,
-            "user_id"=>Auth::user()->id
+            "user_id" => Auth::user()->id
         ]);
 
         return redirect()->back()->with('success', 'Surat Suara Berhasil di Upload');
@@ -433,79 +434,93 @@ class DevelopingController extends Controller
     }
     public function action_upload_kecurangan(Request $request)
     {
+
+        if ($request->hasFile('foto') == false && $request->hasFile('video') == false) {
+            Validator::make($request->all(), [
+                'foto' => ['required', 'file', 'mimes:jpeg,png,jpg,gif'], // Sesuaikan dengan ekstensi file yang diizinkan
+                'video' => ['required', 'file', 'mimetypes:video/mp4,video/avi'], // Sesuaikan dengan tipe MIME file video yang diizinkan
+            ])->validate();
+        }
+   
         Validator::make($request->all(), [
-            'curang.*' => ['required'],
-            'tps' => ['required'],
-            'foto' => ['required'],
+            'video_pernyataan' => ['required', 'file', 'mimetypes:video/mp4,video/avi'],
         ])->validate();
 
-        $tps = Tps::where('id', $request['tps'])->first();
-        $saksi = Saksi::where('tps_id', $request['tps'])->update([
-            'status_kecurangan' => 'belum terverifikasi',
-            'kecurangan' => 'yes',
-            'kecurangan' => 'yes',
-        ]);
-        if ($request->hasFile('foto') && $request->hasFile('video')  && $request->hasFile('video_pernyataan')) {
-            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $kecurangan = new Kecurangan;
+        $kecurangan->user_id = Auth::user()->id;
+        $kecurangan->rekaman = "rekaman";
+        $kecurangan->regency_id = Auth::user()->regency_id;
+        if (Auth::user()->role_id ==  8) {
+            $kecurangan->tps_id = Auth::user()->tps_id;   
+        }
+        $kecurangan->save();
+        $kecuranganId = $kecurangan->id;
+
+        
+
+ 
+        if ($request->hasFile('foto')) {
             foreach ($request->file('foto') as  $file) {
                 $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
                 $randomString = substr(str_shuffle($characters), 0, 50); // Menghasilkan string acak sepanjang 10 karakter
                 $foto = time()  . $randomString  . "." . $file->getClientOriginalExtension();
                 $file->move(public_path('storage/hukum/bukti_foto'), $foto);
-                Buktifoto::create([
+                Buktifoto::insert([
                     'url' => "hukum/bukti_foto/" . $foto,
-                    'user_id' => $tps['user_id'],
-                    'tps_id' => $request['tps'],
+                    'user_id' => Auth::user()->id,
+                    "kecurangan_id" => $kecuranganId
                 ]);
             }
+        }
+        if ($request->hasFile('video')) {
             foreach ($request->file('video') as  $file_video) {
                 $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
                 $randomString = substr(str_shuffle($characters), 0, 50); // Menghasilkan string acak sepanjang 10 karakter
                 $video = time()  . $randomString  . "." . $file_video->getClientOriginalExtension();
                 $file_video->move(public_path('storage/hukum/bukti_vidio'), $video);
-                Buktividio::create([
+                Buktividio::insert([
                     'url' =>  "hukum/bukti_vidio/" . $video,
-                    'user_id' => $tps['user_id'],
-                    'tps_id' => $request['tps'],
+                    'user_id' => Auth::user()->id,
                     'bukti_vidio' => 0,
+                    "kecurangan_id" => $kecuranganId
                 ]);
             }
-
-            $video_pernyataan = $request->file('video_pernyataan');
-            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $randomString = substr(str_shuffle($characters), 0, 50); // Menghasilkan string acak sepanjang 10 karakter
-            $video = time()  . $randomString  . "." . $video_pernyataan->getClientOriginalExtension();
-            $video_pernyataan->move(public_path('storage/hukum/video_pernyataan'), $video);
-            VideoPernyataan::insert([
-                'video' => "hukum/bukti_pernyataan." . $video,
-                'user_id' => $tps['user_id'],
-                'tps_id' => $request['tps'],
-            ]);
-        } else {
-            return redirect()->back()->with('error', 'input file wajib di isi');
         }
 
-
-
-        $fromListKecurangan = $request['curang'];
-        foreach ($fromListKecurangan as $data) {
-            $kecurangan = explode('|', $data)[0];
-            $jenis = explode('|', $data)[1];
-            Bukti_deskripsi_curang::create([
-                'tps_id' => $request['tps'],
-                'text' => $kecurangan,
-                'jenis' => $jenis,
-            ]);
-        }
-        Bukticatatan::create([
-            'tps_id' => $request['tps'],
-            'text' => $request['curang'],
-        ]);
-        DB::table('deskripsi_kecurangan')->insert([
-            "deskripsi" => $request->deskripsi,
-            'tps_id' => $request['tps'],
+        $video_pernyataan = $request->file('video_pernyataan');
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = substr(str_shuffle($characters), 0, 50); // Menghasilkan string acak sepanjang 10 karakter
+        $video = time()  . $randomString  . "." . $video_pernyataan->getClientOriginalExtension();
+        $video_pernyataan->move(public_path('storage/hukum/video_pernyataan'), $video);
+        VideoPernyataan::insert([
+            'video' => "hukum/bukti_pernyataan." . $video,
             'user_id' => Auth::user()->id,
+            "kecurangan_id" => $kecuranganId
         ]);
+
+
+        if ($request['deskripsi'] != null) {
+            DB::table('deskripsi_kecurangan')->insert([
+                "deskripsi" => $request->deskripsi,
+                'user_id' => Auth::user()->id,
+                "kecurangan_id" => $kecuranganId
+            ]);
+        }
+
+        if ($request['curang'] != null) {
+            $fromListKecurangan = $request['curang'];
+            foreach ($fromListKecurangan as $data) {
+                $kecurangan = explode('|', $data)[0];
+                $jenis = explode('|', $data)[1];
+                Bukti_deskripsi_curang::create([
+                    'text' => $kecurangan,
+                    'jenis' => $jenis,
+                    'user_id' => Auth::user()->id,
+                    "kecurangan_id" => $kecuranganId
+                ]);
+            }
+        }
+
 
 
 
