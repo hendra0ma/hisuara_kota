@@ -193,7 +193,7 @@
                             <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Hasil Perhitungan Suara</div>
                             <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Pemilihan Presiden dan Wakil
                                 Presiden</div>
-                            <div class="text-center title-atas-table fs-5 fw-bold">{{ $kota['name'] }}</div>
+                            <div class="text-center title-atas-table fs-5 fw-bold">Tingkat Nasional</div>
                             <div class="row mx-auto" style="width: 884.5px;">
 
                             </div>
