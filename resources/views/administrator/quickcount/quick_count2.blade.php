@@ -124,10 +124,12 @@ $props = Province::where('id',$kota['province_id'])->first();
                                         {{$dpt}}</span></div>
                                 {{-- <div id="chart-pie2" class="chartsh h-100 w-100"></div> --}}
                             </div>
-                            <div class="card my-5">
-                                <div class="card-body text-center">
-                                    <h1 class="fw-bold">Halaman Quick Count Kabupaten Kota dialihkan ke Quick Count Nasional</h1>
-                                    <a href="{{url('')}}/administrator/quick_count_nasional" class="btn btn-success">Redirect</a>
+                            <div class="row justify-content-center">
+                                <div class="col-6">
+                                    <div class="alert alert-danger my-5 text-center">
+                                        <h2 class="fw-bold">Halaman Quick Count Kabupaten Kota dialihkan ke Quick Count Nasional</h2>
+                                        <a href="{{route('quickcount_pusat.quick_count_nasional')}}" class="btn btn-dark">Redirect</a>
+                                    </div>
                                 </div>
                             </div>
 

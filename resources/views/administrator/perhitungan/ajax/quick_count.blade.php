@@ -58,7 +58,14 @@ $tps = Tps::count();
             <div class="text-center">Progress {{substr($realcount,0,5)}}% dari 100%</div>
             <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{$total_incoming_vote}} /
                     {{$dpt}}</span></div> --}}
-            <div id="chart-quick-count" class="chartsh h-100 w-100"></div>
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="alert alert-danger my-5 text-center">
+                        <h3 class="fw-bold">Halaman Quick Count Kabupaten Kota dialihkan ke Quick Count Nasional</h3>
+                        <a href="{{route('quickcount_pusat.quick_count_nasional')}}" class="btn btn-dark">Redirect</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-6">
