@@ -234,7 +234,7 @@ $tps = Tps::count();
             
                                     <tr data-id="{{$item['id']}}" data-bs-toggle="modal" class="modal-id"
                                         data-bs-target="#modal-id">
-                                        <td> <a href="{{url('')}}/administrator/perhitungan_tps/{{Crypt::encrypt($item->id)}}"
+                                        <td> <a href="{{url('')}}/administrator/terverifikasi_tps/{{Crypt::encrypt($item->id)}}"
                                                 class="modal-id text-dark" style="font-size: 0.8em;" id="Cek">TPS
                                                 {{$item['number']}}</a>
                                             @foreach ($paslon_candidate as $cd)
