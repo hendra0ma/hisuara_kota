@@ -149,7 +149,7 @@ Route::domain('hisuara.id')->name('pusat.')->group(function () {
     Route::get('public/pusat', [PublicController::class, 'pusatIndex']);
 
 
-    Route::group(["middleware" => 'role:administrator'], function () {
+    Route::group(["middleware" => ['role:administrator','auth']], function () {
         Route::get('/dashboard-pusats', [PusatController::class, "home"])->name('home');
         Route::get('quick_count_nasional', [PusatController::class, "quick_count_nasional"])->name('quick_count_nasional');
     });
@@ -164,7 +164,7 @@ Route::domain('quickcount.hisuara.id')->name('quickcount_pusat.')->group(functio
     Route::get('public/pusat', [PublicController::class, 'pusatIndex']);
 
 
-    Route::group(["middleware" => 'role:administrator'], function () {
+    Route::group(["middleware" => ['role:administrator','auth']], function () {
         Route::get('/quick_count_nasional', [PusatController::class, "quick_count_nasional"])->name('quick_count_nasional');
     });
 });

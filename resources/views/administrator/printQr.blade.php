@@ -106,7 +106,7 @@
 
         <div class="row justify-content-center border border-dark border-3" style="align-items:center;margin-top:75px">
             <div class="col-6 text-center mt-2 mb-2">
-                <img src="{{url('')}}/storage/{{$config->regencies_logo}}" alt="" class="img-fluid"
+                <img src="{{url('')}}/assets/imagesKota/{{$config->regencies_logo}}" alt="" class="img-fluid"
                     style="height: 150px;">
             </div>
 

@@ -19,10 +19,13 @@ if (isset(parse_url($currentDomain)['port'])) {
 } else {
     $url = $currentDomain;
 }
-$regency_id = RegenciesDomain::where('domain', "LIKE", "%" . $url . "%")->first();
+$regency_id = RegenciesDomain::where('domain', $url)->first();
+
+$reg = App\Models\Regency::where('id', $regency_id->regency_id)->first();
 
 $config = new Configs;
 $config->regencies_id =  (string) $regency_id->regency_id;
+$config->regencies_logo =  (string) $reg->logo_kota;
 $config->provinces_id =  $configs->provinces_id;
 $config->setup =  $configs->setup;
 $config->darkmode =  $configs->darkmode;
@@ -118,7 +121,7 @@ $tps = Tps::count();
                                             @endphp
                                         @else {{--  Perhitungan Kota --}}
                                             @php
-                                            $total_saksi = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $pas->id)->where('saksi.verification', 1)->sum('voice');
+                                            $total_saksi = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('saksi.regency_id',$config->regencies_id)->where('paslon_id', $pas->id)->where('saksi.verification', 1)->sum('voice');
                                             @endphp
                                         @endif
                                         <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3>

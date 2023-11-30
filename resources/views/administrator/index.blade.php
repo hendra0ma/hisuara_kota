@@ -24,8 +24,10 @@
     }
     $regency_id = RegenciesDomain::where('domain', 'LIKE', '%' . $url . '%')->first();
     
-    $config = new Configs();
-    $config->regencies_id = (string) $regency_id->regency_id;
+$reg = App\Models\Regency::where('id', $regency_id->regency_id)->first();
+
+$config = new Configs;
+$config->regencies_id =  (string) $regency_id->regency_id;
     $config->provinces_id = $configs->provinces_id;
     $config->setup = $configs->setup;
     $config->darkmode = $configs->darkmode;
