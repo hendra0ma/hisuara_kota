@@ -490,7 +490,7 @@
 
         .security-keluar {
             position: fixed;
-            z-index: 10;
+            z-index: 30;
             background-image: url('https://t3.ftcdn.net/jpg/02/69/46/42/360_F_269464287_Q2DoeIRT847orJlYDSX59T8pjlF9nO94.jpg');
             background-size: cover;
             height: 100vh;
@@ -567,6 +567,36 @@
         transform: translateX(-50%);
         position: fixed;
         display: none;">
+    <div class="text-white bantuan tugel-content bg-dark" style="display: none; position: fixed; bottom: 30px; z-index: 19; left: 50%; transform: translateX(-50%); width: 100%; padding: 30px;">
+        <div class="row h-100">
+            <div class="col-3">
+                <a href="" class="btn-info btn fs-3 w-100 h-100"><i class="fa-solid fa-book"></i> Unduh Manual Book</a>
+            </div>
+            <div class="col-3">
+                <a href="" class="btn-info btn fs-3 w-100 h-100"><i class="fa-brands fa-youtube"></i> Video Tutorial</a>
+            </div>
+            <div class="col-3">
+                <a href="" class="btn-info btn fs-3 w-100 h-100"><i class="fa-solid fa-circle-question"></i> FAQ</a>
+            </div>
+            <div class="col-3">
+                <a href="" class="btn-info btn fs-3 w-100 h-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="28"
+                        height="28" x="0" y="0" viewBox="0 0 459.668 459.668" style="enable-background:new 0 0 512 512"
+                        xml:space="preserve" class="">
+                        <g>
+                            <path
+                                d="M359.574 297.043c-18.204 25.002-47.692 41.286-80.916 41.286H232.04c-16.104 0-29.818-10.224-35.011-24.534a118.226 118.226 0 0 1-18.83-7.442c-12.99-6.454-24.785-15.198-35.168-26.03-67.35 14.796-117.757 74.808-117.757 146.603v9.384c0 12.9 10.458 23.358 23.358 23.358h362.403c12.9 0 23.358-10.458 23.358-23.358v-9.384c-.001-55.462-30.084-103.894-74.819-129.883z"
+                                fill="#ffffff" opacity="1" data-original="#000000" class=""></path>
+                            <path
+                                d="M118.205 232.178c10.039 0 18.777-5.564 23.304-13.775.119.325.24.648.362.971l.108.291c10.62 27.954 31.284 51.388 58.532 61.627 6.59-10.471 18.243-17.435 31.53-17.435h46.618c4.65 0 8.978-1.312 12.772-3.433 6.372-3.563 12.102-12.602 15.061-17.393 4.735-7.667 8.404-15.788 11.657-24.642a26.728 26.728 0 0 0 7.354 8.471v11.431c0 25.83-21.014 46.845-46.845 46.845H232.04c-8.813 0-15.958 7.145-15.958 15.958 0 8.814 7.145 15.958 15.958 15.958h46.618c43.429 0 78.761-35.332 78.761-78.761V226.86c6.46-4.853 10.639-12.577 10.639-21.278v-66.571c0-8.88-4.355-16.737-11.042-21.568C351.83 51.816 296.77 0 229.833 0 162.895 0 107.836 51.816 102.65 117.442c-6.687 4.831-11.042 12.689-11.042 21.568v66.57c0 14.731 11.967 26.598 26.597 26.598zM229.833 31.917c49.552 0 90.423 37.868 95.2 86.185a26.692 26.692 0 0 0-7.475 9.238c-15.058-39.286-48.672-66.638-87.726-66.638-39.896 0-72.971 28.292-87.667 66.481l-.059.158a26.692 26.692 0 0 0-7.475-9.238c4.78-48.318 45.65-86.186 95.202-86.186z"
+                                fill="#ffffff" opacity="1" data-original="#000000" class=""></path>
+                        </g>
+                    </svg> 
+                    Support System
+                </a>
+            </div>
+        </div>
+    </div>
     <div class="security-keluar" style="display: none">
         <div class="box-security">
             <div class="row">

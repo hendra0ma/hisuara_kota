@@ -216,7 +216,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '
 <div class="app-header header header-baru py-0 pe-0" style="padding-left: 0px !important; z-index: 20 !important;">
     <div class="container-fluid px-0">
 
-        <div class="d-flex" style="position: relative">
+        <div class="d-flex">
 
             <div class="col-12 px-0">
                 <div class="card mb-0 border-0">
@@ -239,7 +239,8 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '
                             <div class="col-auto col-pilpres">
                                 <div class="row">
                                     <div class="col-md-auto pe-0 my-auto">
-                                        <img src="{{asset('')}}assets/imagesKota/{{$config->regencies_logo}}" style="width: 50px" alt="">
+                                        <img src="{{asset('')}}assets/imagesKota/{{$kota->logo_kota}}" style="width: 50px" alt="">
+                                        
                                     </div>
                                     <div class="col-lg-auto ps-3 mb-0">
                                         <h3 class="text-white mb-0">PILPRES 2024
@@ -490,8 +491,8 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '
                             <h4 class="mb-0 fw-bold kota tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
                                 Wilayah
                             </h4>
-                            <h4 class="mb-0 fw-bold support tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
-                                Support
+                            <h4 class="mb-0 fw-bold bantuan tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
+                                Bantuan
                             </h4>
                             <h4 class="mb-0 fw-bold featured tugel-content" style="color: #e1af0a; font-size: 16px; display: none;">
                                 Featured
@@ -865,7 +866,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '
                     });
                 </script>
 
-                <div class="col-md text-white support tugel-content" style="display: none">
+                <div class="col-md text-white bantuan tugel-content" style="display: none">
                     <div class="row">
                         <div class="col-md-auto px-1 my-auto">
                             <img src="https://plus.unsplash.com/premium_photo-1661510749856-47c47ea10fc7?auto=format&fit=crop&q=80&w=1932&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="avatar profile-user brround" style="width: 35px; height: 35px; object-fit: cover" alt="">
@@ -907,7 +908,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '
                                 </label>
                             </div>
                             <div class="text-center" style="font-size:13px; font-family: 'Roboto', sans-serif !important;">
-                                Otonom
+                                Auto Pilot
                             </div>
                         </div>
 
@@ -1183,7 +1184,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '
                 </script>
 
                 <div class="col-md-auto px-0">
-                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="support" data-command-target="bantuan">
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="bantuan" data-command-target="bantuan">
                         <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Bantuan">
                             <i class="fa-solid fa-headset"></i>
                         </span>
