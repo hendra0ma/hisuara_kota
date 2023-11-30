@@ -268,7 +268,7 @@
                     @foreach ($regencies as $item)
                     <div class="col-auto my-2">
                         <div class="text-center mb-2">
-                            <img src="{{asset('assets/imagesKota/'. $item->logo_kota)}}" alt="">
+                            <img src="{{asset('assets/imagesKota/'. $item->logo_kota)}}" style="height: 120px" alt="">
                         </div>
                         <div class="text-center">
                             {{$item->name}}
