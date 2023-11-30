@@ -162,7 +162,7 @@ $tps = Tps::count();
                 <h3 class="card-title text-white">Hasil Perhitungan Suara</h3>
             </div>
             <div class="card-body" style="position: relative;">
-                <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                <img src="{{asset('')}}assets/icons/hisuara_new_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
                 <div class="row">
                     <div class="col-8">
                         <div class="container">

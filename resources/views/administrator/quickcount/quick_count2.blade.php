@@ -127,7 +127,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                             <div class="row justify-content-center">
                                 <div class="col-6">
                                     <div class="alert alert-danger my-5 text-center">
-                                        <h2 class="fw-bold">Halaman Quick Count Kabupaten Kota dialihkan ke Quick Count Nasional</h2>
+                                        <div class="fw-bold">Halaman Quick Count Kabupaten Kota dialihkan ke Quick Count Nasional</div>
                                         <a href="{{route('quickcount_pusat.quick_count_nasional')}}" class="btn btn-dark">Redirect</a>
                                     </div>
                                 </div>
