@@ -26,8 +26,11 @@ if (isset(parse_url($currentDomain)['port'])) {
 }
 $regency_id = RegenciesDomain::where('domain',"LIKE","%".$url."%")->first();
 
+$reg = App\Models\Regency::where('id', $regency_id->regency_id)->first();
+
 $config = new Configs;
 $config->regencies_id =  (string) $regency_id->regency_id;
+$config->regencies_logo =  (string) $reg->logo_kota;
 $config->provinces_id =  $configs->provinces_id;
 $config->setup =  $configs->setup;
 $config->darkmode =  $configs->darkmode;
@@ -301,7 +304,7 @@ $props = Province::where('id',$kota['province_id'])->first();
 <div class="col-12 mt-5 mb-5" style="">
     <div class="row">
         <div class="col-12 text-center pt-2">
-            <img src="{{asset('')}}storage/{{$config->regencies_logo}}" alt="">
+            <img src="{{asset('')}}assets/imagesKota/{{$config->regencies_logo}}" alt="">
         </div>
         <div class="col-12 text-black p-2 fs-5 fw-bold text-center">
             PERHITUNGAN TINGKAT KECAMATAN <br>

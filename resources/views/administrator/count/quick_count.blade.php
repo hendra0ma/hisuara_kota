@@ -75,13 +75,13 @@ use App\Models\RegenciesDomain;
     } else {
         $url = $currentDomain;
     }
-    $regency_id = RegenciesDomain::where('domain', "LIKE", "%" . $url . "%")->first();
+    $regency_id = RegenciesDomain::where('domain', $url)->first();
 
     $configs = Config::first();
     $config = new Configs;
     $config->regencies_id =  (string) $regency_id->regency_id;
     $config->provinces_id =  $configs->provinces_id;
-    $config->regencies_logo =  $configs->regencies_logo;
+    
 
     $config->setup =  $configs->setup;
 $config->darkmode =  $configs->darkmode;

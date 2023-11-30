@@ -11,13 +11,16 @@ if (isset(parse_url($currentDomain)['port'])) {
 } else {
     $url = $currentDomain;
 }
-$regency_id = RegenciesDomain::where('domain', "LIKE", "%" . $url . "%")->first();
+$regency_id = RegenciesDomain::where('domain', $url)->first();
 
 $configs = Config::first();
+$reg = App\Models\Regency::where('id', $regency_id->regency_id)->first();
+
 $config = new Configs;
 $config->regencies_id =  (string) $regency_id->regency_id;
+$config->regencies_logo =  (string) $reg->logo_kota;
 $config->provinces_id =  $configs->provinces_id;
-$config->regencies_logo =  $configs->regencies_logo;
+
 
 $config->setup =  $configs->setup;
 $config->darkmode =  $configs->darkmode;
@@ -48,7 +51,7 @@ $config->default =  $configs->default;
                 <div class="row justify-content-center mb-3">
                     <div class="col-2">
     
-                        <img src="{{asset('')}}storage/{{$config->regencies_logo}}" style="width: 100px" class="float-end">
+                        <img src="{{asset('')}}assets/imagesKota/{{$config->regencies_logo}}" style="width: 100px" class="float-end">
                     </div>
                     <div class="col-4 d-flex">
                         <h3 class="mx-auto text-center text-uppercase fw-bold my-auto">

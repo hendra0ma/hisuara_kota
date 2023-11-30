@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 $config = Config::all()->first();
 use App\Models\Configs;
-use App\Models\RegenciesDomain;
 $configs = Config::all()->first();
 $currentDomain = request()->getHttpHost();
 if (isset(parse_url($currentDomain)['port'])) {
@@ -20,8 +19,11 @@ if (isset(parse_url($currentDomain)['port'])) {
 }
 $regency_id = RegenciesDomain::where('domain',"LIKE","%".$url."%")->first();
 
+$reg = App\Models\Regency::where('id', $regency_id->regency_id)->first();
+
 $config = new Configs;
 $config->regencies_id =  (string) $regency_id->regency_id;
+$config->regencies_logo =  (string) $reg->logo_kota;
 $config->provinces_id =  $configs->provinces_id;
 $config->setup =  $configs->setup;
 $config->darkmode =  $configs->darkmode;

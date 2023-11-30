@@ -68,7 +68,7 @@
             <div class="col-6 mt-2 mb-2">
                 <center>
 
-                <img src="{{url('')}}/storage/{{$config->regencies_logo}}" alt="" class="img-fluid" style="height: 150px;">
+                <img src="{{url('')}}/assets/imagesKota/{{$config->regencies_logo}}" alt="" class="img-fluid" style="height: 150px;">
                 </center>
             </div>
 

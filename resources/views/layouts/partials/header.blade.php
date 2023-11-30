@@ -23,13 +23,19 @@ if (isset(parse_url($currentDomain)['port'])) {
 } else {
     $url = $currentDomain;
 }
-$regency_id = RegenciesDomain::where('domain', "LIKE", "%" . $url . "%")->first();
+$regency_id = RegenciesDomain::where('domain', $url)->first();
+
+
 
 $configs = Config::first();
+$reg = App\Models\Regency::where('id', $regency_id->regency_id)->first();
+
+
 $config = new Configs;
 $config->regencies_id =  (string) $regency_id->regency_id;
+$config->regencies_logo =  (string) $reg->logo_kota;
 $config->provinces_id =  $configs->provinces_id;
-$config->regencies_logo =  $configs->regencies_logo;
+
 
 $config->setup =  $configs->setup;
 $config->darkmode =  $configs->darkmode;
@@ -233,7 +239,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '
                             <div class="col-auto col-pilpres">
                                 <div class="row">
                                     <div class="col-md-auto pe-0 my-auto">
-                                        <img src="{{asset('')}}storage/{{$config->regencies_logo}}" style="width: 50px" alt="">
+                                        <img src="{{asset('')}}assets/imagesKota/{{$config->regencies_logo}}" style="width: 50px" alt="">
                                     </div>
                                     <div class="col-lg-auto ps-3 mb-0">
                                         <h3 class="text-white mb-0">PILPRES 2024
