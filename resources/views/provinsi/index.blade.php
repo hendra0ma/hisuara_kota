@@ -151,7 +151,7 @@
                                                                 $voice += $regency->{'suara' . $i};
                                                             }
                                                         @endphp
-                                                        <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                                        <h3 class="mb-2 number-font">{{ $voice }} Suara</h3>
                                                     </div>
                                                 </div>
                                             </div>
@@ -265,10 +265,10 @@
 
             <div class="col-12 mb-2">
                 <div class="row my-3" style="flex-wrap: nowrap; overflow-x: scroll">
-                    @foreach ($provinsi as $item)
+                    @foreach ($regencies as $item)
                     <div class="col-auto my-2">
                         <div class="text-center mb-2">
-                            <img src="{{asset('assets/imagesProvinsi/'. $item->logo_provinsi)}}" alt="">
+                            <img src="{{asset('assets/imagesKota/'. $item->logo_kota)}}" alt="">
                         </div>
                         <div class="text-center">
                             {{$item->name}}

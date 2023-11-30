@@ -233,7 +233,8 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '
                             <div class="col-auto col-pilpres">
                                 <div class="row">
                                     <div class="col-md-auto pe-0 my-auto">
-                                        <img src="{{asset('')}}storage/{{$config->regencies_logo}}" style="width: 50px" alt="">
+                                        <img src="{{asset('')}}assets/imagesKota/{{$kota->logo_kota}}" style="width: 50px" alt="">
+                                        
                                     </div>
                                     <div class="col-lg-auto ps-3 mb-0">
                                         <h3 class="text-white mb-0">PILPRES 2024

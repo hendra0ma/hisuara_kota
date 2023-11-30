@@ -301,7 +301,7 @@ $props = Province::where('id',$kota['province_id'])->first();
 <div class="col-12 mt-5 mb-5" style="">
     <div class="row">
         <div class="col-12 text-center pt-2">
-            <img src="{{asset('')}}storage/{{$config->regencies_logo}}" alt="">
+            <img src="{{asset('')}}assets/imagesKota/{{$kota->logo_kota}}" alt="">
         </div>
         <div class="col-12 text-black p-2 fs-5 fw-bold text-center">
             PERHITUNGAN TINGKAT KECAMATAN <br>

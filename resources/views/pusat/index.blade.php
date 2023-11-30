@@ -149,7 +149,7 @@
                                                                 $voice += $regency->{'suara' . $i};
                                                             }
                                                         @endphp
-                                                        <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                                        <h3 class="mb-2 number-font">{{ $voice }} Suara</h3>
                                                     </div>
                                                 </div>
                                             </div>
