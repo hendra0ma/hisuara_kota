@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\DB;
 class PusatController extends Controller
 {
     function home() {
+        date_default_timezone_set("Asia/Jakarta");
+        $data['jam'] = date("H");
         $data['paslon']                   = Paslon::get();
     
         $dpt         = Regency::sum("dpt");
