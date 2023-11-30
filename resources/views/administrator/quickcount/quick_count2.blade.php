@@ -113,7 +113,7 @@ $props = Province::where('id',$kota['province_id'])->first();
             
             <div class="card" style="margin-bottom: 1rem">
                 <div class="card-body" style="position: relative">
-                    <img src="{{asset('')}}assets/icons/hisuara_new.png" style="position: absolute; top: 25px; left: 25px; width: 100px"
+                    <img src="{{asset('')}}assets/icons/hisuara_new_new.png" style="position: absolute; top: 25px; left: 25px; width: 150px"
                         alt="">
                     <div class="row">
                         <div class="col-xxl-6">

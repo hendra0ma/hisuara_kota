@@ -102,7 +102,7 @@ $tps = Tps::count();
     <div class="{{($config->otonom == 'yes')?'col-lg-12 col-md-12':'col-lg-6 col-md-12'}}">
         <div class="card">
             <img src="{{asset('')}}assets/icons/hisuara_new_new.png"
-                style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                style="position: absolute; top: 25px; left: 25px; width: 150px" alt="">
             {{-- <div class="card-header" style="background: linear-gradient(90deg, rgba(11,53,217,1) 0%, rgba(23,154,236,1) 100%);">
                 <h3 class="card-title text-white">Suara TPS Masuk</h3>
             </div> --}}
@@ -119,7 +119,7 @@ $tps = Tps::count();
             </div> --}}
             <div class="card-body" style="position: relative;">
                 <img src="{{asset('')}}assets/icons/hisuara_new_new.png"
-                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                    style="position: absolute; top: 25px; left: 25px; width: 150px" alt="">
                 <div id="container-terverifikasi" class="kontainer"></div>
             </div>
         </div>
@@ -140,7 +140,7 @@ $tps = Tps::count();
             </div>
             <div class="card-body" style="position: relative">
                 <img src="{{asset('')}}assets/icons/hisuara_new_new.png"
-                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                    style="position: absolute; top: 25px; left: 25px; width: 150px" alt="">
                 <div id="container-quickcount" class="kontainer"></div>
             </div>
         </div>
@@ -157,7 +157,7 @@ $tps = Tps::count();
             </div>
             <div class="card-body" style="position: relative;">
                 <img src="{{asset('')}}assets/icons/hisuara_new_new.png"
-                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                    style="position: absolute; top: 25px; left: 25px; width: 150px" alt="">
                 <div id="container-rekapitulasi" class="kontainer"></div>
     
             </div>
@@ -175,7 +175,7 @@ $tps = Tps::count();
             </div>
             <div class="card-body" style="position: relative;">
                 <img src="{{asset('')}}assets/icons/hisuara_new_new.png"
-                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                    style="position: absolute; top: 25px; left: 25px; width: 150px" alt="">
                 <div id="container-kpu" class="kontainer"></div>
     
             </div>
@@ -193,7 +193,7 @@ $tps = Tps::count();
             </div>
             <div class="card-body" style="position: relative">
                 <img src="{{asset('')}}assets/icons/hisuara_new_new.png"
-                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                    style="position: absolute; top: 25px; left: 25px; width: 150px" alt="">
                 <div id="container-quickcount" class="kontainer"></div>
             </div>
         </div>
@@ -210,7 +210,7 @@ $tps = Tps::count();
             </div>
             <div class="card-body" style="position: relative;">
                 <img src="{{asset('')}}assets/icons/hisuara_new_new.png"
-                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                    style="position: absolute; top: 25px; left: 25px; width: 150px" alt="">
                 <div id="container-rekapitulasi" class="kontainer"></div>
     
             </div>
@@ -228,7 +228,7 @@ $tps = Tps::count();
             </div>
             <div class="card-body" style="position: relative;">
                 <img src="{{asset('')}}assets/icons/hisuara_new_new.png"
-                    style="position: absolute; top: 25px; left: 25px; width: 100px" alt="">
+                    style="position: absolute; top: 25px; left: 25px; width: 150px" alt="">
                 <div id="container-kpu" class="kontainer"></div>
     
             </div>
