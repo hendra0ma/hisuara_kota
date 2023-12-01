@@ -58,7 +58,7 @@
     
                         <div class="row mt-2">
                             <div class="col-12 px-0">
-                                <button class="btn rounded-0 w-100 periksa-c1-kecurangan text-white" style="background-color: #ff4f4e;" data-bs-toggle="modal" data-bs-target="#periksakecurangan" data-id="{{$ls->tps_id}}">Periksa Kecurangan</button>
+                                <button class="btn rounded-0 w-100 periksa-c1-kecurangan text-white" style="background-color: #ff4f4e;" data-bs-toggle="modal" data-bs-target="#periksakecurangan" data-id="{{$ls->kecurangan_id}}">Periksa Kecurangan</button>
                             </div>
                         </div>
                     </div>

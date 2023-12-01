@@ -306,7 +306,7 @@ foreach ($kotas as $kota) {
             Route::get('security/logoutKelurahan/{id}', [SecurityController::class, 'logoutKelurahan'])->name('security.logoutKelurahan');
             Route::post('security/store/{id}', [SecurityController::class, 'store'])->name('security.store');
             Route::post('security/loginAction/{id}', [SecurityController::class, 'loginAction'])->name('security.actionLog');
-            Route::group(['middleware' => 'role:administrator', 'prefix' => 'administrator', 'as' => 'superadmin.'], function () {
+            Route::group(['middleware' => ['role:administrator','auth'], 'prefix' => 'administrator', 'as' => 'superadmin.'], function () {
                 Route::get('index', [AdminController::class, 'index'])->name('index');
                 Route::get('/all-c1-plano', function () {
                     return view('administrator.all_c1');
@@ -478,7 +478,7 @@ foreach ($kotas as $kota) {
         });
 
         //verifikator
-        Route::group(['middleware' => 'role:verifikator', 'prefix' => 'verifikator', 'as' => 'verifikator.'], function () {
+        Route::group(['middleware' => ['role:verifikator','auth'], 'prefix' => 'verifikator', 'as' => 'verifikator.'], function () {
             Route::get('index', [VerificatorController::class, 'index'])->name('index');
             Route::post('getSaksiData', [VerificatorController::class, 'getSaksiData'])->name('getSaksiData');
             Route::get('verifikasiKecurangan/{id}', [VerificatorController::class, 'verifikasiKecurangan'])->name('verifikasiKecurangan');
@@ -502,7 +502,7 @@ foreach ($kotas as $kota) {
 
 
         //auditor
-        Route::group(['middleware' => 'role:auditor', 'prefix' => 'auditor', 'as' => 'auditor.'], function () {
+        Route::group(['middleware' => ['role:auditor','auth'], 'prefix' => 'auditor', 'as' => 'auditor.'], function () {
             Route::get('index', [AuditorController::class, 'index'])->name('index');
             Route::post('getSaksiData', [AuditorController::class, 'getSaksiData'])->name('getSaksiData');
             Route::get('getSaksiDibatalkan', [AuditorController::class, 'getSaksiDibatalkan'])->name('getSaksiDibatalkan');
@@ -514,7 +514,7 @@ foreach ($kotas as $kota) {
         });
 
         //huver
-        Route::group(['middleware' => 'role:huver', 'prefix' => 'huver', 'as' => 'huver.'], function () {
+        Route::group(['middleware' => ['role:huver','auth'], 'prefix' => 'huver', 'as' => 'huver.'], function () {
             Route::get('index', [HumanVerificationController::class, 'index'])->name('index');
             Route::controller(HumanVerificationController::class)->group(function () {
                 Route::get('verifikasi_akun', 'verifikasi_akun');
@@ -529,7 +529,7 @@ foreach ($kotas as $kota) {
             });
         });
         //rekapitulator
-        Route::group(['middleware' => 'role:rekapitulator', 'prefix' => 'rekapitulator', 'as' => 'rekapitulator.'], function () {
+        Route::group(['middleware' => ['role:rekapitulator','auth'], 'prefix' => 'rekapitulator', 'as' => 'rekapitulator.'], function () {
             Route::get('home', [RekapitulatorController::class, 'home'])->name('home');
             Route::post('action-tambah/{id}', [RekapitulatorController::class, 'actionTambah'])->name('actionTambah');
             Route::get('index', [RekapitulatorController::class, 'index'])->name('index');
@@ -539,7 +539,7 @@ foreach ($kotas as $kota) {
 
 
         //checking
-        Route::group(['middleware' => 'role:checking', 'prefix' => 'checking', 'as' => 'checking.'], function () {
+        Route::group(['middleware' => ['role:checking','auth'], 'prefix' => 'checking', 'as' => 'checking.'], function () {
             // Route::get('index', function () {
             //     return 'hai checking' . Auth::user()->role_id;
             // })->name('index');
@@ -551,7 +551,7 @@ foreach ($kotas as $kota) {
 
 
         //hunter
-        Route::group(['middleware' => 'role:hunter', 'prefix' => 'hunter', 'as' => 'hunter.'], function () {
+        Route::group(['middleware' => ['role:hunter','auth'], 'prefix' => 'hunter', 'as' => 'hunter.'], function () {
             Route::get('index', [HunterController::class, 'index'])->name('index');
             Route::post('get-saksi-data', [HunterController::class, 'getSaksiData'])->name('getSaksiData');
             Route::post('verifikasi-relawan/{id}', [HunterController::class, 'verifikasiRelawan'])->name('verifikasiRelawan');
@@ -559,13 +559,13 @@ foreach ($kotas as $kota) {
 
 
         //saksi
-        Route::group(['middleware' => 'role:saksi', 'prefix' => 'saksi', 'as' => 'saksi.'], function () {
+        Route::group(['middleware' => ['role:saksi','auth'], 'prefix' => 'saksi', 'as' => 'saksi.'], function () {
             Route::get('index', function () {
                 return 'hai saksi';
             })->name('index');
         });
         //hukum
-        Route::group(['middleware' => 'role:hukum', 'prefix' => 'hukum', 'as' => 'hukum.'], function () {
+        Route::group(['middleware' => ['role:hukum','auth'], 'prefix' => 'hukum', 'as' => 'hukum.'], function () {
             Route::get('index', [HukumController::class, 'index'])->name('index');
             Route::controller(HukumController::class)->group(function () {
                 Route::get('terverifikasi', 'terverifikasi');
@@ -593,7 +593,7 @@ foreach ($kotas as $kota) {
             });
         });
         //validator hukum
-        Route::group(['middleware' => 'role:validator_hukum', 'prefix' => 'validator-hukum', 'as' => 'validator_hukum.'], function () {
+        Route::group(['middleware' => ['role:validator_hukum','auth'], 'prefix' => 'validator-hukum', 'as' => 'validator_hukum.'], function () {
             Route::get('index', [ValidatorHukumController::class, 'index'])->name('index');
             Route::controller(ValidatorHukumController::class)->group(function () {
                 Route::get('terverifikasi', 'terverifikasi');
@@ -612,7 +612,7 @@ foreach ($kotas as $kota) {
             });
         });
         //banwaslu
-        Route::group(['middleware' => 'role:banwaslu', 'prefix' => 'banwaslu', 'as' => 'banwaslu.'], function () {
+        Route::group(['middleware' => ['role:banwaslu','auth'], 'prefix' => 'banwaslu', 'as' => 'banwaslu.'], function () {
             Route::get('index', [BalwasluController::class, 'index'])->name('index');
             Route::controller(BalwasluController::class)->group(function () {
                 Route::get('terverifikasi', 'terverifikasi');
@@ -631,7 +631,7 @@ foreach ($kotas as $kota) {
             });
         });
         //payrole
-        Route::group(['middleware' => 'role:payrole', 'prefix' => 'payrole', 'as' => 'payrole.'], function () {
+        Route::group(['middleware' => ['role:payrole','auth'], 'prefix' => 'payrole', 'as' => 'payrole.'], function () {
             Route::get('index', [Payrole::class, 'index'])->name('index');
             Route::get('update-to-diproses/{id}', [Payrole::class, 'updateToDiproses'])->name('updateToDiproses');
         });

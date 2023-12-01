@@ -31,6 +31,7 @@ use App\Models\Configs;
 use App\Models\CrowdC1;
 use App\Models\Databukti;
 use App\Models\DataCrowdC1;
+use App\Models\Kecurangan;
 use App\Models\Listkecurangan as ModelsListkecurangan;
 use App\Models\Relawan;
 use App\Models\RelawanData;
@@ -85,7 +86,7 @@ class VerificatorController extends Controller
          $this->config->tahun = $this->configs->tahun;
          $this->config->quick_count = $this->configs->quick_count;
          $this->config->default = $this->configs->default;
-    $this->config->default =  $this->configs->default;
+        $this->config->default =  $this->configs->default;
      }
 
     public function index()
@@ -186,19 +187,27 @@ class VerificatorController extends Controller
 
         // $data['foto_kecurangan'] = ModelsBuktifoto::where('tps_id', $request['id'])->get();
         // $data['vidio_kecurangan'] = ModelsBuktividio::where('tps_id', $request['id'])->first();
+        $kecurangan = Kecurangan::where('id',$request->id)->first();
+        $data['kecurangan'] = $kecurangan;
         $data['list_kecurangan']     = Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
         ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
-        ->where('bukti_deskripsi_curang.tps_id', $request->id)
+        ->where('bukti_deskripsi_curang.kecurangan_id', $request->id)
         ->get();
 
-        $data['tps'] = Tps::where('id', $request['id'])->first();
+        $data['tps'] = Tps::where('id', $kecurangan->tps_id)->first();
+        $tps = $data['tps'];
+
         $data['kecamatan'] = District::where('id', $data['tps']['district_id'])->first();
-        $data['bukti_vidio'] = ModelsBuktividio::where('tps_id', $request['id'])->get();
-        $data['bukti_foto'] = ModelsBuktifoto::where('tps_id', $request['id'])->get();
-        $data['user'] = User::where('tps_id', $request['id'])->first();
-        $data['qrcode'] = Qrcode::where('tps_id', $data['user']['tps_id'])->first();
-        $data['district'] = District::where('id', $data['user']['districts'])->first();
-        $data['village'] = Village::where('id', $data['user']['villages'])->first();
+        $data['bukti_vidio'] = ModelsBuktividio::where('kecurangan_id', $kecurangan->id)->get();
+        $data['bukti_foto'] = ModelsBuktifoto::where('kecurangan_id', $kecurangan->id)->get();
+        $data['user'] = User::where('id', $kecurangan->user_id)->first();
+        $data['qrcode'] = Qrcode::where('kecurangan_id', $request->id)->first();
+
+        // return $data;
+        if ($data['user']['districts'] != null && $data['user']['villages'] !=null) {
+            $data['district'] = District::where('id', $data['user']['districts'])->first();
+            $data['village'] = Village::where('id', $data['user']['villages'])->first();
+        }
         if ($data['qrcode'] != null) {
             $data['verifikator']            = User::where('id', $data['qrcode']['verifikator_id'])->first();
             $data['hukum']                  = User::where('id', $data['qrcode']['hukum_id'])->first();
@@ -209,12 +218,14 @@ class VerificatorController extends Controller
         $config = Config::first();
         $data['kota'] = Regency::where('id', $config->regencies_id)->first();
         $data['saksi'] = Saksi::where('tps_id', $data['tps']['id'])->first();
-        $data['surat_pernyataan'] = SuratPernyataan::where('saksi_id', $data['saksi']['id'])->first();
+        $data['surat_pernyataan'] = SuratPernyataan::where('kecurangan_id',  $kecurangan->id)->first();
         $data['pelanggaran_umum']    = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->where('list_kecurangan.jenis', 0)->get();
         $data['pelanggaran_petugas'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->where('list_kecurangan.jenis', 1)->get();
         $data['pelanggaran_etik'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->where('list_kecurangan.jenis', 2)->get();
         $data['pelanggaran_aparatur'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->where('list_kecurangan.jenis', 3)->get();
         $data['surat_suara'] = SuratSuara::where('tps_id',$request->id)->first();
+        return $data;
+
         return view('verificator.modal-view-kecurangan', $data);
     }
     /**
@@ -520,7 +531,7 @@ class VerificatorController extends Controller
         }])->get();
         $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
         $data['kota'] = DB::table("regencies")->where('id',(int)$this->config->regencies_id)->first();
-        $data['tracking'] = ModelsTracking::get();
+        $data['tracking'] = ModelsTracking::join("users",'users.id','=','tracking.id_user')->where('users.regency_id',$this->config->regencies_id)->get();
         // $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->count();
         // $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
         // $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
@@ -531,22 +542,9 @@ class VerificatorController extends Controller
     }
 
     public function verifikatorKecurangan() {
-        $data['config'] = Config::first();
-        $config = Config::first();
-        $data['paslon'] = Paslon::with('quicksaksidata')->get();
-        $data['paslon_terverifikasi']     = Paslon::with(['quicksaksidata' => function ($query) {
-            $query->join('quicksaksi', 'quicksaksidata.saksi_id', 'quicksaksi.id')
-                ->whereNull('quicksaksi.pending')
-                ->where('quicksaksi.verification', 1);
-        }])->get();
-        $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
         $data['kota'] = Regency::where('id',$this->config->regencies_id)->first();
-        $data['tracking'] = ModelsTracking::get();
-        $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->count();
-        $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
-        $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
-        $data['total_tps']   =  Tps::where('setup','belum terisi')->count();
-        $data['jumlah_kosong']  =  $data['total_tps'] - $data['jumlah_tps_masuk'];
+        $data['config'] = Config::first();
+        $data['tracking'] = ModelsTracking::join("users",'users.id','=','tracking.id_user')->where('users.regency_id',$this->config->regencies_id)->get();
         return view('administrator.kecurangan.verifikator_kecurangan', $data);
     }
     

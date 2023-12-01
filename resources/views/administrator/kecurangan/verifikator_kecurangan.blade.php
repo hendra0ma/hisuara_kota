@@ -1,4 +1,4 @@
-@extends('layouts.mainlayout')
+@extends('layouts.mainlayoutKecurangan')
 
 @section('content')
 
@@ -61,52 +61,6 @@
 
 <div class="row">
 
-    {{-- <div class="tab">
-        <div class="row">
-            <div class="col-md">
-                <?php
-                $count_suara = \App\Models\Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
-                    ->join('users', 'users.tps_id', '=', 'tps.id')
-                    // ->where('tps.villages_id', (string)$village->id)
-                    ->where('saksi.verification', '')
-                    ->whereNull('saksi.pending')
-                    ->where('saksi.overlimit', 0)
-                    ->count();
-                $count_kecurangan = \App\Models\Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
-                    ->join('users', 'users.tps_id', '=', 'tps.id')
-                    ->where('saksi.kecurangan', 'yes')
-                    ->where('saksi.status_kecurangan', 'belum terverifikasi')
-                    ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
-                    ->count();
-                
-                ?>
-                <button class="btn tablink w-100 rounded-0 c1saksi"
-                    onclick="openPage('Verifikator-Kecurangan', this, '#45aaf2 ')" id="defaultOpen">C1 Saksi <span
-                        class="badge rounded-pill bg-danger">{{ $count_suara }}</span></button>
-            </div>
-            <!-- <div class="col-md">
-                <button class="btn tablink w-100 rounded-0 c1partai" onclick="openPage('C1-Partai', this, '#f7b731')">C1 Partai</button>
-            </div> -->
-            <div class="col-md">
-                <button class="btn tablink w-100 rounded-0 c1relawan"
-                    onclick="openPage('C1-Relawan', this, '#f82649')">C1 Relawan Partai</button>
-            </div>
-
-            <div class="col-md">
-                <button class="btn tablink w-100 rounded-0 c1teraudit"
-                    onclick="openPage('C1-Dibatalkan', this, '#fb6b25')">C1 Dibatalkan</button>
-            </div>
-
-            <div class="col-md">
-                <button class="btn tablink w-100 rounded-0 c1koreksi"
-                    onclick="openPage('C1-Koreksi', this, '#09ad95')">C1 Koreksi</button>
-            </div>
-
-            <!-- <div class="col-md">
-                <button class="btn tablink w-100 rounded-0 kecurangan" onclick="openPage('Kecurangan', this, '#09ad95')">Kecurangan <span class="badge rounded-pill bg-danger">{{ $count_kecurangan }}</span></button>
-            </div> -->
-        </div>
-    </div> --}}
 </div>
 <div class="card-body p-0">
     <livewire:list-kecurangan-component />
@@ -225,9 +179,10 @@
             id
           },
           type: "get",
-          dataType: "html",
           success: function(data) {
             $('#container-view-modal-kecurangan').html(data)
+            {{-- console.log(data) --}}
+
           }
         });
       })
