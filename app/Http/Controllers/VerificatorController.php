@@ -40,6 +40,7 @@ use App\Models\RiwayatKoreksi;
 use App\Models\RiwayatKoreksiData;
 use App\Models\SuratPernyataan;
 use App\Models\SuratSuara;
+use Illuminate\Support\Facades\DB;
 use App\Models\Tracking as ModelsTracking;
 
 class VerificatorController extends Controller
