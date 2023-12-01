@@ -121,7 +121,7 @@ $tps = Tps::count();
                                             @endphp
                                         @else {{--  Perhitungan Kota --}}
                                             @php
-                                            $total_saksi = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('saksi.regency_id',$config->regencies_id)->where('paslon_id', $pas->id)->where('saksi.verification', 1)->sum('voice');
+                                            $total_saksi = $data_kota->{"suarav$i"};
                                             @endphp
                                         @endif
                                         <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3>
@@ -130,6 +130,9 @@ $tps = Tps::count();
                             </div>
                         </div>
                     </div>
+                    @php
+                        $i++;
+                    @endphp
                     @endforeach
                 </div>
             </div>
@@ -166,6 +169,7 @@ $tps = Tps::count();
     </tbody>
 </table>
 @elseif (isset($url_first[3]) && $url_first[2] == "perhitungan_kelurahan")
+
 @else
 <table class="table table-bordered table-hover h-100 mb-0">
     <thead class="bg-primary">
@@ -207,14 +211,38 @@ $(document).ready(function() {
             data: {
                 columns: [
                     // each columns data
-            
+                    @php
+                        $i = 1;
+                    @endphp
                     <?php foreach ($paslon_terverifikasi as $pas) :  ?>
+
+                    @if (isset($url_first[3]) && $url_first[2] == "perhitungan_kecamatan")
+
                         <?php $voice = 0;  ?>
                         <?php foreach ($pas->saksi_data as $pak) :  ?>
                             <?php
                             $voice += $pak->voice;
                             ?>
-                        <?php endforeach  ?>['data<?= $pas->id  ?>', <?= $voice ?>],
+                        <?php endforeach  ?>
+                        
+                        ['data<?= $pas->id  ?>', <?= $voice ?>],
+                    @elseif (isset($url_first[3]) && $url_first[2] == "perhitungan_kelurahan")
+                    
+                        <?php $voice = 0;  ?>
+                        <?php foreach ($pas->saksi_data as $pak) :  ?>
+                            <?php
+                            $voice += $pak->voice;
+                            ?>
+                        <?php endforeach  ?>
+                        
+                        ['data<?= $pas->id  ?>', <?= $voice ?>],
+                    @else
+                        ['data<?= $pas->id  ?>', <?= $data_kota->{"suarav".$i} ?>],
+
+                    @endif
+                    @php
+                        $i++;
+                    @endphp
                     <?php endforeach  ?>
                 ],
                 type: 'pie', // default type of chart

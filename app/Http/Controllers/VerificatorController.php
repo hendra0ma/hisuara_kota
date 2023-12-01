@@ -42,6 +42,7 @@ use App\Models\SuratPernyataan;
 use App\Models\SuratSuara;
 use App\Models\Tracking as ModelsTracking;
 
+
 class VerificatorController extends Controller
 {
     /**
@@ -59,6 +60,7 @@ class VerificatorController extends Controller
          $currentDomain = request()->getHttpHost();
          $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
          $regency_id = RegenciesDomain::where('domain',"LIKE","%".$url."%")->first();
+         
  
          $this->configs = Config::first();
          $this->config = new Configs;
@@ -520,6 +522,7 @@ class VerificatorController extends Controller
         // $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
         $data['total_tps']   =  Tps::where('setup','belum terisi')->count();
         // $data['jumlah_kosong']  =  $data['total_tps'] - $data['jumlah_tps_masuk'];
+
         return view('administrator.c1.verifikasi-c1', $data);
     }
 

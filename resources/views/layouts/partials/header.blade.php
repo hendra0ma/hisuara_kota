@@ -30,7 +30,6 @@ $regency_id = RegenciesDomain::where('domain', $url)->first();
 $configs = Config::first();
 $reg = App\Models\Regency::where('id', $regency_id->regency_id)->first();
 
-
 $config = new Configs;
 $config->regencies_id =  (string) $regency_id->regency_id;
 $config->regencies_logo =  (string) $reg->logo_kota;
