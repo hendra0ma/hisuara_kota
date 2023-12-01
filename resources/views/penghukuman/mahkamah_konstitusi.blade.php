@@ -3,6 +3,9 @@
 @section('content')
 
 <div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
+    <div class="col-lg-auto d-flex">
+        <img style="width: 75px; height: 75px; object-fit: contain" class="my-auto" src="https://contactmk.mkri.id/design/img/logo_mk_new.png" alt="">
+    </div>
     <div class="col-lg">
         @if ($message = Session::get('success'))
 

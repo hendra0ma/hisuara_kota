@@ -322,17 +322,17 @@ $tps = Tps::count();
 
     <div class="col-md-8">
         <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Urutan Suara Terbanyak</h3>
+            <div class="card-header bg-dark text-white">
+                <h3 class="card-title mx-auto">Urutan Suara Terbanyak</h3>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
-                        <thead class="bg-dark">
+                        <thead>
                             <tr>
-                                <th scope="col" class="text-white">NO</th>
-                                <th scope="col" class="text-white">URAIAN</th>
-                                <th scope="col" class="text-white">JUMLAH SUARA</th>
+                                <th scope="col">NO</th>
+                                <th scope="col">URAIAN</th>
+                                <th scope="col">JUMLAH SUARA</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -350,15 +350,14 @@ $tps = Tps::count();
             </div>
         </div>
     </div>
-
+    
     <div class="col-md-4">
         <div class="card">
-            <div class="card-body text-center" style="padding: 21.5px">
-                <div class="card-header py-2 text-white bg-dark">
-                    <h4 class="mb-0 mx-auto text-black card-title">Data Pemilih dan Hak Pilih (TPS {{$data_tps->number}}
-                        /
-                        Kelurahan {{$desa->name}})</h4>
-                </div>
+            <div class="card-header text-white bg-dark">
+                <h4 class="mb-0 mx-auto text-black card-title">Data Pemilih dan Hak Pilih (TPS {{$data_tps->number}} /
+                    Kelurahan {{$desa->name}})</h4>
+            </div>
+            <div class="card-body text-center" style="padding: 13.9px">
                 <table class="table table-striped">
                     <tr>
                         <td class="py-2 text-start" style="width: 50%">Jumlah Hak Pilih (DPT)</td>
@@ -368,27 +367,32 @@ $tps = Tps::count();
                     <tr>
                         <td class="py-2 text-start" style="width: 50%">Surat Suara Sah</td>
                         <td class="py-2" style="width: 5%">:</td>
-                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->surat_suara_sah:"0"}}</td>
+                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->surat_suara_sah:"0"}}
+                        </td>
                     </tr>
                     <tr>
                         <td class="py-2 text-start" style="width: 50%">Suara Tidak Sah</td>
                         <td class="py-2" style="width: 5%">:</td>
-                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->surat_suara_tidak_sah:"0"}}</td>
+                        <td class="py-2" style="width: 40%">{{($surat_suara !=
+                            NULL)?$surat_suara->surat_suara_tidak_sah:"0"}}</td>
                     </tr>
                     <tr>
                         <td class="py-2 text-start" style="width: 50%">Jumlah Suara Sah dan Suara Tidak Sah</td>
                         <td class="py-2" style="width: 5%">:</td>
-                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->jumlah_sah_dan_tidak:"0"}}</td>
+                        <td class="py-2" style="width: 40%">{{($surat_suara !=
+                            NULL)?$surat_suara->jumlah_sah_dan_tidak:"0"}}</td>
                     </tr>
                     <tr>
                         <td class="py-2 text-start" style="width: 50%">Total Surat Suara</td>
                         <td class="py-2" style="width: 5%">:</td>
-                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->total_surat_suara:"0"}}</td>
+                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->total_surat_suara:"0"}}
+                        </td>
                     </tr>
                     <tr>
                         <td class="py-2 text-start" style="width: 50%">Sisa Surat Suara</td>
                         <td class="py-2" style="width: 5%">:</td>
-                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->sisa_surat_suara:"0"}}</td>
+                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->sisa_surat_suara:"0"}}
+                        </td>
                     </tr>
                 </table>
             </div>

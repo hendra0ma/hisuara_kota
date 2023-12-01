@@ -7,6 +7,9 @@ $solution = \App\Models\SolutionFraud::get();
 @include('layouts.partials.header')
 
 <div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
+    <div class="col-auto d-flex">
+        <img style="width: 75px; height: 75px; object-fit: contain" class="my-auto" src="{{asset('')}}images/logo/logo-bawaslu.png" alt="">
+    </div>
     <div class="col-lg">
         @if ($message = Session::get('success'))
 
@@ -16,8 +19,7 @@ $solution = \App\Models\SolutionFraud::get();
         </div>
         @endif
 
-        <h1 class="page-title fs-1 mt-2">Tim Hukum Paslon
-            <!-- Kota -->
+        <h1 class="page-title fs-1 mt-2">Bawaslu
         </h1>
         <ol class="breadcrumb">
             <li class="breadcrumb-item active" aria-current="page">{{ $kota->name }}
@@ -288,7 +290,7 @@ $solution = \App\Models\SolutionFraud::get();
                         <div class="card-body">
 
                             <center>
-                                <div id="chart-donut-et"></div>
+                                <div id="chart-donut-panrb"></div>
                             </center>
 
                             <div class="table-responsive">

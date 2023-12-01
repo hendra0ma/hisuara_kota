@@ -569,16 +569,19 @@
         display: none;">
     <div class="text-white bantuan tugel-content bg-dark" style="display: none; position: fixed; bottom: 30px; z-index: 19; left: 50%; transform: translateX(-50%); width: 100%; padding: 30px;">
         <div class="row h-100">
-            <div class="col-3">
+            <div class="col">
                 <a href="" class="btn-info btn fs-3 w-100 h-100"><i class="fa-solid fa-book"></i> Unduh Manual Book</a>
             </div>
-            <div class="col-3">
+            <div class="col">
                 <a href="" class="btn-info btn fs-3 w-100 h-100"><i class="fa-brands fa-youtube"></i> Video Tutorial</a>
             </div>
-            <div class="col-3">
+            <div class="col">
+                <a href="" class="btn-info btn fs-3 w-100 h-100"><i class="fa-solid fa-tv"></i> Hisuara TV</a>
+            </div>
+            <div class="col">
                 <a href="" class="btn-info btn fs-3 w-100 h-100"><i class="fa-solid fa-circle-question"></i> FAQ</a>
             </div>
-            <div class="col-3">
+            <div class="col">
                 <a href="" class="btn-info btn fs-3 w-100 h-100">
                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="28"
                         height="28" x="0" y="0" viewBox="0 0 459.668 459.668" style="enable-background:new 0 0 512 512"
