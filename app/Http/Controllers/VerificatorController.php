@@ -513,7 +513,7 @@ class VerificatorController extends Controller
                 ->where('quicksaksi.verification', 1);
         }])->get();
         $data['total_incoming_vote']      = QuickSaksiData::sum('voice');
-        $data['kota'] = Regency::where('id',$this->config->regencies_id)->first();
+        $data['kota'] = Regency::where('id',(int)$this->config->regencies_id)->first();
         $data['tracking'] = ModelsTracking::get();
         // $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->count();
         // $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
@@ -521,7 +521,7 @@ class VerificatorController extends Controller
         $data['total_tps']   =  Tps::where('setup','belum terisi')->count();
         // $data['jumlah_kosong']  =  $data['total_tps'] - $data['jumlah_tps_masuk'];
 
-        return $data;
+        return $this->config;
         return view('administrator.c1.verifikasi-c1', $data);
     }
 
