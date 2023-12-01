@@ -522,7 +522,7 @@ class VerificatorController extends Controller
         $data['total_tps']   =  Tps::where('setup','belum terisi')->count();
         // $data['jumlah_kosong']  =  $data['total_tps'] - $data['jumlah_tps_masuk'];
 
-        return  $this->config->regencies_id;
+        return  $this->config;
         return view('administrator.c1.verifikasi-c1', $data);
     }
 
