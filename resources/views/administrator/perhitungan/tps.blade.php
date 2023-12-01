@@ -328,17 +328,17 @@ $tps = Tps::count();
 
     <div class="col-md-8">
         <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Urutan Suara Terbanyak</h3>
+            <div class="card-header bg-dark text-white">
+                <h3 class="card-title mx-auto">Urutan Suara Terbanyak</h3>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
-                        <thead class="bg-dark">
+                        <thead>
                             <tr>
-                                <th scope="col" class="text-white">NO</th>
-                                <th scope="col" class="text-white">URAIAN</th>
-                                <th scope="col" class="text-white">JUMLAH SUARA</th>
+                                <th scope="col">NO</th>
+                                <th scope="col">URAIAN</th>
+                                <th scope="col">JUMLAH SUARA</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -359,10 +359,10 @@ $tps = Tps::count();
 
     <div class="col-md-4">
         <div class="card">
-            <div class="card-body text-center" style="padding: 21.5px">
-                <div class="card-header py-2 text-white bg-dark">
-                    <h4 class="mb-0 mx-auto text-black card-title">Data Pemilih dan Hak Pilih (TPS {{$data_tps->number}} / Kelurahan {{$desa->name}})</h4>
-                </div>
+            <div class="card-header text-white bg-dark">
+                <h4 class="mb-0 mx-auto text-black card-title">Data Pemilih dan Hak Pilih (TPS {{$data_tps->number}} / Kelurahan {{$desa->name}})</h4>
+            </div>
+            <div class="card-body text-center" style="padding: 13.9px">
                 <table class="table table-striped">
                     <tr>
                         <td class="py-2 text-start" style="width: 50%">Jumlah Hak Pilih (DPT)</td>

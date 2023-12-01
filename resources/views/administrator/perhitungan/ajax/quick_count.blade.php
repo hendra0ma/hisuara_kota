@@ -64,7 +64,7 @@ $tps = Tps::count();
             <div class="row justify-content-center">
                 <div class="col-12">
                     <div class="alert alert-danger my-5 text-center">
-                        <h3 class="fw-bold">Halaman Quick Count Kabupaten Kota dialihkan ke Quick Count Nasional</h3>
+                        <h4 class="fw-bold">Halaman Quick Count Kabupaten Kota dialihkan ke Quick Count Nasional</h4>
                         <a href="{{route('quickcount_pusat.quick_count_nasional')}}" class="btn btn-dark">Redirect</a>
                     </div>
                 </div>

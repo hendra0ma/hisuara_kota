@@ -65,11 +65,11 @@ $kota = Regency::where('id', $config->regencies_id)->first();
         </ol>
     </div>
 
-    <div class="col-lg-auto my-auto">
+    {{-- <div class="col-lg-auto my-auto">
         <a href="{{route('superadmin.print_qr')}}" target="_blank" class="btn btn-block btn-dark">
             Print &nbsp; <i class="fa fa-print"></i>
         </a>
-    </div>
+    </div> --}}
 </div>
 
 {{-- <h4 class="fs-4 mt-5 fw-bold">Election Fraud Barcode Report (EFBR) <div>Dilindungi Paten Rekapitung</div> --}}

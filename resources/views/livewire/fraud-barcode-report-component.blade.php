@@ -1,7 +1,16 @@
 <div>
-    <h4 class="fw-bold fs-4 mt-5 mb-0">
-        Jumlah Barkode : {{$jumlah_barkode}}
-    </h4>
+    <div class="row">
+        <div class="col">
+            <h4 class="fw-bold fs-4 mt-5 mb-0 nnt">
+                Jumlah Barkode : {{$jumlah_barkode}}
+            </h4>
+        </div>
+        <div class="col-lg-auto d-flex">
+            <a href="{{route('superadmin.print_qr')}}" target="_blank" class="mt-3 btn btn-block btn-dark nnt">
+                Print &nbsp; <i class="fa fa-print"></i>
+            </a>
+        </div>
+    </div>
     <hr style="border: 1px solid">
     
     <div class="row">

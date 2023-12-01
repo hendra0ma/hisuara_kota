@@ -7,6 +7,10 @@ $solution = \App\Models\SolutionFraud::get();
 @include('layouts.partials.header')
 
 <div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
+    <div class="col-lg-auto d-flex">
+        <img style="width: 75px; height: 75px; object-fit: contain" class="my-auto"
+            src="{{asset('')}}images/logo/panrb.png" alt="">
+    </div>
     <div class="col-lg">
         @if ($message = Session::get('success'))
 

@@ -7,6 +7,10 @@ $solution = \App\Models\SolutionFraud::get();
 @include('layouts.partials.header')
 
 <div class="row" style="margin-top: 90px; transition: all 0.5s ease-in-out;">
+    <div class="col-lg-auto d-flex">
+        <img style="width: 75px; height: 75px; object-fit: contain" class="my-auto"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/KPU_Logo.svg/1200px-KPU_Logo.svg.png" alt="">
+    </div>
     <div class="col-lg">
         @if ($message = Session::get('success'))
 
@@ -288,7 +292,7 @@ $solution = \App\Models\SolutionFraud::get();
                         <div class="card-body">
 
                             <center>
-                                <div id="chart-donut-et"></div>
+                                <div id="chart-donut-panrb"></div>
                             </center>
 
                             <div class="table-responsive">
