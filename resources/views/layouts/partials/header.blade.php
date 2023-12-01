@@ -55,10 +55,10 @@ $config->quick_count =  $configs->quick_count;
 $config->default =  $configs->default;
 
 $total_tps = Tps::where('regency_id', $config->regencies_id)->count();;
-$props = Province::where('id', $kota['province_id'])->first();
-$cityProp = Regency::where('province_id', $kota['province_id'])->get();
+$props = Province::where('id', $kota->province_id)->first();
+$cityProp = Regency::where('province_id', $kota->province_id)->get();
 
-$jumlah_kecamatan = District::where('regency_id', $kota['id'])->count();
+$jumlah_kecamatan = District::where('regency_id', $kota->id)->count();
 $jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '%')->count();
 
 
