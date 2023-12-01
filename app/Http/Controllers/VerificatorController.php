@@ -84,7 +84,7 @@ class VerificatorController extends Controller
          $this->config->tahun = $this->configs->tahun;
          $this->config->quick_count = $this->configs->quick_count;
          $this->config->default = $this->configs->default;
-     }$this->config->default =  $this->configs->default;
+    $this->config->default =  $this->configs->default;
      }
 
     public function index()
