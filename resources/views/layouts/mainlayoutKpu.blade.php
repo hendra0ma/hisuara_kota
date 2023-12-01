@@ -2,7 +2,7 @@
 @include('layouts.partials.sidebar')
         @include('layouts.partials.header')
         @yield('content')
-        @include('layouts.partials.footerkpu')
-        @include('layouts.partials.footer-scriptskpu')
+        @include('layouts.partials.footerKpu')
+        @include('layouts.partials.footer-scriptsKpu')
 </body>
 </html>
