@@ -547,6 +547,12 @@ class VerificatorController extends Controller
         $data['tracking'] = ModelsTracking::join("users",'users.id','=','tracking.id_user')->where('users.regency_id',$this->config->regencies_id)->get();
         return view('administrator.kecurangan.verifikator_kecurangan', $data);
     }
+    public function verifikatorKecuranganAdmin() {
+        $data['kota'] = Regency::where('id',$this->config->regencies_id)->first();
+        $data['config'] = Config::first();
+        $data['tracking'] = ModelsTracking::join("users",'users.id','=','tracking.id_user')->where('users.regency_id',$this->config->regencies_id)->get();
+        return view('administrator.kecurangan.verifikator_kecurangan_admin', $data);
+    }
     
     public function store(Request $request)
     {

@@ -498,6 +498,7 @@ foreach ($kotas as $kota) {
             Route::get('village/{id}', [VerificatorController::class, "village"])->middleware('districtCheck:kelurahan')->name("village");
             Route::get('verifikasi-c1', [VerificatorController::class, 'verifikasiC1'])->name('verifikasiC1');
             Route::get('verifikator_kecurangan', [VerificatorController::class, 'verifikatorKecurangan'])->name('verifikatorKecurangan');
+            Route::get('verifikator_kecurangan_admin', [VerificatorController::class, 'verifikatorKecuranganAdmin'])->name('verifikatorKecuranganAdmin');
         });
 
 

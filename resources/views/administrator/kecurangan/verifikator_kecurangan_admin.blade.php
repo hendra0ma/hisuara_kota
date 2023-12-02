@@ -77,7 +77,7 @@
 
     </div>
     <div class="card-body p-0">
-        <livewire:list-kecurangan-component />
+        <livewire:list-kecurangan-component-admin />
     </div>
     <script>
         let ajaxGetSolution = function(ini) {
