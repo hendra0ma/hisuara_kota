@@ -77,9 +77,11 @@
                         </div>
                         <div class="card-body" style="border: 1px #eee solid !important">
                             <ul class="list-group">
-                                @foreach ($list_kecurangan as $item)
-                                    <li class="list-group-item">{{ $item->text }}</li>
-                                @endforeach
+                                @if (count($list_kecurangan) > 0)
+                                    @foreach ($list_kecurangan as $item)
+                                        <li class="list-group-item">{{ $item->text }}</li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -401,7 +403,10 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-lg-12 text-justify" style="line-height:1.8">
+                                                        @if ($surat_pernyataan)
                                                         {{ $surat_pernyataan->deskripsi }}
+                                                        @endif
+
                                                         </p>
                                                     </div>
                                                 </div>
@@ -551,11 +556,14 @@
                         <h4 class="card-title mx-auto text-white">PANDUAN VALIDASI</h4>
                     </div>
                     @if ($kecurangan->tps_id != null)
-                        <form action="action/proses_kecurangan/{{ Crypt::encrypt($tps['id']) }}" method="post">
+                        <form action="{{route('hukum.prosesKecurangan')}}" method="post">
                         @else
                             <form action="#" method="post">
                     @endif
                     @csrf
+                    <input type="hidden"value="{{$kecurangan->id}}"name="kecurangan_id">
+                    <input type="hidden"value="{{Crypt::encrypt($kecurangan->tps_id)}}"name="tps_id">
+
                     <div class="card-body" style="height: 800px; overflow: scroll;">
                         <p class="card-text">
                         <div class="row">
@@ -576,7 +584,8 @@
                                             saksi kurang lengkap atau salah. Admin Hukum
                                             juga dapat memberi keterangan yang relevan pada
                                             kolom BAP Admin Hukum atau abaikan jika
-                                            keterangan saksi dirasa cukup. </p>
+                                            keterangan saksi dirasa cukup. 
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -701,41 +710,15 @@
                                         Bukti Kejadian TPS
                                     </th>
                                 </tr>
-                                @if (count($bukti_foto) > 0)
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="bukti[]" value="1" checked="">
-                                        </td>
-                                        <td>
-                                            <label for="bukti_foto">Bukti Foto</label>
-                                        </td>
-                                    </tr>
-                                @else
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="bukti[]" value="1">
-                                        </td>
-                                        <td>
-                                            <label for="bukti_foto">Bukti Foto</label>
-                                        </td>
-                                    </tr>
-                                @endif
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" checked name="bukti[]" value="2">
-                                    </td>
-                                    <td>
-                                        <label for="bukti_video">Bukti Video</label>
-                                    </td>
-                                </tr>
+                           
                             </tbody>
                         </table>
                         </p>
                     </div>
                     <div class="card-footer">
                         <?php if ($saksi['status_kecurangan'] == "diproses") : ?>
-                        <a href="action_verifikasi_kecurangan/{{ Crypt::encrypt($tps['id']) }}"
-                            class="btn mt-2 ml-3 btn-success">Validasi Kecurangan</a>
+                        <button type="submit"
+                            class="btn mt-2 ml-3 btn-success">Validasi Kecurangan</button>
                         {{-- <a href="print/{{ Crypt::encrypt($tps['id']); }}"
                                 class="btn mt-2 ml-3 btn-success">Print
                                 Kecurangan</a> --}}
@@ -776,34 +759,7 @@
         });
     }, 200)
 </script>
-<script>
-    let ajaxGetSolution = function(ini) {
-        let id_list = $(ini).data('id')
 
-        if (ini.checked == true) {
-            $.ajax({
-                url: "{{ url('') }}/hukum/getsolution",
-                data: {
-                    id_list
-                },
-                type: 'get',
-                success: function(res) {
-                    $('tbody#container-rekomendasi').append(`
-                        <tr id="solution${id_list}">
-                            <td>
-                            </td>
-                            <td>
-                                ${res.solution}
-                            </td>
-                        </tr>
-                    `)
-                }
-            });
-        } else {
-            $(`#solution${id_list}`).remove();
-        }
-    }
-</script>
 <script>
     setTimeout(function() {
         let uniqueData = [

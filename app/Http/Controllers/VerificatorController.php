@@ -224,7 +224,7 @@ class VerificatorController extends Controller
         $data['pelanggaran_etik'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->where('list_kecurangan.jenis', 2)->get();
         $data['pelanggaran_aparatur'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->where('list_kecurangan.jenis', 3)->get();
         $data['surat_suara'] = SuratSuara::where('tps_id',$request->id)->first();
-        return $data;
+        // return $data;
 
         return view('verificator.modal-view-kecurangan', $data);
     }

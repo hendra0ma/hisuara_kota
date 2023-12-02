@@ -588,8 +588,9 @@ foreach ($kotas as $kota) {
                 Route::get('ajax/get_fotoKecuranganterverifikasi', 'get_fotoKecuranganterverifikasi');
                 Route::get('ajax/get_fotoKecuranganditolak', 'get_fotoKecuranganditolak');
                 Route::get('action_verifikasi_kecurangan/{id}', 'action_verifikasi_kecurangan');
+
                 Route::get('action_tolak_kecurangan/{id}', 'action_tolak_kecurangan');
-                Route::post('action/proses_kecurangan/{id}', 'proses_kecurangan');
+                Route::post('action/proses_kecurangan/', 'proses_kecurangan')->name("prosesKecurangan");
             });
         });
         //validator hukum

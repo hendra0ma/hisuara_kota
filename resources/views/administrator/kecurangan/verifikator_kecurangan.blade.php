@@ -65,7 +65,34 @@
 <div class="card-body p-0">
     <livewire:list-kecurangan-component />
 </div>
+<script>
+    let ajaxGetSolution = function(ini) {
+        let id_list = $(ini).data('id')
 
+        if (ini.checked == true) {
+            $.ajax({
+                url: "{{ url('') }}/hukum/getsolution",
+                data: {
+                    id_list
+                },
+                type: 'get',
+                success: function(res) {
+                    $('tbody#container-rekomendasi').append(`
+                        <tr id="solution${id_list}">
+                            <td>
+                            </td>
+                            <td>
+                                ${res.solution}
+                            </td>
+                        </tr>
+                    `)
+                }
+            });
+        } else {
+            $(`#solution${id_list}`).remove();
+        }
+    }
+</script>
 <div class="modal fade" id="periksaC1Verifikator" tabindex="-1" aria-labelledby="periksaC1VerifikatorLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">

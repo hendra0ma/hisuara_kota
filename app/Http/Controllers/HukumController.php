@@ -11,6 +11,7 @@ use App\Models\Config;
 use App\Models\Configs;
 use App\Models\Databukti;
 use App\Models\District;
+use App\Models\Kecurangan;
 use App\Models\Listkecurangan as ModelsListkecurangan;
 use App\Models\Paslon;
 use App\Models\Qrcode as ModelsQrcode;
@@ -228,81 +229,78 @@ class HukumController extends Controller
     }
 
     //// Action Hukum
-    public function proses_kecurangan(Request $request, $id)
+    public function proses_kecurangan(Request $request)
     {
        $kecurangan = $request['bukti_text'];
+       $kecurangan_id = $request->kecurangan_id;
+       $tps_id = Crypt::decrypt($request->tps_id);
+       $kecuranganData = Kecurangan::where('id',$kecurangan_id)->first();
         if ($kecurangan == null) {
             $kecurangan = [];
         }
+        $tps = Tps::where('id', $tps_id)->first();
         $fromListKecurangan = $request['curang'];
         $catatanHukum = $request['kecurangan'];
-        // if ($request['curang'] != null) {
-        //     foreach ($fromListKecurangan as $data) {
-        //         Bukti_deskripsi_curang::create([
-        //             'tps_id' => Crypt::decrypt($id),
-        //             'text' => $data,
-        //         ]);
-        //     }
-        // }
-
-    
-
+        if ($request['curang'] != null) {
+            foreach ($fromListKecurangan as $data) {
+                Bukti_deskripsi_curang::create([
+                    'tps_id' => $tps_id,
+                    "kecurangan_id"=>$kecurangan_id,
+                    'text' => $data,
+                ]);
+            }
+        }
         if ($request['kecurangan'] != null) {
             Bukticatatan::create([
-                'tps_id' => Crypt::decrypt($id),
-                'text' => $request['kecurangan'],
+                'tps_id' => $tps_id,
+                "kecurangan_id"=>$kecurangan_id,
+                'text' =>  $catatanHukum
             ]);
         }
-        if ($request['bukti'] != NULL) {
-            $buktiImplode = implode('|', $request['bukti']);
-            Databukti::create([
-                'tps_id' => Crypt::decrypt($id),
-                'bukti' => $buktiImplode,
-            ]);
-        }
-        $crypt = Crypt::encrypt(rand());
-        // Saksi::where('tps_id', Crypt::decrypt($id))->update([
-        //     'status_kecurangan' => 'terverifikasi',
-        // ]);
+        
+        Kecurangan::where('id',$kecurangan_id)->update([
+            'status_kecurangan' => 'terverifikasi',
+            "petugas_id"=>Auth::user()->id
+        ]);
         $bulan = date('m');
         $tahun = date('y');
-        $tps = Tps::where('id', Crypt::decrypt($id))->first();
-        $no_berkas = Crypt::decrypt($id) . "/BK"  . "/PILPRES/" . $bulan . "/" . $tahun . "";
+       
+        $no_berkas = $kecurangan_id . "/BK"  . "/PILPRES/" . $bulan . "/" . $tahun . "";
 
         $save = Qrcode::create([
-            'tps_id' => $id,
+            'tps_id' => $tps_id,
+            "kecurangan_id"=>$kecurangan_id,
             'verifikator_id' => Auth::user()->id,
-            'hukum_id' => Auth::user()->role_id,
+            'hukum_id' => Auth::user()->id,
             'tanggal_masuk' => now(),
             'token' => encrypt(rand()),
             'nomor_berkas' => $no_berkas,
-            'hukum_id' => Auth::user()->id,
+           
         ]);
 
-        // $save = Qrcode::where('tps_id',Crypt::decrypt($id))->update([
-        //     'token'  => $crypt,
-        //     'nomor_berkas' => $no_berkas,
-        //     'hukum_id' => Auth::user()->id,
-        // ]);
+        if ($kecuranganData->tps_id != null) {
+            $data = [
+                'status_kecurangan' =>'terverifikasi',
+                'verifikator_id' => Auth::user()->id,
+            ];
+            Saksi::where('tps_id', $tps_id)->update($data);
+            
+        }
         
-        $data = [
-            'status_kecurangan' =>'terverifikasi',
-            'verifikator_id' => Auth::user()->id,
-        ];
-        Saksi::where('tps_id', $id)->update($data);
 
 
 
 
-        $qr =  Qrcode::where('tps_id',Crypt::decrypt($id))->first();
-        $saksi = Saksi::where('tps_id', Crypt::decrypt($id))->first();
+        $qr =  Qrcode::where('tps_id',$tps_id)->first();
+        $saksi = Saksi::where('tps_id', $tps_id)->first();
         SuratPernyataan::create([
             'deskripsi' => 'Dengan ini menyatakan bahwa saya siap bertanggung jawab atas data dan bukti-bukti yang saya kirimkan dari TPS tempat saya bertugas dan bisa dipertanggung jawabkan kebenaranya. Saya bersedia hadir untuk memberikan keterangan sebagai saksi pada pihak-pihak terkait jika diperlukan. Demikian pernyataan ini dibuat dalam keadaan sadar sehat jasmani raohani serta tidak ada paksaan dari pihak manapun.',
             'saksi_id' => $saksi->id,
             'qrcode_hukum_id' => $qr->id,
+            'kecurangan_id'=>$kecurangan_id
         ]);
         if ($save) {
-            return redirect('hukum/index/');
+            return redirect()->back()->with('success','Berhasil Verifikasi Data Kecurangan');
         } else {
             echo 'Terjadi Kesalahan Tak Terduga Hubungi Admin';
         }
