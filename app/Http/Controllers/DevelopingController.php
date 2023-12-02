@@ -444,11 +444,22 @@ class DevelopingController extends Controller
    
         Validator::make($request->all(), [
             'video_pernyataan' => ['required', 'file', 'mimetypes:video/mp4,video/avi'],
+            "audioFile"=>['required', 'file']
         ])->validate();
+
+
+        if ($request->hasFile('audioFile')) {
+                $audioFile = $request->file('audioFile');
+                $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $randomString = substr(str_shuffle($characters), 0, 50); // Menghasilkan string acak sepanjang 10 karakter
+                $audio = time()  . $randomString  . "." . $audioFile->getClientOriginalExtension();
+                $audioFile->move(public_path('storage/hukum/bukti_rekaman'), $audio);
+            
+        }
 
         $kecurangan = new Kecurangan;
         $kecurangan->user_id = Auth::user()->id;
-        $kecurangan->rekaman = "rekaman";
+        $kecurangan->rekaman = "hukum/bukti_foto/" . $audio;
         $kecurangan->regency_id = Auth::user()->regency_id;
         if (Auth::user()->role_id ==  8) {
             $kecurangan->tps_id = Auth::user()->tps_id;   

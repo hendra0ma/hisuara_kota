@@ -23,6 +23,10 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, string $role)
     {
+        if (!Auth::check()) {
+            return redirect('login');
+        };
+
         $role_id = auth()->user()->role_id;
         $config = Config::first();
         //lockdown

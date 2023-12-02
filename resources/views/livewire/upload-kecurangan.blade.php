@@ -141,7 +141,7 @@
                 </div>
             </div>
         </div>
-        <form action="{{ route('action_upload_kecurangan') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('action_upload_kecurangan') }}" method="post" enctype="multipart/form-data"id="form-kecurangan">
             <div class="modal-body">
 
                 @csrf
@@ -301,7 +301,14 @@
                             </tr>
                         @endforeach
                     </thead>
-
+                    <tr>
+                        <th>
+                            <label for="LainnyaPetugas">Deskripsi Kecurangan</label>
+                        </th>
+                        <td>
+                            <textarea class="form-control" name="deskripsi" id="LainnyaPetugas" rows="3"></textarea>
+                        </td>
+                    </tr>
 
                     <tbody>
                         <tr class="bg-success text-light">
@@ -312,22 +319,20 @@
                     <tbody id="container-rekomendasi">
 
                     </tbody>
-                    <tr>
-                        <th>
-                            <label for="LainnyaPetugas">lainnya</label>
-                        </th>
-                        <td>
-                            <textarea class="form-control" name="deskripsi" id="LainnyaPetugas" rows="3"></textarea>
-                        </td>
-                    </tr>
+
                     <tr>
                         <td colspan="2" class="fw-bold">Tambahkan Pesan Suara</td>
                     </tr>
                     <tr>
-                        <td class="text-end"><button class="btn btn-info text-white"id="startRecording"type="button"><i
-                                    class="fa-solid fa-microphone"></i> Rekam</button></td>
-                        <td class="text-end"><button class="btn btn-dark text-white" id="stopRecording" type="button" disabled><i
-                                    class="fa-solid fa-microphone"></i> Berhenti Merekam</button></td>
+                        <td colspan="2">
+                            <button class="btn btn-info text-white"id="startRecording" type="button">
+                            <i class="fa-solid fa-microphone"></i> Rekam
+                            </button>
+                      
+                            <button class="btn btn-dark text-white" id="stopRecording" type="button" disabled>
+                            <i class="fa-solid fa-microphone"></i> Berhenti Merekam
+                            </button>
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="2">
@@ -336,13 +341,11 @@
                                 style="display:none;">
                         </td>
                     </tr>
-                
-
 
                     </thead>
                 </table>
 
-                <button type="submit" class="btn btn-secondary">Simpan</button>
+                <button type="button" class="btn btn-secondary"id="simpan">Simpan</button>
             </div>
         </form>
     </div>
@@ -371,46 +374,60 @@
         $('.halaman-1').hide();
         $('.halaman-2').show()
     })
+    $('button#simpan').on('click',function(){
+        let form = $('form#form-kecurangan')
+         // Asumsi ada input field dengan nama "audioFile" di dalam form
+    let audioFileInput = form.find('input[name="audioFile"]')[0];
+
+    if (audioFileInput.files.length > 0) {
+        // Ada file audio terlampir, lanjutkan dengan tindakan yang diinginkan
+        // Misalnya, Anda dapat mengirimkan formulir dengan menggunakan form.submit();
+        form.submit()
+      
+    } else {
+       alert('Mohon mengisi deskripsi kecurangan menggunakan opsi tombol rekam atau menyampaikan deskripsi kecurangan melalui formulir kecurangan yang tersedia');
+    }
+    })
 
 
+    $(document).ready(function() {
 
-$(document).ready(function () {
+        var audioContext;
+        var recorder;
 
-    var audioContext;
-    var recorder;
+        navigator.mediaDevices.getUserMedia({
+                audio: true
+            })
+            .then(function(stream) {
+                audioContext = new(window.AudioContext || window.webkitAudioContext)();
+                var input = audioContext.createMediaStreamSource(stream);
+                recorder = new Recorder(input);
+            })
+            .catch(function(err) {
+                console.error('Error accessing microphone:', err);
+            });
 
-    navigator.mediaDevices.getUserMedia({ audio: true })
-        .then(function (stream) {
-            audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            var input = audioContext.createMediaStreamSource(stream);
-            recorder = new Recorder(input);
-        })
-        .catch(function (err) {
-            console.error('Error accessing microphone:', err);
+        $('#startRecording').click(function() {
+            recorder && recorder.record();
+            $('#startRecording').prop('disabled', true);
+            $('#stopRecording').prop('disabled', false);
         });
 
-    $('#startRecording').click(function () {
-        recorder && recorder.record();
-        $('#startRecording').prop('disabled', true);
-        $('#stopRecording').prop('disabled', false);
-    });
+        $('#stopRecording').click(function() {
+            recorder && recorder.stop();
+            $('#startRecording').prop('disabled', false);
+            $('#stopRecording').prop('disabled', true);
 
-    $('#stopRecording').click(function () {
-        recorder && recorder.stop();
-        $('#startRecording').prop('disabled', false);
-        $('#stopRecording').prop('disabled', true);
+            recorder.exportWAV(function(blob) {
+                var audioURL = URL.createObjectURL(blob);
+                $('#audioPlayer').attr('src', audioURL);
+                $('#audioPlayer').css('display', 'block');
 
-        recorder.exportWAV(function (blob) {
-            var audioURL = URL.createObjectURL(blob);
-            $('#audioPlayer').attr('src', audioURL);
-            $('#audioPlayer').css('display', 'block');
+                var formData = new FormData();
+                formData.append('audioFile', blob, 'recordedAudio.wav');
 
-            var formData = new FormData();
-            formData.append('audioFile', blob, 'recordedAudio.wav');
-
+            });
         });
+
     });
-
-});
-
 </script>
