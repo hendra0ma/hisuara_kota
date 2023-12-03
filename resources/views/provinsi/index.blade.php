@@ -199,8 +199,23 @@
                             <div class="row mx-auto" style="width: 884.5px;">
 
                             </div>
-                            <div style="overflow-y:auto;height:500px">
-                                <table class="table table-bordered table-hover mt-3">
+                            <style>
+                                table.tabel-kustom tbody {
+                                    display: block;
+                                    height: 450px;
+                                    overflow: auto;
+                                }
+                            
+                                table.tabel-kustom thead,
+                                table.tabel-kustom tbody tr {
+                                    display: table;
+                                    width: 100%;
+                                    table-layout: fixed;
+                                    /* even columns width , fix width of table too*/
+                                }
+                            </style>
+                            {{-- <div style="overflow-y:auto;height:500px"> --}}
+                                <table class="table table-bordered table-hover mt-3 tabel-kustom">
                                     <thead class="bg-primary">
                                         <tr>
                                             <th class="text-white text-center align-middle">KECAMATAN</th>
@@ -242,7 +257,7 @@
 
 
                                 </table>
-                            </div>
+                            {{-- </div> --}}
                         </div>
 
                     </div>
