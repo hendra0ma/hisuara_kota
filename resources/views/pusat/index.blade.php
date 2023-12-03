@@ -198,25 +198,19 @@
 
                             </div>
                             <style>
-                                table, tr td {
-                                    border: 1px solid red
-                                }
-                                tbody {
+                                table.tabel-kustom tbody {
                                     display: block;
                                     height: 450px;
                                     overflow: auto;
                                 }
-                                thead, tbody tr {
+                                table.tabel-kustom thead, table.tabel-kustom tbody tr {
                                     display: table;
                                     width: 100%;
                                     table-layout: fixed;/* even columns width , fix width of table too*/
                                 }
-                                table {
-                                    width: 400px;
-                                }
                             </style>
                             {{-- <div style="overflow-y:auto;height:500px"> --}}
-                                <table class="table table-bordered table-hover mt-3">
+                                <table class="table table-bordered table-hover mt-3 tabel-kustom">
                                     <thead class="bg-primary">
                                         <tr>
                                             <th class="text-white text-center align-middle">KECAMATAN</th>
