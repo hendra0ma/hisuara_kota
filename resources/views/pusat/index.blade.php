@@ -109,7 +109,7 @@
             <ul class="breadcrumb">
                 <?php $regencies = Regency::get(); ?>
                 <li><a href="" class="text-white"></a></li>
-                <img src="{{ asset('') }}assets/icons/hisuara_new.png" style="position: absolute; top: -50px; left: 25px; width: 175px"
+                <img src="{{ asset('') }}assets/icons/hisuara_new.png" style="position: absolute; top: -50px; left: 25px; width: 150px"
                     alt="">
 
             </ul>
