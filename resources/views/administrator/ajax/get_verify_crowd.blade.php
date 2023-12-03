@@ -80,11 +80,11 @@ $config->default =  $configs->default;
                     </p>
                     <div class="row fw-bolder">
                         <div class="col">{{$user->name}}</div>
-                        <div class="col">TPS {{$tps->number}}</div>
+                   
                     </div>
                     <div class="row mt-3">
                         <div class="col">NIK : {{$user->nik}}</div>
-                        <div class="col">Kecamatan {{$district->name}}/Kelurahan {{$village->name}}</div>
+        
                     </div>
                     <p></p>
                 </div>

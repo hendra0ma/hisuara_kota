@@ -20,7 +20,6 @@ class CrowdC1Kpu extends Component
     {
         $data['all_c1'] = CrowdC1::where('crowd_c1.status',"0")
         ->whereNull('crowd_c1.tps_id')
-        // ->where('tps.number', 'like', '%' . $this->search . '%')
         ->paginate(12);
         return view('livewire.crowd-c1-kpu', $data);
     }
