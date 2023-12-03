@@ -37,6 +37,7 @@ use App\Models\QuickSaksiData;
 use App\Models\Configs;
 use App\Models\CrowdC1;
 use App\Models\DataCrowdC1;
+use App\Models\Kecurangan;
 use App\Models\RegenciesDomain;
 use App\Models\RegencyCrowdC1;
 use App\Models\RiwayatKoreksi;
@@ -550,9 +551,8 @@ class AdminController extends Controller
                 ->count();
             $data['id_kecamatan'] = decrypt($id);
         } elseif (isset($url_first[3]) && $url_first[2] == 'perhitungan_kelurahan') {
-            
+
             $data = $this->getTerverifikasiAjaxKelurahan($data);
-           
         } else {
             $data = $this->getTerverifikasiAjaxKota();
         }
@@ -563,47 +563,47 @@ class AdminController extends Controller
 
     private function getTerverifikasiAjaxKelurahan($data)
     {
-         // Perhitungan Kelurahan
-         $id = $data['url_first'][3];
-         $data['paslon_terverifikasi'] = Paslon::with([
-             'saksi_data' => function ($query) use ($id) {
-                 $query
-                     ->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
-                     ->whereNull('saksi.pending')
-                     ->where('saksi.verification', 1)
-                     ->where('saksi.village_id', (string) decrypt($id));
-             },
-         ])->get();
-         $data['total_incoming_vote'] = 0;
-         $verification = Saksi::where('verification', 1)
-             ->where('regency_id', $this->config->regencies_id)
-             ->with('saksi_data')
-             ->where('village_id', decrypt($id))
-             ->get();
-         $data['total_incoming_vote'] = 0;
-         $data['total_verification_voice'] = 0;
-         foreach ($verification as $key) {
-             foreach ($key->saksi_data as $verif) {
-                 $data['total_verification_voice'] += $verif->voice;
-             }
-         }
-         $data['total_tps'] = Village::where('id', (string) decrypt($id))->sum('tps');
-         $id = Crypt::decrypt($id);
-         $data['village'] = Village::where('id', (string) $id)->first();
-         $data['district'] = District::where('id', (string) $data['village']->district_id)->first();
-         $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
-             ->where('tps.villages_id', $id)
-             ->count();
-         $data['tps_kel'] = Tps::where('regency_id', $this->config->regencies_id)
-             ->where('villages_id', (string) $id)
-             ->get();
-         $data['id'] = $id;
-         $data['id_kelurahan'] = $id;
-         $data['title'] = 'KELURAHAN ' . $data['village']['name'] . '';
-         $data['saksi_masuk'] = Saksi::where('regency_id', $this->config->regencies_id)->count();
-         $data['saksi_terverifikasi'] = Saksi::where('verification', 1)
-             ->where('regency_id', $this->config->regencies_id)
-             ->count();
+        // Perhitungan Kelurahan
+        $id = $data['url_first'][3];
+        $data['paslon_terverifikasi'] = Paslon::with([
+            'saksi_data' => function ($query) use ($id) {
+                $query
+                    ->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
+                    ->whereNull('saksi.pending')
+                    ->where('saksi.verification', 1)
+                    ->where('saksi.village_id', (string) decrypt($id));
+            },
+        ])->get();
+        $data['total_incoming_vote'] = 0;
+        $verification = Saksi::where('verification', 1)
+            ->where('regency_id', $this->config->regencies_id)
+            ->with('saksi_data')
+            ->where('village_id', decrypt($id))
+            ->get();
+        $data['total_incoming_vote'] = 0;
+        $data['total_verification_voice'] = 0;
+        foreach ($verification as $key) {
+            foreach ($key->saksi_data as $verif) {
+                $data['total_verification_voice'] += $verif->voice;
+            }
+        }
+        $data['total_tps'] = Village::where('id', (string) decrypt($id))->sum('tps');
+        $id = Crypt::decrypt($id);
+        $data['village'] = Village::where('id', (string) $id)->first();
+        $data['district'] = District::where('id', (string) $data['village']->district_id)->first();
+        $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
+            ->where('tps.villages_id', $id)
+            ->count();
+        $data['tps_kel'] = Tps::where('regency_id', $this->config->regencies_id)
+            ->where('villages_id', (string) $id)
+            ->get();
+        $data['id'] = $id;
+        $data['id_kelurahan'] = $id;
+        $data['title'] = 'KELURAHAN ' . $data['village']['name'] . '';
+        $data['saksi_masuk'] = Saksi::where('regency_id', $this->config->regencies_id)->count();
+        $data['saksi_terverifikasi'] = Saksi::where('verification', 1)
+            ->where('regency_id', $this->config->regencies_id)
+            ->count();
         return $data;
     }
     private function getTerverifikasiAjaxKota()
@@ -1342,7 +1342,7 @@ class AdminController extends Controller
 
     function CrowdC1Id(Request $request)
     {
-        $crowd = CrowdC1::where('tps_id', $request->id)->first();
+        $crowd = CrowdC1::where('id', $request->id)->first();
 
         $data['crowd'] = $crowd;
         $data['user'] = User::where('id', $crowd->user_id)->first();
@@ -2477,7 +2477,7 @@ class AdminController extends Controller
     public function solution($id)
     {
         $id = (string) decrypt($id);
-        return($id);
+        return ($id);
         $data['solution'] = SolutionFraud::get();
         $data['titel'] = SolutionFraud::where('id', $id)->first();
         $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
@@ -2871,16 +2871,8 @@ class AdminController extends Controller
     {
         $data['config'] = Config::first();
         $data['index_tsm'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
-        $data['qrcode'] = QrCode::get();
-        $data['list_suara'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
-            ->join('users', 'users.tps_id', '=', 'tps.id')
-            ->where('saksi.kecurangan', 'yes')
-            ->where('saksi.status_kecurangan', 'terverifikasi')
-            ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
-            ->get();
-        $data['print'] = QrCode::where('print', 1)->get();
-        $data['title'] = 'Jumlah Data Kecurangan Masuk : ' . count($data['list_suara']);
-        // $data['title2']  = 'Election Fraud Data Print';
+        $data['qrcode'] =Kecurangan::where("regency_id",$this->config->regencies_id)->where('kecurangan.status_kecurangan', 'terverifikasi')->count();
+        $data['title'] = 'Jumlah Data Kecurangan Masuk : ' . $data['qrcode'];
         return view('administrator.fraudDataprint', $data);
     }
 
@@ -2907,8 +2899,15 @@ class AdminController extends Controller
     {
         $data['index_tsm'] = ModelsListkecurangan::get();
         $data['config'] = Config::first();
-        $data['qrcode'] = QrCode::join('surat_pernyataan', 'surat_pernyataan.qrcode_hukum_id', '=', 'qrcode_hukum.id')->paginate(15);
+
+        $data['qrcode'] = QrCode::join('surat_pernyataan', 'surat_pernyataan.qrcode_hukum_id', '=', 'qrcode_hukum.id')
+            ->join('kecurangan', 'kecurangan.id', '=', 'qrcode_hukum.kecurangan_id')
+            ->where('kecurangan.regency_id', $this->config->regencies_id)
+            ->select('qrcode_hukum.*', 'surat_pernyataan.*')
+            ->paginate(15);
         $data['jumlah_barcode'] = QrCode::join('surat_pernyataan', 'surat_pernyataan.qrcode_hukum_id', '=', 'qrcode_hukum.id')
+            ->join('kecurangan', 'kecurangan.id', '=', 'qrcode_hukum.kecurangan_id')
+            ->where('kecurangan.regency_id', $this->config->regencies_id)
             ->select('qrcode_hukum.*')
             ->count();
 
