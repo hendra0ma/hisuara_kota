@@ -373,6 +373,8 @@ foreach ($kotas as $kota) {
                     Route::post('cek_pass', 'cek_pass');
                     Route::get('fraud-data-report', 'FraudDataReport')->name('FraudDataReport');
                     Route::get('fraud-data-print', 'fraudDataPrint')->name('fraudDataPrint');
+                    Route::get('update-Status-Print/{id}', 'updateStatusPrint')->name('updateStatusPrint');
+
                     Route::get('fraud-data-print-tercetak', 'fraudDataPrint_tercetak')->name('fraudDataPrint_tercetak');
                     Route::get('print/{id}', 'print')->name('printKecurangan');
                     Route::get('ajax-kecurangan-terverifikasi', 'getKecuranganTerverifikasi')->name('ajaxKecuranganTerverifikasi');

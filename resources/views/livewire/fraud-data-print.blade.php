@@ -54,15 +54,9 @@
     
                         <div class="row mt-2">
                             <div class="col-12 px-0">
-                                <a onclick="openNewPage()" class="btn w-100 fotoKecuranganterverifikasi mt-2 rounded-0 text-white"
+                                <a href="{{route('superadmin.printKecurangan',Crypt::encrypt($ls->kecurangan_id))}}" class="btn w-100 fotoKecuranganterverifikasi mt-2 rounded-0 text-white"
                                     id="Cek" style="background: #ff4f4e">
                                     Cetak Bukti Kecurangan</a>
-
-                                <script>
-                                    function openNewPage() {
-                                            window.open('{{url('')}}/administrator/print/{{ Crypt::encrypt($ls->tps_id)}}', '_blank');
-                                        }
-                                </script>
                             </div>
                         </div>
                     </div>
@@ -73,6 +67,7 @@
         </div>
         @endforeach
     </div>
+    
     
     <div class="mb-4">
         {{$list_suara->links()}}

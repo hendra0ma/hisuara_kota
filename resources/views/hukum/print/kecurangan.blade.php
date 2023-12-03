@@ -91,21 +91,21 @@
     <?php
     use App\Models\Tracking;
     
-    
-    $track = Tracking::where('id_user',$user['id'])->first();
-    $scan_url = url('') . "/scanning-secure/" . (string)Crypt::encrypt($qrcode->nomor_berkas);
+    $track = Tracking::where('id_user', $user['id'])->first();
+    $scan_url = url('') . '/scanning-secure/' . (string) Crypt::encrypt($qrcode->nomor_berkas);
     // dump($absensi);
     ?>
 
 
     <div class="asdf mt-5 row justify-content-center" style="position: relative;width:100%;height:100%;">
-        
+
         <div class="col-12 text-center mb-3 mt-5">
-            @if ($user['profile_photo_path'] == NULL)
-            <img class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover; margin-right: 10px;"
-                src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
+            @if ($user['profile_photo_path'] == null)
+                <img class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover; margin-right: 10px;"
+                    src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
             @else
-            <img class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
+                <img class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover; margin-right: 10px;"
+                    src="{{ url('/storage/profile-photos/' . $user['profile_photo_path']) }}">
             @endif
         </div>
         <div class="col-12 my-auto text-center mb-5">
@@ -118,23 +118,23 @@
             </h1>
         </div>
         <div class="col-9 text-center py-3 mb-5 " style="border: 1px black solid">
-        
+
             <h2>
-                {{$kota->name }}<br>
+                {{ $kota->name }}<br>
                 Kec
-                {{$kecamatan->name}} / Kel
-                {{$kelurahan->name}} <br>
+                {{ $kecamatan->name }} / Kel
+                {{ $kelurahan->name }} <br>
             </h2>
             <h2 class="text-danger" style="font-size:40px">TPS {{ $tps->number }} <br></h2>
-        
+
         </div>
 
         <div class="col-12 text-center mb-5 mt-5">
-            <img src="{{asset('')}}assets/icons/hisuara_new.png" width="350px" alt="">
+            <img src="{{ asset('') }}assets/icons/hisuara_new.png" width="350px" alt="">
         </div>
 
         <div class="col-12 text-center" style="position: absolute; bottom: -90px">
-            <h3>PILPRES 2024 {{$kota->name }}</h3>
+            <h3>PILPRES 2024 {{ $kota->name }}</h3>
         </div>
         {{-- <img src="{{asset('')}}assets/stamp.png" class="img-flluid stamp"
             style="width:150px;height:auto; z-index: 2000;" alt="">
@@ -179,11 +179,12 @@
     <div class="page-break" style="width: 100%; height: 100%;">
         <div class="row">
             <div class="col-auto text-center mb-3">
-                @if ($user['profile_photo_path'] == NULL)
-                <img style="width: 175px; height: 175px; object-fit: cover; margin-right: 10px;"
-                    src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
+                @if ($user['profile_photo_path'] == null)
+                    <img style="width: 175px; height: 175px; object-fit: cover; margin-right: 10px;"
+                        src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
                 @else
-                <img style="width: 175px; height: 175px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
+                    <img style="width: 175px; height: 175px; object-fit: cover; margin-right: 10px;"
+                        src="{{ url('/storage/profile-photos/' . $user['profile_photo_path']) }}">
                 @endif
             </div>
             <div class="col my-auto text-center">
@@ -192,7 +193,7 @@
                 <div style="font-size: 20px">SAKSI TPS {{ $tps['number'] }}</div>
             </div>
             <div class="col-auto my-auto">
-                {!! QrCode::size(125)->generate( $scan_url); !!}
+                {!! QrCode::size(125)->generate($scan_url) !!}
             </div>
         </div>
 
@@ -207,19 +208,21 @@
 
                     <div class="col-12">
                         <table class="table table-stripped">
-                            <tr>
-                                <td class="ps-0 pe-2" style="width: 200px">Status</td>
-                                <td class="px-0">:</td>
-                                @if ($user['is_active'] == 2)
-                                <td class="ps-2">Belum Terverifikasi</td>
-                                @else
-                                @if ($tps['setup'] == 'terisi')
-                                <td class="ps-2">Terverifikasi (Sudah Mengirim C1)</td>
-                                @else
-                                <td class="ps-2">Terverifikasi (Belum Mengirim C1)</td>
-                                @endif
-                                @endif
-                            </tr>
+                            @if ($user['role_id'] == 8)
+                                <tr>
+                                    <td class="ps-0 pe-2" style="width: 200px">Status</td>
+                                    <td class="px-0">:</td>
+                                    @if ($user['is_active'] == 2)
+                                        <td class="ps-2">Belum Terverifikasi</td>
+                                    @else
+                                        @if ($tps['setup'] == 'terisi')
+                                            <td class="ps-2">Terverifikasi (Sudah Mengirim C1)</td>
+                                        @else
+                                            <td class="ps-2">Terverifikasi (Belum Mengirim C1)</td>
+                                        @endif
+                                    @endif
+                                </tr>
+                            @endif
                             <tr>
                                 <td class="ps-0 pe-2" style="width: 200px">Email</td>
                                 <td class="px-0">:</td>
@@ -253,23 +256,26 @@
                             <tr>
                                 <td class="ps-0 pe-2" style="width: 200px">Kota</td>
                                 <td class="px-0">:</td>
-                                <td class="ps-0">{{$kota->name }}</td>
+                                <td class="ps-0">{{ $kota->name }}</td>
                             </tr>
-                            <tr>
-                                <td class="ps-0 pe-2" style="width: 200px">Kecamatan</td>
-                                <td class="px-0">:</td>
-                                <td class="ps-0">{{$kecamatan['name'] }}</td>
-                            </tr>
-                            <tr>
-                                <td class="ps-0 pe-2" style="width: 200px">Kelurahan</td>
-                                <td class="px-0">:</td>
-                                <td class="ps-0">{{$kelurahan['name'] }}</td>
-                            </tr>
-                            <tr>
-                                <td class="ps-0 pe-2" style="width: 200px">TPS</td>
-                                <td class="px-0">:</td>
-                                <td class="ps-0">{{ $tps['number'] }}</td>
-                            </tr>
+                            @if ($user['role_id'] == 8)
+                                <tr>
+                                    <td class="ps-0 pe-2" style="width: 200px">Kecamatan</td>
+                                    <td class="px-0">:</td>
+                                    <td class="ps-0">{{ $kecamatan['name'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-0 pe-2" style="width: 200px">Kelurahan</td>
+                                    <td class="px-0">:</td>
+                                    <td class="ps-0">{{ $kelurahan['name'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-0 pe-2" style="width: 200px">TPS</td>
+                                    <td class="px-0">:</td>
+                                    <td class="ps-0">{{ $tps['number'] }}</td>
+                                </tr>
+                            @endif
+
                         </table>
                     </div>
                 </div>
@@ -280,69 +286,67 @@
                     <div class="col-12">
                         <b>Meta Data <i class="fa fa-info-circle"></i></b>
                     </div>
-                    @if ($track == NULL)
-                    <hr class="mt-1 ms-3" style="margin-bottom: 0px; background: #000; height: 5px; width: 300px">
+                    @if ($track == null)
+                        <hr class="mt-1 ms-3" style="margin-bottom: 0px; background: #000; height: 5px; width: 300px">
 
-                    <div class="col-12">
-                        <table class="table">
-                            <tr>
-                                <td class="ps-0 pe-2" style="width: 200px">Lontitude</td>
-                                <td class="px-0">:</td>
-                                <td class="ps-0">Tidak Terdeteksi</td>
-                            </tr>
-                            <tr>
-                                <td class="ps-0 pe-2" style="width: 200px">Latitude</td>
-                                <td class="px-0">:</td>
-                                <td class="ps-0">Tidak Terdeteksi</td>
-                            </tr>
-                            <tr>
-                                <td class="ps-0 pe-2" style="width: 200px">Ip Address</td>
-                                <td class="px-0">:</td>
-                                <td class="ps-0">Tidak Terdeteksi</td>
-                            </tr>
-                            <tr>
-                                <td class="ps-0 pe-2" style="width: 200px">Tanggal Teregistrasi</td>
-                                <td class="px-0">:</td>
-                                <td class="ps-0">{{ $user['created_at'] }}</td>
-                            </tr>
-                            {{-- @if($url == 'hadir') --}}
-                            <tr>
-                                <td class="ps-0 pe-2" style="width: 200px">Jam Absen</td>
-                                <td class="px-0">:</td>
-                                <td class="ps-0">{{ $user['created_at'] }}</td>
-                            </tr>
-                            {{-- @else
-                            @endif --}}
-                        </table>
-                    </div>
-
+                        <div class="col-12">
+                            <table class="table">
+                                <tr>
+                                    <td class="ps-0 pe-2" style="width: 200px">Lontitude</td>
+                                    <td class="px-0">:</td>
+                                    <td class="ps-0">Tidak Terdeteksi</td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-0 pe-2" style="width: 200px">Latitude</td>
+                                    <td class="px-0">:</td>
+                                    <td class="ps-0">Tidak Terdeteksi</td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-0 pe-2" style="width: 200px">Ip Address</td>
+                                    <td class="px-0">:</td>
+                                    <td class="ps-0">Tidak Terdeteksi</td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-0 pe-2" style="width: 200px">Tanggal Teregistrasi</td>
+                                    <td class="px-0">:</td>
+                                    <td class="ps-0">{{ $user['created_at'] }}</td>
+                                </tr>
+                                @if ($user['role_id'] == 8)
+                                    <tr>
+                                        <td class="ps-0 pe-2" style="width: 200px">Jam Absen</td>
+                                        <td class="px-0">:</td>
+                                        <td class="ps-0">{{ $user['created_at'] }}</td>
+                                    </tr>
+                                @endif
+                            </table>
+                        </div>
                     @else
-                    <hr class="mt-1 ms-3" style="margin-bottom: 0px; background: #000; height: 5px; width: 300px">
+                        <hr class="mt-1 ms-3" style="margin-bottom: 0px; background: #000; height: 5px; width: 300px">
 
-                    <div class="col-12">
-                        <table class="table">
-                            <tr>
-                                <td class="ps-0 pe-2">Lontitude</td>
-                                <td class="px-0">:</td>
-                                <td class="ps-2">{{$track['longitude'] }}</td>
-                            </tr>
-                            <tr>
-                                <td class="ps-0 pe-2">Latitude</td>
-                                <td>:</td>
-                                <td class="ps-2">{{$track['latitude'] }}</td>
-                            </tr>
-                            <tr>
-                                <td class="ps-0 pe-2">Ip Address</td>
-                                <td>:</td>
-                                <td class="ps-2">{{ $track['ip_address'] }}</td>
-                            </tr>
-                            <tr>
-                                <td class="ps-0 pe-2">Tanggal Teregistrasi</td>
-                                <td class="px-0">:</td>
-                                <td class="ps-2">{{ $user['created_at'] }}</td>
-                            </tr>
-                        </table>
-                    </div>
+                        <div class="col-12">
+                            <table class="table">
+                                <tr>
+                                    <td class="ps-0 pe-2">Lontitude</td>
+                                    <td class="px-0">:</td>
+                                    <td class="ps-2">{{ $track['longitude'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-0 pe-2">Latitude</td>
+                                    <td>:</td>
+                                    <td class="ps-2">{{ $track['latitude'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-0 pe-2">Ip Address</td>
+                                    <td>:</td>
+                                    <td class="ps-2">{{ $track['ip_address'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-0 pe-2">Tanggal Teregistrasi</td>
+                                    <td class="px-0">:</td>
+                                    <td class="ps-2">{{ $user['created_at'] }}</td>
+                                </tr>
+                            </table>
+                        </div>
                 </div>
                 @endif
             </div>
@@ -359,15 +363,16 @@
                     <div class="card">
                         <div class="card-header">
                             <h6 class="mb-0 fw-bold">
-                                Foto Saksi
+                                Foto Admin
                             </h6>
                         </div>
                         <div class="card-body p-0 text-center">
-                            @if ($user['profile_photo_path'] == NULL)
-                            <img style="width: 100%; height: 250px; object-fit: cover;"
-                                src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
+                            @if ($user['profile_photo_path'] == null)
+                                <img style="width: 100%; height: 250px; object-fit: cover;"
+                                    src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
                             @else
-                            <img style="height: 250px; height: 250px; object-fit: cover;" src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
+                                <img style="height: 250px; height: 250px; object-fit: cover;"
+                                    src="{{ url('/storage/profile-photos/' . $user['profile_photo_path']) }}">
                             @endif
                         </div>
                     </div>
@@ -381,11 +386,11 @@
                         </div>
                         <div class="card-body p-0">
                             @if ($user['foto_ktp'] != null)
-                            <img style="height: 250px; object-fit: cover; width: 100%" src="{{ $user['foto_ktp'] }}"
-                                alt="">
+                                <img style="height: 250px; object-fit: cover; width: 100%"
+                                    src="{{ $user['foto_ktp'] }}" alt="">
                             @else
-                            <img style="height: 250px; object-fit: cover; width: 100%"
-                                src="https://t-2.tstatic.net/default-2.jpg" alt="">
+                                <img style="height: 250px; object-fit: cover; width: 100%"
+                                    src="https://t-2.tstatic.net/default-2.jpg" alt="">
                             @endif
                         </div>
                     </div>
@@ -393,65 +398,70 @@
             </div>
 
         </div>
-        <div class="col-12">
-        
-            <div class="row mb-3">
-                <div class="col-12 mt-2 px-1">
-                    <div class="card">
-                        <div class="card-header">
-                            <h6 class="mb-0 fw-bold">
-                                Foto Saksi di Lokasi TPS
-                            </h6>
+        @if ($user['role_id'] == 8)
+            <div class="col-12">
+
+                <div class="row mb-3">
+                    <div class="col-12 mt-2 px-1">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="mb-0 fw-bold">
+                                    Foto Saksi di Lokasi TPS
+                                </h6>
+                            </div>
+                            <div class="card-body p-0">
+                                @if ($absensi['selfie_lokasi'] != null)
+                                    <img style="height: 300px; width: 100%; object-fit: cover"
+                                        src="{{ $absensi['selfie_lokasi'] }}" alt="">
+                                @else
+                                    <img style="height: 300px; width: 100%; object-fit: cover"
+                                        src="https://t-2.tstatic.net/default-2.jpg" alt="">
+                                @endif
+                            </div>
                         </div>
-                        <div class="card-body p-0">
-                            @if ($absensi['selfie_lokasi'] != null)
-                            <img style="height: 300px; width: 100%; object-fit: cover" src="{{ $absensi['selfie_lokasi'] }}"
-                                alt="">
-                            @else
-                            <img style="height: 300px; width: 100%; object-fit: cover"
-                                src="https://t-2.tstatic.net/default-2.jpg" alt="">
-                            @endif
+                    </div>
+                    <div class="col-12 mt-2 px-1">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="mb-0 fw-bold">
+                                    Foto TPS
+                                </h6>
+                            </div>
+                            <div class="card-body p-0">
+                                @if ($tps['foto_lokasi'] != null)
+                                    <img style="height: 300px; width: 100%; object-fit: cover"
+                                        src="{{ $tps['foto_lokasi'] }}" alt="">
+                                @else
+                                    <img style="height: 300px; width: 100%; object-fit: cover"
+                                        src="https://t-2.tstatic.net/default-2.jpg" alt="">
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 mt-2 px-1">
-                    <div class="card">
-                        <div class="card-header">
-                            <h6 class="mb-0 fw-bold">
-                                Foto TPS
-                            </h6>
-                        </div>
-                        <div class="card-body p-0">
-                            @if ($tps['foto_lokasi'] != null)
-                            <img style="height: 300px; width: 100%; object-fit: cover" src="{{ $tps['foto_lokasi'] }}" alt="">
-                            @else
-                            <img style="height: 300px; width: 100%; object-fit: cover"
-                                src="https://t-2.tstatic.net/default-2.jpg" alt="">
-                            @endif
-                        </div>
-                    </div>
-                </div>
+
             </div>
-        
-        </div>
+        @endif
     </div>
 
     <div style="width:100%;height:100%;" class="page-break">
-        {{-- <div class="col-12 text-center mb-3">
-            <img src="{{asset('')}}images/logo/timbangan.png" style="width: 200px" alt="">
-        </div> --}}
         <div class="col-12 text-center mb-3">
-            @if ($user['profile_photo_path'] == NULL)
-            <img class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover; margin-right: 10px;"
-                src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
+            @if ($user['profile_photo_path'] == null)
+                <img class="rounded-circle"
+                    style="width: 150px; height: 150px; object-fit: cover; margin-right: 10px;"
+                    src="https://ui-avatars.com/api/?name={{ $user['name'] }}&color=7F9CF5&background=EBF4FF">
             @else
-            <img class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover; margin-right: 10px;" src="{{url("/storage/profile-photos/".$user['profile_photo_path']) }}">
+                <img class="rounded-circle"
+                    style="width: 150px; height: 150px; object-fit: cover; margin-right: 10px;"
+                    src="{{ url('/storage/profile-photos/' . $user['profile_photo_path']) }}">
             @endif
         </div>
         <div class="col-12 my-auto text-center">
             <div class="mb-0 fw-bold" style="font-size: 30px">{{ $user['name'] }}</div>
             <div style="font-size: 20px">NIK : {{ $user['nik'] }}</div>
-            <div style="font-size: 20px">SAKSI TPS {{ $tps['number'] }}</div>
+            @if ($user['role_id'] == 8)
+                <div style="font-size: 20px">SAKSI TPS {{ $tps['number'] }}</div>
+            @endif
         </div>
         <div class="col-12 py-3 text-center mb-5">
             <h4 class="fw-bold mb-0 text-danger">
@@ -466,7 +476,7 @@
                 <div class="card-body" style="border: 1px #eee solid !important">
                     <ul class="list-group">
                         @foreach ($list_kecurangan as $item)
-                        <li class="list-group-item">{{ $item->text }}</li>
+                            <li class="list-group-item">{{ $item->text }}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -493,28 +503,26 @@
                     <table class="table table-bordered">
                         <tr>
                             <td class="fw-bold">
-                                <div class="text-center">A. Petugas Saksi</div>
+                                <div class="text-center">A. Petugas Kecurangan</div>
                             </td>
                             <td class="fw-bold">
                                 <div class="text-center">B. Petugas Verifikator</div>
                             </td>
-                            <td class="fw-bold">
-                                <div class="text-center">C. Petugas Validator</div>
-                            </td>
+
                             <td class="fw-bold">
                                 <div class="text-center">Tanggal Dokumen</div>
                             </td>
                         </tr>
                         <tr>
-                            <td> {{$user->name}}</td>
+                            <td> {{ $user->name }}</td>
                             <td> {{ $verifikator->name }}</td>
-                            <td> {{ $hukum->name }}</td>
+
                             <td rowspan="2" class="align-middle text-center"> {{ $qrcode->created_at }}</td>
                         </tr>
                         <tr>
-                            <td> {{$user->no_hp}}</td>
-                            <td> {{ $verifikator->no_hp}}</td>
-                            <td> {{ $hukum->no_hp }}</td>
+                            <td> {{ $user->no_hp }}</td>
+                            <td> {{ $verifikator->no_hp }}</td>
+
                         </tr>
                     </table>
                     {{-- <table class="table table-bordered">
@@ -625,16 +633,16 @@
                             <td class="fw-bold w-50">Metadata</td>
                         </tr>
                         @foreach ($foto_kecurangan as $bf)
-                        <tr>
-                            <td class="text-center">
-                                <img class="image" style="height: 250px; object-fit: cover"
-                                    src="{{asset('storage/' . $bf->url)}}" data-url="{{asset('storage/' . $bf->url)}}"
-                                    alt="">
-                            </td>
-                            <td class="exifResultsPhoto">
+                            <tr>
+                                <td class="text-center">
+                                    <img class="image" style="height: 250px; object-fit: cover"
+                                        src="{{ asset('storage/' . $bf->url) }}"
+                                        data-url="{{ asset('storage/' . $bf->url) }}" alt="">
+                                </td>
+                                <td class="exifResultsPhoto">
 
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
                         @endforeach
                         <tr>
                             <td class="fw-bold w-50">Video Kecurangan</td>
@@ -643,7 +651,7 @@
                         <tr>
                             <td>
                                 <center>
-                                    {!! QrCode::size(200)->generate( $scan_url); !!}
+                                    {!! QrCode::size(200)->generate($scan_url) !!}
                                     <div class="mt-3">Scan disini untuk melihat video</div>
                                 </center>
                             </td>
@@ -656,7 +664,7 @@
                         <tr>
                             <td>
                                 <center>
-                                    {!! QrCode::size(200)->generate( $scan_url); !!}
+                                    {!! QrCode::size(200)->generate($scan_url) !!}
                                     <div class="mt-3">Scan disini untuk melihat video</div>
                                 </center>
                             </td>
@@ -664,61 +672,73 @@
                         </tr>
                     </table>
                     <script>
-                        $(document).ready(function () {
-                            setTimeout(()=>{
-                                $(".image").each(function (index) {
-                                    
+                        $(document).ready(function() {
+                            setTimeout(() => {
+                                $(".image").each(function(index) {
+
                                     var currentImage = this;
-                                    EXIF.getData(currentImage, function () {
+                                    EXIF.getData(currentImage, function() {
                                         var exifData = EXIF.getAllTags(this);
                                         var locationInfo = "Image " + (index + 1) + " EXIF Data:<br>";
-                                        
-                                        if (exifData && (exifData.DateTimeOriginal || (exifData.GPSLatitude && exifData.GPSLongitude))) {
+
+                                        if (exifData && (exifData.DateTimeOriginal || (exifData
+                                                .GPSLatitude && exifData.GPSLongitude))) {
                                             if (exifData.DateTimeOriginal) {
-                                            locationInfo += "<b>Date taken</b>: " + exifData.DateTimeOriginal + "<br>";
+                                                locationInfo += "<b>Date taken</b>: " + exifData
+                                                    .DateTimeOriginal + "<br>";
                                             }
                                             if (exifData.GPSLatitude && exifData.GPSLongitude) {
-                                                var latitude = exifData.GPSLatitude[0] + exifData.GPSLatitude[1] / 60 + exifData.GPSLatitude[2] / 3600;
-                                                var longitude = exifData.GPSLongitude[0] + exifData.GPSLongitude[1] / 60 + exifData.GPSLongitude[2] / 3600;
-                                                locationInfo += "<b>Location</b>: Latitude " + latitude + ", Longitude " + longitude + "<br>";
+                                                var latitude = exifData.GPSLatitude[0] + exifData
+                                                    .GPSLatitude[1] / 60 + exifData.GPSLatitude[2] / 3600;
+                                                var longitude = exifData.GPSLongitude[0] + exifData
+                                                    .GPSLongitude[1] / 60 + exifData.GPSLongitude[2] / 3600;
+                                                locationInfo += "<b>Location</b>: Latitude " + latitude +
+                                                    ", Longitude " + longitude + "<br>";
                                             }
                                             if (exifData.Make) {
-                                                locationInfo += "<b>Camera Make: </b>" + exifData.Make + "<br>";
+                                                locationInfo += "<b>Camera Make: </b>" + exifData.Make +
+                                                    "<br>";
                                             }
                                             if (exifData.Model) {
-                                                locationInfo += "<b>Camera Model: </b>" + exifData.Model + "<br>";
+                                                locationInfo += "<b>Camera Model: </b>" + exifData.Model +
+                                                    "<br>";
                                             }
                                             if (exifData.ApertureValue) {
-                                                locationInfo += "<b>Aperture: </b>f/" + exifData.ApertureValue + "<br>";
+                                                locationInfo += "<b>Aperture: </b>f/" + exifData
+                                                    .ApertureValue + "<br>";
                                             }
                                             if (exifData.ExposureTime) {
-                                                locationInfo += "<b>Exposure Time: </b>" + exifData.ExposureTime + " sec<br>";
+                                                locationInfo += "<b>Exposure Time: </b>" + exifData
+                                                    .ExposureTime + " sec<br>";
                                             }
                                             if (exifData.ISO) {
                                                 locationInfo += "<b>ISO: </b>" + exifData.ISO + "<br>";
                                             }
                                             if (exifData.FocalLength) {
-                                                locationInfo += "<b>Focal Length: </b>" + exifData.FocalLength + "mm<br>";
+                                                locationInfo += "<b>Focal Length: </b>" + exifData
+                                                    .FocalLength + "mm<br>";
                                             }
                                             if (exifData.Flash) {
                                                 locationInfo += "<b>Flash: </b>" + exifData.Flash + "<br>";
                                             }
                                             if (exifData.ImageWidth && exifData.ImageHeight) {
-                                                locationInfo += "<b>Image Resolution: </b>" + exifData.ImageWidth + "x" + exifData.ImageHeight + "<br>";
+                                                locationInfo += "<b>Image Resolution: </b>" + exifData
+                                                    .ImageWidth + "x" + exifData.ImageHeight + "<br>";
                                             }
                                             // Include more EXIF tags as needed
                                         } else {
                                             locationInfo += "<b>EXIF data not found</b>";
                                         }
-                                        
+
                                         // Display the information in the console to ensure it's being correctly constructed
                                         console.log(locationInfo);
-                                        
+
                                         // Find the corresponding .exifResults element related to the current image and update its content
-                                        $(currentImage).closest('tr').find('.exifResultsPhoto').html(locationInfo);
+                                        $(currentImage).closest('tr').find('.exifResultsPhoto').html(
+                                            locationInfo);
                                     });
                                 });
-                            },100)
+                            }, 100)
                         });
                     </script>
                 </div>
@@ -734,62 +754,71 @@
         data-bs-holder-rendered="true">
 
     @endforeach --}}
+    @if ($user['role_id'] == 8)
+        <div class="row page-content-wrapper page-break">
+            <div class="col-md-12 mb-2">
+                <h1 class="fs-3 text-center"> Lampiran C1</h1>
+            </div>
+            <div class="col-md-12">
+                <img alt="" class="d-block mx-auto" style="width: 90%; height: 90%;"
+                    src="{{ url('') }}/storage/{{ $saksi->c1_images }}" data-bs-holder-rendered="true">
+            </div>
+        </div>
 
-    <div class="row page-content-wrapper page-break">
-        <div class="col-md-12 mb-2">
-            <h1 class="fs-3 text-center"> Lampiran C1</h1>
-        </div>
-        <div class="col-md-12">
-            <img alt="" class="d-block mx-auto" style="width: 90%; height: 90%;"
-            src="{{url('')}}/storage/{{ $saksi->c1_images }}" data-bs-holder-rendered="true">
-        </div>
-    </div>
-    
-    <div class="row page-content-wrapper page-break">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body text-center" style="padding: 21.5px">
-                    <div class="card-header py-2 text-white bg-dark">
-                        <h4 class="mb-0 mx-auto text-black card-title">Data Pemilih dan Hak Pilih (TPS {{$tps->number}}
-                            /
-                            Kelurahan {{$kelurahan->name}})</h4>
+        <div class="row page-content-wrapper page-break">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body text-center" style="padding: 21.5px">
+                        <div class="card-header py-2 text-white bg-dark">
+                            <h4 class="mb-0 mx-auto text-black card-title">Data Pemilih dan Hak Pilih (TPS
+                                {{ $tps->number }}
+                                /
+                                Kelurahan {{ $kelurahan->name }})</h4>
+                        </div>
+                        <table class="table table-striped">
+                            <tr>
+                                <td class="py-2 text-start" style="width: 50%">Jumlah Hak Pilih (DPT)</td>
+                                <td class="py-2" style="width: 5%">:</td>
+                                <td class="py-2" style="width: 40%">
+                                    {{ $surat_suara != null ? $surat_suara->dpt : '0' }}</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 text-start" style="width: 50%">Surat Suara Sah</td>
+                                <td class="py-2" style="width: 5%">:</td>
+                                <td class="py-2" style="width: 40%">
+                                    {{ $surat_suara != null ? $surat_suara->surat_suara_sah : '0' }}</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 text-start" style="width: 50%">Suara Tidak Sah</td>
+                                <td class="py-2" style="width: 5%">:</td>
+                                <td class="py-2" style="width: 40%">
+                                    {{ $surat_suara != null ? $surat_suara->surat_suara_tidak_sah : '0' }}</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 text-start" style="width: 50%">Jumlah Suara Sah dan Suara Tidak Sah
+                                </td>
+                                <td class="py-2" style="width: 5%">:</td>
+                                <td class="py-2" style="width: 40%">
+                                    {{ $surat_suara != null ? $surat_suara->jumlah_sah_dan_tidak : '0' }}</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 text-start" style="width: 50%">Total Surat Suara</td>
+                                <td class="py-2" style="width: 5%">:</td>
+                                <td class="py-2" style="width: 40%">
+                                    {{ $surat_suara != null ? $surat_suara->total_surat_suara : '0' }}</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 text-start" style="width: 50%">Sisa Surat Suara</td>
+                                <td class="py-2" style="width: 5%">:</td>
+                                <td class="py-2" style="width: 40%">
+                                    {{ $surat_suara != null ? $surat_suara->sisa_surat_suara : '0' }}</td>
+                            </tr>
+                        </table>
                     </div>
-                    <table class="table table-striped">
-                    <tr>
-                        <td class="py-2 text-start" style="width: 50%">Jumlah Hak Pilih (DPT)</td>
-                        <td class="py-2" style="width: 5%">:</td>
-                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->dpt:"0"}}</td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 text-start" style="width: 50%">Surat Suara Sah</td>
-                        <td class="py-2" style="width: 5%">:</td>
-                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->surat_suara_sah:"0"}}</td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 text-start" style="width: 50%">Suara Tidak Sah</td>
-                        <td class="py-2" style="width: 5%">:</td>
-                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->surat_suara_tidak_sah:"0"}}</td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 text-start" style="width: 50%">Jumlah Suara Sah dan Suara Tidak Sah</td>
-                        <td class="py-2" style="width: 5%">:</td>
-                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->jumlah_sah_dan_tidak:"0"}}</td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 text-start" style="width: 50%">Total Surat Suara</td>
-                        <td class="py-2" style="width: 5%">:</td>
-                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->total_surat_suara:"0"}}</td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 text-start" style="width: 50%">Sisa Surat Suara</td>
-                        <td class="py-2" style="width: 5%">:</td>
-                        <td class="py-2" style="width: 40%">{{($surat_suara != NULL)?$surat_suara->sisa_surat_suara:"0"}}</td>
-                    </tr>
-                </table>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 
     {{-- <div class="row page-content-wrapper page-break">
         <div class="col-12 px-0">
@@ -842,9 +871,9 @@
 
     <div class="page-content-wrapper page-break" style="width:100%;height:100%;">
         <div class="col-12">
-    
+
             <div class="row mt-2 justify-align-center">
-    
+
                 <div class="container">
                     <div class="col-lg-12">
                         <div class="row">
@@ -854,7 +883,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-lg-12">
-    
+
                             </div>
                         </div>
                         <div class="row mt-1">
@@ -865,68 +894,68 @@
                             </div>
                         </div>
                         <div class="row">
-    
-                                <div class="col-md">
-                                    <div class="row mt-2">
-                                        <div class="col-12">
-                                            <b>Detail Akun <i class="fa fa-info-circle"></i></b>
-                                        </div>
-    
-                                        <hr class="mt-1 ms-3"
-                                            style="margin-bottom: 0px; background: #000; height: 5px; width: 300px">
-    
-                                        <div class="col-12">
-                                            <table class="table table-stripped">
-                                                <tr>
-                                                    <td class="ps-0 pe-2" style="width: 200px">NIK</td>
-                                                    <td class="px-0">:</td>
-                                                    <td class="ps-2">{{$user->nik}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="ps-0 pe-2" style="width: 200px">Nama</td>
-                                                    <td class="px-0">:</td>
-                                                    <td class="ps-2">{{$user->name}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="ps-0 pe-2" style="width: 200px">Alamat</td>
-                                                    <td class="px-0">:</td>
-                                                    <td class="ps-2">{{$user->address}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="ps-0 pe-2" style="width: 200px">No Hp</td>
-                                                    <td class="px-0">:</td>
-                                                    <td class="ps-2">{{$user->no_hp}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="ps-0 pe-2" style="width: 200px">Email</td>
-                                                    <td class="px-0">:</td>
-                                                    <td class="ps-2">{{$user->email}}</td>
-                                                </tr>
-                                            </table>
-                                        </div>
+
+                            <div class="col-md">
+                                <div class="row mt-2">
+                                    <div class="col-12">
+                                        <b>Detail Akun <i class="fa fa-info-circle"></i></b>
+                                    </div>
+
+                                    <hr class="mt-1 ms-3"
+                                        style="margin-bottom: 0px; background: #000; height: 5px; width: 300px">
+
+                                    <div class="col-12">
+                                        <table class="table table-stripped">
+                                            <tr>
+                                                <td class="ps-0 pe-2" style="width: 200px">NIK</td>
+                                                <td class="px-0">:</td>
+                                                <td class="ps-2">{{ $user->nik }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-0 pe-2" style="width: 200px">Nama</td>
+                                                <td class="px-0">:</td>
+                                                <td class="ps-2">{{ $user->name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-0 pe-2" style="width: 200px">Alamat</td>
+                                                <td class="px-0">:</td>
+                                                <td class="ps-2">{{ $user->address }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-0 pe-2" style="width: 200px">No Hp</td>
+                                                <td class="px-0">:</td>
+                                                <td class="ps-2">{{ $user->no_hp }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-0 pe-2" style="width: 200px">Email</td>
+                                                <td class="px-0">:</td>
+                                                <td class="ps-2">{{ $user->email }}</td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
-    
+                            </div>
+                            @if ($user['role_id'] == 8)
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-12">
                                             <b>Lokasi <i class="fa fa-info-circle"></i></b>
                                         </div>
-    
+
                                         <hr class="mt-1 ms-3"
                                             style="margin-bottom: 0px; background: #000; height: 5px; width: 300px">
-    
+
                                         <div class="col-12">
                                             <table class="table">
                                                 <tr>
                                                     <td class="ps-0 pe-2" style="width: 200px">Kecamatan</td>
                                                     <td class="px-0">:</td>
-                                                    <td class="ps-0">{{$kecamatan->name }}</td>
+                                                    <td class="ps-0">{{ $kecamatan->name }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="ps-0 pe-2" style="width: 200px">Kelurahan</td>
                                                     <td class="px-0">:</td>
-                                                    <td class="ps-0">{{$kelurahan->name }}</td>
+                                                    <td class="ps-0">{{ $kelurahan->name }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="ps-0 pe-2" style="width: 200px">TPS</td>
@@ -936,42 +965,44 @@
                                                 <tr>
                                                     <td class="ps-0 pe-2" style="width: 200px">Kota</td>
                                                     <td class="px-0">:</td>
-                                                    <td class="ps-0">{{$kota->name }}</td>
+                                                    <td class="ps-0">{{ $kota->name }}</td>
                                                 </tr>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
-    
+                            @endif
+
                         </div>
                         <div class="row mt-2">
-                                <div class="col-lg-12 text-justify" style="line-height:1.8; text-align: justify">
-                                    {{$surat_pernyataan->deskripsi}}
-                                </div>
+                            <div class="col-lg-12 text-justify" style="line-height:1.8; text-align: justify">
+                                {{ $surat_pernyataan->deskripsi }}
+                            </div>
                         </div>
                         <div class="row mt-3">
-                                <div class="col-lg-12">
-                                    <b>Tanggal Kirim </b>
-                                </div>
+                            <div class="col-lg-12">
+                                <b>Tanggal Kirim </b>
+                            </div>
                         </div>
                         <div class="row">
-                                <div class="col-lg-12 text-left">
-                                    <p>Yang Membuat Pernyataan Ini:</p>
-                                </div>
+                            <div class="col-lg-12 text-left">
+                                <p>Yang Membuat Pernyataan Ini:</p>
+                            </div>
                         </div>
                         <div class="row mt-3">
-                                <div class="col-lg-12 text-left">
-                                    <p class="mt-5"><u> {{$user->name}}</u></p>
-                                </div>
+                            <div class="col-lg-12 text-left">
+                                <p class="mt-5"><u> {{ $user->name }}</u></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="mb-3 text-center mt-4 py-3 mx-auto" style="font-size: 14px; border: 1px #f82649 solid; width: 95%">
+                <div class="mb-3 text-center mt-4 py-3 mx-auto"
+                    style="font-size: 14px; border: 1px #f82649 solid; width: 95%">
                     <i>Laporan Ini Dicetak Oleh Komputer Dan Tidak Memerlukan Tanda Tangan.
                         Berkas Terlampir</i>
                 </div>
             </div>
-    
+
         </div>
     </div>
 
@@ -991,15 +1022,17 @@
         integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous">
     </script>
     <script>
-        setTimeout(function () {
-            let uniqueData = [@foreach($list_kecurangan as $item)
-                '{{$item->solution}} | {{$item->kode}}', @endforeach
+        setTimeout(function() {
+            let uniqueData = [
+                @foreach ($list_kecurangan as $item)
+                    '{{ $item->solution }} | {{ $item->kode }}',
+                @endforeach
             ];
 
-            uniqueArray = uniqueData.filter(function (item, pos) {
+            uniqueArray = uniqueData.filter(function(item, pos) {
                 return uniqueData.indexOf(item) == pos;
             });
-            uniqueArray.forEach(function (item, index) {
+            uniqueArray.forEach(function(item, index) {
                 $('#appendDataSolution').append(`
         <tr>
             <td>
@@ -1011,18 +1044,29 @@
         }, 200)
 
 
+        function afterPrintOrDelay() {
+            @if ($qrcode->id != null)
+            location.href = "{{url()->previous()}}";
+            @else
+            location.href = "{{route('superadmin.updateStatusPrint',Crypt::encrypt($kecurangan->id))}}";
+            @endif
+        }
+        if (window.matchMedia) {
+            var mediaQueryList = window.matchMedia('print');
+            mediaQueryList.addListener(function(mql) {
+                if (!mql.matches) {
+                    afterPrintOrDelay();
+                }
+            });
+        }
 
-        setTimeout(function () {
+        window.onafterprint = function() {
+            afterPrintOrDelay();
+        };
 
-            window.print();
-            window.onafterprint = back;
+        window.print();
 
-            function back() {
-                window.close()
-            }
-
-        }, 1000)
-
+        setTimeout(afterPrintOrDelay, 5000); 
     </script>
 </body>
 

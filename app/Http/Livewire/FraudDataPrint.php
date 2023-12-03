@@ -38,7 +38,9 @@ class FraudDataPrint extends Component
     public function render()
     {
         $data['list_suara']  = Kecurangan::join('users', 'users.id', '=', 'kecurangan.user_id')
+        ->join('qrcode_hukum', 'qrcode_hukum.kecurangan_id', '=', 'kecurangan.id')
         ->where('kecurangan.status_kecurangan', 'terverifikasi')
+        ->whereNull('qrcode_hukum.print')
         ->where('users.regency_id', $this->config->regencies_id)
         ->where('users.name', 'like', '%'.$this->search.'%')
         ->select('kecurangan.created_at as date', 'users.*','kecurangan.*','kecurangan.id as kecurangan_id')
