@@ -97,8 +97,17 @@ $solution = \App\Models\SolutionFraud::get();
 
 <div id="index-tsm" class="tabcontent mt-0 pt-0 px-0">
     <div class="row">
-        <div class="col-12 mt-5">
+        <div class="col-6 mt-5">
             <h2 class="fw-bold">Index TSM Pemilu</h2>
+        </div>
+        <div class="col-6 mt-5">
+            <div class="row justify-content-end">
+                <div class="col-4">
+                    <a href="{{url('')}}/administrator/print-index-tsm" target="_blank"
+                        class="btn btn-block btn-dark ml-2 mr-2 w-100"> Print &nbsp;&nbsp;<i class="fa fa-print"></i></a>
+                </div>
+        
+            </div>
         </div>
         <div class="col-lg-6">
             <div class="row justify-content-center">
@@ -371,17 +380,6 @@ $solution = \App\Models\SolutionFraud::get();
                 </div>
             </div>
         </div>
-
-        <div class="col-lg-12">
-            <div class="row justify-content-end">
-                <div class="col-4">
-                    <a href="{{url('')}}/administrator/print-index-tsm" target="_blank"
-                        class="btn btn-block btn-dark ml-2 mr-2 w-100"> Print &nbsp;&nbsp;<i
-                            class="fa fa-print"></i></a>
-                </div>
-
-            </div>
-        </div>
     </div>
 </div>
 {{-- <style>
@@ -492,7 +490,7 @@ $solution = \App\Models\SolutionFraud::get();
 
             <div class="col-lg-12">
                 <div class="row justify-content-end">
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 mb-5">
                         <a href="{{url('')}}/administrator/fraud-data-print"
                             class="btn btn-dark btn-block">Selengkapnya</a>
                     </div>

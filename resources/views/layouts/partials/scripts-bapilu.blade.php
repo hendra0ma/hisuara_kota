@@ -246,6 +246,14 @@ use App\Models\User;
         },
     });
 
+    $('.tablink').on('click', function () {
+        setTimeout(() => {
+            chart.flush();
+            chart2.flush();
+            chart3.flush();
+            chart4.flush();
+        }, 1000);
+    })
     setTimeout(() => {
         chart.flush();
         chart2.flush();

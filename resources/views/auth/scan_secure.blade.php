@@ -3,7 +3,7 @@
 @section('content')
 
 
-<div class="login-img bg-dark">
+<div class="login-img bg-light">
 
     <!-- GLOABAL LOADER -->
     <div id="global-loader">
@@ -17,8 +17,8 @@
             <!-- CONTAINER OPEN -->
             <div class="col col-login mx-auto">
                 <div class="text-center">
-                    <img src="{{ asset('') }}images/logo/hisuara.png"
-                        class="img-fluid img-thumbnail bg-dark shadow-lg border-0" style="width:100px;height:auto;"
+                    <img src="{{ asset('') }}assets/icons/hisuara_new_new.png"
+                        class="border-0 mb-3" style="width:300px;height:auto;"
                         alt="">
                 </div>
             </div>

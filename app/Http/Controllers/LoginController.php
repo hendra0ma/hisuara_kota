@@ -51,7 +51,7 @@ class LoginController extends Controller
                 // return gettype($role)." > ".$role;
 
                 if ($role == "1") {
-                    return redirect('dashboard-pusats');
+                    return redirect('dashboard-pusat');
                 }else{
                     $regency_id = Auth::user()->regency_id;
                     $regency_domain = RegenciesDomain::where('regency_id',$regency_id)->first();

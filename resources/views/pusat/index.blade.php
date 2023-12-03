@@ -109,6 +109,8 @@
             <ul class="breadcrumb">
                 <?php $regencies = Regency::get(); ?>
                 <li><a href="" class="text-white"></a></li>
+                <img src="{{ asset('') }}assets/icons/hisuara_new.png" style="position: absolute; top: -50px; left: 25px; width: 175px"
+                    alt="">
 
             </ul>
         </div>
@@ -116,8 +118,8 @@
         <div class="col-12 mt-1">
             <div class="card">
                 <div class="card-body" style="position: relative">
-                    <img src="{{ asset('') }}assets/icons/hisuara_new.png"
-                        style="position: absolute; top: 25px; left: 25px; width: 150px" alt="">
+                    {{-- <img src="{{ asset('') }}assets/icons/hisuara_new.png"
+                        style="position: absolute; top: 25px; left: 25px; width: 150px" alt=""> --}}
                     <div class="row">
                         <div class="col-xxl-6">
                             <div class="container">

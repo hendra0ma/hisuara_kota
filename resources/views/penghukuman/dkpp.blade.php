@@ -33,20 +33,20 @@ $solution = \App\Models\SolutionFraud::get();
     <div class="col-md-8">
         <div class="row mt-2">
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 tablink" data-command-target="index-tsm"
-                    onclick="openPage('index-tsm', this, '#6259ca')" id="defaultOpen">Index TSM</a>
+                <a class="btn text-white w-100 py-3 tablink" data-command-target="bukti-kecurangan"
+                    onclick="openPage('bukti-kecurangan', this, '#6259ca')" id="defaultOpen">Bukti Kecurangan</a>
+            </div>
+            <div class="col parent-link">
+                <a class="btn text-white w-100 py-3 tablink" data-command-target="barkode-kecurangan"
+                    onclick="openPage('barkode-kecurangan', this, '#6259ca')">Barkode Kecurangan</a>
             </div>
             <div class="col parent-link">
                 <a class="btn text-white w-100 py-3 tablink" data-command-target="rekomendasi-tindakan"
                     onclick="openPage('rekomendasi-tindakan', this, '#6259ca')">Rekomendasi Tindakan</a>
             </div>
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 tablink" data-command-target="bukti-kecurangan"
-                    onclick="openPage('bukti-kecurangan', this, '#6259ca')">Bukti Kecurangan</a>
-            </div>
-            <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 tablink" data-command-target="barkode-kecurangan"
-                    onclick="openPage('barkode-kecurangan', this, '#6259ca')">Barkode Kecurangan</a>
+                <a class="btn text-white w-100 py-3 tablink" data-command-target="index-tsm"
+                    onclick="openPage('index-tsm', this, '#6259ca')">Index TSM</a>
             </div>
         </div>
     </div>
@@ -89,8 +89,17 @@ $solution = \App\Models\SolutionFraud::get();
 
 <div id="index-tsm" class="tabcontent mt-0 pt-0 px-0">
     <div class="row">
-        <div class="col-12 mt-5">
+        <div class="col-6 mt-5">
             <h2 class="fw-bold">Index TSM Pemilu</h2>
+        </div>
+        <div class="col-6 mt-5">
+            <div class="row justify-content-end">
+                <div class="col-4">
+                    <a href="{{url('')}}/administrator/print-index-tsm" target="_blank"
+                        class="btn btn-block btn-dark ml-2 mr-2 w-100"> Print &nbsp;&nbsp;<i class="fa fa-print"></i></a>
+                </div>
+        
+            </div>
         </div>
         <div class="col-lg-6">
             <div class="row justify-content-center">

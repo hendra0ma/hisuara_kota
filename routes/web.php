@@ -150,7 +150,7 @@ Route::domain('hisuara.id')->name('pusat.')->group(function () {
 
 
     Route::group(["middleware" => ['role:administrator','auth']], function () {
-        Route::get('/dashboard-pusats', [PusatController::class, "home"])->name('home');
+        Route::get('/dashboard-pusat', [PusatController::class, "home"])->name('home');
         Route::get('quick_count_nasional', [PusatController::class, "quick_count_nasional"])->name('quick_count_nasional');
     });
 });
