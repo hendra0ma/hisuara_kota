@@ -29,12 +29,13 @@ class FraudDataPrint extends Component
         } else {
             $url = $currentDomain;
         }
-        $regency_id = RegenciesDomain::where('domain', 'LIKE', '%' . $url . '%')->first();
+        $regency_id = RegenciesDomain::where('domain', $url)->first();
 
         $this->configs = Config::first();
         $this->config = new Configs();
         $this->config->regencies_id = (string) $regency_id->regency_id;      
     }
+     
     public function render()
     {
         $data['list_suara']  = Kecurangan::join('users', 'users.id', '=', 'kecurangan.user_id')

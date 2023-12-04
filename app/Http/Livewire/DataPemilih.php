@@ -51,6 +51,7 @@ class DataPemilih extends Component
     }
 
 
+ 
     public function render()
     {
         $data['surat_suaras'] = SuratSuara::join('users','surat_suara.user_id','=','users.id')

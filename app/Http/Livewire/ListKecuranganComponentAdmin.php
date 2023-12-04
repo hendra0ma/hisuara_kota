@@ -31,7 +31,7 @@ class ListKecuranganComponentAdmin extends Component
         } else {
             $url = $currentDomain;
         }
-        $regency_id = RegenciesDomain::where('domain', 'LIKE', '%' . $url . '%')->first();
+        $regency_id = RegenciesDomain::where('domain', $url)->first();
 
         $this->configs = Config::first();
         $this->config = new Configs();
@@ -56,7 +56,7 @@ class ListKecuranganComponentAdmin extends Component
         ->where('users.name', 'like', '%'.$this->search.'%')
         ->select('kecurangan.created_at as date', 'users.*','kecurangan.*','kecurangan.id as kecurangan_id')->paginate(25);
         // dd($data);
-        $data['jumlah_data_kecurangan']  = Kecurangan::whereNull('kecurangan.tps_id')->count();
+        $data['jumlah_data_kecurangan']  = Kecurangan::whereNull('kecurangan.tps_id')->where("kecurangan.regency_id",  $this->config->regencies_id)->count();
 
         return view('livewire.list-kecurangan-component-admin', $data);
     }

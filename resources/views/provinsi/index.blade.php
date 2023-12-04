@@ -1,7 +1,6 @@
 @extends('layouts.mainlayoutProvinsi')
 @section('content')
 <?php
-    
     use App\Models\Config;
     use App\Models\District;
     use App\Models\ProvinceDomain;

@@ -19,7 +19,8 @@ class FraudDataPrintTercetak extends Component
     private $config;
     private $configs;
     
-    public function __construct()
+ 
+      public function __construct()
     {
         $currentDomain = request()->getHttpHost();
         if (isset(parse_url($currentDomain)['port'])) {
@@ -27,7 +28,7 @@ class FraudDataPrintTercetak extends Component
         } else {
             $url = $currentDomain;
         }
-        $regency_id = RegenciesDomain::where('domain', 'LIKE', '%' . $url . '%')->first();
+        $regency_id = RegenciesDomain::where('domain', $url)->first();
 
         $this->configs = Config::first();
         $this->config = new Configs();
