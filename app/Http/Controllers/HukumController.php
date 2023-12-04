@@ -233,18 +233,22 @@ class HukumController extends Controller
     {
        $kecurangan = $request['bukti_text'];
        $kecurangan_id = $request->kecurangan_id;
-       $tps_id = Crypt::decrypt($request->tps_id);
        $kecuranganData = Kecurangan::where('id',$kecurangan_id)->first();
+       if ($kecuranganData->tps_id != null) {
+           $tps_id = Crypt::decrypt($request->tps_id);
+           $tps = Tps::where('id', $tps_id)->first();
+       }
      
         if ($kecurangan == null) {
             $kecurangan = [];
         }
-        $tps = Tps::where('id', $tps_id)->first();
+        
         $fromListKecurangan = $request['curang'];
         $catatanHukum = $request['kecurangan'];
         
         if ($request['curang'] != null) {
             foreach ($fromListKecurangan as $data) {
+                if ($kecuranganData->tps_id != null) {
                 Bukti_deskripsi_curang::create([
                     'tps_id' => $tps_id,
                     "kecurangan_id"=> $kecuranganData->id,
@@ -252,6 +256,16 @@ class HukumController extends Controller
                     "petugas_id"=> Auth::user()->id,
                     'text' => $data,
                 ]);
+            }else{
+                Bukti_deskripsi_curang::create([
+              
+                    "kecurangan_id"=> $kecuranganData->id,
+                    "user_id"=> $kecuranganData->user_id,
+                    "petugas_id"=> Auth::user()->id,
+                    'text' => $data,
+                ]);
+
+            }
 
                 // return $kecuranganData->id;
             }
@@ -259,11 +273,21 @@ class HukumController extends Controller
         }
       
         if ($request['kecurangan'] != null) {
-            Bukticatatan::create([
-                'tps_id' => $tps_id,
-                "kecurangan_id"=>$kecuranganData->id,
-                'text' =>  $catatanHukum
-            ]);
+            if ($kecuranganData->tps_id != null) {
+                   
+                Bukticatatan::create([
+                    'tps_id' => $tps_id,
+                    "kecurangan_id"=>$kecuranganData->id,
+                    'text' =>  $catatanHukum
+                ]);
+            }else{
+                
+                Bukticatatan::create([
+               
+                    "kecurangan_id"=>$kecuranganData->id,
+                    'text' =>  $catatanHukum
+                ]);
+            }
         }
         
         Kecurangan::where('id',$kecurangan_id)->update([
@@ -274,7 +298,7 @@ class HukumController extends Controller
         $tahun = date('y');
        
         $no_berkas = $kecurangan_id . "/BK"  . "/PILPRES/" . $bulan . "/" . $tahun . "";
-
+        if ($kecuranganData->tps_id != null) {
         $save = Qrcode::create([
             'tps_id' => $tps_id,
             "kecurangan_id"=>$kecuranganData->id,
@@ -285,6 +309,18 @@ class HukumController extends Controller
             'nomor_berkas' => $no_berkas,
            
         ]);
+    }else{
+        $save = Qrcode::create([
+            "kecurangan_id"=>$kecuranganData->id,
+            'verifikator_id' => Auth::user()->id,
+            'hukum_id' => Auth::user()->id,
+            'tanggal_masuk' => now(),
+            'token' => encrypt(rand()),
+            'nomor_berkas' => $no_berkas,
+           
+        ]);
+
+    }
 
         if ($kecuranganData->tps_id != null) {
             $data = [
@@ -294,19 +330,28 @@ class HukumController extends Controller
             Saksi::where('tps_id', $tps_id)->update($data);
             
         }
-        
-
-
-
-
         $qr =  Qrcode::where('kecurangan_id',$kecuranganData->id)->first();
-        $saksi = Saksi::where('tps_id', $tps_id)->first();
-        SuratPernyataan::create([
-            'deskripsi' => 'Dengan ini menyatakan bahwa saya siap bertanggung jawab atas data dan bukti-bukti yang saya kirimkan dari TPS tempat saya bertugas dan bisa dipertanggung jawabkan kebenaranya. Saya bersedia hadir untuk memberikan keterangan sebagai saksi pada pihak-pihak terkait jika diperlukan. Demikian pernyataan ini dibuat dalam keadaan sadar sehat jasmani raohani serta tidak ada paksaan dari pihak manapun.',
-            'saksi_id' => $saksi->id,
-            'qrcode_hukum_id' => $qr->id,
-            'kecurangan_id'=>$kecurangan_id
-        ]);
+        if ($kecuranganData->tps_id != null) {
+            $saksi = Saksi::where('tps_id', $tps_id)->first();
+        }else{
+
+        }
+        if ($kecuranganData->tps_id != null) {
+
+            SuratPernyataan::create([
+                'deskripsi' => 'Dengan ini menyatakan bahwa saya siap bertanggung jawab atas data dan bukti-bukti yang saya kirimkan dari TPS tempat saya bertugas dan bisa dipertanggung jawabkan kebenaranya. Saya bersedia hadir untuk memberikan keterangan sebagai saksi pada pihak-pihak terkait jika diperlukan. Demikian pernyataan ini dibuat dalam keadaan sadar sehat jasmani raohani serta tidak ada paksaan dari pihak manapun.',
+                'saksi_id' => $saksi->id,
+                'qrcode_hukum_id' => $qr->id,
+                'kecurangan_id'=>$kecurangan_id
+            ]);
+        }else{
+            SuratPernyataan::create([
+                'deskripsi' => 'Dengan ini menyatakan bahwa saya siap bertanggung jawab atas data dan bukti-bukti yang saya kirimkan dari TPS tempat saya bertugas dan bisa dipertanggung jawabkan kebenaranya. Saya bersedia hadir untuk memberikan keterangan sebagai saksi pada pihak-pihak terkait jika diperlukan. Demikian pernyataan ini dibuat dalam keadaan sadar sehat jasmani raohani serta tidak ada paksaan dari pihak manapun.',
+                'qrcode_hukum_id' => $qr->id,
+                'kecurangan_id'=>$kecurangan_id
+            ]);
+
+        }
         if ($save) {
             return redirect()->back()->with('success','Berhasil Verifikasi Data Kecurangan');
         } else {

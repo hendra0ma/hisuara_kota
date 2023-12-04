@@ -562,7 +562,13 @@
                     @endif
                     @csrf
                     <input type="hidden"value="{{$kecurangan->id}}"name="kecurangan_id">
+                    @if ($kecurangan->tps_id != null)
                     <input type="hidden"value="{{Crypt::encrypt($kecurangan->tps_id)}}"name="tps_id">
+                        @else
+                        <input type="hidden"value=""name="tps_id">
+                    @endif
+
+             
 
                     <div class="card-body" style="height: 800px; overflow: scroll;">
                         <p class="card-text">
