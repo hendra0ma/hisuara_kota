@@ -42,6 +42,7 @@ class FraudDataPrintTercetak extends Component
         ->where('users.regency_id', $this->config->regencies_id)
         ->where('users.name', 'like', '%'.$this->search.'%')
         ->select('kecurangan.created_at as date', 'users.*','kecurangan.*','kecurangan.id as kecurangan_id')
+        ->distinct()
         ->paginate(16);
         return view('livewire.fraud-data-print-tercetak', $data);
     }
