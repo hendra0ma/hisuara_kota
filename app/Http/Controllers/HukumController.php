@@ -272,7 +272,7 @@ class HukumController extends Controller
 
         $save = Qrcode::create([
             'tps_id' => $tps_id,
-            "kecurangan_id"=$kecuranganData->id,
+            "kecurangan_id"=>$kecuranganData->id,
             'verifikator_id' => Auth::user()->id,
             'hukum_id' => Auth::user()->id,
             'tanggal_masuk' => now(),
