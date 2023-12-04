@@ -235,6 +235,7 @@ class HukumController extends Controller
        $kecurangan_id = $request->kecurangan_id;
        $tps_id = Crypt::decrypt($request->tps_id);
        $kecuranganData = Kecurangan::where('id',$kecurangan_id)->first();
+       return $kecuranganData;
         if ($kecurangan == null) {
             $kecurangan = [];
         }
