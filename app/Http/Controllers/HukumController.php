@@ -235,7 +235,7 @@ class HukumController extends Controller
        $kecurangan_id = $request->kecurangan_id;
        $tps_id = Crypt::decrypt($request->tps_id);
        $kecuranganData = Kecurangan::where('id',$kecurangan_id)->first();
-       return  $kecurangan_id + 2 ;
+     
         if ($kecurangan == null) {
             $kecurangan = [];
         }
@@ -246,7 +246,9 @@ class HukumController extends Controller
             foreach ($fromListKecurangan as $data) {
                 Bukti_deskripsi_curang::create([
                     'tps_id' => $tps_id,
-                    "kecurangan_id"=>$kecurangan_id,
+                    "kecurangan_id"=>   $kecuranganData->id,
+                    "user_id"=> $kecuranganData->user_id,
+                    "petugas_id"=> Auth::user()->id,
                     'text' => $data,
                 ]);
             }
@@ -254,7 +256,7 @@ class HukumController extends Controller
         if ($request['kecurangan'] != null) {
             Bukticatatan::create([
                 'tps_id' => $tps_id,
-                "kecurangan_id"=>$kecurangan_id,
+                "kecurangan_id"=>$kecuranganData->id,
                 'text' =>  $catatanHukum
             ]);
         }
@@ -270,7 +272,7 @@ class HukumController extends Controller
 
         $save = Qrcode::create([
             'tps_id' => $tps_id,
-            "kecurangan_id"=>$kecurangan_id,
+            "kecurangan_id"=$kecuranganData->id,
             'verifikator_id' => Auth::user()->id,
             'hukum_id' => Auth::user()->id,
             'tanggal_masuk' => now(),
