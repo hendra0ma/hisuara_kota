@@ -309,18 +309,18 @@ class HukumController extends Controller
             'nomor_berkas' => $no_berkas,
            
         ]);
-    }else{
-        $save = Qrcode::create([
-            "kecurangan_id"=>$kecuranganData->id,
-            'verifikator_id' => Auth::user()->id,
-            'hukum_id' => Auth::user()->id,
-            'tanggal_masuk' => now(),
-            'token' => encrypt(rand()),
-            'nomor_berkas' => $no_berkas,
-           
-        ]);
+        }else{
+            $save = Qrcode::create([
+                "kecurangan_id"=>$kecuranganData->id,
+                'verifikator_id' => Auth::user()->id,
+                'hukum_id' => Auth::user()->id,
+                'tanggal_masuk' => now(),
+                'token' => encrypt(rand()),
+                'nomor_berkas' => $no_berkas,
+            
+            ]);
 
-    }
+        }
 
         if ($kecuranganData->tps_id != null) {
             $data = [
