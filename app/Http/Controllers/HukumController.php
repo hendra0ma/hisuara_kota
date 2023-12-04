@@ -245,15 +245,15 @@ class HukumController extends Controller
         
         if ($request['curang'] != null) {
             foreach ($fromListKecurangan as $data) {
-                // Bukti_deskripsi_curang::create([
-                //     'tps_id' => $tps_id,
-                //     "kecurangan_id"=> $kecuranganData->id,
-                //     "user_id"=> $kecuranganData->user_id,
-                //     "petugas_id"=> Auth::user()->id,
-                //     'text' => $data,
-                // ]);
+                Bukti_deskripsi_curang::create([
+                    'tps_id' => $tps_id,
+                    "kecurangan_id"=> $kecuranganData->id,
+                    "user_id"=> $kecuranganData->user_id,
+                    "petugas_id"=> Auth::user()->id,
+                    'text' => $data,
+                ]);
 
-                return $kecuranganData->id;
+                // return $kecuranganData->id;
             }
         
         }
