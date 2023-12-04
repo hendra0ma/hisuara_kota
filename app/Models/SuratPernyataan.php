@@ -9,6 +9,6 @@ class SuratPernyataan extends Model
 {
     use HasFactory;
     protected $table = "surat_pernyataan";
-    protected $fillable = ['qrcode_hukum_id','deskripsi','saksi_id'];
+    protected $fillable = ['qrcode_hukum_id','deskripsi','saksi_id',"kecurangan_id"];
 
 }
