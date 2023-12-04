@@ -242,6 +242,7 @@ class HukumController extends Controller
         $tps = Tps::where('id', $tps_id)->first();
         $fromListKecurangan = $request['curang'];
         $catatanHukum = $request['kecurangan'];
+    
         if ($request['curang'] != null) {
             foreach ($fromListKecurangan as $data) {
                 Bukti_deskripsi_curang::create([
@@ -253,7 +254,7 @@ class HukumController extends Controller
                 ]);
             }
         }
-        return   $kecurangan_id;
+        return $kecurangan_id;
         if ($request['kecurangan'] != null) {
             Bukticatatan::create([
                 'tps_id' => $tps_id,
