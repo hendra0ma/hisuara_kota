@@ -253,7 +253,7 @@ class HukumController extends Controller
                 //     'text' => $data,
                 // ]);
 
-                return $data;
+                return $kecuranganData->id;
             }
         
         }
