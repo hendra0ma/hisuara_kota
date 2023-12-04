@@ -242,19 +242,22 @@ class HukumController extends Controller
         $tps = Tps::where('id', $tps_id)->first();
         $fromListKecurangan = $request['curang'];
         $catatanHukum = $request['kecurangan'];
-    
+        
         if ($request['curang'] != null) {
             foreach ($fromListKecurangan as $data) {
-                Bukti_deskripsi_curang::create([
-                    'tps_id' => $tps_id,
-                    "kecurangan_id"=>   $kecuranganData->id,
-                    "user_id"=> $kecuranganData->user_id,
-                    "petugas_id"=> Auth::user()->id,
-                    'text' => $data,
-                ]);
+                // Bukti_deskripsi_curang::create([
+                //     'tps_id' => $tps_id,
+                //     "kecurangan_id"=> $kecuranganData->id,
+                //     "user_id"=> $kecuranganData->user_id,
+                //     "petugas_id"=> Auth::user()->id,
+                //     'text' => $data,
+                // ]);
+
+                return $data;
             }
+        
         }
-        return $kecurangan_id;
+      
         if ($request['kecurangan'] != null) {
             Bukticatatan::create([
                 'tps_id' => $tps_id,
