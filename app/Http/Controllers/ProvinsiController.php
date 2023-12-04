@@ -42,6 +42,8 @@ class ProvinsiController extends Controller
         $data['provinsi_ini'] = Province::where('id',$id)->first();
         $data['regencies'] = Regency::where('province_id',$id)->get();
 
+        // dd($data['regencies']);
+
         return view('provinsi.index', $data);
         // return "hai";
     }
