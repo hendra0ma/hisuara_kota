@@ -22,7 +22,7 @@
     } else {
         $url = $currentDomain;
     }
-    $regency_id = RegenciesDomain::where('domain', 'LIKE', '%' . $url . '%')->first();
+    $regency_id = RegenciesDomain::where('domain', $url)->first();
     
 $reg = App\Models\Regency::where('id', $regency_id->regency_id)->first();
 
@@ -343,7 +343,7 @@ $config->regencies_id =  (string) $regency_id->regency_id;
         } else {
             $url = $currentDomain;
         }
-        $regency_id = RegenciesDomain::where('domain', 'LIKE', '%' . $url . '%')->first();
+        $regency_id = RegenciesDomain::where('domain', $url)->first();
         
         if (request()->segment(1) == 'administrator' && request()->segment(2) == 'perhitungan_kecamatan') {
             $id_wilayah = Crypt::decrypt(request()->segment(3));

@@ -74,7 +74,7 @@ class AdminController extends Controller
         } else {
             $url = $currentDomain;
         }
-        $regency_id = RegenciesDomain::where('domain', 'LIKE', '%' . $url . '%')->first();
+        $regency_id = RegenciesDomain::where('domain', $url)->first();
 
         $this->configs = Config::first();
         $this->config = new Configs();
@@ -4123,6 +4123,7 @@ class AdminController extends Controller
                 $query
                     ->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
                     ->whereNull('saksi.pending')
+                    ->where('saksi.regency_id', $this->config->regencies_id)
                     ->where('saksi.verification', 1);
             },
         ])->get();
