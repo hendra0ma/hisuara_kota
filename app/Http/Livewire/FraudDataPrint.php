@@ -46,7 +46,6 @@ class FraudDataPrint extends Component
         ->select('kecurangan.created_at as date', 'users.*','kecurangan.*','kecurangan.id as kecurangan_id')
         ->distinct()
         ->paginate(16);
-        dd($data);
         return view('livewire.fraud-data-print', $data);
     }
 }
