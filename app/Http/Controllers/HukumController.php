@@ -253,6 +253,7 @@ class HukumController extends Controller
                 ]);
             }
         }
+        return   $kecurangan_id;
         if ($request['kecurangan'] != null) {
             Bukticatatan::create([
                 'tps_id' => $tps_id,
@@ -294,7 +295,7 @@ class HukumController extends Controller
 
 
 
-        $qr =  Qrcode::where('tps_id',$tps_id)->first();
+        $qr =  Qrcode::where('kecurangan_id',$kecuranganData->id)->first();
         $saksi = Saksi::where('tps_id', $tps_id)->first();
         SuratPernyataan::create([
             'deskripsi' => 'Dengan ini menyatakan bahwa saya siap bertanggung jawab atas data dan bukti-bukti yang saya kirimkan dari TPS tempat saya bertugas dan bisa dipertanggung jawabkan kebenaranya. Saya bersedia hadir untuk memberikan keterangan sebagai saksi pada pihak-pihak terkait jika diperlukan. Demikian pernyataan ini dibuat dalam keadaan sadar sehat jasmani raohani serta tidak ada paksaan dari pihak manapun.',
