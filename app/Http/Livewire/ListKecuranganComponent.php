@@ -56,6 +56,7 @@ class ListKecuranganComponent extends Component
         ->where('users.name', 'like', '%'.$this->search.'%')
         ->select('kecurangan.created_at as date', 'users.*','kecurangan.*','kecurangan.id as kecurangan_id')
         ->paginate(16);
+        dd($data);
         $data['jumlah_data_kecurangan']  = Kecurangan::whereNotNull('kecurangan.tps_id')->count();
 
         return view('livewire.list-kecurangan-component', $data);
