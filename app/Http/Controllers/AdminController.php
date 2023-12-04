@@ -2920,6 +2920,11 @@ class AdminController extends Controller
             ->join('villages', 'villages.id', '=', 'tps.villages_id')
             ->select('users.*', 'tps.*', 'villages.name as village_name')
             ->get();
+        $data['jumlah_qrcode'] = QrCode::join('tps', 'tps.id', '=', 'qrcode_hukum.tps_id')
+            ->join('users', 'users.tps_id', '=', 'qrcode_hukum.tps_id')
+            ->join('villages', 'villages.id', '=', 'tps.villages_id')
+            ->select('users.*', 'tps.*', 'villages.name as village_name')
+            ->count();
         // dd($data['qrcode']);
         $config = Config::first();
         $data['config'] = $config;

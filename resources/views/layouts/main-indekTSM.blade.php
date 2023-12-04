@@ -3,6 +3,6 @@
         @include('layouts.partials.header')
         @yield('content')
         @include('layouts.partials.footer')
-        @include('layouts.partials.footer-scripts')
+        @include('layouts.partials.footer-index-tsm-scripts')
 </body>
 </html>
