@@ -36,6 +36,7 @@ class MKKecuranganDitolak extends Component
         $this->config = new Configs;
         $this->config->regencies_id =  (string) $regency_id->regency_id;
     }
+   
     public function render()
     {
         $data['config'] = Config::first();
@@ -46,6 +47,7 @@ class MKKecuranganDitolak extends Component
             ->where('saksi.kecurangan', 'yes')
             ->where('saksi.status_kecurangan', 'terverifikasi')
             ->where('makamah_konsitusi', 'Ditolak')
+            ->where("users.regency_id",  $this->config->regencies_id)
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->count();
         $data['list_suara']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
@@ -53,15 +55,16 @@ class MKKecuranganDitolak extends Component
             ->where('saksi.kecurangan', 'yes')
             ->where('saksi.status_kecurangan', 'terverifikasi')
             ->where('makamah_konsitusi', 'Ditolak')
+            ->where("users.regency_id",  $this->config->regencies_id)
             ->where('name', 'like', '%' . $this->search . '%')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->paginate(18);
         $data['tag'] = 1;
-        $data['terverifikasi'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->get();
-        $data['tidak_menjawab'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->where('makamah_konsitusi', 'Tidak Menjawab')->get();
-        $data['selesai'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->where('makamah_konsitusi', 'Selesai')->get();
-        $data['ditolak'] = Saksi::where('kecurangan', 'yes')->where('makamah_konsitusi', 'Ditolak')->get();
-        $data['data_masuk'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->get();
+        $data['terverifikasi'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi') ->where("saksi.regency_id",  $this->config->regencies_id)->get();
+        $data['tidak_menjawab'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi') ->where("saksi.regency_id",  $this->config->regencies_id)->where('makamah_konsitusi', 'Tidak Menjawab')->get();
+        $data['selesai'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi') ->where("saksi.regency_id",  $this->config->regencies_id)->where('makamah_konsitusi', 'Selesai')->get();
+        $data['ditolak'] = Saksi::where('kecurangan', 'yes')->where('makamah_konsitusi', 'Ditolak') ->where("saksi.regency_id",  $this->config->regencies_id)->get();
+        $data['data_masuk'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi') ->where("saksi.regency_id",  $this->config->regencies_id)->get();
         return view('livewire.m-k-kecurangan-ditolak', $data);
     }
 }

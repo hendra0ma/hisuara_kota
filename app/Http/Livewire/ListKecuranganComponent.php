@@ -23,7 +23,10 @@ class ListKecuranganComponent extends Component
     private $config;
     private $configs;
     
-    public function __construct()
+  
+
+
+      public function __construct()
     {
         $currentDomain = request()->getHttpHost();
         if (isset(parse_url($currentDomain)['port'])) {
@@ -37,8 +40,6 @@ class ListKecuranganComponent extends Component
         $this->config = new Configs();
         $this->config->regencies_id = (string) $regency_id->regency_id;      
     }
-
-
     public function render()
     {
         // $data['list_suara']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
@@ -57,7 +58,7 @@ class ListKecuranganComponent extends Component
         ->select('kecurangan.created_at as date', 'users.*','kecurangan.*','kecurangan.id as kecurangan_id')
         ->paginate(16);
  
-        $data['jumlah_data_kecurangan']  = Kecurangan::whereNotNull('kecurangan.tps_id')->count();
+        $data['jumlah_data_kecurangan']  = Kecurangan::whereNotNull('kecurangan.tps_id')->where("kecurangan.regency_id",  $this->config->regencies_id)->count();
 
         return view('livewire.list-kecurangan-component', $data);
     }

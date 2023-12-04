@@ -20,8 +20,11 @@ class UploadKecurangan extends Component
         $data['kelurahan'] = Village::where('id', $villagee)->first();
 
         $data['list_solution'] = Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+        ->join('kecurangan','kecurangan.id','=','bukti_deskripsi_curang.kecurangan_id')
         ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
         ->where('bukti_deskripsi_curang.tps_id', $request['id'])
+        ->where("kecurangan.regency_id",  $this->config->regencies_id)
+     
             ->select('solution_frauds.*', 'bukti_deskripsi_curang.*', 'list_kecurangan.*', 'list_kecurangan.id as id_list')
             ->get();
         $data['pelanggaran_umum']    = Listkecurangan::where('jenis', 0)->get();

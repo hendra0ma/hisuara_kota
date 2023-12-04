@@ -19,7 +19,8 @@ class FraudDataPrintTercetak extends Component
     private $config;
     private $configs;
     
-    public function __construct()
+ 
+      public function __construct()
     {
         $currentDomain = request()->getHttpHost();
         if (isset(parse_url($currentDomain)['port'])) {

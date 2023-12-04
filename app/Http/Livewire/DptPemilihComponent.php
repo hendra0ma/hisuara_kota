@@ -2,8 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Config;
+use App\Models\Configs;
 use App\Models\District;
 use App\Models\Province;
+use App\Models\RegenciesDomain;
 use App\Models\Regency;
 use App\Models\Tps;
 use App\Models\Village;
@@ -18,6 +21,22 @@ class DptPemilihComponent extends Component
     protected $paginationTheme = 'bootstrap';
     public $tipe_wilayah;
     public $search;
+    private $config;
+    private $configs;
+      public function __construct()
+    {
+        $currentDomain = request()->getHttpHost();
+        if (isset(parse_url($currentDomain)['port'])) {
+            $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
+        } else {
+            $url = $currentDomain;
+        }
+        $regency_id = RegenciesDomain::where('domain', 'LIKE', '%' . $url . '%')->first();
+
+        $this->configs = Config::first();
+        $this->config = new Configs();
+        $this->config->regencies_id = (string) $regency_id->regency_id;      
+    }
     public function render()
     {
         if ($this->tipe_wilayah == "kota") {

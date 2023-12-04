@@ -2,6 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Config;
+use App\Models\Configs;
+use App\Models\RegenciesDomain;
 use App\Models\Relawan;
 use App\Models\Tps;
 use Livewire\Component;
@@ -14,7 +17,22 @@ class C1RelawanKota extends Component
     public $village_id;
     public $search;
     protected $queryString = ['search'];
+    private $config;
+    private $configs;
+      public function __construct()
+    {
+        $currentDomain = request()->getHttpHost();
+        if (isset(parse_url($currentDomain)['port'])) {
+            $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
+        } else {
+            $url = $currentDomain;
+        }
+        $regency_id = RegenciesDomain::where('domain', 'LIKE', '%' . $url . '%')->first();
 
+        $this->configs = Config::first();
+        $this->config = new Configs();
+        $this->config->regencies_id = (string) $regency_id->regency_id;      
+    }
     public function render()
     {
         $data['list_suara']  = Tps::join('c1_relawan', 'c1_relawan.tps_id', '=', 'tps.id')
@@ -22,6 +40,7 @@ class C1RelawanKota extends Component
             // ->where('c1_relawan.village_id', $this->village_id)
             ->where('c1_relawan.status', 1)
             ->where('name', 'like', '%' . $this->search . '%')
+            ->where("users.regency_id",  $this->config->regencies_id)
             ->select('c1_relawan.*', 'c1_relawan.created_at as date', 'tps.*', 'users.*')
             ->paginate(18);
 
@@ -29,6 +48,7 @@ class C1RelawanKota extends Component
             ->join('users', 'users.tps_id', '=', 'tps.id')
             // ->where('c1_relawan.village_id', $this->village_id)
             ->where('c1_relawan.status', 1)
+            ->where("users.regency_id",  $this->config->regencies_id)
             ->select('c1_relawan.*', 'c1_relawan.created_at as date', 'tps.*', 'users.*')
             ->count();
         // dump($data);

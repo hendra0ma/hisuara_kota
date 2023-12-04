@@ -35,6 +35,7 @@ class FraudDataPrint extends Component
         $this->config = new Configs();
         $this->config->regencies_id = (string) $regency_id->regency_id;      
     }
+     
     public function render()
     {
         $data['list_suara']  = Kecurangan::join('users', 'users.id', '=', 'kecurangan.user_id')
