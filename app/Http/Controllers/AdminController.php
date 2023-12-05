@@ -2994,6 +2994,246 @@ class AdminController extends Controller
         $data['surat_pernyataan'] = SuratPernyataan::where('kecurangan_id', Crypt::decrypt($id))->first();
         return view('hukum.print.kecurangan', $data);
     }
+    public function printDkpp(Request $request, $id)
+    {
+        $kecurangan = Kecurangan::where('id',Crypt::decrypt($id))->first();
+        $data['kecurangan'] = $kecurangan;
+        // return $kecurangan;
+        if(isset($kecurangan['tps_id'])){
+        $request['id'] = Crypt::encrypt($kecurangan->tps_id);
+        $data['tps'] = Tps::where('regency_id', $this->config->regencies_id)
+                ->where('id', Crypt::decrypt($request['id']))
+                ->first();
+        $data['saksi'] = Saksi::where('tps_id', Crypt::decrypt($request['id']))->first();
+        $data['kecamatan'] = District::where('id', $data['saksi']['district_id'])->first();
+        $data['kelurahan'] = Village::where('id', $data['saksi']['village_id'])->first();
+        $data['absensi'] = Absensi::where('user_id',  $kecurangan->user_id)->first();
+        $data['surat_suara'] = SuratSuara::where('tps_id', $request['id'])->first();
+        }
+        $data['qrcode'] = Qrcode::where('kecurangan_id', Crypt::decrypt($id))->first();
+        $data['kota'] = Regency::where('id', $kecurangan->regency_id)->first();
+      
+        $data['user'] = User::where('id', $kecurangan->user_id)->first();
+        $data['verifikator'] = User::where('id',  $kecurangan->petugas_id)->first();
+        // $data['hukum'] = User::where('id',  $kecurangan->petugas_id)->first();
+
+        // $data['databukti'] = Databukti::where('tps_id', Crypt::decrypt($request['id']))->first();
+
+        $data['list_kecurangan'] = Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+            ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
+            ->where('bukti_deskripsi_curang.kecurangan_id', Crypt::decrypt($id))
+            ->get();
+        $data['foto_kecurangan'] = Buktifoto::where('kecurangan_id', Crypt::decrypt($id))->get();
+        $data['vidio_kecurangan'] = Buktividio::where('kecurangan_id', Crypt::decrypt($id))->first();
+        $data['surat_pernyataan'] = SuratPernyataan::where('kecurangan_id', Crypt::decrypt($id))->first();
+        return view('hukum.print.kecuranganDkpp', $data);
+    }
+    public function printBawaslu(Request $request, $id)
+    {
+        $kecurangan = Kecurangan::where('id',Crypt::decrypt($id))->first();
+        $data['kecurangan'] = $kecurangan;
+        // return $kecurangan;
+        if(isset($kecurangan['tps_id'])){
+        $request['id'] = Crypt::encrypt($kecurangan->tps_id);
+        $data['tps'] = Tps::where('regency_id', $this->config->regencies_id)
+                ->where('id', Crypt::decrypt($request['id']))
+                ->first();
+        $data['saksi'] = Saksi::where('tps_id', Crypt::decrypt($request['id']))->first();
+        $data['kecamatan'] = District::where('id', $data['saksi']['district_id'])->first();
+        $data['kelurahan'] = Village::where('id', $data['saksi']['village_id'])->first();
+        $data['absensi'] = Absensi::where('user_id',  $kecurangan->user_id)->first();
+        $data['surat_suara'] = SuratSuara::where('tps_id', $request['id'])->first();
+        }
+        $data['qrcode'] = Qrcode::where('kecurangan_id', Crypt::decrypt($id))->first();
+        $data['kota'] = Regency::where('id', $kecurangan->regency_id)->first();
+      
+        $data['user'] = User::where('id', $kecurangan->user_id)->first();
+        $data['verifikator'] = User::where('id',  $kecurangan->petugas_id)->first();
+        // $data['hukum'] = User::where('id',  $kecurangan->petugas_id)->first();
+
+        // $data['databukti'] = Databukti::where('tps_id', Crypt::decrypt($request['id']))->first();
+
+        $data['list_kecurangan'] = Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+            ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
+            ->where('bukti_deskripsi_curang.kecurangan_id', Crypt::decrypt($id))
+            ->get();
+        $data['foto_kecurangan'] = Buktifoto::where('kecurangan_id', Crypt::decrypt($id))->get();
+        $data['vidio_kecurangan'] = Buktividio::where('kecurangan_id', Crypt::decrypt($id))->first();
+        $data['surat_pernyataan'] = SuratPernyataan::where('kecurangan_id', Crypt::decrypt($id))->first();
+        return view('hukum.print.kecuranganBawaslu', $data);
+    }
+    public function printTimHukumPaslon(Request $request, $id)
+    {
+        $kecurangan = Kecurangan::where('id',Crypt::decrypt($id))->first();
+        $data['kecurangan'] = $kecurangan;
+        // return $kecurangan;
+        if(isset($kecurangan['tps_id'])){
+        $request['id'] = Crypt::encrypt($kecurangan->tps_id);
+        $data['tps'] = Tps::where('regency_id', $this->config->regencies_id)
+                ->where('id', Crypt::decrypt($request['id']))
+                ->first();
+        $data['saksi'] = Saksi::where('tps_id', Crypt::decrypt($request['id']))->first();
+        $data['kecamatan'] = District::where('id', $data['saksi']['district_id'])->first();
+        $data['kelurahan'] = Village::where('id', $data['saksi']['village_id'])->first();
+        $data['absensi'] = Absensi::where('user_id',  $kecurangan->user_id)->first();
+        $data['surat_suara'] = SuratSuara::where('tps_id', $request['id'])->first();
+        }
+        $data['qrcode'] = Qrcode::where('kecurangan_id', Crypt::decrypt($id))->first();
+        $data['kota'] = Regency::where('id', $kecurangan->regency_id)->first();
+      
+        $data['user'] = User::where('id', $kecurangan->user_id)->first();
+        $data['verifikator'] = User::where('id',  $kecurangan->petugas_id)->first();
+        // $data['hukum'] = User::where('id',  $kecurangan->petugas_id)->first();
+
+        // $data['databukti'] = Databukti::where('tps_id', Crypt::decrypt($request['id']))->first();
+
+        $data['list_kecurangan'] = Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+            ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
+            ->where('bukti_deskripsi_curang.kecurangan_id', Crypt::decrypt($id))
+            ->get();
+        $data['foto_kecurangan'] = Buktifoto::where('kecurangan_id', Crypt::decrypt($id))->get();
+        $data['vidio_kecurangan'] = Buktividio::where('kecurangan_id', Crypt::decrypt($id))->first();
+        $data['surat_pernyataan'] = SuratPernyataan::where('kecurangan_id', Crypt::decrypt($id))->first();
+        return view('hukum.print.kecuranganTimHukumPaslon', $data);
+    }
+    public function printKpu(Request $request, $id)
+    {
+        $kecurangan = Kecurangan::where('id',Crypt::decrypt($id))->first();
+        $data['kecurangan'] = $kecurangan;
+        // return $kecurangan;
+        if(isset($kecurangan['tps_id'])){
+        $request['id'] = Crypt::encrypt($kecurangan->tps_id);
+        $data['tps'] = Tps::where('regency_id', $this->config->regencies_id)
+                ->where('id', Crypt::decrypt($request['id']))
+                ->first();
+        $data['saksi'] = Saksi::where('tps_id', Crypt::decrypt($request['id']))->first();
+        $data['kecamatan'] = District::where('id', $data['saksi']['district_id'])->first();
+        $data['kelurahan'] = Village::where('id', $data['saksi']['village_id'])->first();
+        $data['absensi'] = Absensi::where('user_id',  $kecurangan->user_id)->first();
+        $data['surat_suara'] = SuratSuara::where('tps_id', $request['id'])->first();
+        }
+        $data['qrcode'] = Qrcode::where('kecurangan_id', Crypt::decrypt($id))->first();
+        $data['kota'] = Regency::where('id', $kecurangan->regency_id)->first();
+      
+        $data['user'] = User::where('id', $kecurangan->user_id)->first();
+        $data['verifikator'] = User::where('id',  $kecurangan->petugas_id)->first();
+        // $data['hukum'] = User::where('id',  $kecurangan->petugas_id)->first();
+
+        // $data['databukti'] = Databukti::where('tps_id', Crypt::decrypt($request['id']))->first();
+
+        $data['list_kecurangan'] = Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+            ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
+            ->where('bukti_deskripsi_curang.kecurangan_id', Crypt::decrypt($id))
+            ->get();
+        $data['foto_kecurangan'] = Buktifoto::where('kecurangan_id', Crypt::decrypt($id))->get();
+        $data['vidio_kecurangan'] = Buktividio::where('kecurangan_id', Crypt::decrypt($id))->first();
+        $data['surat_pernyataan'] = SuratPernyataan::where('kecurangan_id', Crypt::decrypt($id))->first();
+        return view('hukum.print.kecuranganKpu', $data);
+    }
+    public function printMk(Request $request, $id)
+    {
+        $kecurangan = Kecurangan::where('id',Crypt::decrypt($id))->first();
+        $data['kecurangan'] = $kecurangan;
+        // return $kecurangan;
+        if(isset($kecurangan['tps_id'])){
+        $request['id'] = Crypt::encrypt($kecurangan->tps_id);
+        $data['tps'] = Tps::where('regency_id', $this->config->regencies_id)
+                ->where('id', Crypt::decrypt($request['id']))
+                ->first();
+        $data['saksi'] = Saksi::where('tps_id', Crypt::decrypt($request['id']))->first();
+        $data['kecamatan'] = District::where('id', $data['saksi']['district_id'])->first();
+        $data['kelurahan'] = Village::where('id', $data['saksi']['village_id'])->first();
+        $data['absensi'] = Absensi::where('user_id',  $kecurangan->user_id)->first();
+        $data['surat_suara'] = SuratSuara::where('tps_id', $request['id'])->first();
+        }
+        $data['qrcode'] = Qrcode::where('kecurangan_id', Crypt::decrypt($id))->first();
+        $data['kota'] = Regency::where('id', $kecurangan->regency_id)->first();
+      
+        $data['user'] = User::where('id', $kecurangan->user_id)->first();
+        $data['verifikator'] = User::where('id',  $kecurangan->petugas_id)->first();
+        // $data['hukum'] = User::where('id',  $kecurangan->petugas_id)->first();
+
+        // $data['databukti'] = Databukti::where('tps_id', Crypt::decrypt($request['id']))->first();
+
+        $data['list_kecurangan'] = Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+            ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
+            ->where('bukti_deskripsi_curang.kecurangan_id', Crypt::decrypt($id))
+            ->get();
+        $data['foto_kecurangan'] = Buktifoto::where('kecurangan_id', Crypt::decrypt($id))->get();
+        $data['vidio_kecurangan'] = Buktividio::where('kecurangan_id', Crypt::decrypt($id))->first();
+        $data['surat_pernyataan'] = SuratPernyataan::where('kecurangan_id', Crypt::decrypt($id))->first();
+        return view('hukum.print.kecuranganMk', $data);
+    }
+    public function printPolri(Request $request, $id)
+    {
+        $kecurangan = Kecurangan::where('id',Crypt::decrypt($id))->first();
+        $data['kecurangan'] = $kecurangan;
+        // return $kecurangan;
+        if(isset($kecurangan['tps_id'])){
+        $request['id'] = Crypt::encrypt($kecurangan->tps_id);
+        $data['tps'] = Tps::where('regency_id', $this->config->regencies_id)
+                ->where('id', Crypt::decrypt($request['id']))
+                ->first();
+        $data['saksi'] = Saksi::where('tps_id', Crypt::decrypt($request['id']))->first();
+        $data['kecamatan'] = District::where('id', $data['saksi']['district_id'])->first();
+        $data['kelurahan'] = Village::where('id', $data['saksi']['village_id'])->first();
+        $data['absensi'] = Absensi::where('user_id',  $kecurangan->user_id)->first();
+        $data['surat_suara'] = SuratSuara::where('tps_id', $request['id'])->first();
+        }
+        $data['qrcode'] = Qrcode::where('kecurangan_id', Crypt::decrypt($id))->first();
+        $data['kota'] = Regency::where('id', $kecurangan->regency_id)->first();
+      
+        $data['user'] = User::where('id', $kecurangan->user_id)->first();
+        $data['verifikator'] = User::where('id',  $kecurangan->petugas_id)->first();
+        // $data['hukum'] = User::where('id',  $kecurangan->petugas_id)->first();
+
+        // $data['databukti'] = Databukti::where('tps_id', Crypt::decrypt($request['id']))->first();
+
+        $data['list_kecurangan'] = Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+            ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
+            ->where('bukti_deskripsi_curang.kecurangan_id', Crypt::decrypt($id))
+            ->get();
+        $data['foto_kecurangan'] = Buktifoto::where('kecurangan_id', Crypt::decrypt($id))->get();
+        $data['vidio_kecurangan'] = Buktividio::where('kecurangan_id', Crypt::decrypt($id))->first();
+        $data['surat_pernyataan'] = SuratPernyataan::where('kecurangan_id', Crypt::decrypt($id))->first();
+        return view('hukum.print.kecuranganPolri', $data);
+    }
+    public function printPanrb(Request $request, $id)
+    {
+        $kecurangan = Kecurangan::where('id',Crypt::decrypt($id))->first();
+        $data['kecurangan'] = $kecurangan;
+        // return $kecurangan;
+        if(isset($kecurangan['tps_id'])){
+        $request['id'] = Crypt::encrypt($kecurangan->tps_id);
+        $data['tps'] = Tps::where('regency_id', $this->config->regencies_id)
+                ->where('id', Crypt::decrypt($request['id']))
+                ->first();
+        $data['saksi'] = Saksi::where('tps_id', Crypt::decrypt($request['id']))->first();
+        $data['kecamatan'] = District::where('id', $data['saksi']['district_id'])->first();
+        $data['kelurahan'] = Village::where('id', $data['saksi']['village_id'])->first();
+        $data['absensi'] = Absensi::where('user_id',  $kecurangan->user_id)->first();
+        $data['surat_suara'] = SuratSuara::where('tps_id', $request['id'])->first();
+        }
+        $data['qrcode'] = Qrcode::where('kecurangan_id', Crypt::decrypt($id))->first();
+        $data['kota'] = Regency::where('id', $kecurangan->regency_id)->first();
+      
+        $data['user'] = User::where('id', $kecurangan->user_id)->first();
+        $data['verifikator'] = User::where('id',  $kecurangan->petugas_id)->first();
+        // $data['hukum'] = User::where('id',  $kecurangan->petugas_id)->first();
+
+        // $data['databukti'] = Databukti::where('tps_id', Crypt::decrypt($request['id']))->first();
+
+        $data['list_kecurangan'] = Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+            ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
+            ->where('bukti_deskripsi_curang.kecurangan_id', Crypt::decrypt($id))
+            ->get();
+        $data['foto_kecurangan'] = Buktifoto::where('kecurangan_id', Crypt::decrypt($id))->get();
+        $data['vidio_kecurangan'] = Buktividio::where('kecurangan_id', Crypt::decrypt($id))->first();
+        $data['surat_pernyataan'] = SuratPernyataan::where('kecurangan_id', Crypt::decrypt($id))->first();
+        return view('hukum.print.kecuranganPanrb', $data);
+    }
+
+
 
     function updateStatusPrint($id){
            Qrcode::where('kecurangan_id',Crypt::decrypt($id))->update([
