@@ -391,13 +391,13 @@ $solution = \App\Models\SolutionFraud::get();
         transition: all 400ms ease
     }
 </style> --}}
-<div id="rekomendasi-tindakan" class="tabcontent mt-0 pt-0 px-0">
-    <div class="col-12 px-0 mt-5">
+<div id="rekomendasi-tindakan" class="tabcontent mt-0 pt-0 px-0 row">
+    <div class="col-12 mt-5">
         <h2 class="fw-bold">
             Rekomendasi Tindakan
         </h2>
     </div>
-    <div class="col-lg-12 px-0">
+    <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -414,7 +414,7 @@ $solution = \App\Models\SolutionFraud::get();
                                 ->get();
                         ?>
                     <div class="col-lg parent-rekom-tindakan transition">
-                        <div class="card">
+                        <div class="card mb-0">
                             <div class="card-header bg-primary">
                                 <div class="card-title text-white">{{$solut->solution}}</div>
                             </div>
@@ -435,9 +435,9 @@ $solution = \App\Models\SolutionFraud::get();
                                         </script>
                                     </div>
                                     <div class="col my-auto text-end">
-                                        <a 
-                                            href="{{route('superadmin.solution', encrypt($solut->id))}}" 
-                                            data-id="" class="my-auto rekom-tindakan">
+                                        <a {{-- href="{{ route('superadmin.solution', encrypt($solut->id)) }}" --}}
+                                            style="cursor: pointer"
+                                            data-target="{{ preg_replace('/\([^)]+\)/', '', str_replace(' ', '-', strtolower($solut->solution))) }}" class="my-auto rekom-tindakan">
                                             Lihat
                                             <i class="mdi mdi-eye"></i>
                                         </a>
@@ -448,6 +448,88 @@ $solution = \App\Models\SolutionFraud::get();
                     </div>
                     @endforeach
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('.rekom-tindakan').on('click', function () {
+            let target = $(this).data('target');
+            let $targetElement = $(`.konten-rekom-tindakan#${target}`);
+            
+            if ($targetElement.hasClass('active')) {
+            // If it has the 'active' class, do nothing or perform the required action
+            // For example, you might want to toggle the 'active' class or perform other actions
+            } else {
+            // If it doesn't have the 'active' class, hide others and show the selected one
+            $('.konten-rekom-tindakan').not($targetElement).hide(500).removeClass('active');
+                $targetElement.show(200).addClass('active');
+            }
+        }) 
+    </script>
+
+    <div class="col-12 konten-rekom-tindakan" id="perhitungan-suara-ulang" style="display: none">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="card-title text-white">Perhitungan Suara Ulang</div>
+            </div>
+            <div class="card-body">
+                <livewire:rekom-tindakan-p-s-u>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 konten-rekom-tindakan" id="pemungutan-suara-ulang" style="display: none">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="card-title text-white">Pemungutan Suara Ulang</div>
+            </div>
+            <div class="card-body">
+                <livewire:rekom-tindakan-p-s-u2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 konten-rekom-tindakan" id="kasus-administrasi-pemilu" style="display: none">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="card-title text-white">Kasus Administrasi Pemilu</div>
+            </div>
+            <div class="card-body">
+                <livewire:rekom-tindakan-k-a-p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 konten-rekom-tindakan" id="pelanggaran-tindak-pidana" style="display: none">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="card-title text-white">Pelanggaran Tindak Pidana</div>
+            </div>
+            <div class="card-body">
+                <livewire:rekom-tindakan-p-t-p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 konten-rekom-tindakan" id="pelanggaran-kode-etik" style="display: none">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="card-title text-white">Pelanggaran Kode Etik</div>
+            </div>
+            <div class="card-body">
+                <livewire:rekom-tindakan-p-k-e>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 konten-rekom-tindakan" id="pelanggaran-aparatur-sipil-negara-" style="display: none">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="card-title text-white">Pelanggaran Aparatur Sipil Negara (ASN)</div>
+            </div>
+            <div class="card-body">
+                <livewire:rekom-tindakan-p-a-s-n>
             </div>
         </div>
     </div>
