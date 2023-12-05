@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Config;
 use App\Models\Configs;
+use App\Models\Kecurangan;
 use App\Models\RegenciesDomain;
 use App\Models\Tps;
 use Livewire\Component;
@@ -33,13 +34,15 @@ class FraudDataPrintPolri extends Component
     }
     public function render()
     {
-        $data['list_suara']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
-            ->join('users', 'users.tps_id', '=', 'tps.id')
-            ->where('saksi.kecurangan', 'yes')
-            ->where('saksi.status_kecurangan', 'terverifikasi')
-            ->where('name', 'like', '%' . $this->search . '%')
-            ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
-            ->paginate(16);
+        $data['list_suara']  = Kecurangan::join('users', 'users.id', '=', 'kecurangan.user_id')
+        ->join('qrcode_hukum', 'qrcode_hukum.kecurangan_id', '=', 'kecurangan.id')
+        ->where('kecurangan.status_kecurangan', 'terverifikasi')
+        ->whereNull('qrcode_hukum.polriPrint')
+        ->where('users.regency_id', $this->config->regencies_id)
+        ->where('users.name', 'like', '%'.$this->search.'%')
+        ->select('kecurangan.created_at as date', 'users.*','kecurangan.*','kecurangan.id as kecurangan_id')
+        ->distinct()
+        ->paginate(16);
         return view('livewire.fraud-data-print-polri', $data);
     }
 }

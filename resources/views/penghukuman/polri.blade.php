@@ -29,12 +29,53 @@ $solution = \App\Models\SolutionFraud::get();
             </li>
         </ol>
     </div>
+     <div class="col-md-8">
+        <div class="row mt-2">
+            <div class="col parent-link">
+                <a data-command-target="kecurangan-masuk" class="btn text-white w-100 py-3 kecurangan-masuk tablink"
+                    onclick="openPage('kecurangan-masuk', this, '#6259ca')" id="defaultOpen">Bukti Kecurangan</a>
+            </div>
+            <div class="col parent-link">
+                <a class="btn text-white w-100 py-3 tablink" data-command-target="kecurangan-tercetak"
+                    onclick="openPage('kecurangan-tercetak', this, '#6259ca')">Kecurangan Tercetak</a>
+            </div>
+
+        </div>
+    </div>
 
 </div>
 
-<div class="row mt-5">
-    <livewire:fraud-data-print-polri>
+<script>
+    function openPage(pageName, elmnt, color) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+            // Remove the "active-tab" class from all tab links
+            tablinks[i].classList.remove("active-tab");
+        }
+        document.getElementById(pageName).style.display = "block";
+        elmnt.style.backgroundColor = color;
+        // Add the "active-tab" class to the selected tab link
+        elmnt.classList.add("active-tab");
+    }
+    // Wrap this part in a DOMContentLoaded event listener
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("defaultOpen").click();
+    });
+</script>
+
+<div id="kecurangan-masuk" class="tabcontent mt-0 pt-0 px-0">
+      <livewire:fraud-data-print-polri>
 </div>
+<div id="kecurangan-tercetak" class="tabcontent mt-0 pt-0 px-0">
+    <livewire:panrb-tercetak>
+</div>
+
 
 
 @include('layouts.partials.footer')

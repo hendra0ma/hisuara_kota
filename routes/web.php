@@ -371,12 +371,46 @@ foreach ($kotas as $kota) {
                     Route::get('data-gugatan', 'data_gugatan')->name('data_gugatan');
                     Route::get('developer', 'developer')->name('developer');
                     Route::post('cek_pass', 'cek_pass');
+
+                    
                     Route::get('fraud-data-report', 'FraudDataReport')->name('FraudDataReport');
                     Route::get('fraud-data-print', 'fraudDataPrint')->name('fraudDataPrint');
+
                     Route::get('update-Status-Print/{id}', 'updateStatusPrint')->name('updateStatusPrint');
+                    Route::get('update-Status-PrintBawaslu/{id}', 'updateStatusPrintBawaslu')->name('updateStatusPrintBawaslu');
+                    Route::get('update-Status-printTimHukumPaslon/{id}', 'updateStatusprintTimHukumPaslon')->name('updateStatusprintTimHukumPaslon');
+                    Route::get('update-Status-printDkpp/{id}', 'updateStatusprintDkpp')->name('updateStatusprintDkpp');
+                    Route::get('update-Status-printKpu/{id}', 'updateStatusprintKpu')->name('updateStatusprintKpu');
+                    Route::get('update-Status-printMk/{id}', 'updateStatusprintMk')->name('updateStatusprintMk');
+                    Route::get('update-Status-printPolri/{id}', 'updateStatusprintPolri')->name('updateStatusprintPolri');
+                    Route::get('update-Status-printPanrb/{id}', 'updateStatusprintPanrb')->name('updateStatusprintPanrb');
+               
+
 
                     Route::get('fraud-data-print-tercetak', 'fraudDataPrint_tercetak')->name('fraudDataPrint_tercetak');
+                    Route::get('fraud-data-print-tercetakPanrb', 'fraudDataPrint_tercetakPanrb')->name('fraudDataPrint_tercetakPanrb');
+                    Route::get('fraud-data-print-tercetakBawaslu', 'fraudDataPrint_tercetakBawaslu')->name('fraudDataPrint_tercetakBawaslu');
+                    Route::get('fraud-data-print-tercetakTimHukumPaslon', 'fraudDataPrint_tercetakTimHukumPaslon')->name('fraudDataPrint_tercetakTimHukumPaslon');
+                    Route::get('fraud-data-print-tercetakDkpp', 'fraudDataPrint_tercetakDkpp')->name('fraudDataPrint_tercetakDkpp');
+                    Route::get('fraud-data-print-tercetakKpu', 'fraudDataPrint_tercetakKpu')->name('fraudDataPrint_tercetakKpu');
+                    Route::get('fraud-data-print-tercetakMk', 'fraudDataPrint_tercetakMk')->name('fraudDataPrint_tercetakMk');
+                    Route::get('fraud-data-print-tercetakPolri', 'fraudDataPrint_tercetakPolri')->name('fraudDataPrint_tercetakPolri');
+                    Route::get('fraud-data-print-tercetakPanrb', 'fraudDataPrint_tercetakPanrb')->name('fraudDataPrint_tercetakPanrb');
+           
+
+
+
                     Route::get('print/{id}', 'print')->name('printKecurangan');
+                    Route::get('printBawaslu/{id}', 'printBawaslu')->name('printBawasluKecurangan');
+                    Route::get('printTimHukumPaslon/{id}', 'printTimHukumPaslon')->name('printTimHukumPaslonKecurangan');
+                    Route::get('printDkpp/{id}', 'printDkpp')->name('printDkppKecurangan');
+                    Route::get('printKpu/{id}', 'printKpu')->name('printKpuKecurangan');
+                    Route::get('printMk/{id}', 'printMk')->name('printMkKecurangan');
+                    Route::get('printPolri/{id}', 'printPolri')->name('printPolriKecurangan');
+                    Route::get('printPanrb/{id}', 'printPanrb')->name('printPanrbKecurangan');
+
+                  
+
                     Route::get('ajax-kecurangan-terverifikasi', 'getKecuranganTerverifikasi')->name('ajaxKecuranganTerverifikasi');
                     Route::get('kecamatan/{id}', 'kecamatan');
                     Route::get('index-tsm', 'index_tsm')->name('index_tsm');
