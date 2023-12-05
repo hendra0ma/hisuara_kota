@@ -60,11 +60,11 @@ class MKPesertaTidakJawab extends Component
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->paginate(18);
         $data['tag'] = 1;
-        $data['terverifikasi'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi') ->where("users.regency_id",  $this->config->regencies_id)->get();
-        $data['tidak_menjawab'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->where('makamah_konsitusi', 'Tidak Menjawab') ->where("users.regency_id",  $this->config->regencies_id)->get();
-        $data['selesai'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->where('makamah_konsitusi', 'Selesai') ->where("users.regency_id",  $this->config->regencies_id)->get();
-        $data['ditolak'] = Saksi::where('kecurangan', 'yes')->where('makamah_konsitusi', 'Ditolak') ->where("users.regency_id",  $this->config->regencies_id)->get();
-        $data['data_masuk'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi') ->where("users.regency_id",  $this->config->regencies_id)->get();
+        $data['terverifikasi'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi') ->where("saksi.regency_id",  $this->config->regencies_id)->get();
+        $data['tidak_menjawab'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->where('makamah_konsitusi', 'Tidak Menjawab') ->where("saksi.regency_id",  $this->config->regencies_id)->get();
+        $data['selesai'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi')->where('makamah_konsitusi', 'Selesai') ->where("saksi.regency_id",  $this->config->regencies_id)->get();
+        $data['ditolak'] = Saksi::where('kecurangan', 'yes')->where('makamah_konsitusi', 'Ditolak') ->where("saksi.regency_id",  $this->config->regencies_id)->get();
+        $data['data_masuk'] = Saksi::where('kecurangan', 'yes')->where('status_kecurangan', 'terverifikasi') ->where("saksi.regency_id",  $this->config->regencies_id)->get();
         return view('livewire.m-k-peserta-tidak-jawab', $data);
     }
 }

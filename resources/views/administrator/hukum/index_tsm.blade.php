@@ -75,8 +75,8 @@ $kota = Regency::where('id', $config->regencies_id)->first();
 <hr style="border: 1px solid">
 
 <!-- PAGE-HEADER END -->
-<div class="row mx-auto mt-5 container">
-    <div class="col-lg-12">
+<div class="row mx-auto mt-5">
+    <div class="col-lg-6">
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="card">
@@ -138,7 +138,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
         </div>
 
     </div>
-    <div class="col-lg-12">
+    <div class="col-lg-6">
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="card">
@@ -200,7 +200,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
             </div>
         </div>
     </div>
-    <div class="col-lg-12">
+    <div class="col-lg-6">
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="card">
@@ -262,7 +262,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
             </div>
         </div>
     </div>
-    <div class="col-lg-12">
+    <div class="col-lg-6">
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="card">
@@ -276,7 +276,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                     <div class="card-body">
 
                         <center>
-                            <div id="chart-donut-et"></div>
+                            <div id="chart-donut-panrb"></div>
                         </center>
 
                         <div class="table-responsive">
