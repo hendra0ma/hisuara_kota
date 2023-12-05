@@ -33,11 +33,11 @@ class Clainnya extends Component
     public function render()
     {
         $villagee = Auth::user()->villages;
-        $data['dev'] = User::join('tps', 'tps.id', '=', 'users.tps_id')->where("tps.regency_id",  $this->config->regencies_id)->first();
+        $data['dev'] = User::join('tps', 'tps.id', '=', 'users.tps_id')->where("users.regency_id",  $this->config->regencies_id)->first();
         $data['kelurahan'] = Village::where('id', $villagee)->first();
         $data['paslon'] = Paslon::get();
 
-        $cekSaksi = Saksi::where('tps_id', Auth::user()->tps_id)->where("tps.regency_id",  $this->config->regencies_id)->count('id');
+        $cekSaksi = Saksi::where('tps_id', Auth::user()->tps_id)->where("saksi.regency_id",  $this->config->regencies_id)->count('id');
         return view('livewire.clainnya',$data);
     }
 }
