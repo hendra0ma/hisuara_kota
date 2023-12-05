@@ -1045,10 +1045,10 @@
 
 
         function afterPrintOrDelay() {
-            @if ($qrcode->id != null)
+            @if ($qrcode->mkPrint != null)
             location.href = "{{url()->previous()}}";
             @else
-            location.href = "{{route('superadmin.updateStatusPrint',Crypt::encrypt($kecurangan->id))}}";
+              location.href = `{{url("administrator/update-Status-printMk")}}/{{Crypt::encrypt($kecurangan->id)}}`;
             @endif
         }
         if (window.matchMedia) {

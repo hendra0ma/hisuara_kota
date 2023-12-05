@@ -10,7 +10,7 @@ use App\Models\Tps;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class FraudDataPrintPanrb extends Component
+class DkppTercetak extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -18,6 +18,8 @@ class FraudDataPrintPanrb extends Component
     protected $queryString = ['search'];
     private $config;
     private $configs;
+    
+ 
       public function __construct()
     {
         $currentDomain = request()->getHttpHost();
@@ -37,12 +39,12 @@ class FraudDataPrintPanrb extends Component
         $data['list_suara']  = Kecurangan::join('users', 'users.id', '=', 'kecurangan.user_id')
         ->join('qrcode_hukum', 'qrcode_hukum.kecurangan_id', '=', 'kecurangan.id')
         ->where('kecurangan.status_kecurangan', 'terverifikasi')
-        ->whereNull('qrcode_hukum.panrbPrint')
+        ->where('qrcode_hukum.dkppPrint',1)
         ->where('users.regency_id', $this->config->regencies_id)
         ->where('users.name', 'like', '%'.$this->search.'%')
         ->select('kecurangan.created_at as date', 'users.*','kecurangan.*','kecurangan.id as kecurangan_id')
         ->distinct()
         ->paginate(16);
-        return view('livewire.fraud-data-print-panrb', $data);
+        return view('livewire.dkpp-tercetak', $data);
     }
 }

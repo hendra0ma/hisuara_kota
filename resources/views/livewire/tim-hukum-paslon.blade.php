@@ -54,7 +54,7 @@
     
                         <div class="row mt-2">
                             <div class="col-12 px-0">
-                                <a href="{{route('superadmin.printKecurangan',Crypt::encrypt($ls->kecurangan_id))}}" class="btn w-100 fotoKecuranganterverifikasi mt-2 rounded-0 text-white"
+                                <a href="{{route('superadmin.printTimHukumPaslonKecurangan',Crypt::encrypt($ls->kecurangan_id))}}" class="btn w-100 fotoKecuranganterverifikasi mt-2 rounded-0 text-white"
                                     id="Cek" style="background: #ff4f4e">
                                     Cetak Bukti Kecurangan</a>
                             </div>

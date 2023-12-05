@@ -45,10 +45,10 @@ class HukumController extends Controller
         $currentDomain = request()->getHttpHost();
         if (isset(parse_url($currentDomain)['port'])) {
             $url = substr($currentDomain, 0, strpos($currentDomain, ':8000'));
-        }else{
+        } else {
             $url = $currentDomain;
         }
-        $regency_id = RegenciesDomain::where('domain',"LIKE","%".$url."%")->first();
+        $regency_id = RegenciesDomain::where('domain', "LIKE", "%" . $url . "%")->first();
 
         $this->configs = Config::first();
         $this->config = new Configs;
@@ -89,7 +89,7 @@ class HukumController extends Controller
         return view('hukum.index', $data);
     }
 
-    public function validatorKecurangan ()
+    public function validatorKecurangan()
     {
         $data['config'] = Config::first();
         $config = $data['config'];
@@ -105,7 +105,7 @@ class HukumController extends Controller
         $data['jumlah_tps_masuk'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->count();
         $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
         $data['jumlah_tps_terverifikai'] = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')->where('saksi.verification', 1)->count();
-        $data['total_tps']   =  Tps::where('setup','belum terisi')->count();
+        $data['total_tps']   =  Tps::where('setup', 'belum terisi')->count();
         $data['jumlah_kosong']  =  $data['total_tps'] - $data['jumlah_tps_masuk'];
 
         $data['index_tsm']    = ModelsListkecurangan::get();
@@ -158,12 +158,11 @@ class HukumController extends Controller
         $data['foto_kecurangan'] = ModelsBuktifoto::where('tps_id', $request['id'])->get();
         $data['vidio_kecurangan'] = ModelsBuktividio::where('tps_id', $request['id'])->first();
         $data['list_kecurangan']     = Bukti_deskripsi_curang::where('tps_id', $request['id'])->get();
-        $data['list_solution'] = Bukti_deskripsi_curang::
-        join('list_kecurangan','list_kecurangan.id','=','bukti_deskripsi_curang.list_kecurangan_id')
-        ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
-        ->where('bukti_deskripsi_curang.tps_id',$request['id'])
-        ->select('solution_frauds.*','bukti_deskripsi_curang.*','list_kecurangan.*','list_kecurangan.id as id_list')
-        ->get();
+        $data['list_solution'] = Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+            ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
+            ->where('bukti_deskripsi_curang.tps_id', $request['id'])
+            ->select('solution_frauds.*', 'bukti_deskripsi_curang.*', 'list_kecurangan.*', 'list_kecurangan.id as id_list')
+            ->get();
         $data['pelanggaran_umum']    = ModelsListkecurangan::where('jenis', 0)->get();
         $data['pelanggaran_petugas'] = ModelsListkecurangan::where('jenis', 1)->get();
         $data['tps'] = Tps::where('id', $request['id'])->first();
@@ -187,8 +186,8 @@ class HukumController extends Controller
     }
     public function getsolution(Request $request)
     {
-        $data = ModelsListkecurangan::join('solution_frauds','solution_frauds.id','=','list_kecurangan.solution_fraud_id')->where('list_kecurangan.id',$request->id_list)->first();
-        return response()->json($data,200);
+        $data = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->where('list_kecurangan.id', $request->id_list)->first();
+        return response()->json($data, 200);
     }
 
     public function get_fotoKecuranganterverifikasi(Request $request)
@@ -231,110 +230,105 @@ class HukumController extends Controller
     //// Action Hukum
     public function proses_kecurangan(Request $request)
     {
-       $kecurangan = $request['bukti_text'];
-       $kecurangan_id = $request->kecurangan_id;
-       $kecuranganData = Kecurangan::where('id',$kecurangan_id)->first();
-       if ($kecuranganData->tps_id != null) {
-           $tps_id = Crypt::decrypt($request->tps_id);
-           $tps = Tps::where('id', $tps_id)->first();
-       }
-     
+        $kecurangan = $request['bukti_text'];
+        $kecurangan_id = $request->kecurangan_id;
+        $kecuranganData = Kecurangan::where('id', $kecurangan_id)->first();
+        if ($kecuranganData->tps_id != null) {
+            $tps_id = Crypt::decrypt($request->tps_id);
+            $tps = Tps::where('id', $tps_id)->first();
+        }
+
         if ($kecurangan == null) {
             $kecurangan = [];
         }
-        
+
         $fromListKecurangan = $request['curang'];
         $catatanHukum = $request['kecurangan'];
-        
+
         if ($request['curang'] != null) {
             foreach ($fromListKecurangan as $data) {
                 if ($kecuranganData->tps_id != null) {
-                Bukti_deskripsi_curang::create([
-                    'tps_id' => $tps_id,
-                    "kecurangan_id"=> $kecuranganData->id,
-                    "user_id"=> $kecuranganData->user_id,
-                    "petugas_id"=> Auth::user()->id,
-                    'text' => $data,
-                ]);
-            }else{
-                Bukti_deskripsi_curang::create([
-              
-                    "kecurangan_id"=> $kecuranganData->id,
-                    "user_id"=> $kecuranganData->user_id,
-                    "petugas_id"=> Auth::user()->id,
-                    'text' => $data,
-                ]);
+                    Bukti_deskripsi_curang::create([
+                        'tps_id' => $tps_id,
+                        "kecurangan_id" => $kecuranganData->id,
+                        "user_id" => $kecuranganData->user_id,
+                        "petugas_id" => Auth::user()->id,
+                        'text' => $data,
+                    ]);
+                } else {
+                    Bukti_deskripsi_curang::create([
 
-            }
+                        "kecurangan_id" => $kecuranganData->id,
+                        "user_id" => $kecuranganData->user_id,
+                        "petugas_id" => Auth::user()->id,
+                        'text' => $data,
+                    ]);
+                }
 
                 // return $kecuranganData->id;
             }
-        
         }
-      
+
         if ($request['kecurangan'] != null) {
             if ($kecuranganData->tps_id != null) {
-                   
+
                 Bukticatatan::create([
                     'tps_id' => $tps_id,
-                    "kecurangan_id"=>$kecuranganData->id,
+                    "kecurangan_id" => $kecuranganData->id,
                     'text' =>  $catatanHukum
                 ]);
-            }else{
-                
+            } else {
+
                 Bukticatatan::create([
-               
-                    "kecurangan_id"=>$kecuranganData->id,
+
+                    "kecurangan_id" => $kecuranganData->id,
                     'text' =>  $catatanHukum
                 ]);
             }
         }
-        
-        Kecurangan::where('id',$kecurangan_id)->update([
+
+        Kecurangan::where('id', $kecurangan_id)->update([
             'status_kecurangan' => 'terverifikasi',
-            "petugas_id"=>Auth::user()->id
+            "petugas_id" => Auth::user()->id
         ]);
         $bulan = date('m');
         $tahun = date('y');
-       
+
         $no_berkas = $kecurangan_id . "/BK"  . "/PILPRES/" . $bulan . "/" . $tahun . "";
         if ($kecuranganData->tps_id != null) {
-        $save = Qrcode::create([
-            'tps_id' => $tps_id,
-            "kecurangan_id"=>$kecuranganData->id,
-            'verifikator_id' => Auth::user()->id,
-            'hukum_id' => Auth::user()->id,
-            'tanggal_masuk' => now(),
-            'token' => encrypt(rand()),
-            'nomor_berkas' => $no_berkas,
-           
-        ]);
-        }else{
-            $save = Qrcode::create([
-                "kecurangan_id"=>$kecuranganData->id,
+            Qrcode::create([
+                'tps_id' => $tps_id,
+                "kecurangan_id" => $kecuranganData->id,
                 'verifikator_id' => Auth::user()->id,
                 'hukum_id' => Auth::user()->id,
                 'tanggal_masuk' => now(),
                 'token' => encrypt(rand()),
                 'nomor_berkas' => $no_berkas,
-            
-            ]);
 
+            ]);
+        } else {
+            Qrcode::create([
+                "kecurangan_id" => $kecuranganData->id,
+                'verifikator_id' => Auth::user()->id,
+                'hukum_id' => Auth::user()->id,
+                'tanggal_masuk' => now(),
+                'token' => encrypt(rand()),
+                'nomor_berkas' => $no_berkas,
+
+            ]);
         }
 
         if ($kecuranganData->tps_id != null) {
             $data = [
-                'status_kecurangan' =>'terverifikasi',
+                'status_kecurangan' => 'terverifikasi',
                 'verifikator_id' => Auth::user()->id,
             ];
             Saksi::where('tps_id', $tps_id)->update($data);
-            
         }
-        $qr =  Qrcode::where('kecurangan_id',$kecuranganData->id)->first();
+        $qr =  Qrcode::where('kecurangan_id', $kecuranganData->id)->first();
         if ($kecuranganData->tps_id != null) {
             $saksi = Saksi::where('tps_id', $tps_id)->first();
-        }else{
-
+        } else {
         }
         if ($kecuranganData->tps_id != null) {
 
@@ -342,21 +336,17 @@ class HukumController extends Controller
                 'deskripsi' => 'Dengan ini menyatakan bahwa saya siap bertanggung jawab atas data dan bukti-bukti yang saya kirimkan dari TPS tempat saya bertugas dan bisa dipertanggung jawabkan kebenaranya. Saya bersedia hadir untuk memberikan keterangan sebagai saksi pada pihak-pihak terkait jika diperlukan. Demikian pernyataan ini dibuat dalam keadaan sadar sehat jasmani raohani serta tidak ada paksaan dari pihak manapun.',
                 'saksi_id' => $saksi->id,
                 'qrcode_hukum_id' => $qr->id,
-                'kecurangan_id'=>$kecurangan_id
+                'kecurangan_id' => $kecurangan_id
             ]);
-        }else{
+        } else {
             SuratPernyataan::create([
                 'deskripsi' => 'Dengan ini menyatakan bahwa saya siap bertanggung jawab atas data dan bukti-bukti yang saya kirimkan dari TPS tempat saya bertugas dan bisa dipertanggung jawabkan kebenaranya. Saya bersedia hadir untuk memberikan keterangan sebagai saksi pada pihak-pihak terkait jika diperlukan. Demikian pernyataan ini dibuat dalam keadaan sadar sehat jasmani raohani serta tidak ada paksaan dari pihak manapun.',
                 'qrcode_hukum_id' => $qr->id,
-                'kecurangan_id'=>$kecurangan_id
+                'kecurangan_id' => $kecurangan_id
             ]);
+        }
 
-        }
-        if ($save) {
-            return redirect()->back()->with('success','Berhasil Verifikasi Data Kecurangan');
-        } else {
-            echo 'Terjadi Kesalahan Tak Terduga Hubungi Admin';
-        }
+        return redirect()->back()->with('success', 'Berhasil Verifikasi Data Kecurangan');
     }
 
     public function action_verifikasi_kecurangan(Request $request, $id)
@@ -364,13 +354,13 @@ class HukumController extends Controller
         $verifikasi = Saksi::where('tps_id', Crypt::decrypt($id))->update([
             'status_kecurangan' => 'terverifikasi',
         ]);
-        $saksi = Saksi::where('tps_id',Crypt::decrypt($id))->first();
-        $qr = Qrcode::where('tps_id',Crypt::decrypt($id))->first();
-             SuratPernyataan::create([
-                 'deskripsi' => 'Dengan ini menyatakan bahwa saya siap bertanggung jawab atas data dan bukti-bukti yang saya kirimkan dari TPS tempat saya bertugas dan bisa dipertanggung jawabkan kebenaranya. Saya bersedia hadir untuk memberikan keterangan sebagai saksi pada pihak-pihak terkait jika diperlukan. Demikian pernyataan ini dibuat dalam keadaan sadar sehat jasmani raohani serta tidak ada paksaan dari pihak manapun.',
-                 'saksi_id' => $saksi->id,
-                 'qrcode_hukum_id' => $qr->id,
-             ]);
+        $saksi = Saksi::where('tps_id', Crypt::decrypt($id))->first();
+        $qr = Qrcode::where('tps_id', Crypt::decrypt($id))->first();
+        SuratPernyataan::create([
+            'deskripsi' => 'Dengan ini menyatakan bahwa saya siap bertanggung jawab atas data dan bukti-bukti yang saya kirimkan dari TPS tempat saya bertugas dan bisa dipertanggung jawabkan kebenaranya. Saya bersedia hadir untuk memberikan keterangan sebagai saksi pada pihak-pihak terkait jika diperlukan. Demikian pernyataan ini dibuat dalam keadaan sadar sehat jasmani raohani serta tidak ada paksaan dari pihak manapun.',
+            'saksi_id' => $saksi->id,
+            'qrcode_hukum_id' => $qr->id,
+        ]);
         if ($verifikasi) {
             return redirect('hukum/index')->with(['success' => 'Pesan Error']);
         }
@@ -399,22 +389,23 @@ class HukumController extends Controller
         $data['hukum'] = User::where('id', $data['qrcode']['hukum_id'])->first();
         $data['databukti'] = Databukti::where('tps_id', Crypt::decrypt($request['id']))->first();
         $data['list_kecurangan']     = Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
-        ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
-        ->where('bukti_deskripsi_curang.tps_id', Crypt::decrypt($request['id']))
-        ->get();
+            ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
+            ->where('bukti_deskripsi_curang.tps_id', Crypt::decrypt($request['id']))
+            ->get();
         $data['foto_kecurangan'] = ModelsBuktifoto::where('tps_id', Crypt::decrypt($request['id']))->get();
         $data['vidio_kecurangan'] = ModelsBuktividio::where('tps_id', Crypt::decrypt($request['id']))->first();
         return view('hukum.print.kecurangan', $data);
-
     }
 
-    function mk() {
+    function mk()
+    {
         $data['config'] = Config::first();
         $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
         return view('penghukuman.mahkamah_konstitusi', $data);
     }
 
-    function bawaslu() {
+    function bawaslu()
+    {
         $data['config'] = Config::first();
         $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
         $data['index_tsm']    = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
@@ -426,11 +417,12 @@ class HukumController extends Controller
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->limit(6)
             ->get();
-            
+
         return view('penghukuman.bawaslu', $data);
     }
 
-    function timHukumPaslon() {
+    function timHukumPaslon()
+    {
         $data['index_tsm']    = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
         $data['config'] = Config::first();
         $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
@@ -443,14 +435,6 @@ class HukumController extends Controller
             ->limit(6)
             ->get();
 
-        $data['list_sidang']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
-            ->join('users', 'users.tps_id', '=', 'tps.id')
-            ->join('qrcode_hukum', 'qrcode_hukum.tps_id', '=', 'tps.id')
-            ->where('saksi.kecurangan', 'yes')
-            ->where('saksi.status_kecurangan', 'terverifikasi')
-            ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
-            ->limit(6)
-            ->get();
 
         return view('penghukuman.tim_hukum_paslon', $data);
     }
@@ -462,8 +446,8 @@ class HukumController extends Controller
         $data['index_tsm']    = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
         $data['qrcode'] = QrCode::join('surat_pernyataan', 'surat_pernyataan.qrcode_hukum_id', '=', 'qrcode_hukum.id')->get();
         $data['list_suara']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
-        ->join('users', 'users.tps_id', '=', 'tps.id')
-        ->where('saksi.kecurangan', 'yes')
+            ->join('users', 'users.tps_id', '=', 'tps.id')
+            ->where('saksi.kecurangan', 'yes')
             ->where('saksi.status_kecurangan', 'terverifikasi')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->limit(6)
@@ -479,8 +463,8 @@ class HukumController extends Controller
         $data['index_tsm']    = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
         $data['qrcode'] = QrCode::join('surat_pernyataan', 'surat_pernyataan.qrcode_hukum_id', '=', 'qrcode_hukum.id')->get();
         $data['list_suara']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
-        ->join('users', 'users.tps_id', '=', 'tps.id')
-        ->where('saksi.kecurangan', 'yes')
+            ->join('users', 'users.tps_id', '=', 'tps.id')
+            ->where('saksi.kecurangan', 'yes')
             ->where('saksi.status_kecurangan', 'terverifikasi')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->limit(6)
@@ -496,8 +480,8 @@ class HukumController extends Controller
         $data['index_tsm']    = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
         $data['qrcode'] = QrCode::join('surat_pernyataan', 'surat_pernyataan.qrcode_hukum_id', '=', 'qrcode_hukum.id')->get();
         $data['list_suara']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
-        ->join('users', 'users.tps_id', '=', 'tps.id')
-        ->where('saksi.kecurangan', 'yes')
+            ->join('users', 'users.tps_id', '=', 'tps.id')
+            ->where('saksi.kecurangan', 'yes')
             ->where('saksi.status_kecurangan', 'terverifikasi')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->limit(6)
@@ -513,8 +497,8 @@ class HukumController extends Controller
         $data['index_tsm']    = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
         $data['qrcode'] = QrCode::join('surat_pernyataan', 'surat_pernyataan.qrcode_hukum_id', '=', 'qrcode_hukum.id')->get();
         $data['list_suara']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
-        ->join('users', 'users.tps_id', '=', 'tps.id')
-        ->where('saksi.kecurangan', 'yes')
+            ->join('users', 'users.tps_id', '=', 'tps.id')
+            ->where('saksi.kecurangan', 'yes')
             ->where('saksi.status_kecurangan', 'terverifikasi')
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->limit(6)

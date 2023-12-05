@@ -36,6 +36,10 @@ $solution = \App\Models\SolutionFraud::get();
                 <a class="btn text-white w-100 py-3 tablink" data-command-target="bukti-kecurangan"
                     onclick="openPage('bukti-kecurangan', this, '#6259ca')" id="defaultOpen">Bukti Kecurangan</a>
             </div>
+              <div class="col parent-link">
+                <a class="btn text-white w-100 py-3 tablink" data-command-target="kecurangan-tercetak"
+                    onclick="openPage('kecurangan-tercetak', this, '#6259ca')" >Kecurangan Tercetak</a>
+            </div>
             <div class="col parent-link">
                 <a class="btn text-white w-100 py-3 tablink" data-command-target="barkode-kecurangan"
                     onclick="openPage('barkode-kecurangan', this, '#6259ca')">Barkode Kecurangan</a>
@@ -579,7 +583,7 @@ $solution = \App\Models\SolutionFraud::get();
         </h2>
     </div>
     <div class="row">
-        <livewire:fraud-data-print>
+        <livewire:dkpp>
 
             <div class="col-lg-12">
                 <div class="row justify-content-end">
@@ -589,6 +593,19 @@ $solution = \App\Models\SolutionFraud::get();
                     </div>
                 </div>
             </div>
+
+    </div>
+</div>
+<div id="kecurangan-tercetak" class="tabcontent mt-0 pt-0 px-0">
+    <div class="col-12 px-0 mt-5">
+        <h2 class="fw-bold">
+            Bukti Kecurangan
+        </h2>
+    </div>
+    <div class="row">
+        <livewire:dkpp-tercetak>
+
+          
 
     </div>
 </div>

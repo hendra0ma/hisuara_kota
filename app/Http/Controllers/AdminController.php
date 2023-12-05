@@ -2876,6 +2876,7 @@ class AdminController extends Controller
         return view('administrator.fraudDataprint', $data);
     }
 
+
     public function fraudDataPrint_tercetak()
     {
         $data['config'] = Config::first();
@@ -2889,6 +2890,102 @@ class AdminController extends Controller
         $data['title'] = 'Jumlah Data Kecurangan Tercetak : ' . $data['list_suara'];
         return view('administrator.fraudDataprintTercetak', $data);
     }
+
+    public function fraudDataPrint_tercetakBawaslu()
+    {
+        $data['config'] = Config::first();
+        $data['index_tsm'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
+        $data['list_suara'] = Kecurangan::join('qrcode_hukum', 'qrcode_hukum.kecurangan_id', '=', 'kecurangan.id')
+        ->where("kecurangan.regency_id",$this->config->regencies_id)
+        ->where('kecurangan.status_kecurangan', 'terverifikasi')
+        ->where('qrcode_hukum.print', "1")
+        ->count();
+
+        $data['title'] = 'Jumlah Data Kecurangan Tercetak Bawaslu : ' . $data['list_suara'];
+        return view('administrator.fraudDataprintTercetakBawaslu', $data);
+    }
+    public function fraudDataPrint_tercetakTimHukumPaslon()
+    {
+        $data['config'] = Config::first();
+        $data['index_tsm'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
+        $data['list_suara'] = Kecurangan::join('qrcode_hukum', 'qrcode_hukum.kecurangan_id', '=', 'kecurangan.id')
+        ->where("kecurangan.regency_id",$this->config->regencies_id)
+        ->where('kecurangan.status_kecurangan', 'terverifikasi')
+        ->where('qrcode_hukum.print', "1")
+        ->count();
+
+        $data['title'] = 'Jumlah Data Kecurangan Tercetak TIm Hukum : ' . $data['list_suara'];
+        return view('administrator.fraudDataprintTercetakTimHukumPaslon', $data);
+    }
+    public function fraudDataPrint_tercetakDkpp()
+    {
+        $data['config'] = Config::first();
+        $data['index_tsm'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
+        $data['list_suara'] = Kecurangan::join('qrcode_hukum', 'qrcode_hukum.kecurangan_id', '=', 'kecurangan.id')
+        ->where("kecurangan.regency_id",$this->config->regencies_id)
+        ->where('kecurangan.status_kecurangan', 'terverifikasi')
+        ->where('qrcode_hukum.print', "1")
+        ->count();
+
+        $data['title'] = 'Jumlah Data Kecurangan Tercetak : ' . $data['list_suara'];
+        return view('administrator.fraudDataprintTercetakDkpp', $data);
+    }
+    public function fraudDataPrint_tercetakKpu()
+    {
+        $data['config'] = Config::first();
+        $data['index_tsm'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
+        $data['list_suara'] = Kecurangan::join('qrcode_hukum', 'qrcode_hukum.kecurangan_id', '=', 'kecurangan.id')
+        ->where("kecurangan.regency_id",$this->config->regencies_id)
+        ->where('kecurangan.status_kecurangan', 'terverifikasi')
+        ->where('qrcode_hukum.print', "1")
+        ->count();
+
+        $data['title'] = 'Jumlah Data Kecurangan Tercetak : ' . $data['list_suara'];
+        return view('administrator.fraudDataprintTercetakKpu', $data);
+    }
+    public function fraudDataPrint_tercetakMk()
+    {
+        $data['config'] = Config::first();
+        $data['index_tsm'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
+        $data['list_suara'] = Kecurangan::join('qrcode_hukum', 'qrcode_hukum.kecurangan_id', '=', 'kecurangan.id')
+        ->where("kecurangan.regency_id",$this->config->regencies_id)
+        ->where('kecurangan.status_kecurangan', 'terverifikasi')
+        ->where('qrcode_hukum.print', "1")
+        ->count();
+
+        $data['title'] = 'Jumlah Data Kecurangan Tercetak : ' . $data['list_suara'];
+        return view('administrator.fraudDataprintTercetakMk', $data);
+    }
+    public function fraudDataPrint_tercetakPolri()
+    {
+        $data['config'] = Config::first();
+        $data['index_tsm'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
+        $data['list_suara'] = Kecurangan::join('qrcode_hukum', 'qrcode_hukum.kecurangan_id', '=', 'kecurangan.id')
+        ->where("kecurangan.regency_id",$this->config->regencies_id)
+        ->where('kecurangan.status_kecurangan', 'terverifikasi')
+        ->where('qrcode_hukum.print', "1")
+        ->count();
+
+        $data['title'] = 'Jumlah Data Kecurangan Tercetak : ' . $data['list_suara'];
+        return view('administrator.fraudDataprintTercetakPolri', $data);
+    }
+    public function fraudDataPrint_tercetakPanrb()
+    {
+        $data['config'] = Config::first();
+        $data['index_tsm'] = ModelsListkecurangan::join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')->get();
+        $data['list_suara'] = Kecurangan::join('qrcode_hukum', 'qrcode_hukum.kecurangan_id', '=', 'kecurangan.id')
+        ->where("kecurangan.regency_id",$this->config->regencies_id)
+        ->where('kecurangan.status_kecurangan', 'terverifikasi')
+        ->where('qrcode_hukum.print', "1")
+        ->count();
+
+        $data['title'] = 'Jumlah Data Kecurangan Tercetak : ' . $data['list_suara'];
+        return view('administrator.fraudDataprintTercetakPanrb', $data);
+    }
+
+
+
+
     public function FraudDataReport()
     {
         $data['index_tsm'] = ModelsListkecurangan::get();
@@ -3094,6 +3191,7 @@ class AdminController extends Controller
         $data['foto_kecurangan'] = Buktifoto::where('kecurangan_id', Crypt::decrypt($id))->get();
         $data['vidio_kecurangan'] = Buktividio::where('kecurangan_id', Crypt::decrypt($id))->first();
         $data['surat_pernyataan'] = SuratPernyataan::where('kecurangan_id', Crypt::decrypt($id))->first();
+      
         return view('hukum.print.kecuranganTimHukumPaslon', $data);
     }
     public function printKpu(Request $request, $id)
@@ -3242,6 +3340,54 @@ class AdminController extends Controller
             return redirect("administrator/fraud-data-print");
   
     }
+    function updateStatusPrintBawaslu($id){
+           Qrcode::where('kecurangan_id',Crypt::decrypt($id))->update([
+            'bawasluPrint' => 1,
+            ]);
+            return redirect("hukum/bawaslu");
+    }
+    function updateStatusPrintTimHukumPaslon($id){
+           Qrcode::where('kecurangan_id',Crypt::decrypt($id))->update([
+            'timHukumPaslonPrint' => 1,
+            ]);
+            return redirect("hukum/tim_hukum_paslon");
+    }
+    function updateStatusPrintDkpp($id){
+           Qrcode::where('kecurangan_id',Crypt::decrypt($id))->update([
+            'dkppPrint' => 1,
+            ]);
+            return redirect("hukum/dkpp");
+    }
+    function updateStatusPrintKpu($id){
+           Qrcode::where('kecurangan_id',Crypt::decrypt($id))->update([
+            'kpuPrint' => 1,
+            ]);
+            return redirect("hukum/akun_kpu");
+    }
+    function updateStatusPrintMk($id){
+           Qrcode::where('kecurangan_id',Crypt::decrypt($id))->update([
+            'mkPrint' => 1,
+            ]);
+            return redirect("hukum/mahkamah_konstitusi");
+    }
+    function updateStatusPrintPolri($id){
+           Qrcode::where('kecurangan_id',Crypt::decrypt($id))->update([
+            'polriPrint' => 1,
+            ]);
+            return redirect("hukum/polisi");
+    }
+
+    function updateStatusPrintPanrb($id){
+           Qrcode::where('kecurangan_id',Crypt::decrypt($id))->update([
+            'panrbPrint' => 1,
+            ]);
+            return redirect("hukum/panrb");
+    }
+
+
+
+
+
     public function rDataRecord()
     {
         $data['history'] = History::join('users', 'users.id', '=', 'history.user_id')->get();
