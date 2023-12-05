@@ -87,9 +87,9 @@
         <div class="main-content-app pt-0">
             <div class="main-content-body main-content-body-chat">
                 <hr>
-                <livewire:chat-person />
+                {{-- <livewire:chat-person />
 
-                <livewire:chat-input-person />
+                <livewire:chat-input-person /> --}}
                 <button onclick="closeForm()" class="btn btn-danger">TUTUP</button>
             </div>
         </div>
