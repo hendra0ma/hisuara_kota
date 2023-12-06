@@ -175,7 +175,10 @@ $provinsi = Province::get();
 foreach ($provinsi as $provinsis) {
     $domainProvinsi = ProvinceDomain::where('province_id', $provinsis->id)->first();
     Route::domain($domainProvinsi->domain)->group(function () use ($provinsis, $domainProvinsi) {
-        Route::get('/dashboard-provinsi/{id}', [ProvinsiController::class, 'home'])->name('provinsi' . $provinsis->id . '.home');
+        Route::group(['middleware'=>["auth",'role:administrator']],function ()use ($provinsis, $domainProvinsi){
+            Route::get('/dashboard-provinsi/{id}', [ProvinsiController::class, 'home'])->name('provinsi' . $provinsis->id . '.home');
+        });
+
         Route::get('/',function () use ($provinsis) {
             return redirect()->route('provinsi' . $provinsis->id . '.public',Crypt::encrypt($provinsis->id));
         });

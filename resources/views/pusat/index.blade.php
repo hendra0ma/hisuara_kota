@@ -215,7 +215,7 @@
                                 <table class="table table-bordered table-hover mt-3 tabel-kustom">
                                     <thead class="bg-primary">
                                         <tr>
-                                            <th class="text-white text-center align-middle">KECAMATAN</th>
+                                            <th class="text-white text-center align-middle">PROVINSI</th>
                                             @foreach ($paslon as $item)
                                                 <th class="text-white text-center align-middle"
                                                     style="background: {{ $item->color }}; position:relative">
@@ -235,12 +235,26 @@
                                         @foreach ($provinsi as $item)
                                             <tr>
                                                 <td class="align-middle">
-                                                    <a
-                                                        href="{{route('provinsi' . $item->id . '.home',Crypt::encrypt($item['id']) )}}">{{ $item['name'] }}</a>
+                                                    @php
+                                                        $regency = Regency::where('province_id', $item->id)->select('id')->get();
+                                                        $voice = 0;
+                                                        foreach($regency as $reg){
+                                                            $jumlah_tps = TPS::where('regency_id',$reg->id)->count();
+                                                            $jumlah_terisi = TPS::where('setup','terisi')->where('regency_id', $reg->id)->count();
+                                                            
+                                                        
+                                                            $persentase =  ($jumlah_tps > 0 && $jumlah_terisi > 0)? $jumlah_terisi / $jumlah_tps * 100 : 0;
+                                                            
+                                                        }
+
+                                                    @endphp
+                                                    <a href="{{route('provinsi' . $item->id . '.home',Crypt::encrypt($item['id']) )}}">{{ $item['name'] }}</a> <small>{{substr($persentase,0,4)}}/100%</small>
                                                 </td>
                                                 <?php $i = 1; ?>
                                                 @foreach ($paslon as $cd)
                                                     <?php $saksi_dataa = Regency::where('province_id', $item->id)->sum('suara' . $i); ?>
+                                                    
+
                                                     <td class="align-middle text-end">{{ $saksi_dataa }}</td>
                                                     @php
                                                         $i++;
