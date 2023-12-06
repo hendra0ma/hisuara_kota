@@ -2474,7 +2474,7 @@ class AdminController extends Controller
     public function solution($id)
     {
         $id = (string) decrypt($id);
-        return ($id);
+        // return ($id);
         $data['solution'] = SolutionFraud::get();
         $data['titel'] = SolutionFraud::where('id', $id)->first();
         $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();

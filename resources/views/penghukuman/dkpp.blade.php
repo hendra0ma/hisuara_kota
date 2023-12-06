@@ -36,10 +36,6 @@ $solution = \App\Models\SolutionFraud::get();
                 <a class="btn text-white w-100 py-3 tablink" data-command-target="bukti-kecurangan"
                     onclick="openPage('bukti-kecurangan', this, '#6259ca')" id="defaultOpen">Bukti Kecurangan</a>
             </div>
-              <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 tablink" data-command-target="kecurangan-tercetak"
-                    onclick="openPage('kecurangan-tercetak', this, '#6259ca')" >Kecurangan Tercetak</a>
-            </div>
             <div class="col parent-link">
                 <a class="btn text-white w-100 py-3 tablink" data-command-target="barkode-kecurangan"
                     onclick="openPage('barkode-kecurangan', this, '#6259ca')">Barkode Kecurangan</a>
@@ -438,17 +434,101 @@ $solution = \App\Models\SolutionFraud::get();
                                         </script>
                                     </div>
                                     <div class="col my-auto text-end">
-                                        <a href="{{route('superadmin.solution',encrypt($solut->id))}}"
-                                            class="my-auto">Lihat
-                                            <i class="mdi mdi-eye"></i></a>
+                                        <a {{-- href="{{ route('superadmin.solution', encrypt($solut->id)) }}" --}}
+                                            style="cursor: pointer"
+                                            data-target="{{ preg_replace('/\([^)]+\)/', '', str_replace(' ', '-', strtolower($solut->solution))) }}" class="my-auto rekom-tindakan">
+                                            Lihat
+                                            <i class="mdi mdi-eye"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     @endforeach
-
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('.rekom-tindakan').on('click', function () {
+            let target = $(this).data('target');
+            let $targetElement = $(`.konten-rekom-tindakan#${target}`);
+            
+            if ($targetElement.hasClass('active')) {
+            // If it has the 'active' class, do nothing or perform the required action
+            // For example, you might want to toggle the 'active' class or perform other actions
+            } else {
+            // If it doesn't have the 'active' class, hide others and show the selected one
+            $('.konten-rekom-tindakan').not($targetElement).hide(500).removeClass('active');
+                $targetElement.show(200).addClass('active');
+            }
+        }) 
+    </script>
+
+    <div class="col-12 konten-rekom-tindakan" id="perhitungan-suara-ulang">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="card-title text-white">Perhitungan Suara Ulang</div>
+            </div>
+            <div class="card-body">
+                <livewire:rekom-tindakan-p-s-u>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 konten-rekom-tindakan" id="pemungutan-suara-ulang" style="display: none">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="card-title text-white">Pemungutan Suara Ulang</div>
+            </div>
+            <div class="card-body">
+                <livewire:rekom-tindakan-p-s-u2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 konten-rekom-tindakan" id="kasus-administrasi-pemilu" style="display: none">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="card-title text-white">Kasus Administrasi Pemilu</div>
+            </div>
+            <div class="card-body">
+                <livewire:rekom-tindakan-k-a-p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 konten-rekom-tindakan" id="pelanggaran-tindak-pidana" style="display: none">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="card-title text-white">Pelanggaran Tindak Pidana</div>
+            </div>
+            <div class="card-body">
+                <livewire:rekom-tindakan-p-t-p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 konten-rekom-tindakan" id="pelanggaran-kode-etik" style="display: none">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="card-title text-white">Pelanggaran Kode Etik</div>
+            </div>
+            <div class="card-body">
+                <livewire:rekom-tindakan-p-k-e>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 konten-rekom-tindakan" id="pelanggaran-aparatur-sipil-negara-" style="display: none">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="card-title text-white">Pelanggaran Aparatur Sipil Negara (ASN)</div>
+            </div>
+            <div class="card-body">
+                <livewire:rekom-tindakan-p-a-s-n>
             </div>
         </div>
     </div>
@@ -493,36 +573,31 @@ $solution = \App\Models\SolutionFraud::get();
     </div>
 </div>
 <div id="bukti-kecurangan" class="tabcontent mt-0 pt-0 px-0">
-    <div class="col-12 px-0 mt-5">
-        <h2 class="fw-bold">
-            Bukti Kecurangan
-        </h2>
-    </div>
     <div class="row">
-        <livewire:dkpp>
-
-            <div class="col-lg-12">
-                <div class="row justify-content-end">
-                    <div class="col-lg-2">
-                        <a href="{{url('')}}/administrator/fraud-data-print"
-                            class="btn btn-dark btn-block">Selengkapnya</a>
-                    </div>
+        <div class="col mt-5">
+            <h2 class="fw-bold">
+                Bukti Kecurangan
+            </h2>
+        </div>
+        <div class="col-4">
+            <div class="row justify-content-end">
+                <div class="col parent-link">
+                    <a class="btn text-white w-100 py-3 tablink2" data-command-target="bukti-kecurangan"
+                        onclick="openPage2('bukti-kecurangan2', this, '#ed1d2780')" id="defaultOpen2">Bukti
+                        Kecurangan</a>
+                </div>
+                <div class="col-6 parent-link">
+                    <a class="btn text-white w-100 py-3 tablink2" data-command-target="kecurangan-tercetak"
+                        onclick="openPage2('kecurangan-tercetak', this, '#ed1d2780')">Kecurangan Tercetak</a>
                 </div>
             </div>
-
+        </div>
     </div>
-</div>
-<div id="kecurangan-tercetak" class="tabcontent mt-0 pt-0 px-0">
-    <div class="col-12 px-0 mt-5">
-        <h2 class="fw-bold">
-            Bukti Kecurangan
-        </h2>
+    <div id="bukti-kecurangan2" class="tabcontent2 row">
+        <livewire:bawaslu>
     </div>
-    <div class="row">
-        <livewire:dkpp-tercetak>
-
-          
-
+    <div id="kecurangan-tercetak" class="tabcontent2 row">
+        <livewire:bawaslu-tercetak>
     </div>
 </div>
 
@@ -573,6 +648,52 @@ $solution = \App\Models\SolutionFraud::get();
         });
     });
 
+</script>
+
+<script>
+    function openPage(pageName, elmnt, color) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+            // Remove the "active-tab" class from all tab links
+            tablinks[i].classList.remove("active-tab");
+        }
+        document.getElementById(pageName).style.display = "block";
+        elmnt.style.backgroundColor = color;
+        // Add the "active-tab" class to the selected tab link
+        elmnt.classList.add("active-tab");
+    }
+    // Wrap this part in a DOMContentLoaded event listener
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("defaultOpen").click();
+    });
+
+    function openPage2(pageName, elmnt, color) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent2");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink2");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+            // Remove the "active-tab" class from all tab links
+            tablinks[i].classList.remove("active-tab");
+        }
+        document.getElementById(pageName).style.display = "block";
+        elmnt.style.backgroundColor = color;
+        // Add the "active-tab" class to the selected tab link
+        elmnt.classList.add("active-tab");
+    }
+    // Wrap this part in a DOMContentLoaded event listener
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("defaultOpen2").click();
+    });
 </script>
 @include('layouts.partials.footer')
 @include('layouts.partials.scripts-bapilu')

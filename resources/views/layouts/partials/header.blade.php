@@ -1224,7 +1224,7 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '
                                 <i class="dropdown-icon fe fe-user"></i> Upload C1 Saksi
                             </a>
                             <a class="dropdown-item" href="{{route('crowd_c1')}}">
-                                <i class="dropdown-icon fe fe-user"></i> Upload Crowd C1
+                                <i class="dropdown-icon fe fe-user"></i> Upload Crowd C1 KPU
                             </a>
                             <a class="dropdown-item" href="{{url('')}}/enumerator-dashboard">
                                 <i class="dropdown-icon fe fe-user"></i> Upload C1 Enumerator

@@ -60,12 +60,17 @@
                                 }}">
                                 @endif
                             </div>
-                            <div class="col-6 my-auto text-center">
+                            <div class="col-6 my-auto text-start">
                                 <?php $village = App\Models\Village::where('id', $ls->village_id)->first(); ?>
-                                <div class="mb-0 fw-bold" style="font-size: 25px">{{ $ls['name'] }}</div>
-                                <div style="font-size: 15px">NIK : {{ $ls['nik'] }}</div>
-                                <div style="font-size: 15px">SAKSI TPS {{ $ls['number'] }}</div>
-                                <div style="font-size: 15px">KELURAHAN {{ $village['name'] }}</div>
+                                <div class="mb-0 fw-bold" style="font-size: 16px">{{ $ls['name'] }}</div>
+                                <div style="font-size: 16px">NIK : {{ $ls['nik'] }}</div>
+                                <div style="font-size: 16px">SAKSI TPS {{ $ls['number'] }}</div>
+                                <div style="font-size: 16px">KELURAHAN {{ $village['name'] }}</div>
+                            </div>
+                            {{-- {{$village}} --}}
+                            <div class="col-md">
+                            
+                                {!! QrCode::size(125)->generate($scan_url); !!}
                             </div>
                         </div>
                     </div>

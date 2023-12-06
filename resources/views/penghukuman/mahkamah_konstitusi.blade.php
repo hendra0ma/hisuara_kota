@@ -31,10 +31,6 @@
                 <a data-command-target="kecurangan-masuk" class="btn text-white w-100 py-3 kecurangan-masuk tablink" onclick="openPage('kecurangan-masuk', this, '#6259ca')"
                     id="defaultOpen">Kecurangan Masuk</a>
             </div>
-              <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 tablink" data-command-target="kecurangan-tercetak"
-                    onclick="openPage('kecurangan-tercetak', this, '#6259ca')" >Kecurangan Tercetak</a>
-            </div>
             <div class="col parent-link">
                 <a data-command-target="kecurangan-ditolak" class="btn text-white w-100 py-3 kecurangan-ditolak tablink"
                     onclick="openPage('kecurangan-ditolak', this, '#6259ca')">Kecurangan Ditolak</a>
@@ -91,13 +87,8 @@
 </style>
 
 <div id="kecurangan-masuk" class="tabcontent mt-0 pt-0 px-0">
-    <livewire:mk>
+    <livewire:m-k-kecurangan-masuk>
 </div>
-<div id="kecurangan-tercetak" class="tabcontent mt-0 pt-0 px-0">
-    <livewire:mk-tercetak>
-</div>
-
-
 <div id="kecurangan-ditolak" class="tabcontent mt-0 pt-0 px-0">
     <livewire:m-k-kecurangan-ditolak>
 </div>

@@ -49,20 +49,26 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md">
+                        <div class="col-md text-center">
                             @if ($ls->profile_photo_path == NULL)
-                            <img class="" style="width: 250px;"
+                            <img class="" style="width: 175px;"
                                 src="https://ui-avatars.com/api/?name={{ $ls->name }}&color=7F9CF5&background=EBF4FF" alt="img">
                             @else
-                            <img class="" style="width: 250px;" src="{{url("/storage/profile-photos/".$ls->profile_photo_path)
+                            <img class="" style="width: 175px;" src="{{url("/storage/profile-photos/".$ls->profile_photo_path)
                             }}">
                             @endif
                         </div>
+                        <div class="col-6 my-auto text-start">
+                            <?php $village = App\Models\Village::where('id', $ls->village_id)->first(); ?>
+                            <div class="mb-0 fw-bold" style="font-size: 16px">{{ $ls['name'] }}</div>
+                            <div style="font-size: 16px">NIK : {{ $ls['nik'] }}</div>
+                            <div style="font-size: 16px">SAKSI TPS {{ $ls['number'] }}</div>
+                            <div style="font-size: 16px">KELURAHAN {{ $village['name'] }}</div>
+                        </div>
+                        {{-- {{$village}} --}}
                         <div class="col-md">
-                            <a id="Cek" data-bs-toggle="modal" onclick="qrsidang(this)" data-bs-target="#modalQrCode"
-                                data-id="{{$ls->tps_id}}" href="#">
-                                {!! QrCode::size(250)->generate($scan_url); !!}
-                            </a>
+                
+                            {!! QrCode::size(125)->generate($scan_url); !!}
                         </div>
                     </div>
                 </div>
