@@ -69,7 +69,8 @@
                     <img src="{{asset('images/logo/garuda.png')}}" style="width: 100px" class="mb-3" alt=""> <br>
                     <div class="my-auto mx-auto">
                         PERHITUNGAN SUARA <br>
-                        PRESIDEN & WAKIL PRESIDEN RI 2024
+                        PRESIDEN & WAKIL PRESIDEN RI 2024 <br>
+                        TINGKAT NASIONAL
                     </div>
                 </h5>
             </center>
@@ -109,8 +110,8 @@
             <ul class="breadcrumb">
                 <?php $regencies = Regency::get(); ?>
                 <li><a href="" class="text-white"></a></li>
-                <img src="{{ asset('') }}assets/icons/hisuara_new.png" style="position: absolute; top: -50px; left: 25px; width: 150px"
-                    alt="">
+                {{-- <img src="{{ asset('') }}assets/icons/hisuara_new.png" style="position: absolute; top: -50px; left: 25px; width: 150px"
+                    alt=""> --}}
 
             </ul>
         </div>

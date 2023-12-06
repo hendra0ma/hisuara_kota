@@ -416,6 +416,22 @@
             z-index: -1;
         }
 
+        .parent-link a.active-tab.tablink2 {
+            background: #ed1d27 !important;
+        }
+
+        .parent-link a.active-tab.tablink2:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            right: 0;
+            width: 40%;
+            border-top: 3px solid #ed1d27 !important;
+            z-index: -1;
+        }
+
         .parent-link.kecurangan a.active-tab {
             background: #ff4f4e;
         }
@@ -438,6 +454,14 @@
 
         .parent-link a:hover {
             background: #6259ca;
+        }
+
+        .parent-link a.tablink2 {
+            background: #ed1d2780;
+        }
+
+        .parent-link a.tablink2:hover {
+            background: #ed1d27 !important;
         }
 
         .parent-link .btn-fdp.active {

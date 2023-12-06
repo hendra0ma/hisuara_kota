@@ -37,10 +37,6 @@ $solution = \App\Models\SolutionFraud::get();
                     onclick="openPage('bukti-kecurangan', this, '#6259ca')" id="defaultOpen">Bukti Kecurangan</a>
             </div>
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 tablink" data-command-target="kecurangan-tercetak"
-                    onclick="openPage('kecurangan-tercetak', this, '#6259ca')" >Kecurangan Tercetak</a>
-            </div>
-            <div class="col parent-link">
                 <a class="btn text-white w-100 py-3 tablink" data-command-target="barkode-kecurangan"
                     onclick="openPage('barkode-kecurangan', this, '#6259ca')">Barkode Kecurangan</a>
             </div>
@@ -64,7 +60,7 @@ $solution = \App\Models\SolutionFraud::get();
     </div>
 </div>
 
-<script>
+{{-- <script>
     function openPage(pageName, elmnt, color) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
@@ -86,7 +82,7 @@ $solution = \App\Models\SolutionFraud::get();
     document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("defaultOpen").click();
     });
-</script>
+</script> --}}
 
 <style>
     /* Define a CSS class for the active tab text */
@@ -472,7 +468,7 @@ $solution = \App\Models\SolutionFraud::get();
         }) 
     </script>
 
-    <div class="col-12 konten-rekom-tindakan" id="perhitungan-suara-ulang" style="display: none">
+    <div class="col-12 konten-rekom-tindakan" id="perhitungan-suara-ulang">
         <div class="card">
             <div class="card-header bg-primary">
                 <div class="card-title text-white">Perhitungan Suara Ulang</div>
@@ -566,36 +562,31 @@ $solution = \App\Models\SolutionFraud::get();
     
 </div>
 <div id="bukti-kecurangan" class="tabcontent mt-0 pt-0 px-0">
-    <div class="col-12 px-0 mt-5">
-        <h2 class="fw-bold">
-            Bukti Kecurangan
-        </h2>
-    </div>
     <div class="row">
-        <livewire:tim-hukum-paslon>
-
-            <div class="col-lg-12">
-                <div class="row justify-content-end">
-                    <div class="col-lg-2 mb-5">
-                        <a href="{{url('')}}/administrator/fraud-data-print"
-                            class="btn btn-dark btn-block">Selengkapnya</a>
-                    </div>
+        <div class="col mt-5">
+            <h2 class="fw-bold">
+                Bukti Kecurangan
+            </h2>
+        </div>
+        <div class="col-4">
+            <div class="row justify-content-end">
+                <div class="col parent-link">
+                    <a class="btn text-white w-100 py-3 tablink2" data-command-target="bukti-kecurangan"
+                        onclick="openPage2('bukti-kecurangan2', this, '#ed1d2780')" id="defaultOpen2">Bukti
+                        Kecurangan</a>
+                </div>
+                <div class="col-6 parent-link">
+                    <a class="btn text-white w-100 py-3 tablink2" data-command-target="kecurangan-tercetak"
+                        onclick="openPage2('kecurangan-tercetak', this, '#ed1d2780')">Kecurangan Tercetak</a>
                 </div>
             </div>
-
+        </div>
     </div>
-</div>
-<div id="kecurangan-tercetak" class="tabcontent mt-0 pt-0 px-0">
-    <div class="col-12 px-0 mt-5">
-        <h2 class="fw-bold">
-            Bukti Kecurangan
-        </h2>
+    <div id="bukti-kecurangan2" class="tabcontent2 row">
+        <livewire:bawaslu>
     </div>
-    <div class="row">
-        <livewire:tim-hukum-paslon-tercetak>
-
-          
-
+    <div id="kecurangan-tercetak" class="tabcontent2 row">
+        <livewire:bawaslu-tercetak>
     </div>
 </div>
 <div id="laporan-mk" class="tabcontent mt-0 pt-0 px-0">
@@ -645,14 +636,6 @@ $solution = \App\Models\SolutionFraud::get();
     </div>
 
 
-
-    <div class="col-lg-12">
-        <div class="row justify-content-end">
-            <div class="col-lg-2">
-                <a href="{{url('')}}/administrator/sidang_online" class="btn btn-dark btn-block">Selengkapnya</a>
-            </div>
-        </div>
-    </div>
 
     <script>
         let qrsidang = function (ini) {
@@ -717,6 +700,52 @@ $solution = \App\Models\SolutionFraud::get();
         });
     });
 
+</script>
+
+<script>
+    function openPage(pageName, elmnt, color) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+            // Remove the "active-tab" class from all tab links
+            tablinks[i].classList.remove("active-tab");
+        }
+        document.getElementById(pageName).style.display = "block";
+        elmnt.style.backgroundColor = color;
+        // Add the "active-tab" class to the selected tab link
+        elmnt.classList.add("active-tab");
+    }
+    // Wrap this part in a DOMContentLoaded event listener
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("defaultOpen").click();
+    });
+
+    function openPage2(pageName, elmnt, color) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent2");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink2");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+            // Remove the "active-tab" class from all tab links
+            tablinks[i].classList.remove("active-tab");
+        }
+        document.getElementById(pageName).style.display = "block";
+        elmnt.style.backgroundColor = color;
+        // Add the "active-tab" class to the selected tab link
+        elmnt.classList.add("active-tab");
+    }
+    // Wrap this part in a DOMContentLoaded event listener
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("defaultOpen2").click();
+    });
 </script>
 @include('layouts.partials.footer')
 @include('layouts.partials.scripts-bapilu')
