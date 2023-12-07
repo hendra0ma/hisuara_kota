@@ -5,7 +5,9 @@
 
     <!-- META DATA -->
     <meta charset="UTF-8">
-    <meta name='viewport' content='width=1920px, initial-scale=0.75, user-scalable=yes'>
+    This should be everything you need:
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.75, maximum-scale=0.75, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Zanex – Bootstrap  Admin & Dashboard Template">
     <meta name="author" content="Spruko Technologies Private Limited">
