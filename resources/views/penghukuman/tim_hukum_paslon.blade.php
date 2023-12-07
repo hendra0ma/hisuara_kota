@@ -571,14 +571,17 @@ $solution = \App\Models\SolutionFraud::get();
                 Kecurangan Tercetak
             </h2>
         </div>
-        <div class="col-4">
+        <div class="col-8">
             <div class="row justify-content-end">
-                <div class="col parent-link">
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col parent-link" style="width: 224.94px">
                     <a class="btn text-white w-100 py-3 tablink kecurangan-tercetak" style="display: none"
                         data-command-target="bukti-kecurangan"
                         onclick="openPage('bukti-kecurangan', this, '#6259ca')">Bukti Kecurangan</a>
                 </div>
-                <div class="col-6 parent-link">
+                <div class="col parent-link" style="width: 224.94px">
                     <a class="btn text-white w-100 py-3 tablink tercetak" data-command-target="kecurangan-tercetak"
                         onclick="openPage('kecurangan-tercetak', this, '#6259ca')">Kecurangan Tercetak</a>
                 </div>
