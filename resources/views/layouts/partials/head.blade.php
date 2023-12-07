@@ -5,9 +5,7 @@
 
     <!-- META DATA -->
     <meta charset="UTF-8">
-    This should be everything you need:
-    
-    <meta name="viewport" content="width=device-width, initial-scale=0.75, maximum-scale=0.75, user-scalable=0">
+    <meta name='viewport' content='width=1920px, initial-scale=0.75, user-scalable=yes'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Zanex – Bootstrap  Admin & Dashboard Template">
     <meta name="author" content="Spruko Technologies Private Limited">
@@ -62,12 +60,21 @@
     <link rel="stylesheet" href="https://raw.githack.com/thdoan/magnify/master/dist/css/magnify.css">
 
     <style>
-        @media screen and (max-width: 600px) {
+        @media screen and (max-width: 1366px) {
             body {
                 min-width: 1903px;
                 -moz-transform: scale(0.7091352);
                 -moz-transform-origin: 0 0;
                 transform: scale(0.7091352);
+                transform-origin: 0 0;
+            }
+        }
+        @media screen and (max-width: 1300px) {
+            body {
+                min-width: 1903px;
+                -moz-transform: scale(0.611309135);
+                -moz-transform-origin: 0 0;
+                transform: scale(0.611309135);
                 transform-origin: 0 0;
             }
         }
