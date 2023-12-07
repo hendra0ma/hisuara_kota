@@ -5,7 +5,7 @@
 
     <!-- META DATA -->
     <meta charset="UTF-8">
-    <meta name='viewport' content='width=1920px, initial-scale=0.75, user-scalable=yes'>
+    <meta name='viewport' content='width=1920px, initial-scale=1, user-scalable=yes'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Zanex – Bootstrap  Admin & Dashboard Template">
     <meta name="author" content="Spruko Technologies Private Limited">
@@ -62,7 +62,7 @@
     <style>
         @media screen and (max-width: 600px) {
             body {
-                /* min-width: 1903px; */
+                min-width: 1903px;
                 -moz-transform: scale(0.7091352);
                 -moz-transform-origin: 0 0;
                 transform: scale(0.7091352);
