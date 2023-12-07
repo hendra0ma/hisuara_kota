@@ -219,7 +219,7 @@
                             <table class="table table-bordered table-hover mt-3 tabel-kustom">
                                 <thead class="bg-primary">
                                     <tr>
-                                        <th class="text-white text-center align-middle"style="width:250px !important">Kota/Kabupaten</th>
+                                        <th class="text-white text-center align-middle" style="width:40% !important">Kota/Kabupaten</th>
                                         @foreach ($paslon as $item)
                                         <th class="text-white text-center align-middle"
                                             style="background: {{ $item->color }}; position:relative">
@@ -247,7 +247,7 @@
                                             $regDom = RegenciesDomain::where('regency_id', $item->id)->first();
                                         @endphp
                                         <tr>
-                                            <td class="align-middle"style="width:250px !important">
+                                            <td class="align-middle" style="width:40% !important">
                                                 <a
                                                     href="{{ env('HTTP_SSL') . $regDom->domain . env('HTTP_PORT', '') }}/administrator/index">{{ $item['name'] }}
                                                 </a>

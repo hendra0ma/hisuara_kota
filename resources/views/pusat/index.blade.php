@@ -216,7 +216,7 @@
                                 <table class="table table-bordered table-hover mt-3 tabel-kustom">
                                     <thead class="bg-primary">
                                         <tr>
-                                            <th class="text-white text-center align-middle">PROVINSI</th>
+                                            <th class="text-white text-center align-middle" style="width: 40% !important">PROVINSI</th>
                                             @foreach ($paslon as $item)
                                                 <th class="text-white text-center align-middle"
                                                     style="background: {{ $item->color }}; position:relative">
@@ -235,7 +235,7 @@
                                     <tbody>
                                         @foreach ($provinsi as $item)
                                             <tr>
-                                                <td class="align-middle">
+                                                <td class="align-middle" style="width: 40% !important">
                                                     @php
                                                         $regency = Regency::where('province_id', $item->id)->select('id')->get();
                                                         $voice = 0;
@@ -249,7 +249,7 @@
                                                         }
 
                                                     @endphp
-                                                    <a href="{{route('provinsi' . $item->id . '.home',Crypt::encrypt($item['id']) )}}">{{ $item['name'] }}</a> <small>{{substr($persentase,0,4)}}/100%</small>
+                                                    <a href="{{route('provinsi' . $item->id . '.home',Crypt::encrypt($item['id']) )}}">{{ $item['name'] }}</a> <span><small>({{substr($persentase,0,4)}}/100%)</small></span>
                                                 </td>
                                                 <?php $i = 1; ?>
                                                 @foreach ($paslon as $cd)
