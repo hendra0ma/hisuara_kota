@@ -1,4 +1,4 @@
-@include('layouts.partials.headPusat')
+@include('layouts.partials.head')
         @include('layouts.partials.headerPusat')
         @yield('content')
         @include('layouts.partials.footerPusat')
