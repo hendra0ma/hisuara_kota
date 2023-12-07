@@ -219,7 +219,7 @@
                             <table class="table table-bordered table-hover mt-3 tabel-kustom">
                                 <thead class="bg-primary">
                                     <tr>
-                                        <th class="text-white text-center align-middle">KECAMATAN</th>
+                                        <th class="text-white text-center align-middle"style="width:250px !important">Kota/Kabupaten</th>
                                         @foreach ($paslon as $item)
                                         <th class="text-white text-center align-middle"
                                             style="background: {{ $item->color }}; position:relative">
@@ -234,27 +234,38 @@
                                     </tr>
                                 </thead>
 
-                                <tbody>
+                                  <tbody>
                                     @foreach ($regencies as $item)
-                                    @php
-                                    $regDom = RegenciesDomain::where('regency_id', $item->id)->first();
-                                    @endphp
-                                    <tr>
-                                        <td class="align-middle">
-                                            <a
-                                                href="{{ env('HTTP_SSL') . $regDom->domain . env('HTTP_PORT', '') }}/administrator/index">{{
-                                                $item['name'] }}</a>
-                                        </td>
-                                        <?php $i = 1; ?>
-                                        @foreach ($paslon as $cd)
-                                        <td class="align-middle text-end">{{ $item->{'suara' . $i} }}</td>
                                         @php
-                                        $i++;
+                                            $jumlah_tps = TPS::where('regency_id', $item->id)->count();
+                                            $jumlah_terisi = TPS::where('setup', 'terisi')
+                                                ->where('regency_id', $item->id)
+                                                ->count();
+
+                                            $persentase = $jumlah_tps > 0 && $jumlah_terisi > 0 ? ($jumlah_terisi / $jumlah_tps) * 100 : 0;
+
+                                            $regDom = RegenciesDomain::where('regency_id', $item->id)->first();
                                         @endphp
-                                        @endforeach
-                                    </tr>
+                                        <tr>
+                                            <td class="align-middle"style="width:250px !important">
+                                                <a
+                                                    href="{{ env('HTTP_SSL') . $regDom->domain . env('HTTP_PORT', '') }}/administrator/index">{{ $item['name'] }}
+                                                </a>
+                                                 <small>
+                                                    {{substr($persentase,0,4)}}/100%
+                                                 </small>
+                                            </td>
+                                            <?php $i = 1; ?>
+                                            @foreach ($paslon as $cd)
+                                                <td class="align-middle text-end"style="width:auto">{{ $item->{'suara' . $i} }}</td>
+                                                @php
+                                                    $i++;
+                                                @endphp
+                                            @endforeach
+                                        </tr>
                                     @endforeach
                                 </tbody>
+
 
 
                             </table>
@@ -283,7 +294,7 @@
         {{-- <hr style="border: 1px solid"> --}}
 
         <div class="col-12">
-            <div class="row" style="flex-wrap: nowrap; overflow-x: scroll">
+            <div class="row justify-content-center" style="flex-wrap: nowrap; overflow-x: scroll">
                 @foreach ($regencies as $item)
                 <div class="col-auto my-2">
                     <div class="text-center mb-2">

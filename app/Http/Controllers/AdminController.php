@@ -3665,21 +3665,30 @@ class AdminController extends Controller
     public function real_count2()
     {
         $data['config'] = Config::first();
-        $config = Config::first();
+        $config =  $data['config'];
         $data['marquee'] = Saksi::join('users', 'users.tps_id', '=', 'saksi.tps_id')
             ->where('saksi.regency_id', $this->config->regencies_id)
             ->get();
+
         $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $this->config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
         // return DB::table('saksi_data')->where('paslon_id',0)->sum('voice');
-        $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        if(isset($paslon_tertinggi['0'])){
+            $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        }else{
+            $data['paslon_tertinggi'] = Paslon::first();
+        }
+
         $data['urutan'] = $paslon_tertinggi;
         $dpt = District::where('regency_id', $this->config->regencies_id)->sum('dpt');
-        $data['paslon'] = Paslon::with('saksi_data')->get();
+        $data['paslon'] = Paslon::with(['saksi_data'=> function($query){
+            $query->where('saksi_data.regency_id', $this->config->regencies_id);
+        }])->get();
         $data['paslon_terverifikasi'] = Paslon::with([
             'saksi_data' => function ($query) {
                 $query
                     ->join('saksi', 'saksi_data.saksi_id', 'saksi.id')
                     ->whereNull('saksi.pending')
+                    ->where('saksi.regency_id', $this->config->regencies_id)
                     ->where('saksi.verification', 1);
             },
         ])->get();
@@ -3690,20 +3699,22 @@ class AdminController extends Controller
         $data['total_incoming_vote'] = SaksiData::where('regency_id', $this->config->regencies_id)->sum('voice');
         $data['realcount'] = $dpt != 0 ? ($data['total_incoming_vote'] / $dpt) * 100 : 0;
         $data['village'] = Village::first();
-        $data['villages'] = Village::get();
+        // $data['villages'] = Village::get();
         $data['realcount'] = $dpt != 0 ? ($data['total_incoming_vote'] / $dpt) * 100 : 0;
         $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
         $data['kecamatan'] = District::where('regency_id', $this->config->regencies_id)->get();
-        $data['district'] = District::first();
-
-        // dd($data['paslon']);
         return view('administrator.realcount.real_count2', $data);
     }
 
     public function realcountKecamatan($id)
     {
         $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id, SUM(voice) as total FROM saksi_data WHERE district_id = :district_id GROUP BY paslon_id ORDER BY total DESC'), ['district_id' => decrypt($id)]);
-        $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        if(isset($paslon_tertinggi['0'])){
+            $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        }else{
+            $data['paslon_tertinggi'] = Paslon::first();
+        }
+
         $data['urutan'] = $paslon_tertinggi;
         $data['marquee'] = Saksi::join('users', 'users.tps_id', '=', 'saksi.tps_id')
             ->where('saksi.regency_id', $this->config->regencies_id)
@@ -3775,10 +3786,14 @@ class AdminController extends Controller
     {
         $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id, SUM(voice) as total FROM saksi_data WHERE village_id = :village_id GROUP BY paslon_id ORDER BY total DESC'), ['village_id' => (string) decrypt($id)]);
 
-        $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        if(isset($paslon_tertinggi['0'])){
+            $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        }else{
+            $data['paslon_tertinggi'] = Paslon::first();
+        }
         $data['urutan'] = $paslon_tertinggi;
 
-        $data['paslon_tertinggi'] = Paslon::where('id', (string) $paslon_tertinggi['0']->paslon_id)->first();
+       
 
         $data['paslon'] = Paslon::with([
             'saksi_data' => function ($query) use ($id) {
@@ -4114,12 +4129,15 @@ class AdminController extends Controller
     public function Rekapitulasi()
     {
         $data['config'] = Config::first();
-        $config = Config::first();
         $data['marquee'] = Saksi::join('users', 'users.tps_id', '=', 'saksi.tps_id')
             ->where('saksi.regency_id', $this->config->regencies_id)
             ->get();
         $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $this->config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
-        $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        if(isset($paslon_tertinggi['0'])){
+            $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        }else{
+            $data['paslon_tertinggi'] = Paslon::first();
+        }
         $data['urutan'] = $paslon_tertinggi;
         $dpt = District::where('regency_id', $this->config->regencies_id)->sum('dpt');
         $data['paslon'] = Paslon::with('saksi_data')->get();
@@ -4138,11 +4156,11 @@ class AdminController extends Controller
         $data['total_incoming_vote'] = SaksiData::where('regency_id', $this->config->regencies_id)->sum('voice');
         $data['realcount'] = $dpt != 0 ? ($data['total_incoming_vote'] / $dpt) * 100 : 0;
         $data['village'] = Village::first();
-        $data['villages'] = Village::get();
+        // $data['villages'] = Village::get();
         $data['realcount'] = $dpt != 0 ? ($data['total_incoming_vote'] / $dpt) * 100 : 0;
         $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
         $data['kecamatan'] = District::where('regency_id', $this->config->regencies_id)->get();
-        $data['district'] = District::first();
+        // $data['district'] = District::first();
 
         // dd($data['paslon']);
         return view('administrator.rekapitulasi-perhitungan.rekapitulasi', $data);
@@ -4151,7 +4169,11 @@ class AdminController extends Controller
     public function rekapKecamatan($id)
     {
         $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id, SUM(voice) as total FROM saksi_data WHERE district_id = :district_id GROUP BY paslon_id ORDER BY total DESC'), ['district_id' => decrypt($id)]);
-        $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        if(isset($paslon_tertinggi['0'])){
+            $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        }else{
+            $data['paslon_tertinggi'] = Paslon::first();
+        }
         $data['urutan'] = $paslon_tertinggi;
         $data['marquee'] = Saksi::join('users', 'users.tps_id', '=', 'saksi.tps_id')
             ->where('saksi.regency_id', $this->config->regencies_id)
@@ -4223,10 +4245,12 @@ class AdminController extends Controller
     {
         $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id, SUM(voice) as total FROM saksi_data WHERE village_id = :village_id GROUP BY paslon_id ORDER BY total DESC'), ['village_id' => (string) decrypt($id)]);
 
-        $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        if(isset($paslon_tertinggi['0'])){
+            $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        }else{
+            $data['paslon_tertinggi'] = Paslon::first();
+        }
         $data['urutan'] = $paslon_tertinggi;
-
-        $data['paslon_tertinggi'] = Paslon::where('id', (string) $paslon_tertinggi['0']->paslon_id)->first();
 
         $data['paslon'] = Paslon::with([
             'saksi_data' => function ($query) use ($id) {
@@ -4234,8 +4258,7 @@ class AdminController extends Controller
                     ->join('saksi', 'saksi_data.saksi_id', 'saksi.id', 'district_id')
                     ->whereNull('saksi.pending')
                     ->where('saksi.village_id', (string) decrypt($id));
-            },
-        ])->get();
+            }])->get();
         $data['paslon_terverifikasi'] = Paslon::with([
             'saksi_data' => function ($query) use ($id) {
                 $query
@@ -4461,12 +4484,15 @@ class AdminController extends Controller
         $data['config'] = Config::first();
         $config = Config::first();
         $dpt = District::where('regency_id', $this->config->regencies_id)->sum('dpt');
-        $data['paslon'] = Paslon::with('quicksaksidata')->get();
+        $data['paslon'] = Paslon::with(['quicksaksidata'=>function ($query){
+            $query->where('quicksaksidata.regency_id',$this->config->regencies_id);
+        }])->get();
         $data['paslon_terverifikasi'] = Paslon::with([
             'quicksaksidata' => function ($query) {
                 $query
                     ->join('quicksaksi', 'quicksaksidata.saksi_id', 'quicksaksi.id')
                     ->whereNull('quicksaksi.pending')
+                    ->where('quicksaksi.regency_id', $this->config->regencies_id)
                     ->where('quicksaksi.verification', 1);
             },
         ])->get();
@@ -4478,7 +4504,6 @@ class AdminController extends Controller
 
         $data['realcount'] = $dpt != 0 ? ($data['total_incoming_vote'] / $dpt) * 100 : 0;
         $data['village'] = Village::first();
-        $data['villages'] = Village::get();
         $data['realcount'] = $dpt != 0 ? ($data['total_incoming_vote'] / $dpt) * 100 : 0;
         $data['kec'] = District::where('regency_id', $this->config->regencies_id)->get();
         $data['kecamatan'] = District::where('regency_id', $this->config->regencies_id)->get();
@@ -4489,7 +4514,11 @@ class AdminController extends Controller
             ->where('tps.sample', 5)
             ->get();
         $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id,SUM(voice) as total FROM saksi_data WHERE regency_id = "' . $this->config->regencies_id . '" GROUP by paslon_id ORDER by total DESC'));
-        $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        if(isset($paslon_tertinggi['0'])){
+            $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        }else{
+            $data['paslon_tertinggi'] = Paslon::first();
+        }
         $data['urutan'] = $paslon_tertinggi;
         $data['district_quick'] = District::join('villages', 'villages.district_id', '=', 'districts.id')
             ->where('regency_id', $this->config->regencies_id)
@@ -4508,7 +4537,9 @@ class AdminController extends Controller
             ->get();
         $dpt = District::where('regency_id', $this->config->regencies_id)->sum('dpt');
         $incoming_vote = SaksiData::select('voice')->get();
-        $data['paslon'] = Paslon::with('quicksaksidata')->get();
+        $data['paslon'] = Paslon::with(['quicksaksidata'=>function ($query){
+            $query->where('quicksaksidata.regency_id', $this->config->regencies_id);
+        }])->get();
         $data['paslon_terverifikasi'] = Paslon::with([
             'saksi_data' => function ($query) {
                 $query
@@ -4592,7 +4623,12 @@ class AdminController extends Controller
             ['district_id' => decrypt($id)],
         );
 
-        $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        if(isset($paslon_tertinggi['0'])){
+            $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        }else{
+            $data['paslon_tertinggi'] = Paslon::first();
+        }
+
         $data['urutan'] = $paslon_tertinggi;
         $data['marquee'] = Saksi::join('users', 'users.tps_id', '=', 'saksi.tps_id')
             ->where('saksi.regency_id', $this->config->regencies_id)
@@ -4677,7 +4713,11 @@ class AdminController extends Controller
         // $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
         $data['urutan'] = $paslon_tertinggi;
 
-        $data['paslon_tertinggi'] = Paslon::where('id', (string) $paslon_tertinggi['0']->paslon_id)->first();
+        if(isset($paslon_tertinggi['0'])){
+            $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        }else{
+            $data['paslon_tertinggi'] = Paslon::first();
+        }
 
         $data['paslon'] = Paslon::with([
             'saksi_data' => function ($query) use ($id) {
