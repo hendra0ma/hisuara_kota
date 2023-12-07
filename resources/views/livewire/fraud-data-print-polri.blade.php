@@ -1,5 +1,5 @@
 <div>
-    <div class="row">
+    <div class="row mt-5">
         <div class="col-12 mb-3">
             <input wire:model="search" type="search" class="form-control border-1 border-dark"
                 placeholder="Search posts by title...">

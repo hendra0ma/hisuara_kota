@@ -29,7 +29,7 @@ $solution = \App\Models\SolutionFraud::get();
         </ol>
     </div>
 
-    <div class="col-md-8">
+    <div class="col-md-4">
         <div class="row mt-2">
             <div class="col parent-link">
                 <a data-command-target="kecurangan-masuk" class="btn text-white w-100 py-3 kecurangan-masuk tablink"
