@@ -16,10 +16,10 @@ class Bawaslu extends Component
     public $search;
     protected $queryString = ['search'];
 
-
         
     private $config;
     private $configs;
+    
     
     public function __construct()
     {

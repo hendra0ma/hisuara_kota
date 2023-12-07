@@ -1,4 +1,4 @@
-<div>
+<div class="bukti-kecurangan">
     <div class="row">
         <div class="col-12 mb-3">
             <input wire:model="search" type="search" class="form-control border-1 border-dark"

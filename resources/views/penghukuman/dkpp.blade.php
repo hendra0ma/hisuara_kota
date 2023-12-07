@@ -33,7 +33,7 @@ $solution = \App\Models\SolutionFraud::get();
     <div class="col-md-8">
         <div class="row mt-2">
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 tablink" data-command-target="bukti-kecurangan"
+                <a class="btn text-white w-100 py-3 tablink tab-bukti-kecurangan" data-command-target="bukti-kecurangan"
                     onclick="openPage('bukti-kecurangan', this, '#6259ca')" id="defaultOpen">Bukti Kecurangan</a>
             </div>
             <div class="col parent-link">
@@ -572,32 +572,40 @@ $solution = \App\Models\SolutionFraud::get();
         </div>
     </div>
 </div>
-<div id="bukti-kecurangan" class="tabcontent mt-0 pt-0 px-0">
+<div id="bukti-kecurangan" class="tabcontent mt-0 pt-0 px-0 pb-0">
     <div class="row">
         <div class="col mt-5">
-            <h2 class="fw-bold">
+            <h2 class="fw-bold bukti-kecurangan">
                 Bukti Kecurangan
+            </h2>
+            <h2 class="fw-bold kecurangan-tercetak" style="display: none">
+                Kecurangan Tercetak
             </h2>
         </div>
         <div class="col-4">
             <div class="row justify-content-end">
                 <div class="col parent-link">
-                    <a class="btn text-white w-100 py-3 tablink2" data-command-target="bukti-kecurangan"
-                        onclick="openPage2('bukti-kecurangan2', this, '#ed1d2780')" id="defaultOpen2">Bukti
-                        Kecurangan</a>
+                    <a class="btn text-white w-100 py-3 tablink kecurangan-tercetak" style="display: none"
+                        data-command-target="bukti-kecurangan"
+                        onclick="openPage('bukti-kecurangan', this, '#6259ca')">Bukti Kecurangan</a>
                 </div>
                 <div class="col-6 parent-link">
-                    <a class="btn text-white w-100 py-3 tablink2" data-command-target="kecurangan-tercetak"
-                        onclick="openPage2('kecurangan-tercetak', this, '#ed1d2780')">Kecurangan Tercetak</a>
+                    <a class="btn text-white w-100 py-3 tablink tercetak" data-command-target="kecurangan-tercetak"
+                        onclick="openPage('kecurangan-tercetak', this, '#6259ca')">Kecurangan Tercetak</a>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="bukti-kecurangan2" class="tabcontent2 row">
+
         <livewire:bawaslu>
+
     </div>
-    <div id="kecurangan-tercetak" class="tabcontent2 row">
+</div>
+
+<div id="kecurangan-tercetak" class="tabcontent mt-0 pt-0 px-0">
+    <div class="row">
+
         <livewire:bawaslu-tercetak>
+
     </div>
 </div>
 
@@ -666,33 +674,32 @@ $solution = \App\Models\SolutionFraud::get();
         document.getElementById(pageName).style.display = "block";
         elmnt.style.backgroundColor = color;
         // Add the "active-tab" class to the selected tab link
+
+        if(pageName == 'kecurangan-tercetak'){
+            $(`#${pageName}`).find('.tabcontent').show()
+        }
+        const elementChild =  $(elmnt)
         elmnt.classList.add("active-tab");
+        if($(elmnt).data('command-target') == "bukti-kecurangan"){
+            $(`.${$(elmnt).data('command-target')}`).css('display','block')
+            $(`.kecurangan-tercetak`).css('display','none')
+            $('.tab-bukti-kecurangan').addClass('active-tab')
+        }
+        
+
+        if (elementChild.hasClass("tercetak")) {
+            const parentElement = $('a.tab-bukti-kecurangan');
+            $(`#${parentElement.data('command-target')}`).css('display','block')
+            parentElement.addClass('active-tab')
+            $(`.bukti-kecurangan`).css('display','none')
+            $(`.kecurangan-tercetak`).css('display','block')
+            // parentElement.addClass("active-tab");
+        }
+
     }
     // Wrap this part in a DOMContentLoaded event listener
     document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("defaultOpen").click();
-    });
-
-    function openPage2(pageName, elmnt, color) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent2");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablink2");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].style.backgroundColor = "";
-            // Remove the "active-tab" class from all tab links
-            tablinks[i].classList.remove("active-tab");
-        }
-        document.getElementById(pageName).style.display = "block";
-        elmnt.style.backgroundColor = color;
-        // Add the "active-tab" class to the selected tab link
-        elmnt.classList.add("active-tab");
-    }
-    // Wrap this part in a DOMContentLoaded event listener
-    document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("defaultOpen2").click();
     });
 </script>
 @include('layouts.partials.footer')

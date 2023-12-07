@@ -69,6 +69,15 @@
                 transform-origin: 0 0;
             }
         }
+        @media screen and (max-width: 1300px) {
+            body {
+                min-width: 1903px;
+                -moz-transform: scale(0.611309135);
+                -moz-transform-origin: 0 0;
+                transform: scale(0.611309135);
+                transform-origin: 0 0;
+            }
+        }
 
         .inner-card {
             border-radius: 10px;
