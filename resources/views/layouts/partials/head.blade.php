@@ -62,7 +62,7 @@
     <style>
         @media screen and (max-width: 600px) {
             body {
-                min-width: 1903px;
+                /* min-width: 1903px; */
                 -moz-transform: scale(0.7091352);
                 -moz-transform-origin: 0 0;
                 transform: scale(0.7091352);
