@@ -141,7 +141,7 @@ class AdminController extends Controller
         $incoming_vote = SaksiData::where('regency_id', $this->config->regencies_id)
             ->select('voice')
             ->get();
-        $voice = SaksiData::where('regency_id', $this->config->regencies_id)->sum('voice');
+       
         $data['total_verification_voice'] = 0;
         $data['total_incoming_vote'] = SaksiData::where('regency_id', $this->config->regencies_id)->sum('voice') ?? 0;
 
@@ -157,9 +157,7 @@ class AdminController extends Controller
         $data['tps_masuk'] = Tps::where('regency_id', $this->config->regencies_id)
             ->where('setup', 'terisi')
             ->count();
-        $data['total_tps'] = Tps::where('regency_id', $this->config->regencies_id)
-            ->where('setup', 'belum terisi')
-            ->count();
+        $data['total_tps'] = Tps::where('regency_id', $this->config->regencies_id)->count();
         $data['tps_kosong'] = $data['total_tps'] - $data['tps_masuk'];
 
         $data['saksi_terverifikasi'] = Saksi::where('regency_id', $this->config->regencies_id)
@@ -5006,6 +5004,7 @@ class AdminController extends Controller
             ->get();
         $data['tracking'] = ModelsTracking::join('users', 'users.id', '=', 'tracking.id_user')
             ->where('users.role_id', '=', 8)
+            ->where('users.regency_id', $this->config->regencies_id)
             ->select('users.*', 'tracking.*')
             ->get();
         return view('administrator.lacak.lacak_saksi', $data);
@@ -5022,6 +5021,7 @@ class AdminController extends Controller
             ->get();
         $data['tracking'] = ModelsTracking::join('users', 'users.id', '=', 'tracking.id_user')
             ->where('users.role_id', '=', 14)
+            ->where('users.regency_id', $this->config->regencies_id)
             ->select('users.*', 'tracking.*')
             ->get();
         return view('administrator.lacak.lacak_relawan', $data);
@@ -5038,6 +5038,7 @@ class AdminController extends Controller
             ->get();
         $data['tracking'] = ModelsTracking::join('users', 'users.id', '=', 'tracking.id_user')
             ->where('users.role_id', '=', 8)
+              ->where('users.regency_id', $this->config->regencies_id)
             ->select('users.*', 'tracking.*')
             ->get();
         return view('administrator.lacak.lacak_enumerator', $data);
@@ -5054,6 +5055,7 @@ class AdminController extends Controller
             ->get();
         $data['tracking'] = ModelsTracking::join('users', 'users.id', '=', 'tracking.id_user')
             ->where('users.role_id', '=', 1)
+            ->where('users.regency_id', $this->config->regencies_id)
             ->select('users.*', 'tracking.*')
             ->get();
         return view('administrator.lacak.lacak_admin', $data);
@@ -5070,6 +5072,7 @@ class AdminController extends Controller
             ->get();
         $data['tracking'] = ModelsTracking::join('users', 'users.id', '=', 'tracking.id_user')
             ->where('users.role_id', '=', 17)
+            ->where('users.regency_id', $this->config->regencies_id)
             ->select('users.*', 'tracking.*')
             ->get();
         return view('administrator.lacak.lacak_crowd_c1', $data);

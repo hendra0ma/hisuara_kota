@@ -29,6 +29,7 @@ $regency_id = RegenciesDomain::where('domain', $url)->first();
 
 $configs = Config::first();
 $reg = App\Models\Regency::where('id', $regency_id->regency_id)->first();
+$kota = $reg;
 
 $config = new Configs;
 $config->regencies_id =  (string) $regency_id->regency_id;
@@ -54,9 +55,10 @@ $config->tahun =  $configs->tahun;
 $config->quick_count =  $configs->quick_count;
 $config->default =  $configs->default;
 
-$total_tps = Tps::where('regency_id', $config->regencies_id)->count();;
+$total_tps = Tps::where('regency_id', $config->regencies_id)->count();
 $props = Province::where('id', $kota->province_id)->first();
 $cityProp = Regency::where('province_id', $kota->province_id)->get();
+
 
 $jumlah_kecamatan = District::where('regency_id', $kota->id)->count();
 $jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '%')->count();
@@ -722,29 +724,24 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '
                     </div>
                 </div>
 
-                <?php
-                    $dpt_l = 0;
-                    $dpt_p = 0;
-                    if (request()->segment(2) == 'index') {
-                        $dpt_l = District::where('regency_id',$config->regencies_id)->sum('dpt_l');
-                        $dpt_p = District::where('regency_id',$config->regencies_id)->sum('dpt_p');
-                    }elseif(request()->segment(2) == 'perhitungan_kecamatan'){
-                        $dpt_l = District::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt_l');
-                        $dpt_p = District::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt_p');
-                    }elseif(request()->segment(2) == 'perhitungan_kelurahan'){
-                        $dpt_l = Village::where('id',decrypt(request()->segment(3)))->sum('dpt_l');
-                        $dpt_p = Village::where('id',decrypt(request()->segment(3)))->sum('dpt_p');
-
-                    }elseif(request()->segment(2) == 'perhitungan_tps'){
-                        $dpt_l = 128;
-                        $dpt_p = 145;
-
-                    }
-                ?>
+               
                 <div class="col-md text-white dpt tugel-content" style="display:none">
                     <div class="row">
+                            <?php 
+                                 $dpt_l = 0;
+                                 $dpt_p = 0;
+                                 $levelPerhitunganArray = explode('_',request()->segment(2));
+                                 $levelPerhitungan = (isset($levelPerhitunganArray[1]))?$levelPerhitunganArray[1]:"";
 
-                            @if (request()->segment(2) != 'perhitungan_tps')
+                            $total_dpt = 0;
+                            ?>
+                    
+                            @if (request()->segment(3) == null)
+                               @php
+                               $dpt_l = District::where('regency_id',$config->regencies_id)->sum('dpt_l');
+                                $dpt_p = District::where('regency_id',$config->regencies_id)->sum('dpt_p');
+                                $total_dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
+                               @endphp
                             <div class="col py-2 judul text-center bg-secondary text-white"
                                 style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
                                 <div class="text">Pria : <b>{{ $dpt_l }}</b></div>
@@ -752,27 +749,9 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '
                             <div class="col py-2 judul text-center bg-danger text-white">
                                 <div class="text">Wanita : <b>{{ $dpt_p }}</b></div>
                             </div>
-                            @endif
-                            <?php
-                            $total_dpt = 0;
-                            if (request()->segment(2) == 'index') {
-                                $total_dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
-                            } elseif (request()->segment(2) == 'perhitungan_kecamatan') {
-                                $total_dpt = District::where('regency_id', $config->regencies_id)->where('id', decrypt(request()->segment(3)))->sum('dpt');
-                            } elseif (request()->segment(2) == 'perhitungan_kelurahan') {
-                                $total_dpt = (int) $dpt_l + (int) $dpt_p;
-                            } elseif (request()->segment(2) == 'perhitungan_tps') {
-                                $total_dpt = TPS::where('regency_id', $config->regencies_id)->where('id', decrypt(request()->segment(3)))->sum('dpt');
-                            }
-                            ?>
-                            <div class="col py-2 judul text-center bg-primary text-white"
-                            {!!
-                                (request()->segment(2) == 'perhitungan_tps')?
-
-                                'style=" border-top-left-radius: 25px; border-bottom-left-radius: 25px"'
-                                :
-                                ""
-                            !!}>
+                       
+                          
+                            <div class="col py-2 judul text-center bg-primary text-white">
 
                             <div class="text">Total : <b>{{ $total_dpt }}</b></div>
                         </div>
@@ -787,6 +766,72 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '
                             <div class="text">Total Kel : <b>{{$jumlah_kelurahan}}</b>
                             </div>
                         </div>
+
+
+                            @elseif ($levelPerhitungan == 'kecamatan')
+                         <?php  $dpt_l = District::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt_l');
+                                $dpt_p = District::where('regency_id',$config->regencies_id)->where('id',decrypt(request()->segment(3)))->sum('dpt_p');
+                                $total_tps = TPS::where('district_id',decrypt(request()->segment(3)))->count();
+                                $total_kel = Village::where('district_id',decrypt(request()->segment(3)))->count();
+                                $total_dpt = District::where('regency_id', $config->regencies_id)->where('id', decrypt(request()->segment(3)))->sum('dpt');
+                                 ?>
+                            <div class="col py-2 judul text-center bg-secondary text-white"
+                                style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
+                                <div class="text">Pria : <b>{{ $dpt_l }}</b></div>
+                            </div>
+                            <div class="col py-2 judul text-center bg-danger text-white">
+                                <div class="text">Wanita : <b>{{ $dpt_p }}</b></div>
+                            </div>
+                       
+                          
+                            <div class="col py-2 judul text-center bg-primary text-white">
+
+                            <div class="text">Total : <b>{{ $total_dpt }}</b></div>
+                        </div>
+                        <div class="col py-2 judul text-center bg-info text-white">
+                            <div class="text">Total TPS : <b>{{ $total_tps }}</b></div>
+                        </div>
+                     
+                        <div class="col py-2 judul text-center bg-success text-white" style="border-top-right-radius: 25px; border-bottom-right-radius: 25px">
+                            <div class="text">Total Kel : <b>{{$total_kel}}</b>
+                            </div>
+                        </div>
+                            @elseif ($levelPerhitungan == 'kelurahan')
+                            @php
+                                $dpt_l = Village::where('id',decrypt(request()->segment(3)))->sum('dpt_l');
+                                $dpt_p = Village::where('id',decrypt(request()->segment(3)))->sum('dpt_p');
+                                $total_dpt = (int) $dpt_l + (int) $dpt_p;
+                                $total_tps = TPS::where('villages_id',decrypt(request()->segment(3)))->count();
+                            @endphp
+                            <div class="col py-2 judul text-center bg-secondary text-white"
+                                style="border-top-left-radius: 25px; border-bottom-left-radius: 25px">
+                                <div class="text">Pria : <b>{{ $dpt_l }}</b></div>
+                            </div>
+                            <div class="col py-2 judul text-center bg-danger text-white">
+                                <div class="text">Wanita : <b>{{ $dpt_p }}</b></div>
+                            </div>
+                       
+                          
+                            <div class="col py-2 judul text-center bg-primary text-white" >
+
+                            <div class="text">Total : <b>{{ $total_dpt }}</b></div>
+                        </div>
+                        <div class="col py-2 judul text-center bg-info text-white"style="border-top-right-radius: 25px; border-bottom-right-radius: 25px">
+                            <div class="text">Total TPS : <b>{{ $total_tps }}</b></div>
+                        </div>
+                            @elseif ($levelPerhitungan == 'tps')
+                            @php
+                            $total_dpt = TPS::where('regency_id', $config->regencies_id)->where('id', decrypt(request()->segment(3)))->sum('dpt');
+                            @endphp
+                            <div class="col py-2 judul text-center bg-primary text-white"style=" border-top-left-radius: 25px; border-bottom-left-radius: 25px;border-top-right-radius: 25px; border-bottom-right-radius: 25px">
+                            <div class="text">Total DPT: <b>{{ $total_dpt }}</b></div>
+                            </div>
+                            @endif
+                        
+
+
+
+
                     </div>
                 </div>
 
