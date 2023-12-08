@@ -45,16 +45,16 @@ $solution = \App\Models\SolutionFraud::get();
                     onclick="openPage('rekomendasi-tindakan', this, '#6259ca')">Rekomendasi Tindakan</a>
             </div>
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 tablink" data-command-target="index-tsm"
-                    onclick="openPage('index-tsm', this, '#6259ca')">Index TSM</a>
+                <a class="btn text-white w-100 py-3 tablink" data-command-target="indikator-tsm"
+                    onclick="openPage('indikator-tsm', this, '#6259ca')">Indikator TSM</a>
             </div>
             <div class="col parent-link">
                 <a class="btn text-white w-100 py-3 tablink" data-command-target="laporan-mk"
                     onclick="openPage('laporan-mk', this, '#6259ca')">Laporan MK</a>
             </div>
             {{-- <div class="col parent-link">
-                <a data-command-target="index-tsm" class="btn text-white w-100 py-3 kecurangan-masuk tablink"
-                    onclick="openPage('index-tsm', this, '#6259ca')" id="defaultOpen">Data 1</a>
+                <a data-command-target="indikator-tsm" class="btn text-white w-100 py-3 kecurangan-masuk tablink"
+                    onclick="openPage('indikator-tsm', this, '#6259ca')" id="defaultOpen">Data 1</a>
             </div> --}}
         </div>
     </div>
@@ -95,10 +95,10 @@ $solution = \App\Models\SolutionFraud::get();
     }
 </style>
 
-<div id="index-tsm" class="tabcontent mt-0 pt-0 px-0">
+<div id="indikator-tsm" class="tabcontent mt-0 pt-0 px-0">
     <div class="row">
         <div class="col-6 mt-5">
-            <h2 class="fw-bold">Index TSM Pemilu</h2>
+            <h2 class="fw-bold">Indikator TSM Pemilu</h2>
         </div>
         <div class="col-6 mt-5">
             <div class="row justify-content-end">
@@ -400,54 +400,58 @@ $solution = \App\Models\SolutionFraud::get();
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <div class="row">
-                    @foreach($solution as $solut)
-                    <?php 
-                            $jmlh_kecurangan = \App\Models\Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
-                                ->join('users', 'users.tps_id', '=', 'tps.id')
-                                ->join('bukti_deskripsi_curang', 'bukti_deskripsi_curang.tps_id', '=', 'tps.id')
-                                ->join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
-                                ->where('list_kecurangan.solution_fraud_id', $solut->id)
-                                ->where('saksi.kecurangan', 'yes')
-                                ->where('saksi.status_kecurangan', 'terverifikasi')
-                                ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
-                                ->get();
-                        ?>
-                    <div class="col-lg parent-rekom-tindakan transition">
-                        <div class="card mb-0">
-                            <div class="card-header bg-primary">
-                                <div class="card-title text-white">{{$solut->solution}}</div>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col mx-auto text-center">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            @foreach($solution as $solut)
+                            <th class="fw-bold">{{$solut->solution}}</th>
+                            @endforeach
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @foreach($solution as $solut)
+                            <?php 
+                                $jmlh_kecurangan = \App\Models\Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
+                                    ->join('users', 'users.tps_id', '=', 'tps.id')
+                                    ->join('bukti_deskripsi_curang', 'bukti_deskripsi_curang.tps_id', '=', 'tps.id')
+                                    ->join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+                                    ->where('list_kecurangan.solution_fraud_id', $solut->id)
+                                    ->where('saksi.kecurangan', 'yes')
+                                    ->where('saksi.status_kecurangan', 'terverifikasi')
+                                    ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
+                                    ->get();
+                            ?>
+                            <td class="align-middle">
+                                <div class="row justify-content-between">
+                                    <div class="col-auto">
                                         <b class="fs-4 mx-auto target-container{{$solut->id}}"></b>
-                                        <script>
-                                            data = [
-                                                    @foreach($jmlh_kecurangan as $jmlh)
-                                                        '{{$jmlh->tps_id}}', 
-                                                    @endforeach
-                                                ];
-                                                uniqueArray = data.filter(function (item, pos) {
-                                                    return data.indexOf(item) == pos;
-                                                });
-                                                document.querySelector('b.target-container{{$solut->id}}').innerHTML = uniqueArray.length;
-                                        </script>
                                     </div>
-                                    <div class="col my-auto text-end">
-                                        <a {{-- href="{{ route('superadmin.solution', encrypt($solut->id)) }}" --}}
-                                            style="cursor: pointer"
-                                            data-target="{{ preg_replace('/\([^)]+\)/', '', str_replace(' ', '-', strtolower($solut->solution))) }}" class="my-auto rekom-tindakan">
+                                    <script>
+                                        data = [
+                                            @foreach($jmlh_kecurangan as $jmlh)
+                                                '{{$jmlh->tps_id}}', 
+                                            @endforeach
+                                        ];
+                                        uniqueArray = data.filter(function (item, pos) {
+                                            return data.indexOf(item) == pos;
+                                        });
+                                        document.querySelector('b.target-container{{$solut->id}}').innerHTML = uniqueArray.length;
+                                    </script>
+                                    <div class="col-auto d-flex">
+                                        <a {{-- href="{{ route('superadmin.solution', encrypt($solut->id)) }}" --}} href="#" style="cursor: pointer"
+                                            data-target="{{ preg_replace('/\([^)]+\)/', '', str_replace(' ', '-', strtolower($solut->solution))) }}"
+                                            class="my-auto rekom-tindakan my-auto">
                                             Lihat
                                             <i class="mdi mdi-eye"></i>
                                         </a>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
+                            </td>
+                            @endforeach
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

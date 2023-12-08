@@ -1,7 +1,7 @@
 @include('layouts.partials.head')
 @include('layouts.partials.sidebar')
 <?php
-$solution = \App\Models\SolutionFraud::get();
+$solution = \App\Models\SolutionFraud::where('id', '!=', 1)->where('id', '!=', 2)->get();
 ?>
 
 @include('layouts.partials.header')
@@ -47,8 +47,8 @@ $solution = \App\Models\SolutionFraud::get();
                     onclick="openPage('rekomendasi-tindakan', this, '#6259ca')">Rekomendasi Tindakan</a>
             </div>
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 tablink" data-command-target="index-tsm"
-                    onclick="openPage('index-tsm', this, '#6259ca')">Index TSM</a>
+                <a class="btn text-white w-100 py-3 tablink" data-command-target="indikator-tsm"
+                    onclick="openPage('indikator-tsm', this, '#6259ca')">Indikator TSM</a>
             </div>
         </div>
     </div>
@@ -65,15 +65,15 @@ $solution = \App\Models\SolutionFraud::get();
     }
 </style>
 
-<div id="index-tsm" class="tabcontent mt-0 pt-0 px-0">
+<div id="indikator-tsm" class="tabcontent mt-0 pt-0 px-0">
     <div class="row">
         <div class="col-6 mt-5">
-            <h2 class="fw-bold">Index TSM Pemilu</h2>
+            <h2 class="fw-bold">Indikator TSM Pemilu</h2>
         </div>
         <div class="col-6 mt-5">
             <div class="row justify-content-end">
                 <div class="col-4">
-                    <a href="{{url('')}}/administrator/print-index-tsm" target="_blank"
+                    <a href="{{url('')}}/administrator/print-indikator-tsm" target="_blank"
                         class="btn btn-block btn-dark ml-2 mr-2 w-100"> Print &nbsp;&nbsp;<i class="fa fa-print"></i></a>
                 </div>
         
@@ -354,7 +354,7 @@ $solution = \App\Models\SolutionFraud::get();
         <div class="col-lg-12">
             <div class="row justify-content-end">
                 <div class="col-4">
-                    <a href="{{url('')}}/administrator/print-index-tsm" target="_blank"
+                    <a href="{{url('')}}/administrator/print-indikator-tsm" target="_blank"
                         class="btn btn-block btn-dark ml-2 mr-2 w-100"> Print &nbsp;&nbsp;<i
                             class="fa fa-print"></i></a>
                 </div>
@@ -372,58 +372,59 @@ $solution = \App\Models\SolutionFraud::get();
     <div class="col-lg-12 px-0">
         <div class="card">
             <div class="card-body">
-                <div class="row">
-
-                    @foreach($solution as $solut)
-                    <?php $jmlh_kecurangan =  \App\Models\Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
-                                                        ->join('users', 'users.tps_id', '=', 'tps.id')
-                                                        ->join('bukti_deskripsi_curang', 'bukti_deskripsi_curang.tps_id', '=', 'tps.id')
-                                                        ->join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
-                                                        ->where('list_kecurangan.solution_fraud_id',$solut->id)
-                                                        ->where('saksi.kecurangan', 'yes')
-                                                        ->where('saksi.status_kecurangan', 'terverifikasi')
-                                                        ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
-                                                        ->get();
-                                                        
-                                                        
-                                                        ?>
-
-
-                    <div class="col-lg justify-content-end">
-                        <div class="card">
-                            <div class="card-header bg-primary">
-                                <div class="card-title text-white">{{$solut->solution}}
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col mx-auto text-center">
-                                        <b class="fs-4 mx-auto target-container<?=$solut->id?>"> </b>
-                                        <script>
-                                            data = [@foreach($jmlh_kecurangan as $jmlh)
-                                                        '{{$jmlh->tps_id}}', @endforeach
-                                                    ];
-                                                    uniqueArray = data.filter(function (item, pos) {
-                                                        return data.indexOf(item) == pos;
-                                                    });
-                                                    document.querySelector('b.target-container<?=$solut->id?>').innerHTML =
-                                                        uniqueArray.length
-                                        </script>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            @foreach($solution as $solut)
+                            <th class="fw-bold">{{$solut->solution}}</th>
+                            @endforeach
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @foreach($solution as $solut)
+                            <?php 
+                                                $jmlh_kecurangan = \App\Models\Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
+                                                    ->join('users', 'users.tps_id', '=', 'tps.id')
+                                                    ->join('bukti_deskripsi_curang', 'bukti_deskripsi_curang.tps_id', '=', 'tps.id')
+                                                    ->join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+                                                    ->where('list_kecurangan.solution_fraud_id', $solut->id)
+                                                    ->where('saksi.kecurangan', 'yes')
+                                                    ->where('saksi.status_kecurangan', 'terverifikasi')
+                                                    ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
+                                                    ->get();
+                                            ?>
+                            <td class="align-middle">
+                                <div class="row justify-content-between">
+                                    <div class="col-auto">
+                                        <b class="fs-4 mx-auto target-container{{$solut->id}}"></b>
                                     </div>
-                                    <div class="col my-auto text-end">
-                                        <a {{-- href="{{ route('superadmin.solution', encrypt($solut->id)) }}" --}}
+                                    <script>
+                                        data = [
+                                                            @foreach($jmlh_kecurangan as $jmlh)
+                                                                '{{$jmlh->tps_id}}', 
+                                                            @endforeach
+                                                        ];
+                                                        uniqueArray = data.filter(function (item, pos) {
+                                                            return data.indexOf(item) == pos;
+                                                        });
+                                                        document.querySelector('b.target-container{{$solut->id}}').innerHTML = uniqueArray.length;
+                                    </script>
+                                    <div class="col-auto d-flex">
+                                        <a {{-- href="{{ route('superadmin.solution', encrypt($solut->id)) }}" --}} href="#"
                                             style="cursor: pointer"
-                                            data-target="{{ preg_replace('/\([^)]+\)/', '', str_replace(' ', '-', strtolower($solut->solution))) }}" class="my-auto rekom-tindakan">
+                                            data-target="{{ preg_replace('/\([^)]+\)/', '', str_replace(' ', '-', strtolower($solut->solution))) }}"
+                                            class="my-auto rekom-tindakan my-auto">
                                             Lihat
                                             <i class="mdi mdi-eye"></i>
                                         </a>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
+                            </td>
+                            @endforeach
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -444,29 +445,7 @@ $solution = \App\Models\SolutionFraud::get();
         }) 
     </script>
 
-    <div class="col-12 konten-rekom-tindakan" id="perhitungan-suara-ulang">
-        <div class="card">
-            <div class="card-header bg-primary">
-                <div class="card-title text-white">Perhitungan Suara Ulang</div>
-            </div>
-            <div class="card-body">
-                <livewire:rekom-tindakan-p-s-u>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-12 konten-rekom-tindakan" id="pemungutan-suara-ulang" style="display: none">
-        <div class="card">
-            <div class="card-header bg-primary">
-                <div class="card-title text-white">Pemungutan Suara Ulang</div>
-            </div>
-            <div class="card-body">
-                <livewire:rekom-tindakan-p-s-u2>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-12 konten-rekom-tindakan" id="kasus-administrasi-pemilu" style="display: none">
+    <div class="col-12 px-0 konten-rekom-tindakan" id="kasus-administrasi-pemilu">
         <div class="card">
             <div class="card-header bg-primary">
                 <div class="card-title text-white">Kasus Administrasi Pemilu</div>
@@ -477,7 +456,7 @@ $solution = \App\Models\SolutionFraud::get();
         </div>
     </div>
 
-    <div class="col-12 konten-rekom-tindakan" id="pelanggaran-tindak-pidana" style="display: none">
+    <div class="col-12 px-0 konten-rekom-tindakan" id="pelanggaran-tindak-pidana" style="display: none">
         <div class="card">
             <div class="card-header bg-primary">
                 <div class="card-title text-white">Pelanggaran Tindak Pidana</div>
@@ -488,7 +467,7 @@ $solution = \App\Models\SolutionFraud::get();
         </div>
     </div>
 
-    <div class="col-12 konten-rekom-tindakan" id="pelanggaran-kode-etik" style="display: none">
+    <div class="col-12 px-0 konten-rekom-tindakan" id="pelanggaran-kode-etik" style="display: none">
         <div class="card">
             <div class="card-header bg-primary">
                 <div class="card-title text-white">Pelanggaran Kode Etik</div>
@@ -499,7 +478,7 @@ $solution = \App\Models\SolutionFraud::get();
         </div>
     </div>
 
-    <div class="col-12 konten-rekom-tindakan" id="pelanggaran-aparatur-sipil-negara-" style="display: none">
+    <div class="col-12 px-0 konten-rekom-tindakan" id="pelanggaran-aparatur-sipil-negara-" style="display: none">
         <div class="card">
             <div class="card-header bg-primary">
                 <div class="card-title text-white">Pelanggaran Aparatur Sipil Negara (ASN)</div>
