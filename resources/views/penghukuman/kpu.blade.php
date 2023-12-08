@@ -45,8 +45,8 @@ $solution = \App\Models\SolutionFraud::where('id', '!=', 1)->where('id', '!=', 2
                     onclick="openPage('barkode-kecurangan', this, '#6259ca')">Barkode Kecurangan</a>
             </div>
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 tablink" data-command-target="rekomendasi-tindakan"
-                    onclick="openPage('rekomendasi-tindakan', this, '#6259ca')">Rekomendasi Tindakan</a>
+                <a class="btn text-white w-100 py-3 tablink" data-command-target="klasifikasi-kecurangan"
+                    onclick="openPage('klasifikasi-kecurangan', this, '#6259ca')">Klasifikasi Kecurangan</a>
             </div>
             <div class="col parent-link">
                 <a class="btn text-white w-100 py-3 tablink" data-command-target="indikator-tsm"
@@ -366,10 +366,10 @@ $solution = \App\Models\SolutionFraud::where('id', '!=', 1)->where('id', '!=', 2
         </div>
     </div>
 </div>
-<div id="rekomendasi-tindakan" class="tabcontent mt-0 pt-0 px-0">
+<div id="klasifikasi-kecurangan" class="tabcontent mt-0 pt-0 px-0">
     <div class="col-12 px-0 mt-5">
         <h2 class="fw-bold">
-            Rekomendasi Tindakan
+            Klasifikasi Kecurangan
         </h2>
     </div>
     <div class="col-lg-12 px-0">

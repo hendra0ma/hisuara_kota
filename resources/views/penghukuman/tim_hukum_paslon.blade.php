@@ -1,7 +1,8 @@
 @include('layouts.partials.head')
 @include('layouts.partials.sidebar')
 <?php
-$solution = \App\Models\SolutionFraud::get();
+$solution = \App\Models\SolutionFraud::where('id', '!=', 1)->where('id', '!=', 2)->get();
+$solution2 = \App\Models\SolutionFraud::where('id', '=', 1)->orWhere('id', '=', 2)->get();
 ?>
 
 @include('layouts.partials.header')
@@ -39,6 +40,10 @@ $solution = \App\Models\SolutionFraud::get();
             <div class="col parent-link">
                 <a class="btn text-white w-100 py-3 tablink" data-command-target="barkode-kecurangan"
                     onclick="openPage('barkode-kecurangan', this, '#6259ca')">Barkode Kecurangan</a>
+            </div>
+            <div class="col parent-link">
+                <a class="btn text-white w-100 py-3 tablink" data-command-target="klasifikasi-kecurangan"
+                    onclick="openPage('klasifikasi-kecurangan', this, '#6259ca')">Klasifikasi Kecurangan</a>
             </div>
             <div class="col parent-link">
                 <a class="btn text-white w-100 py-3 tablink" data-command-target="rekomendasi-tindakan"
@@ -391,10 +396,10 @@ $solution = \App\Models\SolutionFraud::get();
         transition: all 400ms ease
     }
 </style> --}}
-<div id="rekomendasi-tindakan" class="tabcontent mt-0 pt-0 px-0 row">
+<div id="klasifikasi-kecurangan" class="tabcontent mt-0 pt-0 px-0 row">
     <div class="col-12 mt-5">
         <h2 class="fw-bold">
-            Rekomendasi Tindakan
+            Klasifikasi Kecurangan
         </h2>
     </div>
     <div class="col-lg-12">
@@ -472,29 +477,7 @@ $solution = \App\Models\SolutionFraud::get();
         }) 
     </script>
 
-    <div class="col-12 konten-rekom-tindakan" id="perhitungan-suara-ulang">
-        <div class="card">
-            <div class="card-header bg-primary">
-                <div class="card-title text-white">Perhitungan Suara Ulang</div>
-            </div>
-            <div class="card-body">
-                <livewire:rekom-tindakan-p-s-u>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-12 konten-rekom-tindakan" id="pemungutan-suara-ulang" style="display: none">
-        <div class="card">
-            <div class="card-header bg-primary">
-                <div class="card-title text-white">Pemungutan Suara Ulang</div>
-            </div>
-            <div class="card-body">
-                <livewire:rekom-tindakan-p-s-u2>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-12 konten-rekom-tindakan" id="kasus-administrasi-pemilu" style="display: none">
+    <div class="col-12 konten-rekom-tindakan" id="kasus-administrasi-pemilu">
         <div class="card">
             <div class="card-header bg-primary">
                 <div class="card-title text-white">Kasus Administrasi Pemilu</div>
@@ -534,6 +517,110 @@ $solution = \App\Models\SolutionFraud::get();
             </div>
             <div class="card-body">
                 <livewire:rekom-tindakan-p-a-s-n>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="rekomendasi-tindakan" class="tabcontent mt-0 pt-0 px-0 row">
+    <div class="col-12 mt-5">
+        <h2 class="fw-bold">
+            Rekomendasi Tindakan
+        </h2>
+    </div>
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            @foreach($solution2 as $solut)
+                            <th class="fw-bold">{{$solut->solution}}</th>
+                            @endforeach
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @foreach($solution2 as $solut)
+                            <?php 
+                                $jmlh_kecurangan = \App\Models\Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
+                                    ->join('users', 'users.tps_id', '=', 'tps.id')
+                                    ->join('bukti_deskripsi_curang', 'bukti_deskripsi_curang.tps_id', '=', 'tps.id')
+                                    ->join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+                                    ->where('list_kecurangan.solution_fraud_id', $solut->id)
+                                    ->where('saksi.kecurangan', 'yes')
+                                    ->where('saksi.status_kecurangan', 'terverifikasi')
+                                    ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
+                                    ->get();
+                            ?>
+                            <td class="align-middle">
+                                <div class="row justify-content-between">
+                                    <div class="col-auto">
+                                        <b class="fs-4 mx-auto target-container2{{$solut->id}}"></b>
+                                    </div>
+                                    <script>
+                                        data = [
+                                            @foreach($jmlh_kecurangan as $jmlh)
+                                                '{{$jmlh->tps_id}}', 
+                                            @endforeach
+                                        ];
+                                        uniqueArray = data.filter(function (item, pos) {
+                                            return data.indexOf(item) == pos;
+                                        });
+                                        document.querySelector('b.target-container2{{$solut->id}}').innerHTML = uniqueArray.length;
+                                    </script>
+                                    <div class="col-auto d-flex">
+                                        <a {{-- href="{{ route('superadmin.solution', encrypt($solut->id)) }}" --}} href="#" style="cursor: pointer"
+                                            data-target="{{ preg_replace('/\([^)]+\)/', '', str_replace(' ', '-', strtolower($solut->solution))) }}"
+                                            class="my-auto rekom-tindakan2 my-auto">
+                                            Lihat
+                                            <i class="mdi mdi-eye"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            @endforeach
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('.rekom-tindakan2').on('click', function () {
+            let target = $(this).data('target');
+            let $targetElement = $(`.konten-rekom-tindakan2#${target}`);
+            
+            if ($targetElement.hasClass('active')) {
+            // If it has the 'active' class, do nothing or perform the required action
+            // For example, you might want to toggle the 'active' class or perform other actions
+            } else {
+            // If it doesn't have the 'active' class, hide others and show the selected one
+            $('.konten-rekom-tindakan2').not($targetElement).hide(500).removeClass('active');
+                $targetElement.show(200).addClass('active');
+            }
+        }) 
+    </script>
+
+    <div class="col-12 konten-rekom-tindakan2" id="perhitungan-suara-ulang">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="card-title text-white">Perhitungan Suara Ulang</div>
+            </div>
+            <div class="card-body">
+                <livewire:rekom-tindakan-p-s-u>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 konten-rekom-tindakan2" id="pemungutan-suara-ulang" style="display: none">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="card-title text-white">Pemungutan Suara Ulang</div>
+            </div>
+            <div class="card-body">
+                <livewire:rekom-tindakan-p-s-u2>
             </div>
         </div>
     </div>
