@@ -667,6 +667,7 @@ $solution2 = \App\Models\SolutionFraud::where('id', '=', 1)->orWhere('id', '=', 
                 <div class="col"></div>
                 <div class="col"></div>
                 <div class="col"></div>
+                <div class="col"></div>
                 <div class="col parent-link" style="width: 224.94px">
                     <a class="btn text-white w-100 py-3 tablink kecurangan-tercetak" style="display: none"
                         data-command-target="bukti-kecurangan"
