@@ -220,7 +220,6 @@ class ExcelController extends Controller
                 })
                 ->select('regencies.*', 'districts.*', 'villages.*')
                 ->first();
-
             $filteredArray = $this->filterArrayTps($worksheet);
             $result = $this->countArrayValuesTps($filteredArray);
 

@@ -1185,3 +1185,4 @@ Route::get('ajaxKpuKecamatan',function (Request $request) {
     $data['request'] = $request;
     return view('ajax-hitung-suara-kpu',$data);
 })->name("ajaxKpuKecamatan");
+
