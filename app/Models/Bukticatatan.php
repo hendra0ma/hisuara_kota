@@ -9,7 +9,7 @@ class Bukticatatan extends Model
 {
     use HasFactory;
     public $table = "bukti_catatan";
-    protected $fillable = ['text','tps_id'];
+    protected $fillable = ['text','tps_id','kecurangan_id'];
 
     
 //     public $config;
