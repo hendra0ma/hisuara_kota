@@ -178,6 +178,52 @@ let myModal = new bootstrap.Modal(document.getElementById('modallockdown'), {
             top: 0
         },
     });
+    /*chart-donut*/
+    var chartmode1 = c3.generate({
+        bindto: '#chart-donut', // id of chart wrapper
+        data: {
+            columns: [
+                // each columns data
+
+                    @php
+                    $i=1;
+                    @endphp
+                  
+                <?php foreach ($paslon as $pas) :  ?>
+                    @php
+                    $voice = 0;
+                        foreach($regencies as $regency){
+                            $voice += $regency->{"suarav".$i};
+                        }
+                    @endphp
+                   ['data<?= $pas->id  ?>', <?= $voice ?>],
+                      @php
+                         $i++;
+                    @endphp
+                <?php endforeach  ?>
+            ],
+            type: 'pie', // default type of chart
+            colors: {
+                <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': "<?= $pas->color ?>",
+                <?php endforeach  ?>
+            },
+            names: {
+                // name of each serie
+                <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': " <?= $pas->candidate ?> - <?= $pas->deputy_candidate ?>",
+                <?php endforeach  ?>
+            }
+        },
+        axis: {},
+        legend: {
+            show: true, //hide legend
+        },
+        padding: {
+            bottom: 0,
+            top: 0
+        },
+    });
+
+    
 </script>
 
 <script>
