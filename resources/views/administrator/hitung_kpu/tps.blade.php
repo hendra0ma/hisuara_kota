@@ -333,12 +333,12 @@ $dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($urutan as $urutPaslon)
-                            <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
+                            @foreach ($urutan as $pasangan)
+                        
                             <tr>
                                 <td>{{$no_u++}}</td>
                                 <td>{{$pasangan->candidate}} - {{$pasangan->deputy_candidate}}</td>
-                                <td class="text-end">{{$urutPaslon->total}}</td>
+                                <td class="text-end"></td>
                             </tr>
                             @endforeach
                         </tbody>

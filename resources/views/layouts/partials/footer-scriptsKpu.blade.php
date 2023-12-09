@@ -262,10 +262,19 @@ let myModal = new bootstrap.Modal(document.getElementById('modallockdown'), {
                 // each columns data
 
                 @if (request()->segment(3) == null)
+                @php
+                    $i = 1;
+                @endphp
                 <?php foreach ($paslon as $pas) :  ?>
-                    ['data<?= $pas->id  ?>', <?= $kota->{"suara".$pas->id} ?>],
-                <?php endforeach  ?>
 
+                    ['data<?= $pas->id  ?>', <?= $kota->{"suaraKpu".$i} ?>],
+                    @php
+                        $i++;
+                    @endphp
+                <?php endforeach  ?>
+                @php
+                    $i = 0;
+                @endphp
                 @elseif (request()->segment(3) != null && request()->segment(2) == "kpu_kecamatan")
 
 
