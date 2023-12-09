@@ -60,7 +60,7 @@
     <link rel="stylesheet" href="https://raw.githack.com/thdoan/magnify/master/dist/css/magnify.css">
 
     <style>
-        @media screen and (max-width: 1366px) {
+        @media screen and (max-width: 1366px) and (min-width: 768px) {
             body {
                 min-width: 1903px;
                 -moz-transform: scale(0.7091352);
@@ -69,7 +69,7 @@
                 transform-origin: 0 0;
             }
         }
-        @media screen and (max-width: 1300px) {
+        @media screen and (max-width: 767px) {
             body {
                 min-width: 1903px;
                 -moz-transform: scale(0.611309135);

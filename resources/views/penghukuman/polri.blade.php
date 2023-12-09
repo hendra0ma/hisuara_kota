@@ -29,7 +29,7 @@ $solution = \App\Models\SolutionFraud::get();
             </li>
         </ol>
     </div>
-     <div class="col-md-8">
+     <div class="col-md-4">
         <div class="row mt-2">
             <div class="col parent-link">
                 <a data-command-target="kecurangan-masuk" class="btn text-white w-100 py-3 kecurangan-masuk tablink"
@@ -70,7 +70,7 @@ $solution = \App\Models\SolutionFraud::get();
 </script>
 
 <div id="kecurangan-masuk" class="tabcontent mt-0 pt-0 px-0">
-      <livewire:fraud-data-print-polri>
+    <livewire:fraud-data-print-polri>
 </div>
 <div id="kecurangan-tercetak" class="tabcontent mt-0 pt-0 px-0">
     <livewire:panrb-tercetak>
