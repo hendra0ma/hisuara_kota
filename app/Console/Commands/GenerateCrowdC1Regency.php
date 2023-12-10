@@ -3,16 +3,16 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use AzisHapidin\IndoRegion\RawDataGetter;
+use Illuminate\Support\Facades\DB;
 
-class TestWilayah extends Command
+class GenerateCrowdC1Regency extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'testWilayah';
+    protected $signature = 'GenerateCrowdC1Regency';
 
     /**
      * The console command description.
@@ -38,10 +38,19 @@ class TestWilayah extends Command
      */
     public function handle()
     {
-        $villages = RawDataGetter::getVillages();
+        $regency = DB::table('regencies_2')->get();
+        $allReg = [];
+        $timestamps = now();
+        foreach ($regency as $reg) {
+            $allReg[] = [
+                "id"=>$reg->id,
+                "name"=>$reg->name,
+                "province_id"=>$reg->province_id,
+                "created_at"=>$timestamps
 
-        // Insert Data with Chun
-        
-       $this->info($villages);
+            ];
+        }
+        DB::table('regency_crowd_c1')->insert($allReg);
+     $this->info(json_encode($allReg));
     }
 }
