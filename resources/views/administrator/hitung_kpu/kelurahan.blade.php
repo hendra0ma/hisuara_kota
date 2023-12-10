@@ -185,8 +185,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                                                 <h6 class="mt-4">{{$pas->candidate}} </h6>
                                                 <h6 class="">{{$pas->deputy_candidate}} </h6>
                                               
-                                                {{-- <h3 class="mb-2 number-font">{{ $suaraCrowd['suaraCrowd'.$pas->id] }} suara</h3> --}}
-                                                <h3 class="mb-2 number-font">1000 suara</h3>
+                                                <h3 class="mb-2 number-font">{{ $suaraCrowd['suaraCrowd'.$pas->id] }} suara</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -233,7 +232,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                        
                             <div class="col py-2 judul text-center text-white custom-urutan"
                                 style="background: {{ $pasangan->color }}">
-                                <div class="text">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} : 1000
+                                <div class="text">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} :
                                 </b></div>
                             </div>
                             @endforeach
@@ -277,8 +276,7 @@ $props = Province::where('id',$kota['province_id'])->first();
                                     
                                       ${"suara".$item->id}[$cd->id] = $saksi_dataa;
                                      ?>
-                                    {{-- <td class="align-middle text-end">{{$saksi_dataa}}</td> --}}
-                                    <td class="align-middle text-end">1000</td>
+                                    <td class="align-middle text-end">{{$saksi_dataa}}</td>
 
                                     @endforeach
                                 

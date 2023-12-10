@@ -175,8 +175,7 @@ $regency = $kota;
                                                     <div class="col text-center">
                                                         <h6 class="mt-4">{{ $pas->candidate }} </h6>
                                                         <h6 class="">{{ $pas->deputy_candidate }} </h6>
-                                                        {{-- <h3 class="mb-2 number-font">{{ $kota->{"suaraKpu$i"} }} suara</h3> --}}
-                                                        <h3 class="mb-2 number-font">1000 suara</h3>
+                                                        <h3 class="mb-2 number-font">{{ $kota->{"suaraKpu$i"} }} suara</h3>
                                                     </div>
                                                 </div>
                                             </div>
@@ -221,20 +220,20 @@ $regency = $kota;
                             <div class="text-center title-atas-table fs-5 fw-bold">{{ $kota['name'] }}</div>
 
 
-                            {{-- <div class="row mx-auto" style="width: 884.5px;"id="urutan-pasangan"> --}}
+                            <div class="row mx-auto" style="width: 884.5px;"id="urutan-pasangan">
 
 
-                                @foreach ($paslon as $pas)
+                                {{-- @foreach ($paslon as $pas)
 
                             <div class="col py-2 judul text-center text-white custom-urutan"
                                 style="background: {{ $pas->color }}">
                                 <div class="text">{{ $pas->candidate }} || {{ $pas->deputy_candidate }} :
-                                    1000
+                                    {{$pasangan->total}}
                                     </b>
                                     </div>
                             </div>
                             
-                            @endforeach
+                            @endforeach --}}
 
 
                             </div>

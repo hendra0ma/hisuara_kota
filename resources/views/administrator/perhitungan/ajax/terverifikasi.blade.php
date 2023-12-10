@@ -124,8 +124,7 @@ $tps = Tps::count();
                                             $total_saksi = $data_kota->{"suarav$i"};
                                             @endphp
                                         @endif
-                                        {{-- <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3> --}}
-                                        <h3 class="mb-2 number-font">1000 suara</h3>
+                                        <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3>
                                     </div>
                                 </div>
                             </div>
@@ -163,8 +162,7 @@ $tps = Tps::count();
             </td>
             @foreach ($paslon as $cd)
             <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.village_id', (string)$item['id'])->where('saksi.verification', 1)->sum('voice'); ?>
-            {{-- <td class="align-middle text-end">{{$saksi_dataa}}</td> --}}
-            <td class="align-middle text-end">1000</td>
+            <td class="align-middle text-end">{{$saksi_dataa}}</td>
             @endforeach
         </tr>
         @endforeach
@@ -195,8 +193,7 @@ $tps = Tps::count();
             </td>
             @foreach ($paslon as $cd)
             <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->where('saksi.verification', 1)->sum('voice'); ?>
-            {{-- <td class="align-middle text-end">{{$saksi_dataa}}</td> --}}
-            <td class="align-middle text-end">1000</td>
+            <td class="align-middle text-end">{{$saksi_dataa}}</td>
             @endforeach
         </tr>
         @endforeach
@@ -228,9 +225,7 @@ $(document).ready(function() {
                             ?>
                         <?php endforeach  ?>
                         
-                        ['data<?= $pas->id  ?>', 
-                        // <?= $voice ?>],
-                        1000],
+                        ['data<?= $pas->id  ?>', <?= $voice ?>],
                     @elseif (isset($url_first[3]) && $url_first[2] == "perhitungan_kelurahan")
                     
                         <?php $voice = 0;  ?>
@@ -240,13 +235,9 @@ $(document).ready(function() {
                             ?>
                         <?php endforeach  ?>
                         
-                        ['data<?= $pas->id  ?>', 
-                        // <?= $voice ?>],
-                        1000],
+                        ['data<?= $pas->id  ?>', <?= $voice ?>],
                     @else
-                        ['data<?= $pas->id  ?>', 
-                        // <?= $data_kota->{"suarav".$i} ?>],
-                        1000],
+                        ['data<?= $pas->id  ?>', <?= $data_kota->{"suarav".$i} ?>],
 
                     @endif
                     @php

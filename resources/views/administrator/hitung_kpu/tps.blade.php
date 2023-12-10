@@ -191,8 +191,7 @@ $dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
                                                         <h6>{{$pas->deputy_candidate}} </h6>
                                                       
                                                     
-                                                        {{-- <h3 class="mb-2 number-font">{{ $suaraCrowd['suaraCrowd'.$pas->id] }} suara</h3> --}}
-                                                        <h3 class="mb-2 number-font">1000 suara</h3>
+                                                        <h3 class="mb-2 number-font">{{ $suaraCrowd['suaraCrowd'.$pas->id] }} suara</h3>
                                                     </div>
                                                 </div>
                                             </div>
@@ -339,7 +338,7 @@ $dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
                             <tr>
                                 <td>{{$no_u++}}</td>
                                 <td>{{$pasangan->candidate}} - {{$pasangan->deputy_candidate}}</td>
-                                <td class="text-end">1000</td>
+                                <td class="text-end"></td>
                             </tr>
                             @endforeach
                         </tbody>

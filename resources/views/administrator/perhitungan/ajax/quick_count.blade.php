@@ -107,8 +107,7 @@ $tps = Tps::count();
                                     $total_saksi = QuickSaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->sum('voice');
                                     @endphp
                                 @endif
-                                {{-- <h3 class="mb-2 number-font">{{ $total_saksi }} <br>suara</h3> --}}
-                                <h3 class="mb-2 number-font">1000 <br>suara</h3>
+                                <h3 class="mb-2 number-font">{{ $total_saksi }} <br>suara</h3>
                             </div>
                         </div>
                     </div>
@@ -166,9 +165,7 @@ $(document).ready(function() {
                             <?php
                             $voice += $pak->voice;
                             ?>
-                        <?php endforeach  ?>['data<?= $pas->id  ?>', 
-                        // <?= $voice ?>],
-                        1000],
+                        <?php endforeach  ?>['data<?= $pas->id  ?>', <?= $voice ?>],
                     <?php endforeach  ?>
                 ],
                 type: 'pie', // default type of chart

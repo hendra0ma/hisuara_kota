@@ -106,8 +106,7 @@ $tps = Tps::count();
                                             @endphp
                                         @endif
                                         {{-- {{$url_first}} --}}
-                                        {{-- <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3> --}}
-                                        <h3 class="mb-2 number-font">1000 suara</h3>
+                                        <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3>
                                     </div>
                                 </div>
                             </div>
@@ -190,9 +189,7 @@ $tps = Tps::count();
                             <?php
                             $voice += $pak->voice;
                             ?>
-                        <?php endforeach  ?>['data<?= $pas->id  ?>', 
-                        // <?= $voice ?>],
-                        1000],
+                        <?php endforeach  ?>['data<?= $pas->id  ?>', <?= $voice ?>],
                     <?php endforeach  ?>
                 ],
                 type: 'pie', // default type of chart
