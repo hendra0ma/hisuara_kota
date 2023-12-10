@@ -1142,14 +1142,21 @@ Route::get('dpt/kota', function () {
 Route::get('update-suara-c1-kota',function (){
     $paslon = Paslon::get();
     $suaraP = [];
+    $suaraV = [];
     foreach ($paslon as $j => $psl) {
-        $suara = SaksiData::where('paslon_id',$psl->id)->where('regency_id',3674)->sum("voice");
+        $suara  = SaksiData::where('paslon_id',$psl->id)->where('regency_id',3674)->sum("voice");
+        $suara_v = SaksiData::join("saksi",'saksi.id','=','saksi_data.saksi_id')->where('saksi_data.paslon_id',$psl->id)->where('saksi_data.regency_id',3674)->sum("voice");
         $suaraP[] = $suara;
+        $suaraV[] = $suara_v;
     }
         $c1Prov = Regency::find(3674);
         $c1Prov->suara1 = $suaraP[0];
         $c1Prov->suara2 = $suaraP[1];
         $c1Prov->suara3 = $suaraP[2];
+
+        $c1Prov->suarav1 = $suaraV[0];
+        $c1Prov->suarav2 = $suaraV[1];
+        $c1Prov->suarav3 = $suaraV[2];
         $c1Prov->save();
   
 });

@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Regency;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class AddLogoKota extends Command
 {
@@ -39,20 +40,21 @@ class AddLogoKota extends Command
     public function handle()
     {
         
-        $regency = Regency::get();
+        $regency = DB::table('regencies_2')->get();
         $allFileName = [];
         foreach ($regency as $reg) {
-            $arrayName =  explode(" ",$reg->name);
-            if(trim($arrayName[0]) == "KABUPATEN"){
-                $kabLength = strlen($arrayName[0]);
-                $namaKab = substr($reg->name,$kabLength+1);
-                $filename = $namaKab.".png";
-            }else{
-                $filename = $reg->name.".png";
-            }
+            // $arrayName =  explode(" ",$reg->name);
+            // if(trim($arrayName[0]) == "KABUPATEN"){
+            //     // $kabLength = strlen($arrayName[0]);
+            //     // $namaKab = substr($reg->name,$kabLength+1);
+
+            $filename = $reg->name.".png";
+            // }else{
+            //     $filename = $reg->name.".png";
+            // }
             $allFileName[$reg->id] = $filename;
             
-            Regency::where("id",$reg->id)->update([
+            DB::table('regencies_2')->where("id",$reg->id)->update([
                 "logo_kota"=> $filename
             ]);
         }

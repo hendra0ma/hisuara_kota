@@ -101,7 +101,7 @@ use App\Models\User;
 
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.2/velocity.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.2/velocity.ui.min.js"></script>
 
@@ -114,7 +114,19 @@ use App\Models\User;
 @livewireScripts
 
 
+
 <script>
+    @if($message = Session::get('success'))
+   
+    Swal.fire({
+        title: "Verifikasi Kecurangan",
+        text: "{{$message}}",
+        icon: "success"
+    });
+
+    @endif
+
+
     const redirect = function(page) {
         $.ajax({
             url: `{{ url('') }}/administrator/commander-redirect`,
