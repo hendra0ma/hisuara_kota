@@ -196,7 +196,8 @@ $tps = Tps::count();
                                                         $voice += $dataTps->voice;
                                                         ?>
                                                         @endforeach
-                                                        <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                                        {{-- <h3 class="mb-2 number-font">{{ $voice }} suara</h3> --}}
+                                                        <h3 class="mb-2 number-font">1000 suara</h3>
                                                     </div>
                                                 </div>
                                             </div>
@@ -343,7 +344,8 @@ $tps = Tps::count();
                             <tr>
                                 <td>{{$no_u++}}</td>
                                 <td>{{$pasangan->candidate}} - {{$pasangan->deputy_candidate}}</td>
-                                <td class="text-end">{{$urutPaslon->total}}</td>
+                                {{-- <td class="text-end">{{$urutPaslon->total}}</td> --}}
+                                <td class="text-end">1000</td>
                             </tr>
                             @endforeach
                         </tbody>

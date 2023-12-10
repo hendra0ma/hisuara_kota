@@ -106,7 +106,8 @@ $tps = Tps::count();
                                             @endphp
                                         @endif
                                         {{-- {{$url_first}} --}}
-                                        <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3>
+                                        {{-- <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3> --}}
+                                        <h3 class="mb-2 number-font">1000 suara</h3>
                                     </div>
                                 </div>
                             </div>

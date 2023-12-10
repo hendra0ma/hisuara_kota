@@ -186,7 +186,8 @@ $props = Province::where('id',$kota['province_id'])->first();
                                                 $voice += isset($dataTps->voice)?$dataTps->voice:0;
                                                 ?>
                                                 @endforeach
-                                                <h3 class="mb-2 number-font">{{ $voice }} suara</h3>
+                                                {{-- <h3 class="mb-2 number-font">{{ $voice }} suara</h3> --}}
+                                                <h3 class="mb-2 number-font">1000 suara</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -234,7 +235,8 @@ $props = Province::where('id',$kota['province_id'])->first();
                             <div class="col py-2 judul text-center text-white custom-urutan"
                                 style="background: {{ $pasangan->color }}">
                                 <div class="text">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} :
-                                    {{$urutPaslon->total}}</b></div>
+                                    {{-- {{$urutPaslon->total}}</b></div> --}}
+                                    1000</b></div>
                             </div>
                             @endforeach
                         </div>
@@ -261,7 +263,8 @@ $props = Province::where('id',$kota['province_id'])->first();
                                     </td>
                                     @foreach ($paslon as $cd)
                                     <?php $saksi_dataa = SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('saksi_data.district_id', $item['id'])->where('saksi.verification',1)->sum('voice'); ?>
-                                    <td class="align-middle text-end">{{$saksi_dataa}}</td>
+                                    {{-- <td class="align-middle text-end">{{$saksi_dataa}}</td> --}}
+                                    <td class="align-middle text-end">1000</td>
                                     @endforeach
                                 </tr>
                                 @endforeach
