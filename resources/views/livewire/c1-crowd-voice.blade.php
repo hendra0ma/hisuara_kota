@@ -1,6 +1,6 @@
 <div>
     <h4 class="fw-bold fs-4 mt-5 mb-0">
-        C1 Crowd
+        C1 Crowd KPU
     </h4>
 
     <hr style="border: 1px solid">
