@@ -1145,7 +1145,10 @@ Route::get('update-suara-c1-kota',function (){
     $suaraV = [];
     foreach ($paslon as $j => $psl) {
         $suara  = SaksiData::where('paslon_id',$psl->id)->where('regency_id',3674)->sum("voice");
-        $suara_v = SaksiData::join("saksi",'saksi.id','=','saksi_data.saksi_id')->where('saksi_data.paslon_id',$psl->id)->where('saksi_data.regency_id',3674)->sum("voice");
+        $suara_v = SaksiData::join("saksi",'saksi.id','=','saksi_data.saksi_id')
+        ->where('saksi.verification',"1")
+        ->where('saksi_data.paslon_id',$psl->id)
+        ->where('saksi_data.regency_id',3674)->sum("saksi_data.voice");
         $suaraP[] = $suara;
         $suaraV[] = $suara_v;
     }
