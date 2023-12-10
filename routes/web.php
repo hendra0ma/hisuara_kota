@@ -48,6 +48,7 @@ use App\Http\Controllers\MarqueeController;
 use App\Http\Controllers\Payrole;
 use App\Http\Controllers\ProvinsiController;
 use App\Http\Controllers\PusatController;
+use App\Http\Controllers\test\GenerateTpsFromDptIndonesia;
 use App\Models\MultiAdministrator;
 use App\Models\Paslon;
 use App\Models\RegenciesDomain;
@@ -1196,3 +1197,9 @@ Route::get('ajaxKpuKecamatan',function (Request $request) {
     return view('ajax-hitung-suara-kpu',$data);
 })->name("ajaxKpuKecamatan");
 
+
+Route::get('generate-tps',function () {
+    return view('generate-tps');
+});
+
+Route::get('action-generate-tps',[GenerateTpsFromDptIndonesia::class,'action']);

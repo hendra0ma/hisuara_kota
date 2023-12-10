@@ -38,17 +38,21 @@ class GenerateDomain extends Command
      */
     public function handle()
     {
-        $regency = DB::table('regencies_2')->get();
+        $regency = DB::table('regencies')->get();
         $allDomain = [];
         foreach ($regency as $reg) {
             $arrayName = explode(" ",$reg->name);
             $province = DB::table('province_domains')->where('province_id',(string)$reg->province_id)->select('domain')->first();
         
             $namaProv = explode(".",$province->domain)[1];
-            
+
+            if(trim($arrayName[0]) == "KOTA"){
+                unset($arrayName[0]);
+            }
             $namaKota = strtolower(implode("-",$arrayName));
-            $namaKota = (trim($arrayName[0]) == "KOTA")?$namaKota:"kab-$namaKota";
-          
+
+            $namaKota = (!isset($arrayName[0]))?$namaKota:"kab-$namaKota";
+            
             $Domain = "pilpres.$namaProv.$namaKota.hisuara.id";
             $timeStamp = now();
             $allDomain[$reg->id] = [
@@ -58,6 +62,7 @@ class GenerateDomain extends Command
                 "created_at"=>$timeStamp
             ];
             DB::table('regency_domains')->insert($allDomain[$reg->id]);
+            
         }
      $this->info(json_encode($allDomain));
     }

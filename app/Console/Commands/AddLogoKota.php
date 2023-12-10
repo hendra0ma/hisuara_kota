@@ -39,7 +39,6 @@ class AddLogoKota extends Command
      */
     public function handle()
     {
-        
         $regency = DB::table('regencies_2')->get();
         $allFileName = [];
         foreach ($regency as $reg) {
@@ -59,6 +58,6 @@ class AddLogoKota extends Command
             ]);
         }
      $this->info(json_encode($allFileName));
-
     }
+    
 }

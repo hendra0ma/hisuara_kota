@@ -120,7 +120,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                                                 ->where('list_kecurangan.jenis', 0)
                                                 ->count();
                                             $jumlahSaksi =        App\Models\Saksi::whereNull('pending')->count();
-                                            $persen = ($totalKec / $jumlahSaksi) * 100;
+                                            $persen =($totalKec != 0) ?($totalKec/ $jumlahSaksi)*100 : 0;
 
                                             ?>
 
@@ -183,7 +183,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                                                         ->where('list_kecurangan.jenis', 1)
                                                         ->count();
                                                    $jumlahSaksi =        App\Models\Saksi::whereNull('pending')->count();
-                                                    $persen = ($totalKec / $jumlahSaksi) * 100;
+                                                    $persen =($totalKec != 0) ?($totalKec/ $jumlahSaksi)*100 : 0;
                                                     ?>
                                         <td>{{ $i++ }}</td>
                                         <td>{{$item->kode}}</td>
@@ -245,7 +245,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                                                   ->where('list_kecurangan.jenis', 1)
                                                   ->count();
                                              $jumlahSaksi =        App\Models\Saksi::whereNull('pending')->count();
-                                              $persen = ($totalKec / $jumlahSaksi) * 100;
+                                              $persen =($totalKec != 0) ?($totalKec/ $jumlahSaksi)*100 : 0;
                                               ?>
                                         <td>{{ $i++ }}</td>
                                         <td>{{$item->kode}}</td>
@@ -307,7 +307,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                                                     ->where('list_kecurangan.jenis', 1)
                                                     ->count();
                                                $jumlahSaksi =        App\Models\Saksi::whereNull('pending')->count();
-                                                $persen = ($totalKec / $jumlahSaksi) * 100;
+                                                $persen =($totalKec != 0) ?($totalKec/ $jumlahSaksi)*100 : 0;
                                                 ?>
                                         <td>{{ $i++ }}</td>
                                         <td>{{$item->kode}}</td>
