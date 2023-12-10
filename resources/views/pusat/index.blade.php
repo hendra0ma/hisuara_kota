@@ -314,10 +314,7 @@
                         </style>
 
                         <div class="col-12 mt-5 pt-5" style="border-top: 4px #eee solid">
-                            <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Hasil Perhitungan Suara</div>
-                            <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Pemilihan Presiden dan Wakil
-                                Presiden</div>
-                            <div class="text-center title-atas-table fs-5 fw-bold">Tingkat Nasional</div>
+                            <div class="text-center title-atas-table fs-1 mb-0 fw-bold my-3">Hasil Perhitungan Suara Pilpres 2024 Tingkat Nasional</div>
                             <div class="row mx-auto" style="width: 884.5px;">
 
                             </div>
