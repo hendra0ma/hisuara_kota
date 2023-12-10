@@ -1706,6 +1706,7 @@ class AdminController extends Controller
     }
     public function actionSetujuKoreksiAuditor(Request $request, $id)
     {
+       
         $id = Crypt::decrypt($id);
         $paslon = Paslon::get();
 
@@ -1743,7 +1744,11 @@ class AdminController extends Controller
             ]);
         }
         $regencyId = $this->config->regencies_id;
-        $requestPaslons = [$request->paslon0, $request->paslon1, $request->paslon2];
+        $requestPaslons = [
+            ( $request->paslon0 == null)? $saksi_data[0]->voice :$request->paslon0,
+            ($request->paslon1 == null) ? $saksi_data[1]->voice : $request->paslon1,
+            ($request->paslon2 == null) ? $saksi_data[2]->voice : $request->paslon2
+            ];
 
         for ($i = 0; $i < 3; $i++) {
             $index = $i;
@@ -1760,14 +1765,15 @@ class AdminController extends Controller
             'suara2' => $voice[1],
             'suara3' => $voice[2],
         ]);
-
+        $i = 0;
         foreach ($paslon as $pas) {
             // $saksi_data = SaksiData::where('paslon_id',$pas->id)->where('saksi_id',$id)->first();
             SaksiData::where('paslon_id', $pas->id)
                 ->where('saksi_id', $id)
                 ->update([
-                    'voice' => $request->input('paslon' . $pas->id),
+                    'voice' => $requestPaslons[$i],
                 ]);
+                $i++;
         }
         Saksi::where('id', $id)->update([
             'verification' => '1',

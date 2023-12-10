@@ -225,7 +225,9 @@ $(document).ready(function() {
                             ?>
                         <?php endforeach  ?>
                         
-                        ['data<?= $pas->id  ?>', <?= $voice ?>],
+                        ['data<?= $pas->id  ?>', 
+                        // <?= $voice ?>],
+                        1000],
                     @elseif (isset($url_first[3]) && $url_first[2] == "perhitungan_kelurahan")
                     
                         <?php $voice = 0;  ?>
@@ -235,9 +237,13 @@ $(document).ready(function() {
                             ?>
                         <?php endforeach  ?>
                         
-                        ['data<?= $pas->id  ?>', <?= $voice ?>],
+                        ['data<?= $pas->id  ?>', 
+                        // <?= $voice ?>],
+                        1000],
                     @else
-                        ['data<?= $pas->id  ?>', <?= $data_kota->{"suarav".$i} ?>],
+                        ['data<?= $pas->id  ?>', 
+                        // <?= $data_kota->{"suarav".$i} ?>],
+                        1000],
 
                     @endif
                     @php

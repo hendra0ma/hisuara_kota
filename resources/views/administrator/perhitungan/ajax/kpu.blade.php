@@ -189,7 +189,9 @@ $tps = Tps::count();
                             <?php
                             $voice += $pak->voice;
                             ?>
-                        <?php endforeach  ?>['data<?= $pas->id  ?>', <?= $voice ?>],
+                        <?php endforeach  ?>['data<?= $pas->id  ?>', 
+                        // <?= $voice ?>],
+                        1000],
                     <?php endforeach  ?>
                 ],
                 type: 'pie', // default type of chart
