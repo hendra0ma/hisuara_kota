@@ -224,15 +224,23 @@ $props = Province::where('id',$kota['province_id'])->first();
                         <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Pemilihan Presiden dan Wakil
                             Presiden</div>
                         <div class="text-center title-atas-table fs-5 fw-bold">{{ $kota['name'] }}</div>
-                        <div class="row mx-auto" style="width: 884.5px;">
-                            @foreach ($urutan as $pasangan)
-                                <div class="col py-2 judul text-center text-white custom-urutan"
-                                    style="background: {{ $pasangan->color }}">
-                                    <div class="text">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} :
-                                    
-                                        </b></div>
+                        <div class="row">
+                            <div class="col-auto fw-bold text-center fs-4 d-flex">
+                                <div class="mt-auto">
+                                    Suara Terbanyak
                                 </div>
-                            @endforeach
+                            </div>
+                            <div class="col">
+                                <div class="row mx-auto">
+                                    @foreach ($urutan as $urutPaslon)
+                                    <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
+                                    <div class="col py-2 judul text-center text-white custom-urutan" style="background: {{ $pasangan->color }}">
+                                        <div class="text">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} :
+                                            {{$urutPaslon->total}}</b></div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
                         <table class="table table-bordered table-hover mt-3">
                             <thead class="bg-primary">
