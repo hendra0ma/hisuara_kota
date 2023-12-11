@@ -229,7 +229,7 @@ $tps = Tps::count();
             </div>
             <div class="card-body text-center">
                 <a href="#" data-toggle="modal" data-target="#imgBig">
-                    <img style="height: 594.92px" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}" alt="">
+                    <img style="height: 594.92px" src="{{asset('')}}storage/c1_plano/{{$saksi[0]->c1_images}}" alt="">
                 </a>
             </div>
         </div>
@@ -300,10 +300,10 @@ $tps = Tps::count();
                     </div>
                     <div class="col-lg-12" style="height: 100vh; overflow: scroll">
                         <center>
-                            <img width="100%" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}"
+                            <img width="100%" src="{{asset('')}}storage/c1_plano/{{$saksi[0]->c1_images}}"
                                 data-magnify-speed="200" alt="" data-magnify-magnifiedwidth="2500"
                                 data-magnify-magnifiedheight="2500" class="img-fluid zoom"
-                                data-magnify-src="{{asset('')}}storage/{{$saksi[0]->c1_images}}">
+                                data-magnify-src="{{asset('')}}storage/c1_plano/{{$saksi[0]->c1_images}}">
                         </center>
                     </div>
                 </div>

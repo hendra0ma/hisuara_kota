@@ -149,9 +149,9 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                 </div>
                 <div class="col-lg-12" style="height: 100vh; overflow: scroll">
                     <center>
-                        <img width="100%" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}" data-magnify-speed="200"
+                        <img width="100%" src="{{asset('')}}storage/c1_plano/{{$saksi[0]->c1_images}}" data-magnify-speed="200"
                             alt="" data-magnify-magnifiedwidth="2500" data-magnify-magnifiedheight="2500"
-                            class="img-fluid zoom" data-magnify-src="{{asset('')}}storage/{{$saksi[0]->c1_images}}">
+                            class="img-fluid zoom" data-magnify-src="{{asset('')}}storage/c1_plano/{{$saksi[0]->c1_images}}">
                     </center>
                 </div> --}}
             </div>
