@@ -41,8 +41,11 @@ class C1CrowdVoice extends Component
             $data['list_suara']  = CrowdC1::join('users','crowd_c1.user_id','=','users.id')
             ->join('tps','crowd_c1.tps_id','=','tps.id')
             ->where('crowd_c1.regency_id',$this->config->regencies_id)
+            ->where('crowd_c1.status',0)
+
             ->where('tps.number', 'like', '%'.$this->search.'%')
             ->select('users.*','tps.*','crowd_c1.*','crowd_c1.id as crowd_id')
+            
             ->paginate(25);
             
         return view('livewire.c1-crowd-voice', $data);
