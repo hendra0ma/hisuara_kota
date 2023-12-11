@@ -1754,8 +1754,8 @@ class AdminController extends Controller
      foreach ($paslon as $key => $value) {
         # code...
 
-        $voicev[$index] = $regency_voice->{"suarav{$index}"} - $saksi_data[$key]->voice + $requestPaslons[$key];
-        $voice[$index] = $regency_voice->{"suara{$index}"} - $saksi_data[$key]->voice + $requestPaslons[$key];
+        $voicev[$key] = $regency_voice->{"suarav{$index}"} - $saksi_data[$key]->voice + $requestPaslons[$key];
+        $voice[$key] = $regency_voice->{"suara{$index}"} - $saksi_data[$key]->voice + $requestPaslons[$key];
         $index++;
         
      }
