@@ -219,8 +219,18 @@ $regency = $kota;
                                 Presiden</div>
                             <div class="text-center title-atas-table fs-5 fw-bold">{{ $kota['name'] }}</div>
 
-
-                            <div class="row mx-auto" style="width: 884.5px;"id="urutan-pasangan">
+                            
+                            <div class="row">
+                                <div class="col-auto fw-bold text-center fs-4 d-flex">
+                                    <div class="mt-auto">
+                                        Suara Terbanyak
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row mx-auto" id="urutan-pasangan">
+                                </div>
+                            </div>
+                            
 
 
                                 {{-- @foreach ($paslon as $pas)

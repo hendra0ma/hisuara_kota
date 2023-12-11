@@ -129,7 +129,7 @@
                                                     <div class="form-group col-md-12">
                                                         <label>Suara 0{{$i}}</label>
                                                         <input type="number" class="form-control suara-input"
-                                                            id="suara[]" name="suara[]" required
+                                                            id="suara[]" name="suara[]"
                                                             placeholder="Total Suara 0{{$i}}">
                                                     </div>
                                                     <?php $i++ ?>

@@ -687,8 +687,8 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '
                             </a>
                         </div>
                         <div class="col-md" style="padding-left: 1px; padding-right: 1px">
-                            <a data-command-target-menu="kecurangan" data-command-target="indikator-kecurangan" href="{{url('')}}/administrator/index-tsm" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="border-radius: 0px 25px 25px 0px;">
-                                Indikator Kecurangan
+                            <a data-command-target-menu="kecurangan" data-command-target="indikator-tsm" href="{{url('')}}/administrator/index-tsm" class="py-1 btn fs-6 w-100 text-white glowy-menu glow-kecurangan" style="border-radius: 0px 25px 25px 0px;">
+                                Indikator TSM
                             </a>
                         </div>
                     </div>

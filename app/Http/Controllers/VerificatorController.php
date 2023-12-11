@@ -331,9 +331,10 @@ class VerificatorController extends Controller
     }
     public function actionKoreksiData(Request $req, $id)
     {
+        // dd($req->suara);
 
         $req->validate([
-            'suara.*' => ['required'],
+            // 'suara.*' => ['required'],
             "persetujuan" => ['required']
         ]);
         
@@ -373,20 +374,26 @@ class VerificatorController extends Controller
         }
     
 
+        $reqVoice1 = ($req->suara[0] == null)? $saksi_data[0]->voice: $req->suara[0];
+        $reqVoice2 = ($req->suara[1] == null)? $saksi_data[1]->voice: $req->suara[1];
+        $reqVoice3 = ($req->suara[2] == null)? $saksi_data[2]->voice: $req->suara[2];
 
-        foreach($saksi_data as $i=> $sd){
-            SaksiData::where('id',$sd->id)->update([
-                "voice" => (int)$req->suara[$i],
-            ]);
-        }
-        $voice1 =  $regency_voice->suara1 - $saksi_data[0]->voice + $req->suara[0];
-        $voice2 =  $regency_voice->suara2 - $saksi_data[1]->voice + $req->suara[1];
-        $voice3 =  $regency_voice->suara3 - $saksi_data[2]->voice + $req->suara[2];
+        // dd($reqVoice1);
+
+        $voice1 =  $regency_voice->suara1 - $saksi_data[0]->voice + $reqVoice1;
+        $voice2 =  $regency_voice->suara2 - $saksi_data[1]->voice + $reqVoice2;
+        $voice3 =  $regency_voice->suara3 - $saksi_data[2]->voice + $reqVoice3;
         Regency::where('id',$this->config->regencies_id)->update([
             'suara1'=>$voice1,
             'suara2'=>$voice2,
             'suara3'=>$voice3,
         ]);
+
+        foreach ($saksi_data as $i => $sd) {
+            SaksiData::where('id', $sd->id)->update([
+                "voice" => (int)$req->suara[$i],
+            ]);
+        }
 
         Saksi::where('id', $id)->update([
             "koreksi" => 1,
