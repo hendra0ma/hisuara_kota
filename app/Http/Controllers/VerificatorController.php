@@ -483,7 +483,7 @@ class VerificatorController extends Controller
             'status' => 1
         ]);
         $crowd_c1_data = DataCrowdC1::where('crowd_c1_id', $id)->get();
-dd($crowd_c1->tps_id);
+        dd($crowd_c1->tps_id);
 
         $saksi = new Saksi();
         $saksi->c1_images = "c1_plano"."/".$crowd_c1->crowd_c1;
