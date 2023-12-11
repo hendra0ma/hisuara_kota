@@ -64,11 +64,11 @@
     <div class="row">
 
         <div class="col-12">
-            <div class="row justify-content-between">
+            <div class="row justify-content-center">
                 <div class="col-lg">
                     <h5 class="page-title mt-1 mb-5" style="font-size: 30px;">
-                        <div class="row">
-                            <div class="col-auto">
+                        <div class="row text-center">
+                            <div class="col-12">
                                 <img src="{{asset('images/logo/garuda.png')}}" style="width: 100px" class="mb-3" alt=""> <br>
                             </div>
                             <div class="col">
@@ -82,9 +82,9 @@
                     </h5>
                 </div>
                 
-                <div class="col-lg-auto">
+                {{-- <div class="col-lg-auto">
                     <img src="{{asset('images/logo/hisuara_new.png')}}" style="height: 60px" class="mb-3" alt="">
-                </div>
+                </div> --}}
             </div>
         </div>
 
@@ -136,7 +136,7 @@
                     <div class="row">
                         {{-- <div class="col-8"></div> --}}
 
-                        <div class="col-4">
+                        {{-- <div class="col-4">
                             <div class="row">
                                 <div class="col">
                                     <div class="container">
@@ -184,29 +184,29 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="col-4">
+                        <div class="col-6">
                             <div class="row">
-                                <div class="col">
+                                <div class="col-12">
                                     <div class="container">
-                                        <div class="text-center fs-3 mb-3 fw-bold">Real Count</div>
+                                        <div class="text-center fs-3 mb-3 fw-bold">REAL COUNT</div>
                                         <div class="text-center">Progress {{ substr($realcount, 0, 5) }}% dari 100%</div>
+                                        <div id="chart-pie" style="height: 600px;" class="chartsh"></div>
                                         <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{ $total_incoming_vote }}
                                                 /
                                                 {{ $dpt }}</span></div>
-                                        <div id="chart-pie" class="chartsh h-100 w-100"></div>
                                     </div>
                                 </div>
-                                <div class="col d-flex">
-                                    <div class="row my-auto mt-2 d-flex">
+                                <div class="col-12 d-flex mt-3">
+                                    <div class="row mx-auto my-auto mt-2 d-flex justify-content-center">
                                         <?php $i = 1; ?>
                                         @foreach ($paslon as $pas)
-                                        <div class="col-12 mb-3">
+                                        <div class="col mb-3">
                                             <div class="card" style="margin-bottom: 0px;">
                                                 <div class="card-body p-3">
                                                     <div class="row">
-                                                        <div class="col-6">
+                                                        <div class="col-12">
                                                             <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white d-flex"
                                                                 style="margin-bottom: 0; background-color: {{ $pas->color }}; overflow: hidden; position:relative">
                                                                 <img style="bottom: -10px; position: absolute; left: 50%; transform: translateX(-50%)"
@@ -236,7 +236,110 @@
                             </div>
                         </div>
 
-                        <div class="col-4">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="container">
+                                                <div class="text-center fs-3 mb-3 fw-bold">QUICK COUNT</div>
+                                                <div class="text-center">Progress {{ substr($realcount, 0, 5) }}% dari 100%</div>
+                                                <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{ $total_incoming_vote }}
+                                                        /
+                                                        {{ $dpt }}</span></div>
+                                                <div id="chart-quick" class="chartsh h-100 w-100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col d-flex">
+                                            <div class="row my-auto mt-2 d-flex">
+                                                <?php $i = 1; ?>
+                                                @foreach ($paslon as $pas)
+                                                <div class="col-12 mb-3">
+                                                    <div class="card" style="margin-bottom: 0px;">
+                                                        <div class="card-body p-3">
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white d-flex"
+                                                                        style="margin-bottom: 0; background-color: {{ $pas->color }}; overflow: hidden; position:relative">
+                                                                        <img style="bottom: -10px; position: absolute; left: 50%; transform: translateX(-50%)"
+                                                                            class="my-auto" src="{{ asset('') }}storage/{{ $pas->picture }}" alt="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col text-center">
+                                                                    <h6 class="mt-4">{{ $pas->candidate }} - {{ $pas->deputy_candidate }}</h6>
+                                                                    @php
+                                                                    $voice = 0;
+                                                                    foreach ($regencies as $regency) {
+                                                                    $voice += $regency->{'suaraq' . $i};
+                                                                    }
+                                                                    @endphp
+                                                                    <h3 class="mb-2 number-font">{{ $voice }} Suara</h3>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @php
+                                                $i++;
+                                                @endphp
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-2">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="container">
+                                                <div class="text-center fs-3 mb-3 fw-bold">TERVERIFIKASI</div>
+                                                <div class="text-center">Progress {{ substr($realcount, 0, 5) }}% dari 100%</div>
+                                                <div class="text-center mt-2 mb-2"><span class="badge bg-success">{{ $total_incoming_vote }}
+                                                        /
+                                                        {{ $dpt }}</span></div>
+                                                <div id="chart-donut" class="chartsh h-100 w-100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col d-flex">
+                                            <div class="row my-auto mt-2 d-flex">
+                                                <?php $i = 1; ?>
+                                                @foreach ($paslon as $pas)
+                                                <div class="col-12 mb-3">
+                                                    <div class="card" style="margin-bottom: 0px;">
+                                                        <div class="card-body p-3">
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <div class="mx-auto counter-icon box-shadow-secondary brround candidate-name text-white d-flex"
+                                                                        style="margin-bottom: 0; background-color: {{ $pas->color }}; overflow: hidden; position:relative">
+                                                                        <img style="bottom: -10px; position: absolute; left: 50%; transform: translateX(-50%)"
+                                                                            class="my-auto" src="{{ asset('') }}storage/{{ $pas->picture }}" alt="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col text-center">
+                                                                    <h6 class="mt-4">{{ $pas->candidate }} - {{ $pas->deputy_candidate }}</h6>
+                                                                    @php
+                                                                    $voice = 0;
+                                                                    foreach ($regencies as $regency) {
+                                                                    $voice += $regency->{'suarav' . $i};
+                                                                    }
+                                                                    @endphp
+                                                                    <h3 class="mb-2 number-font">{{ $voice }} Suara</h3>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @php
+                                                $i++;
+                                                @endphp
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- <div class="col-4">
                             <div class="row">
                                 <div class="col">
                                     <div class="container">
@@ -284,7 +387,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <style>
                             .row:has(> .custom-urutan) {
@@ -314,7 +417,7 @@
                         </style>
 
                         <div class="col-12 mt-5 pt-5" style="border-top: 4px #eee solid">
-                            <div class="text-center title-atas-table fs-1 mb-0 fw-bold my-3">Hasil Perhitungan Suara Pilpres 2024 Tingkat Nasional</div>
+                            {{-- <div class="text-center title-atas-table fs-1 mb-0 fw-bold my-3">Hasil Perhitungan Suara Pilpres 2024 Tingkat Nasional</div> --}}
                             <div class="row mx-auto" style="width: 884.5px;">
 
                             </div>
