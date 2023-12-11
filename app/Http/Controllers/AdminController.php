@@ -2622,7 +2622,7 @@ class AdminController extends Controller
         $data['kota'] = Regency::where('id', $this->config->regencies_id)->first();
         $data['jumlah_tidak_hadir'] = User::where('regency_id', $this->config->regencies_id)
             ->where('role_id', 8)
-            ->where('absen', 'tidak hadir')
+            // ->where('absen', 'tidak hadir')
             ->where('is_active', '=', 1)
             ->count();
 
