@@ -11,7 +11,7 @@
     </style>
     @foreach($all_c1 as $c1)
 
-    <img class="dalem-flex mb-2" src="{{asset('')}}storage/{{$c1->crowd_c1}}" data-bs-target="#verify-crowd-c1" data-bs-toggle="modal" style="cursor:pointer"onclick="ajaxCrowdC1(`{{$c1->id}}`)">
+    <img class="dalem-flex mb-2" src="{{asset('')}}storage/c1_plano/{{$c1->crowd_c1}}" data-bs-target="#verify-crowd-c1" data-bs-toggle="modal" style="cursor:pointer"onclick="ajaxCrowdC1(`{{$c1->id}}`)">
 
 
     @endforeach
