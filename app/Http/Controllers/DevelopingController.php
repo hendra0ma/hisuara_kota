@@ -174,6 +174,7 @@ class DevelopingController extends Controller
         $saksi->overlimit = 0;
         $saksi->tps_id = Auth::user()->tps_id;
         $saksi->regency_id = $regency->id;
+        $saksi->province_id = Auth::user()->province_id;
         $saksi->save();
         $ide = $saksi->id;
         $paslon = Paslon::get();
@@ -187,6 +188,7 @@ class DevelopingController extends Controller
                 'district_id' => Auth::user()->districts,
                 'village_id' =>  $villagee,
                 'regency_id' => $regency->id,
+                'province_id' => Auth::user()->province_id,
                 'voice' =>  (int)$request->suara[$i],
                 'saksi_id' => $ide,
             ]);
