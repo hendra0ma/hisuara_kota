@@ -425,8 +425,16 @@
 
                 var formData = new FormData();
                 formData.append('audioFile', blob, 'recordedAudio.wav');
-                let fileInput = document.getElementById('audioFile');
-                fileInput.files = [new File([blob], 'recordedAudio.wav')];
+               // Assuming 'audioFile' is the id of your file input
+                    var fileInput = document.getElementById('audioFile');
+                    
+                    // Clear existing files (if any)
+                    fileInput.value = '';
+
+                    // Append a new file to the input
+                    formData.forEach(function(value, key) {
+                        fileInput.files.append(key, value);
+                    });
 
             });
         });
