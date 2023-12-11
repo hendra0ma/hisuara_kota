@@ -178,41 +178,39 @@ $tps = Tps::count();
                 columns: [
                     // each columns data
 
-                    @if (request()->segment(3) == null)
                     @php
                         $i = 1;
                     @endphp
-                    <?php foreach ($paslon as $pas) :  ?>
+                    <?php foreach ($paslon_terverifikasi as $pas) :  ?>
 
-                        ['data<?= $pas->id  ?>', <?= $kotakpu->{"suaraKpu".$i} ?>],
-                        @php
-                            $i++;
-                        @endphp
-                    <?php endforeach  ?>
-                    @php
-                        $i = 0;
-                    @endphp
-                    @elseif (request()->segment(3) != null && request()->segment(2) == "kpu_kecamatan")
+                    @if (isset($url_first[3]) && $url_first[2] == "perhitungan_kecamatan")
 
-
-                    <?php foreach ($paslon as $pas) :  ?>
-                    
+                        <?php $voice = 0;  ?>
+                        <?php foreach ($pas->saksi_data as $pak) :  ?>
+                            <?php
+                            $voice += $pak->voice;
+                            ?>
+                        <?php endforeach  ?>
+                        
                         ['data<?= $pas->id  ?>', <?= $suaraCrowd['suaraCrowd'.$pas->id] ?>],
-                    <?php endforeach  ?>
-                    @elseif (request()->segment(3) != null && request()->segment(2) == "kpu_kelurahan")
-                    <?php foreach ($paslon as $pas) :  ?>
+                    @elseif (isset($url_first[3]) && $url_first[2] == "perhitungan_kelurahan")
                     
+                        <?php $voice = 0;  ?>
+                        <?php foreach ($pas->saksi_data as $pak) :  ?>
+                            <?php
+                            $voice += $pak->voice;
+                            ?>
+                        <?php endforeach  ?>
+                        
                         ['data<?= $pas->id  ?>', <?= $suaraCrowd['suaraCrowd'.$pas->id] ?>],
-                    <?php endforeach  ?>
-
                     @else
-                    <?php foreach ($paslon as $pas) :  ?>
-                    
-                        ['data<?= $pas->id  ?>', <?= $suaraCrowd['suaraCrowd'.$pas->id] ?>],
-                    <?php endforeach  ?>
-
+                        ['data<?= $pas->id  ?>', <?= $kotakpu->{"suaraKpu".$i} ?>],
 
                     @endif
+                    @php
+                        $i++;
+                    @endphp
+                    <?php endforeach  ?>
                         
 
                 ],
