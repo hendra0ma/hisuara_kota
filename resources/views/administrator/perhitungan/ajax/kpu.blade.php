@@ -95,9 +95,7 @@ $tps = Tps::count();
                                         @if (isset($url_first[3]) && $url_first[2] == "perhitungan_kecamatan") {{-- Perhitungan Kecamatan --}}
                                             <h3 class="mb-2 number-font">{{ $suaraCrowd['suaraCrowd'.$pas->id] }} suara</h3>
                                         @elseif (isset($url_first[3]) && $url_first[2] == "perhitungan_kelurahan") {{-- Perhitungan Kelurahan --}}
-                                            @php
-                                            $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->where('village_id', (string)$id)->sum('voice');
-                                            @endphp
+                                            <h3 class="mb-2 number-font">{{ $suaraCrowd['suaraCrowd'.$pas->id] }} suara</h3>
                                         @else {{--  Perhitungan Kota --}}
                                             <h3 class="mb-2 number-font">{{ $kota->{"suaraKpu$i"} }} suara</h3>
                                         @endif
