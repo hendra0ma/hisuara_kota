@@ -1758,7 +1758,7 @@ class AdminController extends Controller
             $voice[$index] = $regency_voice->{"suara{$index}"} - $saksi_data[$index]->voice + $requestPaslons[$index];
         }
 
-        dd($request->paslon0,$request->paslon1,$request->paslon2);
+        dd($requestPaslons);
 
         Regency::where('id', $regencyId)->update([
             'suarav1' => $voicev[0],
