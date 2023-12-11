@@ -968,6 +968,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
     @endif
 
     <script>
+        @if (isset($list_kecurangan))
         setTimeout(function () {
             let uniqueData = [@foreach($list_kecurangan as $item)
                 '{{$item->solution}} | {{$item->kode}}', @endforeach
@@ -985,6 +986,7 @@ $track = Tracking::where('id_user',$user['id'])->first();
                 `)
             });
         }, 200)
+        @endif
     </script>
 
 </div>
