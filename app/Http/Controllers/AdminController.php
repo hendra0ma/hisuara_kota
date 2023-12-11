@@ -1754,11 +1754,17 @@ class AdminController extends Controller
         for ($i = 0; $i < 3; $i++) {
             $index = $i;
 
-            $voicev[$index] = $regency_voice->{"suarav{$index}"} - $saksi_data[$index]->voice + $requestPaslons[$index];
-            $voice[$index] = $regency_voice->{"suara{$index}"} - $saksi_data[$index]->voice + $requestPaslons[$index];
+            // $voicev[$index] = $regency_voice->{"suarav{$index}"} - $saksi_data[$index]->voice + $requestPaslons[$index];
+            // $voice[$index] = $regency_voice->{"suara{$index}"} - $saksi_data[$index]->voice + $requestPaslons[$index];
+            $data['voicev'][$index] = [
+                $regency_voice->{"suarav{$index}"}
+            ];
+            $data['voice'][$index] = [
+                $regency_voice->{"suara{$index}"}
+            ];
         }
 
-        dd($requestPaslons);
+        dd($data);
 
         Regency::where('id', $regencyId)->update([
             'suarav1' => $voicev[0],
