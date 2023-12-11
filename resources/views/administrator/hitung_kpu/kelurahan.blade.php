@@ -234,15 +234,46 @@ $props = Province::where('id',$kota['province_id'])->first();
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="row mx-auto">
-                                    @foreach ($urutan as $urutPaslon)
-                                    <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
-                                    <div class="col py-2 judul text-center text-white custom-urutan" style="background: {{ $pasangan->color }}">
-                                        <div class="text">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} :
-                                            {{$urutPaslon->total}}</b></div>
-                                    </div>
-                                    @endforeach
+                                <div class="row mx-auto"id="urutan-pasangan">
+                                    
                                 </div>
+
+                                <script>
+                                let kota = {!! json_encode($kota) !!}
+                                let paslon = {!! json_encode($paslon) !!}
+                                let i = 1;
+                                paslon.forEach((item, index) => {
+                                    paslon[index].voice = kota[`suaraKpu${i}`];
+                                    i++;
+
+                                })
+
+                                paslon.sort((a, b) => b.voice - a.voice);
+
+                                paslon.forEach((item, index) => {
+                                    if(item.voice == 'undefined'){
+                                        $('#urutan-pasangan').append(`
+                                               <div class="col py-2 judul text-center text-white custom-urutan"
+                                                    style="background: ${item.color}">
+                                                    <div class="text">${item.candidate} || ${item.deputy_candidate}:
+                                                      0
+                                                        </b>
+                                                        </div>
+                                                </div>
+                                        `)
+                                    }else{
+                                        $('#urutan-pasangan').append(`
+                                               <div class="col py-2 judul text-center text-white custom-urutan"
+                                                    style="background: ${item.color}">
+                                                    <div class="text">${item.candidate} || ${item.deputy_candidate}:
+                                                      ${item.voice} 
+                                                        </b>
+                                                        </div>
+                                                </div>
+                                        `)
+                                    }
+                                })
+                            </script>
                             </div>
                         </div>
                         <table class="table table-bordered table-hover mt-3 display">

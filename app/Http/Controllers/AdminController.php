@@ -4077,7 +4077,7 @@ class AdminController extends Controller
             $data['total_incoming_vote'] += $data['suaraCrowd']["suaraCrowd$pas->id"];
         }
 
-
+        $data['kota'] = RegencyCrowdC1::where('id', $this->config->regencies_id)->first();
         $Village = Village::where('id',(string) $id)->first();
         $data['desa'] = $Village;
         $data['realcount'] = (isset($Village->dpt) && $Village->dpt != 0) ? ($data['total_incoming_vote'] / $Village->dpt) * 100 : 0;
