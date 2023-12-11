@@ -193,6 +193,7 @@ class DevelopingController extends Controller
                 'saksi_id' => $ide,
             ]);
             $updtSuara[] = (int)$request->suara[$i];
+            $i++;
         }
         $suara1 = $regency->suara1 + $updtSuara[0];
         $suara2 = $regency->suara2 + $updtSuara[1];
