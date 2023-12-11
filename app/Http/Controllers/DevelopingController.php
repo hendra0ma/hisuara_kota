@@ -272,7 +272,7 @@ class DevelopingController extends Controller
             "jumlah_sah_dan_tidak" => "required|numeric",
             "total_surat_suara" => "required|numeric",
             "surat_suara_tidak_sah" => "required|numeric",
-            "surat_suara_terpakai" => "required|numeric",
+            // "surat_suara_terpakai" => "required|numeric",
             "sisa_surat_suara" => "required|numeric",
             "surat_suara.*" => 'image|mimes:jpeg,png,jpg,gif'
         ]);
@@ -296,7 +296,7 @@ class DevelopingController extends Controller
         SuratSuara::insert([
             "total_surat_suara" => $request->input("total_surat_suara"),
             "surat_suara_tidak_sah" => $request->input("surat_suara_tidak_sah"),
-            "surat_suara_terpakai" => $request->input("surat_suara_terpakai"),
+            // "surat_suara_terpakai" => $request->input("surat_suara_terpakai"),
             "sisa_surat_suara" => $request->input("sisa_surat_suara"),
             "dpt" => $request->input("dpt"),
             "surat_suara_sah" => $request->input("surat_suara_sah"),
