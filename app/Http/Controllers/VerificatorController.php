@@ -483,6 +483,9 @@ class VerificatorController extends Controller
             'status' => 1
         ]);
         $crowd_c1_data = DataCrowdC1::where('crowd_c1_id', $id)->get();
+
+        dd($crowd_c1_data);
+
         $saksi = new Saksi();
         $saksi->c1_images = "c1_plano"."/".$crowd_c1->crowd_c1;
         $saksi->district_id = $crowd_c1->district_id;
@@ -497,9 +500,9 @@ class VerificatorController extends Controller
         $saksi->batalkan = 0;
         $saksi->overlimit = 0;
         $saksi->kecurangan = "no";
-        
         $saksi->save();
         $saksiId = $saksi->id;
+
         foreach ($crowd_c1_data as $rd) {
             $saksi_data = new SaksiData();
             $saksi_data->voice = $rd->voice;
