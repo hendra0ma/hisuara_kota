@@ -493,7 +493,7 @@ class VerificatorController extends Controller
         $saksi->tps_id = $crowd_c1->tps_id;
         $saksi->verification = "";
         $saksi->audit = "";
-        $saksi->batalkan = "";
+        $saksi->batalkan = 0;
         $saksi->overlimit = 0;
         $saksi->kecurangan = "no";
         $saksi->status_kecurangan = "";
