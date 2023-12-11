@@ -836,18 +836,19 @@
                                 return;
                             }
                         }
+                        console.log(res)
                                 
                         
-                        $('tbody#container-rekomendasi').append(`
-                        <tr class="bg-danger text-light solution${id_list}">
-                            <td>
+                    //     $('tbody#container-rekomendasi').append(`
+                    //     <tr class="bg-danger text-light solution${id_list}">
+                    //         <td>
                           
-                            </td>
-                            <td class="cek-solution">
-                               <i class="fa-solid fa-arrow-right"></i>   ${res.solution}
-                            </td>
-                        </tr>
-                    `)
+                    //         </td>
+                    //         <td class="cek-solution">
+                    //            <i class="fa-solid fa-arrow-right"></i>   ${res.solution}
+                    //         </td>
+                    //     </tr>
+                    // `)
                     }
                 });
             } else {
