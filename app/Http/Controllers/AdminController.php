@@ -4081,7 +4081,7 @@ class AdminController extends Controller
         $Village = Village::where('id', $id)->first();
 
         $data['desa'] = $Village;
-        $data['realcount'] = $Village->dpt != 0 ? ($data['total_incoming_vote'] / $Village->dpt) * 100 : 0;
+        $data['realcount'] = (isset($Village->dpt) && $Village->dpt != 0) ? ($data['total_incoming_vote'] / $Village->dpt) * 100 : 0;
         $data['dpt'] =  $Village->dpt;
         $data['tps_kel'] = Tps::where('villages_id', $id)->get();
         $data['total_tps'] =   count($data['tps_kel']);
@@ -4115,7 +4115,7 @@ class AdminController extends Controller
 
         $data['desa'] = $Village;
         $data['village'] = $Village;
-        $data['realcount'] = $Village->dpt != 0 ? ($data['total_incoming_vote'] / $Village->dpt) * 100 : 0;
+        $data['realcount'] = (isset($Village->dpt) && $Village->dpt != 0) ? ($data['total_incoming_vote'] / $Village->dpt) * 100 : 0;
         $data['dpt'] =  $Village->dpt;
 
 

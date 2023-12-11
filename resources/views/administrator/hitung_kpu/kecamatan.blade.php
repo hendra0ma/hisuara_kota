@@ -262,15 +262,27 @@ $props = Province::where('id',$kota['province_id'])->first();
                                 paslon.sort((a, b) => b.voice - a.voice);
 
                                 paslon.forEach((item, index) => {
-                                    $('#urutan-pasangan').append(`
-                                           <div class="col py-2 judul text-center text-white custom-urutan"
-                                                style="background: ${item.color}">
-                                                <div class="text">${item.candidate} || ${item.deputy_candidate}:
-                                                  ${item.voice} 
-                                                    </b>
-                                                    </div>
-                                            </div>
-                                    `)
+                                    if(item.voice == 'undefined'){
+                                        $('#urutan-pasangan').append(`
+                                               <div class="col py-2 judul text-center text-white custom-urutan"
+                                                    style="background: ${item.color}">
+                                                    <div class="text">${item.candidate} || ${item.deputy_candidate}:
+                                                      0
+                                                        </b>
+                                                        </div>
+                                                </div>
+                                        `)
+                                    }else{
+                                        $('#urutan-pasangan').append(`
+                                               <div class="col py-2 judul text-center text-white custom-urutan"
+                                                    style="background: ${item.color}">
+                                                    <div class="text">${item.candidate} || ${item.deputy_candidate}:
+                                                      ${item.voice} 
+                                                        </b>
+                                                        </div>
+                                                </div>
+                                        `)
+                                    }
                                 })
                             </script>
 
