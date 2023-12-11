@@ -1760,7 +1760,7 @@ class AdminController extends Controller
         
      }
 
-        dd($voicev,$voice);
+        dd( $regency_voice );
 
         Regency::where('id', $regencyId)->update([
             'suarav1' => $voicev[0],
