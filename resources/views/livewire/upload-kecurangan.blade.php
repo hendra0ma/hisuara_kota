@@ -428,13 +428,14 @@
                // Assuming 'audioFile' is the id of your file input
                     var fileInput = document.getElementById('audioFile');
                     
-                    // Clear existing files (if any)
-                    fileInput.value = '';
+                   // Create a new FileList containing the blob
+    var fileList = new FileList([new File([blob], 'recordedAudio.wav')]);
 
-                    // Append a new file to the input
-                    formData.forEach(function(value, key) {
-                        fileInput.files.append(key, value);
-                    });
+// Set the new FileList as the value of the file input
+Object.defineProperty(fileInput, 'files', {
+    value: fileList,
+    writable: true
+});
 
             });
         });
