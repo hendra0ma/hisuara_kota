@@ -480,7 +480,7 @@ class VerificatorController extends Controller
         $id = Crypt::decrypt($id);
         $crowd_c1 = CrowdC1::where('id', $id)->first();
         CrowdC1::where('id', $id)->update([
-            'status' => 1
+            'status' => "1"
         ]);
         $crowd_c1_data = DataCrowdC1::where('crowd_c1_id', $id)->get();
      
@@ -521,7 +521,7 @@ class VerificatorController extends Controller
             'suara2' => $suara2,
             'suara3' => $suara3,
         ]);
-        $saksi = Saksi::where('id', $id)->first();
+       
         $tps = Tps::where('id', $crowd_c1->tps_id)->first();
         $kecamatan = District::where('id', $rd->district_id)->first();
 
