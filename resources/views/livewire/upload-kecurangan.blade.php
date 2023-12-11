@@ -424,7 +424,7 @@
                 $('#audioPlayer').css('display', 'block');
 
                 var formData = new FormData();
-                formData.append('#audioFile', blob, 'recordedAudio.wav');
+                formData.append('audioFile', blob, 'recordedAudio.wav');
 
             });
         });
