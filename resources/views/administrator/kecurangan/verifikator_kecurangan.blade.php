@@ -25,7 +25,7 @@
             <div class="row justify-content-end">
                 <div class="col-lg-4 parent-link">
                     <a href="{{ url('') }}/verifikator/verifikator_kecurangan"
-                        class="btn btn-fdp text-white w-100 py-3 {{ url()->current() == url('') . '/verifikator/verifikator_kecurangan' ? 'active' : '' }}">Laporan Saksi Kecurangan</a>
+                        class="btn btn-fdp text-white w-100 py-3 {{ url()->current() == url('') . '/verifikator/verifikator_kecurangan' ? 'active' : '' }}">Laporan Kecurangan Saksi</a>
                 </div>
                 <div class="col-lg-4 parent-link">
                     <a href="{{ url('') }}/verifikator/verifikator_kecurangan_admin"
