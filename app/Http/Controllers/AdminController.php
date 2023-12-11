@@ -1890,53 +1890,42 @@ class AdminController extends Controller
     public function get_verifikasi_saksi(Request $request)
     {
         // dump($request->url);
-        $user = User::where('id', $request['id'])->first();
-        $district = District::where('id', $user['districts'])->first();
-        $village = Village::where('id', $user['villages'])->first();
-        $tps = Tps::where('regency_id', $this->config->regencies_id)
-            ->where('user_id', $user['id'])
+        $request_id = $request['id'];
+        $data['user'] = User::where('id',  $request_id )->first();
+        $data['district'] = District::where('id', $data['user']['districts'])->first();
+        $data['village'] = Village::where('id', $data['user']['villages'])->first();
+        $data['tps'] = Tps::where('regency_id', $this->config->regencies_id)
+            ->where('user_id',$data['user']['id'])
             ->first();
-        $absensi = Absensi::where('user_id', $user['id'])->first();
-        $qrcode = Qrcode::where('tps_id', $user['tps_id'])->first();
-        if ($qrcode != null) {
-            $verifikator = User::where('id', $qrcode['verifikator_id'])->first();
-            $hukum = User::where('id', $qrcode['hukum_id'])->first();
+        $data['absensi'] = Absensi::where('user_id',$data['user']['id'])->first();
+        $data['qrcode'] = Qrcode::where('tps_id',$data['user']['tps_id'])->first();
+        if ($data['qrcode'] != null) {
+            $data['verifikator'] = User::where('id', $data['qrcode']['verifikator_id'])->first();
+           $data['hukum']= User::where('id', $data['qrcode']['hukum_id'])->first();
         } else {
-            $verifikator = null;
-            $hukum = null;
+            $data['verifikator'] = null;
+           $data['hukum']= null;
         }
-        if ($tps!=null) {
-            $saksi = Saksi::where('tps_id', $tps['id'])->first();
-            $bukti_vidio = Buktividio::where('tps_id', $tps['id'])->get();
-            $bukti_foto = Buktifoto::where('tps_id', $tps['id'])->get();
-            $surat_pernyataan = SuratPernyataan::where('saksi_id', $saksi['id'])->first();
-            $config = Config::first();
-        }
-        $kota = Regency::where('id', $this->config->regencies_id)->first();
-        $list_kecurangan = Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
-            ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
-            ->where('bukti_deskripsi_curang.tps_id', $tps['id'])
-            ->get();
+        if ($data['tps']!=null) {
 
-        return view('administrator.ajax.get_verifikasi_saksi', [
-            'user' => $user,
-            'village' => $village,
-            'district' => $district,
-            'tps' => $tps,
-            'absensi' => $absensi,
-            'saksi' => $saksi,
-            'qrcode' => $qrcode,
-            'bukti_vidio' => $bukti_vidio,
-            'bukti_foto' => $bukti_foto,
-            'surat_pernyataan' => $surat_pernyataan,
-            'verifikator' => $verifikator,
-            'hukum' => $hukum,
-            'kota' => $kota,
-            'surat_suara' => SuratSuara::where('tps_id', $tps['id'])->first(),
-            'list_kecurangan' => $list_kecurangan,
-            'config' => Config::first(),
-            'url' => $request->url,
-        ]);
+            $data['saksi'] = Saksi::where('tps_id', $data['tps']['id'])->first();
+            if($data['saksi'] != null){
+                $data['bukti_vidio'] = Buktividio::where('tps_id', $data['tps']['id'])->get();
+                $data['bukti_foto'] = Buktifoto::where('tps_id', $data['tps']['id'])->get();
+                $data['surat_pernyataan'] = SuratPernyataan::where('saksi_id', $data['saksi']['id'])->first();
+                $data['config'] = Config::first();
+                $data['list_kecurangan'] = Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
+                ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')
+                ->where('bukti_deskripsi_curang.tps_id', $data['tps']['id'])
+                ->get();
+            }
+           
+        }
+        $data['kota']= Regency::where('id', $this->config->regencies_id)->first();
+         $data['surat_suara']= SuratSuara::where('tps_id', $data['tps']['id'])->first();
+         $data['config'] = Config::first();
+         $data['url'] = $request->url;
+        return view('administrator.ajax.get_verifikasi_saksi', $data);
     }
 
     public function get_kecamatan_tracking(Request $request)
