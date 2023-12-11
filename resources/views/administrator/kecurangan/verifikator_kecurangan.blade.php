@@ -78,32 +78,62 @@
         <livewire:list-kecurangan-component />
     </div>
     <script>
-        let ajaxGetSolution = function(ini) {
+        let checkBox = $('input[type=checkbox]');
+        checkBox.on('click', function () {
+            for (let i = 0; i < checkBox.length; i++) {
+                const element = checkBox[i];
+                if (element == this) {
+                    continue;
+                } else {
+                    // (this.checked) ? $(element).attr('disabled', true): $(element).attr('disabled', false)
+                }
+            }
+        });
+        let ajaxGetSolution = function (ini) {
             let id_list = $(ini).data('id')
+            let jenis_list = $(ini).data('jenis')
 
             if (ini.checked == true) {
                 $.ajax({
-                    url: "{{ url('') }}/hukum/getsolution",
+                    url: "{{url('')}}/getsolution",
                     data: {
                         id_list
                     },
                     type: 'get',
-                    success: function(res) {
-                        $('tbody#container-rekomendasi').append(`
-                        <tr id="solution${id_list}">
-                            <td>
-                            </td>
-                            <td>
-                                ${res.solution}
-                            </td>
-                        </tr>
-                    `)
+                    success: function (res) {
+                        let cekSolution = $('td.cek-solution');
+                        for(solution of cekSolution){
+                            if(solution.innerText.trim() == res.solution.trim()){
+                                return;
+                            }
+                        }
+                        console.log(res)
+                                
+                        
+                    //     $('tbody#container-rekomendasi').append(`
+                    //     <tr class="bg-danger text-light solution${id_list}">
+                    //         <td>
+                          
+                    //         </td>
+                    //         <td class="cek-solution">
+                    //            <i class="fa-solid fa-arrow-right"></i>   ${res.solution}
+                    //         </td>
+                    //     </tr>
+                    // `)
                     }
                 });
             } else {
-                $(`#solution${id_list}`).remove();
+                let checkboxLain = $(`input[data-jenis="${jenis_list}"]:checked`);
+                if(checkboxLain.length > 0){
+
+                }else{
+                $(`tr.solution${id_list}`).remove();
+                }
+
+                
             }
         }
+
     </script>
     <div class="modal fade" id="periksaC1Verifikator" tabindex="-1" aria-labelledby="periksaC1VerifikatorLabel"
         aria-hidden="true">
