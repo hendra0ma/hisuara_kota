@@ -806,7 +806,7 @@
     //     });
     // }, 300)Z
 </script>
-<script>
+<!-- <script>
         let checkBox = $('input[type=checkbox]');
         checkBox.on('click', function () {
             for (let i = 0; i < checkBox.length; i++) {
@@ -863,4 +863,4 @@
             }
         }
 
-    </script>
+    </script> -->
