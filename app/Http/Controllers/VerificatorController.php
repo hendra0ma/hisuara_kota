@@ -432,6 +432,7 @@ class VerificatorController extends Controller
         $saksi = new Saksi();
         $saksi->c1_images = $relawan->c1_images;
         $saksi->district_id = $relawan->district_id;
+        $saksi->batalkan = 0;
         $saksi->village_id = $relawan->village_id;
         $saksi->regency_id = $relawan->regency_id;
         $saksi->tps_id = $relawan->tps_id;
@@ -496,7 +497,7 @@ class VerificatorController extends Controller
         $saksi->batalkan = 0;
         $saksi->overlimit = 0;
         $saksi->kecurangan = "no";
-        $saksi->status_kecurangan = "";
+        
         $saksi->save();
         $saksiId = $saksi->id;
         foreach ($crowd_c1_data as $rd) {
