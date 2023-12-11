@@ -4026,6 +4026,7 @@ class AdminController extends Controller
         $data['realcount'] = $dpt != 0 ? ($data['total_incoming_vote'] / $dpt) * 100 : 0;
         $data['total_tps'] = Tps::where('regency_id', $this->config->regencies_id)->count('number');
         $data['paslon'] = Paslon::get();
+        
         return view('administrator.hitung_kpu.kpu', $data);
     }
 
@@ -4052,6 +4053,7 @@ class AdminController extends Controller
         $data['dpt'] =  $district->dpt;
         $data['kel'] = Village::where('district_id', $id)->get();
         $data['total_tps'] = TPS::where('district_id', $id)->count();
+        $data['kota'] = RegencyCrowdC1::where('id', $this->config->regencies_id)->first();
 
         return view('administrator.hitung_kpu.kecamatan', $data);
     }

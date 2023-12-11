@@ -75,13 +75,23 @@ class DptPemilihComponent extends Component
             $kec = District::where("id",(string)$vill->district_id)->first();
             $data['judul'] = 'Daftar Pemilih Tetap (DPT) <br> Kelurahan ' . $vill->name . ', TPS ' . $tps->number . ' tahun 2024';
             $data['wilayah']= $vill;
+            $tpsNumberLength = strlen($tps->number);
+            if ($tpsNumberLength == 1) {
+                $tpsNumber = "00".$tps->number;
+            }elseif($tpsNumberLength == 2){
+                $tpsNumber = "0".$tps->number;
+            }elseif($tpsNumberLength == 3){
+                $tpsNumber = $tps->number;
+            }else{
+                $tpsNumber = $tps->number;
+            }
+
             $data['dpt_i'] = DB::table('dpt_indonesia')
+
             ->where('village_name',$vill->name)
-            ->where('tps',(string) $tps->number)
+            ->where('tps',"like",'%'.$tpsNumber."%")
             ->where('nama_pemilih', 'like', '%' . $this->search . '%')
             ->where('district_name',$kec->name)->paginate(25);
-            // dd($data);
-            
         }
         return view('livewire.dpt-pemilih-component',$data);
         // dd($reg);
