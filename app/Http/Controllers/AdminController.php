@@ -928,13 +928,6 @@ class AdminController extends Controller
         if (isset($url_first[3]) && $url_first[2] == 'perhitungan_kecamatan') {
             // Perhitungan Kecamatan
             $id = $data['url_first'][3];
-            $data['suaraCrowd'] = [];
-            $data['total_incoming_vote'] = 0;
-            foreach ($data['paslon'] as $pas) {
-                $data['suaraCrowd']["suaraCrowd$pas->id"] = DataCrowdC1::where('district_id', $id)->where('paslon_id', $pas->id)->sum('voice');
-                $data['total_incoming_vote'] += $data['suaraCrowd']["suaraCrowd$pas->id"];
-            }
-            $id = $data['url_first'][3];
             $data['paslon'] = Paslon::with([
                 'saksi_data' => function ($query) use ($id) {
                     $query
@@ -943,6 +936,12 @@ class AdminController extends Controller
                         ->where('saksi.district_id', decrypt($id));
                 },
             ])->get();
+            $data['suaraCrowd'] = [];
+            $data['total_incoming_vote'] = 0;
+            foreach ($data['paslon'] as $pas) {
+                $data['suaraCrowd']["suaraCrowd$pas->id"] = DataCrowdC1::where('district_id', $id)->where('paslon_id', $pas->id)->sum('voice');
+                $data['total_incoming_vote'] += $data['suaraCrowd']["suaraCrowd$pas->id"];
+            }
             $data['paslon_terverifikasi'] = Paslon::with([
                 'saksi_data' => function ($query) use ($id) {
                     $query
@@ -997,12 +996,6 @@ class AdminController extends Controller
         } elseif (isset($url_first[3]) && $url_first[2] == 'perhitungan_kelurahan') {
             // Perhitungan Kelurahan
             $id = $data['url_first'][3];
-            $data['suaraCrowd'] = [];
-            $data['total_incoming_vote'] = 0;
-            foreach ($data['paslon'] as $pas) {
-                $data['suaraCrowd']["suaraCrowd$pas->id"] = DataCrowdC1::where('village_id', $id)->where('paslon_id', $pas->id)->sum('voice');
-                $data['total_incoming_vote'] += $data['suaraCrowd']["suaraCrowd$pas->id"];
-            }
             $data['paslon'] = Paslon::with([
                 'saksi_data' => function ($query) use ($id) {
                     $query
@@ -1011,6 +1004,12 @@ class AdminController extends Controller
                         ->where('saksi.village_id', (string) decrypt($id));
                 },
             ])->get();
+            $data['suaraCrowd'] = [];
+            $data['total_incoming_vote'] = 0;
+            foreach ($data['paslon'] as $pas) {
+                $data['suaraCrowd']["suaraCrowd$pas->id"] = DataCrowdC1::where('village_id', $id)->where('paslon_id', $pas->id)->sum('voice');
+                $data['total_incoming_vote'] += $data['suaraCrowd']["suaraCrowd$pas->id"];
+            }
             $data['paslon_terverifikasi'] = Paslon::with([
                 'saksi_data' => function ($query) use ($id) {
                     $query
@@ -1099,6 +1098,7 @@ class AdminController extends Controller
                 ->count();
         } else {
             // Perhitungan Kota
+            $data['kotakpu'] = RegencyCrowdC1::where('id', $this->config->regencies_id)->first();
             $data['paslon'] = Paslon::with([
                 'saksi_data' => function ($query) {
                     $query->where('saksi_data.regency_id', $this->config->regencies_id);
