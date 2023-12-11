@@ -124,7 +124,7 @@ $tps = Tps::count();
                                             $total_saksi = $data_kota->{"suarav$i"};
                                             @endphp
                                         @endif
-                                        <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3>
+                                        <h3 class="mb-2 number-font">{{ $total_saksi }} <br> suara</h3>
                                     </div>
                                 </div>
                             </div>
