@@ -102,12 +102,13 @@
                     type: 'get',
                     success: function (res) {
                         let cekSolution = $('td.cek-solution');
+                        console.log(res)
                         for(solution of cekSolution){
                             if(solution.innerText.trim() == res.solution.trim()){
                                 return;
                             }
                         }
-                        console.log(res)
+                  
                                 
                         
                     //     $('tbody#container-rekomendasi').append(`
