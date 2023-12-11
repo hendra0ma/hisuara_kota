@@ -4,7 +4,7 @@
             <div class="card border-0" style="position: relative">
 
                 <div style="position: relative" class="card-header bg-primary text-light text-center fw-bold rounded-0">
-                    <span style="position: absolute; left: 15px" class="fw-normal">4/4</span> Daftar Hadir Pemilih di TPS (C7)
+                    <span style="position: absolute; left: 15px" class="fw-normal">5/5</span> Daftar Hadir Pemilih di TPS (C7)
                 </div>
 
              

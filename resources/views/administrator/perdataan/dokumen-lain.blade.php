@@ -65,12 +65,15 @@ $kota = Regency::where('id', $config->regencies_id)->first();
     <div class="col-md-8">
         <div class="row mt-2">
             <div class="col parent-link">
-                <a class="btn text-white w-100 py-3 datapemilih tablink" onclick="openPage('Data-Pemilih', this, '#6259ca')"
-                    id="defaultOpen">Data Pemilih</a>
+                <a class="btn text-white w-100 py-3 datapemilih tablink" onclick="openPage('c1-berita', this, '#6259ca')"
+                    id="defaultOpen">C1 Berita Acara (BA)</a>
+            </div>
+            <div class="col parent-link">
+                <a class="btn text-white w-100 py-3 datapemilih tablink" onclick="openPage('Data-Pemilih', this, '#6259ca')">Data Pemilih</a>
             </div>
             <div class="col parent-link">
                 <a class="btn text-white w-100 py-3 c7 tablink" onclick="openPage('C7', this, '#6259ca')">
-                    C7</a>
+                    C7 Daftar Hadir</a>
             </div>
             <div class="col parent-link">
                 <a class="btn text-white w-100 py-3 koreksic1 tablink" onclick="openPage('Koreksi-C1', this, '#6259ca')">
@@ -115,6 +118,9 @@ $kota = Regency::where('id', $config->regencies_id)->first();
     }
 </style>
 
+<div id="c1-berita" class="tabcontent mt-0 pt-0 px-0">
+    <livewire:c1-berita />
+</div>
 <div id="Data-Pemilih" class="tabcontent mt-0 pt-0 px-0">
     <livewire:data-pemilih />
 </div>
