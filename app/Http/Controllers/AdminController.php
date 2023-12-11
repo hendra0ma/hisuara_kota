@@ -1712,6 +1712,7 @@ class AdminController extends Controller
 
         $saksi = Saksi::where('id', $id)->first();
         $saksi_data = SaksiData::where('saksi_id', $id)->get();
+        dd($saksi_data);
         $regency_voice = Regency::where('id', $this->config->regencies_id)->first();
 
         $user = User::where('tps_id', $saksi->tps_id)->first();

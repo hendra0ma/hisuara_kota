@@ -221,6 +221,7 @@ class AuditorController extends Controller
             ->where('saksi.verification', 1)
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->where('saksi.audit', "")
+            ->where('users.regency_id', $this->config->regencies_id)
             ->paginate(18);
 
         $data['list_suara_audit']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
@@ -228,12 +229,14 @@ class AuditorController extends Controller
             ->where('saksi.verification', 1)
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
             ->where('saksi.audit', 1)
+            ->where('users.regency_id', $this->config->regencies_id)
             ->paginate(18);
 
         $data['list_suara_batal']  = Tps::join('saksi', 'saksi.tps_id', '=', 'tps.id')
             ->join('users', 'users.tps_id', '=', 'tps.id')
            ->where('saksi.batalkan', 1)
             ->select('saksi.*', 'saksi.created_at as date', 'tps.*', 'users.*')
+            ->where('users.regency_id', $this->config->regencies_id)
             ->paginate(18);
         if ( count($data['list_suara']) > 0) {
             
