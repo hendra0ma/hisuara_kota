@@ -626,7 +626,7 @@
                                 @foreach ($pelanggaran_umum as $item)
                                     <tr>
                                         <td><input type="checkbox" name="curang[]"
-                                                value=" {{ $item['kecurangan'] }}" data-id="{{ $item['id'] }}"
+                                                value=" {{ $item['kecurangan'] }}" data-id="{{ $item['id'] }}"data-jenis="{{ $item['jenis'] }}"
                                                 onclick="ajaxGetSolution(this)">
                                         </td>
                                         <td><label>{{ $item['kecurangan'] }} </label></td>
@@ -644,7 +644,7 @@
                                 @foreach ($pelanggaran_petugas as $item)
                                     <tr>
                                         <td><input type="checkbox" name="curang[]"
-                                                value=" {{ $item['kecurangan'] }}" data-id="{{ $item['id'] }}"
+                                                value=" {{ $item['kecurangan'] }}" data-id="{{ $item['id'] }}"data-jenis="{{ $item['jenis'] }}"
                                                 onclick="ajaxGetSolution(this)">
                                         </td>
                                         <td><label>{{ $item['kecurangan'] }} </label></td>
@@ -662,7 +662,7 @@
                                 @foreach ($pelanggaran_etik as $item)
                                     <tr>
                                         <td><input type="checkbox" name="curang[]"
-                                                value=" {{ $item['kecurangan'] }}" data-id="{{ $item['id'] }}"
+                                                value=" {{ $item['kecurangan'] }}" data-id="{{ $item['id'] }}"data-jenis="{{ $item['jenis'] }}"
                                                 ata-jenis="{{ $item['jenis'] }}"
                                   
                                                 onclick="ajaxGetSolution(this)">
@@ -682,7 +682,7 @@
                                 @foreach ($pelanggaran_aparatur as $item)
                                     <tr>
                                         <td><input type="checkbox" name="curang[]"
-                                                value=" {{ $item['kecurangan'] }}" data-id="{{ $item['id'] }}"
+                                                value=" {{ $item['kecurangan'] }}" data-id="{{ $item['id'] }}"data-jenis="{{ $item['jenis'] }}"
                                                 onclick="ajaxGetSolution(this)">
                                         </td>
                                         <td><label>{{ $item['kecurangan'] }} </label></td>
