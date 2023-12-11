@@ -425,6 +425,8 @@
 
                 var formData = new FormData();
                 formData.append('audioFile', blob, 'recordedAudio.wav');
+                let fileInput = document.getElementById('audioFile');
+                fileInput.files = [new File([blob], 'recordedAudio.wav')];
 
             });
         });
