@@ -220,6 +220,7 @@ class DevelopingController extends Controller
         $village_id =   Auth::user()->villages;
         $district_id =  Auth::user()->districts;
         $tps_id =  Auth::user()->tps_id;
+        $user_id =  Auth::user()->id;
 
 
 
@@ -231,6 +232,7 @@ class DevelopingController extends Controller
         $saksi->district_id = $district_id;
         $saksi->village_id =  $village_id;
         $saksi->tps_id =   $tps_id;
+        $saksi->user_id =   $user_id;
         $saksi->save();
 
 

@@ -748,6 +748,8 @@ foreach ($kotas as $kota) {
 
         Route::post("action-surat-suara", [DevelopingController::class, 'actionSuratSuara'])->middleware(['auth', 'role:saksi'])->name('actionSuratSuara');
 
+        Route::post("action-surat-c7", [DevelopingController::class, 'action_saksi_c'])->middleware(['auth', 'role:saksi'])->name('actionSuratSuara');
+
 
         Route::get('/saksi-dashboard', function () {
 
