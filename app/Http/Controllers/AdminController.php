@@ -4109,8 +4109,8 @@ class AdminController extends Controller
         }
         $data['crowd_c1'] = CrowdC1::join('users', 'crowd_c1.user_id', '=', 'users.id')->where('crowd_c1.tps_id', $id)->first();
 
-        dd($tps->villages_id);
-        $Village = Village::where('id', (string)$tps->villages_id)->first();
+       
+        $Village = Village::where('id', (string)$id)->first();
 
         $data['desa'] = $Village;
         $data['village'] = $Village;
