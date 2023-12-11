@@ -1905,8 +1905,8 @@ class AdminController extends Controller
             $verifikator = null;
             $hukum = null;
         }
-        $saksi = Saksi::where('tps_id', $tps['id'])->first();
-        if ($saksi!=null) {
+        if ($tps!=null) {
+            $saksi = Saksi::where('tps_id', $tps['id'])->first();
             $bukti_vidio = Buktividio::where('tps_id', $tps['id'])->get();
             $bukti_foto = Buktifoto::where('tps_id', $tps['id'])->get();
             $surat_pernyataan = SuratPernyataan::where('saksi_id', $saksi['id'])->first();
