@@ -483,11 +483,11 @@ class VerificatorController extends Controller
             'status' => 1
         ]);
         $crowd_c1_data = DataCrowdC1::where('crowd_c1_id', $id)->get();
+     
         $saksi = new Saksi();
         $saksi->c1_images = "c1_plano"."/".$crowd_c1->crowd_c1;
         $saksi->district_id = $crowd_c1->district_id;
         $saksi->village_id = $crowd_c1->village_id;
-        $saksi->regency_id = $crowd_c1->regency_id;
         $saksi->regency_id = $crowd_c1->regency_id;
         $saksi->province_id = substr($crowd_c1->regency_id,0,2);
 
@@ -497,9 +497,9 @@ class VerificatorController extends Controller
         $saksi->batalkan = 0;
         $saksi->overlimit = 0;
         $saksi->kecurangan = "no";
-        
         $saksi->save();
         $saksiId = $saksi->id;
+
         foreach ($crowd_c1_data as $rd) {
             $saksi_data = new SaksiData();
             $saksi_data->voice = $rd->voice;
@@ -513,17 +513,17 @@ class VerificatorController extends Controller
             $saksi_data->save();
         }
         $regency_voice = Regency::where('id', $this->config->regencies_id)->first();
-        $suara1 = $regency_voice->suara1 +  $crowd_c1_data->voice[0];
-        $suara2 = $regency_voice->suara2 +  $crowd_c1_data->voice[1];
-        $suara3 = $regency_voice->suara3 +  $crowd_c1_data->voice[2];
+        $suara1 = $regency_voice->suara1 +  $crowd_c1_data[0]->voice;
+        $suara2 = $regency_voice->suara2 +  $crowd_c1_data[1]->voice;
+        $suara3 = $regency_voice->suara3 +  $crowd_c1_data[2]->voice;
         Regency::where('id', $regency_voice->id)->update([
             'suara1' => $suara1,
             'suara2' => $suara2,
             'suara3' => $suara3,
         ]);
         $saksi = Saksi::where('id', $id)->first();
-        $tps = Tps::where('id', $saksi['tps_id'])->first();
-        $kecamatan = District::where('id', $saksi['district_id'])->first();
+        $tps = Tps::where('id', $crowd_c1->tps_id)->first();
+        $kecamatan = District::where('id', $rd->district_id)->first();
 
         $pesan = "" . Auth::user()->name . " Memverifikasi Data Crowd C1 -  Tps " . $tps['number'] . " Kecamatan " . $kecamatan['name'] . " Kelurahan " . $kecamatan['name'] . "  ";
         History::create([
