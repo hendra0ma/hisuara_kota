@@ -23,6 +23,7 @@ use App\Models\District;
 use App\Models\Kecurangan;
 use App\Models\Province;
 use App\Models\Regency;
+use App\Models\RegencyCrowdC1;
 use App\Models\SaksiC;
 use App\Models\SuratSuara;
 use App\Models\Tracking;
@@ -97,6 +98,10 @@ class DevelopingController extends Controller
         if ($request->tipe == "suara") {
             $paslon = Paslon::get();
             $index = 0;
+            $i = 1;
+            $regencyCrowd = RegencyCrowdC1::find($request->input('kota'));
+            $regencyCrowdData = RegencyCrowdC1::where("id",$request->input('kota'))->first();
+           
             foreach ($paslon as $pas) {
 
                 DataCrowdC1::insert([
@@ -111,8 +116,13 @@ class DevelopingController extends Controller
                     'voice' => $request->suara[$index]
 
                 ]);
+                $regencyCrowd->{"suaraKpu".$i} =  $regencyCrowdData->{"suaraKpu".$i}+$request->suara[$index];
+
                 $index++;
+                $i++;
             }
+            $regencyCrowd->save();
+           
         }
 
 

@@ -432,6 +432,7 @@ class VerificatorController extends Controller
         $saksi = new Saksi();
         $saksi->c1_images = $relawan->c1_images;
         $saksi->district_id = $relawan->district_id;
+        $saksi->batalkan = 0;
         $saksi->village_id = $relawan->village_id;
         $saksi->regency_id = $relawan->regency_id;
         $saksi->tps_id = $relawan->tps_id;
@@ -479,19 +480,24 @@ class VerificatorController extends Controller
         $id = Crypt::decrypt($id);
         $crowd_c1 = CrowdC1::where('id', $id)->first();
         CrowdC1::where('id', $id)->update([
-            'status' => 2
+            'status' => 1
         ]);
         $crowd_c1_data = DataCrowdC1::where('crowd_c1_id', $id)->get();
         $saksi = new Saksi();
-        $saksi->c1_images = $crowd_c1->c1_images;
+        $saksi->c1_images = "c1_plano"."/".$crowd_c1->crowd_c1;
         $saksi->district_id = $crowd_c1->district_id;
         $saksi->village_id = $crowd_c1->village_id;
         $saksi->regency_id = $crowd_c1->regency_id;
+        $saksi->regency_id = $crowd_c1->regency_id;
+        $saksi->province_id = substr($crowd_c1->regency_id,0,2);
+
         $saksi->tps_id = $crowd_c1->tps_id;
         $saksi->verification = "";
         $saksi->audit = "";
+        $saksi->batalkan = 0;
         $saksi->overlimit = 0;
         $saksi->kecurangan = "no";
+        
         $saksi->save();
         $saksiId = $saksi->id;
         foreach ($crowd_c1_data as $rd) {
@@ -503,6 +509,7 @@ class VerificatorController extends Controller
             $saksi_data->paslon_id = $rd->paslon_id;
             $saksi_data->user_id = $rd->crowd_c1_id;
             $saksi_data->saksi_id = $saksiId;
+            $saksi->province_id = substr($crowd_c1->regency_id,0,2);
             $saksi_data->save();
         }
         $regency_voice = Regency::where('id', $this->config->regencies_id)->first();
