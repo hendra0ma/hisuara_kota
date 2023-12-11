@@ -197,6 +197,10 @@
                     </div>
                     @endif
                 </div>
+                <div alt="upload-c1-ba" class="content">
+                    <livewire:upload-c1-ba>
+
+                </div>
                 <div alt="blog" class="content ">
 
                     <livewire:surat-suara>
@@ -223,6 +227,10 @@
                         <li>
                             <i class="fa-regular fa-file-lines"></i>
                             <p>C1</p>
+                        </li>
+                        <li>
+                            <i class="fa-regular fa-file-lines"></i>
+                            <p>C1 BA</p>
                         </li>
                         <li>
                             <i class="fa-solid fa-people-group"></i>
@@ -283,6 +291,9 @@
                 </div>
                 @endif
         </div>
+        <div alt="upload-c1-ba" class="content">
+            <livewire:upload-c1-ba>
+        </div>
         <div alt="blog" class="content ">
 
             <livewire:surat-suara>
@@ -308,6 +319,10 @@
                 <li>
                     <i class="fa-regular fa-file-lines"></i>
                     <p>C1</p>
+                </li>
+                <li>
+                    <i class="fa-regular fa-file-lines"></i>
+                    <p>C1 BA</p>
                 </li>
                 <li>
                     <i class="fa-solid fa-people-group"></i>

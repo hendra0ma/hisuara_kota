@@ -4,7 +4,7 @@
             <div class="card border-0" style="position: relative">
 
                 <div style="position: relative;" class="card-header bg-primary text-light text-center fw-bold rounded-0">
-                    <span style="position: absolute; left: 15px" class="fw-normal">1/4</span> Foto dan Kirim Absensi
+                    <span style="position: absolute; left: 15px" class="fw-normal">1/5</span> Foto dan Kirim Absensi
                 </div>
 
                 {{-- <form action="{{route('logout')}}" method="post">

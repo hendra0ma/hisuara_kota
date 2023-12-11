@@ -443,7 +443,7 @@
                                             <img style="width: 60px; position: absolute; left: 0; bottom: 0"
                                                 src="{{ asset('') }}storage/{{ $item->picture }}" alt="">
                                             <div class="ms-7">
-                                                {{ $item['candidate'] }} - <br>
+                                                {{ $item['candidate'] }} - 
                                                 {{ $item['deputy_candidate'] }}
                                             </div>
                                         </th>
