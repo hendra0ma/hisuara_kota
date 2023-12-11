@@ -1717,33 +1717,33 @@ class AdminController extends Controller
 
         $user = User::where('tps_id', $saksi->tps_id)->first();
 
-        $riwayatKoreksi = new RiwayatKoreksi();
-        $riwayatKoreksi->c1_images = $saksi->c1_images;
-        $riwayatKoreksi->user_id = $user->id;
-        $riwayatKoreksi->province_id = $saksi->province_id;
-        $riwayatKoreksi->regency_Id = $saksi->regency_id;
-        $riwayatKoreksi->village_id = $saksi->village_id;
-        $riwayatKoreksi->district_id = $saksi->district_id;
-        $riwayatKoreksi->tps_id = $saksi->tps_id;
-        $riwayatKoreksi->from = 'auditor';
-        $riwayatKoreksi->petugas_id = Auth::user()->id;
-        $riwayatKoreksi->save();
-        $riwayatKoreksiId = $riwayatKoreksi->id;
+        // $riwayatKoreksi = new RiwayatKoreksi();
+        // $riwayatKoreksi->c1_images = $saksi->c1_images;
+        // $riwayatKoreksi->user_id = $user->id;
+        // $riwayatKoreksi->province_id = $saksi->province_id;
+        // $riwayatKoreksi->regency_Id = $saksi->regency_id;
+        // $riwayatKoreksi->village_id = $saksi->village_id;
+        // $riwayatKoreksi->district_id = $saksi->district_id;
+        // $riwayatKoreksi->tps_id = $saksi->tps_id;
+        // $riwayatKoreksi->from = 'auditor';
+        // $riwayatKoreksi->petugas_id = Auth::user()->id;
+        // $riwayatKoreksi->save();
+        // $riwayatKoreksiId = $riwayatKoreksi->id;
 
-        foreach ($paslon as $key => $value) {
-            RiwayatKoreksiData::insert([
-                'user_id' => $user->id,
-                'voice' => $saksi_data[$key]->voice,
-                'paslon_id' => $value->id,
-                'riwayat_koreksi_id' => $riwayatKoreksiId,
-                'province_id' => $saksi->province_id,
-                'regency_id' => $saksi->regency_id,
-                'tps_id' => $saksi->tps_id,
-                'village_id' => $saksi->village_id,
-                'district_id' => $saksi->district_id,
-                'petugas_id' => Auth::user()->id,
-            ]);
-        }
+        // foreach ($paslon as $key => $value) {
+        //     RiwayatKoreksiData::insert([
+        //         'user_id' => $user->id,
+        //         'voice' => $saksi_data[$key]->voice,
+        //         'paslon_id' => $value->id,
+        //         'riwayat_koreksi_id' => $riwayatKoreksiId,
+        //         'province_id' => $saksi->province_id,
+        //         'regency_id' => $saksi->regency_id,
+        //         'tps_id' => $saksi->tps_id,
+        //         'village_id' => $saksi->village_id,
+        //         'district_id' => $saksi->district_id,
+        //         'petugas_id' => Auth::user()->id,
+        //     ]);
+        // }
         $regencyId = $this->config->regencies_id;
         $requestPaslons = [
             ( $request->paslon0 == null)? $saksi_data[0]->voice :$request->paslon0,
@@ -1757,6 +1757,8 @@ class AdminController extends Controller
             $voicev[$index] = $regency_voice->{"suarav{$index}"} - $saksi_data[$index]->voice + $requestPaslons[$index];
             $voice[$index] = $regency_voice->{"suara{$index}"} - $saksi_data[$index]->voice + $requestPaslons[$index];
         }
+
+        dd($voicev,$voice);
 
         Regency::where('id', $regencyId)->update([
             'suarav1' => $voicev[0],
