@@ -3,12 +3,12 @@
 @section('content')
     <div class="row mt-5">
         <div class="col-lg-4">
-            @if ($message = Session::get('success'))
+            {{-- @if ($message = Session::get('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ $message }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">X</button>
                 </div>
-            @endif
+            @endif --}}
 
             <h1 class="page-title fs-1 mt-2">Verifikasi & Validasi Kecurangan
                 <!-- Kota -->
@@ -25,13 +25,11 @@
             <div class="row justify-content-end">
                 <div class="col-lg-4 parent-link">
                     <a href="{{ url('') }}/verifikator/verifikator_kecurangan"
-                        class="btn btn-fdp text-white w-100 py-3 {{ url()->current() == url('') . '/verifikator/verifikator_kecurangan' ? 'active' : '' }}">Saksi
-                        Kecurangan</a>
+                        class="btn btn-fdp text-white w-100 py-3 {{ url()->current() == url('') . '/verifikator/verifikator_kecurangan' ? 'active' : '' }}">Laporan Saksi Kecurangan</a>
                 </div>
                 <div class="col-lg-4 parent-link">
                     <a href="{{ url('') }}/verifikator/verifikator_kecurangan_admin"
-                        class="btn btn-fdp text-white w-100 py-3 {{ url()->current() == url('') . '/verifikator/verifikator_kecurangan_admin' ? 'active' : '' }}">Admin
-                        Kecurangan</a>
+                        class="btn btn-fdp text-white w-100 py-3 {{ url()->current() == url('') . '/verifikator/verifikator_kecurangan_admin' ? 'active' : '' }}">Laporan Kecurangan Umum</a>
                 </div>
             </div>
         </div>

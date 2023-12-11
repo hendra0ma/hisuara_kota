@@ -336,7 +336,7 @@
                         <div class="col-lg-12 col-sm-12 mb-4 mb-lg-0">
                             <div class="row">
                                 <div class="col-6">
-                                    <div class="wrap-input100 validate-input" style="height:500px !important" data-bs-validate="Password is required">
+                                    <div class="wrap-input100 validate-input" style="height:100% !important" data-bs-validate="Password is required">
                                         <label class="picture" for="picture__input3" tabIndex="0">
                                             <span class="picture__image3"></span>
                                         </label>
@@ -359,7 +359,7 @@
                                         }
                                     });
                                 </script>
-                                <div class="col-6" style="margin-top: 65px; position: relative">
+                                <div class="col-6" style="margin-top: 65px; position: relative; height: 500px;">
                                     <div class="form-group">
                                         <select class="form-control select2-show-search form-select" name="provinsi" id="provinsi_2">
                                             <?php

@@ -12,8 +12,8 @@
 <div class="card">
     <div class="card-header mx-auto text-center">
         <div class="row">
-            <div class="col-md-12 mb-2">
-                <img style="width: 175px" src="{{url('/')}}/assets/images/brand/logo-2.png" alt="">
+            <div class="col-md-12 mb-4">
+                <img style="height: 100px" src="{{asset('images/logo/hisuara_new.png')}}" alt="">
             </div>
             <div class="col-md-12">
                 <h5>{{$kota['name']}}, </h5>
