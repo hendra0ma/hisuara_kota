@@ -62,7 +62,7 @@ $cityProp = Regency::where('province_id', $kota->province_id)->get();
 
 $jumlah_kecamatan = District::where('regency_id', $kota->id)->count();
 $jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '%')->count();
-
+$marquee = Saksi::join('users', 'users.tps_id', "=", "saksi.tps_id")->get();
 
 
 
@@ -1331,8 +1331,18 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '
     {{-- <button class="btn btn-kolapse text-white" style="background-color: #30304d; z-index: 20"><i
                             class="fa-solid fa-bars"></i></button>
                     <button class="btn btn-danger text-white rounded-0" style="z-index: 20">Suara Masuk</button> --}}
-    <div id="container-marquee"style="height:35px;width:auto;overflow-x:hidden;padding-left:260px;display:flex;flex-wrap: nowrap;padding-right:15px">
-    </div>
+    {{-- <div id="container-marquee"style="height:35px;width:auto;overflow-x:hidden;padding-left:260px;display:flex;flex-wrap: nowrap;padding-right:15px">
+    </div> --}}
+    <marquee>
+        @foreach ($marquee as $item)
+        <?php $kecamatan =  District::where('id', $item['districts'])->first(); ?>
+        <?php $kelurahan =  Village::where('id', $item['villages'])->first(); ?>
+        <?php $tps =  Tps::where('id', $item['tps_id'])->first(); ?>
+        <span class="text-success">▼ </span><span class="text-white" style="font-size: 20px;">{{$item['name']}}
+            Kecamatan {{$kecamatan['name']}}, Kelurahan {{$kelurahan['name']}}, TPS {{$tps['number']}}
+        </span>
+        @endforeach
+    </marquee>
 </div>
 </div>
 
