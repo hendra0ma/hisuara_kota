@@ -35,7 +35,9 @@ class AbsensiTidakHadir extends Component
     public function render()
     {
         $data['absen2'] = Absensi::join('users', 'users.id', '=', 'absensi.user_id')->where("users.regency_id",  $this->config->regencies_id)->get();
-        $data['absen'] = User::where('role_id',8)->where('absen','tidak hadir')->where("users.regency_id",  $this->config->regencies_id)->where('is_active', '=', 1)->where('name', 'like', '%'.$this->search.'%')->paginate(16);
+        $data['absen'] = User::where('role_id',8)->where('absen','')->where("users.regency_id",  $this->config->regencies_id)
+        ->where('is_active', '=', 1)
+        ->where('name', 'like', '%'.$this->search.'%')->paginate(16);
         $data['user'] = User::where('role_id',8)->where("users.regency_id",  $this->config->regencies_id)->count();
         $data['jumlah'] = $data['user'] - count($data['absen2']);
         
