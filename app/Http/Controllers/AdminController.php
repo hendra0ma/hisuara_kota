@@ -928,7 +928,6 @@ class AdminController extends Controller
         if (isset($url_first[3]) && $url_first[2] == 'perhitungan_kecamatan') {
             // Perhitungan Kecamatan
             $id = $data['url_first'][3];
-            $id = $data['url_first'][3];
             $data['paslon'] = Paslon::with([
                 'saksi_data' => function ($query) use ($id) {
                     $query

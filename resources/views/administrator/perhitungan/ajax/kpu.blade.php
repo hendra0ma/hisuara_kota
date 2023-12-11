@@ -98,6 +98,7 @@ $tps = Tps::count();
                                             <h3 class="mb-2 number-font">{{ $suaraCrowd['suaraCrowd'.$pas->id] }} suara</h3>
                                         @else {{--  Perhitungan Kota --}}
                                             <h3 class="mb-2 number-font">{{ $kota->{"suaraKpu$i"} }} suara</h3>
+                                            {{$kota}}
                                         @endif
                                         {{-- {{$url_first}} --}}
                                         
