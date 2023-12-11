@@ -644,7 +644,7 @@ let myModal = new bootstrap.Modal(document.getElementById('modallockdown'), {
                                     ->where('list_kecurangan.jenis',0)
                                     ->count();
                                     $jumlahSaksi = App\Models\Saksi::where('kecurangan',"yes")->count();
-                                    $persen = ($totalKec/ $jumlahSaksi)*100;
+                                    $persen =($totalKec != 0) ?($totalKec/ $jumlahSaksi)*100 : 0;
                                       ?>
                                       ['{{$i++}}',<?=substr($persen,0,4)?>],
                                     <?php endforeach ?>
@@ -684,7 +684,7 @@ let myModal = new bootstrap.Modal(document.getElementById('modallockdown'), {
                                     ->where('list_kecurangan.jenis',1)
                                     ->count();
                                     $jumlahSaksi = App\Models\Saksi::where('kecurangan',"yes")->count();
-                                    $persen = ($totalKec/ $jumlahSaksi)*100;
+                                    $persen =($totalKec != 0) ?($totalKec/ $jumlahSaksi)*100 : 0;
                                       ?>
                                       ['{{$i++}}',<?=substr($persen,0,4)?>],
                                     <?php endforeach ?>

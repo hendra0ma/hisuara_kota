@@ -509,7 +509,7 @@
                 <div class="col-auto my-2">
                     <a href="{{route('provinsi' . $item->id . '.home',Crypt::encrypt($item['id']) )}}">
                         <div class="text-center mb-2">
-                            <img src="{{asset('assets/imagesProvinsi/'. $item->logo_provinsi)}}" alt="">
+                            <img src="{{asset('assets/imagesProvinsi/'. $item->logo_provinsi)}}" alt=""style="height:150px;width:auto">
                         </div>
                         <div class="text-center">
                             {{$item->name}}

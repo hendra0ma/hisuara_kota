@@ -36,7 +36,7 @@ class DevelopingController extends Controller
 {
     public function index()
     {
-        $villagee = 3674040006;
+        $villagee = $saksi['villages'];
         $data['dev'] = User::join('tps', 'tps.id', '=', 'users.tps_id')->where('villages', $villagee)->where('setup', 'belum terisi')->first();
         $data['kelurahan'] = Village::where('id', $villagee)->first();
         $data['paslon'] = Paslon::get();
@@ -174,6 +174,7 @@ class DevelopingController extends Controller
         $saksi->overlimit = 0;
         $saksi->tps_id = Auth::user()->tps_id;
         $saksi->regency_id = $regency->id;
+        $saksi->province_id = Auth::user()->province_id;
         $saksi->save();
         $ide = $saksi->id;
         $paslon = Paslon::get();
@@ -187,6 +188,7 @@ class DevelopingController extends Controller
                 'district_id' => Auth::user()->districts,
                 'village_id' =>  $villagee,
                 'regency_id' => $regency->id,
+                'province_id' => Auth::user()->province_id,
                 'voice' =>  (int)$request->suara[$i],
                 'saksi_id' => $ide,
             ]);
@@ -218,6 +220,7 @@ class DevelopingController extends Controller
         $village_id =   Auth::user()->villages;
         $district_id =  Auth::user()->districts;
         $tps_id =  Auth::user()->tps_id;
+        $user_id =  Auth::user()->id;
 
 
 
@@ -229,6 +232,7 @@ class DevelopingController extends Controller
         $saksi->district_id = $district_id;
         $saksi->village_id =  $village_id;
         $saksi->tps_id =   $tps_id;
+        $saksi->user_id =   $user_id;
         $saksi->save();
 
 
@@ -270,7 +274,7 @@ class DevelopingController extends Controller
             "jumlah_sah_dan_tidak" => "required|numeric",
             "total_surat_suara" => "required|numeric",
             "surat_suara_tidak_sah" => "required|numeric",
-            "surat_suara_terpakai" => "required|numeric",
+            // "surat_suara_terpakai" => "required|numeric",
             "sisa_surat_suara" => "required|numeric",
             "surat_suara.*" => 'image|mimes:jpeg,png,jpg,gif'
         ]);
@@ -294,7 +298,7 @@ class DevelopingController extends Controller
         SuratSuara::insert([
             "total_surat_suara" => $request->input("total_surat_suara"),
             "surat_suara_tidak_sah" => $request->input("surat_suara_tidak_sah"),
-            "surat_suara_terpakai" => $request->input("surat_suara_terpakai"),
+            // "surat_suara_terpakai" => $request->input("surat_suara_terpakai"),
             "sisa_surat_suara" => $request->input("sisa_surat_suara"),
             "dpt" => $request->input("dpt"),
             "surat_suara_sah" => $request->input("surat_suara_sah"),
@@ -342,7 +346,7 @@ class DevelopingController extends Controller
 
     public function tps_update()
     {
-        $villagee = 3674040006;
+        $villagee = $saksi['villages'];
         $usesr = Tps::where('villages_id', $villagee)->orderBy('id', 'DESC')->first();
         $use3 = Tps::where('villages_id', $villagee)->first();
         for ($x =  $use3['id']; $x <= $usesr['id']; $x++) {
@@ -373,7 +377,7 @@ class DevelopingController extends Controller
     public function tps_user_update()
     {
 
-        $villagee = 3674040006;
+        $villagee = $saksi['villages'];
         $usesr = User::where('villages', $villagee)->orderBy('id', 'DESC')->first();
         $use3 = User::where('villages', $villagee)->first();
         for ($x =  $use3['id']; $x <= $usesr['id']; $x++) {

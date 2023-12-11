@@ -1905,11 +1905,13 @@ class AdminController extends Controller
             $verifikator = null;
             $hukum = null;
         }
-        $bukti_vidio = Buktividio::where('tps_id', $tps['id'])->get();
-        $bukti_foto = Buktifoto::where('tps_id', $tps['id'])->get();
-        $saksi = Saksi::where('tps_id', $tps['id'])->first();
-        $surat_pernyataan = SuratPernyataan::where('saksi_id', $saksi['id'])->first();
-        $config = Config::first();
+        if ($tps!=null) {
+            $saksi = Saksi::where('tps_id', $tps['id'])->first();
+            $bukti_vidio = Buktividio::where('tps_id', $tps['id'])->get();
+            $bukti_foto = Buktifoto::where('tps_id', $tps['id'])->get();
+            $surat_pernyataan = SuratPernyataan::where('saksi_id', $saksi['id'])->first();
+            $config = Config::first();
+        }
         $kota = Regency::where('id', $this->config->regencies_id)->first();
         $list_kecurangan = Bukti_deskripsi_curang::join('list_kecurangan', 'list_kecurangan.id', '=', 'bukti_deskripsi_curang.list_kecurangan_id')
             ->join('solution_frauds', 'solution_frauds.id', '=', 'list_kecurangan.solution_fraud_id')

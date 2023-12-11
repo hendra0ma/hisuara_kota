@@ -46,7 +46,7 @@
                             alt="Avatar" />
                     </h1> --}}
                     {{-- <h5> Halo, {{Auth::user()->name}}</h5> --}}
-                    <form action="dev/action_saksi" method="post" enctype="multipart/form-data">
+                    <form action="{{route("actionSuratC7")}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="tps" value="{{$dev['number']}}" id="">
                         <input type="hidden" name="email" value="{{$dev['email']}}" id="">

@@ -169,13 +169,13 @@ class ExcelController extends Controller
                 ->join('districts', 'districts.regency_id', '=', 'regencies.id')
                 ->where('districts.name', $namaKecamatan)
                 ->join('villages', function ($join) use ($namaKelurahan) {
-                    $lastThreeLettersNamaKelurahan = substr($namaKelurahan, -3);
+                    // $lastThreeLettersNamaKelurahan = substr($namaKelurahan, -3);
                     $join->on('villages.district_id', '=', 'districts.id')
-                        ->where('villages.name', 'like', '%' . $lastThreeLettersNamaKelurahan);
+                        ->where('villages.name', 'like', '%' . $namaKelurahan);
                 })
-                ->select('regencies.*', 'districts.*', 'villages.*')
+                ->select('villages.*')
                 ->first();
-
+       
             $village = Village::where('id', (string) $village->id)->first();
             $village->update([
                 'tps' => $jumlahTps,
@@ -222,7 +222,7 @@ class ExcelController extends Controller
                 ->first();
             $filteredArray = $this->filterArrayTps($worksheet);
             $result = $this->countArrayValuesTps($filteredArray);
-
+            
             foreach ($result as $namaTps => $jumlahTps) {
                 $nomorTps = (string) intval(substr($namaTps, 3));
                 $villageId = (string) $village->id;

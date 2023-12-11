@@ -114,7 +114,7 @@ $(document).ready(function(){
                                     ->where('list_kecurangan.jenis',0)
                                     ->count();
                                     $jumlahSaksi = App\Models\Saksi::where('kecurangan',"yes")->count();
-                                    $persen = ($totalKec/ $jumlahSaksi)*100;
+                                    $persen =($totalKec != 0) ?($totalKec/ $jumlahSaksi)*100 : 0;
                                       ?>
                                       ['{{$i++}}',<?=$persen?>],
                                     <?php endforeach ?>
@@ -149,7 +149,7 @@ $(document).ready(function(){
                                     ->where('list_kecurangan.jenis',1)
                                     ->count();
                                     $jumlahSaksi = App\Models\Saksi::where('kecurangan',"yes")->count();
-                                    $persen = ($totalKec/ $jumlahSaksi)*100;
+                                    $persen =($totalKec != 0) ?($totalKec/ $jumlahSaksi)*100 : 0;
                                       ?>
                                       ['{{$i++}}',<?=$persen?>],
                                     <?php endforeach ?>

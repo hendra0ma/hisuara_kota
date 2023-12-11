@@ -23,7 +23,7 @@ class UsersIndoSeeders extends Seeder
             "address"=> $faker->address,
             "no_hp"=> $faker->phoneNumber,
             "districts"=> 3674040,
-            'villages'=>3674040006,
+            'villages'=>$saksi['villages'],
             "role_id"=> 2,
             "is_active"=>1,
             "email"=> $faker->email,
