@@ -515,9 +515,9 @@ class VerificatorController extends Controller
             $saksi_data->save();
         }
         $regency_voice = Regency::where('id', $this->config->regencies_id)->first();
-        $suara1 = $regency_voice->suara1 +  $crowd_c1_data->voice[0];
-        $suara2 = $regency_voice->suara2 +  $crowd_c1_data->voice[1];
-        $suara3 = $regency_voice->suara3 +  $crowd_c1_data->voice[2];
+        $suara1 = $regency_voice->suara1 +  $crowd_c1_data[0]->voice;
+        $suara2 = $regency_voice->suara2 +  $crowd_c1_data[1]->voice;
+        $suara3 = $regency_voice->suara3 +  $crowd_c1_data[2]->voice;
         Regency::where('id', $regency_voice->id)->update([
             'suara1' => $suara1,
             'suara2' => $suara2,
