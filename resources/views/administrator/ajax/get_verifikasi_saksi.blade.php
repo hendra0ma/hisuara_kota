@@ -60,11 +60,13 @@ $track = Tracking::where('id_user',$user['id'])->first();
 
     <div id="section-to-print">
         <div class="row">
+            @if ($saksi == null)
             @if ($saksi['kecurangan'] == "yes" && $qrcode != null)
             <?php $scan_url = url('') . "/scanning-secure/" . (string)Crypt::encrypt($qrcode->nomor_berkas); ?>
             <div class="col-auto my-auto">
                 {!! QrCode::size(100)->generate( $scan_url); !!}
             </div>
+            @endif
             @else
             @endif
             <div class="col mt-2">
@@ -308,11 +310,15 @@ $track = Tracking::where('id_user',$user['id'])->first();
                             </h6>
                         </div>
                         <div class="card-body p-0">
-                            @if ($absensi['selfie_lokasi'] != null)
-                            <img style="height: 415px; object-fit: cover" src="{{ $absensi['selfie_lokasi'] }}" alt="">
-                            @else
-                            <img style="height: 415px; object-fit: cover" src="https://t-2.tstatic.net/default-2.jpg"
-                                alt="">
+                            @if ($absensi == null)
+                                @if ($absensi['selfie_lokasi'] != null)
+                                    
+                                <img style="height: 415px; object-fit: cover" src="{{ $absensi['selfie_lokasi'] }}" alt="">
+                              
+                                @endif
+                                @else
+                                <img style="height: 415px; object-fit: cover" src="https://t-2.tstatic.net/default-2.jpg"
+                                    alt="">
                             @endif
                         </div>
                     </div>
