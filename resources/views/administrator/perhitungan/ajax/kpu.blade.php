@@ -93,20 +93,16 @@ $tps = Tps::count();
                                         @endif
                                         
                                         @if (isset($url_first[3]) && $url_first[2] == "perhitungan_kecamatan") {{-- Perhitungan Kecamatan --}}
-                                            @php
-                                            $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->where('district_id', (string)$id)->sum('voice');
-                                            @endphp
+                                            <h3 class="mb-2 number-font">{{ $suaraCrowd['suaraCrowd'.$pas->id] }} suara</h3>
                                         @elseif (isset($url_first[3]) && $url_first[2] == "perhitungan_kelurahan") {{-- Perhitungan Kelurahan --}}
                                             @php
                                             $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->where('village_id', (string)$id)->sum('voice');
                                             @endphp
                                         @else {{--  Perhitungan Kota --}}
-                                            @php
-                                            $total_saksi = SaksiData::where('regency_id',$config->regencies_id)->where('paslon_id',$pas->id)->sum('voice');
-                                            @endphp
+                                            <h3 class="mb-2 number-font">{{ $kota->{"suaraKpu$i"} }} suara</h3>
                                         @endif
                                         {{-- {{$url_first}} --}}
-                                        <h3 class="mb-2 number-font">{{ $total_saksi }} suara</h3>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -178,40 +174,69 @@ $tps = Tps::count();
     setTimeout(() => {
 
         var chartmode1 = c3.generate({
-            bindto: '#chart-kpu', // id of chart wrapper
-            data: {
-                columns: [
-                    // each columns data
+        bindto: '#chart-kpu', // id of chart wrapper
+        data: {
+            columns: [
+                // each columns data
 
-                    <?php foreach ($paslon as $pas) :  ?>
-                        <?php $voice = 0;  ?>
-                        <?php foreach ($pas->saksi_data as $pak) :  ?>
-                            <?php
-                            $voice += $pak->voice;
-                            ?>
-                        <?php endforeach  ?>['data<?= $pas->id  ?>', <?= $voice ?>],
-                    <?php endforeach  ?>
-                ],
-                type: 'pie', // default type of chart
-                colors: {
-                    <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': "<?= $pas->color ?>",
-                    <?php endforeach  ?>
-                },
-                names: {
-                    // name of each serie
-                    <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': " <?= $pas->candidate ?> - <?= $pas->deputy_candidate ?>",
-                    <?php endforeach  ?>
-                }
+                @if (request()->segment(3) == null)
+                @php
+                    $i = 1;
+                @endphp
+                <?php foreach ($paslon as $pas) :  ?>
+
+                    ['data<?= $pas->id  ?>', <?= $kota->{"suaraKpu".$i} ?>],
+                    @php
+                        $i++;
+                    @endphp
+                <?php endforeach  ?>
+                @php
+                    $i = 0;
+                @endphp
+                @elseif (request()->segment(3) != null && request()->segment(2) == "kpu_kecamatan")
+
+
+                <?php foreach ($paslon as $pas) :  ?>
+                
+                    ['data<?= $pas->id  ?>', <?= $suaraCrowd['suaraCrowd'.$pas->id] ?>],
+                <?php endforeach  ?>
+                @elseif (request()->segment(3) != null && request()->segment(2) == "kpu_kelurahan")
+                <?php foreach ($paslon as $pas) :  ?>
+                
+                    ['data<?= $pas->id  ?>', <?= $suaraCrowd['suaraCrowd'.$pas->id] ?>],
+                <?php endforeach  ?>
+
+                @else
+                <?php foreach ($paslon as $pas) :  ?>
+                
+                    ['data<?= $pas->id  ?>', <?= $suaraCrowd['suaraCrowd'.$pas->id] ?>],
+                <?php endforeach  ?>
+
+
+                @endif
+                    
+
+            ],
+            type: 'pie', // default type of chart
+            colors: {
+                <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': "<?= $pas->color ?>",
+                <?php endforeach  ?>
             },
-            axis: {},
-            legend: {
-                show: true, //hide legend
-            },
-            padding: {
-                bottom: 0,
-                top: 0
-            },
-        });
+            names: {
+                // name of each serie
+                <?php foreach ($paslon as $pas) :  ?> 'data<?= $pas->id  ?>': " <?= $pas->candidate ?> - <?= $pas->deputy_candidate ?>",
+                <?php endforeach  ?>
+            }
+        },
+        axis: {},
+        legend: {
+            show: true, //hide legend
+        },
+        padding: {
+            bottom: 0,
+            top: 0
+        },
+    });
 
         const createChartContainer = (style) => {
             return `<div style="${style}"></div>`;
