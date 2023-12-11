@@ -4078,8 +4078,8 @@ class AdminController extends Controller
         }
 
 
-        $Village = Village::where('id', $id)->first();
-        dd($id);
+        $Village = Village::where('id',(string) $id)->first();
+        dd($Village);
         $data['desa'] = $Village;
         $data['realcount'] = (isset($Village->dpt) && $Village->dpt != 0) ? ($data['total_incoming_vote'] / $Village->dpt) * 100 : 0;
         $data['dpt'] =  $Village->dpt;
