@@ -479,19 +479,24 @@ class VerificatorController extends Controller
         $id = Crypt::decrypt($id);
         $crowd_c1 = CrowdC1::where('id', $id)->first();
         CrowdC1::where('id', $id)->update([
-            'status' => 2
+            'status' => 1
         ]);
         $crowd_c1_data = DataCrowdC1::where('crowd_c1_id', $id)->get();
         $saksi = new Saksi();
-        $saksi->c1_images = $crowd_c1->crowd_c1;
+        $saksi->c1_images = "c1_plano"."/".$crowd_c1->crowd_c1;
         $saksi->district_id = $crowd_c1->district_id;
         $saksi->village_id = $crowd_c1->village_id;
         $saksi->regency_id = $crowd_c1->regency_id;
+        $saksi->regency_id = $crowd_c1->regency_id;
+        $saksi->province_id = substr($crowd_c1->regency_id,0,2);
+
         $saksi->tps_id = $crowd_c1->tps_id;
         $saksi->verification = "";
         $saksi->audit = "";
+        $saksi->batalkan = "";
         $saksi->overlimit = 0;
         $saksi->kecurangan = "no";
+        $saksi->status_kecurangan = "";
         $saksi->save();
         $saksiId = $saksi->id;
         foreach ($crowd_c1_data as $rd) {
