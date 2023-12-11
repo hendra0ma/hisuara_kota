@@ -92,7 +92,7 @@ $config->default =  $configs->default;
         </div>
     </div>
     <div class="row">
-        <div class="col-md mb-3"><img src="{{asset('')}}storage/c1_plano/{{$crowd->crowd_c1}}">
+        <div class="col-md mb-3"><img src="{{asset('')}}storage/{{$crowd->crowd_c1}}">
         </div>
         <div class="col-md">
             <div class="row">
