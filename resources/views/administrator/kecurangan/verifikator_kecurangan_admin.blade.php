@@ -25,13 +25,13 @@
             <div class="row justify-content-end">
                 <div class="col-lg-4 parent-link">
                     <a href="{{ url('') }}/verifikator/verifikator_kecurangan"
-                        class="btn btn-fdp text-white w-100 py-3 {{ url()->current() == url('') . '/verifikator/verifikator_kecurangan' ? 'active' : '' }}">Saksi
-                        Kecurangan</a>
+                        class="btn btn-fdp text-white w-100 py-3 {{ url()->current() == url('') . '/verifikator/verifikator_kecurangan' ? 'active' : '' }}">Laporan
+                        Saksi Kecurangan</a>
                 </div>
                 <div class="col-lg-4 parent-link">
                     <a href="{{ url('') }}/verifikator/verifikator_kecurangan_admin"
-                        class="btn btn-fdp text-white w-100 py-3 {{ url()->current() == url('') . '/verifikator/verifikator_kecurangan_admin' ? 'active' : '' }}">Admin
-                        Kecurangan</a>
+                        class="btn btn-fdp text-white w-100 py-3 {{ url()->current() == url('') . '/verifikator/verifikator_kecurangan_admin' ? 'active' : '' }}">Laporan
+                        Kecurangan Umum</a>
                 </div>
             </div>
         </div>
