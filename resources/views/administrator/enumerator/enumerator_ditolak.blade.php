@@ -157,7 +157,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                         <tbody>
                             @foreach ($saksi_data as $saksi)
                             <?php $kecamatan = \App\Models\District::where('id',(string)$saksi['districts'])->first(); ?>
-                            <?php $kelurahan = \App\Models\Village::where('id',(string)3674040006)->first(); ?>
+                            <?php $kelurahan = \App\Models\Village::where('id',(string)$saksi['villages'])->first(); ?>
                             <?php $tps = \App\Models\Tps::where('user_id',$saksi['id'])->first(); ?>
                             <tr>
                                 <td>  @if ($saksi['profile_photo_path'] == NULL)

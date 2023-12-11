@@ -52,7 +52,7 @@ use App\Models\Tps;
                         <tbody>
                             @foreach ($saksi_data as $saksi)
                             <?php $kecamatan = District::where('id',(string)$saksi['districts'])->first(); ?>
-                            <?php $kelurahan = Village::where('id',(string)3674040006)->first(); ?>
+                            <?php $kelurahan = Village::where('id',(string)$saksi['villages'])->first(); ?>
                             <?php $tps = Tps::where('user_id',$saksi['id'])->first(); ?>
                             <tr>
                                 <td>  @if ($saksi['profile_photo_path'] == NULL)

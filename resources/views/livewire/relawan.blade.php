@@ -48,7 +48,7 @@
     <div class="row" style="margin-top: 50px;">
         @foreach ($saksi_data as $ls)
         <?php $kecamatan = \App\Models\District::where('id',(string)$ls['districts'])->first(); ?>
-        <?php $kelurahan = \App\Models\Village::where('id',(string)3674040006)->first(); ?>
+        <?php $kelurahan = \App\Models\Village::where('id',(string)$ls['villages'])->first(); ?>
         <?php $tps = \App\Models\Tps::where('user_id',$ls['id'])->first(); ?>
         {{-- @if($ls['is_active'] == 0) --}}
         <div class="col-xl-3">

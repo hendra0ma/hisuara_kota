@@ -19,7 +19,7 @@ class c1RelawanSeeder extends Seeder
         $relawan = new Relawan();
         $relawan->c1_images = "1-53217-01-C1-PPWP-X14.jpg";
         $relawan->district_id = "3674040";
-        $relawan->village_id = "3674040006";
+        $relawan->village_id = "$saksi['villages']";
         $relawan->regency_id = "3674";
         $relawan->relawan_id = 1;
         $relawan->tps_id = 1;
@@ -29,7 +29,7 @@ class c1RelawanSeeder extends Seeder
         // DB::table('c1_relawan_data')->insert([
         //     'relawan_id' => 1,
         //     'paslon_id' => 1,
-        //     'village_id' => "3674040006",
+        //     'village_id' => "$saksi['villages']",
         //     'regency_id' => "3674",
         //     'voice' => 12,
         //     'c1_relawan_id' => $relawanId,
@@ -38,7 +38,7 @@ class c1RelawanSeeder extends Seeder
         // DB::table('c1_relawan_data')->insert([
         //     'relawan_id' => 1,
         //     'paslon_id' => 2,
-        //     'village_id' => "3674040006",
+        //     'village_id' => "$saksi['villages']",
         //     'regency_id' => "3674",
         //     'voice' => 15,
         //     'c1_relawan_id' => $relawanId,

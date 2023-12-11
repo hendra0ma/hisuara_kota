@@ -36,7 +36,7 @@ class DevelopingController extends Controller
 {
     public function index()
     {
-        $villagee = 3674040006;
+        $villagee = $saksi['villages'];
         $data['dev'] = User::join('tps', 'tps.id', '=', 'users.tps_id')->where('villages', $villagee)->where('setup', 'belum terisi')->first();
         $data['kelurahan'] = Village::where('id', $villagee)->first();
         $data['paslon'] = Paslon::get();
@@ -342,7 +342,7 @@ class DevelopingController extends Controller
 
     public function tps_update()
     {
-        $villagee = 3674040006;
+        $villagee = $saksi['villages'];
         $usesr = Tps::where('villages_id', $villagee)->orderBy('id', 'DESC')->first();
         $use3 = Tps::where('villages_id', $villagee)->first();
         for ($x =  $use3['id']; $x <= $usesr['id']; $x++) {
@@ -373,7 +373,7 @@ class DevelopingController extends Controller
     public function tps_user_update()
     {
 
-        $villagee = 3674040006;
+        $villagee = $saksi['villages'];
         $usesr = User::where('villages', $villagee)->orderBy('id', 'DESC')->first();
         $use3 = User::where('villages', $villagee)->first();
         for ($x =  $use3['id']; $x <= $usesr['id']; $x++) {
