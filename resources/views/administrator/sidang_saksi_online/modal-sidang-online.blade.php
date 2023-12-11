@@ -55,14 +55,14 @@ $config->regencies_id =  (string) $regency_id->regency_id;
     ?>
 
 <div class="row">
-    <div class="container mt-3">
-        <div class="row align-items-center">
-            <div class="col-auto">
+    <div class="display-cover mb-0 mt-3">
+        <div class="row w-100">
+            <div class="col-auto ps-0">
                 <img style="width: 250px;" src="{{url('/')}}/images/logo/hisuara_new.png" class="img-fluid mr-3" alt="">
             </div>
             <div class="col">
-                <h1 class="fw-bold mb-0">Sidang MK Gugatan Pemilu Presiden 2024</h1><br>
-                Online
+                <h1 class="fw-bold mb-0">Sidang MK Gugatan Pemilu Presiden 2024</h1>
+                <div class="text-success">Online</div>
             </div>
         </div>
     </div>

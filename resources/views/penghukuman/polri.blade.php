@@ -20,7 +20,7 @@ $solution = \App\Models\SolutionFraud::get();
         </div>
         @endif
 
-        <h1 class="page-title fs-1 mt-2">Polri
+        <h1 class="page-title fs-1 mt-2">Kepolisian Republik Indonesia
             <!-- Kota -->
         </h1>
         <ol class="breadcrumb">

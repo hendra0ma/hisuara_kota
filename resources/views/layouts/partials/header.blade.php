@@ -401,14 +401,6 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '
                         </div>
 
                         <div class="col-md-auto px-0">
-                            <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="pelacakan" data-command-target="pelacakan">
-                                <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Pelacakan">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                </span>
-                            </button>
-                        </div>
-
-                        <div class="col-md-auto px-0">
                             <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="dokumentasi" data-command-target="dokumentasi">
                                 <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Dokumentasi">
                                     <i class="fa-solid fa-book"></i>
@@ -449,6 +441,16 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '
                             <button class="w-100 mx-auto btn tugel-kolaps text-white sirantap" style="background-color: #656064; width: 40px; height: 36px;" data-target="sirantap" data-command-target="kecurangan">
                                 <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Sistem Laporan Data Pemilu">
                                     <i class="fa-solid fa-s"></i>
+                                </span>
+                            </button>
+                        </div>
+
+                        <div class="col-md-auto px-0">
+                            <button class="w-100 mx-auto btn tugel-kolaps text-white"
+                                style="background-color: #656064; width: 40px; height: 36px;" data-target="laporan"
+                                data-command-target="laporan">
+                                <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Laporan">
+                                    <i class="fa-solid fa-file-lines"></i>
                                 </span>
                             </button>
                         </div>
@@ -1185,10 +1187,13 @@ $jumlah_kelurahan = Village::where('id', 'like', '%' . $config->regencies_id . '
                         </span>
                     </button>
                 </div>
+
                 <div class="col-md-auto px-0">
-                    <button class="w-100 mx-auto btn tugel-kolaps text-white" style="background-color: #656064; width: 40px; height: 36px;" data-target="laporan" data-command-target="laporan">
-                        <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Laporan">
-                            <i class="fa-solid fa-file-lines"></i>
+                    <button class="w-100 mx-auto btn tugel-kolaps text-white"
+                        style="background-color: #656064; width: 40px; height: 36px;" data-target="pelacakan"
+                        data-command-target="pelacakan">
+                        <span class="dark-layout" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Pelacakan">
+                            <i class="fa-solid fa-location-dot"></i>
                         </span>
                     </button>
                 </div>

@@ -439,7 +439,7 @@
                                         <th class="text-white text-center align-middle" style="width:40% !important">Kota/Kabupaten</th>
                                         @foreach ($paslon as $item)
                                         <th class="text-white text-center align-middle"
-                                            style="background: {{ $item->color }}; position:relative">
+                                            style="background: {{ $item->color }}; position:relative; height: 65px">
                                             <img style="width: 60px; position: absolute; left: 0; bottom: 0"
                                                 src="{{ asset('') }}storage/{{ $item->picture }}" alt="">
                                             <div class="ms-7">
