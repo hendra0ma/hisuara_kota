@@ -97,7 +97,7 @@ $tps = Tps::count();
                                         @elseif (isset($url_first[3]) && $url_first[2] == "perhitungan_kelurahan") {{-- Perhitungan Kelurahan --}}
                                             <h3 class="mb-2 number-font">{{ $suaraCrowd['suaraCrowd'.$pas->id] }} suara</h3>
                                         @else {{--  Perhitungan Kota --}}
-                                            <h3 class="mb-2 number-font">{{ $kota->{"suaraKpu$i"} }} suara</h3>
+                                            <h3 class="mb-2 number-font">{{ $kotakpu->{"suaraKpu$i"} }} suara</h3>
                                             {{$kota}}
                                         @endif
                                         {{-- {{$url_first}} --}}

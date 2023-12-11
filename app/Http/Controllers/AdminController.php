@@ -1098,7 +1098,8 @@ class AdminController extends Controller
                 ->count();
         } else {
             // Perhitungan Kota
-            $data['kota'] = RegencyCrowdC1::where('id', $this->config->regencies_id)->first();
+            $data['kotakpu'] = RegencyCrowdC1::where('id', $this->config->regencies_id)->first();
+            return $data['kotakpu'];
             $data['paslon'] = Paslon::with([
                 'saksi_data' => function ($query) {
                     $query->where('saksi_data.regency_id', $this->config->regencies_id);
