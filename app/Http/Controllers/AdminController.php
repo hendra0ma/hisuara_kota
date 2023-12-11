@@ -1894,7 +1894,7 @@ class AdminController extends Controller
         $district = District::where('id', $user['districts'])->first();
         $village = Village::where('id', $user['villages'])->first();
         $tps = Tps::where('regency_id', $this->config->regencies_id)
-            ->where('tps_id', $user['tps_id'])
+            ->where('user_id', $user['id'])
             ->first();
         $absensi = Absensi::where('user_id', $user['id'])->first();
         $qrcode = Qrcode::where('tps_id', $user['tps_id'])->first();
