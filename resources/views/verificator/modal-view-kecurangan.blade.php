@@ -663,6 +663,8 @@
                                     <tr>
                                         <td><input type="checkbox" name="curang[]"
                                                 value=" {{ $item['kecurangan'] }}" data-id="{{ $item['id'] }}"
+                                                ata-jenis="{{ $item['jenis'] }}"
+                                  
                                                 onclick="ajaxGetSolution(this)">
                                         </td>
                                         <td><label>{{ $item['kecurangan'] }} </label></td>
@@ -745,62 +747,119 @@
 </div>
 
 <script>
-    setTimeout(function() {
-        let uniqueData = [
-            @foreach ($list_kecurangan as $item)
-                '{{ $item->solution }} | {{ $item->kode }}',
-            @endforeach
-        ];
+    // setTimeout(function() {
+    //     let uniqueData = [
+    //         @foreach ($list_kecurangan as $item)
+    //             '{{ $item->solution }} | {{ $item->kode }}',
+    //         @endforeach
+    //     ];
 
-        uniqueArray = uniqueData.filter(function(item, pos) {
-            return uniqueData.indexOf(item) == pos;
-        });
+    //     uniqueArray = uniqueData.filter(function(item, pos) {
+    //         return uniqueData.indexOf(item) == pos;
+    //     });
 
-        uniqueArray.forEach(function(item, index) {
-            $('#appendDataSolution').append(`
-                    <li class="list-group-item">
-                        ${item}
-                    </li>
-                `)
-        });
-    }, 200)
+    //     uniqueArray.forEach(function(item, index) {
+    //         $('#appendDataSolution').append(`
+    //                 <li class="list-group-item">
+    //                     ${item}
+    //                 </li>
+    //             `)
+    //     });
+    // }, 200)
 </script>
 
 <script>
-    setTimeout(function() {
-        let uniqueData = [
-            @foreach ($list_kecurangan as $item)
-                '{{ $item->solution }}',
-            @endforeach
-        ];
-        let uniqueDataId = [
-            @foreach ($list_kecurangan as $item)
-                '{{ $item->id_list }}',
-            @endforeach
-        ];
-        let dataMerge = [];
-        uniqueArrayText = uniqueData.filter(function(item, pos) {
-            return uniqueData.indexOf(item) == pos;
-        });
-        uniqueArrayId = uniqueDataId.filter(function(item, pos) {
-            return uniqueDataId.indexOf(item) == pos;
-        });
-        for (let i = 0; i < uniqueDataId.length; i++) {
-            dataMerge.push([uniqueArrayId[i], uniqueArrayText[i]]);
-        }
-        dataMerge.forEach(function(item, index) {
-            if (item[1] == undefined) {
-                return;
-            }
-            $('#container-rekomendasi').append(`
-            <tr id="solution${item[0]}">
-                <td>
-                </td>
-                <td>
-                    ${item[1]}
-                </td>
-            </tr>
-            `)
-        });
-    }, 300)
+    // setTimeout(function() {
+    //     let uniqueData = [
+    //         @foreach ($list_kecurangan as $item)
+    //             '{{ $item->solution }}',
+    //         @endforeach
+    //     ];
+    //     let uniqueDataId = [
+    //         @foreach ($list_kecurangan as $item)
+    //             '{{ $item->id_list }}',
+    //         @endforeach
+    //     ];
+    //     let dataMerge = [];
+    //     uniqueArrayText = uniqueData.filter(function(item, pos) {
+    //         return uniqueData.indexOf(item) == pos;
+    //     });
+    //     uniqueArrayId = uniqueDataId.filter(function(item, pos) {
+    //         return uniqueDataId.indexOf(item) == pos;
+    //     });
+    //     for (let i = 0; i < uniqueDataId.length; i++) {
+    //         dataMerge.push([uniqueArrayId[i], uniqueArrayText[i]]);
+    //     }
+    //     dataMerge.forEach(function(item, index) {
+    //         if (item[1] == undefined) {
+    //             return;
+    //         }
+    //         $('#container-rekomendasi').append(`
+    //         <tr id="solution${item[0]}">
+    //             <td>
+    //             </td>
+    //             <td>
+    //                 ${item[1]}
+    //             </td>
+    //         </tr>
+    //         `)
+    //     });
+    // }, 300)Z
 </script>
+<script>
+        let checkBox = $('input[type=checkbox]');
+        checkBox.on('click', function () {
+            for (let i = 0; i < checkBox.length; i++) {
+                const element = checkBox[i];
+                if (element == this) {
+                    continue;
+                } else {
+                    // (this.checked) ? $(element).attr('disabled', true): $(element).attr('disabled', false)
+                }
+            }
+        });
+        let ajaxGetSolution = function (ini) {
+            let id_list = $(ini).data('id')
+            let jenis_list = $(ini).data('jenis')
+
+            if (ini.checked == true) {
+                $.ajax({
+                    url: "{{url('')}}/getsolution",
+                    data: {
+                        id_list
+                    },
+                    type: 'get',
+                    success: function (res) {
+                        let cekSolution = $('td.cek-solution');
+                        for(solution of cekSolution){
+                            if(solution.innerText.trim() == res.solution.trim()){
+                                return;
+                            }
+                        }
+                                
+                        
+                        $('tbody#container-rekomendasi').append(`
+                        <tr class="bg-danger text-light solution${id_list}">
+                            <td>
+                          
+                            </td>
+                            <td class="cek-solution">
+                               <i class="fa-solid fa-arrow-right"></i>   ${res.solution}
+                            </td>
+                        </tr>
+                    `)
+                    }
+                });
+            } else {
+                let checkboxLain = $(`input[data-jenis="${jenis_list}"]:checked`);
+                if(checkboxLain.length > 0){
+
+                }else{
+                $(`tr.solution${id_list}`).remove();
+                }
+
+                
+            }
+        }
+
+    </script>
