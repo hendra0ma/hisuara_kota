@@ -509,6 +509,7 @@ class VerificatorController extends Controller
             $saksi_data->paslon_id = $rd->paslon_id;
             $saksi_data->user_id = $rd->crowd_c1_id;
             $saksi_data->saksi_id = $saksiId;
+            $saksi->province_id = substr($crowd_c1->regency_id,0,2);
             $saksi_data->save();
         }
         $regency_voice = Regency::where('id', $this->config->regencies_id)->first();
