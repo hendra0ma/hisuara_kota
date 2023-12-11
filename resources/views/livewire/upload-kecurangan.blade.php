@@ -422,20 +422,19 @@
                 var audioURL = URL.createObjectURL(blob);
                 $('#audioPlayer').attr('src', audioURL);
                 $('#audioPlayer').css('display', 'block');
+                $('#audioFile').remove()
+                 // Buat elemen input file baru
+                var fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.accept = 'audio/*'; // Setujui file audio
+                fileInput.name="audioFile";
 
-                var formData = new FormData();
-                formData.append('audioFile', blob, 'recordedAudio.wav');
-               // Assuming 'audioFile' is the id of your file input
-                    var fileInput = document.getElementById('audioFile');
-                    
-                   // Create a new FileList containing the blob
-    var fileList = new FileList([new File([blob], 'recordedAudio.wav')]);
+                // Atur nilai input file dengan blob audio
+                fileInput.files = [new File([blob], 'recordedAudio.wav')];
 
-// Set the new FileList as the value of the file input
-Object.defineProperty(fileInput, 'files', {
-    value: fileList,
-    writable: true
-});
+                // Tempelkan input file ke dokumen (pastikan elemen ini ada dalam formulir jika Anda mengirim formulir)
+                
+                $('form#form-kecurangan').append(fileInput);
 
             });
         });
