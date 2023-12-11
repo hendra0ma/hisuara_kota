@@ -224,7 +224,7 @@ $dpt = District::where('regency_id', $config->regencies_id)->sum('dpt');
             </div>
             <div class="card-body text-center">
                 <a href="#" data-toggle="modal" data-target="#imgBig">
-                    <img style="height: 594.92px" src="{{asset('')}}storage/c1_plano/{{$crowd_c1->crowd_c1}}" alt="">
+                    <img style="height: 594.92px" src="{{asset('')}}storage/{{$crowd_c1->crowd_c1}}" alt="">
                 </a>
             </div>
         </div>

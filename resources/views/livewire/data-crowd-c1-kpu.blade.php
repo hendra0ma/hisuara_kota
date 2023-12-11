@@ -11,7 +11,7 @@
     </style>
     @foreach($all_c1 as $c1)
 
-    <img class="dalem-flex mb-2" src="{{asset('')}}storage/c1_plano/{{$c1->crowd_c1}}" >
+    <img class="dalem-flex mb-2" src="{{asset('')}}storage/{{$c1->crowd_c1}}" >
 
 
     @endforeach

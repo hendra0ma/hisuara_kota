@@ -311,7 +311,7 @@ $tps = Tps::count();
                             <img width="100%" src="{{asset('')}}storage/{{$saksi[0]->c1_images}}" data-magnify-speed="200"
                                 alt="" data-magnify-magnifiedwidth="2500" data-magnify-magnifiedheight="2500"
                                 class="img-fluid zoom"
-                                data-magnify-src="{{asset('')}}storage/c1_plano/{{$saksi[0]->c1_images}}">
+                                data-magnify-src="{{asset('')}}storage/{{$saksi[0]->c1_images}}">
                         </center>
                     </div>
                 </div>
