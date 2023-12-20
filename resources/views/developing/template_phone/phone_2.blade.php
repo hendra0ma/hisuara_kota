@@ -21,6 +21,9 @@
     <style>
         @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
+        body {
+            background-color: #f2f2f2
+        }
 
         /* .phone {
             border-radius: 15px;
@@ -80,31 +83,27 @@
 
         .mobile-phone {
             margin: auto;
-            margin-top: 120px;
-            margin-bottom: 120px;
-            padding: 10px 10px 30px;
-            width: 375px;
-            height: 750px;
-            box-shadow: 0 0 20px #000000;
+            /* margin-top: 120px; */
+            /* margin-bottom: 120px; */
+            /* padding: 10px 10px 30px; */
+            width: 500px;
+            height: 100vh;
+            /* box-shadow: 0 0 20px #000000; */
             border-radius: 30px;
             position: relative;
         }
 
         .screen {
-            padding-top: 20px;
             width: 100%;
             height: 100%;
-            background: #f2f2f2;
-            border-radius: 30px;
+            /* background: #f2f2f2; */
+            background: #fff;
+            /* border-radius: 30px; */
             overflow-y: auto;
             padding-bottom: 60px;
         }
 
-        .screen::-webkit-scrollbar {
-            display: none
-        }
-
-        .brove {
+        /* .brove {
             width: 150px;
             height: 20px;
             background: white;
@@ -122,12 +121,12 @@
             margin: auto;
             margin-top: 5px;
             border-radius: 20px;
-        }
+        } */
 
         .nav-on-desktop {
             position: absolute;
             /* width: 100%; */
-            bottom: 30px;
+            /* bottom: 30px; */
         }
 
         /* Default style: hide the content for desktop */
@@ -143,6 +142,10 @@
 
             .content-for-desktop {
                 display: none;
+            }
+
+            body {
+                background-color: #fff
             }
         }
     </style>
