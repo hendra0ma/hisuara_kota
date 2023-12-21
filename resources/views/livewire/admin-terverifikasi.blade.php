@@ -46,7 +46,7 @@
         <div class="col-xl-3">
             <div class="card">
                 <div class="card-header text-white border-0" style="background-color: #404042">
-                    <span class="mx-auto py-6 fs-6">TPS <?php if ($tps == null) { ?> <?php } else { ?> {{$tps['number']}}<?php } ?> / Kelurahan </span>
+                    <span class="mx-auto py-6 fs-6">TPS <?php if ($tps == null) { ?> <?php } else { ?> {{$tps['number']}}<?php } ?> / Kelurahan {{ $villages['name'] }}</span>
                 </div>
                 {{-- <div class="ribbon-baru">
                     @if ($ls['is_active'] == 2)
