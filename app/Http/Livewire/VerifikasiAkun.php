@@ -17,7 +17,8 @@ class VerifikasiAkun extends Component
     protected $queryString = ['search'];
     private $config;
     private $configs;
-      public function __construct()
+
+    public function __construct()
     {
         $currentDomain = request()->getHttpHost();
         if (isset(parse_url($currentDomain)['port'])) {
@@ -31,6 +32,7 @@ class VerifikasiAkun extends Component
         $this->config = new Configs();
         $this->config->regencies_id = (string) $regency_id->regency_id;      
     }
+    
     public function render()
     {
         $data['admin_data'] = User::where('role_id', '!=', 8)->where('is_active', '=', '2') ->where("users.regency_id",  $this->config->regencies_id)->paginate(16);
