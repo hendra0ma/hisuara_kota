@@ -211,9 +211,13 @@
                         <div class="row no-gutters mt-3">
                             <?php $i = 1; ?>
                             @foreach ($paslon as $item)
-                            <div class="col-lg-12 mb-2">
-                                Suara 0{{$i++}} - {{ $item['candidate']}} - {{ $item['deputy_candidate'] }}
-                                <input type="number" class="form-control" id="suara[]" name="suara[]" required placeholder="Suara Paslon">
+                            <div class="row mb-2">
+                                <div class="col-auto d-flex pe-0">
+                                    <span class="my-auto" style="font-weight: 500; width: 63px">Suara 0{{$i++}}</span>
+                                </div>
+                                <div class="col-lg">
+                                    <input type="number" class="form-control" id="suara[]" name="suara[]" required placeholder="{{ $item['candidate'] }} - {{ $item['deputy_candidate'] }}">
+                                </div>
                             </div>
                             @endforeach
                             <h5 class="mt-3 header-title">Foto C1</h5>
