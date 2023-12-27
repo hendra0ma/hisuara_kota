@@ -939,7 +939,7 @@ class AdminController extends Controller
             $data['suaraCrowd'] = [];
             $data['total_incoming_vote'] = 0;
             foreach ($data['paslon'] as $pas) {
-                $data['suaraCrowd']["suaraCrowd$pas->id"] = DataCrowdC1::where('district_id', $id)->where('paslon_id', $pas->id)->sum('voice');
+                $data['suaraCrowd']["suaraCrowd$pas->id"] = DataCrowdC1::where('district_id', decrypt($id))->where('paslon_id', $pas->id)->sum('voice');
                 $data['total_incoming_vote'] += $data['suaraCrowd']["suaraCrowd$pas->id"];
             }
             $data['paslon_terverifikasi'] = Paslon::with([
@@ -1007,7 +1007,7 @@ class AdminController extends Controller
             $data['suaraCrowd'] = [];
             $data['total_incoming_vote'] = 0;
             foreach ($data['paslon'] as $pas) {
-                $data['suaraCrowd']["suaraCrowd$pas->id"] = DataCrowdC1::where('village_id', $id)->where('paslon_id', $pas->id)->sum('voice');
+                $data['suaraCrowd']["suaraCrowd$pas->id"] = DataCrowdC1::where('village_id', decrypt($id))->where('paslon_id', $pas->id)->sum('voice');
                 $data['total_incoming_vote'] += $data['suaraCrowd']["suaraCrowd$pas->id"];
             }
             $data['paslon_terverifikasi'] = Paslon::with([

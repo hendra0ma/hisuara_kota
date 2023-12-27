@@ -53,6 +53,9 @@
     <style>
         @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
     
+        body {
+            background-color: #f2f2f2
+        }
     
         /* .phone {
                 border-radius: 15px;
@@ -77,31 +80,31 @@
 
         .mobile-phone {
             margin: auto;
-            margin-top: 120px;
-            margin-bottom: 120px;
-            padding: 10px 10px 30px;
-            width: 375px;
-            height: 750px;
-            box-shadow: 0 0 20px #000000;
+            /* margin-top: 120px; */
+            /* margin-bottom: 120px; */
+            /* padding: 10px 10px 30px; */
+            width: 500px;
+            height: 100vh;
+            /* box-shadow: 0 0 20px #000000; */
             border-radius: 30px;
             position: relative;
-            background: white
         }
     
         .screen {
-            padding-top: 20px;
             width: 100%;
             height: 100%;
-            background: #f2f2f2;
-            border-radius: 30px;
+            /* background: #f2f2f2; */
+            background: #fff;
+            /* border-radius: 30px; */
             overflow-y: auto;
-            /* padding-bottom: 60px; */
+            padding-bottom: 60px;
         }
+
     
         .screen::-webkit-scrollbar {
             display: none
         }
-    
+/*     
         .brove {
             width: 150px;
             height: 20px;
@@ -120,12 +123,12 @@
             margin: auto;
             margin-top: 5px;
             border-radius: 20px;
-        }
+        } */
     
         .nav-on-desktop {
             position: absolute;
             /* width: 100%; */
-            bottom: 30px;
+            /* bottom: 30px; */
         }
     
         /* Default style: hide the content for desktop */
@@ -136,12 +139,15 @@
         /* Media query for mobile devices */
         @media screen and (max-width: 767px) {
             .content-for-mobile {
-                display: block;
-                /* Show the content on mobile devices */
+                display: block; /* Show the content on mobile devices */
             }
-    
+
             .content-for-desktop {
                 display: none;
+            }
+
+            body {
+                background-color: #fff
             }
         }
     </style>
@@ -159,7 +165,7 @@
     <!-- PAGE -->
     <div class='mobile-phone content-for-desktop' style="position: relative;">
         <div class='brove' style="z-index: 100"><span class='speaker'></span></div>
-        <div class='screen pt-5 px-0'>
+        <div class='screen px-0'>
             <div class="card mb-0">
                 <div class="card-header text-center text-white bg-primary">
                     <h4 class="mb-0">Upload C1 Relawan</h4>
@@ -205,9 +211,13 @@
                         <div class="row no-gutters mt-3">
                             <?php $i = 1; ?>
                             @foreach ($paslon as $item)
-                            <div class="col-lg-12 mb-2">
-                                Suara 0{{$i++}} - {{ $item['candidate']}} - {{ $item['deputy_candidate'] }}
-                                <input type="number" class="form-control" id="suara[]" name="suara[]" required placeholder="Suara Paslon">
+                            <div class="row mb-2">
+                                <div class="col-auto d-flex pe-0">
+                                    <span class="my-auto" style="font-weight: 500; width: 63px">Suara 0{{$i++}}</span>
+                                </div>
+                                <div class="col-lg">
+                                    <input type="number" class="form-control" id="suara[]" name="suara[]" required placeholder="{{ $item['candidate'] }} - {{ $item['deputy_candidate'] }}">
+                                </div>
                             </div>
                             @endforeach
                             <h5 class="mt-3 header-title">Foto C1</h5>
