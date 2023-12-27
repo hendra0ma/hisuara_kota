@@ -384,9 +384,9 @@ class VerificatorController extends Controller
         $voice2 =  $regency_voice->suara2 - $saksi_data[1]->voice + $reqVoice2;
         $voice3 =  $regency_voice->suara3 - $saksi_data[2]->voice + $reqVoice3;
 
-        $voicev1 =  $regency_voice->suarav1 - $saksi_data[0]->voice + $reqVoice1;
-        $voicev2 =  $regency_voice->suarav2 - $saksi_data[1]->voice + $reqVoice2;
-        $voicev3 =  $regency_voice->suarav3 - $saksi_data[2]->voice + $reqVoice3;
+        $voicev1 =  $regency_voice->suarav1  + $reqVoice1;
+        $voicev2 =  $regency_voice->suarav2  + $reqVoice2;
+        $voicev3 =  $regency_voice->suarav3 + $reqVoice3;
 
         Regency::where('id',$this->config->regencies_id)->update([
             'suara1'=>$voice1,
@@ -397,12 +397,14 @@ class VerificatorController extends Controller
             'suarav2'=>$voicev2,
             'suarav3'=>$voicev3,
         ]);
-
+        $d = 1;
         foreach ($saksi_data as $i => $sd) {
             SaksiData::where('id', $sd->id)->update([
-                "voice" => (int)$req->suara[$i],
+                "voice" => (int)${"reqVoice".$d},
             ]);
+            $d++;
         }
+        $d= 0;
 
         Saksi::where('id', $id)->update([
             "koreksi" => 1,
