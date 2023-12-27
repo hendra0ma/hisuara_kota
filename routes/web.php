@@ -497,6 +497,8 @@ foreach ($kotas as $kota) {
                         return view('security.dev_pass');
                     });
 
+                    Route::post('print_rekapitulasi/{id}', 'printRekapitulasi')->name('printRekapitulasi');
+
                     Route::get('analisa_dpt_kpu', 'analisa_dpt_kpu')->name('analisa_dpt_kpu');
                     Route::get('analisa_dpt_kpu/print', 'analisa_dpt_kpu_print');
                     Route::get('get_qrsidang', 'get_qrsidang');

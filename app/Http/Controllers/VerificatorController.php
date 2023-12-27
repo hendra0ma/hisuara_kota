@@ -383,10 +383,19 @@ class VerificatorController extends Controller
         $voice1 =  $regency_voice->suara1 - $saksi_data[0]->voice + $reqVoice1;
         $voice2 =  $regency_voice->suara2 - $saksi_data[1]->voice + $reqVoice2;
         $voice3 =  $regency_voice->suara3 - $saksi_data[2]->voice + $reqVoice3;
+
+        $voicev1 =  $regency_voice->suarav1 - $saksi_data[0]->voice + $reqVoice1;
+        $voicev2 =  $regency_voice->suarav2 - $saksi_data[1]->voice + $reqVoice2;
+        $voicev3 =  $regency_voice->suarav3 - $saksi_data[2]->voice + $reqVoice3;
+
         Regency::where('id',$this->config->regencies_id)->update([
             'suara1'=>$voice1,
             'suara2'=>$voice2,
             'suara3'=>$voice3,
+
+            'suarav1'=>$voicev1,
+            'suarav2'=>$voicev2,
+            'suarav3'=>$voicev3,
         ]);
 
         foreach ($saksi_data as $i => $sd) {
@@ -397,6 +406,8 @@ class VerificatorController extends Controller
 
         Saksi::where('id', $id)->update([
             "koreksi" => 1,
+            "verification" => 1,
+
             "kecurangan_id_users" =>  Auth::user()->id,
         ]);
      

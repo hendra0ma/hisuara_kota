@@ -230,83 +230,96 @@ $props = Province::where('id',$kota['province_id'])->first();
                     </style>
 
                     <div class="col-xxl-6" style="height: 640px; overflow-y: scroll; overflow-x: hidden">
-                        <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Hasil Perhitungan Suara</div>
-                        <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Pemilihan Presiden dan Wakil
-                            Presiden</div>
-                        <div class="text-center title-atas-table fs-5 fw-bold">{{ $kota['name'] }}</div>
-                        <div class="row">
-                            <div class="col-auto fw-bold text-center fs-4 d-flex">
-                                <div class="mt-auto">
-                                    Suara Terbanyak
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="row mx-auto">
-                                    @foreach ($urutan as $urutPaslon)
-                                    <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
-                                    <div class="col py-2 judul text-center text-white custom-urutan" style="background: {{ $pasangan->color }}">
-                                        <div class="text">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} :
-                                            {{$urutPaslon->total}}</b></div>
-                                    </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                        <table class="table table-bordered table-hover mt-3 display">
-                            <thead style="background-color: #45aaf2;">
-                                <tr>
-                                    <th class="align-middle text-white text-center align-middle" rowspan="2">TPS</th>
-                                    @foreach ($paslon_candidate as $item)
-                                    <th class="text-white text-center align-middle" style="background: {{$item->color}}; position:relative">
-                                        <img style="width: 60px; position: absolute; left: 0; bottom: 0" src="{{asset('')}}storage/{{$item->picture}}"
-                                            alt="">
-                                        <div class="ms-7">
-                                            {{ $item['candidate']}} - <br>
-                                            {{ $item['deputy_candidate']}}
+                            <div id="urutan-suara-terbanyak">
+                                <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Hasil Perhitungan Suara</div>
+                                <div class="text-center title-atas-table fs-5 mb-0 fw-bold">Pemilihan Presiden dan Wakil
+                                    Presiden</div>
+                                <div class="text-center title-atas-table fs-5 fw-bold">{{ $kota['name'] }}</div>
+                                <div class="row">
+                                    <div class="col-auto fw-bold text-center fs-4 d-flex">
+                                        <div class="mt-auto">
+                                            Suara Terbanyak
                                         </div>
-                                    </th>
-                                    @endforeach
-                        
-                                </tr>
-                            </thead>
-                        
-                            <tbody>
-                                <?php $totalSaksiDataa = [];  ?>
-                                @foreach ($paslon as $cd)
-                                <?php $totalSaksiDataa[$cd['id']] = 0; ?>
-                                @endforeach
-                                @foreach ($tps_kel as $item)
-                        
-                        
-                                <tr data-id="{{$item['id']}}" data-bs-toggle="modal" class="modal-id" data-bs-target="#modal-id">
-                                    <td> <a href="{{url('')}}/administrator/rekap_tps/{{Crypt::encrypt($item->id)}}"
-                                            class="modal-id" style="font-size: 0.8em;" id="Cek">TPS
-                                            {{$item['number']}}</a>
-                                    @foreach ($paslon_candidate as $cd)
-                        
-                                    <?php
-                                        $tpsass = \App\Models\Tps::where('number', (string)$item['number'])->where('villages_id', (string)$id)->first(); ?>
-                                    <?php $saksi_data = \App\Models\SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('tps_id', $tpsass->id)->sum('voice'); ?>
-                                    <td class="text-end">{{$saksi_data}}</td>
-                                    <?php     
-                                        $totalSaksiDataa[$cd['id']] += $saksi_data; ?>
-                                    @endforeach
-                                </tr>
-                                @endforeach
-                                <tr style="background-color: #cccccc">
-                                    <td class="align-middle">
-                                        <div class="fw-bold">Total</div>
-                                    </td>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row mx-auto">
+                                            @foreach ($urutan as $urutPaslon)
+                                            <?php $pasangan = App\Models\Paslon::where('id', $urutPaslon->paslon_id)->first(); ?>
+                                            <div class="col py-2 judul text-center text-white custom-urutan" style="background: {{ $pasangan->color }}">
+                                                <div class="text">{{ $pasangan->candidate }} || {{ $pasangan->deputy_candidate }} :
+                                                    {{$urutPaslon->total}}</b></div>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                             </div>
+
+                            </div>
+                            <div id="table-suara-tps">
+                                <table class="table table-bordered table-hover mt-3 display">
+                                    <thead style="background-color: #45aaf2;">
+                                        <tr>
+                                            <th class="align-middle text-white text-center align-middle" rowspan="2">TPS</th>
+                                            @foreach ($paslon_candidate as $item)
+                                            <th class="text-white text-center align-middle" style="background: {{$item->color}}; position:relative">
+                                                <img style="width: 60px; position: absolute; left: 0; bottom: 0" src="{{asset('')}}storage/{{$item->picture}}"
+                                                    alt="">
+                                                <div class="ms-7">
+                                                    {{ $item['candidate']}} - <br>
+                                                    {{ $item['deputy_candidate']}}
+                                                </div>
+                                            </th>
+                                            @endforeach
                                 
-                                    @foreach ($paslon as $cd)
-                                    <td class="align-middle text-end">{{$totalSaksiDataa[$cd['id']]}}</td>
-                                    @endforeach
-                                </tr>
-                            </tbody>
-                        </table>
-                        <button class="btn btn-success w-100">
-                            Unduh
-                        </button>
+                                        </tr>
+                                    </thead>
+                                
+                                    <tbody>
+                                        <?php $totalSaksiDataa = [];  ?>
+                                        @foreach ($paslon as $cd)
+                                        <?php $totalSaksiDataa[$cd['id']] = 0; ?>
+                                        @endforeach
+                                        @foreach ($tps_kel as $item)
+                                
+                                
+                                        <tr data-id="{{$item['id']}}" data-bs-toggle="modal" class="modal-id" data-bs-target="#modal-id">
+                                            <td> <a href="{{url('')}}/administrator/rekap_tps/{{Crypt::encrypt($item->id)}}"
+                                                    class="modal-id" style="font-size: 0.8em;" id="Cek">TPS
+                                                    {{$item['number']}}</a>
+                                            @foreach ($paslon_candidate as $cd)
+                                
+                                            <?php
+                                                $tpsass = \App\Models\Tps::where('number', (string)$item['number'])->where('villages_id', (string)$id)->first(); ?>
+                                            <?php $saksi_data = \App\Models\SaksiData::join('saksi', 'saksi.id', '=', 'saksi_data.saksi_id')->where('paslon_id', $cd['id'])->where('tps_id', $tpsass->id)->sum('voice'); ?>
+                                            <td class="text-end">{{$saksi_data}}</td>
+                                            <?php     
+                                                $totalSaksiDataa[$cd['id']] += $saksi_data; ?>
+                                            @endforeach
+                                        </tr>
+                                        @endforeach
+                                        <tr style="background-color: #cccccc">
+                                            <td class="align-middle">
+                                                <div class="fw-bold">Total</div>
+                                            </td>
+                                        
+                                            @foreach ($paslon as $cd)
+                                            <td class="align-middle text-end">{{$totalSaksiDataa[$cd['id']]}}</td>
+                                            @endforeach
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <form action="{{route('superadmin.printRekapitulasi',request()->segment(3))}}" method="post">
+                            @csrf
+                        
+                            @foreach ($paslon as $cd)
+                            <input type="hidden"name="totalSuara[]"value="{{$totalSaksiDataa[$cd['id']]}}">
+                            @endforeach
+
+                            <button class="btn btn-success w-100">
+                                Unduh
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -316,8 +329,9 @@ $props = Province::where('id',$kota['province_id'])->first();
 <script>
     $(document).ready(function() {
         var specificUrl = "{{ url('') }}/administrator/rekapitulasi"; // Specific URL to match
-    
         $('.glowy-menu[href="' + specificUrl + '"]').addClass('active');
+      
     });
+    
 </script>
 @endsection

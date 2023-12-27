@@ -218,7 +218,7 @@ $kota = Regency::where('id', $config->regencies_id)->first();
                                 <button class="btn btn-success" type="submit">Save</button>
                             </td>
                         </form>
-
+    
                     </tr>
                     @endforeach
                 </table>

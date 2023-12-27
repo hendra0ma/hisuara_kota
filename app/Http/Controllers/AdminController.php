@@ -1375,7 +1375,7 @@ class AdminController extends Controller
         foreach ($request->suara as $suara) {
             $jumlah += $suara;
         }
-        if ((int) $jumlah > 300) {
+        if ((int) $jumlah > 308) {
             $error = true;
         }
         if ($error) {
@@ -5089,6 +5089,24 @@ class AdminController extends Controller
             ->select('users.*', 'tracking.*')
             ->get();
         return view('administrator.lacak.lacak_crowd_c1', $data);
+    }
+    function printRekapitulasi(Request $request,$id) {
+        $data['request'] = $request;
+        $paslon_tertinggi = DB::select(DB::raw('SELECT paslon_id, SUM(voice) as total FROM saksi_data WHERE village_id = :village_id GROUP BY paslon_id ORDER BY total DESC'), ['village_id' => (string) decrypt($id)]);
+
+        if(isset($paslon_tertinggi['0'])){
+            $data['paslon_tertinggi'] = Paslon::where('id', $paslon_tertinggi['0']->paslon_id)->first();
+        }else{
+            $data['paslon_tertinggi'] = Paslon::first();
+        }
+        $data['urutan'] = $paslon_tertinggi;
+
+        $id = decrypt($id);
+        $data['id'] = $id;
+        $data['tps_kel'] = TPS::where('villages_id',$id)->get();
+        $data['paslon_candidate'] = Paslon::get();
+        $data['paslon'] = $data['paslon_candidate'];
+        return view('administrator.rekapitulasi-perhitungan.printRekapitulasi',$data);
     }
 
     /**
