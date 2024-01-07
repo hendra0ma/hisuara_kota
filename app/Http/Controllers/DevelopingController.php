@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\QuickSaksi;
+use App\Models\QuickSaksiData;
 use Illuminate\Http\Request;
 use App\Models\Tps;
 use App\Models\Paslon;
@@ -214,6 +216,91 @@ class DevelopingController extends Controller
             'suara3' => $suara3,
         ]);
         return redirect()->route('dashboard.saksi2');
+    }
+
+    public function action_saksi_quick(Request $request)
+    {
+
+
+        $this->validate($request, [
+            'suara.*' => "required|numeric",
+
+        ]);
+        $district = District::where('id', Auth::user()->districts)->first();
+        $regency = Regency::where("id", $district->regency_id)->first();
+
+        $config =  Config::find(1);
+
+
+        $villagee =   Auth::user()->villages;
+        $count = Paslon::count();
+
+        $error = false;
+        $jumlah = 0;
+        foreach ($request->suara as $suara) {
+            $jumlah += $suara;
+        }
+        if ((int)$jumlah > 308) {
+            $error = true;
+        }
+        if ($error) {
+            return redirect()->back()->with('error', 'data tidak boleh lebih dari 300');
+        }
+
+        $tps = Tps::where('id', Auth::user()->tps_id)->first();
+
+        $userrss = User::where('email', $request['email'])->first();
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        if ($request->file('c1_plano')) {
+            $image = $request->file('c1_plano');
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $randomString = substr(str_shuffle($characters), 0, 50); // Menghasilkan string acak sepanjang 10 karakter
+            $c1_plano = time()  . $randomString  . "." . $image->getClientOriginalExtension();
+            $image->move(public_path('storage/c1_plano'), $c1_plano);
+        } else {
+            return redirect()->back()->with("error", 'gagal mengupload data C1 Plano');
+        }
+
+        $saksi = new QuickSaksi;
+        $saksi->c1_images = $c1_plano;
+        $saksi->verification = "";
+        $saksi->audit = "";
+        $saksi->district_id = Auth::user()->districts;
+        $saksi->batalkan = "0";
+        $saksi->village_id =  $villagee;
+        $saksi->overlimit = 0;
+        $saksi->tps_id = Auth::user()->tps_id;
+        $saksi->regency_id = $regency->id;
+        $saksi->province_id = Auth::user()->province_id;
+        $saksi->save();
+        $ide = $saksi->id;
+        $paslon = Paslon::get();
+        // for ($i = 0; $i < $count; $i++) {
+        $i = 0;
+        $updtSuara = [];
+        foreach ($paslon as $item) {
+            QuickSaksiData::create([
+                'user_id' =>  $userrss['id'],
+                'paslon_id' =>  $item->id,
+                'district_id' => Auth::user()->districts,
+                'village_id' =>  $villagee,
+                'regency_id' => $regency->id,
+                'province_id' => Auth::user()->province_id,
+                'voice' =>  (int)$request->suara[$i],
+                'saksi_id' => $ide,
+            ]);
+            $updtSuara[] = (int)$request->suara[$i];
+            $i++;
+        }
+        $suara1 = $regency->suaraq1 + $updtSuara[0];
+        $suara2 = $regency->suaraq2 + $updtSuara[1];
+        $suara3 = $regency->suaraq3 + $updtSuara[2];
+        Regency::where('id', $regency->id)->update([
+            'suaraq1' => $suara1,
+            'suaraq2' => $suara2,
+            'suaraq3' => $suara3,
+        ]);
+        return redirect()->back();
     }
 
 

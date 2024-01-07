@@ -46,12 +46,9 @@
 
 
                     
-                    {{-- <h1 class="text-center">
-                        <img src="{{asset('')}}assets/icons/hisuara_new.png" class="hadow-4 mb-3 mt-3 rounded-2" style="width: 175px;"
-                            alt="Avatar" />
-                    </h1> --}}
-                    {{-- <h5> Halo, {{Auth::user()->name}}</h5> --}}
-                    <form action="dev/action_saksi" method="post" enctype="multipart/form-data">
+              
+                
+                    <form action="dev/action_saksienum" method="post" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="tps" value="{{$dev['number']}}" id="">
                         <input type="hidden" name="email" value="{{$dev['email']}}" id="">

@@ -210,6 +210,8 @@ class ExcelController extends Controller
             $namaKabupatenKota = $worksheetForGetLocation[1][1];
             $namaKecamatan = $worksheetForGetLocation[2][1];
             $namaKelurahan = $worksheetForGetLocation[3][1];
+            $jumlahTps = $worksheetForGetLocation[4][1];
+                
             $village = Regency::where('regencies.name', $namaKabupatenKota)
                 ->join('districts', 'districts.regency_id', '=', 'regencies.id')
                 ->where('districts.name', $namaKecamatan)
@@ -222,8 +224,8 @@ class ExcelController extends Controller
                 ->first();
             $filteredArray = $this->filterArrayTps($worksheet);
             $result = $this->countArrayValuesTps($filteredArray);
-            
-            foreach ($result as $namaTps => $jumlahTps) {
+
+            foreach ($result as $namaTps => $dptPerTps) {
                 $nomorTps = (string) intval(substr($namaTps, 3));
                 $villageId = (string) $village->id;
                 $provinceId = substr($villageId, 0, 2);
@@ -232,11 +234,10 @@ class ExcelController extends Controller
                 $isTpsExist = Tps::where('villages_id', $villageId)
                     ->where('number', $nomorTps)
                     ->exists();
-
                 if ($isTpsExist) {
                     Tps::where('villages_id', $villageId)
                         ->where('number', $nomorTps)->update([
-                            'dpt' => $jumlahTps
+                            'dpt' => $dptPerTps
                         ]);
                     array_push($hasilUpload, "$villageId dengan tps nomor $nomorTps berhasil di update.");
                 } else {
@@ -247,7 +248,7 @@ class ExcelController extends Controller
                         'district_id' => $districtId,
                         'villages_id' => $villageId,
                         'number' => $nomorTps,
-                        'dpt' => $jumlahTps
+                        'dpt' => $dptPerTps
                     ]);
                     array_push($hasilUpload, "$villageId dengan tps nomor $nomorTps berhasil di insert.");
                 }

@@ -791,6 +791,7 @@ foreach ($kotas as $kota) {
             Route::get('c1Crowd/index', 'c1Crowd')->middleware('auth')->name('crowd_c1');
             Route::post('c1Crowd/upload', 'uploadC1Crowd')->middleware('auth');
             Route::post('dev/action_saksi', 'action_saksi')->middleware('auth');
+            Route::post('dev/action_saksienum', 'action_saksi_quick')->middleware('auth');
             Route::get('dev/tps_update', 'tps_update')->middleware('auth');
             Route::get('dev/saksi_update', 'saksi_update')->middleware('auth');
             Route::get('dev/tps_user_update', 'tps_user_update')->middleware('auth');
@@ -1100,9 +1101,6 @@ Route::get("import-excel-dpt-gen", function () {
     return view('excel.dpt-gen');
 });
 
-
-
-
 Route::post("import-excel", [ExcelController::class, "importExcel"])->name("import-excel");
 // Route::post("import-dpt-excel",[ExcelController::class,"importDptExcel"])->name("import-dpt-excel");
 // Route::post("import-dpt-excel-gen", [ExcelController::class, "importDptExcelGen"])->name("import-dpt-excel-gen");
@@ -1121,6 +1119,7 @@ Route::get('dpt/kecamatan/{id_kota}', function ($id) {
         ]);
     }
 });
+
 Route::get('dpt/kota', function () {
     // untuk setup dpt kota dan provinsi
     $prv = Province::get();

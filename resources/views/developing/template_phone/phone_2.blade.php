@@ -167,7 +167,7 @@
                 <div alt="work" class="content {{Auth::user()->absen == 'hadir'?'show':''}}">
 
                     <?php
-                        $cekSaksi = App\Models\Saksi::where('tps_id', Auth::user()->tps_id)->count('id'); ?>
+                        $cekSaksi = App\Models\QuickSaksi::where('tps_id', Auth::user()->tps_id)->count('id'); ?>
                     @if( $cekSaksi == null)
 
                     <livewire:upload-c1-enumerator>
@@ -228,7 +228,7 @@
         <div alt="work" class="content {{Auth::user()->absen == 'hadir'?'show':''}}">
 
             <?php
-            $cekSaksi = App\Models\Saksi::where('tps_id', Auth::user()->tps_id)->count('id'); ?>
+            $cekSaksi = App\Models\QuickSaksi::where('tps_id', Auth::user()->tps_id)->count('id'); ?>
             @if( $cekSaksi == null)
 
             <livewire:upload-c1-enumerator>

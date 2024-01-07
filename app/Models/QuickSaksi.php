@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class QuickSaksi extends Model
 {
     use HasFactory;
+    protected $fillable = ['c1_plano'];
     protected $table = "quicksaksi";
 
 

@@ -409,7 +409,6 @@ class VerificatorController extends Controller
         Saksi::where('id', $id)->update([
             "koreksi" => 1,
             "verification" => 1,
-
             "kecurangan_id_users" =>  Auth::user()->id,
         ]);
      
